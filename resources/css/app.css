@@ -1,3 +1,175 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  outline: none;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  outline: none;
+}
+
+._container {
+  position: relative;
+  max-width: 1680px;
+  margin: 0 auto;
+  box-sizing: content-box;
+  padding: 0 6.25vw;
+}
+
+._container--inter {
+  position: relative;
+  max-width: 1480px;
+  margin: 0 auto;
+  box-sizing: content-box;
+  padding: 0 5.21vw;
+}
+
+._container_policy {
+  position: relative;
+  max-width: 825px;
+  margin: 0 auto;
+  box-sizing: content-box;
+  padding: 0 28.5vw;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type='number'],
+input[type="number"]:hover,
+input[type="number"]:focus {
+  appearance: none;
+  -moz-appearance: textfield;
+}
+
+*,
+::before,
+::after {
+  border: none;
+}
+
+input {
+  outline: none;
+}
+
+:active, :hover, :focus {
+  outline: 0;
+  outline-offset: 0;
+}
+/*****************HEADER*******************/
+/*****************HEADER*******************/
+/*****************HEADER*******************/
+
+.header__chat {
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.header__lang--select {
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.header__lang--change {
+  border-top: 1px solid rgba(255, 255, 255, 0.15) ;
+}
+
+.login__btn--bg {
+  background: #E84680;
+}
+
+.login__btn--bg:hover {
+  background: #EC1B65;
+}
+
+.login__btn--bg:active {
+  background: #D3004C;
+}
+
+.login__btn--bg:disabled {
+  background: rgb(232, 70, 128);
+  opacity: 0.5;
+}
+
+.login__dropdown {
+  border: 1px solid #E5DFEE;
+  box-shadow: 0px 5px 80px rgba(52, 23, 94, 0.05);
+}
+
+.login__dropdown button:not(:last-child) {
+  border-bottom: 1px solid #E5DFEE;
+}
+
+.register__button--bg {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/*****************MAIN*******************/
+/*****************MAIN*******************/
+/*****************MAIN*******************/
+
+.main__title-block {
+  background: rgba(100, 53, 165, 0.06);
+}
+
+.main__title-block--grid {
+  display: grid;
+  grid-template-columns: 2fr 3fr 2fr;
+}
+
+.main__block--bg {
+  background: rgba(100, 53, 165, 0.2);
+  box-shadow: 0px 5px 80px rgba(52, 23, 94, 0.05);
+}
+
+/*****************FOOTER*******************/
+/*****************FOOTER*******************/
+/*****************FOOTER*******************/
+
+.footer {
+  border-top: 1px solid #DFDEE9;
+}
+
+.footer__border-b {
+  border-bottom: 1px solid #DFDEE9;
+}
+
+
+/*****************MODAL*******************/
+/*****************MODAL*******************/
+/*****************MODAL*******************/
+
+.modal__telephone-cod {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal__telephone-cod input {
+  width: 16%;
+  border-bottom: 2px solid #E5DFEE;
+}
+
