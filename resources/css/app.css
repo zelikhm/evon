@@ -23,11 +23,22 @@
   box-sizing: border-box;
 }
 
-
+html,
 body {
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
   outline: none;
+  height: 100%;
+}
+
+#app {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 1 auto;
 }
 
 ._container {
@@ -66,6 +77,13 @@ input[type="number"]:focus {
   -moz-appearance: textfield;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
 *,
 ::before,
 ::after {
@@ -74,6 +92,7 @@ input[type="number"]:focus {
 
 input {
   outline: none;
+  background: none;
 }
 
 :active, :hover, :focus {
@@ -171,5 +190,64 @@ input {
 .modal__telephone-cod input {
   width: 16%;
   border-bottom: 2px solid #E5DFEE;
+}
+
+.custom__checkbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.custom__checkbox + label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+.custom__checkbox + label::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid #6435A5;
+  border-radius: 6px;
+  margin-right: 12px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 90% 90%;
+}
+
+.custom__checkbox:checked + label::before {
+  border-color: #6435A5;
+  background-color: #6435A5;
+  background-image: url("../assets/svg/check_icon.svg");
+}
+
+@media (max-width: 1572px) {
+  .custom__checkbox + label::before {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+    margin-right: 8px;
+  }
+}
+
+@media (max-width: 1572px) {
+  .custom__checkbox + label::before {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    margin-right: 6px;
+  }
+}
+
+/*****************IMMOVABLES*******************/
+/*****************IMMOVABLES*******************/
+/*****************IMMOVABLES*******************/
+
+.immovables__grid {
+  display: grid;
+  grid-template-columns: 16.7vw 1fr 15.6vw;
 }
 
