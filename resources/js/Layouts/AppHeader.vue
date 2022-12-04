@@ -151,7 +151,7 @@ export default {
       loginOpen: false,
     }
   },
-  emits: ['login-realtor'],
+  emits: ['login-realtor', 'login-developer'],
   methods: {
     selectOption(language) {
       this.langSelected =  language.lang
@@ -162,6 +162,7 @@ export default {
       this.loginOpen = false
     },
     loginDeveloper() {
+      this.$emit('login-developer')
       this.loginOpen = false
     }
   }

@@ -1,6 +1,15 @@
 <template>
-  <app-modal v-if="openLoginRealtor" @close-realtor="openLoginRealtor = false"/>
-  <app-header @login-realtor="openLoginRealtor = !openLoginRealtor"/>
+  <app-modal
+    :oLoginRealtor="openLoginRealtor"
+    :oLoginDeveloper="openLoginDeveloper"
+    @close-modal="closeModal"
+    @open-modal-realtor="openModalRealtor"
+    @open-modal-developer="openModalDeveloper"
+  />
+  <app-header
+    @login-developer="openLoginDeveloper = !openLoginDeveloper"
+    @login-realtor="openLoginRealtor = !openLoginRealtor"
+  />
   <main>
     <div class="_container">
       <div class="main__title-block mt-[30px] xxl:mt-6 mb-[100px] xxl:mb-20 rounded-[6px]">
@@ -107,6 +116,21 @@ export default {
   data() {
     return {
       openLoginRealtor: false,
+      openLoginDeveloper: false,
+    }
+  },
+  methods: {
+    closeModal() {
+      this.openLoginRealtor = false
+      this.openLoginDeveloper = false
+    },
+    openModalRealtor() {
+      this.openLoginRealtor = true
+      this.openLoginDeveloper = false
+    },
+    openModalDeveloper() {
+      this.openLoginRealtor = false
+      this.openLoginDeveloper = true
     }
   },
   components: {
