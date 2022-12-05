@@ -251,3 +251,145 @@ input {
   grid-template-columns: 16.7vw 1fr 15.6vw;
 }
 
+.multiselect {
+  background: none !important;
+  border: none !important;
+  border-radius: 0px !important;
+  min-height: 30px !important;
+}
+
+.multi__select .multiselect {
+  font-size: 14px !important;
+}
+
+.ones__select .multiselect {
+  font-size: 18px !important;
+}
+
+.multiselect-wrapper {
+  min-height: 30px !important;
+}
+
+.multiselect-tags {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.multiselect-clear {
+  display: none !important;
+}
+.multiselect-tag {
+  padding: 2px !important;
+}
+
+.multi__select .multiselect-tag {
+  font-size: 14px !important;
+}
+
+.ones__select .multiselect-tag {
+  font-size: 18px !important;
+}
+
+.multiselect-tag-remove {
+  height: 20px;
+  width: 20px;
+}
+
+.multiselect-multiple-label,
+.multiselect-placeholder,
+.multiselect-single-label {
+  padding: 0 !important;
+}
+
+.multiselect-caret {
+  background-color: #F6F3FA !important;
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin: 0 !important;
+  background-image: url("../assets/svg/arrow_down_black.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  pointer-events: none;
+  position: relative;
+  transform: rotate(0deg);
+  transition: transform .3s;
+  z-index: 10;
+}
+
+.multiselect-placeholder {
+  color: #000 !important;
+}
+
+.multiselect.is-active {
+  box-shadow: none !important;
+}
+
+@media (max-width: 1572px) {
+  .multi__select .multiselect {
+    font-size: 12px !important;
+  }
+
+  .ones__select .multiselect {
+    font-size: 15px !important;
+  }
+
+  .multiselect {
+    min-height: 24px !important;
+  }
+
+  .multiselect-wrapper {
+    min-height: 24px !important;
+  }
+
+  .multi__select .multiselect-tag {
+    font-size: 12px !important;
+  }
+
+  .ones__select .multiselect-tag {
+    font-size: 15px !important;
+  }
+
+  .multiselect-tag-remove {
+    height: 16px;
+    width: 16px;
+  }
+}
+
+
+@media (max-width: 1366px) {
+  .multiselect {
+    min-height: 20px !important;
+  }
+
+  .multi__select .multiselect {
+    font-size: 10px !important;
+  }
+
+  .ones__select .multiselect {
+    font-size: 13px !important;
+  }
+
+  .multiselect-wrapper {
+    min-height: 20px !important;
+  }
+
+  .multi__select .multiselect-tag {
+    font-size: 10px !important;
+  }
+
+  .ones__select .multiselect-tag {
+    font-size: 13px !important;
+  }
+
+  .multiselect-tag-remove {
+    height: 14px;
+    width: 14px;
+  }
+}
+
+.border__bottom,
+.border__bottom:focus {
+  border-bottom: 1px solid #CEC3DD;
+}
