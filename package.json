@@ -21,6 +21,6 @@
     },
     "dependencies": {
         "@vueform/multiselect": "^2.5.7",
-        "vue-multiselect": "^2.1.6"
+        "swiper": "^8.4.5"
     }
 }

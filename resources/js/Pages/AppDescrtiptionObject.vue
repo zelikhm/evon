@@ -1,0 +1,243 @@
+<template>
+  <app-header />
+  <main>
+    <div class="_container flex flex-col">
+      <div class="decription__head h-20 xxl:h-16 xl:h-12 rounded-[12px] my-7 xxl:my-5 xl:my-4">
+        <div class=" flex items-center justify-between">
+
+          <div class="flex flex-col p-4 xxl:p-3 xl:p-2">
+            <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
+              <span class="font-semibold text-xl xxl:text-lg xl:text-sm">Euro Avsallar Residence</span>
+              <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1 text-[14px] xxl:text-[12px] xl:text-[10px]">
+                <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">сдан</span>
+                <span class="flex items-center justify-center text-white font-semibold bg-[#FA8D50] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">акция</span>
+              </div>
+            </div>
+            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Туапсе, А147</span>
+          </div>
+
+          <div class="flex h-20 xxl:h-16 xl:h-12">
+            <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 p-4 xxl:p-3 xl:p-2">
+              <div class="flex items-center gap-1.5 xxl:gap-1 xl:gap-0.5">
+                <img src="../../assets/svg/reload_icon.svg" class="h-4 xx:h-3.5 xl:h-3" alt="Перезагрузка">
+                <span class="text-sm xxl:text-xs xl:text-[10px]">Сегодня</span>
+              </div>
+              <div class="flex items-center justify-center bg-[#F6F3FA] gap-2 xxl:gap-1.5 xl:gap-1 h-10 xxl:h-8 xl:h-6 px-4 xxl:px-3 xl:px-2.5 rounded-[3px]">
+                <img src="../../assets/svg/map_pointer.svg" class="h-6 xxl:h-5 xl:h-4" alt="Метка">
+                <span class="text-[#6435A5] text-sm xxl:text-xs xl:text-[10px] leading-none">Показать на карте</span>
+              </div>
+            </div>
+
+            <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
+
+            <div class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5 p-4 xxl:p-3 xl:p-2">
+              <button class="flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
+                <img src="../../assets/svg/plus_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="Плюсик">
+              </button>
+              <button class="flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
+                <img src="../../assets/svg/heart_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="Сердце">
+              </button>
+              <button class="flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
+                <img src="../../assets/svg/upload_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="Загрузка">
+              </button>
+            </div>
+
+            <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
+
+            <div class="flex items-center p-4 xxl:p-3 xl:p-2">
+              <button class="flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
+                <img src="../../assets/svg/cserocs_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="Ксерокс">
+              </button>
+            </div>
+
+            <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
+
+            <div class="flex items-center p-4 xxl:p-3 xl:p-2">
+              <button class="bg-[#E84680] px-4 xxl:px-4 xl:px-2.5 rounded-[3px] h-10 xxl:h-8 xl:h-6 font-semibold text-white text-base xxl:text-[13px] xl:text-[11px] leading-none">Смотреть шахматку</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid__68-32 gap-7 xxl:gap-5 xl:gap-4">
+        <div class="flex flex-col">
+          <swiper
+            :navigation="true"
+            :pagination="{
+              clickable: true,
+            }"
+            :modules="modules"
+            :loop="true"
+            class="mySwiper w-full"
+          >
+            <swiper-slide>
+              <img src="../../assets/slider_img.jpg" alt="">
+            </swiper-slide>
+            <swiper-slide>
+              <img src="../../assets/slider_img.jpg" alt="">
+            </swiper-slide>
+            <swiper-slide>
+              <img src="../../assets/slider_img.jpg" alt="">
+            </swiper-slide>
+          </swiper>
+          <div class="border border-solid border-[#E5DFEE] h-[100px] xxl:h-[80px] xl:h-[60px] flex items-center justify-evenly rounded-[12px] mt-7 xxl:mt-5 xl:mt-4 mb-14 xxl:mb-10 xl:mb-7">
+            <div class="flex flex-col justify-center">
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">Элит</span>
+              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Тип дома</span>
+            </div>
+            <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
+            <div class="flex flex-col justify-center">
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">49</span>
+              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Квартир</span>
+            </div>
+            <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
+            <div class="flex flex-col justify-center">
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">500 000 €</span>
+              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Мин за м²</span>
+            </div>
+            <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
+            <div class="flex flex-col justify-center">
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">5 000 000 €</span>
+              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Мин. ценаа</span>
+            </div>
+            <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
+            <div class="flex flex-col justify-center">
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">14.9 - 23.4</span>
+              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Площади, м²</span>
+            </div>
+          </div>
+          <div class="flex flex-col pb-14 xxl:pb-10 xl:pb-8">
+            <span class="uppercase font-medium text-[18px] xxl:text-[15px] xl:text-[13px]">О ЖК</span>
+            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum</p>
+            <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 items-center">
+              <span class="text-[#6435A5] font-medium text-sm xxl:text-xs xl:text-[10px]">Подробнее</span>
+              <img src="../../assets/svg/arrow_right_purple.svg" alt="Стрелочка в право">
+            </button>
+          </div>
+          <div class="text-[18px] xxl:text-[15px] xl:text-[13px] pb-14 xxl:pb-10 xl:pb-8">
+            <span class="font-medium">Инфраструктура</span>
+            <div class="flex flex-wrap gap-3 xxl:gap-2.5 xl:gap-2m pt-4 xxl:pt-3 xl:pt-2.5">
+              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Спа</span>
+              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Сауна\хамам</span>
+              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Трансфер до пляжа</span>
+              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Консьерж</span>
+              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Паркинг</span>
+              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Открытый бассейн</span>
+              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Кинотеатр</span>
+              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Спортзал</span>
+              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Охрана</span>
+              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Конференц-зал</span>
+              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Детская площадка</span>
+              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Лобби бар</span>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-7 xxl:gap-5 xl:gap-4 pb-14 xxl:pb-10 xl:pb-8">
+            <div class="border border-solid border-[#E5DFEE] p-7 xxl:p-5 xl:p-4 rounded-[12px]">
+              <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px]">Дополнительные услуги</span>
+              <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 pt-6 xxl:pt-5 xl:pt-4">
+                <div class="flex justify-between items-center">
+                  <span class="text-base xxl:text-sm xl:text-xs">Предоставляется ВНЖ</span>
+                  <div class="bg-[#30CB49] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
+                    <img src="../../assets/svg/check_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">Получение Гражданства</span>
+                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
+                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">Возможен онлайн-показ</span>
+                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
+                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">Кадастр >75000$</span>
+                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
+                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">Возможна удалённая сделка</span>
+                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
+                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">Послепродажный сервис</span>
+                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
+                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="border border-solid border-[#E5DFEE] p-7 xxl:p-5 xl:p-4 rounded-[12px]">
+              <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px]">Расположение</span>
+              <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 pt-6 xxl:pt-5 xl:pt-4">
+                <div class="flex justify-between items-center">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от моря</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">500 м</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от торгового центра</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">500 м</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от детского садикая</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">500 м</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от парка</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">500 м</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от остановки</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">500 м</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <app-decrition-object-news />
+      </div>
+    </div>
+  </main>
+  <app-footer />
+</template>
+
+<script>
+import AppHeader from '../Layouts/AppHeader.vue'
+import AppFooter from "../Layouts/AppFooter.vue"
+import AppDecritionObjectNews from "../Components/AppDecritionObjectNews.vue";
+
+import { Swiper, SwiperSlide } from "swiper/vue";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation, Pagination} from "swiper";
+
+export default {
+  data() {
+    return {
+
+    }
+  },
+  components: {
+    AppHeader,
+    AppFooter,
+    AppDecritionObjectNews,
+    Swiper,
+    SwiperSlide,
+  },
+  setup() {
+    return {
+      modules: [Navigation, Pagination],
+    };
+  },
+}
+</script>
+
+<style scoped>
+
+</style>
