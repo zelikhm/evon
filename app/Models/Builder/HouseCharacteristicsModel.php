@@ -2,6 +2,7 @@
 
 namespace App\Models\Builder;
 
+use App\Models\Builder\Info\TypesModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -27,4 +28,8 @@ class HouseCharacteristicsModel extends Model
     'created_at',
     'updated_at',
   ];
+
+  public function house() {
+    return $this->belongsTo(HouseModel::class, 'house_id', 'id');
+  }
 }

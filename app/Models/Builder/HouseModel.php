@@ -3,6 +3,7 @@
 namespace App\Models\Builder;
 
 use App\Models\Builder\Flat\FrameModel;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -28,6 +29,10 @@ class HouseModel extends Model
     'created_at',
     'updated_at',
   ];
+
+  public function user() {
+    return $this->belongsTo(User::class, 'user_id', 'id');
+  }
 
   public function files() {
     return $this->hasMany(HouseFilesModel::class, 'id', 'house_id');
