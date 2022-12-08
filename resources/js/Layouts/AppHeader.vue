@@ -15,9 +15,13 @@
               <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелочка вниз">
             </div>
             <div v-if="langOptionVisible" class="absolute top-full w-full left-0 flex flex-col bg-[#6435A5]">
-            <span @click="selectOption(language)" class="header__lang--change cursor-pointer h-[60px] xxl:h-12 flex items-center justify-center" v-for="(language, idx) in languages" :key="idx">
-              {{ language.lang }}
-            </span>
+              <span
+                @click="selectOption(language)"
+                v-for="(language, idx) in languages" :key="idx"
+                class="header__lang--change cursor-pointer h-[60px] xxl:h-12 flex items-center justify-center"
+              >
+                  {{ language.lang }}
+                </span>
             </div>
           </div>
           <div class="flex gap-3 xxl:gap-2 font-medium">
@@ -70,9 +74,13 @@
                 <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелка вниз">
               </div>
               <div v-if="langOptionVisible" class="absolute top-full w-full left-0 flex flex-col bg-[#6435A5]">
-            <span @click="selectOption(language)" class="header__lang--change cursor-pointer h-[60px] xxl:h-12 flex items-center justify-center" v-for="(language, idx) in languages" :key="idx">
-              {{ language.lang }}
-            </span>
+                <span
+                  @click="selectOption(language)"
+                  v-for="(language, idx) in languages" :key="idx"
+                  class="header__lang--change cursor-pointer h-[60px] xxl:h-12 flex items-center justify-center"
+                >
+                  {{ language.lang }}
+                </span>
               </div>
             </div>
             <div class="flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
@@ -118,9 +126,13 @@
                 <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелка вниз">
               </div>
               <div v-if="langOptionVisible" class="absolute top-full w-full left-0 flex flex-col bg-[#6435A5]">
-            <span @click="selectOption(language)" class="header__lang--change cursor-pointer h-[60px] xxl:h-12 flex items-center justify-center" v-for="(language, idx) in languages" :key="idx">
-              {{ language.lang }}
-            </span>
+                <span
+                  @click="selectOption(language)"
+                  v-for="(language, idx) in languages" :key="idx"
+                  class="header__lang--change cursor-pointer h-[60px] xxl:h-12 flex items-center justify-center"
+                >
+                  {{ language.lang }}
+                </span>
               </div>
             </div>
             <div class="flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
