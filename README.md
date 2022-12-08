@@ -34,9 +34,48 @@
 - 3 - Ход строительсва
 
 
-## Api
+## Api (token - 6f8be2a8db029ec86bd40833acbbd0c5)
 
 Не используется изменение версий, статичный /api (Заголовок апи используется для указания директории после /api/)
 
 Методы: 
+
+### House 
+
+Создание ЖК и его характеристики \
+path create \ [post] / поля: 
+
+- user_id - айди пользователя
+- title - Название ЖК
+- description - Описание ЖК
+- city - Город
+- area - Район
+- longitude - Долгота
+- latitude - Широта
+- percent - Процент
+- comment - Комментарий
+- active - * не передаем
+- status - * не передаем
+- statusHouse - Статус
+- floors - Этажи
+- type - тип ЖК
+- dop - Доп.услуги
+- info - Инфраструктуры
+- toSea - до моря
+- toSchool - до школы
+- toShop - до магазина
+- toPark - до парка
+- toChildrenSchool - до дет.сада
+
+Добавление саппортов для ЖК \
+path addedSupport \ [post] / поля:
+
+- house_id - айди ЖК
+- avatar - Изображение
+- name - Имя
+- phone - Телефон
+- email - Емеил
+- status - Должность
+- link - Ссылка на соц.сеть
+
 
