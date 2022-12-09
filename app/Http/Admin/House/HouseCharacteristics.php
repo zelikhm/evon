@@ -72,7 +72,7 @@ class HouseCharacteristics extends Section implements Initializable
       AdminColumn::text('id', '#')
         ->setWidth('50px')
         ->setHtmlAttribute('class', 'text-center'),
-      AdminColumn::link('house.title', 'ЖК')->setWidth('350px'),
+      AdminColumn::relatedLink('house.title', 'ЖК')->setWidth('350px'),
       AdminColumn::text('status', 'Статус')->setWidth('350px'),
       AdminColumn::text('floors', 'Этажи')->setWidth('350px'),
     ];

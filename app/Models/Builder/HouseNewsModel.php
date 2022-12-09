@@ -13,6 +13,7 @@ class HouseNewsModel extends Model
     'house_id',
     'title',
     'description',
+    'visible',
   ];
 
   protected $hidden = [

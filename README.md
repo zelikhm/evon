@@ -66,6 +66,7 @@ path create \ [post] / поля:
 - toShop - до магазина
 - toPark - до парка
 - toChildrenSchool - до дет.сада
+- token
 
 Добавление саппортов для ЖК \
 path addedSupport \ [post] / поля:
@@ -77,5 +78,56 @@ path addedSupport \ [post] / поля:
 - email - Емеил
 - status - Должность
 - link - Ссылка на соц.сеть
+- token
 
+Получение ЖК по ид \
+path get \ [post] / поля:
 
+-id
+-token
+
+Добавление корпуса \
+path createFrame \ [post] / поля:
+
+- house_id - айди жк
+- name - Название
+
+Добавление квартиры \
+path createFlat \ [post] / поля:
+
+- frame_id - айди корпуса
+- number - Номер
+- square - Площадь
+- count - Планировка
+- floor - Этаж
+- status - Статус
+- stairs - Номер от лестницы
+- price - Цена
+
+### News
+
+Добавление новости \
+path add \ [post] / поля:
+
+- house_id - Айди ЖК
+- title - Заголовок
+- description - Описание
+- visible - true (Не передаем)
+
+Редактирование новости \
+path edit \ [post] / поля:
+
+- new_id - Айди новости
+- title - Заголовок
+- description - Описание
+
+Удаление новости \
+path delete \ [post] / поля:
+
+- new_id - Айди новости
+
+Изменение видимости новости \
+path visible \ [post] / поля:
+
+- new_id - Айди новости
+- visible - false\true

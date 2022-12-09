@@ -23,6 +23,7 @@ class HouseModel extends Model
     'comment',
     'active',
     'status',
+    'slug'
   ];
 
   protected $hidden = [

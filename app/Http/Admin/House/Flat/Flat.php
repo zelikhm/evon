@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Admin\House;
+namespace App\Http\Admin\House\Flat;
 
 use AdminColumn;
 use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
 use AdminNavigation;
+use App\Models\Builder\Flat\FlatModel;
+use App\Models\Builder\Flat\FrameModel;
 use App\Models\Builder\HouseModel;
-use App\Models\LandingModel;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
@@ -28,7 +28,7 @@ use SleepingOwl\Admin\Section;
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */
-class HouseNews extends Section implements Initializable
+class Flat extends Section implements Initializable
 {
   /**
    * @var bool
@@ -38,7 +38,7 @@ class HouseNews extends Section implements Initializable
   /**
    * @var string
    */
-  protected $title = 'Новости ЖК';
+  protected $title = 'Квартиры';
 
   /**
    * @var string
@@ -53,7 +53,7 @@ class HouseNews extends Section implements Initializable
     $page = AdminNavigation::getPages()->findById('houses');
 
     $page->addPage(
-      $this->makePage(300)->setIcon('fas fa-user-lock')
+      $this->makePage(600)->setIcon('fas fa-user-lock')
     );
   }
 
@@ -69,9 +69,13 @@ class HouseNews extends Section implements Initializable
         ->setWidth('50px')
         ->setHtmlAttribute('class', 'text-center'),
       AdminColumn::relatedLink('house.title', 'ЖК')->setWidth('350px'),
-      AdminColumn::text('title', 'Заголовок')->setWidth('350px'),
-      AdminColumn::text('description', 'Описание')->setWidth('350px'),
-      AdminColumn::text('visible', 'Отображать?')->setWidth('350px'),
+      AdminColumn::relatedLink('frame.name', 'Корпус')->setWidth('350px'),
+      AdminColumn::text('number', 'Номер')->setWidth('350px'),
+      AdminColumn::text('square', 'Площадь')->setWidth('350px'),
+      AdminColumn::text('count', 'Планировка')->setWidth('350px'),
+      AdminColumn::text('floor', 'Этаж')->setWidth('350px'),
+      AdminColumn::text('status', 'Статус')->setWidth('350px'),
+      AdminColumn::text('price', 'Цена')->setWidth('350px'),
     ];
 
     $display = AdminDisplay::datatablesAsync()
@@ -82,7 +86,7 @@ class HouseNews extends Section implements Initializable
 
     $display->setApply(function (Builder $query) {
       $query->OrderBy('id', 'asc');
-    })->setNewEntryButtonText('Добавь новость');
+    })->setNewEntryButtonText('Добавь квартиру');
 
     return $display;
   }
@@ -98,14 +102,17 @@ class HouseNews extends Section implements Initializable
 
     $form = AdminForm::elements([
 
-      AdminFormElement::select('house_id', 'ЖК')
-        ->setModelForOptions(HouseModel::class, 'title')
+      AdminFormElement::select('frame_id', 'ЖК')
+        ->setOptions($this->getFlats(), 'name')
         ->setUsageKey('id'),
 
-      AdminFormElement::checkbox('visible', 'Отображать?'),
-
-      AdminFormElement::text('title', 'Заголовок'),
-      AdminFormElement::wysiwyg('description', 'Описание'),
+      AdminFormElement::number('number', 'Номер'),
+      AdminFormElement::number('square', 'Площадь'),
+      AdminFormElement::text('count', 'Планировка'),
+      AdminFormElement::number('floor', 'Этаж'),
+      AdminFormElement::number('status', 'Статус'),
+      AdminFormElement::number('number_from_stairs', 'От леснечной клетки'),
+      AdminFormElement::number('price', 'Цена')->setStep(0.01),
     ]);
 
     $card->getButtons()->setButtons([
@@ -159,5 +166,16 @@ class HouseNews extends Section implements Initializable
   public function onRestore(int $id)
   {
     // remove if unused
+  }
+
+  protected function getFlats() {
+    $flats = FrameModel::with(['house'])->get();
+
+    return $flats->map(static function ($item, $types) {
+      return [
+        'id' => $item->id,
+        'value' => $item->house->title . ' ' . $item->name,
+      ];
+    })->pluck('value', 'id')->toArray();
   }
 }

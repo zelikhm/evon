@@ -67,7 +67,7 @@ class HouseSupport extends Section implements Initializable
       AdminColumn::text('id', '#')
         ->setWidth('50px')
         ->setHtmlAttribute('class', 'text-center'),
-      AdminColumn::link('house.title', 'ЖК')->setWidth('350px'),
+      AdminColumn::relatedLink('house.title', 'ЖК')->setWidth('350px'),
       AdminColumn::image('avatar', 'Аватар')->setWidth('350px'),
       AdminColumn::text('name', 'Имя')->setWidth('350px'),
       AdminColumn::text('phone', 'Телефон')->setWidth('350px'),

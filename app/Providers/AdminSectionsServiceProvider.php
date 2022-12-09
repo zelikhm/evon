@@ -19,7 +19,9 @@ class AdminSectionsServiceProvider extends ServiceProvider
     \App\Models\Builder\Info\StructureModel::class => 'App\Http\Admin\House\Info\Structure',
     \App\Models\Builder\HouseCharacteristicsModel::class => 'App\Http\Admin\House\HouseCharacteristics',
     \App\Models\Builder\HouseNewsModel::class => 'App\Http\Admin\House\HouseNews',
-    \App\Models\Builder\HouseSupportModel::class => 'App\Http\Admin\House\HouseSupport'
+    \App\Models\Builder\HouseSupportModel::class => 'App\Http\Admin\House\HouseSupport',
+    \App\Models\Builder\Flat\FrameModel::class => 'App\Http\Admin\House\Flat\Frame',
+    \App\Models\Builder\Flat\FlatModel::class => 'App\Http\Admin\House\Flat\Flat',
   ];
 
   /**
