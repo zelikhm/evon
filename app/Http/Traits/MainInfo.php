@@ -5,6 +5,7 @@ namespace App\Http\Traits;
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\Info\StructureModel;
 use App\Models\Builder\Info\TypesModel;
+use App\Models\User\CompilationModel;
 
 trait MainInfo {
 
@@ -39,6 +40,16 @@ trait MainInfo {
     return HouseModel::with(['info', 'supports', 'files', 'frames', 'images'])
       ->where('slug', $slug)
       ->first();
+  }
+
+  /**
+   * get all compilation
+   * @param $id
+   * @return mixed
+   */
+
+  protected function getCompilation($id) {
+    return CompilationModel::where('user_id', $id)->with(['values'])->get;
   }
 
 

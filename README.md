@@ -131,3 +131,32 @@ path visible \ [post] / поля:
 
 - new_id - Айди новости
 - visible - false\true
+
+### Compilation
+
+Создание подборки \
+path create \ [post] / поля:
+
+- user_id - Айди юзера
+- title - Заголовок
+- description - Комментарий
+- isVisible - Показывать местоположение (true\false) - default false
+
+Добавление обьекта в подборку \
+path addHouse \ [post] / поля:
+
+- compilation_id - Айди подборки
+- house_id - Айди ЖК
+
+Удаление подборки \
+path delete \ [post] / поля:
+
+- id - Айди подборки
+
+### Favorite
+
+Добавление в избранное \
+path add \ [post] / поля:
+
+- user_id - Айди пользователя
+- house_id - Айди ЖК

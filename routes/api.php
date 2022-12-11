@@ -26,6 +26,16 @@ Route::prefix('house')->group(function () {
   Route::post('createFlat', ['App\Http\Controllers\House\HouseController', 'createFlat']);
 });
 
+Route::prefix('compilation')->group(function () {
+  Route::post('/addHouse', ['App\Http\Controllers\User\CompilationController', 'addHouse']);
+  Route::post('/create', ['App\Http\Controllers\User\CompilationController', 'create']);
+  Route::post('/delete', ['App\Http\Controllers\User\CompilationController', 'delete']);
+});
+
+Route::prefix('favorite')->group(function () {
+  Route::post('/add', ['App\Http\Controllers\User\FavoriteController', 'add']);
+});
+
 Route::prefix('news')->group(function () {
   Route::post('add', ['App\Http\Controllers\House\NewsController', 'add']);
   Route::post('edit', ['App\Http\Controllers\House\NewsController', 'edit']);

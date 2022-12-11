@@ -31,6 +31,9 @@ Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'hou
 Route::prefix('profile')->group(function () {
   Route::get('/addedHouse', ['App\Http\Controllers\House\HouseController', 'createHouse']);
   Route::get('/edit/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
+  Route::get('/compilation', ['App\Http\Controllers\User\CompilationController', 'index']);
+  Route::get('/compilation/{id}', ['App\Http\Controllers\User\CompilationController', 'show']);
+  Route::get('/compilation/{id}/edit', ['App\Http\Controllers\User\CompilationController', 'edit']);
 });
 
 Route::get('/test', function () {
