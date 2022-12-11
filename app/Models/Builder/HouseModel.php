@@ -39,6 +39,10 @@ class HouseModel extends Model
     return $this->hasMany(HouseFilesModel::class, 'id', 'house_id');
   }
 
+  public function images() {
+    return $this->hasMany(HouseImagesModel::class, 'id', 'house_id');
+  }
+
   public function info() {
     return $this->belongsTo(HouseCharacteristicsModel::class, 'id', 'house_id');
   }

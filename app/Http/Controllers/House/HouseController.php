@@ -30,6 +30,8 @@ class HouseController extends Controller
 
     $houses = $this->getAllHouse();
 
+    dd($houses);
+
     foreach ($houses as $house) {
       $house->dop_array = TypesModel::where('id', $house->dop)->get();
       $house->info_array = StructureModel::where('id', $house->info)->get();
