@@ -13,6 +13,7 @@ use App\Models\Builder\Info\StructureModel;
 use App\Models\Builder\Info\TypesModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 
 class HouseController extends Controller
@@ -34,11 +35,39 @@ class HouseController extends Controller
       $house->info_array = StructureModel::where('id', $house->info)->get();
     }
 
-    return Inertia::render('', [
+    return Inertia::render('AppListImmovables', [
       'houses' => $houses,
+    ]);
+  }
+
+  /**
+   * create house
+   * @return \Inertia\Response
+   */
+
+  public function createHouse() {
+
+    return Inertia::render('AppAddObject', [
       'dops' => $this->dops(),
       'infos' => $this->infos(),
     ]);
+
+  }
+
+  /**
+   * render page for house
+   * @param $slug
+   * @return \Inertia\Response
+   */
+
+  public function house($slug) {
+
+    return Inertia::render('', [
+      'house' => $this->getHouseSlug($slug),
+      'dops' => $this->dops(),
+      'infos' => $this->infos(),
+    ]);
+
   }
 
   /**
@@ -53,6 +82,7 @@ class HouseController extends Controller
       $house = HouseModel::create([
         'user_id' => $request->user_id,
         'title' => $request->title,
+        'slug' => Str::slug(mb_substr($request->title, 0, 50), '-'),
         'description' => $request->description,
         'city' => $request->city,
         'area' => $request->area,

@@ -30,6 +30,19 @@ trait MainInfo {
   }
 
   /**
+   * get house
+   * @param $slug
+   * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+   */
+
+  protected function getHouseSlug($slug) {
+    return HouseModel::with(['info', 'supports', 'files', 'frames', 'images'])
+      ->where('slug', $slug)
+      ->first();
+  }
+
+
+  /**
    * get all dops
    * @return \Illuminate\Database\Eloquent\Collection
    */

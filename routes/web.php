@@ -25,6 +25,14 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'index']);
+Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
+
+Route::prefix('profile')->group(function () {
+  Route::get('/addedHouse', ['App\Http\Controllers\House\HouseController', 'createHouse']);
+  Route::get('/edit/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
+});
+
 Route::get('/test', function () {
   dd(env('TOKEN'));
 });
