@@ -18,11 +18,7 @@ module.exports = {
             'md': {'max': '766px'},
             'sm': {'max': '576px'}
         },
-        extend: {
-            fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
-            },
-        },
+        extend: {},
     },
 
     plugins: [require('@tailwindcss/forms')],
