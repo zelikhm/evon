@@ -85,6 +85,11 @@ input:-webkit-autofill:active  {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
+textarea::placeholder,
+input::placeholder {
+  color: #1E1D2D;
+}
+
 .grid__75-25 {
   display: grid;
   grid-template-columns: 75% 25%;
@@ -472,6 +477,15 @@ input:-webkit-autofill:active  {
   display: grid;
   grid-template-columns: 20vw 1fr 20vw;
 }
+.grid__apartments {
+  display: grid;
+  grid-template-columns: 20vw 1fr;
+}
+
+.menu-add-obj {
+  background: #6435A5;
+  color: #fff;
+}
 
 .hover__menu-add-obj:hover {
   background: #6435A5;
@@ -491,4 +505,13 @@ input:-webkit-autofill:active  {
 .border__bottom--0 {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+.corpus__banner {
+  box-shadow: 0px 8px 60px rgba(52, 23, 94, 0.08);
+}
+
+.grid__apartments-line {
+  display: grid;
+  grid-template-columns: 5vw 7vw 8vw 9vw 5vw 1fr;
 }
