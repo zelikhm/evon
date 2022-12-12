@@ -32,7 +32,7 @@
                 <button @click="loginRealtor" class="whitespace-nowrap leading-none px-3.5 py-2.5">Я риэлтор</button>
               </div>
             </div>
-            <button class="register__button--bg text-white px-5 xxl:px-4 xl:px-3 py-2.5 xxl:py-2 xl:py-1 rounded-[3px]">Регистрация</button>
+            <button @click="this.$emit('open-register')" class="register__button--bg text-white px-5 xxl:px-4 xl:px-3 py-2.5 xxl:py-2 xl:py-1 rounded-[3px]">Регистрация</button>
           </div>
         </div>
       </div>
@@ -163,7 +163,7 @@ export default {
       loginOpen: false,
     }
   },
-  emits: ['login-realtor', 'login-developer'],
+  emits: ['login-realtor', 'login-developer', 'open-register'],
   methods: {
     selectOption(language) {
       this.langSelected =  language.lang

@@ -19,7 +19,7 @@
           <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Найдено 1512 новостроек</span>
           <div class="flex-col flex gap-5 xxl:gap-4 xl:gap-3 pt-5 xxl:pt-4 xl:pt-3" >
 
-            <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+            <div class="flex flex-col border gap-2 xxl:gap-1.5 border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
               <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name_object">Название объекта</label>
               <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="name_object" placeholder="Euro Avsallar Residence">
             </div>
@@ -99,8 +99,27 @@
                   </div>
                 </div>
 
+                <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openFloors}">
+                  <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-5 xxl:pt-4 xl:pt-3">Количество этажей</span>
+                  <div class="relative">
+                    <div @click="openFloors = !openFloors" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3">
+                      <span>{{ selectFloors }}</span>
+                      <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openFloors }" alt="">
+                    </div>
+                    <div v-if="openFloors" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
+                  <span
+                    v-for="(floor, idx) in floors" :key="idx"
+                    @click="changeSelectFloors(floor)"
+                    class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
+                  >
+                    {{ floor.floor }}
+                  </span>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectType}">
-                  <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-5 xxl:pt-4 xl:pt-3">Срок сдачи</span>
+                  <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-5 xxl:pt-4 xl:pt-3">Тип</span>
                   <div class="relative">
                     <div @click="openSelectType = !openSelectType" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3">
                       <span>{{ selectType }}</span>
@@ -119,7 +138,7 @@
                 </div>
 
                 <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openInstallment}">
-                  <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-5 xxl:pt-4 xl:pt-3">Срок сдачи</span>
+                  <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-5 xxl:pt-4 xl:pt-3">Рассрочка</span>
                   <div class="relative">
                     <div @click="openInstallment = !openInstallment" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3">
                       <span>{{ selectInstallment }}</span>
@@ -137,13 +156,28 @@
                   </div>
                 </div>
 
-                <div class="multi__select h-fit border border-solid border-[#E5DFEE] rounded-[6px] p-5 xx:p-4 xl:p-3">
-                  <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Тип</span>
+                <div :class="{ 'border__bottom--0': borderServices }" class="multi__select flex flex-col gap-2 xxl:gap-1.5 h-fit border border-solid border-[#E5DFEE] rounded-[6px]">
+                  <div class="px-5 xx:px-4 xl:px-3 pt-5 xx:pt-4 xl:pt-3 text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Дополнительные услуги</div>
                   <Multiselect
-                    v-model="valueSelectType"
-                    :options="optionsSelectType"
+                    @click="borderServices = !borderServices"
+                    class="px-5 xx:px-4 xl:px-3 pb-5 xx:pb-4 xl:pb-3 white__arrow"
+                    v-model="valueSelectServices"
+                    :options="optionsSelectServices"
                     mode="tags"
-                    placeholder="Выбрать тип"
+                    placeholder="Выбрать услуги"
+                    :close-on-select="true"
+                  />
+                </div>
+
+                <div :class="{'border__bottom--0': borderInfrastructure}" class="multi__select flex flex-col gap-2 xxl:gap-1.5 h-fit border border-solid border-[#E5DFEE] rounded-[6px]">
+                  <div class="px-5 xx:px-4 xl:px-3 pt-5 xx:pt-4 xl:pt-3 text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Инфраструктура</div>
+                  <Multiselect
+                    @click="borderInfrastructure = !borderInfrastructure"
+                    class="px-5 xx:px-4 xl:px-3 pb-5 xx:pb-4 xl:pb-3 white__arrow"
+                    v-model="valueSelectInfrastructure"
+                    :options="optionsSelectInfrastructure"
+                    mode="tags"
+                    placeholder="Инфраструктура"
                     :close-on-select="true"
                   />
                 </div>
@@ -189,27 +223,27 @@
               <div class="my-10 xxl:my-8 xl:my-6">
                 <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">Расположение</h3>
                 <div class="grid grid-cols-2 gap-7 xxl:gap-5 xl:gap-4">
-                  <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+                  <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                     <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_sea">от моря</label>
                     <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_sea" placeholder="500 м">
                   </div>
-                  <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+                  <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                     <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_school">от школы</label>
                     <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_school" placeholder="500 м">
                   </div>
-                  <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+                  <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                     <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_shoping">от торгового центра</label>
                     <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_shoping" placeholder="500 м">
                   </div>
-                  <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+                  <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                     <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_park">от парка</label>
                     <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_park" placeholder="500 м">
                   </div>
-                  <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+                  <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                     <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_child">от детского садика</label>
                     <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_child" placeholder="500 м">
                   </div>
-                  <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+                  <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                     <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_stop">от остановки</label>
                     <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_stop" placeholder="500 м">
                   </div>
@@ -218,11 +252,11 @@
               <div class="my-10 xxl:my-8 xl:my-6">
                 <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">Вознаграждение</h3>
                 <div class="grid grid-cols-2 gap-7 xxl:gap-5 xl:gap-4">
-                  <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+                  <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                     <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="commission">Комиссия</label>
                     <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="commission" placeholder="5 %">
                   </div>
-                  <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+                  <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                     <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="commission">Комментарий</label>
                     <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="commission" placeholder="///">
                   </div>
@@ -265,8 +299,8 @@
                 <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px]">Корпус 1</span>
                 <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">11 квартир</span>
               </div>
-              <div class="flex items-center justify-center">
-                <img src="../../assets/svg/plus_icon_purple.svg" class="cursor-pointer w-8 xxl:w-6 xl:w-5" alt="">
+              <div class="flex items-center">
+                <img src="../../assets/svg/plus_icon_purple.svg" class="cursor-pointer ml-3 xxl:ml-2.5 xl:ml-2 w-8 xxl:w-6 xl:w-5" alt="">
               </div>
             </div>
             <div class="grid gap-4 xxl:gap-3.5 xl:gap-3 my-16 xxl:my-12 xl:my-10 text-[#1E1D2D] text-base xxl:text-sm xl:text-xs">
@@ -488,10 +522,13 @@ import Multiselect from '@vueform/multiselect'
 export default {
   data() {
     return {
+      borderServices: false,
+      borderInfrastructure: false,
       infoJK: true,
       apartments: false,
       photo: false,
       inputFile: 0,
+
       selectCity: 'Сочи',
       openSelectCity: false,
       cities: [
@@ -499,6 +536,18 @@ export default {
         { city: 'Москва', value: 2 },
         { city: 'Краснодар', value: 3 },
       ],
+
+      selectFloors: '12',
+      openFloors: false,
+      floors: [
+        { floor: '1', value: 1},
+        { floor: '2', value: 1},
+        { floor: '5', value: 1},
+        { floor: '9', value: 1},
+        { floor: '12', value: 1},
+        { floor: '17', value: 1},
+      ],
+
       selectRegion: 'Центральный',
       openSelectRegion: false,
       regions: [
@@ -508,6 +557,7 @@ export default {
         { region: 'Западный', value: 4 },
         { region: 'Восточный', value: 5 },
       ],
+
       selectDeadline: 'Сдан',
       openSelectDeadline: false,
       deadlines: [
@@ -515,6 +565,7 @@ export default {
         { deadline: 'Не сдан', value: 2 },
         { deadline: 'В разработке', value: 3 },
       ],
+
       selectType: 'Эконом',
       openSelectType: false,
       types: [
@@ -522,19 +573,28 @@ export default {
         { type: 'Средний', value: 2 },
         { type: 'Элит', value: 3 },
       ],
+
       selectInstallment: 'Да',
       openInstallment: false,
       installments: [
         { installment: 'Да', value: 1 },
         { installment: 'Нет', value: 2 },
       ],
-      valueSelectType: null,
-      optionsSelectType: [
+
+      valueSelectInfrastructure: null,
+      optionsSelectInfrastructure: [
         'Кинотеатр',
         'Лобби бар',
         'Спа',
         'Спортивная площадка',
       ],
+
+      valueSelectServices: null,
+      optionsSelectServices: [
+        'Онлайн-показ 1',
+        'Онлайн-показ 2',
+        'Онлайн-показ 3',
+      ]
     }
   },
   methods: {
@@ -549,6 +609,10 @@ export default {
     changeSelectDeadline(deadline) {
       this.selectDeadline = deadline.deadline
       this.openSelectDeadline = false
+    },
+    changeSelectFloors(floor) {
+      this.selectFloors = floor.floor
+      this.openFloors = false
     },
     changeSelectType(type) {
       this.selectType = type.type
