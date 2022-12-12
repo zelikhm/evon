@@ -4,7 +4,7 @@
     <div class="_container">
       <div :class="{'grid__apartments': apartments}" class="grid__add-object my-14 xxl:my-10 xl:my-8 gap-7 xxl:gap-5 xl:gap-4">
         <div class="relative">
-          <div class="fixed z-50 w-[20vw] h-fit bg-[#F6F3FA] p-7 xxl:p-5 xl:p-4 rounded-[6px]">
+          <div class="sticky top-10 z-50 w-[20vw] h-fit bg-[#F6F3FA] p-7 xxl:p-5 xl:p-4 rounded-[6px]">
             <div class="flex flex-col gap-3 xxl:gap-2.5 xl:gap-2">
               <div @click="openInfoJK" :class="{ 'menu-add-obj': infoJK }" class="hover__menu-add-obj cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] p-5 xxl:p-4 xl:p-3">Информация о ЖК</div>
               <div @click="openApartments" :class="{ 'menu-add-obj': apartments }" class="hover__menu-add-obj cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] p-5 xxl:p-4 xl:p-3">Корпуса и квартиры</div>
@@ -468,8 +468,10 @@
               <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">11 фото</span>
             </div>
           </div>
+          <div class="my-10 xxl:my-8 xl:my-6">
+            <app-upload />
+          </div>
         </div>
-
       </div>
     </div>
   </main>
@@ -479,6 +481,7 @@
 <script>
 import AppHeader from '../Layouts/AppHeader.vue'
 import AppFooter from "../Layouts/AppFooter.vue"
+import AppUpload from "../Components/AppUpload.vue"
 
 import Multiselect from '@vueform/multiselect'
 
@@ -579,6 +582,7 @@ export default {
     AppHeader,
     AppFooter,
     Multiselect,
+    AppUpload,
   }
 }
 </script>

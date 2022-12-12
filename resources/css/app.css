@@ -515,3 +515,29 @@ input::placeholder {
   display: grid;
   grid-template-columns: 5vw 7vw 8vw 9vw 5vw 1fr;
 }
+
+.n-upload-file-list {
+  display: flex !important;
+  flex-wrap: wrap !important;
+}
+
+.n-upload-file-list .n-upload-file-list--grid {
+  display: flex !important;
+  flex-wrap: wrap !important;
+}
+
+.n-upload-trigger.n-upload-trigger--image-card {
+  flex: 1 1 auto !important;
+}
+
+.n-upload-file-list .n-upload-file.n-upload-file--image-card-type {
+  border: 1px solid #6435A5 !important;
+}
+
+.n-upload-trigger.n-upload-trigger--image-card .n-upload-dragger {
+  border: 1px solid #E5DFEE !important;
+}
+
+.n-upload-trigger.n-upload-trigger--image-card .n-upload-dragger:hover {
+  background: #F6F3FA;
+}
