@@ -160,3 +160,24 @@ path add \ [post] / поля:
 
 - user_id - Айди пользователя
 - house_id - Айди ЖК
+
+### Notification
+
+Удаление оповщения \ 
+path delete \ [post] / поля:
+
+- id - Айди уведомления
+
+Получить уведомления \ 
+path get \ [get] / поля:
+
+not param
+
+### Chat
+
+Отправить сообщение \
+path message \ [post] / поля:
+
+- user_id - Айди кому отправляем
+- chat_id - Айди чата
+- message - Сообщение любой длины

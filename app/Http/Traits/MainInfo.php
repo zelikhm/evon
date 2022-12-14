@@ -5,7 +5,10 @@ namespace App\Http\Traits;
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\Info\StructureModel;
 use App\Models\Builder\Info\TypesModel;
+use App\Models\Messages\ChatModel;
+use App\Models\Messages\MessageModel;
 use App\Models\User\CompilationModel;
+use Illuminate\Support\Facades\Auth;
 
 trait MainInfo {
 
@@ -16,6 +19,24 @@ trait MainInfo {
 
   protected function getAllHouse() {
     return HouseModel::with(['info', 'supports', 'files', 'frames', 'images'])->get();
+  }
+
+  /**
+   * get all chats
+   * @return mixed
+   */
+
+  protected function getChats() {
+   $chats = ChatModel::where('from_id', Auth::id())
+     ->orWhere('to_id', Auth::id())
+     ->with(['from', 'to'])
+     ->get();
+
+   foreach ($chats as $chat) {
+     $chat->last_message = MessageModel::where('chat_id', $chat->id)->orderBy('DESC')->first();
+   }
+
+   return $chats;
   }
 
   /**
@@ -49,7 +70,7 @@ trait MainInfo {
    */
 
   protected function getCompilation($id) {
-    return CompilationModel::where('user_id', $id)->with(['values'])->get;
+    return CompilationModel::where('user_id', $id)->with(['values'])->get();
   }
 
 
