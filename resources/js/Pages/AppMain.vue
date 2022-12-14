@@ -1,5 +1,5 @@
 <template>
-  <app-modal
+  <app-modal-auth
     :oLoginRealtor="openLoginRealtor"
     :oLoginDeveloper="openLoginDeveloper"
     :oOpenRegister="openRegister"
@@ -112,7 +112,7 @@
 <script>
 import AppHeader from '../Layouts/AppHeader.vue'
 import AppFooter from "../Layouts/AppFooter.vue"
-import AppModal from "../Layouts/AppModal.vue"
+import AppModalAuth from "../Layouts/AppModalAuth.vue"
 
 export default {
   data() {
@@ -140,7 +140,7 @@ export default {
   components: {
     AppHeader,
     AppFooter,
-    AppModal,
+    AppModalAuth,
   }
 }
 </script>
