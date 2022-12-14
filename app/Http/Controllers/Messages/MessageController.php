@@ -31,19 +31,7 @@ class MessageController extends Controller
 
     public function chat($id) {
 
-      $chat = ChatModel::where('from_id', $id)
-        ->orWhere('to_id', Auth::id())
-        ->first();
-
-      if($chat === null) {
-        $chat = ChatModel::where('to_id', $id)
-          ->orWhere('from_id', Auth::id())
-          ->first();
-      }
-
-      if($chat === null) {
-        $chat = $this->createChat($id);
-      }
+      $chat = $this->checkChat($id);
 
       $messages = MessageModel::where('chat_id', $chat->id)->get();
 
@@ -53,6 +41,46 @@ class MessageController extends Controller
         'chats' => $this->getChats(),
         'user' => Auth::user(),
       ]);
+    }
+
+  /**
+   * reload chats
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+    public function reloadChats(Request $request) {
+      if($request->token === env('TOKEN')) {
+        return response()->json([
+          'notification' => $this->getNotification(),
+          'chats' => $this->getChats(),
+        ]);
+      } else {
+       return response()->json('not auth', 401);
+      }
+    }
+
+  /**
+   * reload chat
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+    public function reloadChat(Request $request) {
+      if($request->token === env('TOKEN')) {
+        $chat = $this->checkChat($request->id);
+
+        $messages = MessageModel::where('chat_id', $chat->id)->get();
+
+        return response()->json([
+          'notification' => $this->getNotification(),
+          'chats' => $this->getChats(),
+          'chat' => $chat,
+          'messages' => $messages,
+        ]);
+      } else {
+        return response()->json('not auth', 401);
+      }
     }
 
   /**
@@ -77,17 +105,5 @@ class MessageController extends Controller
 
     }
 
-  /**
-   * create chat for user
-   * @param $id
-   * @return mixed
-   */
 
-    protected function createChat($id) {
-      return ChatModel::create([
-        'from_id' => Auth::id(),
-        'to_id' => $id,
-        'visible_id' => $id,
-      ]);
-    }
 }

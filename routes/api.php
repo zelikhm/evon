@@ -43,6 +43,8 @@ Route::prefix('favorite')->group(function () {
 
 Route::prefix('chat')->group(function () {
   Route::post('/message', ['App\Http\Controllers\Messages\MessageController', 'message']);
+  Route::post('/reloadChats', ['App\Http\Controllers\Messages\MessageController', 'reloadChats']);
+  Route::post('/reloadChat', ['App\Http\Controllers\Messages\MessageController', 'reloadChat']);
 });
 
 Route::prefix('news')->group(function () {

@@ -185,3 +185,15 @@ path message \ [post] / поля:
 - chat_id - Айди чата
 - message - Сообщение любой длины
 - token
+
+Обновить чаты \
+path reloadChats \ [post] / поля:
+
+- token
+
+Обновить чат \
+path reloadChat \ [post] / поля:
+
+- token
+- id
+

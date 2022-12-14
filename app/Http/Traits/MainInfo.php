@@ -13,6 +13,40 @@ use Illuminate\Support\Facades\Auth;
 
 trait MainInfo {
 
+  protected function checkChat($id){
+    $chat = ChatModel::where('from_id', $id)
+      ->orWhere('to_id', Auth::id())
+      ->first();
+
+    if($chat === null) {
+      $chat = ChatModel::where('to_id', $id)
+        ->orWhere('from_id', Auth::id())
+        ->first();
+    }
+
+    if($chat === null) {
+      $chat = $this->createChat($id);
+    }
+
+    return $chat;
+  }
+
+  /**
+   * create chat for user
+   * @param $id
+   * @return mixed
+   */
+
+  protected function createChat($id) {
+    return ChatModel::create([
+      'from_id' => Auth::id(),
+      'to_id' => $id,
+      'visible_id' => $id,
+    ]);
+  }
+
+
+
   /**
    * get all houses
    * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
