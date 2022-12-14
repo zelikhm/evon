@@ -22,7 +22,7 @@
   </div>
 
 <!-- Вход с кодом с телефона -->
-  <div v-if="1 != 1" class="fixed z-[100] w-full h-full flex items-center justify-center">
+  <div v-if="oOpenRegister" class="fixed z-[100] w-full h-full flex items-center justify-center">
     <div class="relative bg-white rounded-[12px] p-10 z-50 w-[30%] h-fit">
       <div class="relative mb-10 xxl:mb-8 xl:mb-6">
         <h2 class="text-center text-[22px] xxl:text-lg xl:text-base font-semibold">Вход в приложение Avon</h2>
@@ -97,6 +97,9 @@ export default {
       type: Boolean
     },
     oLoginDeveloper: {
+      type: Boolean
+    },
+    oOpenRegister: {
       type: Boolean
     }
   },

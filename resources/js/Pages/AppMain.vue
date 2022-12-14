@@ -2,6 +2,7 @@
   <app-modal
     :oLoginRealtor="openLoginRealtor"
     :oLoginDeveloper="openLoginDeveloper"
+    :oOpenRegister="openRegister"
     @close-modal="closeModal"
     @open-modal-realtor="openModalRealtor"
     @open-modal-developer="openModalDeveloper"
@@ -9,6 +10,7 @@
   <app-header
     @login-developer="openLoginDeveloper = !openLoginDeveloper"
     @login-realtor="openLoginRealtor = !openLoginRealtor"
+    @open-register="openRegister = !openRegister"
   />
   <main>
     <div class="_container">
@@ -28,7 +30,7 @@
                 <div class="h-[30px] w-[2px] xl:w-[1px] rounded-[3px] bg-[#784FB0]"></div>
                 <p class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996] w-[70%]">Получи доступ к максимально полной и актуальной информации по объектам недвижимости</p>
               </div>
-              <button class="w-fit border border-solid border-[#6435A5] leading-none rounded-[3px] text-[16px] xxl:text-[13px] xl:text-[11px] text-[#6435A5] px-5 xxl:px-4 xl:px-3 py-2.5 xxl:py-2 xl:py-1.5">Регистрация</button>
+              <button @click="openRegister = true" class="w-fit border border-solid border-[#6435A5] leading-none rounded-[3px] text-[16px] xxl:text-[13px] xl:text-[11px] text-[#6435A5] px-5 xxl:px-4 xl:px-3 py-2.5 xxl:py-2 xl:py-1.5">Регистрация</button>
             </div>
           </div>
         </div>
@@ -98,7 +100,7 @@
       <div class="_container">
         <div class="_container--inter">
           <div class="flex items-center justify-center ">
-            <button class="text-white bg-[#6435A5] text-base xxl:text-sm xl:text-xs leading-none rounded-[3px] px-6 xxl:px-5 xl:px-4 py-3 xxl:py-2 xl:py-1.5 my-7 xxl:my-5 xl:my-4">Зарегистрироваться</button>
+            <button @click="openRegister = true" class="text-white bg-[#6435A5] text-base xxl:text-sm xl:text-xs leading-none rounded-[3px] px-6 xxl:px-5 xl:px-4 py-3 xxl:py-2 xl:py-1.5 my-7 xxl:my-5 xl:my-4">Зарегистрироваться</button>
           </div>
         </div>
       </div>
@@ -117,12 +119,14 @@ export default {
     return {
       openLoginRealtor: false,
       openLoginDeveloper: false,
+      openRegister: false,
     }
   },
   methods: {
     closeModal() {
       this.openLoginRealtor = false
       this.openLoginDeveloper = false
+      this.openRegister = false
     },
     openModalRealtor() {
       this.openLoginRealtor = true
