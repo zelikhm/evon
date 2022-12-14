@@ -342,6 +342,7 @@ input::placeholder {
 }
 
 .multiselect-dropdown {
+  overflow-y: auto !important;
   border: 1px solid #E5DFEE !important;
   border-bottom-left-radius: 6px !important;
   border-bottom-right-radius: 6px !important;
@@ -517,6 +518,10 @@ input::placeholder {
   color: #fff;
 }
 
+.contact__selling {
+  box-shadow: 0px 8px 60px rgba(52, 23, 94, 0.05);
+}
+
 .custom__scroll::-webkit-scrollbar {
   width: 2px;
 }
@@ -565,4 +570,43 @@ input::placeholder {
 
 .n-upload-trigger.n-upload-trigger--image-card .n-upload-dragger:hover {
   background: #F6F3FA;
+}
+
+.n-upload-file-list .n-upload-file.n-upload-file--error-status .n-upload-file-info .n-upload-file-info__thumbnail {
+  background: #fff;
+}
+
+.n-upload-file-list .n-upload-file .n-upload-file-info .n-upload-file-info__action.n-upload-file-info__action--image-card-type {
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.n-upload-file-list .n-upload-file .n-upload-file-info .n-upload-file-info__action {
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.n-upload-file-list .n-upload-file.n-upload-file--image-card-type .n-progress {
+  background: rgba(255, 255, 255) !important;
+  border-radius: 20px;
+  height: 6px !important;
+}
+
+.n-progress-graph-line .n-progress-graph-line--indicator-outside {
+  background: rgba(255, 255, 255) !important;
+  height: 100% !important;
+}
+
+.n-progress .n-progress-graph .n-progress-graph-line .n-progress-graph-line-rail {
+  background: rgba(255, 255, 255) !important;
+  height: 100% !important;
+}
+
+.n-progress .n-progress-graph .n-progress-graph-line .n-progress-graph-line-rail .n-progress-graph-line-fill {
+  background: white !important;
+  height: 100% !important;
+}
+
+.n-upload-file-list .n-upload-file.n-upload-file--image-card-type .n-upload-file-info {
+  background: #6f42c1;
 }
