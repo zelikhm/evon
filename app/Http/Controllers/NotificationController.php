@@ -16,7 +16,7 @@ class NotificationController extends Controller
 
   public function setNotification($user_id, $message)
   {
-    $notifs = NotificationModel::create([
+    NotificationModel::create([
       'user_id' => $user_id,
       'message' => $message,
       'active' => 1,

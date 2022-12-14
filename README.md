@@ -147,11 +147,13 @@ path addHouse \ [post] / поля:
 
 - compilation_id - Айди подборки
 - house_id - Айди ЖК
+- token
 
 Удаление подборки \
 path delete \ [post] / поля:
 
 - id - Айди подборки
+- token
 
 ### Favorite
 
@@ -160,10 +162,11 @@ path add \ [post] / поля:
 
 - user_id - Айди пользователя
 - house_id - Айди ЖК
+- token
 
 ### Notification
 
-Удаление оповщения \ 
+Удаление оповещения \ 
 path delete \ [post] / поля:
 
 - id - Айди уведомления
@@ -181,3 +184,4 @@ path message \ [post] / поля:
 - user_id - Айди кому отправляем
 - chat_id - Айди чата
 - message - Сообщение любой длины
+- token

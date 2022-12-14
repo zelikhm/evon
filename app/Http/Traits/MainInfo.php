@@ -7,6 +7,7 @@ use App\Models\Builder\Info\StructureModel;
 use App\Models\Builder\Info\TypesModel;
 use App\Models\Messages\ChatModel;
 use App\Models\Messages\MessageModel;
+use App\Models\NotificationModel;
 use App\Models\User\CompilationModel;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,6 +20,15 @@ trait MainInfo {
 
   protected function getAllHouse() {
     return HouseModel::with(['info', 'supports', 'files', 'frames', 'images'])->get();
+  }
+
+  /**
+   * get notification
+   * @return mixed
+   */
+
+  protected function getNotification() {
+    return NotificationModel::where('user_id', Auth::id());
   }
 
   /**

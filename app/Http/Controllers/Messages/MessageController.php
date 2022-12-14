@@ -20,6 +20,7 @@ class MessageController extends Controller
       return Inertia::render('chats', [
         'chats' => $this->getChats(),
         'user' => Auth::user(),
+        'notification' => $this->getNotification(),
       ]);
     }
 

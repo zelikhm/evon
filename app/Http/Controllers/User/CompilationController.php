@@ -21,6 +21,7 @@ class CompilationController extends Controller
     return Inertia::render('', [
       'compilation' => $this->getCompilation(Auth::id()),
       'user' => Auth::user(),
+      'notification' => $this->getNotification(),
     ]);
 
   }
