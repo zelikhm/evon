@@ -59,8 +59,8 @@
       <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="coord_object">Введи координаты объекта</label>
       <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="coord_object" placeholder="49.5122 39.2143">
     </div>
-    <iframe class="w-full h-[300px] rounded-[6px] my-10 xxl:my-8 xl:my-6" src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d939346.3926624231!2d26.987657373274562!3d53.35298654639129!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sru!2sby!4v1670507874830!5m2!1sru!2sby"  style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    <div class="my-10 xxl:my-8 xl:my-6">
+    <iframe class="w-full h-[300px] rounded-[6px] mt-5 xxl:mt-4 xl:mt-3" src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d939346.3926624231!2d26.987657373274562!3d53.35298654639129!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sru!2sby!4v1670507874830!5m2!1sru!2sby"  style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="my-5 xxl:my-4 xl:my-3">
       <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium mb-5 xxl:mb-4 xl:mb-3">Характеристики</h3>
       <div class="grid grid-cols-2 gap-7 xxl:gap-5 xl:gap-4">
 

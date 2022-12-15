@@ -1,7 +1,7 @@
 <template>
   <app-modal-add-contact @close-add-contact="modalAddContact = false" v-if="modalAddContact"/>
   <app-modal-add-apartments @close-add-apartments="modalAddApatments = false" v-if="modalAddApatments"/>
-  <app-add-frame v-if="modalAddFrame" @close-add-frame="modalAddFrame = false" />
+  <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="modalAddFrame = false" />
   <app-header />
   <main>
     <div class="_container">
@@ -53,7 +53,7 @@ import AppApartments from "../Components/AppApartments.vue"
 import AppAddPhoto from "../Components/AppAddPhoto.vue"
 import AppModalAddContact from "../Layouts/AppModalAddContact.vue"
 import AppModalAddApartments from "../Layouts/AppModalAddApartments.vue"
-import AppAddFrame from "../Layouts/AppAddFrame.vue"
+import AppModalAddFrame from "../Layouts/AppModalAddFrame.vue"
 
 export default {
   data() {
@@ -91,7 +91,7 @@ export default {
     AppAddPhoto,
     AppModalAddContact,
     AppModalAddApartments,
-    AppAddFrame,
+    AppModalAddFrame,
   }
 }
 </script>

@@ -10,7 +10,7 @@
       </div>
       <div class="flex flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
         <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="frame">Название</label>
-        <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="frame" placeholder="Корпус 1">
+        <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="frame" placeholder="Корпус 1">
       </div>
       <button class="bg-[#E84680] rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
         <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">Добавить</span>

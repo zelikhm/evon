@@ -2,17 +2,17 @@
   <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] mb-5 xxl:mb-4 xl:mb-3">Добавить корпус и квартиры</h2>
   <div class="flex flex-col">
     <div class="grid grid-cols-6 gap-3 xxl:gap-2.5 xl:gap-2">
-      <div class="corpus__banner cursor-pointer rounded-[5px] border border-solid border-[#6435A5] flex flex-col px-5 xxl:px-4 xl:px-3 py-2 xl:py-1.5">
-        <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px]">Корпус 1</span>
-        <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">11 квартир</span>
+      <div class="corpus__banner gap-3.5 xxl:gap-3 xl:gap-2.5 cursor-pointer rounded-[5px] border border-solid border-[#6435A5] flex flex-col justify-center px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
+        <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none">Корпус 1</span>
+        <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none">11 квартир</span>
       </div>
-      <div class="corpus__banner cursor-pointer rounded-[5px] flex flex-col px-5 xxl:px-4 xl:px-3 py-2 xl:py-1.5">
-        <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px]">Корпус 2</span>
-        <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">11 квартир</span>
+      <div class="corpus__banner gap-3.5 xxl:gap-3 xl:gap-2.5 cursor-pointer rounded-[5px] flex flex-col justify-center px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
+        <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none">Корпус 2</span>
+        <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none">11 квартир</span>
       </div>
-      <div class="corpus__banner cursor-pointer rounded-[5px] flex flex-col px-5 xxl:px-4 xl:px-3 py-2 xl:py-1.5">
-        <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px]">Корпус 3</span>
-        <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">11 квартир</span>
+      <div class="corpus__banner gap-3.5 xxl:gap-3 xl:gap-2.5 cursor-pointer rounded-[5px] flex flex-col justify-center px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
+        <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none">Корпус 3</span>
+        <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none">11 квартир</span>
       </div>
       <div class="flex items-center">
         <img @click="this.$emit('open-add-frame')" src="../../assets/svg/plus_icon_purple.svg" class="cursor-pointer ml-3 xxl:ml-2.5 xl:ml-2 w-8 xxl:w-6 xl:w-5" alt="">
@@ -94,7 +94,19 @@
           <div class="leading-none">64 175 200</div>
           <div class="leading-none">1+1</div>
           <div class="leading-none">1</div>
-          <div class="leading-none">Бронь</div>
+          <div class="relative">
+            <div @click="openStatus = !openStatus" class="flex items-center cursor-pointer gap-5 xxl:gap-4 xl:gap-3">
+              <span>{{ selectStatus }}</span>
+              <svg class="w-2.5 xl:w-2" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.00005 3.879L8.71255 0.166504L9.77305 1.227L5.00005 6L0.227051 1.227L1.28755 0.166504L5.00005 3.879Z" fill="#8A8996"/>
+              </svg>
+            </div>
+            <div v-if="openStatus" class="absolute flex flex-col top-[130%] left-0 bg-white border border-solid border-[#E5DFEE] rounded-[5px]">
+              <span @click="changeSelectStatus(status)" v-for="status in statuses" class="border__bottom--not cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 whitespace-nowrap">
+                {{ status.status }}
+              </span>
+            </div>
+          </div>
         </div>
         <div class="flex items-center">
           <button class="px-5 xxl:px-4 xl:px-3">
@@ -261,7 +273,20 @@
 export default {
   data() {
     return {
-
+      selectStatus: 'Свободно',
+      openStatus: false,
+      statuses: [
+        { status: 'Свободно', value: 1},
+        { status: 'Продажи закрыты', value: 2},
+        { status: 'Акция', value: 3},
+        { status: 'Перепродажа', value: 4},
+      ],
+    }
+  },
+  methods: {
+    changeSelectStatus(status) {
+      this.selectStatus = status.status
+      this.openStatus = false
     }
   }
 }
