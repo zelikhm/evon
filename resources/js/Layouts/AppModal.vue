@@ -33,10 +33,10 @@
       </div>
       <p class="text-[#8A8996] mb-10 xxl:mb-8 xl:mb-6 text-center text-base xxl:text-[13px] xl:text-[11px]">На номер +7 930 245 15 20 был отправлен код</p>
       <div class="modal__telephone-cod gap-5 xxl:gap-4 xl:gap-3 mb-8 xxl:mb-6 xl:mb-5">
-        <input type="number" v-model="valueTelOne" @input="changeValueOne" class="border-transparent focus:border-transparent focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
-        <input type="number" v-model="valueTelTwo" @input="changeValueTwo" class="border-transparent focus:border-transparent focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
-        <input type="number" v-model="valueTelThree" @input="changeValueThree" class="border-transparent focus:border-transparent focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
-        <input type="number" v-model="valueTelFour" @input="changeValueFour" class="border-transparent focus:border-transparent focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
+        <input type="number" v-model="valueTelOne" @input="changeValueOne" ref="item1" class="border-transparent focus:border-transparent focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
+        <input type="number" v-model="valueTelTwo" @input="changeValueTwo" ref="item2" class="border-transparent focus:border-transparent focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
+        <input type="number" v-model="valueTelThree" @input="changeValueThree" ref="item3" class="border-transparent focus:border-transparent focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
+        <input type="number" v-model="valueTelFour" @input="changeValueFour" ref="item4" class="border-transparent focus:border-transparent focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
       </div>
       <div class="flex flex-col items-center mb-10 xxl:mb-8 xl:mb-6 text-base xxl:text-[13px] xl:text-[11px]">
         <span class="text-[#8A8996]">Отправить код еще раз через <span class="text-[#E84680]"> 1:56 </span></span>
@@ -129,23 +129,36 @@ export default {
       this.$emit('close-modal')
     },
     changeValueOne() {
-      if(this.valueTelOne.toString().length > 1) {
+      if (this.valueTelOne.toString().length > 1) {
         this.valueTelOne = this.valueTelOne.toString().substring(0, 1)
+      } else if (this.valueTelOne.toString().length === 1) {
+        this.$refs.item2.focus()
       }
     },
     changeValueTwo() {
-      if(this.valueTelTwo.toString().length > 1) {
+      if (this.valueTelTwo.toString().length > 1) {
         this.valueTelTwo = this.valueTelTwo.toString().substring(0, 1)
+      } else if (this.valueTelTwo.toString().length === 1) {
+        this.$refs.item3.focus()
+      } else {
+        this.$refs.item1.focus()
       }
     },
     changeValueThree() {
-      if(this.valueTelThree.toString().length > 1) {
+      if (this.valueTelThree.toString().length > 1) {
         this.valueTelThree = this.valueTelThree.toString().substring(0, 1)
+      } else if (this.valueTelThree.toString().length === 1) {
+        this.$refs.item4.focus()
+      } else {
+        this.$refs.item2.focus()
       }
+
     },
     changeValueFour() {
-      if(this.valueTelFour.toString().length > 1) {
+      if (this.valueTelFour.toString().length > 1) {
         this.valueTelFour = this.valueTelFour.toString().substring(0, 1)
+      } else if (this.valueTelFour.toString().length === 0) {
+        this.$refs.item3.focus()
       }
     },
   },
