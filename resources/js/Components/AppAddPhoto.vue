@@ -1,21 +1,21 @@
 <template>
   <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] mb-5 xxl:mb-4 xl:mb-3">Добавить фото</h2>
   <div class="grid grid-cols-4 gap-3 xxl:gap-2.5 xl:gap-2">
-    <div class="corpus__banner cursor-pointer rounded-[5px] border border-solid border-[#6435A5] flex flex-col px-5 xxl:px-4 xl:px-3 py-2 xl:py-1.5">
-      <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-[110%]">3D Рендеры</span>
-      <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">0 фото</span>
+    <div class="corpus__banner cursor-pointer gap-3.5 xxl:gap-3 xl:gap-2.5 rounded-[5px] border border-solid border-[#6435A5] flex flex-col justify-center px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3 ">
+      <span class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] leading-none">3D Рендеры</span>
+      <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none">0 фото</span>
     </div>
-    <div class="corpus__banner cursor-pointer rounded-[5px] flex flex-col px-5 xxl:px-4 xl:px-3 py-2 xl:py-1.5">
-      <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-[110%]">Инфраструктура</span>
-      <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">11 фото</span>
+    <div class="corpus__banner cursor-pointer gap-3.5 xxl:gap-3 xl:gap-2.5 rounded-[5px] flex flex-col justify-center px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
+      <span class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] leading-none">Инфраструктура</span>
+      <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none">11 фото</span>
     </div>
-    <div class="corpus__banner cursor-pointer rounded-[5px] flex flex-col px-5 xxl:px-4 xl:px-3 py-2 xl:py-1.5">
-      <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-[110%]">Дизайн</span>
-      <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">11 фото</span>
+    <div class="corpus__banner cursor-pointer gap-3.5 xxl:gap-3 xl:gap-2.5 rounded-[5px] flex flex-col justify-center px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
+      <span class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] leading-none">Дизайн</span>
+      <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none">11 фото</span>
     </div>
-    <div class="corpus__banner cursor-pointer rounded-[5px] flex flex-col px-5 xxl:px-4 xl:px-3 py-2 xl:py-1.5">
-      <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-[110%]">Ход строительства</span>
-      <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">11 фото</span>
+    <div class="corpus__banner cursor-pointer gap-3.5 xxl:gap-3 xl:gap-2.5 rounded-[5px] flex flex-col justify-center px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
+      <span class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] leading-none">Ход строительства</span>
+      <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none">11 фото</span>
     </div>
   </div>
   <div class="my-10 xxl:my-8 xl:my-6">

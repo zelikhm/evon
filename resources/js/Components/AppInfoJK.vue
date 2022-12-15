@@ -65,7 +65,7 @@
             referrerpolicy="no-referrer-when-downgrade">
     </iframe>
     <div id="map"></div>
-    <div class="my-10 xxl:my-8 xl:my-6">
+    <div class="my-5 xxl:my-4 xl:my-3">
       <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium mb-5 xxl:mb-4 xl:mb-3">Характеристики</h3>
       <div class="grid grid-cols-2 gap-7 xxl:gap-5 xl:gap-4">
 
