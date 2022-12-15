@@ -1,3 +1,7 @@
+<script setup>
+import { Link } from '@inertiajs/inertia-vue3'
+</script>
+
 <template>
   <app-header />
   <main>
@@ -5,7 +9,7 @@
       <div class="my-14 xxl:my-10 xl:my-8">
         <div class="flex justify-between items-center mb-7 xxl:mb-5 xl:mb-4">
           <span class="font-semibold ext-[22px] xxl:text-[18px] xl:text-[14px]">Наши объекты</span>
-          <button class="text-base xxl:text-sm xl:text-xs text-white bg-[#E84680] leading-none rounded-[3px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5">Добавить объект</button>
+          <Link href="/houses" class="text-base xxl:text-sm xl:text-xs text-white bg-[#E84680] leading-none rounded-[3px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5">Добавить объект</Link>
         </div>
         <div class="grid grid-cols-2 gap-7 xxl:gap-5 xl:gap-4">
 
