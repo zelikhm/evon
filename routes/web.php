@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -25,10 +26,10 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'index']);
+Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'index'])->middleware(['auth']);
 Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
 
-Route::prefix('profile')->group(function () {
+Route::prefix('profile')->middleware(['auth'])->group(function () {
   Route::get('/addedHouse', ['App\Http\Controllers\House\HouseController', 'createHouse']);
   Route::get('/edit/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
   Route::get('/compilation', ['App\Http\Controllers\User\CompilationController', 'index']);
@@ -36,8 +37,15 @@ Route::prefix('profile')->group(function () {
   Route::get('/compilation/{id}/edit', ['App\Http\Controllers\User\CompilationController', 'edit']);
 });
 
+Route::prefix('messages')->group(function () {
+  Route::get('/');
+  Route::get('/{id}');
+})->middleware('auth');
+
 Route::get('/test', function () {
-  dd(env('TOKEN'));
+//  dd(env('TOKEN'));
+  $user = User::where('phone', '+375295109994')->where('role', 0)->first();
+  dd($user);
 });
 
 Route::get('/dashboard', function () {

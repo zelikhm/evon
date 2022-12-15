@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdminAuth
+class SessionCheckUser
 {
   /**
    * Handle an incoming request.
@@ -17,22 +17,18 @@ class AdminAuth
    */
   public function handle(Request $request, Closure $next, $guard = null)
   {
-    $auth = Auth::guard($guard);
-
-    if (Auth::guard($guard)->guest()) {
-      if ($request->ajax() || $request->wantsJson()) {
-        return response('Unauthorized.', 401);
-      } else {
-        return redirect()->guest('login');
-      }
+    if (!auth()->check()) {
+      return $next($request);
     }
 
-    if (! $auth->user()->isAdmin()) {
-      return redirect('/');
-    } else {
-      return redirect('/admin');
-    }
+    $user = Auth::user();
 
+    if ($user->logout === false) {
+      $user->update(['logout' => true]);
+      Auth::logout();
+
+      return redirect()->route('login');
+    }
 
     return $next($request);
   }

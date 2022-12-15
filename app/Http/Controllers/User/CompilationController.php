@@ -18,10 +18,10 @@ class CompilationController extends Controller
 
   public function index()
   {
-
     return Inertia::render('', [
       'compilation' => $this->getCompilation(Auth::id()),
       'user' => Auth::user(),
+      'notification' => $this->getNotification(),
     ]);
 
   }

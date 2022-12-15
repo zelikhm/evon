@@ -24,19 +24,19 @@
 <!-- Вход с кодом с телефона -->
   <div v-if="oOpenRegister" class="fixed z-[100] w-full h-full flex items-center justify-center">
     <div class="relative bg-white rounded-[12px] p-10 z-50 w-[30%] h-fit">
-      <div class="relative mb-10 xxl:mb-8 xl:mb-6">
+      <div class="relative mb-4 xxl:mb-3 xl:mb-2.5">
         <h2 class="text-center text-[22px] xxl:text-lg xl:text-base font-semibold">Вход в приложение Avon</h2>
         <button @click="closeModal" class="w-4 h-4 absolute top-[20%] right-0 z-50">
           <div class="absolute h-[1px] w-4 bg-[#8A8996] rotate-45"></div>
           <div class="absolute h-[1px] w-4 bg-[#8A8996] -rotate-45"></div>
         </button>
       </div>
-      <p class="text-[#8A8996] mb-10 xxl:mb-8 xl:mb-6 text-center text-base xxl:text-[13px] xl:text-[11px]">На номер +7 930 245 15 20 был отправлен код</p>
-      <div class="modal__telephone-cod gap-5 xxl:gap-4 xl:gap-3 mb-8 xxl:mb-6 xl:mb-5">
-        <input type="number" v-model="valueTelOne" @input="changeValueOne" ref="item1" class="border-transparent focus:border-transparent focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
-        <input type="number" v-model="valueTelTwo" @input="changeValueTwo" ref="item2" class="border-transparent focus:border-transparent focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
-        <input type="number" v-model="valueTelThree" @input="changeValueThree" ref="item3" class="border-transparent focus:border-transparent focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
-        <input type="number" v-model="valueTelFour" @input="changeValueFour" ref="item4" class="border-transparent focus:border-transparent focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
+      <p class="text-[#8A8996] mb-5 xxl:mb-4 xl:mb-3 text-center text-base xxl:text-[13px] xl:text-[11px]">На номер +7 930 245 15 20 был отправлен код</p>
+      <div class="modal__telephone-cod gap-5 xxl:gap-4 xl:gap-3 mb-7 xxl:mb-6 xl:mb-5">
+        <input type="number" v-model="valueTelOne" @input="changeValueOne" ref="item1" class="border-transparent focus:border-[#6435A5] focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
+        <input type="number" v-model="valueTelTwo" @input="changeValueTwo" ref="item2" class="border-transparent focus:border-[#6435A5] focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
+        <input type="number" v-model="valueTelThree" @input="changeValueThree" ref="item3" class="border-transparent focus:border-[#6435A5] focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
+        <input type="number" v-model="valueTelFour" @input="changeValueFour" ref="item4" class="border-transparent focus:border-[#6435A5] focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
       </div>
       <div class="flex flex-col items-center mb-10 xxl:mb-8 xl:mb-6 text-base xxl:text-[13px] xl:text-[11px]">
         <span class="text-[#8A8996]">Отправить код еще раз через <span class="text-[#E84680]"> 1:56 </span></span>

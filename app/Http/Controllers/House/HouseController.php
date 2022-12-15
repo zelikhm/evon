@@ -37,6 +37,7 @@ class HouseController extends Controller
 
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
+      'notification' => $this->getNotification(),
     ]);
   }
 
@@ -50,6 +51,7 @@ class HouseController extends Controller
     return Inertia::render('AppAddObject', [
       'dops' => $this->dops(),
       'infos' => $this->infos(),
+      'notification' => $this->getNotification(),
     ]);
 
   }
@@ -66,6 +68,7 @@ class HouseController extends Controller
       'house' => $this->getHouseSlug($slug),
       'dops' => $this->dops(),
       'infos' => $this->infos(),
+      'notification' => $this->getNotification(),
     ]);
 
   }

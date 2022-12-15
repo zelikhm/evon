@@ -32,8 +32,24 @@ Route::prefix('compilation')->group(function () {
   Route::post('/delete', ['App\Http\Controllers\User\CompilationController', 'delete']);
 });
 
+Route::prefix('notification')->group(function () {
+  Route::post('/delete', ['App\Http\Controllers\NotificationController', 'delete']);
+  Route::get('/get', ['App\Http\Controllers\NotificationController', 'get']);
+});
+
 Route::prefix('favorite')->group(function () {
   Route::post('/add', ['App\Http\Controllers\User\FavoriteController', 'add']);
+});
+
+Route::prefix('user')->group(function () {
+  Route::post('phone', ['App\Http\Controllers\User\AuthController', 'checkUserPhone']);
+  Route::post('email', ['App\Http\Controllers\User\AuthController', 'checkUserEmail']);
+});
+
+Route::prefix('chat')->group(function () {
+  Route::post('/message', ['App\Http\Controllers\Messages\MessageController', 'message']);
+  Route::post('/reloadChats', ['App\Http\Controllers\Messages\MessageController', 'reloadChats']);
+  Route::post('/reloadChat', ['App\Http\Controllers\Messages\MessageController', 'reloadChat']);
 });
 
 Route::prefix('news')->group(function () {
