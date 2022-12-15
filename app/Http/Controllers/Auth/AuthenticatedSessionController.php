@@ -42,6 +42,17 @@ class AuthenticatedSessionController extends Controller
     $user = User::where('email', $request->email)
       ->first();
 
+    if($user === null) {
+      $user = User::where('phone', $request->phone)
+        ->first();
+
+      if($user !== null) {
+        Auth::login($user, $remember = true);
+      } else {
+        return response()->json('not auth', 401);
+      }
+    }
+
     if(Hash::check($request->password, $user->password)) {
       Auth::logoutOtherDevices(Hash::make($request->password));
 

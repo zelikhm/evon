@@ -41,6 +41,11 @@ Route::prefix('favorite')->group(function () {
   Route::post('/add', ['App\Http\Controllers\User\FavoriteController', 'add']);
 });
 
+Route::prefix('user')->group(function () {
+  Route::post('phone', ['App\Http\Controllers\User\AuthController', 'checkUserPhone']);
+  Route::post('email', ['App\Http\Controllers\User\AuthController', 'checkUserEmail']);
+});
+
 Route::prefix('chat')->group(function () {
   Route::post('/message', ['App\Http\Controllers\Messages\MessageController', 'message']);
   Route::post('/reloadChats', ['App\Http\Controllers\Messages\MessageController', 'reloadChats']);

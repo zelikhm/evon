@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -42,7 +43,9 @@ Route::prefix('messages')->group(function () {
 })->middleware('auth');
 
 Route::get('/test', function () {
-  dd(env('TOKEN'));
+//  dd(env('TOKEN'));
+  $user = User::where('phone', '+375295109994')->where('role', 0)->first();
+  dd($user);
 });
 
 Route::get('/dashboard', function () {
