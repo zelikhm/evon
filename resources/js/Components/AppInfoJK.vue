@@ -1,3 +1,7 @@
+<script setup>
+import { Link } from '@inertiajs/inertia-vue3'
+</script>
+
 <template>
   <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px]">Добавить объект</h2>
   <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Найдено 1512 новостроек</span>
@@ -35,7 +39,7 @@
     </div>
 
     <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectRegion}">
-      <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-5 xxl:pt-4 xl:pt-3">Город</span>
+      <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-5 xxl:pt-4 xl:pt-3">Район</span>
       <div class="relative">
         <div @click="openSelectRegion = !openSelectRegion" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
           <span>{{ selectRegion }}</span>
@@ -55,7 +59,7 @@
 
     <div class="flex flex-col border border-solid border-[#E5DFEE] gap-2.5 xxl:gap-2 xl:gap-1.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
       <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="coord_object">Введи координаты объекта</label>
-      <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="coord_object" placeholder="49.5122 39.2143">
+      <input v-model="object.latitude" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="coord_object" placeholder="49.5122 39.2143">
     </div>
     <iframe class="w-full h-[300px] rounded-[6px] my-10 xxl:my-8 xl:my-6"
             src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d939346.3926624231!2d26.987657373274562!3d53.35298654639129!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sru!2sby!4v1670507874830!5m2!1sru!2sby"
@@ -88,23 +92,9 @@
           </div>
         </div>
 
-        <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openFloors}">
-          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Количество этажей</span>
-          <div class="relative">
-            <div @click="openFloors = !openFloors" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-4 xxl:pb-3 xl:pb-2.5">
-              <span>{{ selectFloors }}</span>
-              <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openFloors }" alt="">
-            </div>
-            <div v-if="openFloors" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
-              <span
-                v-for="(floor, idx) in floors" :key="idx"
-                @click="changeSelectFloors(floor)"
-                class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
-              >
-                {{ floor.floor }}
-              </span>
-            </div>
-          </div>
+        <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_floors">Количество этажей</label>
+          <input v-model="object.floors" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_floors" placeholder="9">
         </div>
 
         <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectType}">
@@ -246,8 +236,8 @@
             <input v-model="object.percent" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="commission" placeholder="5 %">
           </div>
           <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="commission">Комментарий</label>
-            <input v-model="object.comment" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="commission" placeholder="///">
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="comment">Комментарий</label>
+            <input v-model="object.comment" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="comment" placeholder="///">
           </div>
         </div>
       </div>
@@ -268,7 +258,8 @@
         </div>
       </div>
       <div class="my-10 xxl:my-8 xl:my-6 w-full">
-        <button @click="addObject" class="w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Добавить</button>
+        <Link href="" @click="addObject" class="w-[49%] mr-4 font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Добавить</Link>
+        <button @click="addObject(1)" class="w-[49%] font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Добавить и продолжить</button>
       </div>
     </div>
   </div>
@@ -279,6 +270,7 @@
 import Multiselect from '@vueform/multiselect'
 
 export default {
+  props: ['dops', 'infos'],
   data() {
     return {
       borderServices: false,
@@ -286,7 +278,7 @@ export default {
       selectCity: 'Сочи',
       openSelectCity: false,
       object: {
-        user_id: null,
+        user_id: Math.ceil(Math.random() * 999),
         title: null,
         description: null,
         city: null,
@@ -305,7 +297,7 @@ export default {
         toShop: null,
         toPark: null,
         toChildrenSchool: null,
-        token: '6f8be2a8db029ec86bd40833acbbd0c5'
+        token: this.globalToken
       },
       cities: [
         { city: 'Сочи', value: 1 },
@@ -358,27 +350,45 @@ export default {
       ],
 
       valueSelectInfrastructure: null,
-      optionsSelectInfrastructure: [
-        'Кинотеатр',
-        'Лобби бар',
-        'Спа',
-        'Спортивная площадка',
-      ],
-
       valueSelectServices: null,
-      optionsSelectServices: [
-        'Онлайн-показ 1',
-        'Онлайн-показ 2',
-        'Онлайн-показ 3',
-      ],
+      optionsSelectInfrastructure: [],
+      optionsSelectServices: [],
       inputFile: [],
       files: []
     }
   },
   methods: {
-    addObject() {
+    addObject(id) {
       this.object.dop = this.valueSelectServices
       this.object.info = this.valueSelectInfrastructure
+      this.object.city = this.selectCity
+      this.object.area = this.selectRegion
+      this.object.statusHouse = this.de
+
+      axios.post('/api/house/create', {
+        user_id: Math.ceil(Math.random() * 999),
+        title: this.object.title,
+        description: this.object.description,
+        city: this.selectCity,
+        area: this.selectRegion,
+        longitude: this.object.longitude,
+        latitude: this.object.longitude,
+        percent: this.object.percent,
+        comment: this.object.comment,
+        statusHouse: this.selectDeadline,
+        floors: this.object.floors,
+        type: this.object.type,
+        dop: this.valueSelectServices,
+        info: this.valueSelectInfrastructure,
+        toSea: this.object.toSea,
+        toSchool: this.object.toSchool,
+        toShop: this.object.toShop,
+        toPark: this.object.toPark,
+        toChildrenSchool: this.object.toChildrenSchool,
+        token: this.globalToken
+      })
+          .then(response => console.log(response.data))
+          .catch(e => console.error(e))
     },
     changeSelectCity(city) {
       this.selectCity = this.object.city = city.city
@@ -419,17 +429,18 @@ export default {
     Multiselect,
   },
   mounted() {
-    let map;
-
-    function initMap() {
-      map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: -34.397, lng: 150.644 },
-        zoom: 8,
-      });
+    for (let key of this.dops) {
+      this.optionsSelectServices.push(key.name)
     }
 
-    window.initMap = initMap;
+    for (let key of this.infos) {
+      this.optionsSelectInfrastructure.push(key.name)
+    }
 
+  },
+  created() {
+    console.log(this.dops)
+    console.log(this.infos)
   }
 }
 
