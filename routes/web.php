@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -27,36 +26,25 @@ Route::get('/', function () {
 });
 
 
-//Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'index'])->middleware(['auth']);
-//Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
+Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'index'])->middleware(['auth']);
+Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
 
 Route::prefix('profile')->middleware(['auth'])->group(function () {
-  Route::get('/addedHouse', ['App\Http\Controllers\House\HouseController', 'createHouse']);
-  Route::get('/edit/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
+  Route::get('/', ['App\Http\Controllers\User\ProfileController', 'index']);
   Route::get('/compilation', ['App\Http\Controllers\User\CompilationController', 'index']);
   Route::get('/compilation/{id}', ['App\Http\Controllers\User\CompilationController', 'show']);
   Route::get('/compilation/{id}/edit', ['App\Http\Controllers\User\CompilationController', 'edit']);
+  Route::get('/addedHouse', ['App\Http\Controllers\House\HouseController', 'createHouse']);
+  Route::get('/edit/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
+  Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'showHouse']);
+  Route::get('/news', ['App\Http\Controllers\House\NewsController', 'index']);
 });
+
+Route::get('/privacy', ['App\Http\Controllers\PrivacyController', 'index']);
 
 Route::prefix('messages')->group(function () {
   Route::get('/');
   Route::get('/{id}');
 })->middleware('auth');
-
-Route::get('/test', function () {
-//  dd(env('TOKEN'));
-  $user = User::where('phone', '+375295109994')->where('role', 0)->first();
-  dd($user);
-});
-
-//Route::get('/dashboard', function () {
-//    return Inertia::render('Dashboard');
-//})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
 require __DIR__.'/auth.php';

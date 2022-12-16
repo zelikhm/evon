@@ -13,8 +13,10 @@ use App\Models\Builder\Info\StructureModel;
 use App\Models\Builder\Info\TypesModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use function Symfony\Component\Routing\Loader\Configurator\collection;
 
 class HouseController extends Controller
 {
@@ -46,7 +48,8 @@ class HouseController extends Controller
    * @return \Inertia\Response
    */
 
-  public function createHouse() {
+  public function createHouse()
+  {
 
     return Inertia::render('AppAddObject', [
       'dops' => $this->getDop(),
@@ -58,6 +61,17 @@ class HouseController extends Controller
   }
 
   /**
+   * show all house for user
+   * @return \Inertia\Response
+   */
+
+  public function showHouse() {
+    return Inertia::render('AppPrivateOfficeDev', [
+      'houses' => $this->getHouseForUser(Auth::id()),
+    ]);
+  }
+
+  /**
    * render page for house
    * @param $slug
    * @return \Inertia\Response
@@ -65,12 +79,13 @@ class HouseController extends Controller
 
   public function house($slug) {
 
-    return Inertia::render('', [
+    return Inertia::render('AppDescriptionObject', [
       'house' => $this->getHouseSlug($slug),
       'dops' => $this->getDop(),
       'infos' => $this->getInfo(),
       'city' => $this->getCity(),
       'notification' => $this->getNotification(),
+      'user' => Auth::user(),
     ]);
 
   }

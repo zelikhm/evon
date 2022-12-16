@@ -3,6 +3,7 @@
 namespace App\Http\Traits;
 
 use App\Models\Builder\HouseModel;
+use App\Models\Builder\HouseNewsModel;
 use App\Models\Builder\Info\CityModel;
 use App\Models\Builder\Info\StructureModel;
 use App\Models\Builder\Info\TypesModel;
@@ -11,8 +12,15 @@ use App\Models\Messages\MessageModel;
 use App\Models\NotificationModel;
 use App\Models\User\CompilationModel;
 use Illuminate\Support\Facades\Auth;
+use function Symfony\Component\Routing\Loader\Configurator\collection;
 
 trait MainInfo {
+
+  /**
+   * check chat
+   * @param $id
+   * @return mixed
+   */
 
   protected function checkChat($id){
     $chat = ChatModel::where('from_id', $id)
@@ -46,7 +54,37 @@ trait MainInfo {
     ]);
   }
 
+  /**
+   * get house for user
+   * @param $id
+   * @return mixed
+   */
 
+  protected function getHouseForUser($id) {
+    return HouseModel::where('user_id', $id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->get();
+  }
+
+  /**
+   * get all news for user
+   * @param $id
+   * @return \Symfony\Component\Routing\Loader\Configurator\CollectionConfigurator
+   */
+
+  protected function getNews($id) {
+    $houses = $this->getHouseForUser($id);
+
+    $news = collect();
+
+    foreach ($houses as $house) {
+      $news_array = HouseNewsModel::where('house_id', $house->id)->with(['house'])->get();
+
+      foreach ($news_array as $new) {
+        $news->push($new);
+      }
+    }
+
+    return $news;
+  }
 
   /**
    * get all houses
@@ -91,7 +129,7 @@ trait MainInfo {
    */
 
   protected function getHouse($id) {
-    return HouseModel::with(['info', 'supports', 'files', 'frames', 'images'])
+    return HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'news'])
       ->where('id', $id)
       ->first();
   }

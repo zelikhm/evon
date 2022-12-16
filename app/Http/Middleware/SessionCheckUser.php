@@ -17,18 +17,18 @@ class SessionCheckUser
    */
   public function handle(Request $request, Closure $next, $guard = null)
   {
-    if (!auth()->check()) {
-      return $next($request);
-    }
-
-    $user = Auth::user();
-
-    if ($user->logout === false) {
-      $user->update(['logout' => true]);
-      Auth::logout();
-
-      return redirect()->route('login');
-    }
+//    if (!auth()->check()) {
+//      return $next($request);
+//    }
+//
+//    $user = Auth::user();
+//
+//    if ($user->logout === false) {
+//      $user->update(['logout' => true]);
+//      Auth::logout();
+//
+//      return redirect()->route('login');
+//    }
 
     return $next($request);
   }
