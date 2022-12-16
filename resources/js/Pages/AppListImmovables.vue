@@ -23,12 +23,18 @@ import AppListNewBuilding from "../Components/AppListNewBuilding.vue"
 import AppNewsDeveloper from "../Components/AppNewsDeveloper.vue"
 
 export default {
+  props: {
+    houses: []
+  },
   components: {
     AppHeader,
     AppFooter,
     AppFilter,
     AppListNewBuilding,
     AppNewsDeveloper,
+  },
+  created() {
+    console.log(this.houses)
   }
 }
 </script>

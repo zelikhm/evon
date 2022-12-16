@@ -5,12 +5,12 @@
 
     <div class="flex flex-col border gap-2 xxl:gap-1.5 border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
       <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name_object">Название объекта</label>
-      <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="name_object" placeholder="Euro Avsallar Residence">
+      <input v-model="object.title" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="name_object" placeholder="Euro Avsallar Residence">
     </div>
 
     <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]">
       <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5" for="description_object">Описание объекта</label>
-      <textarea class="custom__scroll text-[#1E1D2D] resize-none text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="description_object" placeholder="Описание объекта"></textarea>
+      <textarea v-model="object.description" class="custom__scroll text-[#1E1D2D] resize-none text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="description_object" placeholder="Описание объекта"></textarea>
     </div>
 
     <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectCity}">
@@ -29,9 +29,7 @@
             v-for="(city, idx) in cities" :key="idx"
             @click="changeSelectCity(city)"
             class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
-          >
-                    {{ city.city }}
-                  </span>
+          >{{ city.city }}</span>
         </div>
       </div>
     </div>
@@ -59,8 +57,15 @@
       <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="coord_object">Введи координаты объекта</label>
       <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="coord_object" placeholder="49.5122 39.2143">
     </div>
-    <iframe class="w-full h-[300px] rounded-[6px] my-10 xxl:my-8 xl:my-6" src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d939346.3926624231!2d26.987657373274562!3d53.35298654639129!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sru!2sby!4v1670507874830!5m2!1sru!2sby"  style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    <div class="my-10 xxl:my-8 xl:my-6">
+    <iframe class="w-full h-[300px] rounded-[6px] my-10 xxl:my-8 xl:my-6"
+            src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d939346.3926624231!2d26.987657373274562!3d53.35298654639129!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sru!2sby!4v1670507874830!5m2!1sru!2sby"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+    <div id="map"></div>
+    <div class="my-5 xxl:my-4 xl:my-3">
       <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium mb-5 xxl:mb-4 xl:mb-3">Характеристики</h3>
       <div class="grid grid-cols-2 gap-7 xxl:gap-5 xl:gap-4">
 
@@ -209,27 +214,27 @@
         <div class="grid grid-cols-2 gap-7 xxl:gap-5 xl:gap-4">
           <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_sea">от моря</label>
-            <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_sea" placeholder="500 м">
+            <input v-model="object.toSea" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_sea" placeholder="500 м">
           </div>
           <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_school">от школы</label>
-            <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_school" placeholder="500 м">
+            <input v-model="object.toSchool" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_school" placeholder="500 м">
           </div>
           <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_shoping">от торгового центра</label>
-            <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_shoping" placeholder="500 м">
+            <input v-model="object.toShop" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_shoping" placeholder="500 м">
           </div>
           <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_park">от парка</label>
-            <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_park" placeholder="500 м">
+            <input v-model="object.toPark" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_park" placeholder="500 м">
           </div>
           <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_child">от детского садика</label>
-            <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_child" placeholder="500 м">
+            <input v-model="object.toChildrenSchool" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_child" placeholder="500 м">
           </div>
           <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_stop">от остановки</label>
-            <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_stop" placeholder="500 м">
+            <input v-model="object.to" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_stop" placeholder="500 м">
           </div>
         </div>
       </div>
@@ -238,11 +243,11 @@
         <div class="grid grid-cols-2 gap-7 xxl:gap-5 xl:gap-4">
           <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="commission">Комиссия</label>
-            <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="commission" placeholder="5 %">
+            <input v-model="object.percent" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="commission" placeholder="5 %">
           </div>
           <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="commission">Комментарий</label>
-            <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="commission" placeholder="///">
+            <input v-model="object.comment" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="commission" placeholder="///">
           </div>
         </div>
       </div>
@@ -263,7 +268,7 @@
         </div>
       </div>
       <div class="my-10 xxl:my-8 xl:my-6 w-full">
-        <button class="w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Добавить</button>
+        <button @click="addObject" class="w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Добавить</button>
       </div>
     </div>
   </div>
@@ -280,6 +285,28 @@ export default {
       borderInfrastructure: false,
       selectCity: 'Сочи',
       openSelectCity: false,
+      object: {
+        user_id: null,
+        title: null,
+        description: null,
+        city: null,
+        area: null,
+        longitude: null,
+        latitude: null,
+        percent: null,
+        comment: null,
+        statusHouse: null,
+        floors: null,
+        type: null,
+        dop: null,
+        info: null,
+        toSea: null,
+        toSchool: null,
+        toShop: null,
+        toPark: null,
+        toChildrenSchool: null,
+        token: '6f8be2a8db029ec86bd40833acbbd0c5'
+      },
       cities: [
         { city: 'Сочи', value: 1 },
         { city: 'Москва', value: 2 },
@@ -349,8 +376,12 @@ export default {
     }
   },
   methods: {
+    addObject() {
+      this.object.dop = this.valueSelectServices
+      this.object.info = this.valueSelectInfrastructure
+    },
     changeSelectCity(city) {
-      this.selectCity = city.city
+      this.selectCity = this.object.city = city.city
       this.openSelectCity = false
     },
     changeSelectRegion(region) {
@@ -358,15 +389,15 @@ export default {
       this.openSelectRegion = false
     },
     changeSelectDeadline(deadline) {
-      this.selectDeadline = deadline.deadline
+      this.selectDeadline = this.object.statusHouse = deadline.deadline
       this.openSelectDeadline = false
     },
     changeSelectFloors(floor) {
-      this.selectFloors = floor.floor
+      this.selectFloors = this.object.floors = floor.floor
       this.openFloors = false
     },
     changeSelectType(type) {
-      this.selectType = type.type
+      this.selectType = this.object.type = type.type
       this.openSelectType = false
     },
     changeSelectInstallment(installment) {
@@ -386,6 +417,19 @@ export default {
   },
   components: {
     Multiselect,
+  },
+  mounted() {
+    let map;
+
+    function initMap() {
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+      });
+    }
+
+    window.initMap = initMap;
+
   }
 }
 
