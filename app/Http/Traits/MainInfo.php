@@ -101,7 +101,11 @@ trait MainInfo {
    */
 
   protected function getNotification() {
-    return NotificationModel::where('user_id', Auth::id());
+    $notifications = NotificationModel::where('user_id', Auth::id())->get();
+
+    NotificationModel::where('user_id', Auth::id())->delete();
+
+    return $notifications;
   }
 
   /**
