@@ -49,8 +49,9 @@ class HouseController extends Controller
   public function createHouse() {
 
     return Inertia::render('AppAddObject', [
-      'dops' => $this->dops(),
-      'infos' => $this->infos(),
+      'dops' => $this->getDop(),
+      'infos' => $this->getInfo(),
+      'city' => $this->getCity(),
       'notification' => $this->getNotification(),
     ]);
 
@@ -66,8 +67,9 @@ class HouseController extends Controller
 
     return Inertia::render('', [
       'house' => $this->getHouseSlug($slug),
-      'dops' => $this->dops(),
-      'infos' => $this->infos(),
+      'dops' => $this->getDop(),
+      'infos' => $this->getInfo(),
+      'city' => $this->getCity(),
       'notification' => $this->getNotification(),
     ]);
 

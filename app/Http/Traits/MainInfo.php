@@ -3,6 +3,7 @@
 namespace App\Http\Traits;
 
 use App\Models\Builder\HouseModel;
+use App\Models\Builder\Info\CityModel;
 use App\Models\Builder\Info\StructureModel;
 use App\Models\Builder\Info\TypesModel;
 use App\Models\Messages\ChatModel;
@@ -123,8 +124,17 @@ trait MainInfo {
    * @return \Illuminate\Database\Eloquent\Collection
    */
 
-  protected function dops() {
+  protected function getDop() {
     return TypesModel::all();
+  }
+
+  /**
+   * get city and regions
+   * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+   */
+
+  protected function getCity() {
+    return CityModel::with(['regions'])->get();
   }
 
   /**
@@ -132,7 +142,7 @@ trait MainInfo {
    * @return \Illuminate\Database\Eloquent\Collection
    */
 
-  protected function infos() {
+  protected function getInfo() {
     return StructureModel::all();
   }
 }

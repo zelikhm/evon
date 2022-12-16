@@ -26,8 +26,9 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'index'])->middleware(['auth']);
-Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
+
+//Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'index'])->middleware(['auth']);
+//Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
 
 Route::prefix('profile')->middleware(['auth'])->group(function () {
   Route::get('/addedHouse', ['App\Http\Controllers\House\HouseController', 'createHouse']);
@@ -48,9 +49,9 @@ Route::get('/test', function () {
   dd($user);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+//Route::get('/dashboard', function () {
+//    return Inertia::render('Dashboard');
+//})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
