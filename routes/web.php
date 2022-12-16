@@ -29,7 +29,7 @@ Route::get('/', function () {
 Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'index'])->middleware(['auth']);
 Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
 
-Route::prefix('profile')->middleware(['auth'])->group(function () {
+Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
   Route::get('/', ['App\Http\Controllers\User\ProfileController', 'index']);
   Route::get('/compilation', ['App\Http\Controllers\User\CompilationController', 'index']);
   Route::get('/compilation/{id}', ['App\Http\Controllers\User\CompilationController', 'show']);
