@@ -97,6 +97,7 @@ class HouseController extends Controller
         'comment' => $request->comment,
         'active' => 0,
         'status' => 'нету',
+        'fool_price' => $request->fool_price,
         'created_at' => Carbon::now()->addHour(3),
         'updated_at' => Carbon::now()->addHour(3),
       ]);
@@ -112,6 +113,7 @@ class HouseController extends Controller
         'toSchool' => $request->toSchool,
         'toShop' => $request->toShop,
         'toPark' => $request->toPark,
+        'toBus' => $request->toBus,
         'toChildrenSchool' => $request->toChildrenSchool,
         'created_at' => Carbon::now()->addHour(3),
         'updated_at' => Carbon::now()->addHour(3),
