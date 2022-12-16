@@ -105,7 +105,7 @@ class HouseCharacteristics extends Section implements Initializable
         ->setUsageKey('id'),
       AdminFormElement::columns()
         ->addColumn([
-          AdminFormElement::multiselect('dop', 'Доп.Услуги')->SetDisplay('name')->setUsageKey('id')
+          AdminFormElement::multiselect('dop', 'Доп.Услуги')->SetDisplay('name')->setUsageKey('value')
             ->setOptions($this->types()),
           AdminFormElement::select('type', 'Тип здания', [
             'Эконом' => 'Эконом',
@@ -113,7 +113,7 @@ class HouseCharacteristics extends Section implements Initializable
             'Люкс' => 'Люкс',
           ])->required(),
         ], 6)->addColumn([
-          AdminFormElement::multiselect('info', 'Инфаструктура')->SetDisplay('name')->setUsageKey('id')
+          AdminFormElement::multiselect('info', 'Инфаструктура')->SetDisplay('name')->setUsageKey('value')
             ->setOptions($this->infos()),
           AdminFormElement::select('status', 'Статус', [
             'Сдан' => 'Продажи закрыты',
@@ -131,6 +131,7 @@ class HouseCharacteristics extends Section implements Initializable
           AdminFormElement::number('toShop', 'До магазина'),
           AdminFormElement::number('toPark', 'До парка'),
           AdminFormElement::number('toChildrenSchool', 'До детского сада'),
+          AdminFormElement::number('toBus', 'До остановки'),
         ]),
 
     ]);

@@ -56,15 +56,17 @@ path create \ [post] / поля:
 - comment - Комментарий
 - active - * не передаем
 - status - * не передаем
+- fool_price - рассрочка*
 - statusHouse - Статус
 - floors - Этажи
 - type - тип ЖК
-- dop - Доп.услуги
-- info - Инфраструктуры
+- dop - Доп.услуги - массив из названий
+- info - Инфраструктуры - массив из названий
 - toSea - до моря
 - toSchool - до школы
 - toShop - до магазина
 - toPark - до парка
+- toBus - до остановки
 - toChildrenSchool - до дет.сада
 - token
 

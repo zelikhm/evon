@@ -13,8 +13,10 @@ use App\Models\Builder\Info\StructureModel;
 use App\Models\Builder\Info\TypesModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use function Symfony\Component\Routing\Loader\Configurator\collection;
 
 class HouseController extends Controller
 {
@@ -46,14 +48,27 @@ class HouseController extends Controller
    * @return \Inertia\Response
    */
 
-  public function createHouse() {
+  public function createHouse()
+  {
 
     return Inertia::render('AppAddObject', [
-      'dops' => $this->dops(),
-      'infos' => $this->infos(),
+      'dops' => $this->getDop(),
+      'infos' => $this->getInfo(),
+      'city' => $this->getCity(),
       'notification' => $this->getNotification(),
     ]);
 
+  }
+
+  /**
+   * show all house for user
+   * @return \Inertia\Response
+   */
+
+  public function showHouse() {
+    return Inertia::render('AppPrivateOfficeDev', [
+      'houses' => $this->getHouseForUser(Auth::id()),
+    ]);
   }
 
   /**
@@ -64,11 +79,13 @@ class HouseController extends Controller
 
   public function house($slug) {
 
-    return Inertia::render('', [
+    return Inertia::render('AppDescriptionObject', [
       'house' => $this->getHouseSlug($slug),
-      'dops' => $this->dops(),
-      'infos' => $this->infos(),
+      'dops' => $this->getDop(),
+      'infos' => $this->getInfo(),
+      'city' => $this->getCity(),
       'notification' => $this->getNotification(),
+      'user' => Auth::user(),
     ]);
 
   }
@@ -95,6 +112,7 @@ class HouseController extends Controller
         'comment' => $request->comment,
         'active' => 0,
         'status' => 'нету',
+        'fool_price' => $request->fool_price,
         'created_at' => Carbon::now()->addHour(3),
         'updated_at' => Carbon::now()->addHour(3),
       ]);
@@ -110,6 +128,7 @@ class HouseController extends Controller
         'toSchool' => $request->toSchool,
         'toShop' => $request->toShop,
         'toPark' => $request->toPark,
+        'toBus' => $request->toBus,
         'toChildrenSchool' => $request->toChildrenSchool,
         'created_at' => Carbon::now()->addHour(3),
         'updated_at' => Carbon::now()->addHour(3),

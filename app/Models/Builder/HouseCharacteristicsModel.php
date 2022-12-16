@@ -21,6 +21,7 @@ class HouseCharacteristicsModel extends Model
     'toSchool',
     'toShop',
     'toPark',
+    'toBus',
     'toChildrenSchool',
   ];
 

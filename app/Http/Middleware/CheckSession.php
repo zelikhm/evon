@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class SessionCheckUser
+class CheckSession
 {
   /**
    * Handle an incoming request.
@@ -17,18 +17,8 @@ class SessionCheckUser
    */
   public function handle(Request $request, Closure $next, $guard = null)
   {
-//    if (!auth()->check()) {
-//      return $next($request);
-//    }
-//
-//    $user = Auth::user();
-//
-//    if ($user->logout === false) {
-//      $user->update(['logout' => true]);
-//      Auth::logout();
-//
-//      return redirect()->route('login');
-//    }
+
+    $auth = Auth::guard($guard);
 
     return $next($request);
   }

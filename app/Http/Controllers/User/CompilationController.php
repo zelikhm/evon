@@ -54,7 +54,7 @@ class CompilationController extends Controller
         'updated_at' => Carbon::now()->addHour(3),
       ]);
 
-      return response()->json($compl, 200);
+      return response()->json($compl->id, 200);
     } else {
       return response()->json('not auth', 401);
     }

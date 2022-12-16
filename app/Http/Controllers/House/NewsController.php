@@ -3,27 +3,31 @@
 namespace App\Http\Controllers\House;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\MainInfo;
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\HouseNewsModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class NewsController extends Controller
 {
+  use MainInfo;
 
   /**
    * render page
-   * @param $slug
    * @return \Inertia\Response
    */
 
-  public function index($slug) {
+  public function index() {
 
-    $house = HouseModel::where('slug', $slug)->with(['news'])->first();
-
-    return Inertia::render('', [
-      'house' => $house
+    return Inertia::render('AppNews', [
+      'houses' => $this->getHouseForUser(Auth::id()),
+      'news' => $this->getNews(Auth::id()),
+      'user' => Auth::user(),
+      'notification' => $this->getNotification(),
     ]);
+
   }
 
   /**
