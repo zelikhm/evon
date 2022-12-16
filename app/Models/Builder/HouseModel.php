@@ -23,7 +23,8 @@ class HouseModel extends Model
     'comment',
     'active',
     'status',
-    'slug'
+    'slug',
+    'fool_price',
   ];
 
   protected $hidden = [
@@ -36,11 +37,11 @@ class HouseModel extends Model
   }
 
   public function files() {
-    return $this->hasMany(HouseFilesModel::class, 'id', 'house_id');
+    return $this->hasMany(HouseFilesModel::class, 'house_id', 'id');
   }
 
   public function images() {
-    return $this->hasMany(HouseImagesModel::class, 'id', 'house_id');
+    return $this->hasMany(HouseImagesModel::class, 'house_id', 'id');
   }
 
   public function info() {
@@ -48,10 +49,14 @@ class HouseModel extends Model
   }
 
   public function supports() {
-    return $this->hasMany(HouseSupportModel::class, 'id', 'house_id');
+    return $this->hasMany(HouseSupportModel::class, 'house_id', 'id');
   }
 
   public function frames() {
-    return $this->hasMany(FrameModel::class, 'id', 'house_id');
+    return $this->hasMany(FrameModel::class, 'house_id', 'id');
+  }
+
+  public function news() {
+    return $this->hasMany(HouseNewsModel::class, 'house_id', 'id');
   }
 }

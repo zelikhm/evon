@@ -29,8 +29,6 @@ class AdminAuth
 
     if (! $auth->user()->isAdmin()) {
       return redirect('/');
-    } else {
-      return redirect('/admin');
     }
 
 
