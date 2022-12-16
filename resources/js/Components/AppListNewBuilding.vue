@@ -397,7 +397,12 @@
 
 <script>
 export default {
-
+  props: {
+    houses: []
+  },
+  created() {
+    console.log(this.houses)
+  }
 }
 </script>
 

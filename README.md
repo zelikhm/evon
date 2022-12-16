@@ -7,60 +7,219 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Карта запуска проекта 
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+    - git pull
+    - composer update
+    - npm i && npm update
+    - php artisan migrate
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Периодический запуск команды: php artisan migrate
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# О проекте, используетя полу-рест \ полу-сср - realtime-chat (help with pusher technology)
 
-## Learning Laravel
+Пользователи разделяются на 4 роли:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- 0 - realtor, (риелтор) 
+- 1 - builder, (застройщик)
+- 2 - moderator, (модератор)
+- 3 - admin (админ)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Застройщик: 
+фото (айди категории): 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- 0 - 3D рендеры, 
+- 1 - Инфраструктура,
+- 2 - Дизайн,
+- 3 - Ход строительсва
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Api (token - 6f8be2a8db029ec86bd40833acbbd0c5)
 
-### Premium Partners
+Не используется изменение версий, статичный /api (Заголовок апи используется для указания директории после /api/)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Методы: 
 
-## Contributing
+### House 
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Создание ЖК и его характеристики \
+path create \ [post] / поля: 
 
-## Code of Conduct
+- user_id - айди пользователя
+- title - Название ЖК
+- description - Описание ЖК
+- city - Город
+- area - Район
+- longitude - Долгота
+- latitude - Широта
+- percent - Процент
+- comment - Комментарий
+- active - * не передаем
+- status - * не передаем
+- statusHouse - Статус
+- floors - Этажи
+- type - тип ЖК
+- dop - Доп.услуги
+- info - Инфраструктуры
+- toSea - до моря
+- toSchool - до школы
+- toShop - до магазина
+- toPark - до парка
+- toChildrenSchool - до дет.сада
+- token
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Добавление саппортов для ЖК \
+path addedSupport \ [post] / поля:
 
-## Security Vulnerabilities
+- house_id - айди ЖК
+- avatar - Изображение
+- name - Имя
+- phone - Телефон
+- email - Емеил
+- status - Должность
+- link - Ссылка на соц.сеть
+- token
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Получение ЖК по ид \
+path get \ [post] / поля:
 
-## License
+-id
+-token
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Добавление корпуса \
+path createFrame \ [post] / поля:
+
+- house_id - айди жк
+- name - Название
+
+Добавление квартиры \
+path createFlat \ [post] / поля:
+
+- frame_id - айди корпуса
+- number - Номер
+- square - Площадь
+- count - Планировка
+- floor - Этаж
+- status - Статус
+- stairs - Номер от лестницы
+- price - Цена
+
+### News
+
+Добавление новости \
+path add \ [post] / поля:
+
+- house_id - Айди ЖК
+- title - Заголовок
+- description - Описание
+- visible - true (Не передаем)
+
+Редактирование новости \
+path edit \ [post] / поля:
+
+- new_id - Айди новости
+- title - Заголовок
+- description - Описание
+
+Удаление новости \
+path delete \ [post] / поля:
+
+- new_id - Айди новости
+
+Изменение видимости новости \
+path visible \ [post] / поля:
+
+- new_id - Айди новости
+- visible - false\true
+
+### Compilation
+
+Создание подборки \
+path create \ [post] / поля:
+
+- user_id - Айди юзера
+- title - Заголовок
+- description - Комментарий
+- isVisible - Показывать местоположение (true\false) - default false
+
+Добавление обьекта в подборку \
+path addHouse \ [post] / поля:
+
+- compilation_id - Айди подборки
+- house_id - Айди ЖК
+- token
+
+Удаление подборки \
+path delete \ [post] / поля:
+
+- id - Айди подборки
+- token
+
+### Favorite
+
+Добавление в избранное \
+path add \ [post] / поля:
+
+- user_id - Айди пользователя
+- house_id - Айди ЖК
+- token
+
+### Notification
+
+Удаление оповещения \ 
+path delete \ [post] / поля:
+
+- id - Айди уведомления
+
+Получить уведомления \ 
+path get \ [get] / поля:
+
+not param
+
+### Chat
+
+Отправить сообщение \
+path message \ [post] / поля:
+
+- user_id - Айди кому отправляем
+- chat_id - Айди чата
+- message - Сообщение любой длины
+- token
+
+Обновить чаты \
+path reloadChats \ [post] / поля:
+
+- token
+
+Обновить чат \
+path reloadChat \ [post] / поля:
+
+- token
+- id
+
+### User 
+
+Проверка юзера по емейлу (кроме риелтора)\
+path email \ [post] / поля:
+
+- email - емеил юзер
+
+Статусы возврата:
+
+401 - нет токена \
+405 - нет пользователя \
+200 - true 
+
+Проверка юезра по телефону и отправка ему кода (только риелтор)\
+path phone \ [post] / поля:
+
+- phone - телефон введенный пользователем
+
+Статусы возврата: 
+
+401 - нет токена \
+405 - нет пользователя \
+200 - true 
+
+Ввод кода и отправка на проверку /
+
