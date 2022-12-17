@@ -1,3 +1,7 @@
+<script setup>
+import { Link } from '@inertiajs/inertia-vue3'
+</script>
+
 <template>
   <footer class="footer">
     <div class="_container text-lg xxl:text-sm xl:text-xs">
@@ -13,7 +17,7 @@
       </div>
       <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 text-[#3B3A45] opacity-50 pb-14 xxl:pb-10 xl:pb-8 pt-10 xxl:pt-8 xl:pt-6">
         <div class="flex justify-between">
-          <a href="#" class="underline">Политика</a>
+          <Link href="/privacy" class="underline">Политика</Link>
           <span>2022. Все права защищены</span>
         </div>
         <div class="grid grid-cols-3">

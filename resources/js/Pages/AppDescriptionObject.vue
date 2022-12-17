@@ -218,6 +218,9 @@ import "swiper/css/pagination";
 import { Navigation, Pagination} from "swiper";
 
 export default {
+  props: {
+    house: []
+  },
   data() {
     return {
 
@@ -235,6 +238,9 @@ export default {
       modules: [Navigation, Pagination],
     };
   },
+  created() {
+    console.log(this.house)
+  }
 }
 </script>
 

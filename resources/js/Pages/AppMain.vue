@@ -51,7 +51,7 @@
             <img src="../../assets/svg/main_for_rieltor_three.svg" class="h-8 xxl:h-6 xl:h-5" alt="Для риэлтора 3">
           </div>
           <div class="flex flex-col gap-2 justify-between items-start min-h-[9.9vw] border border-solid rounded-xl border-[#E5DFEE] p-7 xxl:p-5 xl:p-4">
-            <span class="text-base xxl:text-sm xl:text-xs">Расположение объектов НА КАРТЕ</span>
+            <span class="text-base xxl:text-sm xl:text-xs">Расположение объектов на карте</span>
             <img src="../../assets/svg/main_for_rieltor_four.svg" class="h-8 xxl:h-6 xl:h-5" alt="Для риэлтора 4">
           </div>
           <div class="flex flex-col gap-2 justify-between items-start min-h-[9.9vw] border border-solid rounded-xl border-[#E5DFEE] p-7 xxl:p-5 xl:p-4">
@@ -59,7 +59,7 @@
             <img src="../../assets/svg/main_for_rieltor_five.svg" class="h-8 xxl:h-6 xl:h-5" alt="Для риэлтора 5">
           </div>
           <div class="flex flex-col gap-2 justify-between items-start min-h-[9.9vw] border border-solid rounded-xl border-[#E5DFEE] p-7 xxl:p-5 xl:p-4">
-            <span class="text-base xxl:text-sm xl:text-xs">Формирование ПОДБОРКИ под вашего клиента и отправка от вашего имени/агентства</span>
+            <span class="text-base xxl:text-sm xl:text-xs">Формирование подборки под вашего клиента и отправка от вашего имени/агентства</span>
             <img src="../../assets/svg/main_for_rieltor_six.svg" class="h-8 xxl:h-6 xl:h-5" alt="Для риэлтора 6">
           </div>
           <div class="flex flex-col gap-2 justify-between items-start min-h-[9.9vw] border border-solid rounded-xl border-[#E5DFEE] p-7 xxl:p-5 xl:p-4">

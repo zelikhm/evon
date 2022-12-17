@@ -2,9 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User\SessionModel;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class SessionCheckUser
 {
@@ -17,18 +19,12 @@ class SessionCheckUser
    */
   public function handle(Request $request, Closure $next, $guard = null)
   {
-//    if (!auth()->check()) {
-//      return $next($request);
-//    }
-//
-//    $user = Auth::user();
-//
-//    if ($user->logout === false) {
-//      $user->update(['logout' => true]);
-//      Auth::logout();
-//
-//      return redirect()->route('login');
-//    }
+    $hasSession = SessionModel::where('user_id', Auth::id())->where('session', $request->cookie('session_key'))->first();
+
+    if ($hasSession === null) {
+      Auth::logout();
+      return \redirect('/');
+    }
 
     return $next($request);
   }

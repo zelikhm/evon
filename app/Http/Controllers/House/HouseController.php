@@ -91,6 +91,25 @@ class HouseController extends Controller
   }
 
   /**
+   * delete house
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function delete(Request $request) {
+    if($request->token === env('TOKEN')) {
+      HouseModel::where('id', $request->id)
+        ->where('user_id', Auth::id())
+        ->delete();
+
+      return response()->json(true, 205);
+    } else {
+      return response()->json('not auth', 401);
+    }
+
+  }
+
+  /**
    * create house and characteristics
    * @param Request $request
    * @return \Illuminate\Http\JsonResponse
@@ -98,6 +117,9 @@ class HouseController extends Controller
 
   public function create(Request $request)
   {
+    $imageName = time() . '.' . $request->image->getClientOriginalName();
+    $request->image->move(public_path('storage'), $imageName);
+
     if ($request->token === env('TOKEN')) {
       $house = HouseModel::create([
         'user_id' => $request->user_id,
@@ -112,6 +134,7 @@ class HouseController extends Controller
         'comment' => $request->comment,
         'active' => 0,
         'status' => 'нету',
+        'image' => $imageName,
         'fool_price' => $request->fool_price,
         'created_at' => Carbon::now()->addHour(3),
         'updated_at' => Carbon::now()->addHour(3),

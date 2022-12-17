@@ -9,6 +9,7 @@ use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
@@ -40,7 +41,7 @@ class AuthenticatedSessionController extends Controller
    */
   public function store(LoginRequest $request)
   {
-    if($request->token === env('TOKEN')) {
+//    if($request->token === env('TOKEN')) {
       $user = User::where('email', $request->email)
         ->first();
 
@@ -69,9 +70,9 @@ class AuthenticatedSessionController extends Controller
       } else {
         return response()->json('not auth', 401);
       }
-    } else {
-      return response()->json('not auth', 401);
-    }
+//    } else {
+//      return response()->json('not auth', 401);
+//    }
 
   }
 
@@ -97,8 +98,12 @@ class AuthenticatedSessionController extends Controller
 
   protected function setSession($id) {
 
+    $session = rand(10000, 100000);
+
+    Cookie::queue('session_key', $session);
+
     User\SessionModel::create([
-      'session' => rand(10000, 100000),
+      'session' => $session,
       'user_id' => $id,
       'active' => 1,
       'created_at' => Carbon::now()->addHour(3),
