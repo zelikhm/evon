@@ -106,6 +106,8 @@ path createFlat \ [post] / поля:
 - status - Статус
 - stairs - Номер от лестницы
 - price - Цена
+- image_up - верхнее изображение (category = 0)
+- image_down - нижнее изображение (category = 1)
 
 Удаление ЖК и всех связей \ 
 path delete \ [post] / поля:

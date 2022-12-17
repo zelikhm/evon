@@ -4,6 +4,7 @@ namespace App\Http\Controllers\House;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\MainInfo;
+use App\Models\Builder\Flat\FlatImagesModel;
 use App\Models\Builder\Flat\FlatModel;
 use App\Models\Builder\Flat\FrameModel;
 use App\Models\Builder\HouseCharacteristicsModel;
@@ -172,6 +173,13 @@ class HouseController extends Controller
 
   public function createFlat(Request $request) {
     if($request->token === env('TOKEN')) {
+
+      $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
+      $request->image_up->move(public_path('/storage/'), $imageUp);
+
+      $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
+      $request->image_down->move(public_path('/storage/'), $imageDown);
+
       $flat = FlatModel::create([
         'frame_id' => $request->frame_id,
         'number' => $request->number,
@@ -181,6 +189,18 @@ class HouseController extends Controller
         'status' => $request->status,
         'number_from_stairs' => $request->stairs,
         'price' => $request->price,
+      ]);
+
+      FlatImagesModel::create([
+        'flat_id' => $flat->id,
+        'name' => $imageUp,
+        'category' => 0,
+      ]);
+
+      FlatImagesModel::create([
+        'flat_id' => $flat->id,
+        'name' => $imageDown,
+        'category' => 1,
       ]);
 
       return response()->json(true, 200);
@@ -217,9 +237,13 @@ class HouseController extends Controller
 
   public function supports(Request $request) {
     if ($request->token === env('TOKEN')) {
+
+      $imageName = time() . '.' . $request->avatar->getClientOriginalName();
+      $request->avatar->move(public_path('/storage/'), $imageName);
+
       $support = HouseSupportModel::create([
         'house_id' => $request->house_id,
-        'avatar' => $request->avatar,
+        'avatar' => $imageName,
         'name' => $request->name,
         'phone' => $request->phone,
         'email' => $request->email,

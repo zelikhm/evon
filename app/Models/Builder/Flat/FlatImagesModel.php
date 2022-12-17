@@ -12,6 +12,7 @@ class FlatImagesModel extends Model
     protected $fillable = [
       'flat_id',
       'name',
+      'category',
     ];
 
     protected $hidden = [
