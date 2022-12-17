@@ -4,6 +4,7 @@ namespace App\Http\Traits;
 
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\HouseNewsModel;
+use App\Models\Builder\HouseViewsModel;
 use App\Models\Builder\Info\CityModel;
 use App\Models\Builder\Info\StructureModel;
 use App\Models\Builder\Info\TypesModel;
@@ -11,6 +12,7 @@ use App\Models\Messages\ChatModel;
 use App\Models\Messages\MessageModel;
 use App\Models\NotificationModel;
 use App\Models\User\CompilationModel;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use function Symfony\Component\Routing\Loader\Configurator\collection;
 
@@ -61,7 +63,19 @@ trait MainInfo {
    */
 
   protected function getHouseForUser($id) {
-    return HouseModel::where('user_id', $id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->get();
+    $houses = HouseModel::where('user_id', $id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->get();
+
+    foreach ($houses as $house) {
+      $house->view = [
+        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addHour(-24))->count(),
+        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-5))->count(),
+        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-7))->count(),
+        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addWeek(-1))->count(),
+        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addYear(-1))->count(),
+      ];
+    }
+
+    return $houses;
   }
 
   /**
@@ -92,7 +106,10 @@ trait MainInfo {
    */
 
   protected function getAllHouse() {
-    return HouseModel::with(['info', 'supports', 'files', 'frames', 'images'])->get();
+    return HouseModel::where('visible', true)
+      ->where('active', 2)
+      ->with(['info', 'supports', 'files', 'frames', 'images'])
+      ->get();
   }
 
   /**

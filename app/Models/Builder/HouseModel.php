@@ -25,6 +25,8 @@ class HouseModel extends Model
     'status',
     'slug',
     'fool_price',
+    'image',
+    'visible',
   ];
 
   protected $hidden = [

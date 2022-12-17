@@ -31,6 +31,21 @@ class NewsController extends Controller
   }
 
   /**
+   * render page for create new
+   * @return \Inertia\Response
+   */
+
+  public function createNews() {
+
+    return Inertia::render('AppAddNews', [
+      'houses' => $this->getHouseForUser(Auth::id()),
+      'user' => Auth::user(),
+      'notification' => $this->getNotification(),
+    ]);
+
+  }
+
+  /**
    * added news for house
    * @param Request $request
    * @return \Illuminate\Http\JsonResponse
