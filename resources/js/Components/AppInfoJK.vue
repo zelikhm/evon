@@ -224,7 +224,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
           <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_stop">от остановки</label>
-            <input v-model="object.to" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_stop" placeholder="500 м">
+            <input v-model="object.toBus" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_stop" placeholder="500 м">
           </div>
         </div>
       </div>
@@ -246,6 +246,22 @@ import { Link } from '@inertiajs/inertia-vue3'
         <div class="relative my-3 xxl:my-2.5 xl:my-2">
           <input @change="changeInputFile" type="file" id="input_file" class="opacity-0 absolute invisible" multiple>
           <label class="w-fit flex items-center cursor-pointer gap-2 xl:gap-1.5 border border-solid border-[#6435A5] rounded-[6px] px-4 xxl:px-3 xl:px-2.5 py-3 xxl:py-2.5 xl:py-2" for="input_file" >
+            <img class="w-4.5 xxl:w-4 xl:w-3.5" src="../../assets/svg/plus_icon_purple.svg" alt="Выбрать файл">
+            <span class="text-[#6435A5] font-medium text-base xxl:text-sm xl:text-xs leading-none">Загрузить файл</span>
+          </label>
+        </div>
+        <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
+          <div v-for="input in files" class="relative flex items-center gap-4 xxl:gap-3 xl:gap-2.5">
+            <img src="../../assets/svg/file-icon_docx.svg" alt="">
+            <span class="text-lg xxl:text-[15px] xl:text-[13px] font-medium">{{ input.title }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="my-10 xxl:my-8 xl:my-6">
+        <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">Загрузите главную картинку для ЖК</h3>
+        <div class="relative my-3 xxl:my-2.5 xl:my-2">
+          <input @change="changeInputFile" type="file" id="input_file2" class="opacity-0 absolute invisible">
+          <label class="w-fit flex items-center cursor-pointer gap-2 xl:gap-1.5 border border-solid border-[#6435A5] rounded-[6px] px-4 xxl:px-3 xl:px-2.5 py-3 xxl:py-2.5 xl:py-2" for="input_file2" >
             <img class="w-4.5 xxl:w-4 xl:w-3.5" src="../../assets/svg/plus_icon_purple.svg" alt="Выбрать файл">
             <span class="text-[#6435A5] font-medium text-base xxl:text-sm xl:text-xs leading-none">Загрузить файл</span>
           </label>
@@ -296,7 +312,9 @@ export default {
         toSchool: null,
         toShop: null,
         toPark: null,
+        toBus: null,
         toChildrenSchool: null,
+        installment: 0,
         token: this.globalToken
       },
       cities: [
@@ -345,8 +363,8 @@ export default {
       selectInstallment: 'Да',
       openInstallment: false,
       installments: [
-        { installment: 'Да', value: 1 },
-        { installment: 'Нет', value: 2 },
+        { id: 0, installment: 'Да' },
+        { id: 1, installment: 'Нет' },
       ],
 
       valueSelectInfrastructure: null,
@@ -366,25 +384,27 @@ export default {
       this.object.statusHouse = this.de
 
       axios.post('/api/house/create', {
-        user_id: Math.ceil(Math.random() * 999),
+        user_id: 5,
         title: this.object.title,
         description: this.object.description,
         city: this.selectCity,
         area: this.selectRegion,
-        longitude: this.object.longitude,
-        latitude: this.object.longitude,
+        longitude: this.object.latitude,
+        latitude: this.object.latitude,
         percent: this.object.percent,
         comment: this.object.comment,
         statusHouse: this.selectDeadline,
         floors: this.object.floors,
-        type: this.object.type,
+        type: this.selectType,
         dop: this.valueSelectServices,
         info: this.valueSelectInfrastructure,
         toSea: this.object.toSea,
         toSchool: this.object.toSchool,
         toShop: this.object.toShop,
         toPark: this.object.toPark,
+        toBus: this.object.toBus,
         toChildrenSchool: this.object.toChildrenSchool,
+        fool_price: this.object.installment === 0 ? true : false ,
         token: this.globalToken
       })
           .then(response => console.log(response.data))
@@ -412,6 +432,7 @@ export default {
     },
     changeSelectInstallment(installment) {
       this.selectInstallment = installment.installment
+      this.object.installment = installment.id
       this.openInstallment = false
     },
     changeInputFile(e) {

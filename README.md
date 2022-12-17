@@ -62,6 +62,7 @@ path create \ [post] / поля:
 - type - тип ЖК
 - dop - Доп.услуги - массив из названий
 - info - Инфраструктуры - массив из названий
+- image - изображение
 - toSea - до моря
 - toSchool - до школы
 - toShop - до магазина
@@ -105,6 +106,11 @@ path createFlat \ [post] / поля:
 - status - Статус
 - stairs - Номер от лестницы
 - price - Цена
+
+Удаление ЖК и всех связей \ 
+path delete \ [post] / поля:
+
+- house_id - айди жк
 
 ### News
 

@@ -1,13 +1,16 @@
-<template>
+<script setup>
+import { Link } from '@inertiajs/inertia-vue3'
+</script>
 
+<template>
 <!--  Меню до входа-->
   <header class="relative z-50 bg-[#6435A5] leading-[100%]">
     <div class="_container h-[60px] xxl:h-12 xl:h-10">
       <div class="flex items-center justify-between h-full ">
-        <div class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
+        <Link href="/" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
           <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4" alt="Логотип">
           <span class="uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon.com</span>
-        </div>
+        </Link>
         <div class="flex items-center gap-7 xxl:gap-5 text-[16px] xxl:text-[13px] xl:text-[11px]">
           <div class="header__lang--select text-white uppercase relative flex items-center h-[60px] xxl:h-12 xl:h-10">
             <div class="flex h-full items-center cursor-pointer px-7 xxl:px-5 xl:px-4 gap-2.5 xl:gap-1.5" @click="langOptionVisible = !langOptionVisible">
@@ -44,10 +47,10 @@
     <div class="_container h-[60px] xxl:h-12 xl:h-10">
       <div class="flex items-center justify-between h-full ">
         <div class="flex gap-20 xxl:gap-16 xl:gap-12 items-center">
-          <div class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
+          <Link href="/" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
             <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4" alt="Логотип">
             <span class="uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon.com</span>
-          </div>
+          </Link>
           <div class="text-white text-[16px] xxl:text-[13px] xl:text-[11px] flex gap-20 xxl:gap-16 xl:gap-12">
             <a href="#" class="">Новостройки</a>
             <a href="#" class="opacity-60">Виллы</a>
@@ -97,14 +100,14 @@
   </header>
 
   <!-- Меню Застройщик-->
-  <header v-if="1 != 1"  class="relative z-50 bg-[#6435A5] leading-[100%]">
+  <header v-if="1 !== 1"  class="relative z-50 bg-[#6435A5] leading-[100%]">
     <div class="_container h-[60px] xxl:h-12 xl:h-10">
       <div class="flex items-center justify-between h-full ">
         <div class="flex gap-20 xxl:gap-16 xl:gap-12 items-center">
-          <div class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
+          <Link href="/" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
             <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4" alt="Логотип">
             <span class="uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon.com</span>
-          </div>
+          </Link>
           <div class="text-white text-[16px] xxl:text-[13px] xl:text-[11px] flex gap-20 xxl:gap-16 xl:gap-12">
             <a href="#" class="">Объекты</a>
             <a href="#" class="">Новости</a>
@@ -154,9 +157,9 @@ export default {
   data() {
     return {
       languages: [
-        {lang: 'ru', value: 1},
-        {lang: 'en', value: 2},
-        {lang: 'tr', value: 3},
+        { id: 0, lang: 'ru' },
+        { id: 1, lang: 'en' },
+        { id: 2, lang: 'tr' },
       ],
       langOptionVisible: false,
       langSelected: 'ru',
