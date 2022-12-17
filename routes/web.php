@@ -25,24 +25,6 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/add-news', function () {
-    return Inertia::render('AppAddNews', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
-Route::get('/profile-dev', function () {
-    return Inertia::render('AppProfileDev', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
 Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'index'])->middleware(['auth']);
 Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
 
@@ -56,6 +38,10 @@ Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
   Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'showHouse']);
   Route::get('/news', ['App\Http\Controllers\House\NewsController', 'index']);
   Route::get('/news/create', ['App\Http\Controllers\House\NewsController', 'createNews']);
+});
+
+Route::get('test', function () {
+  return  Inertia::render('TestApp');
 });
 
 Route::get('/privacy', ['App\Http\Controllers\PrivacyController', 'index']);

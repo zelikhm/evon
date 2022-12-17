@@ -7,6 +7,7 @@ use App\Http\Traits\MainInfo;
 use App\Models\Builder\Flat\FlatModel;
 use App\Models\Builder\Flat\FrameModel;
 use App\Models\Builder\HouseCharacteristicsModel;
+use App\Models\Builder\HouseImagesModel;
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\HouseSupportModel;
 use App\Models\Builder\Info\StructureModel;
@@ -259,6 +260,16 @@ class HouseController extends Controller
   public function addedImages(Request $request) {
     if ($request->token === env('TOKEN')) {
 
+        $imageName = time() . '.' . $request->image->getClientOriginalName();
+        $request->image->move(public_path('/storage/'), $imageName);
+
+        HouseImagesModel::create([
+          'house_id' => $request->house_id,
+          'name' => $imageName,
+          'category' => $request->category_id,
+          'created_at' => Carbon::now()->addHour(3),
+          'updated_at' => Carbon::now()->addHour(3),
+        ]);
 
       return response()->json(true, 200);
     } else {
