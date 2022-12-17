@@ -285,6 +285,26 @@ class HouseController extends Controller
   }
 
   /**
+   * edit visible for house
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function setVisible(Request $request) {
+    if($request->token === env('TOKEN')) {
+      HouseModel::where('house_id', $request->house_id)
+        ->update([
+          'visible' => $request->visible,
+        ]);
+
+      return response()->json(true, 200);
+    } else {
+      return response()->json(false, 401);
+    }
+
+  }
+
+  /**
    * added images for house
    * @param Request $request
    * @return \Illuminate\Http\JsonResponse

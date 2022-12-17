@@ -106,7 +106,10 @@ trait MainInfo {
    */
 
   protected function getAllHouse() {
-    return HouseModel::with(['info', 'supports', 'files', 'frames', 'images'])->get();
+    return HouseModel::where('visible', true)
+      ->where('active', 2)
+      ->with(['info', 'supports', 'files', 'frames', 'images'])
+      ->get();
   }
 
   /**

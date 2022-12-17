@@ -109,6 +109,12 @@ path createFlat \ [post] / поля:
 - image_up - верхнее изображение (category = 0)
 - image_down - нижнее изображение (category = 1)
 
+Изменение статуса видимости (скрыть) \
+path setVisible \ [post] / поля:
+
+- house_id - айди ЖК
+- visible - true\false - отображение\скрытие
+
 Удаление ЖК и всех связей \ 
 path delete \ [post] / поля:
 
