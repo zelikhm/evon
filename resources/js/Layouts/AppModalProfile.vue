@@ -10,17 +10,24 @@
       </div>
       <div class="flex justify-between items-center border border-solid border-[#E5DFEE] rounded-[5px] p-5 xxl:p-4 xl:p-3">
         <label class="payd__checkbox">
-          <input type="radio" value="" id="pay_1" name="payd">
-          <span for="pay_1">Happy</span>
+          <input type="radio" value="1" id="pay_1" name="payd">
+          <span for="pay_1">на 1 месяц</span>
         </label>
-        <span></span>
+        <span>100 ₤</span>
       </div>
       <div class="flex justify-between items-center border border-solid border-[#E5DFEE] rounded-[5px] p-5 xxl:p-4 xl:p-3">
         <label class="payd__checkbox">
-          <input type="radio" value="" id="pay_2" name="payd">
-          <span for="pay_2">Happy</span>
+          <input type="radio" value="6" id="pay_2" name="payd">
+          <span for="pay_2">на 6 месяцев</span>
         </label>
-        <span></span>
+        <span>500 ₤</span>
+      </div>
+      <div class="flex justify-between items-center border border-solid border-[#E5DFEE] rounded-[5px] p-5 xxl:p-4 xl:p-3">
+        <label class="payd__checkbox">
+          <input type="radio" value="12" id="pay_3" name="payd">
+          <span for="pay_3">на год</span>
+        </label>
+        <span>1000 ₤</span>
       </div>
       <button class="bg-[#E84680] rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
         <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">Оплатить</span>
