@@ -6,10 +6,10 @@ use App\Models\Builder\Flat\FrameModel;
 use App\Models\Builder\HouseCharacteristicsModel;
 use App\Models\Builder\HouseFilesModel;
 use App\Models\Builder\HouseImagesModel;
+use App\Models\Builder\HouseModel;
 use App\Models\Builder\HouseNewsModel;
 use App\Models\Builder\HouseSupportModel;
 use App\Models\Builder\HouseViewsModel;
-use App\Models\HouseModel;
 
 class HouseObserver
 {
