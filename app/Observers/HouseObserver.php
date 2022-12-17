@@ -2,6 +2,13 @@
 
 namespace App\Observers;
 
+use App\Models\Builder\Flat\FrameModel;
+use App\Models\Builder\HouseCharacteristicsModel;
+use App\Models\Builder\HouseFilesModel;
+use App\Models\Builder\HouseImagesModel;
+use App\Models\Builder\HouseNewsModel;
+use App\Models\Builder\HouseSupportModel;
+use App\Models\Builder\HouseViewsModel;
 use App\Models\HouseModel;
 
 class HouseObserver
@@ -36,7 +43,13 @@ class HouseObserver
      */
     public function deleted(HouseModel $houseModel)
     {
-        //
+        HouseViewsModel::where('house_id', $houseModel->id)->delete();
+        HouseImagesModel::where('house_id', $houseModel->id)->delete();
+        HouseNewsModel::where('house_id', $houseModel->id)->delete();
+        HouseSupportModel::where('house_id', $houseModel->id)->delete();
+        HouseCharacteristicsModel::where('house_id', $houseModel->id)->delete();
+        HouseFilesModel::where('house_id', $houseModel->id)->delete();
+        FrameModel::where('house_id', $houseModel->id)->delete();
     }
 
     /**

@@ -11,6 +11,7 @@ use App\Models\Builder\HouseCharacteristicsModel;
 use App\Models\Builder\HouseImagesModel;
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\HouseSupportModel;
+use App\Models\Builder\HouseViewsModel;
 use App\Models\Builder\Info\StructureModel;
 use App\Models\Builder\Info\TypesModel;
 use Carbon\Carbon;
@@ -80,6 +81,14 @@ class HouseController extends Controller
    */
 
   public function house($slug) {
+
+    $house = HouseModel::where('slug', $slug)->first();
+
+    HouseViewsModel::create([
+      'house_id' => $house->id,
+      'created_at' => Carbon::now()->addHour(3),
+      'updated_at' => Carbon::now()->addHour(3),
+    ]);
 
     return Inertia::render('AppDescriptionObject', [
       'house' => $this->getHouseSlug($slug),
