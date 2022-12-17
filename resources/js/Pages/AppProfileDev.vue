@@ -1,4 +1,5 @@
 <template>
+  <app-modal-profile v-if="openPayProfile" @close-pay-profile="openPayProfile = false"/>
   <app-header />
   <main>
     <div class="_container">
@@ -35,7 +36,7 @@
                 <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none">Управление подпиской</span>
                 <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs leading-none">Активна до: <span class="text-[#E84680]"> 20.11.2022</span></span>
               </div>
-              <button class="bg-[#6435A5] h-fit rounded-[6px] px-12 xxl:px-10 xl:px-8 py-3.5 xxl:py-2.5 xl:py-2">
+              <button @click="openPayProfile = !openPayProfile"  class="bg-[#6435A5] h-fit rounded-[6px] px-12 xxl:px-10 xl:px-8 py-3.5 xxl:py-2.5 xl:py-2">
                 <span class="text-white text-base xxl:text-sm xl:text-xs leading-none">Оплатить</span>
               </button>
             </div>
@@ -50,16 +51,18 @@
 <script>
 import AppFooter from "@/Layouts/AppFooter.vue"
 import AppHeader from "@/Layouts/AppHeader.vue"
+import AppModalProfile from "@/Layouts/AppModalProfile.vue"
 
 export default {
   data() {
     return {
-
+      openPayProfile: false
     }
   },
   components: {
     AppHeader,
     AppFooter,
+    AppModalProfile,
   }
 }
 </script>
