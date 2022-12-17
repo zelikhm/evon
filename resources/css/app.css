@@ -313,19 +313,15 @@ input::placeholder {
 }
 
 .multiselect-caret {
+  width: 12px !important;
   background-color: #F6F3FA !important;
-  flex-grow: 0;
-  flex-shrink: 0;
   margin: 0 !important;
+  background-size: contain;
   background-image: url("../assets/svg/arrow_down_black.svg");
   background-repeat: no-repeat;
   background-position: center;
   -webkit-mask-image: none !important;
   mask-image: none !important;
-  pointer-events: none;
-  position: relative;
-  transform: rotate(0deg);
-  transition: transform .3s;
   z-index: 10;
 }
 
@@ -346,6 +342,18 @@ input::placeholder {
   border: 1px solid #E5DFEE !important;
   border-bottom-left-radius: 6px !important;
   border-bottom-right-radius: 6px !important;
+}
+
+.multiselect-dropdown::-webkit-scrollbar {
+  width: 2px;
+}
+
+.multiselect-dropdown::-webkit-scrollbar-thumb {
+  background: #6435A5;
+}
+
+.multiselect-dropdown::-webkit-scrollbar-track {
+  background: #E5DFEE;
 }
 
 .multiselect-option {
@@ -370,6 +378,10 @@ input::placeholder {
     min-height: 24px !important;
   }
 
+  .multiselect-caret {
+    width: 10px !important;
+  }
+
   .multi__select .multiselect-tag {
     font-size: 12px !important;
   }
@@ -389,7 +401,6 @@ input::placeholder {
   }
 }
 
-
 @media (max-width: 1366px) {
   .multiselect {
     min-height: 20px !important;
@@ -401,6 +412,10 @@ input::placeholder {
 
   .ones__select .multiselect {
     font-size: 13px !important;
+  }
+
+  .multiselect-caret {
+    width: 8px !important;
   }
 
   .multiselect-wrapper {
@@ -491,6 +506,11 @@ input::placeholder {
 /*****************LC_DEV*******************/
 
 .hover__select:hover {
+  background: #F6F3FA;
+  color: #6435A5;
+}
+
+.select__pagination {
   background: #F6F3FA;
   color: #6435A5;
 }
@@ -611,7 +631,6 @@ input::placeholder {
   background: #6f42c1;
 }
 
-
 .avatar__contact {
   background: rgba(100, 53, 165, 0.15);
 }
@@ -635,9 +654,147 @@ input::placeholder {
 }
 
 .object__block:hover .hide {
-  display: none;
+  opacity: 0;
+  transition: all 0.4s;
 }
 
 .object__block:hover .seek {
-  display: flex;
+  opacity: 1;
+  transition: all 0.4s;
+}
+
+.ql-toolbar.ql-snow {
+  border-top-left-radius: 6px !important;
+  border-top-right-radius: 6px !important;
+  padding: 2px !important;
+}
+
+.ql-container.ql-snow {
+  border-bottom-left-radius: 6px !important;
+  border-bottom-right-radius: 6px !important;
+  height: 100px !important;
+}
+
+.ql-editor::-webkit-scrollbar {
+  width: 2px;
+}
+
+.ql-editor::-webkit-scrollbar-thumb {
+  background: #6f42c1;
+}
+
+.ql-editor::-webkit-scrollbar-track {
+  background: #E5DFEE;
+}
+
+.ql-toolbar.ql-snow .ql-formats {
+  margin-right: 5px !important;
+}
+
+.ql-snow.ql-toolbar button, .ql-snow .ql-toolbar button {
+  height: 18px !important;
+  width: 17px !important;
+}
+
+.ql-snow .ql-color-picker, .ql-snow .ql-icon-picker {
+  height: 18px !important;
+  width: 17px !important;
+}
+
+.ql-snow .ql-picker.ql-size {
+  width: 80px !important;
+}
+
+.ql-snow .ql-picker {
+  height: 20px !important;
+  font-size: 12px;
+}
+
+.ql-snow .ql-picker.ql-header {
+  width: 80px !important;
+}
+
+.ql-snow .ql-picker-label {
+  padding: 0 !important;
+  align-items: center;
+}
+
+@media (max-width: 1572px) {
+  .ql-toolbar.ql-snow .ql-formats {
+    margin-right: 3px !important;
+  }
+
+  .ql-snow.ql-toolbar button, .ql-snow .ql-toolbar button {
+    height: 16px !important;
+    width: 15px !important;
+    padding: 2px 3px !important;
+  }
+
+  .ql-snow .ql-color-picker, .ql-snow .ql-icon-picker {
+    height: 16px !important;
+    width: 15px !important;
+  }
+
+  .ql-snow .ql-picker.ql-size {
+    width: 70px !important;
+  }
+
+  .ql-snow .ql-picker {
+    height: 20px !important;
+    font-size: 10px !important;
+    line-height: 100% !important;
+  }
+
+  .ql-snow .ql-picker.ql-font {
+    width: 90px !important;
+  }
+
+  .ql-snow .ql-picker.ql-header {
+    width: 80px !important;
+  }
+
+  .ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
+    width: 16px !important;
+    margin-top: -8px !important;
+  }
+}
+
+@media (max-width: 1366px) {
+  .ql-toolbar.ql-snow .ql-formats {
+    margin-right: 2px !important;
+  }
+
+  .ql-snow.ql-toolbar button, .ql-snow .ql-toolbar button {
+    height: 14px !important;
+    width: 13px !important;
+    padding: 1px 2px !important;
+  }
+
+  .ql-snow .ql-color-picker, .ql-snow .ql-icon-picker {
+    height: 14px !important;
+    width: 13px !important;
+  }
+
+  .ql-snow .ql-picker.ql-size {
+    width: 55px !important;
+  }
+
+  .ql-snow .ql-picker {
+    height: 14px !important;
+    font-size: 10px !important;
+    line-height: 100% !important;
+  }
+
+  .ql-snow .ql-picker.ql-font {
+    width: 72px !important;
+  }
+
+  .ql-snow .ql-picker.ql-header {
+    width: 64px !important;
+  }
+
+  .ql-snow .ql-picker:not(.ql-color-picker):not(.ql-icon-picker) svg {
+    width: 14px !important;
+    margin-top: -7px !important;
+  }
 }

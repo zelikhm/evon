@@ -25,6 +25,23 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/add-news', function () {
+    return Inertia::render('AppAddNews', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
+
+Route::get('/profile-dev', function () {
+    return Inertia::render('AppProfileDev', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
 
 Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'index'])->middleware(['auth']);
 Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
