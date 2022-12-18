@@ -11,7 +11,16 @@
       </div>
       <div class="flex flex-col p-5 xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5 border border-solid border-[#E5DFEE] rounded-[6px]">
         <label for="telephone" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Телефон</label>
-        <input class="text-[#1E1D2D] border-transparent focus:border-transparent focus:ring-0 text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0" type="tel" id="telephone" placeholder="+7 930 245 15 20">
+        <input
+          class="text-[#1E1D2D] border-transparent focus:border-transparent focus:ring-0 text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
+          type="tel"
+          id="telephone"
+          placeholder="Введите номер телефона"
+          maxlength="18"
+          v-model="valueInputMask"
+          @input="inputMask"
+          @keydown.backspace="keydown"
+        >
       </div>
       <button class="text-white w-full text-lg xxl:text-[15px] xl:text-xs mb-5 xxl:mb-4 xl:mb-3 p-5 xxl:p-4 xl:p-3 bg-[#E84680] border border-solid border-[#E5DFEE] rounded-[6px]">Войти</button>
       <div class="flex items-center justify-center text-base xxl:text-sm xl:text-xs">
@@ -63,7 +72,11 @@
       </div>
       <div class="flex flex-col p-5 xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5 border border-solid border-[#E5DFEE] rounded-[6px]">
         <label for="email" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">email</label>
-        <input class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0" type="text" id="email" placeholder="test@mail.com">
+        <input
+          class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
+          type="email"
+          id="email"
+          placeholder="test@mail.com">
       </div>
       <div class="flex flex-col p-5 xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5 border border-solid border-[#E5DFEE] rounded-[6px]">
         <label for="password" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Пароль</label>
@@ -111,6 +124,7 @@ export default {
       valueTelFour: null,
       loginRealtor: false,
       loginDeveloper: false,
+      valueInputMask: null,
     }
   },
   emits: [
@@ -119,6 +133,44 @@ export default {
     'open-modal-developer',
   ],
   methods: {
+    inputMask(e) {
+      let numValue = this.valueInputMask.replace(/\D/g, ""),
+          formattedValue = "",
+          selStart = e.target.selectionStart
+
+      if (e.target.value.length != selStart) {
+        console.log(e)
+        return
+      }
+
+      if (["7", "8", "9"].indexOf(numValue[0]) > -1) {
+        if (numValue[0] == '9') {
+          numValue = '7' + numValue
+        }
+        let firstSymbols = (numValue[0] == '8') ? '8' : '+7'
+        formattedValue = firstSymbols + " "
+        if (numValue.length > 1) {
+          formattedValue += numValue.substring(1, 4)
+        }
+        if (numValue.length >= 5) {
+          formattedValue += " " + numValue.substring(4, 7)
+        }
+        if (numValue.length >= 8) {
+          formattedValue += " " + numValue.substring(7, 9)
+        }
+        if (numValue.length >= 10) {
+          formattedValue += " " + numValue.substring(9, 11)
+        }
+      } else {
+        formattedValue = "+" + numValue.substring(0, 16)
+      }
+      this.valueInputMask = formattedValue
+    },
+    keydown(e) {
+      if (e.target.value.length == 3) {
+        this.valueInputMask = ''
+      }
+    },
     openLoginRealtor() {
       this.$emit('open-modal-realtor')
     },
