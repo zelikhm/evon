@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-[#F6F3FA] rounded-[6px]">
-    <div class="flex cursor-pointer items-center m-7 xxl:m-5 xl:m-4">
+  <div class="overflow-y-auto h-fit custom__scroll bg-[#F6F3FA] rounded-[6px]">
+    <div @click="openNewsDev = !openNewsDev" class="flex cursor-pointer items-center p-7 xxl:p-5 xl:p-4">
       <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none">Новости застройщика </span>
       <img src="../../assets/svg/arrow_down_black.svg" class="ml-auto" alt="Стрелочка вниз">
     </div>
-    <div class="h-[1px] w-full bg-[#E5DFEE]"></div>
-    <div class="p-7 xxl:p-5 xl:p-4 leading-none">
+    <div v-if="openNewsDev" class="h-[1px] w-full bg-[#E5DFEE]"></div>
+    <div v-if="openNewsDev" class="h-[90vh] p-7 xxl:p-5 xl:p-4 leading-none">
       <span class="text-sm xxl:text-xs xl:text-[10px] text-[#6435A5]">Сегодня</span>
       <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 mt-7 xxl:mt-5 xl:mt-4">
         <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
@@ -80,7 +80,11 @@
 
 <script>
 export default {
-
+  data() {
+    return {
+      openNewsDev: false,
+    }
+  }
 }
 </script>
 
