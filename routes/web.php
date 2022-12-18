@@ -38,6 +38,7 @@ Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
   Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'showHouse']);
   Route::get('/news', ['App\Http\Controllers\House\NewsController', 'index']);
   Route::get('/news/create', ['App\Http\Controllers\House\NewsController', 'createNews']);
+  Route::get('/news/edit/{id}', ['App\Http\Controllers\House\NewsController', 'editNews']);
 });
 
 Route::get('test', function () {
