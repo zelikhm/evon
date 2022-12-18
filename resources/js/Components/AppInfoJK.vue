@@ -26,14 +26,15 @@ import { Link } from '@inertiajs/inertia-vue3'
         </div>
         <div v-if="openSelectCity" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
           <div class="relative w-full p-5 xxl:p-4 xl:p-3">
-            <input class="py-3 xxl:py-2.5 xl:py-2 pl-12 xxl:pl-10 xl:pl-8 w-full text-lg xxl:text-[15px] xl:text-[13px] rounded-[6px] leading-none border border-solid border-[#E5DFEE]" type="text">
+            <input v-model="searchValue" class="py-3 xxl:py-2.5 xl:py-2 pl-12 xxl:pl-10 xl:pl-8 w-full text-lg xxl:text-[15px] xl:text-[13px] rounded-[6px] leading-none border border-solid border-[#E5DFEE]" type="text">
             <img class="absolute top-1/2 -translate-y-1/2 left-[4%] w-4.5 xxl:w-4 xl:w-3.5" src="../../assets/svg/search_icon_grey.svg" alt="">
           </div>
           <span
-            v-for="(city, idx) in cities" :key="idx"
+            v-for="(city, idx) in filteredBlogs" :key="idx"
             @click="changeSelectCity(city)"
             class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
-          >{{ city.city }}</span>
+          >{{ city.city }}
+          </span>
         </div>
       </div>
     </div>
@@ -273,9 +274,9 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
         </div>
       </div>
-      <div class="my-10 xxl:my-8 xl:my-6 w-full">
-        <Link href="" @click="addObject" class="w-[49%] mr-4 font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Добавить</Link>
-        <button @click="addObject(1)" class="w-[49%] font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Добавить и продолжить</button>
+      <div class="grid grid-cols-2 my-10 xxl:my-8 xl:my-6 w-full">
+        <Link href="" @click="addObject" class="w-full text-center mr-4 font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Добавить</Link>
+        <button @click="addObject(1)" class="w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Добавить и продолжить</button>
       </div>
     </div>
   </div>
@@ -286,13 +287,14 @@ import { Link } from '@inertiajs/inertia-vue3'
 import Multiselect from '@vueform/multiselect'
 
 export default {
-  props: ['dops', 'infos'],
+  props: ['dops', 'infos', 'city'],
   data() {
     return {
       borderServices: false,
       borderInfrastructure: false,
       selectCity: 'Сочи',
       openSelectCity: false,
+      searchValue: null,
       object: {
         user_id: Math.ceil(Math.random() * 999),
         title: null,
@@ -450,6 +452,10 @@ export default {
     Multiselect,
   },
   mounted() {
+    if (this.city[0] !== null) {
+      this.selectCity = this.city[0].title
+    }
+
     for (let key of this.dops) {
       this.optionsSelectServices.push(key.name)
     }
@@ -460,8 +466,20 @@ export default {
 
   },
   created() {
-    console.log(this.dops)
-    console.log(this.infos)
+    console.log(this.city)
+  },
+  computed: {
+    filteredBlogs() {
+      if (this.searchValue !== null) {
+        return this.city.filter(item =>
+            item.title.toLowerCase().includes(
+                this.searchValue.toLowerCase()
+            )
+        )
+      } else {
+        return this.city
+      }
+    }
   }
 }
 

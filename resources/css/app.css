@@ -822,8 +822,8 @@ input::placeholder {
   border-radius: 50%;
   margin-right: 0.5em;
   background-repeat: no-repeat;
-  background-position: center center;
-  background-size: 90% 90%;
+  background-position: center;
+  background-size: 80%;
 }
 
 .payd__checkbox>input:not(:disabled):active+span::before {
@@ -833,6 +833,21 @@ input::placeholder {
 
 .payd__checkbox>input:checked+span::before {
   border-color: #6435A5;
-  background-color: #6435A5;
+  background-color: white;
+  background-image: url("../assets/svg/circle_purple.svg");
 }
 
+.grid__chat {
+  display: grid;
+  grid-template-columns: 28.125vw 1fr;
+}
+
+.chat__userlist {
+  border-bottom-left-radius: 12px;
+  border-top-left-radius: 12px;
+}
+
+.chat__container {
+  border-bottom-right-radius: 12px;
+  border-top-right-radius: 12px;
+}

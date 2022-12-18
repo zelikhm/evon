@@ -21,6 +21,9 @@
   <div class="my-10 xxl:my-8 xl:my-6">
     <app-upload />
   </div>
+  <div class="my-10 xxl:my-8 xl:my-6 w-full gap-10 xxl:gap-8 xl:gap-6">
+    <button @click="addObject(1)" class="w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Закончить</button>
+  </div>
 </template>
 
 <script>
