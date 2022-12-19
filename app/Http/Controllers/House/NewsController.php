@@ -99,6 +99,7 @@ class NewsController extends Controller
     if($request->token === env('TOKEN')) {
       $new = HouseNewsModel::where('id', $request->new_id)
         ->update([
+          'house_id' => $request->house_id,
           'title' => $request->title,
           'description' => $request->description,
         ]);
