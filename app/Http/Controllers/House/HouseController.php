@@ -132,6 +132,8 @@ class HouseController extends Controller
     if($request->image) {
       $imageName = time() . '.' . $request->image->getClientOriginalName();
       $request->image->move(public_path('storage'), $imageName);
+    } else {
+      $imageName = null;
     }
 
     if ($request->token === env('TOKEN')) {
@@ -253,6 +255,8 @@ class HouseController extends Controller
       if($request->avatar) {
         $imageName = time() . '.' . $request->avatar->getClientOriginalName();
         $request->avatar->move(public_path('/storage/'), $imageName);
+      } else {
+        $imageName = null;
       }
 
       $support = HouseSupportModel::create([
