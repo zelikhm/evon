@@ -8,9 +8,9 @@ import { Link } from '@inertiajs/inertia-vue3'
     <div class="_container">
       <div class="px-[22.23vw] relative mx-auto max-w-[826px] box-content">
         <div class="my-14 xxl:my-10 xl:my-8">
-          <h2 class="text-[22px] xxl:text-lg xl:text-[15px] font-semibold pb-7 xxl:pb-5 xl:pb-4">Добавить новости</h2>
+          <h2 class="text-[22px] xxl:text-lg xl:text-[15px] font-semibold pb-7 xxl:pb-5 xl:pb-4">{{ itemEdit === undefined ? 'Добавить новости' : 'Редактировать новость' }}</h2>
           <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3">
-            <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectJK}">
+            <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectJK, 'validate': !validate.JK}">
               <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">ЖК</span>
               <div class="relative">
                 <div @click="openSelectJK = !openSelectJK" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
@@ -40,8 +40,8 @@ import { Link } from '@inertiajs/inertia-vue3'
                 theme="snow"
               />
             </div>
-            <Link href="/profile/news" @click="addNews" class="bg-[#E84680] rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
-              <div class="text-white text-center font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">Добавить</div>
+            <Link href="#" @click="addNews" class="bg-[#E84680] rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
+              <div class="text-white text-center font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">{{ itemEdit === undefined ? 'Добавить' : 'Редактировать' }}</div>
             </Link>
           </div>
         </div>
@@ -60,16 +60,24 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 export default {
   props: {
-    houses: []
+    houses: [],
+    new: []
   },
   data() {
     return {
       selectJK: 'Нажмите для выбора ЖК',
       openSelectJK: false,
+      href: '#',
+      itemEdit: null,
       dataNews: {
         house_id: null,
         title: null,
         description: null
+      },
+      validate: {
+        JK: true,
+        title: true,
+        description: true
       }
     }
   },
@@ -80,13 +88,31 @@ export default {
       this.openSelectJK = false
     },
     addNews() {
-      axios.post('/api/news/add', {
-        house_id: this.dataNews.house_id,
-        title: this.dataNews.title,
-        description: this.dataNews.description,
-        token: this.globalToken
-      })
+      if (this.validate.JK) this.validate.JK = false
+      if (this.itemEdit === undefined) {
+        axios.post('/api/news/add', {
+          house_id: this.dataNews.house_id,
+          title: this.dataNews.title,
+          description: this.dataNews.description,
+          token: this.globalToken
+        })
+      } else {
+        axios.post('')
+      }
     },
+  },
+  created() {
+    let link = window.location.href.split('#')
+    if (link[1] !== undefined) {
+      this.dataNews.house_id = this.houses.find(item => item.title === link[1]).id
+      this.selectJK = this.houses.find(item => item.title === link[1]).title
+    }
+    this.itemEdit = this.new
+    if (this.itemEdit !== undefined) {
+      this.selectJK = this.itemEdit.house.title
+      this.dataNews.title = this.itemEdit.title
+      this.dataNews.description = this.itemEdit.description
+    }
   },
   components: {
     AppHeader,
@@ -97,5 +123,9 @@ export default {
 </script>
 
 <style scoped>
+
+.validate {
+  border: 1px solid red;
+}
 
 </style>
