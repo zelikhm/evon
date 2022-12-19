@@ -82,7 +82,7 @@ class HouseController extends Controller
 
   public function house($slug) {
 
-    $house = HouseModel::where('slug', $slug)->first();
+    $house = HouseModel::where('slug', $slug)->firstOrFail();
 
     HouseViewsModel::create([
       'house_id' => $house->id,
@@ -97,6 +97,7 @@ class HouseController extends Controller
       'city' => $this->getCity(),
       'notification' => $this->getNotification(),
       'user' => Auth::user(),
+      'slider' => $this->getSlider($this->getHouseSlug($slug)),
     ]);
 
   }

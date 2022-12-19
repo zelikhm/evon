@@ -140,6 +140,7 @@ path add \ [post] / поля:
 Редактирование новости \
 path edit \ [post] / поля:
 
+- house_id - Айди ЖК
 - new_id - Айди новости
 - title - Заголовок
 - description - Описание

@@ -19,6 +19,31 @@ use function Symfony\Component\Routing\Loader\Configurator\collection;
 trait MainInfo {
 
   /**
+   * get houses for slider in the page house
+   * @param $house
+   * @return mixed
+   */
+
+  protected function getSlider($house) {
+
+    $requestCity = HouseModel::where('city', $house->city)->get();
+
+    $requestArea = HouseModel::where('area', $house->area)->get();
+
+    if(count($requestCity) > 5) {
+    } else {
+      $requestCity->merge($requestArea);
+      $requestCity->splice(0, 5);
+    }
+
+    if(count($requestCity) === 0) {
+      $requestCity = HouseModel::limit(5);
+    }
+
+    return $requestCity;
+  }
+
+  /**
    * check chat
    * @param $id
    * @return mixed
