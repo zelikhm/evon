@@ -30,10 +30,10 @@ import { Link } from '@inertiajs/inertia-vue3'
             <img class="absolute top-1/2 -translate-y-1/2 left-[4%] w-4.5 xxl:w-4 xl:w-3.5" src="../../assets/svg/search_icon_grey.svg" alt="">
           </div>
           <span
-            v-for="(city, idx) in filteredBlogs" :key="idx"
+            v-for="(city, idx) in filteredCity" :key="idx"
             @click="changeSelectCity(city)"
             class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
-          >{{ city.city }}
+          >{{ city.title }}
           </span>
         </div>
       </div>
@@ -52,7 +52,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                     @click="changeSelectRegion(region)"
                     class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
                   >
-                    {{ region.region }}
+                    {{ region.title }}
                   </span>
         </div>
       </div>
@@ -294,7 +294,7 @@ export default {
       borderInfrastructure: false,
       selectCity: 'Сочи',
       openSelectCity: false,
-      searchValue: null,
+      searchValue: 'а',
       object: {
         user_id: Math.ceil(Math.random() * 999),
         title: null,
@@ -336,15 +336,8 @@ export default {
         { floor: '17', value: 1},
       ],
 
-      selectRegion: 'Центральный',
+      selectRegion: null,
       openSelectRegion: false,
-      regions: [
-        { region: 'Центральный', value: 1 },
-        { region: 'Южный', value: 2 },
-        { region: 'Северный', value: 3 },
-        { region: 'Западный', value: 4 },
-        { region: 'Восточный', value: 5 },
-      ],
 
       selectDeadline: 'Сдан',
       openSelectDeadline: false,
@@ -454,6 +447,8 @@ export default {
   mounted() {
     if (this.city[0] !== null) {
       this.selectCity = this.city[0].title
+      this.selectRegion = this.city[0].regions[0].title
+      this.regions = this.city[0].regions
     }
 
     for (let key of this.dops) {
@@ -467,9 +462,10 @@ export default {
   },
   created() {
     console.log(this.city)
+
   },
   computed: {
-    filteredBlogs() {
+    filteredCity() {
       if (this.searchValue !== null) {
         return this.city.filter(item =>
             item.title.toLowerCase().includes(
@@ -479,7 +475,7 @@ export default {
       } else {
         return this.city
       }
-    }
+    },
   }
 }
 
