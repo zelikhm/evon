@@ -188,11 +188,19 @@ class HouseController extends Controller
   public function createFlat(Request $request) {
     if($request->token === env('TOKEN')) {
 
-      $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
-      $request->image_up->move(public_path('/storage/'), $imageUp);
+      if($request->image_up) {
+        $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
+        $request->image_up->move(public_path('/storage/'), $imageUp);
+      } else {
+        $imageUp = null;
+      }
 
-      $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
-      $request->image_down->move(public_path('/storage/'), $imageDown);
+      if($request->image_down) {
+        $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
+        $request->image_down->move(public_path('/storage/'), $imageDown);
+      } else {
+        $imageDown = null;
+      }
 
       $flat = FlatModel::create([
         'frame_id' => $request->frame_id,
