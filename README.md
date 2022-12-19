@@ -106,11 +106,26 @@ path createFlat \ [post] / поля:
 - status - Статус
 - stairs - Номер от лестницы
 - price - Цена
+- image_up - верхнее изображение (category = 0)
+- image_down - нижнее изображение (category = 1)
+
+Изменение статуса видимости (скрыть) \
+path setVisible \ [post] / поля:
+
+- house_id - айди ЖК
+- visible - true\false - отображение\скрытие
 
 Удаление ЖК и всех связей \ 
 path delete \ [post] / поля:
 
 - house_id - айди жк
+
+Добавления изображений к обьекту ЖК \
+path addedImages \ [post] / поля:
+
+- image - изображение
+- house_id - айди ЖК
+- category - айди категории (всего 4)
 
 ### News
 
@@ -125,6 +140,7 @@ path add \ [post] / поля:
 Редактирование новости \
 path edit \ [post] / поля:
 
+- house_id - Айди ЖК
 - new_id - Айди новости
 - title - Заголовок
 - description - Описание

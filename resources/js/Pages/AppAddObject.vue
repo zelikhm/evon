@@ -28,6 +28,7 @@
         <div v-if="page === 0">
           <app-info-j-k :dops="dops"
                         :infos="infos"
+                        :city="city"
                         @open-add-contact="modalAddContact = !modalAddContact"
           />
         </div>
@@ -61,7 +62,8 @@ import AppModalAddFrame from "../Layouts/AppModalAddFrame.vue"
 export default {
   props: {
     dops: [],
-    infos: []
+    infos: [],
+    city: []
   },
   data() {
     return {
@@ -75,6 +77,9 @@ export default {
     openPage(id) {
       this.page = id
     }
+  },
+  created() {
+    console.log(this.city)
   },
   components: {
     AppHeader,

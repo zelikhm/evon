@@ -19,29 +19,28 @@ import { Link } from '@inertiajs/inertia-vue3'
                 </div>
                 <div v-if="openSelectJK" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
               <span
-                v-for="(JK, idx) in JKs" :key="idx"
+                v-for="(JK, idx) in houses" :key="idx"
                 @click="changeSelectJK(JK)"
                 class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
               >
-                {{ JK.JK }}
+                {{ JK.title }}
               </span>
                 </div>
               </div>
             </div>
             <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-3 xxl:gap-2.5 xl:gap-2 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
               <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name_dev">Заголовок новости</label>
-              <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="name_dev" placeholder="1">
+              <input v-model="dataNews.title" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="name_dev" placeholder="Введите заголовок">
             </div>
             <div>
               <QuillEditor
                 toolbar="full"
-                @input="check"
-                v-model:content="editor"
+                v-model:content="dataNews.description"
                 content-type="html"
                 theme="snow"
               />
             </div>
-            <Link href="#" class="bg-[#E84680] rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
+            <Link href="/profile/news" @click="addNews" class="bg-[#E84680] rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
               <div class="text-white text-center font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">Добавить</div>
             </Link>
           </div>
@@ -60,28 +59,34 @@ import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 export default {
+  props: {
+    houses: []
+  },
   data() {
     return {
       selectJK: 'Нажмите для выбора ЖК',
       openSelectJK: false,
-      editor: null,
-      JKs: [
-        { JK: 'Euro Avsallar Residence 1', value: 1 },
-        { JK: 'Euro Avsallar Residence 2', value: 2 },
-        { JK: 'Euro Avsallar Residence 3', value: 3 },
-        { JK: 'Euro Avsallar Residence 4', value: 4 },
-        { JK: 'Euro Avsallar Residence 5', value: 5 },
-      ],
+      dataNews: {
+        house_id: null,
+        title: null,
+        description: null
+      }
     }
   },
   methods: {
     changeSelectJK(JK) {
-      this.selectJK = JK.JK
+      this.selectJK = JK.title
+      this.dataNews.house_id = JK.id
       this.openSelectJK = false
     },
-    check() {
-      console.log(this.editor)
-    }
+    addNews() {
+      axios.post('/api/news/add', {
+        house_id: this.dataNews.house_id,
+        title: this.dataNews.title,
+        description: this.dataNews.description,
+        token: this.globalToken
+      })
+    },
   },
   components: {
     AppHeader,

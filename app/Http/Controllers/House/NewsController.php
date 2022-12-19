@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\House;
 
+use App\Http\Admin\House\HouseNews;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\MainInfo;
 use App\Models\Builder\HouseModel;
@@ -24,6 +25,29 @@ class NewsController extends Controller
     return Inertia::render('AppNews', [
       'houses' => $this->getHouseForUser(Auth::id()),
       'news' => $this->getNews(Auth::id()),
+      'user' => Auth::user(),
+      'notification' => $this->getNotification(),
+    ]);
+
+  }
+
+  /**
+   * edit news
+   * @param $id
+   * @return \Inertia\Response
+   */
+
+  public function editNews($id) {
+
+    $new = HouseNewsModel::where('id', $id)->with(['house'])->first();
+
+    if($new === null) {
+      redirect('/news');
+    }
+
+    return Inertia::render('AppAddNews', [
+      'houses' => $this->getHouseForUser(Auth::id()),
+      'new' => $new,
       'user' => Auth::user(),
       'notification' => $this->getNotification(),
     ]);
@@ -75,6 +99,7 @@ class NewsController extends Controller
     if($request->token === env('TOKEN')) {
       $new = HouseNewsModel::where('id', $request->new_id)
         ->update([
+          'house_id' => $request->house_id,
           'title' => $request->title,
           'description' => $request->description,
         ]);
