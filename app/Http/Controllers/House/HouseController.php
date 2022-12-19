@@ -129,8 +129,10 @@ class HouseController extends Controller
 
   public function create(Request $request)
   {
-    $imageName = time() . '.' . $request->image->getClientOriginalName();
-    $request->image->move(public_path('storage'), $imageName);
+    if($request->image) {
+      $imageName = time() . '.' . $request->image->getClientOriginalName();
+      $request->image->move(public_path('storage'), $imageName);
+    }
 
     if ($request->token === env('TOKEN')) {
       $house = HouseModel::create([
@@ -248,8 +250,10 @@ class HouseController extends Controller
   public function supports(Request $request) {
     if ($request->token === env('TOKEN')) {
 
-      $imageName = time() . '.' . $request->avatar->getClientOriginalName();
-      $request->avatar->move(public_path('/storage/'), $imageName);
+      if($request->avatar) {
+        $imageName = time() . '.' . $request->avatar->getClientOriginalName();
+        $request->avatar->move(public_path('/storage/'), $imageName);
+      }
 
       $support = HouseSupportModel::create([
         'house_id' => $request->house_id,
