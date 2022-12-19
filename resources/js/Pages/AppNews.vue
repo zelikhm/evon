@@ -30,9 +30,9 @@ import { Link } from '@inertiajs/inertia-vue3'
               <img v-if="item.visible" src="../../assets/svg/eye_icon_grey.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
               <img v-if="!item.visible" src="../../assets/svg/eye_close.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
             </button>
-            <button>
+            <Link :href="'/profile/news/edit/' + item.id">
               <img src="../../assets/svg/pen_icon_grey.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
-            </button>
+            </Link>
             <button @click="delNews(item)">
               <img src="../../assets/svg/bucket_icon_red.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
             </button>
@@ -66,7 +66,7 @@ import AppHeader from "@/Layouts/AppHeader.vue"
 
 export default {
   props: {
-    news: []
+    news: [],
   },
   data() {
     return {
@@ -90,6 +90,9 @@ export default {
     AppHeader,
     AppFooter,
   },
+  created() {
+    console.log(this.news)
+  }
 }
 </script>
 

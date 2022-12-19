@@ -27,7 +27,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                   <img src="../../assets/svg/pen_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
                 </button>
                 <button class="flex items-center justify-between w-[30%] border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5">
-                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">Удалить</span>
+                  <span @click="deleteHouse(house)" class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">Удалить</span>
                   <img src="../../assets/svg/bucket_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
                 </button>
                 <button class="flex items-center justify-between w-[30%] border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5">
@@ -38,10 +38,10 @@ import { Link } from '@inertiajs/inertia-vue3'
                   <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">Посмотреть на сайте</span>
                   <img src="../../assets/svg/planet_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
                 </Link>
-                <button class="flex items-center justify-between w-[30%] border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5">
+                <Link :href="'/profile/news/create#' + house.title" class="flex items-center justify-between w-[30%] border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5">
                   <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">Добавить новость</span>
                   <img src="../../assets/svg/plus_icon.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
-                </button>
+                </Link>
               </div>
             </div>
             <div class="flex flex-col p-5 xxl:p-4 xl:p-3">
@@ -49,13 +49,13 @@ import { Link } from '@inertiajs/inertia-vue3'
               <div class="relative">
                 <span @click="openWatchTime = !openWatchTime" class="w-fit cursor-pointer flex items-center gap-2 xxl:gap-1.5 xl:gap-1">
                   <img src="../../assets/svg/eye_icon_grey.svg" class="w-4 xxl:w-3.5 xl:w-3" alt="">
-                  <span class="text-[#8A8996] leading-none text-lg xxl:text-[15px] xl:text-[13px]"><span class="text-[#6435A5]"> 220 </span> {{ selectTime }}</span>
+                  <span class="text-[#8A8996] leading-none text-lg xxl:text-[15px] xl:text-[13px]"><span class="text-[#6435A5]"> {{ views === null ? house.view[0] : views }} </span> {{ selectTime }}</span>
                   <img src="../../assets/svg/arrow_down_black.svg" alt="">
                 </span>
                 <div v-if="openWatchTime" class="absolute top-[120%] text-lg xxl:text-[15px] xl:text-[13px] rounded-[3px] z-40 border bg-white border-solid border-[#E5DFEE] flex flex-col">
                   <span
                     v-for="(time, idx) in watchTime" :key="idx"
-                    @click="changeSelectTime(time)"
+                    @click="changeSelectTime(time, house)"
                     class="hover__select cursor-pointer pl-5 xxl:pl-4 xl:pl-3 pr-20 xxl:pr-16 xl:pr-12 py-3 xxl:py-2.5 xl:py-2 leading-none"
                   >
                     {{ time.time }}
@@ -108,11 +108,11 @@ export default {
       selectTime: 'за день',
       openWatchTime: false,
       watchTime: [
-        { time: 'за день', value: 1 },
-        { time: 'за 5 дней', value: 2 },
-        { time: 'за неделю', value: 3 },
-        { time: 'за месяц', value: 4 },
-        { time: 'за год', value: 5 },
+        { id: 0, time: 'за день' },
+        { id: 1, time: 'за 5 дней' },
+        { id: 2, time: 'за неделю' },
+        { id: 3, time: 'за месяц' },
+        { id: 4, time: 'за год' },
       ],
       tabsPagination: [
         { number: '1', active: false },
@@ -120,13 +120,18 @@ export default {
         { number: '3', active: false },
         { number: '...', active: false },
         { number: '24', active: false },
-      ]
+      ],
+      views: null
     }
   },
   methods: {
     changeSelectTime(time, object) {
       this.selectTime = time.time
-      object.active = false
+      this.openWatchTime = !this.openWatchTime
+      this.views = object.view[time.id]
+    },
+    deleteHouse(item) {
+      axios.post('/house/delete', { house_id: item.id })
     }
   },
   components: {
