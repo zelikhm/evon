@@ -69,6 +69,7 @@ export default {
       openSelectJK: false,
       href: '#',
       itemEdit: null,
+      idNews: null,
       dataNews: {
         house_id: null,
         title: null,
@@ -85,11 +86,17 @@ export default {
     changeSelectJK(JK) {
       this.selectJK = JK.title
       this.dataNews.house_id = JK.id
+      console.log(JK)
       this.openSelectJK = false
     },
     addNews() {
-      if (this.validate.JK) this.validate.JK = false
       if (this.itemEdit === undefined) {
+        console.log({
+          house_id: this.dataNews.house_id,
+          title: this.dataNews.title,
+          description: this.dataNews.description,
+          token: this.globalToken
+        })
         axios.post('/api/news/add', {
           house_id: this.dataNews.house_id,
           title: this.dataNews.title,
@@ -97,21 +104,35 @@ export default {
           token: this.globalToken
         })
       } else {
-        axios.post('')
+        axios.post('/api/news/edit', {
+          house_id: this.idNews,
+          new_id: this.dataNews.house_id,
+          title: this.dataNews.title,
+          description: this.dataNews.description,
+          token: this.globalToken
+        })
       }
     },
   },
   created() {
     let link = window.location.href.split('#')
+    let link2 = window.location.href.split('/')
     if (link[1] !== undefined) {
-      this.dataNews.house_id = this.houses.find(item => item.title === link[1]).id
-      this.selectJK = this.houses.find(item => item.title === link[1]).title
+      this.dataNews.house_id = this.houses.find(item => item.id === +link[1]).id
+      this.selectJK = this.houses.find(item => item.id === +link[1]).title
     }
+    if (Number.isInteger(+link2.at(-1))) {
+      this.dataNews.house_id = this.houses.find(item => item.id === +link2.at(-1)).id
+      this.selectJK = this.houses.find(item => item.id === +link2.at(-1)).title
+    }
+    console.log(this.houses)
+
     this.itemEdit = this.new
     if (this.itemEdit !== undefined) {
       this.selectJK = this.itemEdit.house.title
       this.dataNews.title = this.itemEdit.title
       this.dataNews.description = this.itemEdit.description
+      this.idNews = this.itemEdit.id
     }
   },
   components: {

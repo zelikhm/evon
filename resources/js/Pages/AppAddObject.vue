@@ -80,6 +80,7 @@ export default {
   },
   created() {
     console.log(this.city)
+    let link = window.location.href
   },
   components: {
     AppHeader,
