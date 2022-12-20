@@ -3,6 +3,10 @@ import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
+  <app-modal-notification
+    v-if="openNotification"
+    @close-notification="openNotification = false"
+  />
   <app-header />
   <main>
     <div class="_container">
@@ -54,6 +58,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 <script>
 import AppFooter from "@/Layouts/AppFooter.vue"
 import AppHeader from "@/Layouts/AppHeader.vue"
+import AppModalNotification from "@/Layouts/AppModalNotification.vue"
 
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
@@ -64,6 +69,7 @@ export default {
   },
   data() {
     return {
+      openNotification: false,
       selectJK: 'Нажмите для выбора ЖК',
       openSelectJK: false,
       dataNews: {
@@ -92,6 +98,7 @@ export default {
     AppHeader,
     AppFooter,
     QuillEditor,
+    AppModalNotification,
   }
 }
 </script>
