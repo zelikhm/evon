@@ -25,7 +25,7 @@
           <div class="relative">
             <div @click="openSelectLayout = !openSelectLayout" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
               <span>{{ selectLayout }}</span>
-              <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectLayout }" alt="">
+              <img src="../../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectLayout }" alt="">
             </div>
             <div v-if="openSelectLayout" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
               <span
@@ -44,7 +44,7 @@
           <div class="relative">
             <div @click="openFloors = !openFloors" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
               <span>{{ selectFloors }}</span>
-              <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openFloors }" alt="">
+              <img src="../../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openFloors }" alt="">
             </div>
             <div v-if="openFloors" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
               <span
@@ -64,7 +64,7 @@
         <div class="relative">
           <div @click="openStatus = !openStatus" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
             <span>{{ selectStatus}}</span>
-            <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openStatus }" alt="">
+            <img src="../../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openStatus }" alt="">
           </div>
           <div v-if="openStatus" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
               <span
@@ -83,7 +83,7 @@
         <div class="relative">
           <div @click="openStairs = !openStairs" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
             <span>{{ selectStairs }}</span>
-            <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openStairs }" alt="">
+            <img src="../../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openStairs }" alt="">
           </div>
           <div v-if="openStairs" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
               <span
@@ -105,14 +105,14 @@
       <div class="grid grid-cols-2 gap-5 xxl:gap-4 xl:gap-3">
         <div class="relative w-full">
           <label class="w-full cursor-pointer flex justify-center items-center gap-2.5 xxl:gap-2 xl:gap-1.5 rounded-[5px] border border-solid border-[#E5DFEE] py-5 xxl:py-4 xl:py-3" for="upload_photo_one">
-            <img src="../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
+            <img src="../../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
             <span class="text-[#6435A5] text-[14px] xxl:text-[12px] xl:text-[10px]">Загрузить первое фото</span>
           </label>
           <input class="absolute pointer-events-none overflow-hidden opacity-0 top-0 left-0 w-full" type="file" id="upload_photo_one">
         </div>
         <div class="relative w-full">
           <label class="w-full cursor-pointer flex justify-center items-center gap-2.5 xxl:gap-2 xl:gap-1.5 rounded-[5px] border border-solid border-[#E5DFEE] py-5 xxl:py-4 xl:py-3" for="upload_photo_two">
-            <img src="../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
+            <img src="../../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
             <span class="text-[#6435A5] text-[14px] xxl:text-[12px] xl:text-[10px]">Загрузить второе фото</span>
           </label>
           <input class="absolute pointer-events-none overflow-hidden opacity-0 top-0 left-0 w-full" type="file" id="upload_photo_two">
