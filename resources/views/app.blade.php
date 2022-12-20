@@ -19,5 +19,4 @@
     <body class="antialiased">
         @inertia
     </body>
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=38c1a62c-7a6c-45c4-a328-bf53a635ae3d&lang=ru_RU" type="text/javascript"></script>
 </html>

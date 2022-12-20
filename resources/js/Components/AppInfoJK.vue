@@ -62,14 +62,30 @@ import { Link } from '@inertiajs/inertia-vue3'
       <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="coord_object">Введи координаты объекта</label>
       <input v-model="object.latitude" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="coord_object" placeholder="49.5122 39.2143">
     </div>
-    <iframe class="w-full h-[300px] rounded-[6px] my-10 xxl:my-8 xl:my-6"
-            src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d939346.3926624231!2d26.987657373274562!3d53.35298654639129!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sru!2sby!4v1670507874830!5m2!1sru!2sby"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-    <div id="map"></div>
+
+<!--  class="w-full h-[300px] rounded-[6px] my-10 xxl:my-8 xl:my-6"  -->
+
+    <GMapMap :center="center" :zoom="10" map-type-id="terrain" class="w-full h-[300px] rounded-[6px] my-10 xxl:my-8 xl:my-6">
+      <GMapMarker :key="index" v-for="(m, index) in markers" :position="m.position" :clickable="true" :draggable="true"
+                  @click="openMarker(m.id)" >
+        <GMapInfoWindow
+            :closeclick="true"
+            @closeclick="openMarker(null)"
+            :opened="openedMarkerID === m.id"
+        >
+          <div>
+            <h1>Euro Avsallar Residence</h1>
+            <h3>Туапсе, А147</h3>
+            <h3>Туапсе, А147</h3>
+            <hr>
+            <h4>от 149000$</h4>
+            <button>В подборку</button>
+          </div>
+        </GMapInfoWindow>
+      </GMapMarker>
+    </GMapMap>
+
+
     <div class="my-5 xxl:my-4 xl:my-3">
       <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium mb-5 xxl:mb-4 xl:mb-3">Характеристики</h3>
       <div class="grid grid-cols-2 gap-7 xxl:gap-5 xl:gap-4">
@@ -171,28 +187,14 @@ import { Link } from '@inertiajs/inertia-vue3'
             <span class="text-[#6435A5] font-medium text-base xxl:text-sm xl:text-xs leading-none">Добавить</span>
           </button>
         </div>
-        <div class="contact__selling my-5 xxl:my-4 xl:my-3 text-lg xxl:text-[15px] xl:text-[13px] flex justify-between items-center rounded-[5px] p-1.5 xl:p-1">
+        <div v-for="item in supports" class="contact__selling my-5 xxl:my-4 xl:my-3 text-lg xxl:text-[15px] xl:text-[13px] flex justify-between items-center rounded-[5px] p-1.5 xl:p-1">
           <div class="flex items-center gap-14 xxl:gap-10 xl:gap-8">
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-              <img src="../../assets/developer_avatar.png" class="h-12 xxl:h-10 xl:h-8" alt="">
-              <span class="text-[#1E1D2D]">Елена</span>
+              <img :src="item.image_front" class="h-12 xxl:h-10 xl:h-8" alt="">
+              <span class="text-[#1E1D2D]">{{ item.name }}</span>
             </div>
-            <span class="text-[#8A8996]">+7 930 245 15 20</span>
-            <span class="text-[#8A8996]">elena@mail.ru</span>
-          </div>
-          <div class="flex gap-7 xxl:gap-5 xl:gap-4">
-            <img src="../../assets/svg/pen_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4" alt="">
-            <img src="../../assets/svg/bucket_icon_red.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4" alt="">
-          </div>
-        </div>
-        <div class="contact__selling my-5 xxl:my-4 xl:my-3 text-lg xxl:text-[15px] xl:text-[13px] flex justify-between items-center rounded-[5px] p-1.5 xl:p-1">
-          <div class="flex items-center gap-14 xxl:gap-10 xl:gap-8">
-            <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-              <img src="../../assets/developer_avatar.png" class="h-12 xxl:h-10 xl:h-8" alt="">
-              <span class="text-[#1E1D2D]">Елена</span>
-            </div>
-            <span class="text-[#8A8996]">+7 930 245 15 20</span>
-            <span class="text-[#8A8996]">elena@mail.ru</span>
+            <span class="text-[#8A8996]">{{ item.tel }}</span>
+            <span class="text-[#8A8996]">{{ item.email }}</span>
           </div>
           <div class="flex gap-7 xxl:gap-5 xl:gap-4">
             <img src="../../assets/svg/pen_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4" alt="">
@@ -287,16 +289,33 @@ import { Link } from '@inertiajs/inertia-vue3'
 import Multiselect from '@vueform/multiselect'
 
 export default {
-  props: ['dops', 'infos', 'city', 'user'],
+  props: ['dops', 'infos', 'city', 'user', 'supports'],
   data() {
     return {
+      openedMarkerID: null,
+      center: { lat: 51.093048, lng: 6.84212 },
+      markers: [
+        {
+          id: 1,
+          position: {
+            lat: 51.093048,
+            lng: 6.84212
+          }
+        },
+        {
+          id: 2,
+          position: {
+            lat: 51.198429,
+            lng: 6.69529
+          }
+        }
+      ],
       borderServices: false,
       borderInfrastructure: false,
       selectCity: 'Сочи',
       openSelectCity: false,
       searchValue: 'а',
       object: {
-        user_id: Math.ceil(Math.random() * 999),
         title: "",
         description: "",
         city: "",
@@ -371,6 +390,9 @@ export default {
     }
   },
   methods: {
+    openMarker(id) {
+      this.openedMarkerID = id
+    },
     addObject(id) {
       this.object.dop = this.valueSelectServices
       this.object.info = this.valueSelectInfrastructure
@@ -468,7 +490,6 @@ export default {
   },
   created() {
     console.log(this.city)
-
   },
   computed: {
     filteredCity() {
