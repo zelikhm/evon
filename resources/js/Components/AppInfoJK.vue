@@ -8,7 +8,7 @@ import { Link } from '@inertiajs/inertia-vue3'
   <div class="flex-col flex gap-5 xxl:gap-4 xl:gap-3 pt-5 xxl:pt-4 xl:pt-3" >
 
     <div class="flex flex-col border gap-2 xxl:gap-1.5 border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-      <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name_object">Название объекта</label>
+      <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name_object">Название</label>
       <input v-model="object.title" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="name_object" placeholder="Euro Avsallar Residence">
     </div>
 
@@ -261,7 +261,7 @@ import { Link } from '@inertiajs/inertia-vue3'
       <div class="my-10 xxl:my-8 xl:my-6">
         <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">Загрузите главную картинку для ЖК</h3>
         <div class="relative my-3 xxl:my-2.5 xl:my-2">
-          <input @change="changeInputFile" type="file" id="input_file2" class="opacity-0 absolute invisible">
+          <input @change="changeInputFile" type="file" id="input_file2" class="opacity-0 absolute invisible" ref="file">
           <label class="w-fit flex items-center cursor-pointer gap-2 xl:gap-1.5 border border-solid border-[#6435A5] rounded-[6px] px-4 xxl:px-3 xl:px-2.5 py-3 xxl:py-2.5 xl:py-2" for="input_file2" >
             <img class="w-4.5 xxl:w-4 xl:w-3.5" src="../../assets/svg/plus_icon_purple.svg" alt="Выбрать файл">
             <span class="text-[#6435A5] font-medium text-base xxl:text-sm xl:text-xs leading-none">Загрузить файл</span>
@@ -287,7 +287,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 import Multiselect from '@vueform/multiselect'
 
 export default {
-  props: ['dops', 'infos', 'city'],
+  props: ['dops', 'infos', 'city', 'user'],
   data() {
     return {
       borderServices: false,
@@ -376,34 +376,40 @@ export default {
       this.object.info = this.valueSelectInfrastructure
       this.object.city = this.selectCity
       this.object.area = this.selectRegion
-      this.object.statusHouse = this.de
 
-      axios.post('/api/house/create', {
-        user_id: 5,
-        title: this.object.title,
-        description: this.object.description,
-        city: this.selectCity,
-        area: this.selectRegion,
-        longitude: this.object.latitude,
-        latitude: this.object.latitude,
-        percent: this.object.percent,
-        comment: this.object.comment,
-        statusHouse: this.selectDeadline,
-        floors: this.object.floors,
-        type: this.selectType,
-        dop: this.valueSelectServices,
-        info: this.valueSelectInfrastructure,
-        toSea: this.object.toSea,
-        toSchool: this.object.toSchool,
-        toShop: this.object.toShop,
-        toPark: this.object.toPark,
-        toBus: this.object.toBus,
-        toChildrenSchool: this.object.toChildrenSchool,
-        fool_price: this.object.installment === 0 ? true : false ,
-        token: this.globalToken
+      let formData = new FormData();
+      formData.append('user_id', 5); // пока статика, жду пропс user :D
+      formData.append('title', this.object.title);
+      formData.append('description', this.object.description);
+      formData.append('city', this.selectCity);
+      formData.append('area', this.selectRegion);
+      formData.append('longitude', this.object.latitude);
+      formData.append('latitude', this.object.latitude);
+      formData.append('percent', this.object.percent);
+      formData.append('comment', this.object.comment);
+      formData.append('statusHouse', this.selectDeadline);
+      formData.append('type', this.selectType);
+      formData.append('dop', this.valueSelectServices);
+      formData.append('info', this.valueSelectInfrastructure);
+      formData.append('floors', this.object.floors);
+      formData.append('toSea', this.object.toSea);
+      formData.append('toSchool', this.object.toSchool);
+      formData.append('toShop', this.object.toShop);
+      formData.append('toPark', this.object.toPark);
+      formData.append('toBus', this.object.toBus);
+      formData.append('toChildrenSchool',this.object.toChildrenSchool);
+      formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
+      formData.append('image', this.$refs.file.files[0]);
+      formData.append('token', this.globalToken);
+
+      axios({
+        method: 'post',
+        url: '/api/house/create',
+        headers: {"Content-type": "multipart/form-data"},
+        data: formData,
+      }).then(res => {
+        console.log(res.data);
       })
-          .then(response => console.log(response.data))
-          .catch(e => console.error(e))
     },
     changeSelectCity(city) {
       this.selectCity = this.object.city = city.city
