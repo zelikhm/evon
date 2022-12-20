@@ -260,24 +260,26 @@ class HouseController extends Controller
   public function supports(Request $request) {
     if ($request->token === env('TOKEN')) {
 
-      if($request->avatar) {
-        $imageName = time() . '.' . $request->avatar->getClientOriginalName();
-        $request->avatar->move(public_path('/storage/'), $imageName);
-      } else {
-        $imageName = null;
-      }
+      foreach ($request->array as $support) {
+        if($support->avatar) {
+          $imageName = time() . '.' . $support->avatar->getClientOriginalName();
+          $support->avatar->move(public_path('/storage/'), $imageName);
+        } else {
+          $imageName = null;
+        }
 
-      $support = HouseSupportModel::create([
-        'house_id' => $request->house_id,
-        'avatar' => $imageName,
-        'name' => $request->name,
-        'phone' => $request->phone,
-        'email' => $request->email,
-        'status' => $request->status,
-        'link' => $request->link,
-        'created_at' => Carbon::now()->addHour(3),
-        'updated_at' => Carbon::now()->addHour(3),
-      ]);
+        $support = HouseSupportModel::create([
+          'house_id' => $support->house_id,
+          'avatar' => $imageName,
+          'name' => $support->name,
+          'phone' => $support->phone,
+          'email' => $support->email,
+          'status' => $support->status,
+          'link' => $support->link,
+          'created_at' => Carbon::now()->addHour(3),
+          'updated_at' => Carbon::now()->addHour(3),
+        ]);
+      }
 
       return response()->json($support, 200);
     } else {
