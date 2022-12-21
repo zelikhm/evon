@@ -21,34 +21,34 @@
                 <label for="avatar" :class="{'-z-10': avatar}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-full">
                   <img src="../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
                 </label>
-                <input class="w-full h-full rounded-full opacity-0 absolute top-0 left-0 pointer-events-none" id="avatar" type="file" @change="avatarContact">
+                <input class="w-full h-full rounded-full opacity-0 absolute top-0 left-0 pointer-events-none" id="avatar" type="file" ref="file" @change="avatarContact">
               </div>
             </div>
           </div>
         </div>
         <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
           <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name_contact">Имя</label>
-          <input class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="name_contact" placeholder="Елена">
+          <input v-model="dataSupport.name" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="name_contact" placeholder="Введите имя...">
         </div>
       </div>
       <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
         <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">Должность</label>
-        <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="post_contact" placeholder="Отдел продаж">
+        <input v-model="dataSupport.position" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="post_contact" placeholder="Введите должность...">
       </div>
       <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
         <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="tel_contact">Телефон</label>
-        <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="tel_contact" placeholder="+7 930 245 15 20">
+        <input v-model="dataSupport.tel" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="tel_contact" placeholder="+7 930 245 15 20">
       </div>
       <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
         <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="email_contact">Почта</label>
-        <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="email_contact" placeholder="elena@mail.ru">
+        <input v-model="dataSupport.email" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="email_contact" placeholder="elena@mail.ru">
       </div>
       <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
         <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="soc_contact">Ссылка на соц сеть</label>
-        <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="soc_contact" placeholder="Http://172468712687">
+        <input v-model="dataSupport.social" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="soc_contact" placeholder="http://172468712687">
       </div>
       <button class="bg-[#E84680] rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
-        <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">Добавить</span>
+        <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none" @click="addSupport">Добавить</span>
       </button>
     </div>
     <div @click="this.$emit('close-add-contact')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
@@ -60,13 +60,27 @@ export default {
   data() {
     return {
       myPhoto: '',
-      avatar: false
+      avatar: false,
+      dataSupport: {
+        image_back: "",
+        image_front: "",
+        name: "",
+        position: "",
+        tel: "",
+        email: "",
+        social: "",
+      }
     }
   },
   methods: {
+    addSupport() {
+      this.$emit('close-add-contact', this.dataSupport)
+    },
     avatarContact(e) {
-      let url = URL.createObjectURL(e.target.files[0])
-      this.myPhoto = url
+      this.dataSupport.image_front = URL.createObjectURL(e.target.files[0])
+      console.log(this.dataSupport.image_front)
+      this.dataSupport.image_back = this.$refs.file.files[0]
+      this.myPhoto = this.dataSupport.image_front
       if (e.target.files.length == 1) {
         this.avatar = true
       }

@@ -26,6 +26,7 @@ Route::prefix('house')->group(function () {
   Route::post('createFlat', ['App\Http\Controllers\House\HouseController', 'createFlat']);
   Route::post('addedImages', ['App\Http\Controllers\House\HouseController', 'addedImages']);
   Route::post('setVisible', ['App\Http\Controllers\House\HouseController', 'setVisible']);
+  Route::post('delete', ['App\Http\Controllers\House\HouseController', 'delete']);
 });
 
 Route::prefix('compilation')->group(function () {

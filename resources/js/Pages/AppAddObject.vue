@@ -1,5 +1,5 @@
 <template>
-  <app-modal-add-contact @close-add-contact="modalAddContact = false" v-if="modalAddContact"/>
+  <app-modal-add-contact @close-add-contact="closeModalContact" v-if="modalAddContact"/>
   <app-modal-add-apartments @close-add-apartments="modalAddApatments = false" v-if="modalAddApatments"/>
   <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="modalAddFrame = false" />
   <app-modal-notification v-if="openNotification" @close-notification="openNotification = false"
@@ -31,6 +31,7 @@
           <app-info-j-k :dops="dops"
                         :infos="infos"
                         :city="city"
+                        :supports="supports"
                         @open-add-contact="modalAddContact = !modalAddContact"
           />
         </div>
@@ -66,7 +67,7 @@ export default {
   props: {
     dops: [],
     infos: [],
-    city: []
+    city: [],
   },
   data() {
     return {
@@ -75,15 +76,21 @@ export default {
       modalAddContact: false,
       modalAddApatments: false,
       modalAddFrame: false,
+      supports: []
     }
   },
   methods: {
     openPage(id) {
       this.page = id
+    },
+    closeModalContact(data) {
+      this.modalAddContact = false
+      this.supports.push(data)
     }
   },
   created() {
     console.log(this.city)
+    let link = window.location.href
   },
   components: {
     AppHeader,

@@ -129,8 +129,12 @@ class HouseController extends Controller
 
   public function create(Request $request)
   {
-    $imageName = time() . '.' . $request->image->getClientOriginalName();
-    $request->image->move(public_path('storage'), $imageName);
+    if($request->image) {
+      $imageName = time() . '.' . $request->image->getClientOriginalName();
+      $request->image->move(public_path('storage'), $imageName);
+    } else {
+      $imageName = null;
+    }
 
     if ($request->token === env('TOKEN')) {
       $house = HouseModel::create([
@@ -184,11 +188,19 @@ class HouseController extends Controller
   public function createFlat(Request $request) {
     if($request->token === env('TOKEN')) {
 
-      $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
-      $request->image_up->move(public_path('/storage/'), $imageUp);
+      if($request->image_up) {
+        $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
+        $request->image_up->move(public_path('/storage/'), $imageUp);
+      } else {
+        $imageUp = null;
+      }
 
-      $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
-      $request->image_down->move(public_path('/storage/'), $imageDown);
+      if($request->image_down) {
+        $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
+        $request->image_down->move(public_path('/storage/'), $imageDown);
+      } else {
+        $imageDown = null;
+      }
 
       $flat = FlatModel::create([
         'frame_id' => $request->frame_id,
@@ -248,20 +260,26 @@ class HouseController extends Controller
   public function supports(Request $request) {
     if ($request->token === env('TOKEN')) {
 
-      $imageName = time() . '.' . $request->avatar->getClientOriginalName();
-      $request->avatar->move(public_path('/storage/'), $imageName);
+      foreach ($request->array as $support) {
+        if($support->avatar) {
+          $imageName = time() . '.' . $support->avatar->getClientOriginalName();
+          $support->avatar->move(public_path('/storage/'), $imageName);
+        } else {
+          $imageName = null;
+        }
 
-      $support = HouseSupportModel::create([
-        'house_id' => $request->house_id,
-        'avatar' => $imageName,
-        'name' => $request->name,
-        'phone' => $request->phone,
-        'email' => $request->email,
-        'status' => $request->status,
-        'link' => $request->link,
-        'created_at' => Carbon::now()->addHour(3),
-        'updated_at' => Carbon::now()->addHour(3),
-      ]);
+        $support = HouseSupportModel::create([
+          'house_id' => $support->house_id,
+          'avatar' => $imageName,
+          'name' => $support->name,
+          'phone' => $support->phone,
+          'email' => $support->email,
+          'status' => $support->status,
+          'link' => $support->link,
+          'created_at' => Carbon::now()->addHour(3),
+          'updated_at' => Carbon::now()->addHour(3),
+        ]);
+      }
 
       return response()->json($support, 200);
     } else {

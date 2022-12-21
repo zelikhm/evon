@@ -119,6 +119,7 @@ path setVisible \ [post] / поля:
 path delete \ [post] / поля:
 
 - house_id - айди жк
+- token 
 
 Добавления изображений к обьекту ЖК \
 path addedImages \ [post] / поля:

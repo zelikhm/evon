@@ -23,16 +23,16 @@ import { Link } from '@inertiajs/inertia-vue3'
           <div class="grid__news text-base xxl:text-sm xl:text-xs">
             <span class="p-5 xxl:p-4 xl:p-3">{{ item.house.title }}</span>
             <span class="p-5 xxl:p-4 xl:p-3">{{ item.title }}</span>
-            <span class="p-5 xxl:p-4 xl:p-3">24.11.22</span>
+            <span class="p-5 xxl:p-4 xl:p-3">{{ new Date(Date.parse(item.created_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1')}}</span>
           </div>
           <div class="flex gap-4 xxl:gap-3 xl:gap-2.5 p-5 xxl:p-4 xl:p-3">
             <button @click="changeVisible(item)">
               <img v-if="item.visible" src="../../assets/svg/eye_icon_grey.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
               <img v-if="!item.visible" src="../../assets/svg/eye_close.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
             </button>
-            <button>
+            <Link :href="'/profile/news/edit/' + item.id">
               <img src="../../assets/svg/pen_icon_grey.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
-            </button>
+            </Link>
             <button @click="delNews(item)">
               <img src="../../assets/svg/bucket_icon_red.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
             </button>
@@ -66,7 +66,7 @@ import AppHeader from "@/Layouts/AppHeader.vue"
 
 export default {
   props: {
-    news: []
+    news: [],
   },
   data() {
     return {
@@ -90,6 +90,9 @@ export default {
     AppHeader,
     AppFooter,
   },
+  created() {
+    console.log(this.news)
+  }
 }
 </script>
 
