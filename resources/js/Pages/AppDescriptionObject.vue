@@ -22,7 +22,7 @@
                 <img src="../../assets/svg/reload_icon.svg" class="h-4 xx:h-3.5 xl:h-3" alt="Перезагрузка">
                 <span class="text-sm xxl:text-xs xl:text-[10px]">Сегодня</span>
               </div>
-              <div class="flex items-center justify-center bg-[#F6F3FA] gap-2 xxl:gap-1.5 xl:gap-1 h-10 xxl:h-8 xl:h-6 px-4 xxl:px-3 xl:px-2.5 rounded-[3px]">
+              <div class="flex items-center justify-center cursor-pointer bg-[#F6F3FA] gap-2 xxl:gap-1.5 xl:gap-1 h-10 xxl:h-8 xl:h-6 px-4 xxl:px-3 xl:px-2.5 rounded-[3px]">
                 <img src="../../assets/svg/map_pointer.svg" class="h-6 xxl:h-5 xl:h-4" alt="Метка">
                 <span class="text-[#6435A5] text-sm xxl:text-xs xl:text-[10px] leading-none">Показать на карте</span>
               </div>
@@ -79,7 +79,7 @@
               <img src="../../assets/slider_img.jpg" alt="">
             </swiper-slide>
           </swiper>
-          <div class="border border-solid border-[#E5DFEE] h-[100px] xxl:h-[80px] xl:h-[60px] flex items-center justify-evenly rounded-[12px] mt-7 xxl:mt-5 xl:mt-4 mb-14 xxl:mb-10 xl:mb-7">
+          <div class="border border-solid border-[#E5DFEE] h-[100px] xxl:h-[80px] xl:h-[60px] flex items-center justify-evenly rounded-[12px] mt-7 xxl:mt-5 xl:mt-4 mb-16 xxl:mb-12 xl:mb-10">
             <div class="flex flex-col justify-center">
               <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">{{ house.info.type }}</span>
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Тип дома</span>
@@ -106,12 +106,12 @@
             </div>
           </div>
           <div class="flex flex-col pb-14 xxl:pb-10 xl:pb-8">
-            <span class="uppercase font-medium text-[18px] xxl:text-[15px] xl:text-[13px]">О ЖК</span>
+            <span class="uppercase font-medium text-[18px] xxl:text-[15px] xl:text-[13px] pb-5 xxl:pb-4 xl:pb-3 leading-none">О ЖК</span>
             <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="!fullDescription">{{ house.description.slice(0, 300) + '...' }}</p>
             <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{ house.description }}</p>
-            <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 items-center" @click="fullDescription = true">
+            <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 items-center animation__arrow" @click="fullDescription = true">
               <span class="text-[#6435A5] font-medium text-sm xxl:text-xs xl:text-[10px]">Подробнее</span>
-              <img src="../../assets/svg/arrow_right_purple.svg" alt="Стрелочка в право">
+              <img src="../../assets/svg/arrow_right_purple.svg" class="transition-all duration-300 w-3.5 xxl:w-3 xl:wp-2.5" alt="Стрелочка в право">
             </button>
           </div>
           <div class="text-[18px] xxl:text-[15px] xl:text-[13px] pb-14 xxl:pb-10 xl:pb-8">
@@ -204,8 +204,12 @@
             </div>
           </div>
         </div>
-        <app-decrition-object-news :house="house" />
+        <app-decrition-object-sidebar :house="house" />
       </div>
+    </div>
+    <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
+    <div class="_container">
+      <app-description-object-other-j-k />
     </div>
   </main>
   <app-footer />
@@ -214,7 +218,8 @@
 <script>
 import AppHeader from '../Layouts/AppHeader.vue'
 import AppFooter from "../Layouts/AppFooter.vue"
-import AppDecritionObjectNews from "../Components/AppDecritionObjectNews.vue";
+import AppDecritionObjectSidebar from "../Components/AppDecritionObjectSidebar.vue";
+import AppDescriptionObjectOtherJK from "../Components/AppDescriptionObjectOtherJK.vue"
 
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
@@ -235,7 +240,8 @@ export default {
   components: {
     AppHeader,
     AppFooter,
-    AppDecritionObjectNews,
+    AppDecritionObjectSidebar,
+    AppDescriptionObjectOtherJK,
     Swiper,
     SwiperSlide,
   },

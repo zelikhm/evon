@@ -922,3 +922,105 @@ input::placeholder {
   background: rgba(100, 53, 165, 0.15);
   border-radius: 200px;
 }
+
+.animation__arrow:hover img {
+  transform: translateX(6px);
+  transition: all 0.3s;
+}
+
+/***************SWIPER*********************/
+/***************SWIPER*********************/
+/***************SWIPER*********************/
+
+.swiper-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-pagination-bullet {
+  background: #fff !important;
+  width: 8px !important;
+  opacity: 0.8 !important;
+  height: 8px !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #fff !important;
+  width: 10px !important;
+  height: 10px !important;
+  opacity: 1 !important;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  content: '' !important;
+  background-image: url("../assets/svg/arrow-right-white.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 28px;
+  width: 28px;
+}
+
+.swiper-button-prev:after {
+  transform: rotate(180deg);
+}
+
+@media (max-width: 1572px) {
+  .swiper-pagination-bullet {
+    width: 7px !important;
+    height: 7px !important;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: 9px !important;
+    height: 9px !important;
+  }
+
+  .swiper-button-next:after,
+  .swiper-button-prev:after {
+    height: 22px;
+    width: 22px;
+  }
+}
+
+@media (max-width: 1366px) {
+  .swiper-pagination-bullet {
+    width: 6px !important;
+    height: 6px !important;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: 7.5px !important;
+    height: 7.5px !important;
+  }
+
+  .swiper-button-next:after,
+  .swiper-button-prev:after {
+    height: 15px;
+    width: 15px;
+  }
+}
+
+.animation__news-dev {
+  transform: translateY(-120vh);
+  transition: all 0.5s;
+}
+
+.border__bottom-6 {
+  border-bottom-right-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+.border__top-6 {
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+}
+
+.notification__shadow {
+  box-shadow: 0px 5px 80px rgba(52, 23, 94, 0.15);
+}
+
+.notification__icon-bg {
+  background: rgba(100, 53, 165, 0.15);
+}
