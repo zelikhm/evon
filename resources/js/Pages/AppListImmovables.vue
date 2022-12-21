@@ -25,7 +25,7 @@ import AppFooter from "../Layouts/AppFooter.vue"
 import AppFilter from "../Components/AppFilter.vue"
 import AppListNewBuilding from "../Components/AppListNewBuilding.vue"
 import AppNewsDeveloper from "../Components/AppNewsDeveloper.vue"
-import AppModalNotification from "../Layouts/modal/AppModalNotification.vue"
+import AppModalNotification from "../Layouts/AppModalNotification.vue"
 
 export default {
   props: {
