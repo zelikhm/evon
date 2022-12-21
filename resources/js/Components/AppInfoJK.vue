@@ -489,7 +489,7 @@ export default {
 
   },
   created() {
-    console.log(this.city)
+    console.log(this.dops)
   },
   computed: {
     filteredCity() {

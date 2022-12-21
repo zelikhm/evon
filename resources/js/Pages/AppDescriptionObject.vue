@@ -7,9 +7,9 @@
 
           <div class="flex flex-col p-4 xxl:p-3 xl:p-2">
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-              <span class="font-semibold text-xl xxl:text-lg xl:text-sm">Euro Avsallar Residence</span>
+              <span class="font-semibold text-xl xxl:text-lg xl:text-sm">{{ house.title }}</span>
               <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1 text-[14px] xxl:text-[12px] xl:text-[10px]">
-                <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">сдан</span>
+                <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">{{ house.info.status }}</span>
                 <span class="flex items-center justify-center text-white font-semibold bg-[#FA8D50] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">акция</span>
               </div>
             </div>
@@ -70,7 +70,7 @@
             class="mySwiper w-full"
           >
             <swiper-slide>
-              <img src="../../assets/slider_img.jpg" alt="">
+              <img :src="'/storage/' + house.image" alt="">
             </swiper-slide>
             <swiper-slide>
               <img src="../../assets/slider_img.jpg" alt="">
@@ -81,7 +81,7 @@
           </swiper>
           <div class="border border-solid border-[#E5DFEE] h-[100px] xxl:h-[80px] xl:h-[60px] flex items-center justify-evenly rounded-[12px] mt-7 xxl:mt-5 xl:mt-4 mb-14 xxl:mb-10 xl:mb-7">
             <div class="flex flex-col justify-center">
-              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">Элит</span>
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">{{ house.info.type }}</span>
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Тип дома</span>
             </div>
             <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
@@ -107,8 +107,9 @@
           </div>
           <div class="flex flex-col pb-14 xxl:pb-10 xl:pb-8">
             <span class="uppercase font-medium text-[18px] xxl:text-[15px] xl:text-[13px]">О ЖК</span>
-            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum</p>
-            <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 items-center">
+            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="!fullDescription">{{ house.description.slice(0, 300) + '...' }}</p>
+            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{ house.description }}</p>
+            <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 items-center" @click="fullDescription = true">
               <span class="text-[#6435A5] font-medium text-sm xxl:text-xs xl:text-[10px]">Подробнее</span>
               <img src="../../assets/svg/arrow_right_purple.svg" alt="Стрелочка в право">
             </button>
@@ -175,31 +176,35 @@
             <div class="border border-solid border-[#E5DFEE] p-7 xxl:p-5 xl:p-4 rounded-[12px]">
               <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px]">Расположение</span>
               <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 pt-6 xxl:pt-5 xl:pt-4">
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center" v-if="house.info.toSea !== null">
                   <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от моря</span>
-                  <span class="text-base xxl:text-sm xl:text-xs">500 м</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toSea }} м</span>
                 </div>
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center" v-if="house.info.toShop !== null">
                   <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от торгового центра</span>
-                  <span class="text-base xxl:text-sm xl:text-xs">500 м</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toShop }} м</span>
                 </div>
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center" v-if="house.info.toSchool !== null">
                   <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от детского садикая</span>
-                  <span class="text-base xxl:text-sm xl:text-xs">500 м</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toChildrenSchool }} м</span>
                 </div>
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center" v-if="house.info.toPark !== null">
                   <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от парка</span>
-                  <span class="text-base xxl:text-sm xl:text-xs">500 м</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toPark }} м</span>
                 </div>
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center" v-if="house.info.toBus !== null">
                   <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от остановки</span>
-                  <span class="text-base xxl:text-sm xl:text-xs">500 м</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toBus }} м</span>
+                </div>
+                <div class="flex justify-between items-center" v-if="house.info.toSchool !== null">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от школы</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toSchool }} м</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <app-decrition-object-news />
+        <app-decrition-object-news :house="house" />
       </div>
     </div>
   </main>
@@ -219,7 +224,8 @@ import { Navigation, Pagination} from "swiper";
 
 export default {
   props: {
-    house: []
+    house: [],
+    fullDescription: false
   },
   data() {
     return {
