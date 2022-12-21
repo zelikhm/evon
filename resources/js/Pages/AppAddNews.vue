@@ -58,7 +58,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 <script>
 import AppFooter from "@/Layouts/AppFooter.vue"
 import AppHeader from "@/Layouts/AppHeader.vue"
-import AppModalNotification from "@/Layouts/AppModalNotification.vue"
+import AppModalNotification from "@/Layouts/modal/AppModalNotification.vue"
 
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';

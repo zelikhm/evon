@@ -25,6 +25,33 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/object', function () {
+    return Inertia::render('AppDescriptionObject', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
+
+Route::get('/list-nedvijim', function () {
+    return Inertia::render('AppListImmovables', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
+
+Route::get('/selections', function () {
+    return Inertia::render('AppSelections', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
+
 Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
   Route::get('/', ['App\Http\Controllers\User\ProfileController', 'index']);
   Route::get('/compilation', ['App\Http\Controllers\User\CompilationController', 'index']);

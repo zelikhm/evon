@@ -112,7 +112,7 @@
 <script>
 import AppHeader from '../Layouts/AppHeader.vue'
 import AppFooter from "../Layouts/AppFooter.vue"
-import AppModalAuth from "../Layouts/AppModalAuth.vue"
+import AppModalAuth from "../Layouts/modal/AppModalAuth.vue"
 
 export default {
   data() {

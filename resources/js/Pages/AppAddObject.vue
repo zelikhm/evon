@@ -2,8 +2,7 @@
   <app-modal-add-contact @close-add-contact="modalAddContact = false" v-if="modalAddContact"/>
   <app-modal-add-apartments @close-add-apartments="modalAddApatments = false" v-if="modalAddApatments"/>
   <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="modalAddFrame = false" />
-  <app-modal-notification v-if="openNotification" @close-notification="openNotification = false"
-  />
+  <app-modal-notification v-if="openNotification" @close-notification="openNotification = false" />
   <app-header />
   <main>
     <div class="_container">
@@ -57,10 +56,10 @@ import AppFooter from "../Layouts/AppFooter.vue"
 import AppInfoJK from "../Components/AppInfoJK.vue"
 import AppApartments from "../Components/AppApartments.vue"
 import AppAddPhoto from "../Components/AppAddPhoto.vue"
-import AppModalAddContact from "../Layouts/AppModalAddContact.vue"
+import AppModalAddContact from "../Layouts/modal/AppModalAddContact.vue"
 import AppModalAddApartments from "../Layouts/modal/AppModalAddApartments.vue"
-import AppModalAddFrame from "../Layouts/AppModalAddFrame.vue"
-import AppModalNotification from "@/Layouts/AppModalNotification.vue"
+import AppModalAddFrame from "../Layouts/modal/AppModalAddFrame.vue"
+import AppModalNotification from "@/Layouts/modal/AppModalNotification.vue"
 
 export default {
   props: {

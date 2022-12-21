@@ -3,7 +3,7 @@
     <div class="relative notification__shadow w-full flex flex-col gap-7 xxl:gap-6 xl:gap-5 bg-white rounded-[12px] p-4.5 xxl:p-4 xl:p-3.5 z-50 h-fit">
       <div class="relative w-full flex justify-between items-center gap-4.5 xxl:gap-4 xl:gap-3.5">
         <div class="notification__icon-bg flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px]">
-          <img src="../../assets/svg/notification__icon.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
+          <img src="../../../assets/svg/notification__icon.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
         </div>
         <div class="flex gap-9 xxl:gap-7 xl:gap-6 items-center">
           <h2 class="text-lg xxl:text-[15px] xl:text-[13px] font-semibold leading-none whitespace-nowrap">3 дня до окончания платной подписки</h2>

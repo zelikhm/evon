@@ -19,7 +19,7 @@
             <div class="avatar__contact w-full h-full rounded-full">
               <div class="absolute rounded-full w-full h-full top-0 left-0">
                 <label for="avatar" :class="{'-z-10': avatar}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-full">
-                  <img src="../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
+                  <img src="../../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
                 </label>
                 <input class="w-full h-full rounded-full opacity-0 absolute top-0 left-0 pointer-events-none" id="avatar" type="file" @change="avatarContact">
               </div>

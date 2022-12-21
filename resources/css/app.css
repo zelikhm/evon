@@ -1024,3 +1024,12 @@ input::placeholder {
 .notification__icon-bg {
   background: rgba(100, 53, 165, 0.15);
 }
+
+.grid__selection-block {
+  display: grid;
+  grid-template-columns: 24%  1fr;
+}
+
+.border__left {
+  border-left: 1px solid #E5DFEE;
+}
