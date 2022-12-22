@@ -53,12 +53,12 @@ class HouseController extends Controller
 
   public function createHouse()
   {
-
     return Inertia::render('AppAddObject', [
       'dops' => $this->getDop(),
       'infos' => $this->getInfo(),
       'city' => $this->getCity(),
       'notification' => $this->getNotification(),
+      'user' => Auth::user(),
     ]);
 
   }
@@ -159,13 +159,50 @@ class HouseController extends Controller
         'updated_at' => Carbon::now()->addHour(3),
       ]);
 
+      if($request->info !== null) {
+        $info = explode(',', $request->info);
+        $str = '[';
+        $i = 0;
+        foreach ($info as $item) {
+          if($i !== 0) {
+            $str .= ',"' . $item . '"';
+          } else {
+            $str .= '"' . $item . '"';
+          }
+
+          $i++;
+        }
+        $str .= ']';
+      } else {
+        $str = null;
+      }
+
+      if($request->dop !== null) {
+        $dop = explode(',', $request->dop);
+
+        $str1 = '[';
+        $i = 0;
+        foreach ($dop as $item) {
+          if($i !== 0) {
+            $str1 .= ',"' . $item . '"';
+          } else {
+            $str1 .= '"' . $item . '"';
+          }
+
+          $i++;
+        }
+        $str1 .= ']';
+      } else {
+        $str1 = null;
+      }
+
       HouseCharacteristicsModel::create([
         'house_id' => $house->id,
         'status' => $request->statusHouse,
         'floors' => $request->floors,
         'type' => $request->type,
-        'dop' => $request->dop,
-        'info' => $request->info,
+        'dop' => $str1,
+        'info' => $str,
         'toSea' => $request->toSea,
         'toSchool' => $request->toSchool,
         'toShop' => $request->toShop,
