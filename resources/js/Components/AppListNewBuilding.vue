@@ -411,7 +411,8 @@
 <script>
 export default {
   props: {
-    houses: []
+    houses: [],
+    user: []
   },
   data() {
     return {
@@ -442,6 +443,7 @@ export default {
   },
   created() {
     console.log(this.houses)
+    console.log(this.user)
   }
 }
 </script>

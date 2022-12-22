@@ -9,7 +9,7 @@
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
               <span class="font-semibold text-xl xxl:text-lg xl:text-sm">{{ house.title }}</span>
               <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1 text-[14px] xxl:text-[12px] xl:text-[10px]">
-                <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">{{ house.info.status }}</span>
+<!--                <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">{{ house.info.status }}</span>-->
                 <span class="flex items-center justify-center text-white font-semibold bg-[#FA8D50] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="!house.fool_price">акция</span>
               </div>
             </div>
@@ -81,7 +81,7 @@
           </swiper>
           <div class="border border-solid border-[#E5DFEE] h-[100px] xxl:h-[80px] xl:h-[60px] flex items-center justify-evenly rounded-[12px] mt-7 xxl:mt-5 xl:mt-4 mb-16 xxl:mb-12 xl:mb-10">
             <div class="flex flex-col justify-center">
-              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">{{ house.info.type }}</span>
+<!--              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">{{ house.info.type }}</span>-->
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Тип дома</span>
             </div>
             <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
@@ -177,10 +177,10 @@
             <div class="border border-solid border-[#E5DFEE] p-7 xxl:p-5 xl:p-4 rounded-[12px]">
               <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px]">Расположение</span>
               <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 pt-6 xxl:pt-5 xl:pt-4">
-                <div class="flex justify-between items-center" v-if="house.info.toSea !== null">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от моря</span>
-                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toSea }} м</span>
-                </div>
+<!--                <div class="flex justify-between items-center" v-if="house.info.toSea !== null">-->
+<!--                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от моря</span>-->
+<!--                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toSea }} м</span>-->
+<!--                </div>-->
                 <div class="flex justify-between items-center" v-if="house.info.toShop !== null">
                   <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от торгового центра</span>
                   <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toShop }} м</span>
