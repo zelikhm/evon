@@ -47,13 +47,13 @@ import { Link } from '@inertiajs/inertia-vue3'
           <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectRegion }" alt="">
         </div>
         <div v-if="openSelectRegion" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
-                  <span
-                    v-for="(region, idx) in regions" :key="idx"
-                    @click="changeSelectRegion(region)"
-                    class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
-                  >
-                    {{ region.title }}
-                  </span>
+          <span
+            v-for="(region, idx) in regions" :key="idx"
+            @click="changeSelectRegion(region)"
+            class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
+          >
+            {{ region.title }}
+          </span>
         </div>
       </div>
     </div>
@@ -162,19 +162,22 @@ import { Link } from '@inertiajs/inertia-vue3'
             mode="tags"
             placeholder="Выбрать услуги"
             :close-on-select="true"
+            track-by="id"
           />
         </div>
 
         <div :class="{'border__bottom--0': borderInfrastructure}" class="multi__select flex flex-col gap-2 xxl:gap-1.5 h-fit border border-solid border-[#E5DFEE] rounded-[6px]">
           <div class="px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5 text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Инфраструктура</div>
-          <Multiselect
-            @click="borderInfrastructure = !borderInfrastructure"
-            class="px-5 xx:px-4 xl:px-3 pb-4 xx:pb-3 xl:pb-2.5 white__arrow"
-            v-model="valueSelectInfrastructure"
-            :options="optionsSelectInfrastructure"
-            mode="tags"
-            placeholder="Инфраструктура"
-            :close-on-select="true"
+          <VueMultiselect
+                          v-model="info.array"
+                          :options="infos"
+                          :multiple="true"
+                          :close-on-select="false"
+                          placeholder="Выбрать..."
+                          label="name"
+                          track-by="id"
+                          limit="5"
+                          max="5"
           />
         </div>
 
@@ -278,7 +281,7 @@ import { Link } from '@inertiajs/inertia-vue3'
       </div>
       <div class="grid grid-cols-2 my-10 xxl:my-8 xl:my-6 w-full">
         <Link href="" @click="addObject" class="w-full text-center mr-4 font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Добавить</Link>
-        <button @click="addObject(1)" class="w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Добавить и продолжить</button>
+        <button @click="addAndContinue" class="w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Добавить и продолжить</button>
       </div>
     </div>
   </div>
@@ -287,6 +290,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 <script>
 
 import Multiselect from '@vueform/multiselect'
+import VueMultiselect from 'vue-multiselect'
 
 export default {
   props: ['dops', 'infos', 'city', 'user', 'supports'],
@@ -380,9 +384,11 @@ export default {
         { id: 0, installment: 'Да' },
         { id: 1, installment: 'Нет' },
       ],
-
-      valueSelectInfrastructure: null,
-      valueSelectServices: null,
+      info: {
+        array: []
+      },
+      valueSelectInfrastructure: [],
+      valueSelectServices: [],
       optionsSelectInfrastructure: [],
       optionsSelectServices: [],
       inputFile: [],
@@ -393,44 +399,78 @@ export default {
     openMarker(id) {
       this.openedMarkerID = id
     },
-    addObject(id) {
-      this.object.dop = this.valueSelectServices
-      this.object.info = this.valueSelectInfrastructure
-      this.object.city = this.selectCity
-      this.object.area = this.selectRegion
+    addAndContinue() {
+      console.log(this.info.array, this.infos);
+      // this.object.dop = this.valueSelectServices
+      // this.object.info = this.valueSelectInfrastructure
+      // this.object.city = this.selectCity
+      // this.object.area = this.selectRegion
+      //
+      // let formData = new FormData();
+      // formData.append('user_id', 5); // пока статика, жду пропс user :D
+      // formData.append('title', this.object.title);
+      // formData.append('description', this.object.description);
+      // formData.append('city', this.selectCity);
+      // formData.append('area', this.selectRegion);
+      // formData.append('longitude', this.object.latitude);
+      // formData.append('latitude', this.object.latitude);
+      // formData.append('percent', this.object.percent);
+      // formData.append('comment', this.object.comment);
+      // formData.append('statusHouse', this.selectDeadline);
+      // formData.append('type', this.selectType);
+      // formData.append('dop', this.valueSelectServices);
+      // formData.append('info', this.valueSelectInfrastructure);
+      // formData.append('floors', this.object.floors);
+      // formData.append('toSea', this.object.toSea);
+      // formData.append('toSchool', this.object.toSchool);
+      // formData.append('toShop', this.object.toShop);
+      // formData.append('toPark', this.object.toPark);
+      // formData.append('toBus', this.object.toBus);
+      // formData.append('toChildrenSchool',this.object.toChildrenSchool);
+      // formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
+      // formData.append('image', this.$refs.file.files[0]);
+      // formData.append('token', this.globalToken);
+      // console.log(formData)
+      //
+      // axios({
+      //   method: 'post',
+      //   url: '/api/house/create',
+      //   headers: {"Content-type": "multipart/form-data"},
+      //   data: formData,
+      // }).then(res => this.addedSupports(res))
 
-      let formData = new FormData();
-      formData.append('user_id', 5); // пока статика, жду пропс user :D
-      formData.append('title', this.object.title);
-      formData.append('description', this.object.description);
-      formData.append('city', this.selectCity);
-      formData.append('area', this.selectRegion);
-      formData.append('longitude', this.object.latitude);
-      formData.append('latitude', this.object.latitude);
-      formData.append('percent', this.object.percent);
-      formData.append('comment', this.object.comment);
-      formData.append('statusHouse', this.selectDeadline);
-      formData.append('type', this.selectType);
-      formData.append('dop', this.valueSelectServices);
-      formData.append('info', this.valueSelectInfrastructure);
-      formData.append('floors', this.object.floors);
-      formData.append('toSea', this.object.toSea);
-      formData.append('toSchool', this.object.toSchool);
-      formData.append('toShop', this.object.toShop);
-      formData.append('toPark', this.object.toPark);
-      formData.append('toBus', this.object.toBus);
-      formData.append('toChildrenSchool',this.object.toChildrenSchool);
-      formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
-      formData.append('image', this.$refs.file.files[0]);
-      formData.append('token', this.globalToken);
+      // this.addedSupports(1);
 
+    },
+    addedSupports(res) {
+      // let idNewJk = res.data.id;
+
+      axios.post('/api/house/clearSupport', {
+        house_id: 1
+      }).then(res => {
+        this.supports.forEach(item => {
+          let arr = new FormData();
+          arr.append('avatar', item.avatar)
+          arr.append('name', item.name)
+          arr.append('phone', item.phone)
+          arr.append('email', item.email)
+          arr.append('status', item.status)
+          arr.append('link', item.link)
+          arr.append('house_id', 1)
+          arr.append('token', this.globalToken)
+
+          this.saveSupport(arr);
+        })
+      })
+    },
+    saveSupport(data) {
       axios({
         method: 'post',
-        url: '/api/house/create',
+        url: '/api/house/addedSupport',
         headers: {"Content-type": "multipart/form-data"},
-        data: formData,
+        data: data,
       }).then(res => {
-        console.log(res.data);
+        // this.$emit('addAndContinue')
       })
     },
     changeSelectCity(city) {
@@ -470,7 +510,7 @@ export default {
     },
   },
   components: {
-    Multiselect,
+    Multiselect, VueMultiselect
   },
   mounted() {
     if (this.city[0] !== null) {
@@ -478,18 +518,9 @@ export default {
       this.selectRegion = this.city[0].regions[0].title
       this.regions = this.city[0].regions
     }
-
-    for (let key of this.dops) {
-      this.optionsSelectServices.push(key.name)
-    }
-
-    for (let key of this.infos) {
-      this.optionsSelectInfrastructure.push(key.name)
-    }
-
   },
   created() {
-    console.log(this.city)
+
   },
   computed: {
     filteredCity() {

@@ -14,7 +14,6 @@ createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
     setup({ el, app, props, plugin }) {
-        // app.config.globalProperties.globalToken = '6f8be2a8db029ec86bd40833acbbd0c5'
         const VueApp = createApp({ render: () => h(app, props) })
 
         VueApp.config.globalProperties.globalToken = '6f8be2a8db029ec86bd40833acbbd0c5'

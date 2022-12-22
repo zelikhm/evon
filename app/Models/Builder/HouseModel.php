@@ -2,6 +2,7 @@
 
 namespace App\Models\Builder;
 
+use App\Models\Builder\Flat\FlatModel;
 use App\Models\Builder\Flat\FrameModel;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -60,5 +61,16 @@ class HouseModel extends Model
 
   public function news() {
     return $this->hasMany(HouseNewsModel::class, 'house_id', 'id');
+  }
+
+  public function flats() {
+    return $this->hasManyThrough(
+      FlatModel::class,
+      FrameModel::class,
+      'house_id',
+      'frame_id',
+      'id',
+      'id'
+    );
   }
 }

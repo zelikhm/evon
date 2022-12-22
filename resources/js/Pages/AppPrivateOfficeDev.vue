@@ -22,12 +22,12 @@ import { Link } from '@inertiajs/inertia-vue3'
                 <span class="bg-[#30CB49] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5 text-white text-sm xxl:text-xs xl:text-[10px] leading-none" v-if="house.active === 2">опубликованно</span>
               </div>
               <div class="seek opacity-0 transition-all absolute z-10 top-1/2 w-full flex flex-col gap-3 xxl:gap-2 xl:gap-1.5 items-center -translate-x-1/2 -translate-y-1/2 left-1/2">
-                <Link :href="'/profile/edit/' + house.id" class="flex items-center justify-between w-[30%] border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5">
+                <Link :href="'/profile/edit/' + house.slug" class="flex items-center justify-between w-[30%] border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5">
                   <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">Редактировать</span>
                   <img src="../../assets/svg/pen_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
                 </Link>
-                <button class="flex items-center justify-between w-[30%] border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5">
-                  <span @click="deleteHouse(house)" class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">Удалить</span>
+                <button @click="deleteHouse(house)" class="flex items-center justify-between w-[30%] border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5">
+                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">Удалить</span>
                   <img src="../../assets/svg/bucket_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
                 </button>
                 <button @click="changeVisible(house)" class="flex items-center justify-between w-[30%] border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5">
@@ -46,7 +46,7 @@ import { Link } from '@inertiajs/inertia-vue3'
               </div>
             </div>
             <div class="flex flex-col p-5 xxl:p-4 xl:p-3">
-              <span class="font-semibold text-xl xxl:text-base xl:text-[13px]">{{ house.slug }}</span>
+              <span class="font-semibold text-xl xxl:text-base xl:text-[13px]">{{ house.title }}</span>
               <div class="relative">
                 <span @click="house.openWatchTime = !house.openWatchTime" class="w-fit cursor-pointer flex items-center gap-2 xxl:gap-1.5 xl:gap-1">
                   <img src="../../assets/svg/eye_icon_grey.svg" class="w-4 xxl:w-3.5 xl:w-3" alt="">
@@ -124,7 +124,8 @@ export default {
       object.views = object.view[time.id]
     },
     deleteHouse(item) {
-      axios.post('/api/house/delete', { house_id: item.id, token: this.globalToken })
+      console.log(item.id)
+      axios.post('/api/house/delete', { house_id: item.id, token: this.globalToken }).then(res => console.log(res.data)).catch(err => console.error(err))
     },
     changeVisible(item) {
       item.visible = !item.visible

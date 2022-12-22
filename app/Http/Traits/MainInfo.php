@@ -26,9 +26,9 @@ trait MainInfo {
 
   protected function getSlider($house) {
 
-    $requestCity = HouseModel::where('city', $house->city)->get();
+    $requestCity = HouseModel::where('city', $house->city)->whereNot('id', $house->id)->with(['flats'])->get();
 
-    $requestArea = HouseModel::where('area', $house->area)->get();
+    $requestArea = HouseModel::where('area', $house->area)->whereNot('id', $house->id)->with(['flats'])->get();
 
     if(count($requestCity) > 5) {
     } else {
@@ -37,7 +37,7 @@ trait MainInfo {
     }
 
     if(count($requestCity) === 0) {
-      $requestCity = HouseModel::limit(5);
+      $requestCity = HouseModel::limit(5)->whereNot('id', $house->id)->with(['flats'])->get();
     }
 
     return $requestCity;
@@ -187,7 +187,7 @@ trait MainInfo {
    */
 
   protected function getHouseSlug($slug) {
-    return HouseModel::with(['info', 'supports', 'files', 'frames', 'images'])
+    return HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'user'])
       ->where('slug', $slug)
       ->first();
   }
