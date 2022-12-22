@@ -1057,3 +1057,16 @@ input::placeholder {
 .favorites__banner {
   background: rgba(48, 203, 110, 0.15);
 }
+
+.grid__prof-agent {
+  display: grid;
+  grid-template-columns: 13.28vw 1fr 28.125vw;
+}
+
+.custom__scroll-grey::-webkit-scrollbar {
+  width: 2px;
+}
+
+.custom__scroll-grey::-webkit-scrollbar-thumb {
+  background: #E5DFEE;
+}
