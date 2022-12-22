@@ -65,25 +65,25 @@ import { Link } from '@inertiajs/inertia-vue3'
 
 <!--  class="w-full h-[300px] rounded-[6px] my-10 xxl:my-8 xl:my-6"  -->
 
-    <GMapMap :center="center" :zoom="10" map-type-id="terrain" class="w-full h-[300px] rounded-[6px] my-10 xxl:my-8 xl:my-6">
-      <GMapMarker :key="index" v-for="(m, index) in markers" :position="m.position" :clickable="true" :draggable="true"
-                  @click="openMarker(m.id)" >
-        <GMapInfoWindow
-            :closeclick="true"
-            @closeclick="openMarker(null)"
-            :opened="openedMarkerID === m.id"
-        >
-          <div>
-            <h1>Euro Avsallar Residence</h1>
-            <h3>Туапсе, А147</h3>
-            <h3>Туапсе, А147</h3>
-            <hr>
-            <h4>от 149000$</h4>
-            <button>В подборку</button>
-          </div>
-        </GMapInfoWindow>
-      </GMapMarker>
-    </GMapMap>
+<!--    <GMapMap :center="center" :zoom="10" map-type-id="terrain" class="w-full h-[300px] rounded-[6px] my-10 xxl:my-8 xl:my-6">-->
+<!--      <GMapMarker :key="index" v-for="(m, index) in markers" :position="m.position" :clickable="true" :draggable="true"-->
+<!--                  @click="openMarker(m.id)" >-->
+<!--        <GMapInfoWindow-->
+<!--            :closeclick="true"-->
+<!--            @closeclick="openMarker(null)"-->
+<!--            :opened="openedMarkerID === m.id"-->
+<!--        >-->
+<!--          <div>-->
+<!--            <h1>Euro Avsallar Residence</h1>-->
+<!--            <h3>Туапсе, А147</h3>-->
+<!--            <h3>Туапсе, А147</h3>-->
+<!--            <hr>-->
+<!--            <h4>от 149000$</h4>-->
+<!--            <button>В подборку</button>-->
+<!--          </div>-->
+<!--        </GMapInfoWindow>-->
+<!--      </GMapMarker>-->
+<!--    </GMapMap>-->
 
 
     <div class="my-5 xxl:my-4 xl:my-3">

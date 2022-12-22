@@ -25,6 +25,33 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/selections', function () {
+    return Inertia::render('AppSelections', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
+
+Route::get('/favorites', function () {
+    return Inertia::render('AppFavorites', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
+
+Route::get('/profile-agent', function () {
+    return Inertia::render('AppProfileAgent', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
+
 Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
   Route::get('/', ['App\Http\Controllers\User\ProfileController', 'index']);
   Route::get('/compilation', ['App\Http\Controllers\User\CompilationController', 'index']);

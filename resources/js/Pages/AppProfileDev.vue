@@ -51,7 +51,7 @@
 <script>
 import AppFooter from "@/Layouts/AppFooter.vue"
 import AppHeader from "@/Layouts/AppHeader.vue"
-import AppModalProfile from "@/Layouts/AppModalProfile.vue"
+import AppModalProfile from "@/Layouts/modal/AppModalProfile.vue"
 
 export default {
   props: ['user'],

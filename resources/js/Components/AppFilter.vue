@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-[#F6F3FA] rounded-[6px] border">
+  <div class="bg-[#F6F3FA] rounded-[6px] h-fit">
     <div class="flex justify-between items-center p-7 xxl:p-5 xl:p-4">
       <span class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] leading-none">Фильтры</span>
       <button class="text-[#6435A5] text-sm xxl:text-xs xl:text-[10px] leading-none">Сбросить</button>
     </div>
     <div class="h-[1px] w-full bg-[#E5DFEE]"></div>
-    <div class="custom__scroll h-[88vh] relative overflow-y-auto p-7 xxl:p-5 xl:p-4">
+    <div class="custom__scroll h-[90vh] relative overflow-y-auto p-7 xxl:p-5 xl:p-4">
       <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3">
         <div :class="{'border__bottom--0': borderType}" class="multi__select multi__select--filter flex flex-col gap-2 xxl:gap-1.5 h-fit border border-solid border-[#E5DFEE] rounded-[6px]">
           <div class="px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5 text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Инфраструктура</div>

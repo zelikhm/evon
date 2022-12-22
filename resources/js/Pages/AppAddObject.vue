@@ -58,10 +58,10 @@ import AppFooter from "../Layouts/AppFooter.vue"
 import AppInfoJK from "../Components/AppInfoJK.vue"
 import AppApartments from "../Components/AppApartments.vue"
 import AppAddPhoto from "../Components/AppAddPhoto.vue"
-import AppModalAddContact from "../Layouts/AppModalAddContact.vue"
+import AppModalAddContact from "../Layouts/modal/AppModalAddContact.vue"
 import AppModalAddApartments from "../Layouts/modal/AppModalAddApartments.vue"
-import AppModalAddFrame from "../Layouts/AppModalAddFrame.vue"
-import AppModalNotification from "@/Layouts/AppModalNotification.vue"
+import AppModalAddFrame from "../Layouts/modal/AppModalAddFrame.vue"
+import AppModalNotification from "@/Layouts/modal/AppModalNotification.vue"
 
 export default {
   props: {
