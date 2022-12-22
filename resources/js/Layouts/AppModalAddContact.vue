@@ -37,7 +37,7 @@
       </div>
       <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
         <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="tel_contact">Телефон</label>
-        <input v-model="dataSupport.tel" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="tel_contact" placeholder="+7 930 245 15 20">
+        <input v-model="dataSupport.phone" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="tel_contact" placeholder="+7 930 245 15 20">
       </div>
       <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
         <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="email_contact">Почта</label>
@@ -45,7 +45,7 @@
       </div>
       <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
         <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="soc_contact">Ссылка на соц сеть</label>
-        <input v-model="dataSupport.social" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="soc_contact" placeholder="http://172468712687">
+        <input v-model="dataSupport.link" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="soc_contact" placeholder="http://172468712687">
       </div>
       <button class="bg-[#E84680] rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
         <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none" @click="addSupport">Добавить</span>
@@ -62,13 +62,14 @@ export default {
       myPhoto: '',
       avatar: false,
       dataSupport: {
-        image_back: "",
+        avatar: "",
         image_front: "",
         name: "",
-        position: "",
-        tel: "",
+        status: "",
+        phone: "",
         email: "",
-        social: "",
+        link: "",
+        token: this.globalToken
       }
     }
   },
@@ -78,8 +79,7 @@ export default {
     },
     avatarContact(e) {
       this.dataSupport.image_front = URL.createObjectURL(e.target.files[0])
-      console.log(this.dataSupport.image_front)
-      this.dataSupport.image_back = this.$refs.file.files[0]
+      this.dataSupport.avatar = this.$refs.file.files[0]
       this.myPhoto = this.dataSupport.image_front
       if (e.target.files.length == 1) {
         this.avatar = true

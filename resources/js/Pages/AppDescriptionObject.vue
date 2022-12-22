@@ -10,7 +10,7 @@
               <span class="font-semibold text-xl xxl:text-lg xl:text-sm">{{ house.title }}</span>
               <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1 text-[14px] xxl:text-[12px] xl:text-[10px]">
                 <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">{{ house.info.status }}</span>
-                <span class="flex items-center justify-center text-white font-semibold bg-[#FA8D50] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">акция</span>
+                <span class="flex items-center justify-center text-white font-semibold bg-[#FA8D50] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="!house.fool_price">акция</span>
               </div>
             </div>
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Туапсе, А147</span>
@@ -44,7 +44,7 @@
 
             <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
 
-            <div class="flex items-center p-4 xxl:p-3 xl:p-2">
+            <div class="flex items-center p-4 xxl:p-3 xl:p-2" @click="onPrint">
               <button class="flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
                 <img src="../../assets/svg/cserocs_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="Ксерокс">
               </button>
@@ -107,10 +107,11 @@
           </div>
           <div class="flex flex-col pb-14 xxl:pb-10 xl:pb-8">
             <span class="uppercase font-medium text-[18px] xxl:text-[15px] xl:text-[13px] pb-5 xxl:pb-4 xl:pb-3 leading-none">О ЖК</span>
-            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="!fullDescription">{{ house.description.slice(0, 300) + '...' }}</p>
+            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="!fullDescription">{{ house }}</p>
+<!--            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="!fullDescription">{{ house.description.slice(0, 300) + '...' }}</p>-->
             <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{ house.description }}</p>
-            <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 items-center animation__arrow" @click="fullDescription = true">
-              <span class="text-[#6435A5] font-medium text-sm xxl:text-xs xl:text-[10px]">Подробнее</span>
+            <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 items-center animation__arrow" @click="fullDescription = !fullDescription">
+              <span class="text-[#6435A5] font-medium text-sm xxl:text-xs xl:text-[10px]">{{ fullDescription ? 'Скрыть' : 'Подробнее' }}</span>
               <img src="../../assets/svg/arrow_right_purple.svg" class="transition-all duration-300 w-3.5 xxl:w-3 xl:wp-2.5" alt="Стрелочка в право">
             </button>
           </div>
@@ -184,8 +185,8 @@
                   <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от торгового центра</span>
                   <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toShop }} м</span>
                 </div>
-                <div class="flex justify-between items-center" v-if="house.info.toSchool !== null">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от детского садикая</span>
+                <div class="flex justify-between items-center" v-if="house.info.toChildrenSchool !== null">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от детского садика</span>
                   <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toChildrenSchool }} м</span>
                 </div>
                 <div class="flex justify-between items-center" v-if="house.info.toPark !== null">
@@ -235,6 +236,11 @@ export default {
   data() {
     return {
 
+    }
+  },
+  methods: {
+    onPrint() {
+      window.print()
     }
   },
   components: {

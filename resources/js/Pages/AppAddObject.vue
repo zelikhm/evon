@@ -33,6 +33,7 @@
                         :city="city"
                         :supports="supports"
                         @open-add-contact="modalAddContact = !modalAddContact"
+                        @addAndContinue="page = 1"
           />
         </div>
 

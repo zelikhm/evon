@@ -47,13 +47,13 @@ import { Link } from '@inertiajs/inertia-vue3'
           <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectRegion }" alt="">
         </div>
         <div v-if="openSelectRegion" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
-                  <span
-                    v-for="(region, idx) in regions" :key="idx"
-                    @click="changeSelectRegion(region)"
-                    class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
-                  >
-                    {{ region.title }}
-                  </span>
+          <span
+            v-for="(region, idx) in regions" :key="idx"
+            @click="changeSelectRegion(region)"
+            class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
+          >
+            {{ region.title }}
+          </span>
         </div>
       </div>
     </div>
@@ -278,7 +278,7 @@ import { Link } from '@inertiajs/inertia-vue3'
       </div>
       <div class="grid grid-cols-2 my-10 xxl:my-8 xl:my-6 w-full">
         <Link href="" @click="addObject" class="w-full text-center mr-4 font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Добавить</Link>
-        <button @click="addObject(1)" class="w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Добавить и продолжить</button>
+        <button @click="addAndContinue" class="w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Добавить и продолжить</button>
       </div>
     </div>
   </div>
@@ -392,8 +392,9 @@ export default {
   methods: {
     openMarker(id) {
       this.openedMarkerID = id
+      console.log(this.supports)
     },
-    addObject(id) {
+    addAndContinue() {
       this.object.dop = this.valueSelectServices
       this.object.info = this.valueSelectInfrastructure
       this.object.city = this.selectCity
@@ -423,14 +424,35 @@ export default {
       formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
       formData.append('image', this.$refs.file.files[0]);
       formData.append('token', this.globalToken);
+      console.log(formData)
 
       axios({
         method: 'post',
         url: '/api/house/create',
         headers: {"Content-type": "multipart/form-data"},
         data: formData,
+      }).then(res => this.addedSupports(res))
+
+
+    },
+    addedSupports(res) {
+      let idNewJk = res.data.id;
+      this.supports.forEach(item => {
+        item.house_id = idNewJk
+      })
+
+      let formData2 = new FormData();
+      formData2.append('array', this.supports)
+      formData2.append('token', this.globalToken)
+
+      axios({
+        method: 'post',
+        url: '/api/house/addedSupport',
+        headers: {"Content-type": "multipart/form-data"},
+        data: formData2,
       }).then(res => {
-        console.log(res.data);
+        console.log(res)
+        this.$emit('addAndContinue')
       })
     },
     changeSelectCity(city) {

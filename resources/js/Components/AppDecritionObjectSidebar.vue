@@ -47,7 +47,7 @@
     <div class="pb-14 xxl:pb-10 xl:pb-8">
       <div class="font-medium text-lg xxl:text-[15px] xl:text-[13px] pb-5 xxl:pb-4 xl:pb-3 leading-none">Комиссия</div>
       <div class="flex items-start gap-4 xxl:gap-3 xl:gap-2.5">
-        <span class="font-medium text-[32px] xxl:text-[26px] xl:text-[22px]">5%</span>
+        <span class="font-medium text-[32px] xxl:text-[26px] xl:text-[22px]">{{ house.percent }}%</span>
         <span class="text-base text-[#8A8996]  xxl:text-sm xl:text-xs">По предварительной записи</span>
       </div>
     </div>
@@ -96,6 +96,9 @@
 
 <script>
 export default {
+  props: {
+    house: []
+  },
   data() {
     return {
 
