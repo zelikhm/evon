@@ -21,6 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('house')->group(function () {
   Route::post('create', ['App\Http\Controllers\House\HouseController', 'create']);
   Route::post('addedSupport', ['App\Http\Controllers\House\HouseController', 'supports']);
+  Route::post('clearSupport', ['App\Http\Controllers\House\HouseController', 'clearSupport']);
+  Route::post('deleteSupport', ['App\Http\Controllers\House\HouseController', 'deleteSupport']);
   Route::post('get', ['App\Http\Controllers\House\HouseController', 'get']);
   Route::post('createFrame', ['App\Http\Controllers\House\HouseController', 'createFrame']);
   Route::post('createFlat', ['App\Http\Controllers\House\HouseController', 'createFlat']);
