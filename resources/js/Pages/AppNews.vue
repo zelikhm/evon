@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
-  <app-header />
+  <app-header :user="user" />
   <main>
     <div class="_container">
       <div class="flex items-center justify-between mt-14 xxl:mt-10 xl:mt-8">
@@ -67,6 +67,7 @@ import AppHeader from "@/Layouts/AppHeader.vue"
 export default {
   props: {
     news: [],
+    user: []
   },
   data() {
     return {
@@ -91,6 +92,7 @@ export default {
     AppFooter,
   },
   created() {
+    console.log(this.user)
     console.log(this.news)
   }
 }

@@ -496,11 +496,14 @@ export default {
         this.object.info.push(this.infos.find(item => item.name === value).id)
       })
 
+      console.log(this.object.info)
+      console.log(this.object.dop)
+
+
       this.object.city = this.selectCity
       this.object.area = this.selectRegion
 
       let formData = new FormData();
-      formData.append('user_id', 5); // пока статика, жду пропс user :D
       formData.append('title', this.object.title);
       formData.append('description', this.object.description);
       formData.append('city', this.selectCity);
@@ -511,8 +514,8 @@ export default {
       formData.append('comment', this.object.comment);
       formData.append('statusHouse', this.selectDeadline);
       formData.append('type', this.selectType);
-      formData.append('dop', this.valueSelectServices);
-      formData.append('info', this.valueSelectInfrastructure);
+      formData.append('dop', this.object.dop);
+      formData.append('info', this.object.info);
       formData.append('floors', this.object.floors);
       formData.append('toSea', this.object.toSea);
       formData.append('toSchool', this.object.toSchool);
