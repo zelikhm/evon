@@ -176,32 +176,7 @@
             </div>
             <div class="border border-solid border-[#E5DFEE] p-7 xxl:p-5 xl:p-4 rounded-[12px]">
               <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px]">Расположение</span>
-              <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 pt-6 xxl:pt-5 xl:pt-4">
-<!--                <div class="flex justify-between items-center" v-if="house.info.toSea !== null">-->
-<!--                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от моря</span>-->
-<!--                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toSea }} м</span>-->
-<!--                </div>-->
-                <div class="flex justify-between items-center" v-if="house.info.toShop !== null">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от торгового центра</span>
-                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toShop }} м</span>
-                </div>
-                <div class="flex justify-between items-center" v-if="house.info.toChildrenSchool !== null">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от детского садика</span>
-                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toChildrenSchool }} м</span>
-                </div>
-                <div class="flex justify-between items-center" v-if="house.info.toPark !== null">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от парка</span>
-                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toPark }} м</span>
-                </div>
-                <div class="flex justify-between items-center" v-if="house.info.toBus !== null">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от остановки</span>
-                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toBus }} м</span>
-                </div>
-                <div class="flex justify-between items-center" v-if="house.info.toSchool !== null">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от школы</span>
-                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toSchool }} м</span>
-                </div>
-              </div>
+            
             </div>
           </div>
         </div>

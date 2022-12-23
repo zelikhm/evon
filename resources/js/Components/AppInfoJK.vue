@@ -497,10 +497,15 @@ export default {
         this.object.info.push(this.infos.find(item => item.name === value).id)
       })
 
+      console.log(this.object.info)
+      console.log(this.object.dop)
+
+
       this.object.city = this.selectCity
       this.object.area = this.selectRegion
 
       let formData = new FormData();
+
       formData.append('user_id', this.user.id); // пока статика, жду пропс user :D
       formData.append('title', this.object.title);
       formData.append('description', this.object.description);

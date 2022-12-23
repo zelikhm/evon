@@ -1,6 +1,6 @@
 <template>
-  <div class="fixed flex justify-end z-[100] top-0 ring-0 w-full h-full">
-    <div class="flex flex-col relative z-50 w-[50%] translate-x- h-full bg-white px-28 xxl:px-24 xl:px-20 py-14 xxl:py-10 xl:py-8">
+  <div v-if="openSelection" class="fixed flex justify-end z-[100] top-0 ring-0 w-full h-full">
+    <div :class="{'translate-x-0': openSideBar}" class="transition-all ease-linear duration-500 flex flex-col relative z-50 w-[50%] translate-x-full h-full bg-white px-28 xxl:px-24 xl:px-20 py-14 xxl:py-10 xl:py-8">
       <div class="relative mb-10 xxl:mb-8 xl:mb-6">
         <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold">Вход в приложение Avon</h2>
         <button @click="closeCreateSelection" class="w-4 h-4 absolute top-[20%] right-0 z-50">
@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 chat__container--flex">
-        <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none ">Данные</h3>
+        <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none">Данные</h3>
         <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
           <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name">Название</label>
           <input class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="name" placeholder="Введите название">
@@ -28,20 +28,27 @@
         <button class="bg-litepink text-[#E84680] text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Отправить</button>
       </div>
     </div>
-    <div class="absolute bg-black opacity-50 h-full w-full z-40"></div>
+    <div @click="closeCreateSelection"  class="absolute bg-black opacity-50 h-full w-full z-40"></div>
   </div>
 </template>
 
 <script>
 
 export default {
+  props: {
+    openSelection: Boolean,
+    openSideBar: Boolean,
+  },
   data() {
     return {
 
     }
   },
+  emits: ['close-create-selection'],
   methods: {
-
+    closeCreateSelection() {
+      this.$emit('close-create-selection')
+    }
   }
 }
 </script>

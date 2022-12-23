@@ -100,7 +100,8 @@ import { Link } from '@inertiajs/inertia-vue3'
   </header>
 
   <!-- Меню Застройщик-->
-  <header v-if="1 !== 1"  class="relative z-50 bg-[#6435A5] leading-[100%]">
+<!--  v-if="user.role === 1" -->
+  <header v-if="1 !== 1" class="relative z-50 bg-[#6435A5] leading-[100%]">
     <div class="_container h-[60px] xxl:h-12 xl:h-10">
       <div class="flex items-center justify-between h-full ">
         <div class="flex gap-20 xxl:gap-16 xl:gap-12 items-center">
@@ -109,8 +110,8 @@ import { Link } from '@inertiajs/inertia-vue3'
             <span class="uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon.com</span>
           </Link>
           <div class="text-white text-[16px] xxl:text-[13px] xl:text-[11px] flex gap-20 xxl:gap-16 xl:gap-12">
-            <a href="#" class="">Объекты</a>
-            <a href="#" class="">Новости</a>
+            <Link href="/profile/houses" class="">Объекты</Link>
+            <Link href="/profile/news" class="">Новости</Link>
           </div>
         </div>
         <div class="flex items-center gap-7 xxl:gap-5 text-[16px] xxl:text-[13px] xl:text-[11px]">
@@ -141,7 +142,7 @@ import { Link } from '@inertiajs/inertia-vue3'
             <div class="flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
               <img src="../../assets/header_user_photo.png" class="h-9 xxl:h-7 xl:h-6" alt="Фотография пользователя">
               <button class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                <span class="text-white text-lg xxl:text-sm xl:text-xs leading-none">Ольга Рыбкина</span>
+<!--                <span class="text-white text-lg xxl:text-sm xl:text-xs leading-none">{{ user.first_name }} {{ user.last_name }}</span>-->
                 <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелка вниз">
               </button>
             </div>
@@ -154,6 +155,9 @@ import { Link } from '@inertiajs/inertia-vue3'
 
 <script>
 export default {
+  props: {
+    user: []
+  },
   data() {
     return {
       languages: [
@@ -180,7 +184,7 @@ export default {
       this.$emit('login-developer')
       this.loginOpen = false
     }
-  }
+  },
 }
 </script>
 
