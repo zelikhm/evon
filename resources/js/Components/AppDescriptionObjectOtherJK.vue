@@ -114,6 +114,9 @@ import { Link } from "@inertiajs/inertia-vue3";
 
 <script>
 export default {
+  props: {
+    user: []
+  },
   data() {
     return {
 

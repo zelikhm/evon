@@ -12,7 +12,7 @@ import {Link} from '@inertiajs/inertia-vue3'
       <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name_object">Название</label>
       <input v-model="object.title"
              class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
-             type="text" id="name_object" placeholder="Euro Avsallar Residence">
+             type="text" id="name_object" >
     </div>
 
     <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]">
@@ -20,7 +20,7 @@ import {Link} from '@inertiajs/inertia-vue3'
              for="description_object">Описание объекта</label>
       <textarea v-model="object.description"
                 class="custom__scroll text-[#1E1D2D] resize-none text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0"
-                type="text" id="description_object" placeholder="Описание объекта"></textarea>
+                type="text" id="description_object"></textarea>
     </div>
 
     <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]"
@@ -82,7 +82,7 @@ import {Link} from '@inertiajs/inertia-vue3'
         объекта</label>
       <input v-model="object.latitude"
              class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
-             type="number" id="coord_object" placeholder="49.5122 39.2143">
+             type="number" id="coord_object">
     </div>
 
     <!--  class="w-full h-[300px] rounded-[6px] my-10 xxl:my-8 xl:my-6"  -->
@@ -141,7 +141,7 @@ import {Link} from '@inertiajs/inertia-vue3'
           <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_floors">Количество этажей</label>
           <input v-model="object.floors"
                  class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
-                 type="number" id="for_floors" placeholder="9">
+                 type="number" id="for_floors">
         </div>
 
         <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]"
@@ -257,46 +257,45 @@ import {Link} from '@inertiajs/inertia-vue3'
         <div class="grid grid-cols-2 gap-7 xxl:gap-5 xl:gap-4">
           <div
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_sea">от моря</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_sea">от моря (м)</label>
             <input v-model="object.toSea"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
-                   type="number" id="for_sea" placeholder="500 м">
+                   type="number" id="for_sea">
           </div>
           <div
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_school">от школы</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_school">от школы (м)</label>
             <input v-model="object.toSchool"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
-                   type="number" id="for_school" placeholder="500 м">
+                   type="number" id="for_school">
           </div>
           <div
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_shoping">от торгового
-              центра</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_shoping">от торгового центра (м)</label>
             <input v-model="object.toShop"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
-                   type="number" id="for_shoping" placeholder="500 м">
+                   type="number" id="for_shoping">
           </div>
           <div
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_park">от парка</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_park">от парка (м)</label>
             <input v-model="object.toPark"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
-                   type="number" id="for_park" placeholder="500 м">
+                   type="number" id="for_park">
           </div>
           <div
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_child">от детского садика</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_child">от детского садика (м)</label>
             <input v-model="object.toChildrenSchool"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
-                   type="number" id="for_child" placeholder="500 м">
+                   type="number" id="for_child">
           </div>
           <div
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_stop">от остановки</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_stop">от остановки (м)</label>
             <input v-model="object.toBus"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
-                   type="number" id="for_stop" placeholder="500 м">
+                   type="number" id="for_stop">
           </div>
         </div>
       </div>
@@ -306,17 +305,17 @@ import {Link} from '@inertiajs/inertia-vue3'
         <div class="grid grid-cols-2 gap-7 xxl:gap-5 xl:gap-4">
           <div
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="commission">Комиссия</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="commission">Комиссия (%)</label>
             <input v-model="object.percent"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
-                   type="number" id="commission" placeholder="5 %">
+                   type="number" id="commission">
           </div>
           <div
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="comment">Комментарий</label>
             <input v-model="object.comment"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
-                   type="text" id="comment" placeholder="///">
+                   type="text" id="comment">
           </div>
         </div>
       </div>
