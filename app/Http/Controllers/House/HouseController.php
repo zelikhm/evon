@@ -43,6 +43,7 @@ class HouseController extends Controller
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
       'notification' => $this->getNotification(),
+      'user' => Auth::user(),
     ]);
   }
 
@@ -72,6 +73,7 @@ class HouseController extends Controller
   {
     return Inertia::render('AppPrivateOfficeDev', [
       'houses' => $this->getHouseForUser(Auth::id()),
+      'user' => Auth::user(),
     ]);
   }
 
