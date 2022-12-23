@@ -1,5 +1,6 @@
 <template>
   <app-header />
+  <app-modal-album />
   <main>
     <div class="_container flex flex-col">
       <div class="decription__head h-20 xxl:h-16 xl:h-12 rounded-[12px] my-7 xxl:my-5 xl:my-4">
@@ -69,8 +70,8 @@
             :loop="true"
             class="mySwiper w-full"
           >
-            <swiper-slide>
-              <img :src="'/storage/' + house.image" alt="">
+            <swiper-slide class="h-full flex justify-center">
+              <img class="h-full" :src="'/storage/' + house.image" alt="">
             </swiper-slide>
             <swiper-slide>
               <img src="../../assets/slider_img.jpg" alt="">
@@ -176,7 +177,6 @@
             </div>
             <div class="border border-solid border-[#E5DFEE] p-7 xxl:p-5 xl:p-4 rounded-[12px]">
               <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px]">Расположение</span>
-            
             </div>
           </div>
         </div>
@@ -194,8 +194,9 @@
 <script>
 import AppHeader from '../Layouts/AppHeader.vue'
 import AppFooter from "../Layouts/AppFooter.vue"
-import AppDecritionObjectSidebar from "../Components/AppDecritionObjectSidebar.vue";
+import AppDecritionObjectSidebar from "../Components/AppDecritionObjectSidebar.vue"
 import AppDescriptionObjectOtherJK from "../Components/AppDescriptionObjectOtherJK.vue"
+import AppModalAlbum from "@/Layouts/modal/AppModalAlbum.vue"
 
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
@@ -223,6 +224,7 @@ export default {
     AppFooter,
     AppDecritionObjectSidebar,
     AppDescriptionObjectOtherJK,
+    AppModalAlbum,
     Swiper,
     SwiperSlide,
   },
