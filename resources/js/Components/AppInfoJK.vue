@@ -378,7 +378,8 @@ import Multiselect from '@vueform/multiselect'
 import VueMultiselect from 'vue-multiselect'
 
 export default {
-  props: ['dops', 'infos', 'city', 'user', 'supports'],
+  props: ['dops', 'infos', 'city', 'supports'],
+  inject: ['user'],
   data() {
     return {
       openedMarkerID: null,
@@ -504,6 +505,8 @@ export default {
       this.object.area = this.selectRegion
 
       let formData = new FormData();
+
+      formData.append('user_id', this.user.id); // пока статика, жду пропс user :D
       formData.append('title', this.object.title);
       formData.append('description', this.object.description);
       formData.append('city', this.selectCity);

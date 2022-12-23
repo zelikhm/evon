@@ -88,7 +88,7 @@ trait MainInfo {
    */
 
   protected function getHouseForUser($id) {
-    $houses = HouseModel::where('user_id', $id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->get();
+    $houses = HouseModel::where('user_id', $id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->paginate(2);
 
     foreach ($houses as $house) {
       $house->view = [

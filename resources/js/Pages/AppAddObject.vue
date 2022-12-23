@@ -69,6 +69,12 @@ export default {
     dops: [],
     infos: [],
     city: [],
+    user: [],
+  },
+  provide() {
+    return {
+      user: this.user,
+    }
   },
   data() {
     return {

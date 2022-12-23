@@ -12,7 +12,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           <Link href="/profile/addedHouse" class="text-base xxl:text-sm xl:text-xs text-white bg-[#E84680] leading-none rounded-[3px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5">Добавить объект</Link>
         </div>
         <div class="grid grid-cols-2 gap-7 xxl:gap-5 xl:gap-4">
-          <div class="flex flex-col" v-for="house in houses">
+          <div class="flex flex-col" v-for="house in houses.data">
             <div class="object__block relative h-[26vw]">
               <img :src="'/storage/' + house.image" class="w-full h-full rounded-[8px]" alt="">
               <div class="seek hidden absolute top-0 left-0 immovables__overlay w-full h-full rounded-[8px]"></div>
@@ -67,18 +67,44 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
 
         </div>
+        <p>
+          {{ page + ' ' + pages}}
+        </p>
         <div class="w-full flex justify-center mt-24 xxl:mt-20 xl:mt-16 gap-3 xxl:gap-2.5 xl:gap-2 items-center text-[#8A8996] text-lg xxl:text-[15px] xl:text-[13px]">
           <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer">
             <img src="../../assets/svg/arrow_right_grey.svg" class="rotate-180 w-5 xxl:w-4 xl:w-3" alt="">
           </div>
-          <div
-            @click="tab.active = !tab.active"
-            v-for="tab in tabsPagination"
-            :class="{'select__pagination': tab.active}"
-            class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer"
-          >
-            {{ tab.number }}
+
+          <div v-if="page + 2 <= pages">
+            <Link
+              v-for="index in pages"
+              :key="index"
+              @click="tab.active = !tab.active"
+              :class="{'select__pagination': 1}"
+              class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer"
+              :href="'?page=' + index"
+            >
+              {{ index }}
+            </Link>
           </div>
+          <div v-else-if="page + 2 > pages">
+             <div v-if="page - 2 >= 1 && page - 2 <= 3">
+               <Link
+                 v-for="number in pages"
+                 @click="tab.active = !tab.active"
+                 :class="{'select__pagination': 1}"
+                 class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer"
+                 :href="'?page=' + number"
+               >
+                 {{ number }}
+               </Link>
+             </div>
+            <div v-else-if="page - 2 > 3">
+
+            </div>
+          </div>
+
+
           <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer">
             <img src="../../assets/svg/arrow_right_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
           </div>
@@ -115,6 +141,9 @@ export default {
         { number: '...', active: false },
         { number: '24', active: false },
       ],
+      pages: 0,
+      page: 0,
+      nextPage: 0,
     }
   },
   methods: {
@@ -133,7 +162,7 @@ export default {
     }
   },
   created() {
-    this.houses.forEach(item => {
+    this.houses.data.forEach(item => {
       item.openWatchTime = false
       item.views = null
       item.selectTime = null
@@ -153,6 +182,9 @@ export default {
     AppFooter,
   },
   mounted() {
+    this.page = new URL(location.href).searchParams.get('page');
+    this.page = +this.page;
+    this.pages = this.houses.last_page;
     console.log(this.houses)
     console.log(this.user)
   }
