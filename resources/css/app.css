@@ -105,6 +105,11 @@ input::placeholder {
   grid-template-columns: 68% 32%;
 }
 
+.grid__70-30 {
+  display: grid;
+  grid-template-columns: 70% 30%;
+}
+
 .gray-backg {
   background: rgba(138, 137, 150, 0.12);
   border-radius: 200px;
@@ -948,6 +953,10 @@ input::placeholder {
 /***************SWIPER*********************/
 /***************SWIPER*********************/
 
+.swiper {
+  border-radius: 10px;
+}
+
 .swiper-pagination {
   display: flex;
   align-items: center;
@@ -980,6 +989,10 @@ input::placeholder {
 
 .swiper-button-prev:after {
   transform: rotate(180deg);
+}
+
+.swiper-wrapper {
+  height: 31.25vw !important;
 }
 
 @media (max-width: 1572px) {
@@ -1070,3 +1083,5 @@ input::placeholder {
 .custom__scroll-grey::-webkit-scrollbar-thumb {
   background: #E5DFEE;
 }
+
+

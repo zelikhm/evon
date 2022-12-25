@@ -1,5 +1,6 @@
 <template>
   <app-header />
+  <app-modal-album />
   <main>
     <div class="_container flex flex-col">
       <div class="decription__head h-20 xxl:h-16 xl:h-12 rounded-[12px] my-7 xxl:my-5 xl:my-4">
@@ -69,8 +70,8 @@
             :loop="true"
             class="mySwiper w-full"
           >
-            <swiper-slide>
-              <img :src="'/storage/' + house.image" alt="">
+            <swiper-slide class="h-full flex justify-center">
+              <img class="h-full" :src="'/storage/' + house.image" alt="">
             </swiper-slide>
             <swiper-slide>
               <img src="../../assets/slider_img.jpg" alt="">
@@ -81,7 +82,7 @@
           </swiper>
           <div class="border border-solid border-[#E5DFEE] h-[100px] xxl:h-[80px] xl:h-[60px] flex items-center justify-evenly rounded-[12px] mt-7 xxl:mt-5 xl:mt-4 mb-16 xxl:mb-12 xl:mb-10">
             <div class="flex flex-col justify-center">
-<!--              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">{{ house.info.type }}</span>-->
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">{{ house.info.type }}</span>
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Тип дома</span>
             </div>
             <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
@@ -176,7 +177,32 @@
             </div>
             <div class="border border-solid border-[#E5DFEE] p-7 xxl:p-5 xl:p-4 rounded-[12px]">
               <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px]">Расположение</span>
-            
+              <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 pt-6 xxl:pt-5 xl:pt-4">
+                <div class="flex justify-between items-center" v-if="house.info.toSea !== null">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от моря</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toSea }} м</span>
+                </div>
+                <div class="flex justify-between items-center" v-if="house.info.toShop !== null">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от торгового центра</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toShop }} м</span>
+                </div>
+                <div class="flex justify-between items-center" v-if="house.info.toChildrenSchool !== null">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от детского садика</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toChildrenSchool }} м</span>
+                </div>
+                <div class="flex justify-between items-center" v-if="house.info.toPark !== null">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от парка</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toPark }} м</span>
+                </div>
+                <div class="flex justify-between items-center" v-if="house.info.toBus !== null">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от остановки</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toBus }} м</span>
+                </div>
+                <div class="flex justify-between items-center" v-if="house.info.toSchool !== null">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от школы</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toSchool }} м</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -185,7 +211,7 @@
     </div>
     <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
     <div class="_container">
-      <app-description-object-other-j-k />
+      <app-description-object-other-j-k :house="house" />
     </div>
   </main>
   <app-footer />
@@ -194,8 +220,9 @@
 <script>
 import AppHeader from '../Layouts/AppHeader.vue'
 import AppFooter from "../Layouts/AppFooter.vue"
-import AppDecritionObjectSidebar from "../Components/AppDecritionObjectSidebar.vue";
+import AppDecritionObjectSidebar from "../Components/AppDecritionObjectSidebar.vue"
 import AppDescriptionObjectOtherJK from "../Components/AppDescriptionObjectOtherJK.vue"
+import AppModalAlbum from "@/Layouts/modal/AppModalAlbum.vue"
 
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
@@ -223,6 +250,7 @@ export default {
     AppFooter,
     AppDecritionObjectSidebar,
     AppDescriptionObjectOtherJK,
+    AppModalAlbum,
     Swiper,
     SwiperSlide,
   },
