@@ -59,6 +59,7 @@ class HouseController extends Controller
       'infos' => $this->getInfo(),
       'city' => $this->getCity(),
       'notification' => $this->getNotification(),
+      'count' => HouseModel::count(),
       'user' => Auth::user(),
     ]);
 
