@@ -39,7 +39,7 @@
 
 <!--  Корпуса и квартиры  -->
         <div v-if="page === 1">
-          <app-apartments  @open-add-frame="modalAddFrame = !modalAddFrame"/>
+          <app-apartments @open-add-frame="modalAddFrame = !modalAddFrame"/>
         </div>
 
 <!--  Фото  -->

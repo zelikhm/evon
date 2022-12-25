@@ -23,7 +23,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                 </div>
                 <div v-if="openSelectJK" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
               <span
-                v-for="(JK, idx) in houses" :key="idx"
+                v-for="(JK, idx) in houses.data" :key="idx"
                 @click="changeSelectJK(JK)"
                 class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
               >
@@ -124,12 +124,13 @@ export default {
     let link = window.location.href.split('#')
     let link2 = window.location.href.split('/')
     if (link[1] !== undefined) {
-      this.dataNews.house_id = this.houses.find(item => item.id === +link[1]).id
-      this.selectJK = this.houses.find(item => item.id === +link[1]).title
+      console.log(this.houses.data)
+      this.dataNews.house_id = this.houses.data.find(item => item.id === +link[1])
+      this.selectJK = this.houses.data.find(item => item.id === +link[1])
     }
     if (Number.isInteger(+link2.at(-1))) {
-      this.dataNews.house_id = this.houses.find(item => item.id === +link2.at(-1)).id
-      this.selectJK = this.houses.find(item => item.id === +link2.at(-1)).title
+      this.dataNews.house_id = this.houses.data.find(item => item.id === +link2.at(-1)).id
+      this.selectJK = this.houses.data.find(item => item.id === +link2.at(-1)).title
     }
     console.log(this.houses)
 

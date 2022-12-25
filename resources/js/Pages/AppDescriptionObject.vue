@@ -9,21 +9,21 @@
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
               <span class="font-semibold text-xl xxl:text-lg xl:text-sm">{{ house.title }}</span>
               <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1 text-[14px] xxl:text-[12px] xl:text-[10px]">
-<!--                <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">{{ house.info.status }}</span>-->
+                <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="house.info.status !== null">{{ house.info.status }}</span>
                 <span class="flex items-center justify-center text-white font-semibold bg-[#FA8D50] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="!house.fool_price">акция</span>
               </div>
             </div>
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Туапсе, А147</span>
+            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">{{ house.city }}, {{ house.area }}</span>
           </div>
 
           <div class="flex h-20 xxl:h-16 xl:h-12">
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 p-4 xxl:p-3 xl:p-2">
               <div class="flex items-center gap-1.5 xxl:gap-1 xl:gap-0.5">
-                <img src="../../assets/svg/reload_icon.svg" class="h-4 xx:h-3.5 xl:h-3" alt="Перезагрузка">
+                <img src="../../assets/svg/reload_icon.svg" class="h-4 xx:h-3.5 xl:h-3" alt="reload">
                 <span class="text-sm xxl:text-xs xl:text-[10px]">Сегодня</span>
               </div>
               <div class="flex items-center justify-center cursor-pointer bg-[#F6F3FA] gap-2 xxl:gap-1.5 xl:gap-1 h-10 xxl:h-8 xl:h-6 px-4 xxl:px-3 xl:px-2.5 rounded-[3px]">
-                <img src="../../assets/svg/map_pointer.svg" class="h-6 xxl:h-5 xl:h-4" alt="Метка">
+                <img src="../../assets/svg/map_pointer.svg" class="h-6 xxl:h-5 xl:h-4" alt="mark">
                 <span class="text-[#6435A5] text-sm xxl:text-xs xl:text-[10px] leading-none">Показать на карте</span>
               </div>
             </div>
@@ -32,21 +32,10 @@
 
             <div class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5 p-4 xxl:p-3 xl:p-2">
               <button class="flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
-                <img src="../../assets/svg/plus_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="Плюсик">
+                <img src="../../assets/svg/plus_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="plus">
               </button>
               <button class="flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
-                <img src="../../assets/svg/heart_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="Сердце">
-              </button>
-              <button class="flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
-                <img src="../../assets/svg/upload_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="Загрузка">
-              </button>
-            </div>
-
-            <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
-
-            <div class="flex items-center p-4 xxl:p-3 xl:p-2" @click="onPrint">
-              <button class="flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
-                <img src="../../assets/svg/cserocs_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="Ксерокс">
+                <img src="../../assets/svg/heart_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="heart">
               </button>
             </div>
 
@@ -118,18 +107,9 @@
           <div class="text-[18px] xxl:text-[15px] xl:text-[13px] pb-14 xxl:pb-10 xl:pb-8">
             <span class="font-medium">Инфраструктура</span>
             <div class="flex flex-wrap gap-3 xxl:gap-2.5 xl:gap-2m pt-4 xxl:pt-3 xl:pt-2.5">
-              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Спа</span>
-              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Сауна\хамам</span>
-              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Трансфер до пляжа</span>
-              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Консьерж</span>
-              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Паркинг</span>
-              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Открытый бассейн</span>
-              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Кинотеатр</span>
-              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Спортзал</span>
-              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Охрана</span>
-              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Конференц-зал</span>
-              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Детская площадка</span>
-              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Лобби бар</span>
+              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5"
+                    v-for="item in arrayInfos"
+              >{{ item.name }}</span>
             </div>
           </div>
           <div class="grid grid-cols-2 gap-7 xxl:gap-5 xl:gap-4 pb-14 xxl:pb-10 xl:pb-8">
@@ -231,11 +211,13 @@ import { Navigation, Pagination} from "swiper";
 export default {
   props: {
     house: [],
-    fullDescription: false
+    dop: [],
+    infos: []
   },
   data() {
     return {
-
+      fullDescription: false,
+      arrayInfos: []
     }
   },
   methods: {
@@ -256,8 +238,14 @@ export default {
       modules: [Navigation, Pagination],
     };
   },
-  created() {
-    console.log(this.house)
+  mounted() {
+    this.arrayInfos = []
+
+    for (let key of this.house.info.info) {
+      if (!+isNaN(key)) {
+        this.arrayInfos.push(this.infos.find(item => item.id === +key))
+      }
+    }
   }
 }
 </script>
