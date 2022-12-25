@@ -72,7 +72,7 @@ class HouseController extends Controller
   public function showHouse()
   {
     return Inertia::render('AppPrivateOfficeDev', [
-      'houses' => $this->getHouseForUser(Auth::id()),
+      'houses' => $this->getHouseForUserPagination(Auth::id()),
       'user' => Auth::user(),
     ]);
   }
@@ -116,7 +116,6 @@ class HouseController extends Controller
   {
     if ($request->token === env('TOKEN')) {
       HouseModel::where('id', $request->id)
-        ->where('user_id', Auth::id())
         ->delete();
 
       return response()->json(true, 205);
@@ -375,7 +374,7 @@ class HouseController extends Controller
   public function setVisible(Request $request)
   {
     if ($request->token === env('TOKEN')) {
-      HouseModel::where('house_id', $request->house_id)
+      HouseModel::where('id', $request->house_id)
         ->update([
           'visible' => $request->visible,
         ]);
