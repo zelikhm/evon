@@ -23,7 +23,7 @@
                   </div>
                 </div>
               </div>
-              <div class="bg-[#F6F3FA] flex flex-col">
+              <div class="bg-[#F6F3FA] flex flex-col rounded-[10px]">
                <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5 p-5 xxl:p-4 xl:p-3">
                  <span class="text-[15px] xxl:text-[13px] xl:text-[11px] leading-none">Управление подпиской</span>
                  <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">
@@ -74,23 +74,39 @@
             <div class="flex flex-col">
               <h3 class="text-[18px] xxl:text-[15px] xl:text-[13px] text-[#1E1D2D]">Данные Агенства недвижимости</h3>
               <div class="p-7 xxl:p-5 xl:p-4 mt-7 xxl:mt-5 xl:mt-4">
-                <div class="flex">
-                  <div class="flex flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
+                <div class="flex gap-7 xxl:gap-5 xl:gap-4">
+                  <div class="flex w-full flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
                     <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="company">Компания</label>
                     <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="company" placeholder="First">
                   </div>
-                  <div class="relative h-[78px] w-[78px] rounded-full">
-                    <img v-if="avatar" class="absolute w-full h-full rounded-full" :src="myPhoto" alt="">
+                  <div class="relative shrink-0 h-[78px] xxl:h-[61px] xl:h-[55px] w-[78px] xxl:w-[61px] xl:w-[55px] rounded-full">
+                    <img v-if="agency" class="absolute w-full h-full rounded-full" :src="agencyPhoto" alt="">
+                    <button v-if="agency" @click="deletePhoto" class="absolute rounded-full bg-[#E84680] z-10 top-0 left-0 h-5 xxl:h-4.5 xl:h-4 w-5 xxl:w-4.5 xl:w-4">
+                      <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-white h-[1px] w-[60%]"></span>
+                      <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-white h-[1px] w-[60%]"></span>
+                    </button>
                     <div class="avatar__contact w-full h-full rounded-full">
                       <div class="absolute rounded-full w-full h-full top-0 left-0">
-                        <label for="avatar" :class="{'-z-10': avatar}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-full">
-                          <img src="../../assets/svg/upload_photo.svg" class="w-12 xxl:w-10 xl:w-8" alt="">
+                        <label for="agency" :class="{'-z-10': agency}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-full">
+                          <img src="../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
                         </label>
-                        <input class="w-full h-full rounded-full opacity-0 absolute top-0 left-0 pointer-events-none" id="avatar" type="file" ref="file" @change="avatarContact">
+                        <input class="w-full h-full rounded-full opacity-0 absolute top-0 left-0 pointer-events-none" id="agency" type="file" ref="file" @change="changeAgency">
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
+              <div class="relative my-7 xxl:my-5 xl:my-4">
+                <label class="bg-[#F6F3FA] w-full h-[6.56vw] rounded-[10px] flex justify-center items-center" for="cover">
+                  <div class="flex flex-col items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
+                    <div class="flex items-center gap-4 xxl:gap-3 xl:gap-2.5">
+                      <img src="../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
+                      <span class="text-[#6435A5] text-lg xxl:text-[15px] xl:text-[13px] font-semibold leading-none">1920 x 260 px</span>
+                    </div>
+                    <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none">Загрузить обложку</span>
+                  </div>
+                </label>
+                <input class="pointer-events-none overflow-hidden absolute top-0 left-0 opacity-0" id="cover" type="file">
               </div>
             </div>
           </div>
@@ -110,6 +126,8 @@ export default {
     return {
       myPhoto: '',
       avatar: false,
+      agencyPhoto: '',
+      agency: false,
       valueTextarea: null,
       lengthTextarea: 0,
     }
@@ -120,6 +138,17 @@ export default {
       if (e.target.files.length == 1) {
         this.avatar = true
       }
+    },
+    changeAgency(e) {
+      this.agencyPhoto = URL.createObjectURL(e.target.files[0])
+      console.log(e.target.files[0])
+      if (e.target.files.length == 1) {
+        this.agency = true
+      }
+    },
+    deletePhoto() {
+      this.agencyPhoto = ''
+      this.agency = false
     },
   },
   components: {

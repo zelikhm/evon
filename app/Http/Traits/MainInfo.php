@@ -88,6 +88,28 @@ trait MainInfo {
    */
 
   protected function getHouseForUser($id) {
+    $houses = HouseModel::where('user_id', $id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->get();
+
+    foreach ($houses as $house) {
+      $house->view = [
+        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addHour(-24))->count(),
+        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-5))->count(),
+        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-7))->count(),
+        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addWeek(-1))->count(),
+        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addYear(-1))->count(),
+      ];
+    }
+
+    return $houses;
+  }
+
+  /**
+   * get house for user
+   * @param $id
+   * @return mixed
+   */
+
+  protected function getHouseForUserPagination($id) {
     $houses = HouseModel::where('user_id', $id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->paginate(2);
 
     foreach ($houses as $house) {

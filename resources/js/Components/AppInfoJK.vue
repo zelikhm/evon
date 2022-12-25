@@ -239,7 +239,7 @@ import {Link} from '@inertiajs/inertia-vue3'
              class="contact__selling my-5 xxl:my-4 xl:my-3 text-lg xxl:text-[15px] xl:text-[13px] flex justify-between items-center rounded-[5px] p-1.5 xl:p-1">
           <div class="flex items-center gap-14 xxl:gap-10 xl:gap-8">
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-              <img :src="item.image_front" class="h-12 xxl:h-10 xl:h-8" alt="">
+              <img :src="item.image_front" class="h-12 xxl:h-10 xl:h-8 w-12 xxl:w-10 xl:w-8 rounded-full" alt="">
               <span class="text-[#1E1D2D]">{{ item.name }}</span>
             </div>
             <span class="text-[#8A8996]">{{ item.tel }}</span>
@@ -357,7 +357,7 @@ import {Link} from '@inertiajs/inertia-vue3'
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-2 my-10 xxl:my-8 xl:my-6 w-full">
+      <div class="grid grid-cols-2 gap-10 xxl:gap-8 xl:gap-6 my-10 xxl:my-8 xl:my-6 w-full">
         <Link href="" @click="addObject"
               class="w-full text-center mr-4 font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">
           Добавить
