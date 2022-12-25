@@ -158,7 +158,7 @@ export default {
     },
     changeVisible(item) {
       item.visible = !item.visible
-      axios.post('/api/house/setVisible', { visible: item.visible, token: this.globalToken })
+      axios.post('/api/house/setVisible', { house_id: item.id, visible: item.visible, token: this.globalToken }).then(res => { console.log(res.data) })
     }
   },
   created() {
