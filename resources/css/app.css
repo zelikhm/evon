@@ -44,7 +44,6 @@ main {
 
 ._container {
   position: relative;
-  max-width: 1680px;
   margin: 0 auto;
   box-sizing: content-box;
   padding: 0 6.25vw;
@@ -52,7 +51,6 @@ main {
 
 ._container--inter {
   position: relative;
-  max-width: 1480px;
   margin: 0 auto;
   box-sizing: content-box;
   padding: 0 5.21vw;
@@ -113,6 +111,15 @@ input::placeholder {
 .gray-backg {
   background: rgba(138, 137, 150, 0.12);
   border-radius: 200px;
+}
+
+.border__right-bottom {
+  border-right: 1px solid #E5DFEE;
+  border-bottom: 1px solid #E5DFEE;
+}
+
+.border__right {
+  border-right: 1px solid #E5DFEE;
 }
 
 /*****************HEADER*******************/
@@ -1031,6 +1038,27 @@ input::placeholder {
   }
 }
 
+.inner__slider {
+
+}
+
+.inner__slider .swiper {
+  margin: 0 6vw;
+}
+
+.inner__slider .swiper-wrapper {
+
+}
+
+.inner__slider .swiper-button-next {
+  right: 10px !important;
+}
+.inner__slider .swiper-button-prev {
+  left: 10px !important;
+}
+
+
+
 .animation__news-dev {
   transform: translateY(-120vh);
   transition: all 0.5s;
@@ -1084,4 +1112,70 @@ input::placeholder {
   background: #E5DFEE;
 }
 
+.custom__scroll--chess::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
 
+.custom__scroll--chess::-webkit-scrollbar-thumb {
+  background: #E5DFEE;
+  border-radius: 100px;
+}
+
+.plus__hover:hover .seek {
+  opacity: 1;
+  overflow: visible;
+  pointer-events: auto;
+  transition: all 0.3s;
+}
+
+.heart__hover:hover .seek {
+  opacity: 1;
+  overflow: visible;
+  pointer-events: auto;
+  transition: all 0.3s;
+}
+
+.chess__buttons {
+  color: rgba(100, 53, 165, 0.5);
+  background: rgba(100, 53, 165, 0.12);
+}
+
+.chess__button--active {
+  color: white;
+  background: #6435A5;
+}
+
+.chess__button--active path {
+  fill: white;
+  fill-opacity: 1;
+}
+
+.grid__chess {
+  grid-template-columns: 66vw 34vw;
+}
+
+.grid__chess--inner {
+  grid-auto-rows: 48px;
+}
+
+@media (max-width: 1572px) {
+  .grid__chess--inner {
+    grid-auto-rows: 40px;
+  }
+}
+
+@media (max-width: 1366px) {
+  .grid__chess--inner {
+    grid-auto-rows: 32px;
+  }
+}
+
+.grid__chess--list {
+  grid-template-columns: 6vw 8.5vw 7vw 9vw 1fr auto;
+}
+
+.chess__bg--ruller {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 100px;
+}

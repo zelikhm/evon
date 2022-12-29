@@ -15,7 +15,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           <div class="flex flex-col" v-for="house in houses.data">
             <div class="object__block relative h-[26vw]">
               <img :src="'/storage/' + house.image" class="w-full h-full rounded-[8px]" alt="">
-              <div class="seek hidden absolute top-0 left-0 immovables__overlay w-full h-full rounded-[8px]"></div>
+              <div class="seek opacity-0 absolute top-0 left-0 immovables__overlay w-full h-full rounded-[8px]"></div>
               <div class="hide absolute flex gap-2 top-0 left-0 p-5 xxl:p-4 xl:p-3">
                 <span class="bg-[#E84680] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5 text-white text-sm xxl:text-xs xl:text-[10px] leading-none" v-if="house.active === 0">на модерации</span>
                 <span class="bg-[#E84680] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5 text-white text-sm xxl:text-xs xl:text-[10px] leading-none" v-if="house.active === 1">не прошло модерацию</span>
