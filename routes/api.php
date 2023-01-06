@@ -49,6 +49,7 @@ Route::prefix('notification')->group(function () {
 
 Route::prefix('favorite')->group(function () {
   Route::post('/add', ['App\Http\Controllers\User\FavoriteController', 'add']);
+  Route::get('getAll', ['App\Http\Controllers\User\FavoriteController', 'getAll']);
 });
 
 Route::prefix('user')->group(function () {

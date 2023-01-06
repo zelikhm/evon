@@ -217,6 +217,11 @@ path delete \ [post] / поля:
 
 ### Favorite
 
+Получить избранные \
+path getAll \ [get] / нет полей:
+
+-
+
 Добавление в избранное \
 path add \ [post] / поля:
 

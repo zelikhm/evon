@@ -21,4 +21,13 @@ class FavoriteController extends Controller
       }
 
     }
+
+  /**
+   * get all favorites
+   * @return mixed
+   */
+
+    public function getAll() {
+      return FavoritesModel::where('user_id')->get();
+    }
 }
