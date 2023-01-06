@@ -1,8 +1,6 @@
 <template>
-  <app-modal-notification
-    v-if="openNotification"
-    @close-notification="openNotification = false"
-  />
+  <app-modal-notification v-if="openNotification" @close-notification="openNotification = false" />
+  <app-add-selections @close-add-selection="openAddSelection = false"/>
   <app-header />
   <main>
     <div class="_container">
@@ -26,6 +24,7 @@ import AppFilter from "../Components/AppFilter.vue"
 import AppListNewBuilding from "../Components/AppListNewBuilding.vue"
 import AppNewsDeveloper from "../Components/AppNewsDeveloper.vue"
 import AppModalNotification from "../Layouts/modal/AppModalNotification.vue"
+import AppAddSelections from "@/Layouts/modal/AppAddSelections.vue"
 
 export default {
   props: {
@@ -34,6 +33,7 @@ export default {
   data() {
     return {
       openNotification: false,
+      openAddSelection: false,
     }
   },
   components: {
@@ -43,6 +43,7 @@ export default {
     AppListNewBuilding,
     AppNewsDeveloper,
     AppModalNotification,
+    AppAddSelections,
   },
   created() {
     console.log(this.houses)
