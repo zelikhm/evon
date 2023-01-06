@@ -19,11 +19,27 @@ class CompilationController extends Controller
   public function index()
   {
     return Inertia::render('', [
-      'compilation' => $this->getCompilation(Auth::id()),
+      'compilation' => $this->getCompilations(Auth::id()),
       'user' => Auth::user(),
       'notification' => $this->getNotification(),
     ]);
 
+  }
+
+  /**
+   * get compilation
+   * @param Request $request
+   * @return mixed
+   */
+
+  public function getAll(Request $request) {
+
+    return $this->getCompilations($request->user_id);
+
+  }
+
+  public function get(Request $request) {
+    return $this->getCompilation($request->id);
   }
 
   public function show($id)

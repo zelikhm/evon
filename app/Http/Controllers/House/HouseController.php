@@ -81,6 +81,14 @@ class HouseController extends Controller
     ]);
   }
 
+  public function getHouseApi(Request $request) {
+    return $this->house($request->slug);
+  }
+
+  public function getHousesApi(Request $request) {
+    return $this->getAllHouse();
+  }
+
   /**
    * render page for house
    * @param $slug
