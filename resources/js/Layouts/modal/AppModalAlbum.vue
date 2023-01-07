@@ -1,7 +1,7 @@
 <template>
   <div class="fixed z-[100] w-full h-full flex items-center justify-center">
-    <div class="relative z-50 w-full h-full">
-      <div class="grid__70-30 gap-7 xxl:gap-5 xl:gap-4 pl-44 pr-28 my-20">
+    <div class="relative z-50 left-[3vw] w-[78%]">
+      <div class="grid__70-30 gap-7 xxl:gap-5 xl:gap-4">
 
         <div>
           <swiper
@@ -41,49 +41,51 @@
               <img class="w-full" src="https://swiperjs.com/demos/images/nature-10.jpg" />
             </swiper-slide>
           </swiper>
-          <swiper
-            :loop="true"
-            :modules="modules"
-            @swiper="setThumbsSwiper"
-            :navigation="true"
-            :spaceBetween="10"
-            :slidesPerView="4"
-            class="mySwiper h-[10vh]"
-          >
-            <swiper-slide class="w-full h-[10vh]">
-              <img class="w-full" src="https://swiperjs.com/demos/images/nature-1.jpg" />
-            </swiper-slide>
-            <swiper-slide class="w-full h-[10vh]">
-              <img class="w-full" src="https://swiperjs.com/demos/images/nature-2.jpg" />
-            </swiper-slide>
-            <swiper-slide class="w-full h-[10vh]">
-              <img class="w-full" src="https://swiperjs.com/demos/images/nature-3.jpg" />
-            </swiper-slide>
-            <swiper-slide class="w-full h-[10vh]">
-              <img class="w-full" src="https://swiperjs.com/demos/images/nature-4.jpg" />
-            </swiper-slide>
-            <swiper-slide class="w-full h-[10vh]">
-              <img class="w-full" src="https://swiperjs.com/demos/images/nature-5.jpg" />
-            </swiper-slide>
-            <swiper-slide class="w-full h-[10vh]">
-              <img class="w-full" src="https://swiperjs.com/demos/images/nature-6.jpg" />
-            </swiper-slide>
-            <swiper-slide class="w-full h-[10vh]">
-              <img class="w-full" src="https://swiperjs.com/demos/images/nature-7.jpg" />
-            </swiper-slide>
-            <swiper-slide class="w-full h-[10vh]">
-              <img class="w-full" src="https://swiperjs.com/demos/images/nature-8.jpg" />
-            </swiper-slide>
-            <swiper-slide class="w-full h-[10vh]">
-              <img class="w-full" src="https://swiperjs.com/demos/images/nature-9.jpg" />
-            </swiper-slide>
-            <swiper-slide class="w-full h-[10vh]">
-              <img class="w-full" src="https://swiperjs.com/demos/images/nature-10.jpg" />
-            </swiper-slide>
-          </swiper>
+          <div class="inner__slider">
+            <swiper
+              :loop="true"
+              :modules="modules"
+              @swiper="setThumbsSwiper"
+              :navigation="true"
+              :spaceBetween="10"
+              :slidesPerView="4"
+              class="mySwiper h-[10vh]"
+            >
+              <swiper-slide class="w-full h-[10vh]">
+                <img class="w-full" src="https://swiperjs.com/demos/images/nature-1.jpg" />
+              </swiper-slide>
+              <swiper-slide class="w-full h-[10vh]">
+                <img class="w-full" src="https://swiperjs.com/demos/images/nature-2.jpg" />
+              </swiper-slide>
+              <swiper-slide class="w-full h-[10vh]">
+                <img class="w-full" src="https://swiperjs.com/demos/images/nature-3.jpg" />
+              </swiper-slide>
+              <swiper-slide class="w-full h-[10vh]">
+                <img class="w-full" src="https://swiperjs.com/demos/images/nature-4.jpg" />
+              </swiper-slide>
+              <swiper-slide class="w-full h-[10vh]">
+                <img class="w-full" src="https://swiperjs.com/demos/images/nature-5.jpg" />
+              </swiper-slide>
+              <swiper-slide class="w-full h-[10vh]">
+                <img class="w-full" src="https://swiperjs.com/demos/images/nature-6.jpg" />
+              </swiper-slide>
+              <swiper-slide class="w-full h-[10vh]">
+                <img class="w-full" src="https://swiperjs.com/demos/images/nature-7.jpg" />
+              </swiper-slide>
+              <swiper-slide class="w-full h-[10vh]">
+                <img class="w-full" src="https://swiperjs.com/demos/images/nature-8.jpg" />
+              </swiper-slide>
+              <swiper-slide class="w-full h-[10vh]">
+                <img class="w-full" src="https://swiperjs.com/demos/images/nature-9.jpg" />
+              </swiper-slide>
+              <swiper-slide class="w-full h-[10vh]">
+                <img class="w-full" src="https://swiperjs.com/demos/images/nature-10.jpg" />
+              </swiper-slide>
+            </swiper>
+          </div>
         </div>
 
-        <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2">
+        <div class="flex flex-col h-fit gap-4 xxl:gap-3 xl:gap-2">
           <button class="bg-white flex justify-between items-center p-7 xxl:p-5 xl:p-4 rounded-[10px] news__line">
             <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none">3D Рендеры</span>
             <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px]">17 фото</span>
@@ -103,7 +105,7 @@
         </div>
       </div>
     </div>
-    <div @click="this.$emit('close-add-frame')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
+    <div @click="this.$emit('close-album')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
   </div>
 </template>
 
@@ -126,6 +128,7 @@ export default {
     Swiper,
     SwiperSlide,
   },
+  emits: ['close-album'],
   setup() {
     const thumbsSwiper = ref(null);
     const setThumbsSwiper = (swiper) => {

@@ -220,8 +220,18 @@ trait MainInfo {
    * @return mixed
    */
 
-  protected function getCompilation($id) {
+  protected function getCompilations($id) {
     return CompilationModel::where('user_id', $id)->with(['values'])->get();
+  }
+
+  /**
+   * get one compilation
+   * @param $id
+   * @return mixed
+   */
+
+  protected function getCompilation($id) {
+    return CompilationModel::where('id', $id)->with(['values'])->get();
   }
 
 

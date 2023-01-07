@@ -32,6 +32,46 @@ class NewsController extends Controller
   }
 
   /**
+   * get all news
+   * @return mixed
+   */
+
+  public function getAllNews() {
+    return HouseNewsModel::orderBy('ASC', 'created_at')->get();
+  }
+
+  /**
+   * get all news for user
+   * @param Request $request
+   * @return \Illuminate\Support\Collection
+   */
+
+  public function getAllNewsForUser(Request $request) {
+    $collections = collect();
+
+    $houses = $this->getHouseForUser($request->user_id);
+
+    foreach ($houses as $house) {
+      $news = HouseNewsModel::where('house_id', $house->id)->get();
+      $collections->push($news);
+    }
+
+    return $collections;
+  }
+
+  /**
+   * get new
+   * @param Request $request
+   * @return mixed
+   */
+
+  public function getNew(Request $request) {
+
+    return HouseNewsModel::where('id', $request->new_id)->first();
+
+  }
+
+  /**
    * edit news
    * @param $id
    * @return \Inertia\Response

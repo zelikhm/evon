@@ -1,6 +1,6 @@
 <template>
   <app-header />
-  <app-modal-album />
+  <app-modal-album v-if="album" @close-album="album = false"/>
   <main>
     <div class="_container flex flex-col">
       <div class="decription__head h-20 xxl:h-16 xl:h-12 rounded-[12px] my-7 xxl:my-5 xl:my-4">
@@ -32,11 +32,13 @@
             <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
 
             <div class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5 p-4 xxl:p-3 xl:p-2">
-              <button class="flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
+              <button class="relative plus__hover flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
                 <img src="../../assets/svg/plus_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="plus">
+                <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">Добавить в подборки</div>
               </button>
-              <button class="flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
+              <button class="relative heart__hover flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
                 <img src="../../assets/svg/heart_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="heart">
+                <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">Добавить в избранное</div>
               </button>
             </div>
 
@@ -60,13 +62,13 @@
             class="mySwiper w-full"
           >
             <swiper-slide class="h-full flex justify-center">
-              <img class="h-full" :src="'/storage/' + house.image" alt="">
+              <img @click="album = true" class="h-full" :src="'/storage/' + house.image" alt="">
             </swiper-slide>
-            <swiper-slide>
-              <img src="../../assets/slider_img.jpg" alt="">
+            <swiper-slide class="h-full flex justify-center">
+              <img @click="album = true" class="h-full" src="../../assets/slider_img.jpg" alt="">
             </swiper-slide>
-            <swiper-slide>
-              <img src="../../assets/slider_img.jpg" alt="">
+            <swiper-slide class="h-full flex justify-center">
+              <img @click="album = true" class="h-full" src="../../assets/slider_img.jpg" alt="">
             </swiper-slide>
           </swiper>
           <div class="border border-solid border-[#E5DFEE] h-[100px] xxl:h-[80px] xl:h-[60px] flex items-center justify-evenly rounded-[12px] mt-7 xxl:mt-5 xl:mt-4 mb-16 xxl:mb-12 xl:mb-10">
@@ -219,7 +221,8 @@ export default {
   data() {
     return {
       fullDescription: false,
-      arrayInfos: []
+      arrayInfos: [],
+      album: false,
     }
   },
   methods: {

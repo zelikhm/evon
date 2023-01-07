@@ -29,12 +29,17 @@ Route::prefix('house')->group(function () {
   Route::post('addedImages', ['App\Http\Controllers\House\HouseController', 'addedImages']);
   Route::post('setVisible', ['App\Http\Controllers\House\HouseController', 'setVisible']);
   Route::post('delete', ['App\Http\Controllers\House\HouseController', 'delete']);
+  //
+  Route::post('getHouseApi', ['App\Http\Controllers\House\HouseController', 'getHouseApi']);
+  Route::get('getHousesApi', ['App\Http\Controllers\House\HouseController', 'getHousesApi']);
 });
 
 Route::prefix('compilation')->group(function () {
   Route::post('/addHouse', ['App\Http\Controllers\User\CompilationController', 'addHouse']);
   Route::post('/create', ['App\Http\Controllers\User\CompilationController', 'create']);
   Route::post('/delete', ['App\Http\Controllers\User\CompilationController', 'delete']);
+  Route::post('/get', ['App\Http\Controllers\User\CompilationController', 'get']);
+  Route::post('/getAll', ['App\Http\Controllers\User\CompilationController', 'getAll']);
 });
 
 Route::prefix('notification')->group(function () {
@@ -44,6 +49,7 @@ Route::prefix('notification')->group(function () {
 
 Route::prefix('favorite')->group(function () {
   Route::post('/add', ['App\Http\Controllers\User\FavoriteController', 'add']);
+  Route::get('getAll', ['App\Http\Controllers\User\FavoriteController', 'getAll']);
 });
 
 Route::prefix('user')->group(function () {
@@ -62,4 +68,8 @@ Route::prefix('news')->group(function () {
   Route::post('edit', ['App\Http\Controllers\House\NewsController', 'edit']);
   Route::post('delete', ['App\Http\Controllers\House\NewsController', 'delete']);
   Route::post('visible', ['App\Http\Controllers\House\NewsController', 'visible']);
+  //
+  Route::get('getAllNews',['App\Http\Controllers\House\NewsController', 'getAllNews']);
+  Route::post('getAllNewsForUser',['App\Http\Controllers\House\NewsController', 'getAllNewsForUser']);
+  Route::post('getNew',['App\Http\Controllers\House\NewsController', 'getNew']);
 });

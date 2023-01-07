@@ -8,8 +8,10 @@ use App\Models\Builder\Flat\FlatImagesModel;
 use App\Models\Builder\Flat\FlatModel;
 use App\Models\Builder\Flat\FrameModel;
 use App\Models\Builder\HouseCharacteristicsModel;
+use App\Models\Builder\HouseFilesModel;
 use App\Models\Builder\HouseImagesModel;
 use App\Models\Builder\HouseModel;
+use App\Models\Builder\HouseNewsModel;
 use App\Models\Builder\HouseSupportModel;
 use App\Models\Builder\HouseViewsModel;
 use App\Models\Builder\Info\StructureModel;
@@ -19,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use function League\Flysystem\type;
 use function Symfony\Component\Routing\Loader\Configurator\collection;
 
 class HouseController extends Controller
@@ -78,6 +81,14 @@ class HouseController extends Controller
     ]);
   }
 
+  public function getHouseApi(Request $request) {
+    return $this->house($request->slug);
+  }
+
+  public function getHousesApi(Request $request) {
+    return $this->getAllHouse();
+  }
+
   /**
    * render page for house
    * @param $slug
@@ -116,8 +127,14 @@ class HouseController extends Controller
   public function delete(Request $request)
   {
     if ($request->token === env('TOKEN')) {
-      HouseModel::where('id', $request->id)
-        ->delete();
+      HouseModel::where('id', $request->house_id)->delete();
+      HouseViewsModel::where('house_id', $request->house_id)->delete();
+      HouseImagesModel::where('house_id', $request->house_id)->delete();
+      HouseNewsModel::where('house_id', $request->house_id)->delete();
+      HouseCharacteristicsModel::where('house_id', $request->house_id)->delete();
+      HouseSupportModel::where('house_id', $request->house_id)->delete();
+      HouseFilesModel::where('house_id', $request->house_id)->delete();
+      FrameModel::where('house_id', $request->house_id)->delete();
 
       return response()->json(true, 205);
     } else {
@@ -375,6 +392,7 @@ class HouseController extends Controller
   public function setVisible(Request $request)
   {
     if ($request->token === env('TOKEN')) {
+
       HouseModel::where('id', $request->house_id)
         ->update([
           'visible' => $request->visible,

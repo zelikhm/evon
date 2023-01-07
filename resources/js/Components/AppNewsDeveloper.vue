@@ -1,13 +1,12 @@
 <template>
   <div class="h-fit">
-    <div @click="openNewsDev = !openNewsDev" :class="{'border__bottom-6': !openNewsDev}" class="relative z-20 border__top-6 bg-[#F6F3FA] flex cursor-pointer items-center p-7 xxl:p-5 xl:p-4">
+    <div class="relative z-20 border__top-6 bg-[#F6F3FA] flex items-center p-7 xxl:p-5 xl:p-4">
       <span class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] whitespace-nowrap leading-none">Новости застройщика </span>
-      <img src="../../assets/svg/arrow_down_black.svg" :class="{'rotate-180': !openNewsDev}" class="transition-all duration-300 ml-auto" alt="Стрелочка вниз">
     </div>
-    <div v-if="openNewsDev" class="relative z-10 h-[1px] w-full bg-[#E5DFEE]"></div>
+    <div class="relative z-10 h-[1px] w-full bg-[#E5DFEE]"></div>
     <div class="overflow-hidden">
-      <div :class="{'animation__news-dev': !openNewsDev}" class="relative custom__scroll border__bottom-6 overflow-y-auto bg-[#F6F3FA] transition-all duration-500 h-[90vh] p-7 xxl:p-5 xl:p-4 leading-none">
-        <span class="text-sm xxl:text-xs xl:text-[10px] text-[#6435A5]">Сегодня</span>
+      <div class="relative custom__scroll border__bottom-6 overflow-y-auto bg-[#F6F3FA] transition-all duration-500 h-[90vh] p-7 xxl:p-5 xl:p-4 leading-none">
+        <span class="cursor-pointer text-sm xxl:text-xs xl:text-[10px] text-[#6435A5]">Сегодня</span>
         <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 mt-7 xxl:mt-5 xl:mt-4">
           <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
             <div class="flex gap-3 xxl:gap-2 xl:gap-1.5">
@@ -84,7 +83,7 @@
 export default {
   data() {
     return {
-      openNewsDev: true,
+
     }
   }
 }

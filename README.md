@@ -42,6 +42,16 @@
 
 ### House 
 
+Получить все ЖК \ 
+path getHousesApi \ [get] / нет полей:
+
+- 
+
+Получить жк по Слагу \ 
+path getHouseApi \ [post] / поля:
+
+- slug - слаг жк 
+
 Создание ЖК и его характеристики \
 path create \ [post] / поля: 
 
@@ -130,6 +140,21 @@ path addedImages \ [post] / поля:
 
 ### News
 
+Получить все новости \
+path getAllNews \ [get] / нет полей: 
+
+- 
+
+Получить все новости юзера \
+path getAllNewsForUser \ [post] / поля:
+
+- user_id - айди Юзера
+
+Получить носоть \
+path getNew \ [post] / поля:
+
+- new_id - айди Новости
+
 Добавление новости \
 path add \ [post] / поля:
 
@@ -159,6 +184,16 @@ path visible \ [post] / поля:
 
 ### Compilation
 
+Получить подборки юзера \
+path getAll \ [post] / поля:
+
+- user_id - Айди юзера
+
+Получить одну подборку \
+path get \ [post] / поля:
+
+- id - Айди подборки
+
 Создание подборки \
 path create \ [post] / поля:
 
@@ -181,6 +216,11 @@ path delete \ [post] / поля:
 - token
 
 ### Favorite
+
+Получить избранные \
+path getAll \ [get] / нет полей:
+
+-
 
 Добавление в избранное \
 path add \ [post] / поля:
