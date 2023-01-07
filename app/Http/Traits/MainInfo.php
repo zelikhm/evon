@@ -2,6 +2,7 @@
 
 namespace App\Http\Traits;
 
+use App\Models\Builder\Flat\FlatModel;
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\HouseNewsModel;
 use App\Models\Builder\HouseViewsModel;
@@ -197,9 +198,15 @@ trait MainInfo {
    */
 
   protected function getHouse($id) {
-    return HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'news'])
-      ->where('id', $id)
+    $house = HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'user', 'news'])
+      ->where('slug', $id)
       ->first();
+
+    foreach ($house->frames as $frame) {
+      $frame->flats = FlatModel::where('frame_id', $frame->id)->with(['images'])->get();
+    }
+
+    return $house;
   }
 
   /**
@@ -209,9 +216,15 @@ trait MainInfo {
    */
 
   protected function getHouseSlug($slug) {
-    return HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'user'])
+    $house = HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'user', 'news'])
       ->where('slug', $slug)
       ->first();
+
+    foreach ($house->frames as $frame) {
+      $frame->flats = FlatModel::where('frame_id', $frame->id)->with(['images'])->get();
+    }
+
+    return $house;
   }
 
   /**
