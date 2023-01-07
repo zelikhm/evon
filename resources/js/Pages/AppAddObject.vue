@@ -31,6 +31,7 @@
           <app-info-j-k :dops="dops"
                         :infos="infos"
                         :city="city"
+                        :count="count"
                         :supports="supports"
                         @open-add-contact="modalAddContact = !modalAddContact"
                         @addAndContinue="page = 1"
@@ -70,6 +71,7 @@ export default {
     infos: [],
     city: [],
     user: [],
+    count: Number
   },
   provide() {
     return {
@@ -96,8 +98,7 @@ export default {
     }
   },
   created() {
-    console.log(this.city)
-    let link = window.location.href
+    console.log(this.count)
   },
   components: {
     AppHeader,

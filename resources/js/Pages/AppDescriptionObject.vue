@@ -213,7 +213,7 @@ import { Navigation, Pagination} from "swiper";
 export default {
   props: {
     house: [],
-    dop: [],
+    dops: [],
     infos: []
   },
   data() {
@@ -249,6 +249,7 @@ export default {
         this.arrayInfos.push(this.infos.find(item => item.id === +key))
       }
     }
+    console.log(this.dops)
   }
 }
 </script>
