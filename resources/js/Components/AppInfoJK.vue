@@ -4,7 +4,7 @@ import {Link} from '@inertiajs/inertia-vue3'
 
 <template>
   <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px]">Добавить объект</h2>
-  <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Найдено 1512 новостроек</span>
+  <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Найдено {{ count }} новостроек</span>
   <div class="flex-col flex gap-5 xxl:gap-4 xl:gap-3 pt-5 xxl:pt-4 xl:pt-3">
 
     <div
@@ -377,7 +377,7 @@ import Multiselect from '@vueform/multiselect'
 import VueMultiselect from 'vue-multiselect'
 
 export default {
-  props: ['dops', 'infos', 'city', 'supports'],
+  props: ['dops', 'infos', 'city', 'supports', 'count'],
   inject: ['user'],
   data() {
     return {

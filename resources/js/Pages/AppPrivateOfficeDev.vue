@@ -31,9 +31,9 @@ import { Link } from '@inertiajs/inertia-vue3'
                   <img src="../../assets/svg/bucket_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
                 </button>
                 <button @click="changeVisible(house)" class="flex items-center justify-between w-[30%] border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5">
-                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">{{ house.visible === 1 ? 'Скрыть' : 'Показать' }}</span>
-                  <img v-if="house.visible !== 0" src="../../assets/svg/eye_icon_grey.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
-                  <img v-else src="../../assets/svg/hide_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
+                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">{{ house.visible ? 'Скрыть' : 'Показать' }}</span>
+                  <img v-if="!house.visible" src="../../assets/svg/hide_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
+                  <img v-else src="../../assets/svg/eye_icon_grey.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
                 </button>
                 <Link :href="'/house/' + house.slug" class="flex items-center justify-between w-[30%] border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5">
                   <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">Посмотреть на сайте</span>
@@ -153,7 +153,7 @@ export default {
       object.views = object.view[time.id]
     },
     deleteHouse(item) {
-      console.log(item.id)
+      console.log(item)
       axios.post('/api/house/delete', { house_id: item.id, token: this.globalToken }).then(res => console.log(res)).catch(err => console.error(err))
     },
     changeVisible(item) {

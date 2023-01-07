@@ -215,7 +215,7 @@ import { Navigation, Pagination} from "swiper";
 export default {
   props: {
     house: [],
-    dop: [],
+    dops: [],
     infos: []
   },
   data() {
@@ -245,13 +245,14 @@ export default {
     };
   },
   mounted() {
-    // this.arrayInfos = []
-    //
-    // for (let key of this.house.info.info) {
-    //   if (!+isNaN(key)) {
-    //     this.arrayInfos.push(this.infos.find(item => item.id === +key))
-    //   }
-    // }
+    this.arrayInfos = []
+
+    for (let key of this.house.info.info) {
+      if (!+isNaN(key)) {
+        this.arrayInfos.push(this.infos.find(item => item.id === +key))
+      }
+    }
+    console.log(this.dops)
   }
 }
 </script>

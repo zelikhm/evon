@@ -18,12 +18,12 @@ import { Link } from '@inertiajs/inertia-vue3'
               <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">ЖК</span>
               <div class="relative">
                 <div @click="openSelectJK = !openSelectJK" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
-                  <span>{{ selectJK }}</span>
+                  <span>{{ selectJK.title }}</span>
                   <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectJK }" alt="">
                 </div>
                 <div v-if="openSelectJK" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
               <span
-                v-for="(JK, idx) in houses.data" :key="idx"
+                v-for="(JK, idx) in houses" :key="idx"
                 @click="changeSelectJK(JK)"
                 class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
               >
@@ -34,7 +34,7 @@ import { Link } from '@inertiajs/inertia-vue3'
             </div>
             <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-3 xxl:gap-2.5 xl:gap-2 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
               <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name_dev">Заголовок новости</label>
-              <input v-model="dataNews.title" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="name_dev" placeholder="Введите заголовок">
+              <input v-model="dataNews.title" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="name_dev">
             </div>
             <div>
               <QuillEditor
@@ -124,13 +124,13 @@ export default {
     let link = window.location.href.split('#')
     let link2 = window.location.href.split('/')
     if (link[1] !== undefined) {
-      console.log(this.houses.data)
-      this.dataNews.house_id = this.houses.data.find(item => item.id === +link[1])
-      this.selectJK = this.houses.data.find(item => item.id === +link[1])
+      console.log(this.houses)
+      this.dataNews.house_id = this.houses.find(item => item.id === +link[1])
+      this.selectJK = this.houses.find(item => item.id === +link[1])
     }
     if (Number.isInteger(+link2.at(-1))) {
-      this.dataNews.house_id = this.houses.data.find(item => item.id === +link2.at(-1)).id
-      this.selectJK = this.houses.data.find(item => item.id === +link2.at(-1)).title
+      this.dataNews.house_id = this.houses.find(item => item.id === +link2.at(-1)).id
+      this.selectJK = this.houses.find(item => item.id === +link2.at(-1)).title
     }
     console.log(this.houses)
 
