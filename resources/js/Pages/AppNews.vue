@@ -13,19 +13,19 @@ import { Link } from '@inertiajs/inertia-vue3'
           <span class="text-[#6435A5] leading-none text-base xxl:text-sm xl:text-xs font-medium">Добавить новость</span>
         </Link>
       </div>
-      <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 my-7 xxl:my-5 xl:my-4">
+      <div class="flex flex-col overflow-x-auto custom__scroll--chess p-2 gap-5 xxl:gap-4 xl:gap-3 my-7 xxl:my-5 xl:my-4">
         <div class="grid__news text-[#8A8996] text-base xxl:text-sm xl:text-xs">
-          <span class="p-5 xxl:p-4 xl:p-3">ЖК</span>
-          <span class="p-5 xxl:p-4 xl:p-3">Заголовок</span>
-          <span class="p-5 xxl:p-4 xl:p-3">Дата публикации</span>
+          <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap">ЖК</span>
+          <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap">Заголовок</span>
+          <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap">Дата публикации</span>
         </div>
         <div class="news__line flex justify-between items-center rounded-[12px]" v-for="item in news">
           <div class="grid__news text-base xxl:text-sm xl:text-xs">
-            <span class="p-5 xxl:p-4 xl:p-3">{{ item.house.title }}</span>
-            <span class="p-5 xxl:p-4 xl:p-3">{{ item.title }}</span>
-            <span class="p-5 xxl:p-4 xl:p-3">{{ new Date(Date.parse(item.created_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1')}}</span>
+            <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap">{{ item.house.title }}</span>
+            <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap">{{ item.title }}</span>
+            <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap">{{ new Date(Date.parse(item.created_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1')}}</span>
           </div>
-          <div class="flex gap-4 xxl:gap-3 xl:gap-2.5 p-5 xxl:p-4 xl:p-3">
+          <div class="flex flex-shrink-0 gap-4 xxl:gap-3 xl:gap-2.5 p-5 xxl:p-4 xl:p-3">
             <button @click="changeVisible(item)">
               <img v-if="item.visible" src="../../assets/svg/eye_icon_grey.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
               <img v-if="!item.visible" src="../../assets/svg/eye_close.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
@@ -40,19 +40,19 @@ import { Link } from '@inertiajs/inertia-vue3'
         </div>
         <div class="news__line flex justify-between items-center rounded-[12px]" v-if="news.length === 0">
           <h1 class="text-center">Новостей нет</h1>
+        </div>
       </div>
-        <div class="w-full flex justify-center gap-7 xxl:gap-5 xl:gap-4 my-14 xxl:my-10 xl:my-8 text-[22px] xxl:text-lg xl:text-[15px]">
-          <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer">
-            <img src="../../assets/svg/arrow_right_grey.svg" class="rotate-180 w-8 xxl:w-6 xl:w-5" alt="">
-          </div>
-          <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">1</div>
-          <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">2</div>
-          <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">3</div>
-          <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">...</div>
-          <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">24</div>
-          <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">
-            <img src="../../assets/svg/arrow_right_grey.svg" class="w-8 xxl:w-6 xl:w-5" alt="">
-          </div>
+      <div class="w-full flex justify-center gap-7 xxl:gap-5 xl:gap-4 my-14 xxl:my-10 xl:my-8 text-[22px] xxl:text-lg xl:text-[15px]">
+        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer">
+          <img src="../../assets/svg/arrow_right_grey.svg" class="rotate-180 w-8 xxl:w-6 xl:w-5" alt="">
+        </div>
+        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">1</div>
+        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">2</div>
+        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">3</div>
+        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">...</div>
+        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">24</div>
+        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">
+          <img src="../../assets/svg/arrow_right_grey.svg" class="w-8 xxl:w-6 xl:w-5" alt="">
         </div>
       </div>
     </div>

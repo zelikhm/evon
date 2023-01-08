@@ -8,7 +8,7 @@ import { Link } from '@inertiajs/inertia-vue3'
       <div class="footer__border-b flex justify-between pt-14 xxl:pt-10 xl:pt-8 pb-10 xxl:pb-8 xl:pb-6">
         <div class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
           <img src="../../assets/svg/fotter_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4" alt="Логотип">
-          <span class="uppercase text-[#6435A5] font-semibold">Evon.com</span>
+          <span class="sm:hidden uppercase text-[#6435A5] font-semibold">Evon.com</span>
         </div>
         <div class="flex gap-12 xxl:gap-10 xl:gap-8 text-[#3B3A45]">
           <span>7 930 245 15 20</span>
@@ -20,11 +20,11 @@ import { Link } from '@inertiajs/inertia-vue3'
           <Link href="/privacy" class="underline">Политика</Link>
           <span>2022. Все права защищены</span>
         </div>
-        <div class="grid grid-cols-3">
-          <span>Не является публичной офертой</span>
-          <div class="flex justify-center gap-12 xxl:gap-10 xl:gap-8 text-sm xxl:text-xs xl:text-[10px]">
-            <span>ИНН 215125125125125</span>
-            <span>ОГРН 215125125125125</span>
+        <div class="grid grid-cols-3 lg:flex lg:flex-col items-center lg:gap-2">
+          <div>Не является публичной офертой</div>
+          <div class="flex justify-center lg:flex-col gap-12 xxl:gap-10 xl:gap-8 lg:gap-2 text-sm xxl:text-xs xl:text-[10px]">
+            <span class="whitespace-nowrap">ИНН 215125125125125</span>
+            <span class="whitespace-nowrap">ОГРН 215125125125125</span>
           </div>
         </div>
       </div>

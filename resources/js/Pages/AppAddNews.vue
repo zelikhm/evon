@@ -10,7 +10,7 @@ import { Link } from '@inertiajs/inertia-vue3'
   <app-header />
   <main>
     <div class="_container">
-      <div class="px-[22.23vw] relative mx-auto max-w-[826px] box-content">
+      <div class="px-[20vw] lg:px-[10vw] md:px-[6vw] sm:px-0 relative mx-auto max-w-[826px] box-content">
         <div class="my-14 xxl:my-10 xl:my-8">
           <h2 class="text-[22px] xxl:text-lg xl:text-[15px] font-semibold pb-7 xxl:pb-5 xl:pb-4">{{ itemEdit === undefined ? 'Добавить новости' : 'Редактировать новость' }}</h2>
           <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3">
@@ -44,7 +44,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                 theme="snow"
               />
             </div>
-            <Link href="#" @click="addNews" class="bg-[#E84680] rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
+            <Link href="#" @click="addNews" class="login__btn--bg rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
               <div class="text-white text-center font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">{{ itemEdit === undefined ? 'Добавить' : 'Редактировать' }}</div>
             </Link>
           </div>

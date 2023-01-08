@@ -1,6 +1,6 @@
 <template>
   <div class="fixed z-[100] w-full h-full flex items-center justify-center">
-    <div class="relative flex flex-col gap-5 xxl:gap-4 xl:gap-3 bg-white rounded-[12px] px-12 xxl:px-10 xl:px-8 py-8 xxl:py-6 xl:py-5 z-50 w-[32%] h-fit">
+    <div class="relative flex flex-col gap-5 xxl:gap-4 xl:gap-3 bg-white rounded-[12px] px-12 xxl:px-10 xl:px-8 py-8 xxl:py-6 xl:py-5 z-50 w-[34%] lg:w-[50%] md:w-[64%] sm:w-[90%] h-fit">
       <div class="relative flex justify-between items-center">
         <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold leading-none">Добавить квартиру</h2>
         <button @click="this.$emit('close-add-apartments')" class="relative w-4 h-4 z-50">
@@ -102,23 +102,23 @@
         <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="cost" placeholder="50 000 €">
       </div>
 
-      <div class="grid grid-cols-2 gap-5 xxl:gap-4 xl:gap-3">
+      <div class="grid grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3">
         <div class="relative w-full">
           <label class="w-full cursor-pointer flex justify-center items-center gap-2.5 xxl:gap-2 xl:gap-1.5 rounded-[5px] border border-solid border-[#E5DFEE] py-5 xxl:py-4 xl:py-3" for="upload_photo_one">
             <img src="../../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
-            <span class="text-[#6435A5] text-[14px] xxl:text-[12px] xl:text-[10px]">Загрузить первое фото</span>
+            <span class="text-[#6435A5] text-[14px] xxl:text-[12px] xl:text-[10px]">Загрузить 1-ое фото</span>
           </label>
           <input class="absolute pointer-events-none overflow-hidden opacity-0 top-0 left-0 w-full" type="file" id="upload_photo_one">
         </div>
         <div class="relative w-full">
           <label class="w-full cursor-pointer flex justify-center items-center gap-2.5 xxl:gap-2 xl:gap-1.5 rounded-[5px] border border-solid border-[#E5DFEE] py-5 xxl:py-4 xl:py-3" for="upload_photo_two">
             <img src="../../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
-            <span class="text-[#6435A5] text-[14px] xxl:text-[12px] xl:text-[10px]">Загрузить второе фото</span>
+            <span class="text-[#6435A5] text-[14px] xxl:text-[12px] xl:text-[10px]">Загрузить 2-ое фото</span>
           </label>
           <input class="absolute pointer-events-none overflow-hidden opacity-0 top-0 left-0 w-full" type="file" id="upload_photo_two">
         </div>
       </div>
-      <button class="bg-[#E84680] rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
+      <button class="login__btn--bg bg-[#E84680] rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
         <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">Добавить</span>
       </button>
     </div>
