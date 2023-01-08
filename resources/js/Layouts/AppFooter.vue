@@ -6,10 +6,10 @@ import { Link } from '@inertiajs/inertia-vue3'
   <footer class="footer">
     <div class="_container text-lg xxl:text-sm xl:text-xs">
       <div class="footer__border-b flex justify-between pt-14 xxl:pt-10 xl:pt-8 pb-10 xxl:pb-8 xl:pb-6">
-        <div class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
+        <Link href="/" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
           <img src="../../assets/svg/fotter_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4" alt="Логотип">
           <span class="sm:hidden uppercase text-[#6435A5] font-semibold">Evon.com</span>
-        </div>
+        </Link>
         <div class="flex gap-12 xxl:gap-10 xl:gap-8 text-[#3B3A45]">
           <span>7 930 245 15 20</span>
           <span>mail@mail</span>

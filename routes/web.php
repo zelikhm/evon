@@ -25,68 +25,13 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/immovables', function () {
-    return Inertia::render('AppListImmovables', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
-Route::get('/link_selection', function () {
-    return Inertia::render('AppLinkSelection', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
-Route::get('/link_object', function () {
-    return Inertia::render('AppLinkDescriptionObject', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
-Route::get('/profile-agent', function () {
-    return Inertia::render('AppProfileAgent', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
-Route::get('/object', function () {
-    return Inertia::render('AppDescriptionObject', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
-Route::get('/chess', function () {
-    return Inertia::render('AppChess', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
-
 Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
   Route::get('/', ['App\Http\Controllers\User\ProfileController', 'index']);
   Route::get('/compilation', ['App\Http\Controllers\User\CompilationController', 'index']);
   Route::get('/compilation/{id}', ['App\Http\Controllers\User\CompilationController', 'show']);
   Route::get('/compilation/{id}/edit', ['App\Http\Controllers\User\CompilationController', 'edit']);
   Route::get('/addedHouse', ['App\Http\Controllers\House\HouseController', 'createHouse']);
-  Route::get('/edit/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
+  Route::get('/edit/{house}', ['App\Http\Controllers\House\HouseController', 'edit']);
   Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'showHouse']);
   Route::get('/news', ['App\Http\Controllers\House\NewsController', 'index']);
   Route::get('/news/create', ['App\Http\Controllers\House\NewsController', 'createNews']);

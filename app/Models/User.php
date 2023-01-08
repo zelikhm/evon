@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\User\CompanyModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -28,6 +29,7 @@ class User extends Authenticatable
     'status',
     'link',
     'description',
+    'image',
   ];
 
   /**
@@ -55,5 +57,9 @@ class User extends Authenticatable
     } else {
       return false;
     }
+  }
+
+  public function company() {
+    return $this->belongsTo(CompanyModel::class, 'id', 'user_id');
   }
 }

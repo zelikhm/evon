@@ -12,12 +12,12 @@
 
         <div class="flex flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
           <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="number">№</label>
-          <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="number" placeholder="1">
+          <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="number">
         </div>
 
         <div class="flex flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="coord_object">Площадь</label>
-          <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="coord_object" placeholder="50 м²">
+          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="coord_object">Площадь (м²)</label>
+          <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="coord_object">
         </div>
 
         <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectLayout}">
@@ -98,8 +98,8 @@
       </div>
 
       <div class="flex flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-        <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="cost">Цена</label>
-        <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="cost" placeholder="50 000 €">
+        <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="cost">Цена (€)</label>
+        <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="cost">
       </div>
 
       <div class="grid grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3">
@@ -108,17 +108,17 @@
             <img src="../../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
             <span class="text-[#6435A5] text-[14px] xxl:text-[12px] xl:text-[10px]">Загрузить 1-ое фото</span>
           </label>
-          <input class="absolute pointer-events-none overflow-hidden opacity-0 top-0 left-0 w-full" type="file" id="upload_photo_one">
+          <input class="absolute pointer-events-none overflow-hidden opacity-0 top-0 left-0 w-full" type="file" id="upload_photo_one" ref="image_up">
         </div>
         <div class="relative w-full">
           <label class="w-full cursor-pointer flex justify-center items-center gap-2.5 xxl:gap-2 xl:gap-1.5 rounded-[5px] border border-solid border-[#E5DFEE] py-5 xxl:py-4 xl:py-3" for="upload_photo_two">
             <img src="../../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
             <span class="text-[#6435A5] text-[14px] xxl:text-[12px] xl:text-[10px]">Загрузить 2-ое фото</span>
           </label>
-          <input class="absolute pointer-events-none overflow-hidden opacity-0 top-0 left-0 w-full" type="file" id="upload_photo_two">
+          <input class="absolute pointer-events-none overflow-hidden opacity-0 top-0 left-0 w-full" type="file" id="upload_photo_two" ref="image_down">
         </div>
       </div>
-      <button class="login__btn--bg bg-[#E84680] rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
+      <button @click="addFlat" class="login__btn--bg bg-[#E84680] rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
         <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">Добавить</span>
       </button>
     </div>
@@ -130,6 +130,15 @@
 export default {
   data() {
     return {
+      flat: {
+        id: '',
+        square: '',
+        count: '',
+        floor: '',
+        status: '',
+        stairs: '',
+        price: '',
+      },
       selectLayout: '1 + 1',
       openSelectLayout: false,
       layouts: [
@@ -165,6 +174,30 @@ export default {
     }
   },
   methods: {
+    addFlat() {
+      let formData = new FormData()
+
+      formData.append('frame_id', NULL)
+      formData.append('number', this.flat.id)
+      formData.append('id', this.flat.square)
+      formData.append('count', this.flat.count)
+      formData.append('floor', this.flat.floor)
+      formData.append('status', this.flat.status)
+      formData.append('stairs', this.flat.stairs)
+      formData.append('price', this.flat.price)
+      formData.append('image_up', this.$refs.image_up.files[0])
+      formData.append('image_down', this.$refs.image_down.files[0])
+      formData.append('token', this.globalToken)
+
+      axios({
+        method: 'post',
+        url: '/api/house/createFlat',
+        headers: { "Content-type": "multipart/form-data" },
+        data: formData,
+      }).then(response => console.log(response.data))
+        .catch(e => console.error(e))
+
+    },
     changeSelectLayout(layout) {
       this.selectLayout = layout.layout
       this.openSelectLayout = false
