@@ -5,7 +5,7 @@ import { Link } from "@inertiajs/inertia-vue3";
 
 <template>
   <div class="my-14 xl:my-10 xl:my-8">
-    <h2 class="text-lg xxl:text-[15px] xl:text-[13px] leading-none font-semibold pb-7 xxl:pb-5 xl:pb-4">Другие ЖК в микрорайоне Новый Сочи</h2>
+    <h2 class="text-lg xxl:text-[15px] xl:text-[13px] leading-none font-semibold pb-7 xxl:pb-5 xl:pb-4">Другие ЖК в микрорайоне {{ house.area }}</h2>
     <div class="grid grid-cols-5 gap-5 xxl:gap-4 xl:gap-3">
 
       <div class="flex flex-col">
@@ -115,7 +115,8 @@ import { Link } from "@inertiajs/inertia-vue3";
 <script>
 export default {
   props: {
-    user: []
+    user: [],
+    house: []
   },
   data() {
     return {

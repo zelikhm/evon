@@ -1,7 +1,11 @@
 <template>
   <app-modal-add-contact @close-add-contact="closeModalContact" v-if="modalAddContact"/>
-  <app-modal-add-apartments @close-add-apartments="modalAddApatments = false" v-if="modalAddApatments"/>
-  <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="closeAddFrame" :houseID="houseID" />
+  <app-modal-add-apartments @close-add-apartments="modalAddApatments = false"
+                            v-if="modalAddApatments"
+                            :house="house"
+                            :activeFrame="activeFrame"
+  />
+  <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="closeAddFrame" :house="house" />
   <app-modal-notification v-if="openNotification" @close-notification="openNotification = false"
   />
   <app-header />
@@ -32,6 +36,7 @@
                         :infos="infos"
                         :city="city"
                         :count="count"
+                        :house="house"
                         :supports="supports"
                         @open-add-contact="modalAddContact = !modalAddContact"
                         @addAndContinue="addAndContinue"
@@ -41,7 +46,8 @@
 <!--  Корпуса и квартиры  -->
         <div v-if="page === 1">
           <app-apartments @open-add-frame="modalAddFrame = !modalAddFrame"
-                          :createHouse="createHouse"
+                          :house="readyHouse"
+                          @change-frame="changeFrame"
           />
         </div>
 
@@ -75,11 +81,11 @@ export default {
     user: [],
     count: Number,
     frames: null,
+    house: [],
   },
   provide() {
     return {
       user: this.user,
-      createHouse: null
     }
   },
   data() {
@@ -90,12 +96,19 @@ export default {
       modalAddApatments: false,
       modalAddFrame: false,
       supports: [],
-      houseID: null
+      houseID: null,
+      createHouse: null,
+      isMainPage: null,
+      isEdit: true,
+      readyHouse: null,
+      activeFrame: null
     }
   },
   methods: {
     openPage(id) {
-      this.page = id
+      if (!this.isMainPage) {
+        this.page = id
+      }
     },
     closeModalContact(data) {
       this.modalAddContact = false
@@ -105,13 +118,25 @@ export default {
       this.page = 1
       this.createHouse = house
     },
-    closeAddFrame() {
+    closeAddFrame(data) {
       this.modalAddFrame = false
-
+      this.readyHouse = data
+      console.log(data)
+    },
+    changeFrame(data) {
+      this.activeFrame = data
     }
   },
   created() {
     console.log(this.count)
+    this.readyHouse = this.house
+    let lastItemLink = window.location.href.split('/').at(-1)
+    lastItemLink === 'addedHouse' ? this.isMainPage = true : this.isMainPage = false
+
+    if (lastItemLink.split('#').at(-1) === 'create') {
+      this.page = 1
+      this.isEdit = false
+    }
   },
   components: {
     AppHeader,

@@ -48,11 +48,11 @@
             </div>
             <div v-if="openFloors" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
               <span
-                v-for="(floor, idx) in floors" :key="idx"
+                v-for="(floor, idx) in house.info.floors" :key="idx"
                 @click="changeSelectFloors(floor)"
                 class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
               >
-                {{ floor.floor }}
+                {{ floor }}
               </span>
             </div>
           </div>
@@ -128,6 +128,7 @@
 
 <script>
 export default {
+  props: ['house', 'activeFrame'],
   data() {
     return {
       flat: {
@@ -161,7 +162,7 @@ export default {
       openStatus: false,
       statuses: [
         { status: 'Свободно', value: 1},
-        { status: 'Зянято', value: 2},
+        { status: 'Занято', value: 2},
       ],
       selectStairs: '1',
       openStairs: false,
@@ -177,7 +178,12 @@ export default {
     addFlat() {
       let formData = new FormData()
 
-      formData.append('frame_id', NULL)
+      this.flat.count = this.selectLayout
+      this.flat.floor = this.selectFloors
+      this.flat.stairs = this.selectStairs
+      this.flat.status = this.selectStatus
+
+      formData.append('frame_id', this.activeFrame)
       formData.append('number', this.flat.id)
       formData.append('id', this.flat.square)
       formData.append('count', this.flat.count)
@@ -203,7 +209,7 @@ export default {
       this.openSelectLayout = false
     },
     changeSelectFloors(floor) {
-      this.selectFloors = floor.floor
+      this.selectFloors = floor
       this.openFloors = false
     },
     changeSelectStatus(status) {
@@ -214,7 +220,7 @@ export default {
       this.selectStairs = stairs.stairs
       this.openStairs = false
     }
-  }
+  },
 }
 </script>
 

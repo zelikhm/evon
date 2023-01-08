@@ -119,39 +119,12 @@
             <div class="border border-solid border-[#E5DFEE] p-7 xxl:p-5 xl:p-4 rounded-[12px]">
               <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px]">Дополнительные услуги</span>
               <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 pt-6 xxl:pt-5 xl:pt-4">
-                <div class="flex justify-between items-center">
-                  <span class="text-base xxl:text-sm xl:text-xs">Предоставляется ВНЖ</span>
-                  <div class="bg-[#30CB49] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
+                <div class="flex justify-between items-center" v-for="dop in dops">
+                  <span :class="{ disableColor: dop.active !== 1 }" class="text-base xxl:text-sm xl:text-xs">{{ dop.name }}</span>
+                  <div v-if="dop.active === 1" class="bg-[#30CB49] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
                     <img src="../../assets/svg/check_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
                   </div>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">Получение Гражданства</span>
-                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
-                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-                  </div>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">Возможен онлайн-показ</span>
-                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
-                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-                  </div>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">Кадастр >75000$</span>
-                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
-                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-                  </div>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">Возможна удалённая сделка</span>
-                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
-                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-                  </div>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">Послепродажный сервис</span>
-                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
+                  <div v-else class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
                     <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
                   </div>
                 </div>
@@ -216,7 +189,8 @@ export default {
   props: {
     house: [],
     dops: [],
-    infos: []
+    infos: [],
+    slider: []
   },
   data() {
     return {
@@ -226,9 +200,7 @@ export default {
     }
   },
   methods: {
-    onPrint() {
-      window.print()
-    }
+
   },
   components: {
     AppHeader,
@@ -252,11 +224,24 @@ export default {
         this.arrayInfos.push(this.infos.find(item => item.id === +key))
       }
     }
-    console.log(this.dops)
+
+    for (let key of this.house.info.dop) {
+      if (!+isNaN(key)) {
+        this.dops.forEach(item => {
+          if (+key === item.id) {
+            item.active = 1
+          }
+        })
+      }
+    }
+    console.log(this.slider)
   }
 }
 </script>
 
 <style scoped>
+.disableColor {
+  color: #8A8996;
+}
 
 </style>

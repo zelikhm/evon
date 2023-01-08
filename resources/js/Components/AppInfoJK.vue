@@ -76,6 +76,14 @@ import {Link} from '@inertiajs/inertia-vue3'
       </div>
     </div>
 
+    <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]">
+      <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"
+             for="text_agency">Эксклюзив для агентства</label>
+      <textarea v-model="object.text_agency"
+                class="custom__scroll text-[#1E1D2D] resize-none text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0"
+                type="text" id="text_agency"></textarea>
+    </div>
+
     <div
         class="flex flex-col border border-solid border-[#E5DFEE] gap-2.5 xxl:gap-2 xl:gap-1.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
       <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="coord_object">Введи координаты
@@ -235,11 +243,12 @@ import {Link} from '@inertiajs/inertia-vue3'
             <span class="text-[#6435A5] font-medium text-base xxl:text-sm xl:text-xs leading-none">Добавить</span>
           </button>
         </div>
-        <div v-for="item in supports"
+        <div v-for="item in supportsReady"
              class="contact__selling my-5 xxl:my-4 xl:my-3 text-lg xxl:text-[15px] xl:text-[13px] flex justify-between items-center rounded-[5px] p-1.5 xl:p-1">
           <div class="flex items-center gap-14 xxl:gap-10 xl:gap-8">
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-              <img :src="item.image_front" class="h-12 xxl:h-10 xl:h-8 w-12 xxl:w-10 xl:w-8 rounded-full" alt="">
+              <img :src="'/storage/' + item.avatar" v-if="house !== undefined" class="h-12 xxl:h-10 xl:h-8 w-12 xxl:w-10 xl:w-8 rounded-full" alt="">
+              <img :src="item.image_front" v-else class="h-12 xxl:h-10 xl:h-8 w-12 xxl:w-10 xl:w-8 rounded-full" alt="">
               <span class="text-[#1E1D2D]">{{ item.name }}</span>
             </div>
             <span class="text-[#8A8996]">{{ item.tel }}</span>
@@ -299,6 +308,7 @@ import {Link} from '@inertiajs/inertia-vue3'
           </div>
         </div>
       </div>
+
       <div class="my-10 xxl:my-8 xl:my-6">
         <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">
           Вознаграждение</h3>
@@ -377,7 +387,7 @@ import Multiselect from '@vueform/multiselect'
 import VueMultiselect from 'vue-multiselect'
 
 export default {
-  props: ['dops', 'infos', 'city', 'supports', 'count'],
+  props: ['dops', 'infos', 'city', 'supports', 'count', 'house'],
   inject: ['user'],
   data() {
     return {
@@ -425,6 +435,7 @@ export default {
         toBus: "",
         toChildrenSchool: "",
         installment: 0,
+        text_agency: "",
         token: this.globalToken
       },
       cities: [
@@ -477,7 +488,8 @@ export default {
       optionsSelectInfrastructure: [],
       optionsSelectServices: [],
       inputFile: [],
-      files: []
+      files: [],
+      supportsReady: []
     }
   },
   methods: {
@@ -542,7 +554,7 @@ export default {
       axios.post('/api/house/clearSupport', {
         house_id: idNewJk
       }).then(res => {
-        this.supports.forEach(item => {
+        this.supportsReady.forEach(item => {
           let arr = new FormData();
           arr.append('avatar', item.avatar)
           arr.append('name', item.name)
@@ -557,16 +569,17 @@ export default {
         })
       })
 
-      this.object.title = ''
-      this.object.description = ''
-      this.object.floors = ''
-      this.object.comment = ''
-      this.object.percent = ''
-      this.$refs.file.value = null
-      this.files = []
+      // this.object.title = ''
+      // this.object.description = ''
+      // this.object.floors = ''
+      // this.object.comment = ''
+      // this.object.percent = ''
+      // this.$refs.file.value = null
+      // this.files = []
 
       if (flag === 1) {
-        this.$emit('addAndContinue', house)
+        window.location.href = '/profile/edit/' + house.slug + '#create'
+        // this.$emit('addAndContinue', house)
       }
     },
     saveSupport(data) {
@@ -635,6 +648,46 @@ export default {
     for (let key of this.infos) {
       this.optionsSelectInfrastructure.push(key.name)
     }
+
+    this.supportsReady = this.supports
+
+    if (this.house !== undefined ) {
+      this.object.title = this.house.title
+      this.object.description = this.house.description
+      this.selectCity = this.house.city
+      this.selectRegion = this.house.area
+      this.object.latitude = this.house.latitude
+      this.object.longitude = this.house.longitude
+      this.selectType = this.house.info.type
+      this.selectDeadline = this.house.info.status
+      this.object.floors = this.house.info.floors
+      this.object.toSea = this.house.info.toSea
+      this.object.toPark = this.house.info.toPark
+      this.object.toShop = this.house.info.toShop
+      this.object.toSchool = this.house.info.toSchool
+      this.object.toChildrenSchool = this.house.info.toChildrenSchool
+      this.object.toBus = this.house.info.toBus
+      this.object.comment = this.house.comment
+      this.object.percent = this.house.percent
+
+      for (let key of this.house.info.info) {
+        if (!+isNaN(key)) {
+          this.object.info.push(this.infos.find(item => item.id === +key))
+          this.valueSelectInfrastructure.push(this.infos.find(item => item.id === +key).name)
+        }
+      }
+
+      for (let key of this.house.info.dop) {
+        if (!+isNaN(key)) {
+          this.object.dop.push(this.dops.find(item => item.id === +key))
+          this.valueSelectServices.push(this.dops.find(item => item.id === +key).name)
+        }
+      }
+
+      this.supportsReady = this.house.supports
+    }
+
+    console.log(this.house)
   },
   computed: {
     filteredCity() {

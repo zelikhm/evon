@@ -22,6 +22,7 @@
 
 <script>
 export default {
+  props: ['house'],
   data() {
     return {
       frameName: null
@@ -29,11 +30,13 @@ export default {
   },
   methods: {
     addFrame() {
-      axios.post('/api/house/createFrame', { house_id: localStorage.getItem('houseID'), name: this.frameName, token: this.globalToken })
-           .then(response => console.log(response))
+      axios.post('/api/house/createFrame', { house_id: this.house.id, name: this.frameName, token: this.globalToken })
+           .then(response => {
+             this.house.frames = response.data
+             this.$emit('close-add-frame', this.house)
+           })
            .catch(e => console.error(e))
 
-      this.$emit('close-add-frame')
     }
   }
 }

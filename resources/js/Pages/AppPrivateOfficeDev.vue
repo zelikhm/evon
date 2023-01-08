@@ -152,9 +152,13 @@ export default {
       object.openWatchTime = !object.openWatchTime
       object.views = object.view[time.id]
     },
-    deleteHouse(item) {
-      console.log(item)
-      axios.post('/api/house/delete', { house_id: item.id, token: this.globalToken }).then(res => console.log(res)).catch(err => console.error(err))
+    deleteHouse(house) {
+      this.houses.data.forEach((item, idx) => {
+        if (item.id === house.id) {
+          this.houses.data.splice(idx, 1)
+        }
+      })
+      axios.post('/api/house/delete', { house_id: house.id, token: this.globalToken }).then(res => console.log(res)).catch(err => console.error(err))
     },
     changeVisible(item) {
       item.visible = !item.visible

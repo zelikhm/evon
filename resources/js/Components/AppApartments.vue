@@ -6,7 +6,7 @@ import { Link } from '@inertiajs/inertia-vue3'
   <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] mb-5 xxl:mb-4 xl:mb-3">Добавить корпус и квартиры</h2>
   <div class="flex flex-col">
     <div class="grid grid-cols-6 gap-3 xxl:gap-2.5 xl:gap-2">
-      <div v-for="frame in house" class="corpus__banner gap-3.5 xxl:gap-3 xl:gap-2.5 cursor-pointer rounded-[5px] border border-solid border-[#6435A5] flex flex-col justify-center px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
+      <div @click="targetFrame(frame)" v-for="frame in house.frames" :class="{ border: frame.active === 1 }" class="corpus__banner gap-3.5 xxl:gap-3 xl:gap-2.5 cursor-pointer rounded-[5px] border-solid border-[#6435A5] flex flex-col justify-center px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
         <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none">{{ frame.name }}</span>
         <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none"></span>
       </div>
@@ -254,11 +254,11 @@ import { Link } from '@inertiajs/inertia-vue3'
       <img src="../../assets/svg/arrow_right_grey.svg" class="rotate-180 w-5 xxl:w-4 xl:w-3" alt="">
     </div>
     <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">1</div>
-    <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer">2</div>
-    <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer">3</div>
-    <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer">...</div>
-    <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer">24</div>
-    <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer">
+    <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">2</div>
+    <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">3</div>
+    <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">...</div>
+    <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">24</div>
+    <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">
       <img src="../../assets/svg/arrow_right_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
     </div>
   </div>
@@ -270,10 +270,11 @@ import { Link } from '@inertiajs/inertia-vue3'
 <script>
 
 export default {
-  props: ['createHouse'],
+  props: ['house'],
   data() {
     return {
       selectStatus: 'Свободно',
+      id: null,
       openStatus: false,
       statuses: [
         { status: 'Свободно', value: 1},
@@ -287,12 +288,19 @@ export default {
     changeSelectStatus(status) {
       this.selectStatus = status.status
       this.openStatus = false
+    },
+    targetFrame(frame) {
+      this.house.frames.forEach(item => item.active = 0)
+      frame.active = 1
+      this.$emit('change-frame', frame.id)
     }
   },
   created() {
-    console.log(this.createHouse)
-  }
+    this.house.frames.forEach((item, idx) => {
+      if (idx === 0) item.active = 1
+      else item.active = 0
+    })
+  },
 }
 
 </script>
-
