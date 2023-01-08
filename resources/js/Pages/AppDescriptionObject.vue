@@ -102,7 +102,7 @@
             <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="!fullDescription">{{ house }}</p>
 <!--            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="!fullDescription">{{ house.description.slice(0, 300) + '...' }}</p>-->
             <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{ house.description }}</p>
-            <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 items-center animation__arrow" @click="fullDescription = !fullDescription">
+            <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 items-center w-fit animation__arrow" @click="fullDescription = !fullDescription">
               <span class="text-[#6435A5] font-medium text-sm xxl:text-xs xl:text-[10px]">{{ fullDescription ? 'Скрыть' : 'Подробнее' }}</span>
               <img src="../../assets/svg/arrow_right_purple.svg" class="transition-all duration-300 w-3.5 xxl:w-3 xl:wp-2.5" alt="Стрелочка в право">
             </button>

@@ -119,7 +119,7 @@ import {Link} from '@inertiajs/inertia-vue3'
     <div class="my-5 xxl:my-4 xl:my-3">
       <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium mb-5 xxl:mb-4 xl:mb-3">
         Характеристики</h3>
-      <div class="grid grid-cols-2 gap-7 xxl:gap-5 xl:gap-4">
+      <div class="grid grid-cols-2 sm:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4">
 
         <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]"
              :class="{ 'border__bottom--0': openSelectDeadline}">
@@ -144,8 +144,7 @@ import {Link} from '@inertiajs/inertia-vue3'
           </div>
         </div>
 
-        <div
-            class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+        <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
           <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_floors">Количество этажей</label>
           <input v-model="object.floors"
                  class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
@@ -157,7 +156,7 @@ import {Link} from '@inertiajs/inertia-vue3'
           <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Тип</span>
           <div class="relative">
             <div @click="openSelectType = !openSelectType"
-                 class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
+                 class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
               <span>{{ selectType }}</span>
               <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all"
                    :class="{ 'rotate-180': openSelectType }" alt="">
@@ -235,12 +234,21 @@ import {Link} from '@inertiajs/inertia-vue3'
       </div>
       <div class="my-10 xxl:my-8 xl:my-6">
         <div class="flex justify-between items-center">
-          <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none">Контакты отдела
-            продаж</h3>
-          <button @click="this.$emit('open-add-contact')"
-                  class="flex items-center border border-solid border-[#6435A5] rounded-[5px] py-3 xxl:py-2.5 xl:py-2 px-4 xxl:px-3 xl:px-2.5">
-            <img src="../../assets/svg/plus_icon_purple.svg" alt="Плюсик">
-            <span class="text-[#6435A5] font-medium text-base xxl:text-sm xl:text-xs leading-none">Добавить</span>
+          <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none">Контакты отдела продаж</h3>
+          <button
+            @click="this.$emit('open-add-contact')"
+            class="flex items-center register__button--white text-[#6435A5] border border-solid border-[#6435A5] rounded-[5px] py-3 xxl:py-2.5 xl:py-2 px-4 xxl:px-3 xl:px-2.5">
+            <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_519_1862)">
+                <path d="M7.33398 7.33301V3.33301H8.66732V7.33301H12.6673V8.66634H8.66732V12.6663H7.33398V8.66634H3.33398V7.33301H7.33398Z" fill="#6435A5"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_519_1862">
+                  <rect width="16" height="16" fill="white"/>
+                </clipPath>
+              </defs>
+            </svg>
+            <span class="font-medium text-base xxl:text-sm xl:text-xs leading-none">Добавить</span>
           </button>
         </div>
         <div v-for="item in supportsReady"
@@ -263,7 +271,7 @@ import {Link} from '@inertiajs/inertia-vue3'
       <div class="my-10 xxl:my-8 xl:my-6">
         <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">
           Расположение</h3>
-        <div class="grid grid-cols-2 gap-7 xxl:gap-5 xl:gap-4">
+        <div class="grid grid-cols-2 sm:grid-cols-1  gap-7 xxl:gap-5 xl:gap-4">
           <div
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_sea">от моря (м)</label>
@@ -335,10 +343,20 @@ import {Link} from '@inertiajs/inertia-vue3'
         <div class="relative my-3 xxl:my-2.5 xl:my-2">
           <input @change="changeInputFile" type="file" id="input_file" class="opacity-0 absolute invisible" multiple>
           <label
-              class="w-fit flex items-center cursor-pointer gap-2 xl:gap-1.5 border border-solid border-[#6435A5] rounded-[6px] px-4 xxl:px-3 xl:px-2.5 py-3 xxl:py-2.5 xl:py-2"
-              for="input_file">
-            <img class="w-4.5 xxl:w-4 xl:w-3.5" src="../../assets/svg/plus_icon_purple.svg" alt="Выбрать файл">
-            <span class="text-[#6435A5] font-medium text-base xxl:text-sm xl:text-xs leading-none">Загрузить файл</span>
+            class="register__button--white w-fit text-[#6435A5] flex items-center cursor-pointer gap-2 xl:gap-1.5 border border-solid border-[#6435A5] rounded-[6px] px-4 xxl:px-3 xl:px-2.5 py-3 xxl:py-2.5 xl:py-2"
+            for="input_file"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_519_1862)">
+                <path d="M7.33398 7.33301V3.33301H8.66732V7.33301H12.6673V8.66634H8.66732V12.6663H7.33398V8.66634H3.33398V7.33301H7.33398Z" fill="#6435A5"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_519_1862">
+                  <rect width="16" height="16" fill="white"/>
+                </clipPath>
+              </defs>
+            </svg>
+            <span class="font-medium text-base xxl:text-sm xl:text-xs leading-none">Загрузить файл</span>
           </label>
         </div>
         <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
@@ -354,10 +372,20 @@ import {Link} from '@inertiajs/inertia-vue3'
         <div class="relative my-3 xxl:my-2.5 xl:my-2">
           <input @change="changeInputFile" type="file" id="input_file2" class="opacity-0 absolute invisible" ref="file">
           <label
-              class="w-fit flex items-center cursor-pointer gap-2 xl:gap-1.5 border border-solid border-[#6435A5] rounded-[6px] px-4 xxl:px-3 xl:px-2.5 py-3 xxl:py-2.5 xl:py-2"
-              for="input_file2">
-            <img class="w-4.5 xxl:w-4 xl:w-3.5" src="../../assets/svg/plus_icon_purple.svg" alt="Выбрать файл">
-            <span class="text-[#6435A5] font-medium text-base xxl:text-sm xl:text-xs leading-none">Загрузить файл</span>
+            for="input_file2"
+            class=" register__button--white text-[#6435A5] w-fit flex items-center cursor-pointer gap-2 xl:gap-1.5 border border-solid border-[#6435A5] rounded-[6px] px-4 xxl:px-3 xl:px-2.5 py-3 xxl:py-2.5 xl:py-2"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_519_1862)">
+                <path d="M7.33398 7.33301V3.33301H8.66732V7.33301H12.6673V8.66634H8.66732V12.6663H7.33398V8.66634H3.33398V7.33301H7.33398Z" fill="#6435A5"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_519_1862">
+                  <rect width="16" height="16" fill="white"/>
+                </clipPath>
+              </defs>
+            </svg>
+            <span class="font-medium text-base xxl:text-sm xl:text-xs leading-none">Загрузить файл</span>
           </label>
         </div>
         <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
@@ -369,11 +397,11 @@ import {Link} from '@inertiajs/inertia-vue3'
       </div>
       <div class="grid grid-cols-2 gap-10 xxl:gap-8 xl:gap-6 my-10 xxl:my-8 xl:my-6 w-full">
         <Link href="/profile/houses" @click="addAndContinue"
-              class="w-full text-center mr-4 font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">
+              class="login__btn--bg w-full text-center mr-4 font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">
           Добавить
         </Link>
         <button @click="addAndContinue(1)"
-                class="w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">
+                class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">
           Добавить и продолжить
         </button>
       </div>
@@ -389,6 +417,7 @@ import VueMultiselect from 'vue-multiselect'
 export default {
   props: ['dops', 'infos', 'city', 'supports', 'count', 'house'],
   inject: ['user'],
+  emits: ['open-add-contact'],
   data() {
     return {
       openedMarkerID: null,

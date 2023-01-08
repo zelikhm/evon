@@ -24,9 +24,9 @@
         </div>
       </div>
       <div class="grid grid-cols-2 gap-8 xxl:gap-6 xl:gap-5">
-        <button class="bg-[#E84680] text-white text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Создать</button>
-        <button class="bg-litepink text-[#E84680] text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Отправить</button>
-      </div>
+      <button class="bg-[#E84680] text-white text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Создать</button>
+      <button class="bg-litepink text-[#E84680] text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Отправить</button>
+    </div>
     </div>
     <div @click="closeCreateSelection"  class="absolute bg-black opacity-50 h-full w-full z-40"></div>
   </div>

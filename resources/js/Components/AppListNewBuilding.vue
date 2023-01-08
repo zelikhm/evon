@@ -1,15 +1,26 @@
 <template>
-  <div class="w-full px-7 xxl:px-5 xl:px-4">
+  <div class="w-full px-7 xxl:px-5 xl:px-4 lg:px-0">
     <div class="relative z-20">
-      <div class="flex justify-between items-center">
-        <div class="flex flex-col">
-          <h2 class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px]">Новостройки в Сочи</h2>
-          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Найдено 1512 новостроек</span>
+      <div class="hidden lg:flex bg-[#F6F3FA] rounded-[10px] justify-between items-center p-5 xxl:p-4 xl:p-3 mb-2">
+        <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 rounded-[5px] text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] leading-none font-semibold">
+          <div @click="$emit('open-filter')" class="relative flex flex-col justify-evenly py-1 items-center cursor-pointer h-6 w-6 rounded-[5px] bg-[#6435A5]">
+            <span class="bg-white h-[2px] w-[60%] rounded-[2px]"></span>
+            <span class="bg-white h-[2px] w-[60%] rounded-[2px]"></span>
+            <span class="bg-white h-[2px] w-[60%] rounded-[2px]"></span>
+          </div>
+          <span>Фильтры</span>
         </div>
-        <div class="flex items-center gap-8 xxl:gap-6 xl:gap-5">
+        <button class="text-[#6435A5] text-[16px] xxl:text-[14px] xl:text-[12px] cursor-pointer leading-none">Сбросить</button>
+      </div>
+      <div class="flex justify-between md:flex-col md:gap-3 items-center">
+        <div class="flex flex-col">
+          <h2 class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] whitespace-nowrap text-center">Новостройки в Сочи</h2>
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] whitespace-nowrap text-center">Найдено 1512 новостроек</span>
+        </div>
+        <div class="flex items-center md:flex-col gap-8 xxl:gap-6 xl:gap-5 md:gap-3">
           <div class="relative">
             <div @click="openDate = !openDate" class="cursor-pointer flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
-              <span class="text-base xxl:text-sm xl:text-xs leading-none">
+              <span class="text-base xxl:text-sm xl:text-xs leading-none whitespace-nowrap">
                 По {{ selectDate }}
               </span>
               <img src="../../assets/svg/arrow_down_black.svg" alt="Стрелочка вниз">
@@ -23,30 +34,32 @@
               </span>
             </div>
           </div>
-          <button class="button__map flex items-center gap-3 xxl:gap-2 xl:gap-1.5 p-3 xxl:p-2.5 xl:p-2 rounded-[6px]">
-            <img src="../../assets/svg/map_pointer.svg" class="h-6 xxl:h-5 xl:h-4" alt="Метка">
-            <span class="text-[#6435A5] font-medium text-base xxl:text-sm xl:text-xs">Искать на карте</span>
-          </button>
-          <div class="flex gap-3 xxl:gap-2 xl:gap-1.5">
-            <button @click="openTable" :class="{'grid--active': tableBuild}" class="button__choices--grid h-9 xxl:h-7 xl:h-6 w-9 xxl:w-7 xl:w-6 gap-1 xxl:gap-0.5 rounded-[6px] p-[8px] xxl:p-[6px] xl:p-[5px]">
-              <div class="w-full rounded-[1px] h-full"></div>
-              <div class="w-full rounded-[1px] h-full"></div>
-              <div class="w-full rounded-[1px] h-full"></div>
-              <div class="w-full rounded-[1px] h-full"></div>
+          <div class="flex items-center gap-8 xxl:gap-6 xl:gap-5">
+            <button class="button__map flex items-center gap-3 xxl:gap-2 xl:gap-1.5 p-3 xxl:p-2.5 xl:p-2 rounded-[6px]">
+              <img src="../../assets/svg/map_pointer.svg" class="h-6 xxl:h-5 xl:h-4" alt="Метка">
+              <span class="text-[#6435A5] font-medium text-base xxl:text-sm xl:text-xs whitespace-nowrap">Искать на карте</span>
             </button>
-            <button @click="openList" :class="{'col--active': listBuild}" class="button__choices--col h-9 xxl:h-7 xl:h-6 w-9 xxl:w-7 xl:w-6 gap-1.5 xl:gap-1 rounded-[6px] p-[8px] xxl:p-[6px]">
-              <div class="w-full rounded-[1px] h-full"></div>
-              <div class="w-full rounded-[1px] h-full"></div>
-            </button>
+            <div class="flex gap-3 xxl:gap-2 xl:gap-1.5">
+              <button @click="openTable" :class="{'grid--active': tableBuild}" class="button__choices--grid h-9 xxl:h-7 xl:h-6 w-9 xxl:w-7 xl:w-6 gap-1 xxl:gap-0.5 rounded-[6px] p-[8px] xxl:p-[6px] xl:p-[5px]">
+                <div class="w-full rounded-[1px] h-full"></div>
+                <div class="w-full rounded-[1px] h-full"></div>
+                <div class="w-full rounded-[1px] h-full"></div>
+                <div class="w-full rounded-[1px] h-full"></div>
+              </button>
+              <button @click="openList" :class="{'col--active': listBuild}" class="button__choices--col h-9 xxl:h-7 xl:h-6 w-9 xxl:w-7 xl:w-6 gap-1.5 xl:gap-1 rounded-[6px] p-[8px] xxl:p-[6px]">
+                <div class="w-full rounded-[1px] h-full"></div>
+                <div class="w-full rounded-[1px] h-full"></div>
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <!--  Новостройки в виде таблицы -->
-    <div v-if="tableBuild" class="grid grid-cols-3 gap-5 xxl:gap-4 xl:gap-3 mt-5 xxl:mt-4 xl:mt-3">
+    <div v-if="tableBuild" class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3 mt-5 xxl:mt-4 xl:mt-3">
       <div class="flex flex-col">
-        <div class="object__block relative z-10 h-[16vw] rounded-[6px]">
+          <div class="object__block relative z-10 h-[16vw] lg:h-[24vw] md:h-[36vw] sm:h-[56vw] rounded-[6px]">
           <img src="../../assets/immovables_img_one.png" class="absolute -z-10 w-full h-full rounded-[6px]" alt="">
           <div class="seek immovables__overlay opacity-0 transition-all h-full w-full absolute -z-10 rounded-[6px]"></div>
           <div class="flex flex-col h-full justify-between p-5 xxl-4 xl:p-3">
@@ -77,8 +90,8 @@
         </div>
       </div>
 
-      <div class="flex flex-col">
-        <div class="object__block relative z-10 h-[16vw] rounded-[6px]">
+      <div class="flex flex-col" >
+        <div class="object__block relative z-10 h-[16vw] lg:h-[24vw] md:h-[36vw] sm:h-[56vw] rounded-[6px]">
           <img src="../../assets/immovables_img_two.png" class="absolute -z-10 w-full h-full rounded-[6px]" alt="">
           <div class="seek transition-all opacity-0 immovables__overlay h-full w-full absolute -z-10 rounded-[6px]"></div>
           <div class="flex flex-col h-full justify-between p-5 xxl-4 xl:p-3">
@@ -110,7 +123,7 @@
       </div>
 
       <div class="flex flex-col">
-        <div class="object__block relative z-10 h-[16vw] rounded-[6px]">
+        <div class="object__block relative z-10 h-[16vw] lg:h-[24vw] md:h-[36vw] sm:h-[56vw] rounded-[6px]">
           <img src="../../assets/immovables_img_three.png" class="absolute -z-10 w-full h-full rounded-[6px]" alt="">
           <div class="seek transition-all opacity-0 immovables__overlay h-full w-full absolute -z-10 rounded-[6px]"></div>
           <div class="flex flex-col h-full justify-between p-5 xxl-4 xl:p-3">
@@ -142,7 +155,7 @@
       </div>
 
       <div class="flex flex-col">
-        <div class="object__block relative z-10 h-[16vw] rounded-[6px]">
+        <div class="object__block relative z-10 h-[16vw] lg:h-[24vw] md:h-[36vw] sm:h-[56vw] rounded-[6px]">
           <img src="../../assets/immovables_img_two.png" class="absolute -z-10 w-full h-full rounded-[6px]" alt="">
           <div class="seek transition-all opacity-0 immovables__overlay h-full w-full absolute -z-10 rounded-[6px]"></div>
           <div class="flex flex-col h-full justify-between p-5 xxl-4 xl:p-3">
@@ -174,7 +187,7 @@
       </div>
 
       <div class="flex flex-col">
-        <div class="object__block relative z-10 h-[16vw] rounded-[6px]">
+        <div class="object__block relative z-10 h-[16vw] lg:h-[24vw] md:h-[36vw] sm:h-[56vw] rounded-[6px]">
           <img src="../../assets/immovables_img_three.png" class="absolute -z-10 w-full h-full rounded-[6px]" alt="">
           <div class="seek transition-all opacity-0 immovables__overlay h-full w-full absolute -z-10 rounded-[6px]"></div>
           <div class="flex flex-col h-full justify-between p-5 xxl-4 xl:p-3">
@@ -206,7 +219,7 @@
       </div>
 
       <div class="flex flex-col">
-        <div class="object__block relative z-10 h-[16vw] rounded-[6px]">
+        <div class="object__block relative z-10 h-[16vw] lg:h-[24vw] md:h-[36vw] sm:h-[56vw] rounded-[6px]">
           <img src="../../assets/immovables_img_one.png" class="absolute -z-10 w-full h-full rounded-[6px]" alt="">
           <div class="seek transition-all opacity-0 immovables__overlay h-full w-full absolute -z-10 rounded-[6px]"></div>
           <div class="flex flex-col h-full justify-between p-5 xxl-4 xl:p-3">
@@ -414,6 +427,7 @@ export default {
     houses: [],
     user: []
   },
+  emits: ['open-filter'],
   data() {
     return {
       tableBuild: true,

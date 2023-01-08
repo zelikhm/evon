@@ -17,6 +17,14 @@
 import { NUpload } from 'naive-ui'
 
 export default {
+  data() {
+    return {
+
+    }
+  },
+  methods: {
+
+  },
   components: { NUpload }
 }
 
