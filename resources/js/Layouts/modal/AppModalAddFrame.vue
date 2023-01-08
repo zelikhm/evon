@@ -29,7 +29,11 @@ export default {
   },
   methods: {
     addFrame() {
-      axios.post('/api/house/createFrame', { house_id: null, name: this.frameName })
+      axios.post('/api/house/createFrame', { house_id: localStorage.getItem('houseID'), name: this.frameName, token: this.globalToken })
+           .then(response => console.log(response))
+           .catch(e => console.error(e))
+
+      this.$emit('close-add-frame')
     }
   }
 }

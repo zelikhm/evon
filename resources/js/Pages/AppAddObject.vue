@@ -1,7 +1,7 @@
 <template>
   <app-modal-add-contact @close-add-contact="closeModalContact" v-if="modalAddContact"/>
   <app-modal-add-apartments @close-add-apartments="modalAddApatments = false" v-if="modalAddApatments"/>
-  <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="modalAddFrame = false" />
+  <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="closeAddFrame" :houseID="houseID" />
   <app-modal-notification v-if="openNotification" @close-notification="openNotification = false"
   />
   <app-header />
@@ -34,18 +34,20 @@
                         :count="count"
                         :supports="supports"
                         @open-add-contact="modalAddContact = !modalAddContact"
-                        @addAndContinue="page = 1"
+                        @addAndContinue="addAndContinue"
           />
         </div>
 
 <!--  Корпуса и квартиры  -->
         <div v-if="page === 1">
-          <app-apartments @open-add-frame="modalAddFrame = !modalAddFrame"/>
+          <app-apartments @open-add-frame="modalAddFrame = !modalAddFrame"
+                          :createHouse="createHouse"
+          />
         </div>
 
 <!--  Фото  -->
         <div v-if="page === 2">
-          <app-add-photo />
+          <app-add-photo :houseID="houseID" />
         </div>
 
       </div>
@@ -71,11 +73,13 @@ export default {
     infos: [],
     city: [],
     user: [],
-    count: Number
+    count: Number,
+    frames: null,
   },
   provide() {
     return {
       user: this.user,
+      createHouse: null
     }
   },
   data() {
@@ -85,7 +89,8 @@ export default {
       modalAddContact: false,
       modalAddApatments: false,
       modalAddFrame: false,
-      supports: []
+      supports: [],
+      houseID: null
     }
   },
   methods: {
@@ -95,6 +100,14 @@ export default {
     closeModalContact(data) {
       this.modalAddContact = false
       this.supports.push(data)
+    },
+    addAndContinue(house) {
+      this.page = 1
+      this.createHouse = house
+    },
+    closeAddFrame() {
+      this.modalAddFrame = false
+
     }
   },
   created() {

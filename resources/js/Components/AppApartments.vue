@@ -2,14 +2,13 @@
 import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
-
 <template>
   <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] mb-5 xxl:mb-4 xl:mb-3">Добавить корпус и квартиры</h2>
   <div class="flex flex-col">
     <div class="grid grid-cols-6 gap-3 xxl:gap-2.5 xl:gap-2">
-      <div class="corpus__banner gap-3.5 xxl:gap-3 xl:gap-2.5 cursor-pointer rounded-[5px] border border-solid border-[#6435A5] flex flex-col justify-center px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
-        <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none">Корпус 1</span>
-        <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none">0 квартир</span>
+      <div v-for="frame in house" class="corpus__banner gap-3.5 xxl:gap-3 xl:gap-2.5 cursor-pointer rounded-[5px] border border-solid border-[#6435A5] flex flex-col justify-center px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
+        <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none">{{ frame.name }}</span>
+        <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none"></span>
       </div>
       <div class="flex items-center">
         <img @click="this.$emit('open-add-frame')" src="../../assets/svg/plus_icon_purple.svg" class="cursor-pointer ml-3 xxl:ml-2.5 xl:ml-2 w-8 xxl:w-6 xl:w-5" alt="">
@@ -271,6 +270,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 <script>
 
 export default {
+  props: ['createHouse'],
   data() {
     return {
       selectStatus: 'Свободно',
@@ -288,6 +288,9 @@ export default {
       this.selectStatus = status.status
       this.openStatus = false
     }
+  },
+  created() {
+    console.log(this.createHouse)
   }
 }
 

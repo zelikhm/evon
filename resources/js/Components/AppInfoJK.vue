@@ -44,7 +44,7 @@ import {Link} from '@inertiajs/inertia-vue3'
           </div>
           <span
               v-for="(city, idx) in filteredCity" :key="idx"
-              @click="changeSelectCity(city)"
+              @click="changeSelectCity(city, idx)"
               class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
           >{{ city.title }}
           </span>
@@ -358,11 +358,11 @@ import {Link} from '@inertiajs/inertia-vue3'
         </div>
       </div>
       <div class="grid grid-cols-2 gap-10 xxl:gap-8 xl:gap-6 my-10 xxl:my-8 xl:my-6 w-full">
-        <Link href="" @click="addObject"
+        <Link href="/profile/houses" @click="addAndContinue"
               class="w-full text-center mr-4 font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">
           Добавить
         </Link>
-        <button @click="addAndContinue"
+        <button @click="addAndContinue(1)"
                 class="w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">
           Добавить и продолжить
         </button>
@@ -403,7 +403,7 @@ export default {
       borderInfrastructure: false,
       selectCity: 'Сочи',
       openSelectCity: false,
-      searchValue: 'а',
+      searchValue: '',
       object: {
         title: "",
         description: "",
@@ -484,7 +484,7 @@ export default {
     openMarker(id) {
       this.openedMarkerID = id
     },
-    addAndContinue() {
+    addAndContinue(flag) {
       this.object.info = []
       this.object.dop = []
 
@@ -496,16 +496,13 @@ export default {
         this.object.info.push(this.infos.find(item => item.name === value).id)
       })
 
-      console.log(this.object.info)
-      console.log(this.object.dop)
-
 
       this.object.city = this.selectCity
       this.object.area = this.selectRegion
 
       let formData = new FormData();
 
-      formData.append('user_id', this.user.id); // пока статика, жду пропс user :D
+      formData.append('user_id', this.user.id);
       formData.append('title', this.object.title);
       formData.append('description', this.object.description);
       formData.append('city', this.selectCity);
@@ -535,11 +532,12 @@ export default {
         url: '/api/house/create',
         headers: {"Content-type": "multipart/form-data"},
         data: formData,
-      }).then(res => this.addedSupports(res))
+      }).then(res => this.addedSupports(res, flag))
 
     },
-    addedSupports(res) {
-      let idNewJk = res.data.id;
+    addedSupports(res, flag) {
+      let idNewJk = res.data.id,
+          house = res.data
 
       axios.post('/api/house/clearSupport', {
         house_id: idNewJk
@@ -558,6 +556,18 @@ export default {
           this.saveSupport(arr);
         })
       })
+
+      this.object.title = ''
+      this.object.description = ''
+      this.object.floors = ''
+      this.object.comment = ''
+      this.object.percent = ''
+      this.$refs.file.value = null
+      this.files = []
+
+      if (flag === 1) {
+        this.$emit('addAndContinue', house)
+      }
     },
     saveSupport(data) {
       axios({
@@ -569,12 +579,15 @@ export default {
         // this.$emit('addAndContinue')
       })
     },
-    changeSelectCity(city) {
-      this.selectCity = this.object.city = city.city
+    changeSelectCity(city, idx) {
+      this.selectCity = this.object.city = city.title
       this.openSelectCity = false
+
+      this.selectRegion = this.city[idx].regions[0].title
+      this.regions = this.city[idx].regions
     },
     changeSelectRegion(region) {
-      this.selectRegion = region.region
+      this.selectRegion = this.object.area = region.title
       this.openSelectRegion = false
     },
     changeSelectDeadline(deadline) {
