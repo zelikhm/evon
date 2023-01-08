@@ -119,6 +119,25 @@ class HouseController extends Controller
   }
 
   /**
+   * edit house for user
+   * @param $slug
+   * @return \Inertia\Response
+   */
+
+  public function edit($slug) {
+    HouseModel::where('slug', $slug)->firstOrFail();
+
+    return Inertia::render('AppAddObject', [
+      'house' => $this->getHouseSlug($slug),
+      'dops' => $this->getDop(),
+      'infos' => $this->getInfo(),
+      'city' => $this->getCity(),
+      'notification' => $this->getNotification(),
+      'user' => Auth::user(),
+    ]);
+  }
+
+  /**
    * delete house
    * @param Request $request
    * @return \Illuminate\Http\JsonResponse
