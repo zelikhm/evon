@@ -144,7 +144,7 @@ import {Link} from '@inertiajs/inertia-vue3'
           </div>
         </div>
 
-        <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+        <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">
           <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_floors">Количество этажей</label>
           <input v-model="object.floors"
                  class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
@@ -341,7 +341,7 @@ import {Link} from '@inertiajs/inertia-vue3'
         <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">
           Приложите файлы для наполнения</h3>
         <div class="relative my-3 xxl:my-2.5 xl:my-2">
-          <input @change="changeInputFile" type="file" id="input_file" class="opacity-0 absolute invisible" multiple>
+          <input multiple @change="changeInputFile" type="file" id="input_file" class="opacity-0 absolute invisible">
           <label
             class="register__button--white w-fit text-[#6435A5] flex items-center cursor-pointer gap-2 xl:gap-1.5 border border-solid border-[#6435A5] rounded-[6px] px-4 xxl:px-3 xl:px-2.5 py-3 xxl:py-2.5 xl:py-2"
             for="input_file"
@@ -360,9 +360,14 @@ import {Link} from '@inertiajs/inertia-vue3'
           </label>
         </div>
         <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
-          <div v-for="input in files" class="relative flex items-center gap-4 xxl:gap-3 xl:gap-2.5">
-            <img src="../../assets/svg/file-icon_docx.svg" alt="">
-            <span class="text-lg xxl:text-[15px] xl:text-[13px] font-medium">{{ input.title }}</span>
+          <div v-for="input in files" class="flex justify-between items-center">
+            <div class="flex items-center gap-4 xxl:gap-3 xl:gap-2.5">
+              <img src="../../assets/svg/file-icon_docx.svg" alt="">
+              <span class="text-lg xxl:text-[15px] xl:text-[13px] font-medium">{{ input.title }}</span>
+            </div>
+            <button>
+              <img @click="deleteFile(input)" class="w-6 xxl:w-5 xl:w-4" src="../../assets/svg/bucket_icon_red.svg" alt="">
+            </button>
           </div>
         </div>
       </div>
@@ -370,7 +375,13 @@ import {Link} from '@inertiajs/inertia-vue3'
         <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">
           Загрузите главную картинку для ЖК</h3>
         <div class="relative my-3 xxl:my-2.5 xl:my-2">
-          <input @change="changeInputFile" type="file" id="input_file2" class="opacity-0 absolute invisible" ref="file">
+          <input
+            @change="changeImage"
+            type="file"
+            id="input_file2"
+            class="opacity-0 absolute invisible"
+            ref="file"
+          >
           <label
             for="input_file2"
             class=" register__button--white text-[#6435A5] w-fit flex items-center cursor-pointer gap-2 xl:gap-1.5 border border-solid border-[#6435A5] rounded-[6px] px-4 xxl:px-3 xl:px-2.5 py-3 xxl:py-2.5 xl:py-2"
@@ -389,9 +400,14 @@ import {Link} from '@inertiajs/inertia-vue3'
           </label>
         </div>
         <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
-          <div v-for="input in files" class="relative flex items-center gap-4 xxl:gap-3 xl:gap-2.5">
-            <img src="../../assets/svg/file-icon_docx.svg" alt="">
-            <span class="text-lg xxl:text-[15px] xl:text-[13px] font-medium">{{ input.title }}</span>
+          <div class="flex justify-between items-center">
+            <div v-for="image in images" class="relative flex items-center gap-4 xxl:gap-3 xl:gap-2.5">
+              <img src="../../assets/svg/file-icon_jpg.svg" v-if="extension === 'jpg'">
+              <span class="text-lg xxl:text-[15px] xl:text-[13px] font-medium">{{ image }}</span>
+            </div>
+            <button @click="deleteImage" v-if="images.length !== 0">
+              <img class="w-6 xxl:w-5 xl:w-4" src="../../assets/svg/bucket_icon_red.svg" alt="">
+            </button>
           </div>
         </div>
       </div>
@@ -400,8 +416,10 @@ import {Link} from '@inertiajs/inertia-vue3'
               class="login__btn--bg w-full text-center mr-4 font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">
           Добавить
         </Link>
-        <button @click="addAndContinue(1)"
-                class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">
+        <button
+          @click="addAndContinue(1)"
+          class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]"
+        >
           Добавить и продолжить
         </button>
       </div>
@@ -443,6 +461,7 @@ export default {
       selectCity: 'Сочи',
       openSelectCity: false,
       searchValue: '',
+      extension: null,
       object: {
         title: "",
         description: "",
@@ -517,8 +536,9 @@ export default {
       optionsSelectInfrastructure: [],
       optionsSelectServices: [],
       inputFile: [],
+      supportsReady: [],
+      images: [],
       files: [],
-      supportsReady: []
     }
   },
   methods: {
@@ -597,7 +617,6 @@ export default {
           this.saveSupport(arr);
         })
       })
-
       // this.object.title = ''
       // this.object.description = ''
       // this.object.floors = ''
@@ -605,7 +624,6 @@ export default {
       // this.object.percent = ''
       // this.$refs.file.value = null
       // this.files = []
-
       if (flag === 1) {
         window.location.href = '/profile/edit/' + house.slug + '#create'
         // this.$emit('addAndContinue', house)
@@ -658,6 +676,22 @@ export default {
         }
         this.files.push(obj)
       })
+    },
+    changeImage(e) {
+      let file = e.target.files[0].name
+      this.images[0] = file
+      this.extension = file.split('.').at(-1)
+      console.log(this.extension)
+    },
+    deleteFile(input, idx) {
+      this.files.forEach((item) => {
+        if (item.title === input.title) {
+          this.files.splice(idx, 1)
+        }
+      })
+    },
+    deleteImage() {
+      this.images = []
     },
   },
   components: {

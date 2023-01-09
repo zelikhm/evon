@@ -27,7 +27,7 @@
               <span>{{ selectLayout }}</span>
               <img src="../../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectLayout }" alt="">
             </div>
-            <div v-if="openSelectLayout" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
+            <div v-if="openSelectLayout" class="h-[120px] overflow-y-auto custom__scroll absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
               <span
                 v-for="(layout, idx) in layouts" :key="idx"
                 @click="changeSelectLayout(layout)"
@@ -46,7 +46,7 @@
               <span>{{ selectFloors }}</span>
               <img src="../../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openFloors }" alt="">
             </div>
-            <div v-if="openFloors" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
+            <div v-if="openFloors" class="h-[120px] overflow-y-auto custom__scroll absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
               <span
                 v-for="(floor, idx) in house.info.floors" :key="idx"
                 @click="changeSelectFloors(floor)"
@@ -57,16 +57,15 @@
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openStatus}">
-        <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Статус</span>
-        <div class="relative">
-          <div @click="openStatus = !openStatus" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
-            <span>{{ selectStatus}}</span>
-            <img src="../../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openStatus }" alt="">
-          </div>
-          <div v-if="openStatus" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
+        <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openStatus}">
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Статус</span>
+          <div class="relative">
+            <div @click="openStatus = !openStatus" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
+              <span>{{ selectStatus}}</span>
+              <img src="../../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openStatus }" alt="">
+            </div>
+            <div v-if="openStatus" class="h-[120px] overflow-y-auto custom__scroll absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
               <span
                 v-for="(status, idx) in statuses" :key="idx"
                 @click="changeSelectStatus(status)"
@@ -74,18 +73,18 @@
               >
                 {{ status.status }}
               </span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openStairs}">
-        <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">От лестничного пролета</span>
-        <div class="relative">
-          <div @click="openStairs = !openStairs" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
-            <span>{{ selectStairs }}</span>
-            <img src="../../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openStairs }" alt="">
-          </div>
-          <div v-if="openStairs" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
+        <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openStairs}">
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">От лестничного пролета</span>
+          <div class="relative">
+            <div @click="openStairs = !openStairs" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
+              <span>{{ selectStairs }}</span>
+              <img src="../../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openStairs }" alt="">
+            </div>
+            <div v-if="openStairs" class="h-[120px] overflow-y-auto custom__scroll absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
               <span
                 v-for="(stairs, idx) in stairses" :key="idx"
                 @click="changeSelectStairs(stairs)"
@@ -93,6 +92,7 @@
               >
                 {{ stairs.stairs }}
               </span>
+            </div>
           </div>
         </div>
       </div>
@@ -102,20 +102,40 @@
         <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="cost">
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3">
-        <div class="relative w-full">
-          <label class="w-full cursor-pointer flex justify-center items-center gap-2.5 xxl:gap-2 xl:gap-1.5 rounded-[5px] border border-solid border-[#E5DFEE] py-5 xxl:py-4 xl:py-3" for="upload_photo_one">
-            <img src="../../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
-            <span class="text-[#6435A5] text-[14px] xxl:text-[12px] xl:text-[10px]">Загрузить 1-ое фото</span>
-          </label>
-          <input class="absolute pointer-events-none overflow-hidden opacity-0 top-0 left-0 w-full" type="file" id="upload_photo_one" ref="image_up">
+      <div class="grid grid-cols-2 gap-5 xxl:gap-4 xl:gap-3">
+        <div>
+          <div class="relative w-full h-[10vw] lg:h-[14vw] md:h-[18vw] sm:h-[24vw] rounded-[5px]">
+            <img v-if="imageLoadOne" class="absolute w-full h-full rounded-[5px]" :src="imageOne" alt="">
+            <button v-if="imageLoadOne" @click="deleteImageOne" class="absolute rounded-[5px] m-2 bg-[#E84680] z-10 top-0 right-0 h-5 xxl:h-4.5 xl:h-4 w-5 xxl:w-4.5 xl:w-4">
+              <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-white h-[1px] w-[60%] rounded-[10px]"></span>
+              <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-white h-[1px] w-[60%] rounded-[10px]"></span>
+            </button>
+            <div class="border border-solid border-[#E5DFEE] bg__uploud-photo w-full h-full rounded-[5px]">
+              <div class="absolute rounded-[5px] w-full h-full top-0 left-0">
+                <label for="image_1" :class="{'-z-10': imageLoadOne}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-[5px]">
+                  <img src="../../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
+                </label>
+                <input @change="addImageOne" class="w-full h-full rounded-[5px] opacity-0 absolute top-0 left-0 pointer-events-none" id="image_1" type="file" ref="file">
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="relative w-full">
-          <label class="w-full cursor-pointer flex justify-center items-center gap-2.5 xxl:gap-2 xl:gap-1.5 rounded-[5px] border border-solid border-[#E5DFEE] py-5 xxl:py-4 xl:py-3" for="upload_photo_two">
-            <img src="../../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
-            <span class="text-[#6435A5] text-[14px] xxl:text-[12px] xl:text-[10px]">Загрузить 2-ое фото</span>
-          </label>
-          <input class="absolute pointer-events-none overflow-hidden opacity-0 top-0 left-0 w-full" type="file" id="upload_photo_two" ref="image_down">
+        <div>
+          <div class="relative w-full h-[10vw] lg:h-[14vw] md:h-[18vw] sm:h-[24vw] rounded-[5px]">
+            <img v-if="imageLoadTwo" class="absolute w-full h-full rounded-[5px]" :src="imageTwo" alt="">
+            <button v-if="imageLoadTwo" @click="deleteImageTwo" class="absolute rounded-[5px] m-2 bg-[#E84680] z-10 top-0 right-0  h-5 xxl:h-4.5 xl:h-4 w-5 xxl:w-4.5 xl:w-4">
+              <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-white h-[1px] w-[60%] rounded-[10px]"></span>
+              <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-white h-[1px] w-[60%] rounded-[10px]"></span>
+            </button>
+            <div class="border border-solid border-[#E5DFEE] bg__uploud-photo transition-all w-full h-full rounded-[5px]">
+              <div class="absolute rounded-[5px] w-full h-full top-0 left-0">
+                <label for="image_2" :class="{'-z-10': imageLoadTwo}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-[5px]">
+                  <img src="../../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
+                </label>
+                <input @change="addImageTwo" class="w-full h-full rounded-[5px] opacity-0 absolute top-0 left-0 pointer-events-none" id="image_2" type="file" ref="file">
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <button @click="addFlat" class="login__btn--bg bg-[#E84680] rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
@@ -171,10 +191,34 @@ export default {
         {stairs: '2', value: 2},
         {stairs: '3', value: 3},
         {stairs: '4', value: 4},
-      ]
+      ],
+      imageLoadOne: false,
+      imageOne: '',
+      imageLoadTwo: false,
+      imageTwo: '',
     }
   },
   methods: {
+    addImageOne(e) {
+      this.imageOne = URL.createObjectURL(e.target.files[0])
+      if (e.target.files.length == 1) {
+        this.imageLoadOne = true
+      }
+    },
+    addImageTwo(e) {
+      this.imageTwo = URL.createObjectURL(e.target.files[0])
+      if (e.target.files.length == 1) {
+        this.imageLoadTwo = true
+      }
+    },
+    deleteImageOne() {
+      this.imageOne = ''
+      this.imageLoadOne = false
+    },
+    deleteImageTwo() {
+      this.imageTwo = ''
+      this.imageLoadTwo = false
+    },
     addFlat() {
       let formData = new FormData()
 

@@ -44,8 +44,8 @@
             <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]">
               <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
                 <div class="flex">
-                  <input id="name_1" type="checkbox" class="custom__checkbox">
-                  <label for="name_1"></label>
+                  <input id="name_2" type="checkbox" class="custom__checkbox">
+                  <label for="name_2"></label>
                 </div>
                 <span class="leading-none">Дмитрию</span>
               </div>
@@ -54,8 +54,8 @@
             <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]">
               <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
                 <div class="flex">
-                  <input id="name_1" type="checkbox" class="custom__checkbox">
-                  <label for="name_1"></label>
+                  <input id="name_3" type="checkbox" class="custom__checkbox">
+                  <label for="name_3"></label>
                 </div>
                 <span class="leading-none">Дмитрию</span>
               </div>
@@ -64,8 +64,8 @@
             <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]">
               <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
                 <div class="flex">
-                  <input id="name_1" type="checkbox" class="custom__checkbox">
-                  <label for="name_1"></label>
+                  <input id="name_4" type="checkbox" class="custom__checkbox">
+                  <label for="name_4"></label>
                 </div>
                 <span class="leading-none">Дмитрию</span>
               </div>
@@ -74,8 +74,8 @@
             <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]">
               <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
                 <div class="flex">
-                  <input id="name_1" type="checkbox" class="custom__checkbox">
-                  <label for="name_1"></label>
+                  <input id="name_5" type="checkbox" class="custom__checkbox">
+                  <label for="name_5"></label>
                 </div>
                 <span class="leading-none">Дмитрию</span>
               </div>
@@ -84,8 +84,8 @@
             <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]">
               <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
                 <div class="flex">
-                  <input id="name_1" type="checkbox" class="custom__checkbox">
-                  <label for="name_1"></label>
+                  <input id="name_6" type="checkbox" class="custom__checkbox">
+                  <label for="name_6"></label>
                 </div>
                 <span class="leading-none">Дмитрию</span>
               </div>
@@ -94,8 +94,8 @@
             <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]">
               <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
                 <div class="flex">
-                  <input id="name_1" type="checkbox" class="custom__checkbox">
-                  <label for="name_1"></label>
+                  <input id="name_7" type="checkbox" class="custom__checkbox">
+                  <label for="name_8"></label>
                 </div>
                 <span class="leading-none">Дмитрию</span>
               </div>
@@ -104,8 +104,8 @@
             <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]">
               <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
                 <div class="flex">
-                  <input id="name_1" type="checkbox" class="custom__checkbox">
-                  <label for="name_1"></label>
+                  <input id="name_8" type="checkbox" class="custom__checkbox">
+                  <label for="name_8"></label>
                 </div>
                 <span class="leading-none">Дмитрию</span>
               </div>

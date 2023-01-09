@@ -6,15 +6,25 @@ import { Link } from '@inertiajs/inertia-vue3'
   <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] mb-5 xxl:mb-4 xl:mb-3">Добавить корпус и квартиры</h2>
   <div class="flex flex-col">
     <div class="grid grid-cols-6 lg:grid-cols-4 sm:grid-cols-3 gap-3 xxl:gap-2.5 xl:gap-2">
-      <div @click="targetFrame(frame)" v-for="frame in house.frames" :class="{ border: frame.active === 1 }" class="corpus__banner gap-3.5 xxl:gap-3 xl:gap-2.5 cursor-pointer rounded-[5px] border-solid border-[#6435A5] flex flex-col justify-center px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
-        <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">{{ frame.name }}</span>
-        <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap"></span>
+      <div @click="targetFrame(frame)" v-for="frame in house.frames" :class="{ border: frame.active === 1 }" class="corpus__banner flex justify-between cursor-pointer rounded-[5px] border-solid border-[#6435A5] px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
+        <div class="flex flex-col justify-center gap-3.5 xxl:gap-3 xl:gap-2.5">
+          <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">{{ frame.name }}</span>
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap"></span>
+        </div>
+        <div class="flex flex-col items-center justify-between gap-3.5 xxl:gap-3 xl:gap-2.5">
+          <button>
+            <img class="w-5 xxl:w-4 xl:w-3" src="../../assets/svg/pen_icon_grey.svg" alt="">
+          </button>
+          <button>
+            <img class="w-5 xxl:w-4 xl:w-3" src="../../assets/svg/bucket_icon_red.svg" alt="">
+          </button>
+        </div>
       </div>
       <div class="flex items-center">
         <img @click="this.$emit('open-add-frame')" src="../../assets/svg/plus_icon_purple.svg" class="cursor-pointer ml-3 xxl:ml-2.5 xl:ml-2 w-8 xxl:w-6 xl:w-5" alt="">
       </div>
     </div>
-    <div class="grid overflow-x-auto lg:w-[87.5vw] pb-2 custom__scroll--chess gap-4 xxl:gap-3.5 xl:gap-3 my-16 xxl:my-12 xl:my-10 text-[#1E1D2D] text-base xxl:text-sm xl:text-xs">
+    <div class="grid lg:w-[87.5vw] pb-2 custom__scroll--chess gap-4 xxl:gap-3.5 xl:gap-3 my-16 xxl:my-12 xl:my-10 text-[#1E1D2D] text-base xxl:text-sm xl:text-xs">
       <div class="text-[#8A8996] grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
         <div
           class="leading-none bg-white flex items-center gap-2 xl:gap-1.5"
@@ -40,7 +50,8 @@ import { Link } from '@inertiajs/inertia-vue3'
           <div class="leading-none">1</div>
           <div class="relative">
             <div @click="openStatus = !openStatus" class="flex items-center cursor-pointer gap-5 xxl:gap-4 xl:gap-3">
-              <span class="whitespace-nowrap">{{ selectStatus }}</span>
+              <span class="whitespace-nowrap">{{ selectStatus }}
+              </span>
               <svg class="w-2.5 xl:w-2" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5.00005 3.879L8.71255 0.166504L9.77305 1.227L5.00005 6L0.227051 1.227L1.28755 0.166504L5.00005 3.879Z" fill="#8A8996"/>
               </svg>
@@ -51,132 +62,6 @@ import { Link } from '@inertiajs/inertia-vue3'
               </span>
             </div>
           </div>
-        </div>
-        <div class="flex items-center justify-end flex-shrink-0">
-          <button class="border__right h-[56px] xxl:h-[48px] xl:h-[40px] w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/pen_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-          <button class="w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/bucket_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-        </div>
-      </div>
-      <div class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
-        <div class="grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
-          <div class="leading-none bg-white">1002</div>
-          <div class="leading-none">33.08</div>
-          <div class="leading-none">64 175 200</div>
-          <div class="leading-none">1+1</div>
-          <div class="leading-none">1</div>
-          <div class="leading-none">Бронь</div>
-        </div>
-        <div class="flex items-center justify-end flex-shrink-0">
-          <button class="border__right h-[56px] xxl:h-[48px] xl:h-[40px] w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/pen_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-          <button class="w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/bucket_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-        </div>
-      </div>
-      <div class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
-        <div class="grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
-          <div class="leading-none bg-white">1002</div>
-          <div class="leading-none">33.08</div>
-          <div class="leading-none">64 175 200</div>
-          <div class="leading-none">1+1</div>
-          <div class="leading-none">1</div>
-          <div class="leading-none">Бронь</div>
-        </div>
-        <div class="flex items-center justify-end flex-shrink-0">
-          <button class="border__right h-[56px] xxl:h-[48px] xl:h-[40px] w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/pen_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-          <button class="w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/bucket_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-        </div>
-      </div>
-      <div class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
-        <div class="grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
-          <div class="leading-none bg-white">1002</div>
-          <div class="leading-none">33.08</div>
-          <div class="leading-none">64 175 200</div>
-          <div class="leading-none">1+1</div>
-          <div class="leading-none">1</div>
-          <div class="leading-none">Бронь</div>
-        </div>
-        <div class="flex items-center justify-end flex-shrink-0">
-          <button class="border__right h-[56px] xxl:h-[48px] xl:h-[40px] w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/pen_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-          <button class="w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/bucket_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-        </div>
-      </div>
-      <div class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
-        <div class="grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
-          <div class="leading-none bg-white">1002</div>
-          <div class="leading-none">33.08</div>
-          <div class="leading-none">64 175 200</div>
-          <div class="leading-none">1+1</div>
-          <div class="leading-none">1</div>
-          <div class="leading-none">Бронь</div>
-        </div>
-        <div class="flex items-center justify-end flex-shrink-0">
-          <button class="border__right h-[56px] xxl:h-[48px] xl:h-[40px] w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/pen_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-          <button class="w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/bucket_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-        </div>
-      </div>
-      <div class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
-        <div class="grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
-          <div class="leading-none bg-white">1002</div>
-          <div class="leading-none">33.08</div>
-          <div class="leading-none">64 175 200</div>
-          <div class="leading-none">1+1</div>
-          <div class="leading-none">1</div>
-          <div class="leading-none">Бронь</div>
-        </div>
-        <div class="flex items-center justify-end flex-shrink-0">
-          <button class="border__right h-[56px] xxl:h-[48px] xl:h-[40px] w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/pen_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-          <button class="w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/bucket_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-        </div>
-      </div>
-      <div class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
-        <div class="grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
-          <div class="leading-none bg-white">1002</div>
-          <div class="leading-none">33.08</div>
-          <div class="leading-none">64 175 200</div>
-          <div class="leading-none">1+1</div>
-          <div class="leading-none">1</div>
-          <div class="leading-none">Бронь</div>
-        </div>
-        <div class="flex items-center justify-end flex-shrink-0">
-          <button class="border__right h-[56px] xxl:h-[48px] xl:h-[40px] w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/pen_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-          <button class="w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/bucket_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-        </div>
-      </div>
-      <div class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
-        <div class="grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
-          <div class="leading-none bg-white">1002</div>
-          <div class="leading-none">33.08</div>
-          <div class="leading-none">64 175 200</div>
-          <div class="leading-none">1+1</div>
-          <div class="leading-none">1</div>
-          <div class="leading-none">Бронь</div>
         </div>
         <div class="flex items-center justify-end flex-shrink-0">
           <button class="border__right h-[56px] xxl:h-[48px] xl:h-[40px] w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">

@@ -4,7 +4,7 @@
       <span class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] leading-none">Фильтры</span>
       <div class="flex items-center gap-4">
         <button class="text-[#6435A5] text-sm xxl:text-xs xl:text-[10px] lg:text-[12px] leading-none cursor-pointer">Сбросить</button>
-        <button @click="$emit('close-filter')" class="text-[#6435A5] text-sm xxl:text-xs xl:text-[10px] lg:text-[12px] leading-none cursor-pointer">Закрыть</button>
+        <button @click="$emit('close-filter')" class="hidden lg:block text-[#6435A5] text-sm xxl:text-xs xl:text-[10px] lg:text-[12px] leading-none cursor-pointer">Закрыть</button>
       </div>
     </div>
     <div class="h-[1px] w-full bg-[#E5DFEE]"></div>
