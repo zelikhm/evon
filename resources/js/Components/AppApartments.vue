@@ -8,7 +8,7 @@ import { Link } from '@inertiajs/inertia-vue3'
     <div class="grid grid-cols-6 lg:grid-cols-4 sm:grid-cols-3 gap-3 xxl:gap-2.5 xl:gap-2">
       <div @click="targetFrame(frame)" v-for="frame in house.frames" :class="{ border: frame.active === 1 }" class="corpus__banner gap-3.5 xxl:gap-3 xl:gap-2.5 cursor-pointer rounded-[5px] border-solid border-[#6435A5] flex flex-col justify-center px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
         <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">{{ frame.name }}</span>
-        <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap"></span>
+        <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ frame.flats.length }} квартир</span>
       </div>
       <div class="flex items-center">
         <img @click="this.$emit('open-add-frame')" src="../../assets/svg/plus_icon_purple.svg" class="cursor-pointer ml-3 xxl:ml-2.5 xl:ml-2 w-8 xxl:w-6 xl:w-5" alt="">
@@ -22,22 +22,22 @@ import { Link } from '@inertiajs/inertia-vue3'
         >
           <span class="leading-none">{{ item.title }}</span>
           <div @click="changeFilter(item)" class="flex flex-col gap-[1px] xl:gap-[0.5px]">
-            <svg class="cursor-pointer rotate-180 w-[9px] xxl:w-[8px] xl:w-[7px] h-[7px]" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path :class="{ 'fill-[#6435A5]': item.activeArrow === 2 }" d="M4.5 7L8.39711 0.25H0.602886L4.5 7Z" fill="#E5DFEE"/>
+            <svg class="cursor-pointer rotate-180 w-[9px] h-[7px] w-[9px] xxl:w-[8px] xl:w-[7px]" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path :class="{ 'fill-[#6435A5]': item.active === 1 }" d="M4.5 7L8.39711 0.25H0.602886L4.5 7Z" fill="#E5DFEE"/>
             </svg>
-            <svg class="cursor-pointer w-[9px] h-[7px] w-[9px] xxl:w-[8px] xl:w-[7px]" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path :class="{ 'fill-[#6435A5]': item.activeArrow === 1 }" d="M4.5 7L8.39711 0.25H0.602886L4.5 7Z" fill="#E5DFEE"/>
+            <svg class="cursor-pointer w-[9px] xxl:w-[8px] xl:w-[7px] h-[7px]" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path :class="{ 'fill-[#6435A5]': item.active === 2 }" d="M4.5 7L8.39711 0.25H0.602886L4.5 7Z" fill="#E5DFEE"/>
             </svg>
           </div>
         </div>
       </div>
-      <div class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
+      <div v-for="item in flats" class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
         <div class="grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
-          <div class="leading-none bg-white">1002</div>
-          <div class="leading-none">33.08</div>
-          <div class="leading-none">64 175 200</div>
-          <div class="leading-none">1+1</div>
-          <div class="leading-none">1</div>
+          <div class="leading-none bg-white">{{ item.id }}</div>
+          <div class="leading-none">{{ item.square }}</div>
+          <div class="leading-none">{{ item.price }}</div>
+          <div class="leading-none">{{ item.count }}</div>
+          <div class="leading-none">{{ item.floor }}</div>
           <div class="relative">
             <div @click="openStatus = !openStatus" class="flex items-center cursor-pointer gap-5 xxl:gap-4 xl:gap-3">
               <span class="whitespace-nowrap">{{ selectStatus }}</span>
@@ -61,135 +61,9 @@ import { Link } from '@inertiajs/inertia-vue3'
           </button>
         </div>
       </div>
-      <div class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
-        <div class="grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
-          <div class="leading-none bg-white">1002</div>
-          <div class="leading-none">33.08</div>
-          <div class="leading-none">64 175 200</div>
-          <div class="leading-none">1+1</div>
-          <div class="leading-none">1</div>
-          <div class="leading-none">Бронь</div>
-        </div>
-        <div class="flex items-center justify-end flex-shrink-0">
-          <button class="border__right h-[56px] xxl:h-[48px] xl:h-[40px] w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/pen_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-          <button class="w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/bucket_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-        </div>
-      </div>
-      <div class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
-        <div class="grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
-          <div class="leading-none bg-white">1002</div>
-          <div class="leading-none">33.08</div>
-          <div class="leading-none">64 175 200</div>
-          <div class="leading-none">1+1</div>
-          <div class="leading-none">1</div>
-          <div class="leading-none">Бронь</div>
-        </div>
-        <div class="flex items-center justify-end flex-shrink-0">
-          <button class="border__right h-[56px] xxl:h-[48px] xl:h-[40px] w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/pen_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-          <button class="w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/bucket_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-        </div>
-      </div>
-      <div class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
-        <div class="grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
-          <div class="leading-none bg-white">1002</div>
-          <div class="leading-none">33.08</div>
-          <div class="leading-none">64 175 200</div>
-          <div class="leading-none">1+1</div>
-          <div class="leading-none">1</div>
-          <div class="leading-none">Бронь</div>
-        </div>
-        <div class="flex items-center justify-end flex-shrink-0">
-          <button class="border__right h-[56px] xxl:h-[48px] xl:h-[40px] w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/pen_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-          <button class="w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/bucket_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-        </div>
-      </div>
-      <div class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
-        <div class="grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
-          <div class="leading-none bg-white">1002</div>
-          <div class="leading-none">33.08</div>
-          <div class="leading-none">64 175 200</div>
-          <div class="leading-none">1+1</div>
-          <div class="leading-none">1</div>
-          <div class="leading-none">Бронь</div>
-        </div>
-        <div class="flex items-center justify-end flex-shrink-0">
-          <button class="border__right h-[56px] xxl:h-[48px] xl:h-[40px] w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/pen_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-          <button class="w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/bucket_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-        </div>
-      </div>
-      <div class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
-        <div class="grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
-          <div class="leading-none bg-white">1002</div>
-          <div class="leading-none">33.08</div>
-          <div class="leading-none">64 175 200</div>
-          <div class="leading-none">1+1</div>
-          <div class="leading-none">1</div>
-          <div class="leading-none">Бронь</div>
-        </div>
-        <div class="flex items-center justify-end flex-shrink-0">
-          <button class="border__right h-[56px] xxl:h-[48px] xl:h-[40px] w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/pen_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-          <button class="w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/bucket_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-        </div>
-      </div>
-      <div class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
-        <div class="grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
-          <div class="leading-none bg-white">1002</div>
-          <div class="leading-none">33.08</div>
-          <div class="leading-none">64 175 200</div>
-          <div class="leading-none">1+1</div>
-          <div class="leading-none">1</div>
-          <div class="leading-none">Бронь</div>
-        </div>
-        <div class="flex items-center justify-end flex-shrink-0">
-          <button class="border__right h-[56px] xxl:h-[48px] xl:h-[40px] w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/pen_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-          <button class="w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/bucket_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-        </div>
-      </div>
-      <div class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
-        <div class="grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
-          <div class="leading-none bg-white">1002</div>
-          <div class="leading-none">33.08</div>
-          <div class="leading-none">64 175 200</div>
-          <div class="leading-none">1+1</div>
-          <div class="leading-none">1</div>
-          <div class="leading-none">Бронь</div>
-        </div>
-        <div class="flex items-center justify-end flex-shrink-0">
-          <button class="border__right h-[56px] xxl:h-[48px] xl:h-[40px] w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/pen_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-          <button class="w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/bucket_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </button>
-        </div>
-      </div>
     </div>
   </div>
-  <div class="w-full flex justify-center mt-5 xxl:mt-4 xl:mt-3 gap-3 xxl:gap-2.5 xl:gap-2 items-center text-[#8A8996] text-lg xxl:text-[15px] xl:text-[13px]">
+  <div class= "w-full flex justify-center mt-5 xxl:mt-4 xl:mt-3 gap-3 xxl:gap-2.5 xl:gap-2 items-center text-[#8A8996] text-lg xxl:text-[15px] xl:text-[13px]">
     <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer">
       <img src="../../assets/svg/arrow_right_grey.svg" class="rotate-180 w-5 xxl:w-4 xl:w-3" alt="">
     </div>
@@ -215,12 +89,12 @@ export default {
   data() {
     return {
       titleTable: [
-        { title: '№', activeArrow: 0 },
-        { title: 'Площадь', activeArrow: 0 },
-        { title: 'Цена', activeArrow: 0 },
-        { title: 'Планировка', activeArrow: 0 },
-        { title: 'Этаж', activeArrow: 0 },
-        { title: 'Статус', activeArrow: 0 },
+        { name: 'id', title: '№', active: 0 },
+        { name: 'square', title: 'Площадь', active: 0 },
+        { name: 'price', title: 'Цена', active: 0 },
+        { name: 'plan', title: 'Планировка', active: 0 },
+        { name: 'floor', title: 'Этаж', active: 0 },
+        { name: 'status', title: 'Статус', active: 0 }
       ],
       selectStatus: 'Свободно',
       id: null,
@@ -231,6 +105,8 @@ export default {
         { status: 'Акция', value: 3},
         { status: 'Перепродажа', value: 4},
       ],
+      flats: null,
+      frameId: null
     }
   },
   methods: {
@@ -242,20 +118,46 @@ export default {
       this.house.frames.forEach(item => item.active = 0)
       frame.active = 1
       this.$emit('change-frame', frame.id)
+      this.frameId = frame.id
+      this.flats = this.house.frames.find(item => item.id === frame.id).flats
+      this.titleTable.forEach(item => item.active = 0)
     },
     changeFilter(item) {
-      item.activeArrow += 1
-      if (item.activeArrow > 2) {
-        item.activeArrow = 0
+      item.active += 1
+
+      if (item.active > 2) {
+        item.active = 0
       }
+
+      this.filter(item, 'id')
+      this.filter(item, 'square')
+      this.filter(item, 'price')
+      this.filter(item, 'floor')
     },
+    filter(item, name) {
+      if (item.name === name && item.active === 1) {
+        this.flats = this.flats.sort((a, b) => a[name] - b[name])
+      } else if (item.name === name && item.active === 2) {
+        this.flats = this.flats.sort((a, b) => b[name] - a[name])
+      } else if (item.active === 0) {
+        this.flats = this.house.frames.find(item => item.id === this.frameId).flats
+        console.log(this.flats)
+      }
+    }
   },
   created() {
-    this.house.frames.forEach((item, idx) => {
-      if (idx === 0) item.active = 1
-      else item.active = 0
-    })
-  }
+    if (this.house.frames.length > 0) {
+      let startFrame = this.house.frames[0].id
+
+      this.house.frames.forEach((item, idx) => {
+        if (idx === 0) item.active = 1
+        else item.active = 0
+      })
+      this.flats = this.house.frames.find(item => item.id === startFrame).flats
+
+      this.$emit('change-frame', startFrame)
+    }
+  },
 }
 
 </script>

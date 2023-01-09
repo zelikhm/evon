@@ -67,6 +67,7 @@
 
       </div>
     </div>
+
   </main>
   <app-footer />
 </template>
@@ -81,6 +82,7 @@ import AppModalAddContact from "../Layouts/modal/AppModalAddContact.vue"
 import AppModalAddApartments from "../Layouts/modal/AppModalAddApartments.vue"
 import AppModalAddFrame from "../Layouts/modal/AppModalAddFrame.vue"
 import AppModalNotification from "@/Layouts/modal/AppModalNotification.vue"
+
 
 export default {
   props: {
@@ -129,12 +131,13 @@ export default {
     },
     closeAddFrame(data) {
       this.modalAddFrame = false
-      this.readyHouse = data
-      console.log(data)
+      if (this.readyHouse.frames.length === 1) {
+        this.activeFrame = this.readyHouse.frames[0].id
+      }
     },
     changeFrame(data) {
       this.activeFrame = data
-    }
+    },
   },
   created() {
     console.log(this.count)

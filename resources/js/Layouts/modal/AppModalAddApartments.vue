@@ -12,12 +12,12 @@
 
         <div class="flex flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
           <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="number">№</label>
-          <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="number">
+          <input v-model="flat.id" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="number">
         </div>
 
         <div class="flex flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
           <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="coord_object">Площадь (м²)</label>
-          <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="coord_object">
+          <input v-model="flat.square" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="coord_object">
         </div>
 
         <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectLayout}">
@@ -99,7 +99,7 @@
 
       <div class="flex flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
         <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="cost">Цена (€)</label>
-        <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="cost">
+        <input v-model="flat.price" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="cost">
       </div>
 
       <div class="grid grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3">
@@ -179,13 +179,14 @@ export default {
       let formData = new FormData()
 
       this.flat.count = this.selectLayout
-      this.flat.floor = this.selectFloors
-      this.flat.stairs = this.selectStairs
+      this.flat.floor = +this.selectFloors
+      this.flat.stairs = +this.selectStairs
       this.flat.status = this.selectStatus
+      console.log(this.activeFrame)
 
       formData.append('frame_id', this.activeFrame)
       formData.append('number', this.flat.id)
-      formData.append('id', this.flat.square)
+      formData.append('square', this.flat.square)
       formData.append('count', this.flat.count)
       formData.append('floor', this.flat.floor)
       formData.append('status', this.flat.status)
@@ -203,6 +204,7 @@ export default {
       }).then(response => console.log(response.data))
         .catch(e => console.error(e))
 
+      this.$emit('close-add-apartments')
     },
     changeSelectLayout(layout) {
       this.selectLayout = layout.layout
