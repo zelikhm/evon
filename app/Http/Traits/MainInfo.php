@@ -34,12 +34,13 @@ trait MainInfo {
     if(count($requestCity) > 5) {
     } else {
       $requestCity->merge($requestArea);
-      $requestCity->splice(0, 5);
+
     }
 
     if(count($requestCity) === 0) {
       $requestCity = HouseModel::limit(5)->whereNot('id', $house->id)->with(['flats'])->get();
     }
+    $requestCity->splice(0, 5);
 
     return $requestCity;
   }
