@@ -40,8 +40,10 @@ Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
 
 });
 
-Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'index']);
-Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
+Route::middleware('auth', 'session')->group(function () {
+  Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'index']);
+  Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
+});
 
 Route::get('test', function () {
   return  Inertia::render('TestApp');
