@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
-  <app-header />
+  <app-header :user="user" />
   <main>
     <div class="_container">
       <div class="my-14 xxl:my-10 xl:my-8">

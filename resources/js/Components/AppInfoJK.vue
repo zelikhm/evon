@@ -7,18 +7,20 @@ import {Link} from '@inertiajs/inertia-vue3'
   <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Найдено {{ count }} новостроек</span>
   <div class="flex-col flex gap-5 xxl:gap-4 xl:gap-3 pt-5 xxl:pt-4 xl:pt-3">
 
-    <div
-        class="flex flex-col border gap-2 xxl:gap-1.5 border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-      <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name_object">Название</label>
+    <div :class="{ validation: validation.title }"
+         class="flex flex-col border gap-2 xxl:gap-1.5 border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
+      <label :class="{ validationText: validation.title }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name_object">Название</label>
       <input v-model="object.title"
+             @input="checkValidation(2)"
              class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
              type="text" id="name_object" >
     </div>
 
-    <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]">
-      <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"
+    <div :class="{ validation: validation.description }" class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]">
+      <label :class="{ validationText: validation.description }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"
              for="description_object">Описание объекта</label>
       <textarea v-model="object.description"
+                @input="checkValidation(3)"
                 class="custom__scroll text-[#1E1D2D] resize-none text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0"
                 type="text" id="description_object"></textarea>
     </div>
@@ -84,11 +86,11 @@ import {Link} from '@inertiajs/inertia-vue3'
                 type="text" id="text_agency"></textarea>
     </div>
 
-    <div
-        class="flex flex-col border border-solid border-[#E5DFEE] gap-2.5 xxl:gap-2 xl:gap-1.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-      <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="coord_object">Введи координаты
+    <div :class="{ validation: validation.coordinates }" class="flex flex-col border border-solid border-[#E5DFEE] gap-2.5 xxl:gap-2 xl:gap-1.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
+      <label :class="{ validationText: validation.coordinates }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="coord_object">Введите координаты
         объекта</label>
-      <input v-model="object.latitude"
+      <input v-model="object.coordinates"
+             @input="checkValidation(4)"
              class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
              type="number" id="coord_object">
     </div>
@@ -144,9 +146,10 @@ import {Link} from '@inertiajs/inertia-vue3'
           </div>
         </div>
 
-        <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">
-          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_floors">Количество этажей</label>
+        <div :class="{ validation: validation.floors }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">
+          <label :class="{ validationText: validation.floors }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_floors">Количество этажей</label>
           <input v-model="object.floors"
+                 @input="checkValidation(5)"
                  class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                  type="number" id="for_floors">
         </div>
@@ -321,10 +324,10 @@ import {Link} from '@inertiajs/inertia-vue3'
         <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">
           Вознаграждение</h3>
         <div class="grid grid-cols-2 gap-7 xxl:gap-5 xl:gap-4">
-          <div
-              class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="commission">Комиссия (%)</label>
+          <div :class="{ validation: validation.percent }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+            <label :class="{ validationText: validation.percent }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="commission">Комиссия (%)</label>
             <input v-model="object.percent"
+                   @input="checkValidation(6)"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                    type="number" id="commission">
           </div>
@@ -467,8 +470,7 @@ export default {
         description: "",
         city: "",
         area: "",
-        longitude: "",
-        latitude: "",
+        coordinates: "",
         percent: "",
         comment: "",
         statusHouse: "",
@@ -539,6 +541,15 @@ export default {
       supportsReady: [],
       images: [],
       files: [],
+      validation: {
+        title: false,
+        description: false,
+        coordinates: false,
+        latitude: false,
+        percent: false,
+        floors: false,
+        image: false
+      }
     }
   },
   methods: {
@@ -546,55 +557,58 @@ export default {
       this.openedMarkerID = id
     },
     addAndContinue(flag) {
-      this.object.info = []
-      this.object.dop = []
 
-      this.valueSelectServices.forEach(value => {
-        this.object.dop.push(this.dops.find(item => item.name === value).id)
-      })
+      this.checkValidation(1)
 
-      this.valueSelectInfrastructure.forEach(value => {
-        this.object.info.push(this.infos.find(item => item.name === value).id)
-      })
+      if (!this.validation.description && !this.validation.title && !this.validation.coordinates && !this.validation.percent && !this.validation.floors && !this.validation.image) {
+        this.object.info = []
+        this.object.dop = []
 
+        this.valueSelectServices.forEach(value => {
+          this.object.dop.push(this.dops.find(item => item.name === value).id)
+        })
 
-      this.object.city = this.selectCity
-      this.object.area = this.selectRegion
+        this.valueSelectInfrastructure.forEach(value => {
+          this.object.info.push(this.infos.find(item => item.name === value).id)
+        })
 
-      let formData = new FormData();
+        this.object.city = this.selectCity
+        this.object.area = this.selectRegion
 
-      formData.append('user_id', this.user.id);
-      formData.append('title', this.object.title);
-      formData.append('description', this.object.description);
-      formData.append('city', this.selectCity);
-      formData.append('area', this.selectRegion);
-      formData.append('longitude', this.object.latitude);
-      formData.append('latitude', this.object.latitude);
-      formData.append('percent', this.object.percent);
-      formData.append('comment', this.object.comment);
-      formData.append('statusHouse', this.selectDeadline);
-      formData.append('type', this.selectType);
-      formData.append('dop', this.object.dop);
-      formData.append('info', this.object.info);
-      formData.append('floors', this.object.floors);
-      formData.append('toSea', this.object.toSea);
-      formData.append('toSchool', this.object.toSchool);
-      formData.append('toShop', this.object.toShop);
-      formData.append('toPark', this.object.toPark);
-      formData.append('toBus', this.object.toBus);
-      formData.append('toChildrenSchool',this.object.toChildrenSchool);
-      formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
-      formData.append('image', this.$refs.file.files[0]);
-      formData.append('token', this.globalToken);
-      console.log(formData)
+        let formData = new FormData();
 
-      axios({
-        method: 'post',
-        url: '/api/house/create',
-        headers: {"Content-type": "multipart/form-data"},
-        data: formData,
-      }).then(res => this.addedSupports(res, flag))
+        formData.append('user_id', this.user.id);
+        formData.append('title', this.object.title);
+        formData.append('description', this.object.description);
+        formData.append('city', this.selectCity);
+        formData.append('area', this.selectRegion);
+        formData.append('longitude', this.object.coordinates);
+        formData.append('latitude', this.object.coordinates);
+        formData.append('percent', this.object.percent);
+        formData.append('comment', this.object.comment);
+        formData.append('statusHouse', this.selectDeadline);
+        formData.append('type', this.selectType);
+        formData.append('dop', this.object.dop);
+        formData.append('info', this.object.info);
+        formData.append('floors', this.object.floors);
+        formData.append('toSea', this.object.toSea);
+        formData.append('toSchool', this.object.toSchool);
+        formData.append('toShop', this.object.toShop);
+        formData.append('toPark', this.object.toPark);
+        formData.append('toBus', this.object.toBus);
+        formData.append('toChildrenSchool',this.object.toChildrenSchool);
+        formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
+        formData.append('image', this.$refs.file.files[0]);
+        formData.append('token', this.globalToken);
+        console.log(formData)
 
+        axios({
+          method: 'post',
+          url: '/api/house/create',
+          headers: {"Content-type": "multipart/form-data"},
+          data: formData,
+        }).then(res => this.addedSupports(res, flag))
+      }
     },
     addedSupports(res, flag) {
       let idNewJk = res.data.id,
@@ -638,6 +652,21 @@ export default {
       }).then(res => {
         // this.$emit('addAndContinue')
       })
+    },
+    checkValidation(num) {
+      if (num === 1) {
+        this.object.title === '' ? this.validation.title = true : this.validation.title = false
+        this.object.description === '' ? this.validation.description = true : this.validation.description = false
+        this.object.coordinates === '' ? this.validation.coordinates = true : this.validation.coordinates = false
+        this.object.percent === '' ? this.validation.percent = true : this.validation.percent = false
+        this.object.floors === '' ? this.validation.floors = true : this.validation.floors = false
+      } else {
+        if (this.validation.title && num === 2) this.validation.title = false
+        if (this.validation.description && num === 3) this.validation.description = false
+        if (this.validation.coordinates && num === 4) this.validation.coordinates = false
+        if (this.validation.floors && num === 5) this.validation.floors = false
+        if (this.validation.percent && num === 6) this.validation.percent = false
+      }
     },
     changeSelectCity(city, idx) {
       this.selectCity = this.object.city = city.title
@@ -719,8 +748,7 @@ export default {
       this.object.description = this.house.description
       this.selectCity = this.house.city
       this.selectRegion = this.house.area
-      this.object.latitude = this.house.latitude
-      this.object.longitude = this.house.longitude
+      this.object.coordinates = this.house.latitude + ' ' + this.house.longitude
       this.selectType = this.house.info.type
       this.selectDeadline = this.house.info.status
       this.object.floors = this.house.info.floors
@@ -768,3 +796,13 @@ export default {
 }
 
 </script>
+
+<style scoped>
+.validation {
+  border: 1px solid red;
+}
+
+.validationText {
+  color: red;
+}
+</style>

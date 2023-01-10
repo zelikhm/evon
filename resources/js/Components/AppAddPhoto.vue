@@ -40,6 +40,7 @@
               <span class="text-[#6435A5] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Загрузить фото</span>
             </label>
             <input
+              ref="photos"
               multiple class="w-full h-full rounded-full opacity-0 absolute top-0 left-0 pointer-events-none"
               id="image" type="file"
               @change="addPhotos"
@@ -56,6 +57,7 @@
 
 <script>
 export default {
+  props: ['house'],
   data() {
     return {
       photos: [
@@ -66,6 +68,7 @@ export default {
       ],
       myPhotos: [],
       avatar: false,
+      files: []
     }
   },
   methods: {
@@ -93,7 +96,27 @@ export default {
         this.$refs.progressBar.forEach((i) => {
           i.style.display = 'none'
         })
+
+        this.files.forEach(item => {
+          let formData = new FormData()
+
+          formData.append('image', item)
+          formData.append('house_id', this.house.id)
+          formData.append('category', 3)
+          formData.append('token', this.globalToken)
+
+          axios({
+            method: 'post',
+            url: '/api/house/addedImages',
+            headers: {"Content-type": "multipart/form-data"},
+            data: formData,
+          }).then(response => console.log(response))
+
+          console.log(0)
+
+        })
       }, 1000)
+      this.files.push(...this.$refs.photos.files)
       setTimeout(() => {
         this.$refs.uploudBackground.forEach((i) => {
           i.style.display = 'none'
@@ -114,9 +137,6 @@ export default {
       else item.active = 0
     })
   },
-  components: {
-
-  }
 }
 
 </script>
