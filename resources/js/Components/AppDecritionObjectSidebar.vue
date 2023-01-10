@@ -51,7 +51,7 @@
         <span class="text-base text-[#8A8996]  xxl:text-sm xl:text-xs">{{ house.comment }}</span>
       </div>
     </div>
-    <div class="pb-14 xxl:pb-10 xl:pb-8">
+    <div class="pb-14 xxl:pb-10 xl:pb-8" v-if="house.supports.length > 0">
       <div class="font-medium text-lg xxl:text-[15px] xl:text-[13px] pb-5 xxl:pb-4 xl:pb-3 leading-none">Контакты</div>
       <div class="bg-white p-4 xxl:p-3 xl:p-2.5 rounded-[10px] mb-3" v-for="item in house.supports">
         <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 pb-5 xxl:pb-4 xl:pb-3">

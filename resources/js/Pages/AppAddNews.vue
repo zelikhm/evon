@@ -7,7 +7,7 @@ import { Link } from '@inertiajs/inertia-vue3'
     v-if="openNotification"
     @close-notification="openNotification = false"
   />
-  <app-header />
+  <app-header :user="user" />
   <main>
     <div class="_container">
       <div class="px-[20vw] lg:px-[10vw] md:px-[6vw] sm:px-0 relative mx-auto max-w-[826px] box-content">
@@ -18,7 +18,7 @@ import { Link } from '@inertiajs/inertia-vue3'
               <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">ЖК</span>
               <div class="relative">
                 <div @click="openSelectJK = !openSelectJK" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
-                  <span>{{ selectJK.title }}</span>
+                  <span>{{ selectJK }}</span>
                   <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectJK }" alt="">
                 </div>
                 <div v-if="openSelectJK" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
@@ -44,9 +44,9 @@ import { Link } from '@inertiajs/inertia-vue3'
                 theme="snow"
               />
             </div>
-            <Link href="#" @click="addNews" class="login__btn--bg rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
+            <div @click="addNews" class="login__btn--bg rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
               <div class="text-white text-center font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">{{ itemEdit === undefined ? 'Добавить' : 'Редактировать' }}</div>
-            </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -66,7 +66,8 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css';
 export default {
   props: {
     houses: [],
-    new: []
+    new: [],
+    user: []
   },
   data() {
     return {
@@ -97,12 +98,6 @@ export default {
     },
     addNews() {
       if (this.itemEdit === undefined) {
-        console.log({
-          house_id: this.dataNews.house_id,
-          title: this.dataNews.title,
-          description: this.dataNews.description,
-          token: this.globalToken
-        })
         axios.post('/api/news/add', {
           house_id: this.dataNews.house_id,
           title: this.dataNews.title,
@@ -110,6 +105,8 @@ export default {
           token: this.globalToken
         })
       } else {
+        console.log(this.idNews)
+        console.log(this.dataNews)
         axios.post('/api/news/edit', {
           house_id: this.idNews,
           new_id: this.dataNews.house_id,
@@ -124,7 +121,6 @@ export default {
     let link = window.location.href.split('#')
     let link2 = window.location.href.split('/')
     if (link[1] !== undefined) {
-      console.log(this.houses)
       this.dataNews.house_id = this.houses.find(item => item.id === +link[1])
       this.selectJK = this.houses.find(item => item.id === +link[1])
     }
@@ -132,22 +128,23 @@ export default {
       this.dataNews.house_id = this.houses.find(item => item.id === +link2.at(-1)).id
       this.selectJK = this.houses.find(item => item.id === +link2.at(-1)).title
     }
-    console.log(this.houses)
-
     this.itemEdit = this.new
+
     if (this.itemEdit !== undefined) {
       this.selectJK = this.itemEdit.house.title
       this.dataNews.title = this.itemEdit.title
       this.dataNews.description = this.itemEdit.description
       this.idNews = this.itemEdit.id
+      console.log(this.itemEdit)
     }
+
   },
   components: {
     AppHeader,
     AppFooter,
     QuillEditor,
     AppModalNotification,
-  }
+  },
 }
 </script>
 

@@ -49,15 +49,15 @@ import { Link } from '@inertiajs/inertia-vue3'
           <div class="leading-none">{{ item.count }}</div>
           <div class="leading-none">{{ item.floor }}</div>
           <div class="relative">
-            <div @click="openStatus = !openStatus" class="flex items-center cursor-pointer gap-5 xxl:gap-4 xl:gap-3">
-              <span class="whitespace-nowrap">{{ selectStatus }}
+            <div @click="item.statusActive = !item.statusActive" class="flex items-center cursor-pointer gap-5 xxl:gap-4 xl:gap-3">
+              <span class="whitespace-nowrap">{{ item.status }}
               </span>
               <svg class="w-2.5 xl:w-2" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5.00005 3.879L8.71255 0.166504L9.77305 1.227L5.00005 6L0.227051 1.227L1.28755 0.166504L5.00005 3.879Z" fill="#8A8996"/>
               </svg>
             </div>
-            <div v-if="openStatus" class="absolute flex flex-col top-[130%] left-0 bg-white border border-solid border-[#E5DFEE] rounded-[5px]">
-              <span @click="changeSelectStatus(status)" v-for="status in statuses" class="border__bottom--not cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 whitespace-nowrap">
+            <div v-if="item.statusActive" class="absolute flex flex-col z-20 top-[130%] left-0 bg-white border border-solid border-[#E5DFEE] rounded-[5px]">
+              <span @click="changeSelectStatus(status, item)" v-for="status in statuses" class="border__bottom--not cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 whitespace-nowrap">
                 {{ status.status }}
               </span>
             </div>
@@ -111,19 +111,20 @@ export default {
       id: null,
       openStatus: false,
       statuses: [
-        { status: 'Свободно', value: 1},
-        { status: 'Продажи закрыты', value: 2},
-        { status: 'Акция', value: 3},
-        { status: 'Перепродажа', value: 4},
+        { status: 'Свободно', value: 1 },
+        { status: 'Продажи закрыты', value: 2 },
+        { status: 'Акция', value: 3 },
+        { status: 'Перепродажа', value: 4 },
       ],
       flats: null,
       frameId: null
     }
   },
   methods: {
-    changeSelectStatus(status) {
-      this.selectStatus = status.status
-      this.openStatus = false
+    changeSelectStatus(status, item) {
+      item.status = status.status
+      item.statusActive = !item.statusActive
+      console.log(item)
     },
     targetFrame(frame) {
       this.house.frames.forEach(item => item.active = 0)
@@ -167,6 +168,12 @@ export default {
       this.flats = this.house.frames.find(item => item.id === startFrame).flats
 
       this.$emit('change-frame', startFrame)
+
+      this.house.frames.forEach(item => {
+        if (item.flats) {
+          item.statusActive = 0
+        }
+      })
     }
   },
 }
