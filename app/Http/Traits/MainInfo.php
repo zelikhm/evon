@@ -34,12 +34,13 @@ trait MainInfo {
     if(count($requestCity) > 5) {
     } else {
       $requestCity->merge($requestArea);
-      $requestCity->splice(0, 5);
+
     }
 
     if(count($requestCity) === 0) {
       $requestCity = HouseModel::limit(5)->whereNot('id', $house->id)->with(['flats'])->get();
     }
+    $requestCity->splice(0, 5);
 
     return $requestCity;
   }
@@ -154,7 +155,7 @@ trait MainInfo {
    */
 
   protected function getAllHouse() {
-    return HouseModel::where('visible', true)
+    return HouseModel::where('visible', 1)
       ->where('active', 2)
       ->with(['info', 'supports', 'files', 'frames', 'images'])
       ->get();
@@ -199,7 +200,7 @@ trait MainInfo {
 
   protected function getHouse($id) {
     $house = HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'user', 'news'])
-      ->where('slug', $id)
+      ->where('id', $id)
       ->first();
 
     foreach ($house->frames as $frame) {

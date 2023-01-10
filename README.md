@@ -105,6 +105,19 @@ path createFrame \ [post] / поля:
 - house_id - айди жк
 - name - Название
 
+Редактирование корпуса \
+path editFrame \ [post] / поля:
+
+- frame_id - айди корпуса
+- name - Название
+- token
+
+Удаление корпуса (+ квартиры и изображения) \
+path deleteFrame \ [post] / поля:
+
+- frame_id - айди корпуса
+- token
+
 Добавление квартиры \
 path createFlat \ [post] / поля:
 
@@ -118,6 +131,28 @@ path createFlat \ [post] / поля:
 - price - Цена
 - image_up - верхнее изображение (category = 0)
 - image_down - нижнее изображение (category = 1)
+- token
+
+Редактировани квартиры \
+path editFlat \ [post] / поля:
+
+- flat_id - айди квартиры
+- number - Номер
+- square - Площадь
+- count - Планировка
+- floor - Этаж
+- status - Статус
+- stairs - Номер от лестницы
+- price - Цена
+- image_up - верхнее изображение (category = 0)
+- image_down - нижнее изображение (category = 1)
+- token
+
+Удаление квартиры (+ изображения) \
+path deletedFlat \ [post] / поля:
+
+- flat_id - айди квартиры
+- token
 
 Изменение статуса видимости (скрыть) \
 path setVisible \ [post] / поля:
