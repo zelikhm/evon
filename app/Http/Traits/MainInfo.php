@@ -200,7 +200,7 @@ trait MainInfo {
 
   protected function getHouse($id) {
     $house = HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'user', 'news'])
-      ->where('slug', $id)
+      ->where('id', $id)
       ->first();
 
     foreach ($house->frames as $frame) {
