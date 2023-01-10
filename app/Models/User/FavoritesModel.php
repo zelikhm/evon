@@ -13,6 +13,8 @@ class FavoritesModel extends Model
     protected $fillable = [
       'user_id',
       'house_id',
+      'created_at',
+      'updated_at',
     ];
 
     protected $hidden = [
