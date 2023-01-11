@@ -157,7 +157,7 @@ trait MainInfo {
   protected function getAllHouse() {
     return HouseModel::where('visible', 1)
       ->where('active', 2)
-      ->with(['info', 'supports', 'files', 'frames', 'images'])
+      ->with(['info', 'supports', 'files', 'frames', 'images', 'flats'])
       ->get();
   }
 
