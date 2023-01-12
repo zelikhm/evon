@@ -34,11 +34,11 @@
             <div class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5 p-4 xxl:p-3 xl:p-2">
               <button class="relative plus__hover flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
                 <img src="../../assets/svg/plus_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="plus">
-                <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">Добавить в подборки</div>
+                <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">{{ hints.selection }}</div>
               </button>
-              <button class="relative heart__hover flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
+              <button class="relative heart__hover flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]" @click="addToFavorite">
                 <img src="../../assets/svg/heart_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="heart">
-                <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">Добавить в избранное</div>
+                <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">{{ hints.favorite }}</div>
               </button>
             </div>
 
@@ -166,7 +166,7 @@
     </div>
     <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
     <div class="_container">
-      <app-description-object-other-j-k :house="house" />
+      <app-description-object-other-j-k :house="house" :slider="slider" />
     </div>
   </main>
   <app-footer />
@@ -198,10 +198,25 @@ export default {
       fullDescription: false,
       arrayInfos: [],
       album: false,
+      hints: {
+        selection: 'Добавить в подборки',
+        favorite: 'Добавить в избранное'
+      }
     }
   },
   methods: {
-
+    addToFavorite() {
+      console.log({
+        user_id: this.user.id,
+        house_id: this.house.id,
+        token: this.globalToken
+      })
+      axios.post('/api/favorite/add', {
+        user_id: this.user.id,
+        house_id: this.house.id,
+        token: this.globalToken
+      }).then(() => this.hints.favorite = 'Добавлено!')
+    }
   },
   components: {
     AppHeader,

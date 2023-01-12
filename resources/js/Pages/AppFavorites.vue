@@ -1,5 +1,5 @@
 <template>
-  <app-header />
+  <app-header :user="user" />
   <main class="relative">
 
     <div class="absolute w-full text-center favorites__banner py-3 xxl:py-2.5 xl:py-2 text-[#30CB6E] text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">Euro Avsallar Residence добавлен в избранное</div>
@@ -215,10 +215,21 @@
 import AppHeader from "@/Layouts/AppHeader.vue"
 import AppFooter from "@/Layouts/AppFooter.vue"
 
+import { computed } from 'vue'
+import { usePage } from '@inertiajs/inertia-vue3'
+
 export default {
   components: {
     AppHeader,
     AppFooter,
+  },
+  data() {
+    return {
+      user: computed(() => usePage().props.value.auth.user)
+    }
+  },
+  mounted() {
+    console.log(this.user)
   }
 }
 

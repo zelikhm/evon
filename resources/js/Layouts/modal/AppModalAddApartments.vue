@@ -115,7 +115,7 @@
                 <label for="image_1" :class="{'-z-10': imageLoadOne}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-[5px]">
                   <img src="../../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
                 </label>
-                <input @change="addImageOne" class="w-full h-full rounded-[5px] opacity-0 absolute top-0 left-0 pointer-events-none" id="image_1" type="file" ref="file">
+                <input @change="addImageOne" class="w-full h-full rounded-[5px] opacity-0 absolute top-0 left-0 pointer-events-none" id="image_1" type="file" ref="image_up">
               </div>
             </div>
           </div>
@@ -132,7 +132,7 @@
                 <label for="image_2" :class="{'-z-10': imageLoadTwo}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-[5px]">
                   <img src="../../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
                 </label>
-                <input @change="addImageTwo" class="w-full h-full rounded-[5px] opacity-0 absolute top-0 left-0 pointer-events-none" id="image_2" type="file" ref="file">
+                <input @change="addImageTwo" class="w-full h-full rounded-[5px] opacity-0 absolute top-0 left-0 pointer-events-none" id="image_2" type="file" ref="image_down">
               </div>
             </div>
           </div>
@@ -222,11 +222,12 @@ export default {
     addFlat() {
       let formData = new FormData()
 
+      console.log(this.$refs)
+
       this.flat.count = this.selectLayout
       this.flat.floor = +this.selectFloors
       this.flat.stairs = +this.selectStairs
       this.flat.status = this.selectStatus
-      console.log(this.activeFrame)
 
       formData.append('frame_id', this.activeFrame)
       formData.append('number', this.flat.id)

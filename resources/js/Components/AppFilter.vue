@@ -31,14 +31,14 @@
             </div>
             <div v-if="openSelectCity" class="absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
               <div class="relative w-full p-5 xxl:p-4 xl:p-3">
-                <input class="py-3 xxl:py-2.5 xl:py-2 pl-10 xxl:pl-8 xl:pl-6 w-full text-lg xxl:text-[15px] xl:text-[13px] rounded-[6px] leading-none border border-solid border-[#E5DFEE]" type="text">
+                <input v-model="searchValue" class="py-3 xxl:py-2.5 xl:py-2 pl-10 xxl:pl-8 xl:pl-6 w-full text-lg xxl:text-[15px] xl:text-[13px] rounded-[6px] leading-none border border-solid border-[#E5DFEE]" type="text">
                 <img class="absolute top-1/2 -translate-y-1/2 translate-x-1/2 w-4.5 xxl:w-4 xl:w-3.5" src="../../assets/svg/search_icon_grey.svg" alt="">
               </div>
               <span
-                v-for="(city, idx) in cities" :key="idx"
-                @click="changeSelectCity(city)"
+                v-for="(city, idx) in filteredCity" :key="idx"
+                @click="changeSelectCity(city, idx)"
                 class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
-              >{{ city.city }}</span>
+              >{{ city.title }}</span>
             </div>
           </div>
         </div>
@@ -51,13 +51,13 @@
               <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectRegion }" alt="">
             </div>
             <div v-if="openSelectRegion" class="absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
-                  <span
-                    v-for="(region, idx) in regions" :key="idx"
-                    @click="changeSelectRegion(region)"
-                    class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
-                  >
-                    {{ region.region }}
-                  </span>
+              <span
+                v-for="(region, idx) in regions" :key="idx"
+                @click="changeSelectRegion(region)"
+                class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
+              >
+                {{ region.title }}
+              </span>
             </div>
           </div>
         </div>
@@ -118,11 +118,11 @@
             </div>
             <div v-if="openSelectDev" class="absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
               <span
-                v-for="(dev, idx) in optionsSelectDev" :key="idx"
-                @click="changeSelectDev(dev)"
+                v-for="(item, idx) in builders" :key="idx"
+                @click="changeSelectDev(item)"
                 class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
               >
-                {{ dev.dev }}
+                {{ item.first_name }}
               </span>
             </div>
           </div>
@@ -159,37 +159,9 @@
         <div class="mb-10 xxl:mb-8 xl:mb-6">
           <div class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] mb-5 xxl:mb-4 xl:mb-3 leading-none">Инфраструктура</div>
           <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
-            <div class="flex items-center text-[#1E1D2D]">
-              <input class="custom__checkbox" name="infrastructure" type="checkbox" id="infrastructure_1">
-              <label class="text-base xxl:text-[13px] xl:text-[11px]" for="infrastructure_1">Открытый бассейн</label>
-            </div>
-            <div class="flex items-center">
-              <input class="custom__checkbox" name="infrastructure" type="checkbox" id="infrastructure_2">
-              <label class="text-base xxl:text-[13px] xl:text-[11px]" for="infrastructure_2">Спорт зал</label>
-            </div>
-            <div class="flex items-center">
-              <input class="custom__checkbox" name="infrastructure" type="checkbox" id="infrastructure_3">
-              <label class="text-base xxl:text-[13px] xl:text-[11px]" for="infrastructure_3">Кинотеатр</label>
-            </div>
-            <div class="flex items-center">
-              <input class="custom__checkbox" name="infrastructure" type="checkbox" id="infrastructure_4">
-              <label class="text-base xxl:text-[13px] xl:text-[11px]" for="infrastructure_4">Трансфер до пляжа</label>
-            </div>
-            <div class="flex items-center">
-              <input class="custom__checkbox" name="infrastructure" type="checkbox" id="infrastructure_5">
-              <label class="text-base xxl:text-[13px] xl:text-[11px]" for="infrastructure_5">Лобби бар</label>
-            </div>
-            <div class="flex items-center">
-              <input class="custom__checkbox" name="infrastructure" type="checkbox" id="infrastructure_6">
-              <label class="text-base xxl:text-[13px] xl:text-[11px]" for="infrastructure_6">Спа</label>
-            </div>
-            <div class="flex items-center">
-              <input class="custom__checkbox" name="infrastructure" type="checkbox" id="infrastructure_7">
-              <label class="text-base xxl:text-[13px] xl:text-[11px]" for="infrastructure_7">Сауна/хамам</label>
-            </div>
-            <div class="flex items-center">
-              <input class="custom__checkbox" name="infrastructure" type="checkbox" id="infrastructure_8">
-              <label class="text-base xxl:text-[13px] xl:text-[11px]" for="infrastructure_8">Тип отопления</label>
+            <div class="flex items-center text-[#1E1D2D]" v-for="item in infos">
+              <input class="custom__checkbox" name="infrastructure" type="checkbox" :id="'infrastructure' + item.id">
+              <label class="text-base xxl:text-[13px] xl:text-[11px]" :for="'infrastructure' + item.id">{{ item.name }}</label>
             </div>
             <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectInstallment}">
               <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Рассрочка</span>
@@ -214,25 +186,9 @@
         <div class="mb-10 xxl:mb-8 xl:mb-6">
           <div class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] mb-5 xxl:mb-4 xl:mb-3 leading-none">Дополнительные услуги</div>
           <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
-            <div class="flex items-center text-[#1E1D2D]">
-              <input class="custom__checkbox" name="services" type="checkbox" id="services_1">
-              <label class="text-base xxl:text-[13px] xl:text-[11px]" for="services_1">Предоставляется ВНЖ</label>
-            </div>
-            <div class="flex items-center text-[#1E1D2D]">
-              <input class="custom__checkbox" name="services" type="checkbox" id="services_2">
-              <label class="text-base xxl:text-[13px] xl:text-[11px]" for="services_2">Получение Гражданства</label>
-            </div>
-            <div class="flex items-center text-[#1E1D2D]">
-              <input class="custom__checkbox" name="services" type="checkbox" id="services_3">
-              <label class="text-base xxl:text-[13px] xl:text-[11px]" for="services_3">Кадастр >75000$</label>
-            </div>
-            <div class="flex items-center text-[#1E1D2D]">
-              <input class="custom__checkbox" name="services" type="checkbox" id="services_4">
-              <label class="text-base xxl:text-[13px] xl:text-[11px]" for="services_4">Возможен онлайн-показ</label>
-            </div>
-            <div class="flex items-center text-[#1E1D2D]">
-              <input class="custom__checkbox" name="services" type="checkbox" id="services_5">
-              <label class="text-base xxl:text-[13px] xl:text-[11px]" for="services_5">Послепродажный сервис</label>
+            <div class="flex items-center text-[#1E1D2D]" v-for="item in dops">
+              <input class="custom__checkbox" name="services" type="checkbox" :id="'services' + item.id">
+              <label class="text-base xxl:text-[13px] xl:text-[11px]" :for="'services' + item.id">{{ item.name }}</label>
             </div>
           </div>
         </div>
@@ -264,6 +220,7 @@ import Multiselect from '@vueform/multiselect'
 
 export default {
   emits: ['close-filter'],
+  props: ['city', 'infos', 'dops', 'builders'],
   data () {
     return {
       borderType: false,
@@ -274,22 +231,11 @@ export default {
         'Элит 1',
         'Элит 2',
       ],
-      selectCity: 'Сочи',
+      selectCity: null,
       openSelectCity: false,
-      cities: [
-        { city: 'Сочи', id: 0 },
-        { city: 'Москва', id: 1 },
-        { city: 'Краснодар', id: 2 },
-      ],
       selectRegion: 'Центральный',
       openSelectRegion: false,
-      regions: [
-        { region: 'Центральный', id: 0 },
-        { region: 'Южный', id: 1 },
-        { region: 'Северный', id: 2 },
-        { region: 'Западный', id: 3 },
-        { region: 'Восточный', id: 4 },
-      ],
+      regions: [],
       selectDeadline: 'Сдан',
       openSelectDeadline: false,
       deadlines: [
@@ -297,28 +243,27 @@ export default {
         { deadline: 'Не сдан', id: 1 },
         { deadline: 'В разработке', id: 2 },
       ],
-      selectDev: 'Группа Аквилон',
+      selectDev: null,
       openSelectDev: false,
-      optionsSelectDev: [
-        { dev: 'Группа Аквилон', id: 0},
-        { dev: 'Группа Акв', id: 1},
-        { dev: 'Группа Аквил', id: 2},
-      ],
       selectInstallment: 'Да',
       openSelectInstallment: false,
       optionsInstallment: [
         { installment: 'Да', id: 0 },
         { installment: 'Нет', id: 1 },
-      ]
+      ],
+      searchValue: null
     }
   },
   methods: {
     changeSelectCity(city) {
-      this.selectCity = this.object.city = city.city
+      this.selectCity = city.title
       this.openSelectCity = false
+
+      this.selectRegion = this.city[idx].regions[0].title
+      this.regions = this.city[idx].regions
     },
     changeSelectRegion(region) {
-      this.selectRegion = region.region
+      this.selectRegion = region.title
       this.openSelectRegion = false
     },
     changeSelectDeadline(deadline) {
@@ -326,13 +271,39 @@ export default {
       this.openSelectDeadline = false
     },
     changeSelectDev(dev) {
-      this.selectDev = dev.dev
+      this.selectDev = dev.first_name
       this.openSelectDev = false
     },
     changeSelectInstallment(installment) {
       this.selectInstallment = installment.installment
       this.openSelectInstallment = false
     }
+  },
+  created() {
+    if (this.city[0] !== null) {
+      this.selectDev = this.builders[0].first_name
+      this.selectCity = this.city[0].title
+      this.selectRegion = this.city[0].regions[0].title
+      this.regions = this.city[0].regions
+    }
+
+    console.log(this.dops)
+    console.log(this.infos)
+    console.log(this.city)
+    console.log(this.builders)
+  },
+  computed: {
+    filteredCity() {
+      if (this.searchValue !== null) {
+        return this.city.filter(item =>
+            item.title.toLowerCase().includes(
+                this.searchValue.toLowerCase()
+            )
+        )
+      } else {
+        return this.city
+      }
+    },
   },
   components: {
     Multiselect

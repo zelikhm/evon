@@ -52,7 +52,7 @@ import { Link } from '@inertiajs/inertia-vue3'
             <span class="uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon.com</span>
           </Link>
           <div class="text-white text-[16px] xxl:text-[13px] xl:text-[11px] flex gap-20 xxl:gap-16 xl:gap-12">
-            <a href="#" class="">Новостройки</a>
+            <Link href="/houses" class="">Новостройки</Link>
             <a href="#" class="opacity-60">Виллы</a>
             <a href="#" class="opacity-60">Подборки</a>
             <a href="#" class="opacity-60">Избранное</a>
@@ -101,7 +101,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
   <!-- Меню Застройщик-->
 <!--  v-if="user.role === 1" -->
-  <header v-if="user !== undefined && user.role === 1" class="relative z-50 bg-[#6435A5] leading-[100%]">
+  <header v-if="user !== undefined && user.role === 1 || user !== undefined && user.role === 2 || user !== undefined && user.role === 3" class="relative z-50 bg-[#6435A5] leading-[100%]">
     <div class="_container h-[60px] xxl:h-12 xl:h-10">
       <div class="flex items-center justify-between h-full ">
         <div class="flex gap-20 xxl:gap-16 xl:gap-12 items-center">

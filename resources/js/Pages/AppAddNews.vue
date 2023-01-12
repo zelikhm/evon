@@ -18,7 +18,7 @@ import { Link } from '@inertiajs/inertia-vue3'
               <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">ЖК</span>
               <div class="relative">
                 <div @click="openSelectJK = !openSelectJK" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
-                  <span>{{ selectJK }}</span>
+                  <span>{{ isCreate ? selectJK.title : selectJK }}</span>
                   <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectJK }" alt="">
                 </div>
                 <div v-if="openSelectJK" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
@@ -44,7 +44,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                 theme="snow"
               />
             </div>
-            <div @click="addNews" class="login__btn--bg rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
+            <div @click="addNews" class="cursor-pointer login__btn--bg rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
               <div class="text-white text-center font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">{{ itemEdit === undefined ? 'Добавить' : 'Редактировать' }}</div>
             </div>
           </div>
@@ -86,7 +86,8 @@ export default {
         JK: true,
         title: true,
         description: true
-      }
+      },
+      isCreate: null
     }
   },
   methods: {
@@ -127,6 +128,8 @@ export default {
     if (Number.isInteger(+link2.at(-1))) {
       this.dataNews.house_id = this.houses.find(item => item.id === +link2.at(-1)).id
       this.selectJK = this.houses.find(item => item.id === +link2.at(-1)).title
+    } else {
+      this.isCreate = true
     }
     this.itemEdit = this.new
 

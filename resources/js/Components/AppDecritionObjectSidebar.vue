@@ -31,7 +31,7 @@
       <div class="font-medium text-lg xxl:text-[15px] xl:text-[13px] pb-5 xxl:pb-4 xl:pb-3 leading-none">Застройщик</div>
       <div class="bg-white flex flex-col gap-5 xxl:gap-4 xl:gap-3 rounded-[10px] p-4 xxl:p-3 xl:p-2.5">
         <div class="flex items-center gap-4 xxl:gap-3 xl:gap-2.5">
-          <img src="../../assets/developer_avatar.png" class="h-14 xxl:h-12 xl:h-10" alt="Аватарка">
+          <img :src="'/storage/' + house.user.image" class="h-14 xxl:h-12 xl:h-10" alt="avatar">
           <div class="flex flex-col gap-1.5 xxl:gap-1 xl:gap-0.5">
             <span class="font-medium text-lg xxl:text-[15px] xl:text-[13px] leading-none">{{ house.user.first_name }} {{ house.user.last_name }}</span>
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none">Застройщик</span>
