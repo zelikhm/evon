@@ -1,6 +1,7 @@
 <template>
   <app-header :user="user" />
   <app-modal-album v-if="album" @close-album="album = false"/>
+  <app-all-news v-if="openAllNews" @close-all-news="openAllNews = false" />
   <main>
     <div class="_container flex flex-col">
       <div class="decription__head h-20 xxl:h-16 xl:h-12 rounded-[12px] my-7 xxl:my-5 xl:my-4">
@@ -161,7 +162,7 @@
             </div>
           </div>
         </div>
-        <app-decrition-object-sidebar :house="house" />
+        <app-decrition-object-sidebar @open-all-news="openAllNews = true" :house="house" />
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
@@ -178,6 +179,7 @@ import AppFooter from "../Layouts/AppFooter.vue"
 import AppDecritionObjectSidebar from "../Components/AppDecritionObjectSidebar.vue"
 import AppDescriptionObjectOtherJK from "../Components/AppDescriptionObjectOtherJK.vue"
 import AppModalAlbum from "@/Layouts/modal/AppModalAlbum.vue"
+import AppAllNews from "@/Layouts/modal/AppAllNews.vue"
 
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
@@ -201,7 +203,8 @@ export default {
       hints: {
         selection: 'Добавить в подборки',
         favorite: 'Добавить в избранное'
-      }
+      },
+      openAllNews: false,
     }
   },
   methods: {
@@ -226,6 +229,7 @@ export default {
     AppModalAlbum,
     Swiper,
     SwiperSlide,
+    AppAllNews,
   },
   setup() {
     return {
@@ -235,19 +239,23 @@ export default {
   mounted() {
     this.arrayInfos = []
 
-    for (let key of this.house.info.info) {
-      if (!+isNaN(key)) {
-        this.arrayInfos.push(this.infos.find(item => item.id === +key))
+    if (this.house.info.info !== null) {
+      for (let key of this.house.info.info) {
+        if (!+isNaN(key)) {
+          this.arrayInfos.push(this.infos.find(item => item.id === +key))
+        }
       }
     }
 
-    for (let key of this.house.info.dop) {
-      if (!+isNaN(key)) {
-        this.dops.forEach(item => {
-          if (+key === item.id) {
-            item.active = 1
-          }
-        })
+    if (this.house.info.dop !== null) {
+      for (let key of this.house.info.dop) {
+        if (!+isNaN(key)) {
+          this.dops.forEach(item => {
+            if (+key === item.id) {
+              item.active = 1
+            }
+          })
+        }
       }
     }
     console.log(this.slider)

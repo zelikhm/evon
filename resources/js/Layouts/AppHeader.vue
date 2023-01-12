@@ -12,16 +12,16 @@ import { Link } from '@inertiajs/inertia-vue3'
           <span class="sm:hidden uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon.com</span>
         </Link>
         <div class="flex items-center gap-7 xxl:gap-5 lg:gap-2 text-[16px] xxl:text-[13px] xl:text-[11px]">
-          <div class="header__lang--select text-white uppercase relative flex items-center h-[60px] xxl:h-12 xl:h-10">
-            <div class="flex h-full items-center cursor-pointer px-7 xxl:px-5 xl:px-4 gap-2.5 xl:gap-1.5" @click="langOptionVisible = !langOptionVisible">
+          <div class="header__lang--select uppercase relative flex items-center h-[60px] xxl:h-12 xl:h-10">
+            <div class="flex h-full text-white items-center cursor-pointer px-7 xxl:px-5 xl:px-4 gap-2.5 xl:gap-1.5" @click="langOptionVisible = !langOptionVisible">
               <span>{{ langSelected }}</span>
               <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелочка вниз">
             </div>
-            <div v-if="langOptionVisible" class="absolute top-full w-full left-0 flex flex-col bg-[#6435A5]">
+            <div v-if="langOptionVisible" class="border border-solid border-[#E5DFEE] absolute top-[90%] w-full left-0 flex flex-col bg-white rounded-[5px]">
               <span
                 @click="selectOption(language)"
                 v-for="(language, idx) in languages" :key="idx"
-                class="header__lang--change cursor-pointer h-[60px] xxl:h-12 flex items-center justify-center"
+                class="hover__select border__bottom--not cursor-pointer leading-none p-4 xxl:p-3 xl:p-2.5"
               >
                   {{ language.lang }}
                 </span>

@@ -11,13 +11,20 @@ import { Link } from '@inertiajs/inertia-vue3'
           <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">{{ frame.name }}</span>
           <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ frame.flats.length }} квартир</span>
         </div>
-        <div class="flex flex-col items-center justify-between gap-3.5 xxl:gap-3 xl:gap-2.5">
+        <div class="relative flex flex-col items-center justify-between gap-3.5 xxl:gap-3 xl:gap-2.5">
           <button>
             <img class="w-5 xxl:w-4 xl:w-3" src="../../assets/svg/pen_icon_grey.svg" alt="">
           </button>
-          <button>
+          <button @click="deleteConfirm = true" class="relative">
             <img class="w-5 xxl:w-4 xl:w-3" src="../../assets/svg/bucket_icon_red.svg" alt="">
           </button>
+          <div v-if="deleteConfirm" class="cursor-auto z-20 text-[16px] xxl:text-[14px] xl:text-[12px] absolute top-[120%] bg-white left-[] flex flex-col border border-solid border-[#CEC3DD] rounded-[5px]">
+            <span class="whitespace-nowrap text-center border__bottom p-2.5 xxl:p-2 xl:p-1.5 leading-none">Вы уверены что хотите удалить</span>
+            <div class="cursor-pointer flex">
+              <div class="hover__select w-full text-center border__right p-2.5 xxl:p-2 xl:p-1.5 leading-none">Да</div>
+              <div @click="deleteConfirm = false" class="hover__select w-full text-center p-2.5 xxl:p-2 xl:p-1.5 leading-none">Нет</div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="flex items-center">
@@ -99,6 +106,7 @@ export default {
   emits: ['open-add-frame'],
   data() {
     return {
+      deleteConfirm: false,
       titleTable: [
         { name: 'id', title: '№', active: 0 },
         { name: 'square', title: 'Площадь', active: 0 },
