@@ -333,6 +333,7 @@ path phone \ [post] / поля:
 Редактирование пользователя / 
 path edit \ [post] / поля:
 
+- user_id - Айди юзера
 - first_name - Имя
 - last_name - Фамилия
 - status (Риелтор) - должность
