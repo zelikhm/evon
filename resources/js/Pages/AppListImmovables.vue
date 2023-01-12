@@ -11,7 +11,10 @@
           :class="{'animation__filter': openFilter}"
           @close-filter="openFilter = false"
         />
-        <app-list-new-building @open-filter="openFilter = true" />
+        <app-list-new-building
+          @open-filter="openFilter = true"
+          @open-add-selections="openAddSelection = true"
+        />
         <app-news-developer />
       </div>
       <div class="w-full flex justify-center mb-14 xxl:mb-10 xl:mb-8">
