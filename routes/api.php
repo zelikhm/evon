@@ -55,7 +55,8 @@ Route::prefix('notification')->group(function () {
 
 Route::prefix('favorite')->group(function () {
   Route::post('/add', ['App\Http\Controllers\User\FavoriteController', 'add']);
-  Route::get('getAll', ['App\Http\Controllers\User\FavoriteController', 'getAll']);
+  Route::get('/getAll', ['App\Http\Controllers\User\FavoriteController', 'getAll']);
+  Route::post('/deleted', ['App\Http\Controllers\User\FavoriteController', 'deleted']);
 });
 
 Route::prefix('user')->group(function () {

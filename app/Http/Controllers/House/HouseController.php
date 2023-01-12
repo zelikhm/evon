@@ -14,8 +14,10 @@ use App\Models\Builder\HouseModel;
 use App\Models\Builder\HouseNewsModel;
 use App\Models\Builder\HouseSupportModel;
 use App\Models\Builder\HouseViewsModel;
+use App\Models\Builder\Info\CityModel;
 use App\Models\Builder\Info\StructureModel;
 use App\Models\Builder\Info\TypesModel;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,6 +47,10 @@ class HouseController extends Controller
 
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
+      'dops' => TypesModel::all(),
+      'infos' => StructureModel::all(),
+      'city' => CityModel::with(['regions'])->get(),
+      'builders' => User::where('role', 1)->get(),
       'notification' => $this->getNotification(),
       'user' => Auth::user(),
     ]);

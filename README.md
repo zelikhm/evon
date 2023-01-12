@@ -264,6 +264,12 @@ path add \ [post] / поля:
 - house_id - Айди ЖК
 - token
 
+Удаление из избранного \
+path deleted \ [post] / поля:
+
+- house_id - Айди жк
+- user_id - Айди пользователя
+
 ### Notification
 
 Удаление оповещения \ 
