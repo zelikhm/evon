@@ -8,7 +8,7 @@
   <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="closeAddFrame" :house="house" />
   <app-modal-notification v-if="openNotification" @close-notification="openNotification = false"
   />
-  <app-header />
+  <app-header :user="user" />
   <main>
     <div class="_container">
       <div :class="{'grid__apartments': page === 1}" class="grid__add-object my-14 xxl:my-10 xl:my-8 gap-7 xxl:gap-5 xl:gap-4">
@@ -62,7 +62,8 @@
 
 <!--  Фото  -->
         <div v-if="page === 2">
-          <app-add-photo :houseID="houseID" />
+          <app-add-photo :house="readyHouse"
+          />
         </div>
 
       </div>
@@ -112,7 +113,7 @@ export default {
       isMainPage: null,
       isEdit: true,
       readyHouse: null,
-      activeFrame: null
+      activeFrame: null,
     }
   },
   methods: {
@@ -140,7 +141,6 @@ export default {
     },
   },
   created() {
-    console.log(this.count)
     this.readyHouse = this.house
     let lastItemLink = window.location.href.split('/').at(-1)
     lastItemLink === 'addedHouse' ? this.isMainPage = true : this.isMainPage = false

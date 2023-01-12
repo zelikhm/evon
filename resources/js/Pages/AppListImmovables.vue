@@ -2,7 +2,7 @@
   <app-modal-notification v-if="openNotification" @close-notification="openNotification = false" />
   <app-add-selections v-if="openAddSelection" @close-add-selection="openAddSelection = false"/>
   <app-create-selection v-if="openCreateSelection" @close-create-selection="openCreateSelection = false" />
-  <app-header />
+  <app-header :user="user" />
   <main>
     <div class="_container">
       <div class="immovables__grid relative my-14 xxl:my-10 xl:my-8">
@@ -34,10 +34,11 @@ import AppNewsDeveloper from "../Components/AppNewsDeveloper.vue"
 import AppModalNotification from "../Layouts/modal/AppModalNotification.vue"
 import AppAddSelections from "@/Layouts/modal/AppAddSelections.vue"
 import AppCreateSelection from "@/Layouts/modal/AppImmovablesCreateSelection.vue"
+import {usePage} from "@inertiajs/inertia-vue3";
 
 export default {
   props: {
-    houses: []
+    houses: [],
   },
   data() {
     return {
@@ -59,7 +60,7 @@ export default {
   },
   created() {
     console.log(this.houses)
-  }
+  },
 }
 </script>
 

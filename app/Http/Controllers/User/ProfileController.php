@@ -14,10 +14,21 @@ class ProfileController extends Controller
 
     public function index() {
 
-      return Inertia::render('AppProfileDev', [
-        'user' => Auth::user(),
-        'notification' => $this->getNotification(),
-      ]);
+      if(Auth::user()->role !== 0) {
+
+        return Inertia::render('AppProfileDev', [
+          'user' => Auth::user(),
+          'notification' => $this->getNotification(),
+        ]);
+
+      } else {
+
+        return Inertia::render('AppProfileAgent', [
+          'user' => Auth::user(),
+          'notification' => $this->getNotification(),
+        ]);
+
+      }
 
     }
 

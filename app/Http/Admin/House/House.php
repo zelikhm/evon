@@ -108,7 +108,11 @@ class House extends Section implements Initializable
           AdminFormElement::text('city', 'Город'),
           AdminFormElement::text('longitude', 'Долгота'),
           AdminFormElement::number('percent', 'Процент')->setMin(0),
-          AdminFormElement::checkbox('active', 'Прошел модерацию?'),
+          AdminFormElement::select('active', 'Прошел модерацию?', [
+            '0' => 'На модерации',
+            '1' => 'Не прошел модерацию',
+            '2' => 'Прошел модерацию',
+          ]),
         ], 6)->addColumn([
           AdminFormElement::text('area', 'Район'),
           AdminFormElement::text('latitude', 'Широта'),

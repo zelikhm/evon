@@ -1,5 +1,5 @@
 <template>
-  <app-header />
+  <app-header :user="user" />
   <app-modal-album v-if="album" @close-album="album = false"/>
   <app-all-news v-if="openAllNews" @close-all-news="openAllNews = false" />
   <main>
@@ -79,22 +79,22 @@
             </div>
             <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
             <div class="flex flex-col justify-center">
-              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">49</span>
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">{{ countFlats }}</span>
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Квартир</span>
             </div>
             <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
             <div class="flex flex-col justify-center">
-              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">500 000 €</span>
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">{{  Number.isInteger(minPriceForM) ? minPriceForM : "-"  }} €</span>
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Мин за м²</span>
             </div>
             <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
             <div class="flex flex-col justify-center">
-              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">5 000 000 €</span>
-              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Мин. ценаа</span>
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">{{ Number.isInteger(minPriceFlat) ? minPriceFlat : "-" }} €</span>
+              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Мин. цена</span>
             </div>
             <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
             <div class="flex flex-col justify-center">
-              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">14.9 - 23.4</span>
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">{{ Number.isInteger(minSquareFlat) ? minSquareFlat : "-" }} - {{ Number.isInteger(maxSquareFlat) ? maxSquareFlat : "-" }}</span>
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Площади, м²</span>
             </div>
           </div>
@@ -108,7 +108,7 @@
               <img src="../../assets/svg/arrow_right_purple.svg" class="transition-all duration-300 w-3.5 xxl:w-3 xl:wp-2.5" alt="Стрелочка в право">
             </button>
           </div>
-          <div class="text-[18px] xxl:text-[15px] xl:text-[13px] pb-14 xxl:pb-10 xl:pb-8">
+          <div class="text-[18px] xxl:text-[15px] xl:text-[13px] pb-14 xxl:pb-10 xl:pb-8" v-if="arrayInfos.length > 0">
             <span class="font-medium">Инфраструктура</span>
             <div class="flex flex-wrap gap-3 xxl:gap-2.5 xl:gap-2m pt-4 xxl:pt-3 xl:pt-2.5">
               <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5"
@@ -192,7 +192,8 @@ export default {
     house: [],
     dops: [],
     infos: [],
-    slider: []
+    slider: [],
+    user: []
   },
   data() {
     return {
@@ -243,7 +244,52 @@ export default {
       }
     }
     console.log(this.slider)
-  }
+  },
+  computed: {
+    countFlats() {
+      let count = 0;
+      this.house.frames.forEach(item => {
+        item.flats.forEach(flat => {
+            count += 1
+        })
+      })
+
+      return count
+    },
+    minPriceFlat() {
+      let prices = []
+      this.house.frames.forEach(item => {
+        item.flats.forEach(flat => {
+          prices.push(flat.price)
+        })
+      })
+
+      return Math.min(...prices)
+    },
+    minSquareFlat() {
+      let minSquare = []
+      for (let key of this.house.frames) {
+        for (let flat of key.flats) {
+          minSquare.push(flat.square)
+        }
+      }
+
+      return Math.min(...minSquare)
+    },
+    maxSquareFlat() {
+      let maxSquare = []
+      for (let key of this.house.frames) {
+        for (let flat of key.flats) {
+          maxSquare.push(flat.square)
+        }
+      }
+
+      return Math.max(...maxSquare)
+    },
+    minPriceForM() {
+      return Math.round(this.minPriceFlat / this.minSquareFlat)
+    },
+  },
 }
 </script>
 

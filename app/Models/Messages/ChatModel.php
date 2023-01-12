@@ -33,4 +33,8 @@ class ChatModel extends Model
     public function to() {
       return $this->belongsTo(User::class, 'to_id', 'id');
     }
+
+    public function messages() {
+      return $this->hasMany(MessageModel::class, 'id', 'chat_id');
+    }
 }

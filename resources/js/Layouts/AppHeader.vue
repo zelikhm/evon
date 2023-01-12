@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
 <template>
 <!--  Меню до входа-->
-  <header class="relative z-50 bg-[#6435A5] leading-[100%]">
+  <header v-if="user === undefined" class="relative z-50 bg-[#6435A5] leading-[100%]">
     <div class="_container h-[60px] xxl:h-12 xl:h-10">
       <div class="flex items-center justify-between h-full ">
         <Link href="/" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
@@ -42,8 +42,8 @@ import { Link } from '@inertiajs/inertia-vue3'
     </div>
   </header>
 
-<!-- Меню Общее-->
-  <header v-if="1 !== 1" class="relative z-50 bg-[#6435A5] leading-[100%]">
+<!-- Меню агента -->
+  <header v-if="user !== undefined && user.role === 0" class="relative z-50 bg-[#6435A5] leading-[100%]">
     <div class="_container h-[60px] xxl:h-12 xl:h-10">
       <div class="flex items-center justify-between h-full ">
         <div class="flex gap-20 xxl:gap-16 xl:gap-12 items-center">
@@ -101,7 +101,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
   <!-- Меню Застройщик-->
 <!--  v-if="user.role === 1" -->
-  <header v-if="1 !== 1" class="relative z-50 bg-[#6435A5] leading-[100%]">
+  <header v-if="user !== undefined && user.role === 1" class="relative z-50 bg-[#6435A5] leading-[100%]">
     <div class="_container h-[60px] xxl:h-12 xl:h-10">
       <div class="flex items-center justify-between h-full ">
         <div class="flex gap-20 xxl:gap-16 xl:gap-12 items-center">
@@ -116,14 +116,14 @@ import { Link } from '@inertiajs/inertia-vue3'
         </div>
         <div class="flex items-center gap-7 xxl:gap-5 text-[16px] xxl:text-[13px] xl:text-[11px]">
           <div class="flex">
-            <div class="cursor-pointer flex items-center justify-center h-[60px] xxl:h-12 xl:h-10 px-8 xxl:px-6 xl:px-5">
+            <Link href="" class="cursor-pointer flex items-center justify-center h-[60px] xxl:h-12 xl:h-10 px-8 xxl:px-6 xl:px-5">
               <div class="relative">
                 <img src="../../assets/svg/chat_icon.svg" class="h-6 xxl:h-5 xl:h-4" alt="Чат">
                 <div class="absolute flex items-center justify-center -top-[30%] -right-[50%] rounded-full bg-[#E84680] h-3.5 xxl:h-3 xl:h-2.5 w-3.5 xxl:w-3 xl:w-2.5">
                   <span class="text-white text-[12px] xxl:text-[10px] xl:text-[8px]">3</span>
                 </div>
               </div>
-            </div>
+            </Link>
             <div class="header__lang--select text-white uppercase relative flex items-center h-[60px] xxl:h-12 xl:h-10">
               <div class="flex h-full items-center cursor-pointer px-7 xxl:px-5 xl:px-4 gap-2.5 xl:gap-1.5" @click="langOptionVisible = !langOptionVisible">
                 <span>{{ langSelected }}</span>
@@ -142,7 +142,7 @@ import { Link } from '@inertiajs/inertia-vue3'
             <div class="flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
               <img src="../../assets/header_user_photo.png" class="h-9 xxl:h-7 xl:h-6" alt="Фотография пользователя">
               <button class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-<!--                <span class="text-white text-lg xxl:text-sm xl:text-xs leading-none">{{ user.first_name }} {{ user.last_name }}</span>-->
+                <span class="text-white text-lg xxl:text-sm xl:text-xs leading-none">{{ user.first_name }} {{ user.last_name }}</span>
                 <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелка вниз">
               </button>
             </div>
@@ -154,6 +154,8 @@ import { Link } from '@inertiajs/inertia-vue3'
 </template>
 
 <script>
+import { usePage } from '@inertiajs/inertia-vue3'
+
 export default {
   props: {
     user: []
@@ -184,6 +186,9 @@ export default {
       this.$emit('login-developer')
       this.loginOpen = false
     }
+  },
+  created() {
+    console.log(this.user)
   },
 }
 </script>

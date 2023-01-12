@@ -24,8 +24,14 @@ Route::prefix('house')->group(function () {
   Route::post('clearSupport', ['App\Http\Controllers\House\HouseController', 'clearSupport']);
   Route::post('deleteSupport', ['App\Http\Controllers\House\HouseController', 'deleteSupport']);
   Route::post('get', ['App\Http\Controllers\House\HouseController', 'get']);
+  //
   Route::post('createFrame', ['App\Http\Controllers\House\HouseController', 'createFrame']);
+  Route::post('deleteFrame', ['App\Http\Controllers\House\HouseController', 'deleteFrame']);
+  Route::post('editFrame', ['App\Http\Controllers\House\HouseController', 'editFrame']);
   Route::post('createFlat', ['App\Http\Controllers\House\HouseController', 'createFlat']);
+  Route::post('deletedFlat', ['App\Http\Controllers\House\HouseController', 'deletedFlat']);
+  Route::post('editFlat', ['App\Http\Controllers\House\HouseController', 'editFlat']);
+  //
   Route::post('addedImages', ['App\Http\Controllers\House\HouseController', 'addedImages']);
   Route::post('setVisible', ['App\Http\Controllers\House\HouseController', 'setVisible']);
   Route::post('delete', ['App\Http\Controllers\House\HouseController', 'delete']);
@@ -49,7 +55,8 @@ Route::prefix('notification')->group(function () {
 
 Route::prefix('favorite')->group(function () {
   Route::post('/add', ['App\Http\Controllers\User\FavoriteController', 'add']);
-  Route::get('getAll', ['App\Http\Controllers\User\FavoriteController', 'getAll']);
+  Route::get('/getAll', ['App\Http\Controllers\User\FavoriteController', 'getAll']);
+  Route::post('/deleted', ['App\Http\Controllers\User\FavoriteController', 'deleted']);
 });
 
 Route::prefix('user')->group(function () {

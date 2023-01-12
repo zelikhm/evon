@@ -14,8 +14,10 @@ use App\Models\Builder\HouseModel;
 use App\Models\Builder\HouseNewsModel;
 use App\Models\Builder\HouseSupportModel;
 use App\Models\Builder\HouseViewsModel;
+use App\Models\Builder\Info\CityModel;
 use App\Models\Builder\Info\StructureModel;
 use App\Models\Builder\Info\TypesModel;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,6 +47,10 @@ class HouseController extends Controller
 
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
+      'dops' => TypesModel::all(),
+      'infos' => StructureModel::all(),
+      'city' => CityModel::with(['regions'])->get(),
+      'builders' => User::where('role', 1)->get(),
       'notification' => $this->getNotification(),
       'user' => Auth::user(),
     ]);
@@ -304,7 +310,80 @@ class HouseController extends Controller
         'category' => 1,
       ]);
 
-      return response()->json(true, 200);
+      $frame = FrameModel::where('id', $request->frame_id)->first();
+
+      return response()->json($this->getHouse($frame->house_id), 200);
+    } else {
+      return response()->json('not auth', 401);
+    }
+  }
+
+  /**
+   * deleted flat
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function deletedFlat(Request $request) {
+    if ($request->token === env('TOKEN')) {
+
+      FlatModel::where('id', $request->flat_id)->delete();
+
+      return response()->json('deleted', 205);
+    } else {
+      return response()->json('not auth', 401);
+    }
+  }
+
+  /**
+   * edit flat
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function editFlat(Request $request) {
+    if ($request->token === env('TOKEN')) {
+
+      if ($request->image_up) {
+        $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
+        $request->image_up->move(public_path('/storage/'), $imageUp);
+      } else {
+        $imageUp = null;
+      }
+
+      if ($request->image_down) {
+        $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
+        $request->image_down->move(public_path('/storage/'), $imageDown);
+      } else {
+        $imageDown = null;
+      }
+
+      $flat = FlatModel::where('id', $request->flat_id)
+        ->create([
+        'number' => $request->number,
+        'square' => $request->square,
+        'count' => $request->count,
+        'floor' => $request->floor,
+        'status' => $request->status,
+        'number_from_stairs' => $request->stairs,
+        'price' => $request->price,
+      ]);
+
+      FlatImagesModel::create([
+        'flat_id' => $flat->id,
+        'name' => $imageUp,
+        'category' => 0,
+      ]);
+
+      FlatImagesModel::create([
+        'flat_id' => $flat->id,
+        'name' => $imageDown,
+        'category' => 1,
+      ]);
+
+      $frame = FrameModel::where('id', $request->frame_id)->first();
+
+      return response()->json($this->getHouse($frame->house_id), 200);
     } else {
       return response()->json('not auth', 401);
     }
@@ -331,6 +410,45 @@ class HouseController extends Controller
       return response()->json('not auth', 401);
     }
   }
+
+  /**
+   * edit frame
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function editFrame(Request $request) {
+    if ($request->token === env('TOKEN')) {
+
+      FrameModel::where('id', $request->frame_id)
+        ->update([
+        'name' => $request->name,
+        'updated_at' => Carbon::now()->addHour(3),
+      ]);
+
+      return response()->json(FrameModel::where('house_id', $request->house_id)->get(), 200);
+    } else {
+      return response()->json('not auth', 401);
+    }
+  }
+
+  /**
+   * deleted frame
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function deleteFrame(Request $request) {
+    if ($request->token === env('TOKEN')) {
+
+      FrameModel::where('id', $request->frame_id)->delete();
+
+      return response()->json('deleted', 205);
+    } else {
+      return response()->json('not auth', 401);
+    }
+  }
+
 
   /**
    * added support for house
