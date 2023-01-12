@@ -39,7 +39,8 @@ class IndexController extends Controller
   {
     if ($request->token === env('TOKEN')) {
       User::where('id', $request->user_id)->update([
-        'first_name' => $request->name,
+        'first_name' => $request->first_name,
+        'last_name' => $request->last_name,
         'status' => $request->status,
         'link' => $request->link,
         'description' => $request->description,
