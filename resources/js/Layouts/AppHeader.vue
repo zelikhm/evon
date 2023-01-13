@@ -71,17 +71,17 @@ import { Link } from '@inertiajs/inertia-vue3'
                 </div>
               </div>
             </div>
-            <div class="header__lang--select text-white uppercase relative flex items-center h-[60px] xxl:h-12 xl:h-10">
-              <div class="flex h-full items-center cursor-pointer px-7 xxl:px-5 xl:px-4 gap-2.5 xl:gap-1.5" @click="langOptionVisible = !langOptionVisible">
+            <div class="header__lang--select uppercase relative flex items-center h-[60px] xxl:h-12 xl:h-10">
+              <div class="flex h-full text-white items-center cursor-pointer px-7 xxl:px-5 xl:px-4 gap-2.5 xl:gap-1.5" @click="langOptionVisible = !langOptionVisible">
                 <span>{{ langSelected }}</span>
-                <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелка вниз">
+                <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелочка вниз">
               </div>
-              <div v-if="langOptionVisible" class="absolute top-full w-full left-0 flex flex-col bg-[#6435A5]">
-                <span
-                  @click="selectOption(language)"
-                  v-for="(language, idx) in languages" :key="idx"
-                  class="header__lang--change cursor-pointer h-[60px] xxl:h-12 flex items-center justify-center"
-                >
+              <div v-if="langOptionVisible" class="border border-solid border-[#E5DFEE] absolute top-[90%] w-full left-0 flex flex-col bg-white rounded-[5px]">
+              <span
+                @click="selectOption(language)"
+                v-for="(language, idx) in languages" :key="idx"
+                class="hover__select border__bottom--not cursor-pointer leading-none p-4 xxl:p-3 xl:p-2.5"
+              >
                   {{ language.lang }}
                 </span>
               </div>
@@ -124,27 +124,42 @@ import { Link } from '@inertiajs/inertia-vue3'
                 </div>
               </div>
             </Link>
-            <div class="header__lang--select text-white uppercase relative flex items-center h-[60px] xxl:h-12 xl:h-10">
-              <div class="flex h-full items-center cursor-pointer px-7 xxl:px-5 xl:px-4 gap-2.5 xl:gap-1.5" @click="langOptionVisible = !langOptionVisible">
+            <div class="header__lang--select uppercase relative flex items-center h-[60px] xxl:h-12 xl:h-10">
+              <div class="flex h-full text-white items-center cursor-pointer px-7 xxl:px-5 xl:px-4 gap-2.5 xl:gap-1.5" @click="langOptionVisible = !langOptionVisible">
                 <span>{{ langSelected }}</span>
-                <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелка вниз">
+                <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелочка вниз">
               </div>
-              <div v-if="langOptionVisible" class="absolute top-full w-full left-0 flex flex-col bg-[#6435A5]">
+              <div v-if="langOptionVisible" class="border border-solid border-[#E5DFEE] absolute top-[90%] w-full left-0 flex flex-col bg-white rounded-[5px]">
                 <span
                   @click="selectOption(language)"
                   v-for="(language, idx) in languages" :key="idx"
-                  class="header__lang--change cursor-pointer h-[60px] xxl:h-12 flex items-center justify-center"
+                  class="hover__select border__bottom--not cursor-pointer leading-none p-4 xxl:p-3 xl:p-2.5"
                 >
                   {{ language.lang }}
                 </span>
               </div>
             </div>
-            <div class="flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
-              <img src="../../assets/header_user_photo.png" class="h-9 xxl:h-7 xl:h-6" alt="Фотография пользователя">
-              <button class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
+            <div class="relative flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
+              <img src="../../assets/header_user_photo.png" class="h-9 xxl:h-7 xl:h-6 rounded-full" alt="Фотография пользователя">
+              <button @click="openProfileMenu = !openProfileMenu" class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
                 <span class="text-white text-lg xxl:text-sm xl:text-xs leading-none">{{ user.first_name }} {{ user.last_name }}</span>
                 <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелка вниз">
               </button>
+              <div v-if="openProfileMenu" class="border border-solid border-[#E5DFEE] absolute top-[90%] right-0 flex flex-col bg-white rounded-[5px]">
+                <div class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
+                  <span class="leading-none whitespace-nowrap">Подписка PRO</span>
+                  <span class="leading-none whitespace-nowrap">6 дней</span>
+                </div>
+                <div class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
+                  <span class="leading-none whitespace-nowrap">Я с клиентом</span>
+                  <label class="relative cursor-pointer inline-block w-[42px] xxl:w-[36px] xl:w-[30px] h-[24px] xxl:h-[20px] xl:h-[18px]">
+                    <input class="hidden" type="checkbox">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <div class="hover__select border__bottom--not whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">Профиль</div>
+                <div class="hover:bg-[#F6F3FA] border__bottom--not text-[#E84680] whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">Выйти</div>
+              </div>
             </div>
           </div>
         </div>
@@ -170,6 +185,7 @@ export default {
       langOptionVisible: false,
       langSelected: 'ru',
       loginOpen: false,
+      openProfileMenu: false,
     }
   },
   emits: ['login-realtor', 'login-developer', 'open-register'],

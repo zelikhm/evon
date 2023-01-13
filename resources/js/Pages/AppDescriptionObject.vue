@@ -1,6 +1,8 @@
 <template>
   <app-header :user="user" />
   <app-modal-album v-if="album" @close-album="album = false"/>
+  <app-add-selections v-if="openAddSelection" @close-add-selection="openAddSelection = false"/>
+  <app-create-selection v-if="openCreateSelection" @close-create-selection="openCreateSelection = false" />
   <app-all-news v-if="openAllNews" @close-all-news="openAllNews = false" />
   <main>
     <div class="_container flex flex-col">
@@ -33,14 +35,19 @@
             <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
 
             <div class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5 p-4 xxl:p-3 xl:p-2">
-              <button class="relative plus__hover flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
+              <button @click="openAddSelection = true" class="relative plus__hover flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
                 <img src="../../assets/svg/plus_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="plus">
                 <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">{{ hints.selection }}</div>
               </button>
-              <button class="relative heart__hover flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]" @click="addToFavorite">
-                <img src="../../assets/svg/heart_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="heart">
+              <button v-if="showHeart === 1"  @click="addToFavorite" class="relative heart__hover flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
+                <img src="../../assets/svg/heart_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="Сердце">
                 <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">{{ hints.favorite }}</div>
               </button>
+              <button v-if="showHeart === 2" @click="removeToFavorite" class="relative heart__hover flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
+                <img src="../../assets/svg/heart_icon_pink.svg" class="h-6 xxl:h-5 xl:h-4" alt="Сердце">
+                <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">{{ hints.favorite }}</div>
+              </button>
+
             </div>
 
             <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
@@ -180,6 +187,8 @@ import AppDecritionObjectSidebar from "../Components/AppDecritionObjectSidebar.v
 import AppDescriptionObjectOtherJK from "../Components/AppDescriptionObjectOtherJK.vue"
 import AppModalAlbum from "@/Layouts/modal/AppModalAlbum.vue"
 import AppAllNews from "@/Layouts/modal/AppAllNews.vue"
+import AppAddSelections from "@/Layouts/modal/AppAddSelections.vue"
+import AppCreateSelections from "@/Layouts/modal/AppCreateSelections.vue"
 
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
@@ -205,10 +214,14 @@ export default {
         favorite: 'Добавить в избранное'
       },
       openAllNews: false,
+      showHeart: 1,
+      openAddSelection: false,
+      openCreateSelection: false,
     }
   },
   methods: {
     addToFavorite() {
+      this.showHeart = 2
       console.log({
         user_id: this.user.id,
         house_id: this.house.id,
@@ -219,6 +232,9 @@ export default {
         house_id: this.house.id,
         token: this.globalToken
       }).then(() => this.hints.favorite = 'Добавлено!')
+    },
+    removeToFavorite() {
+      this.showHeart = 1
     }
   },
   components: {
@@ -230,6 +246,8 @@ export default {
     Swiper,
     SwiperSlide,
     AppAllNews,
+    AppAddSelections,
+    AppCreateSelections,
   },
   setup() {
     return {
