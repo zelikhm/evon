@@ -9,7 +9,7 @@
           <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] leading-none">Мои подборки</h2>
           <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Найдено 1512 новостроек</span>
         </div>
-        <button @click="openSelection" class="bg-[#E84680] text-white text-base text-sm text-xs px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5 rounded-[3px] leading-none">Создать подборку</button>
+        <button @click="openSelection" class="login__btn--bg text-white text-base text-sm text-xs px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5 rounded-[3px] leading-none">Создать подборку</button>
       </div>
       <div class="grid grid-cols-2 lg:grid-cols-1 gap-x-10 gap-y-4 mt-8 xxl:mt-7 xl:mt-6 mb-28 xxl:mb-24 xl:mb-20">
         <div class="contact__selling grid__selection-block rounded-[10px]">

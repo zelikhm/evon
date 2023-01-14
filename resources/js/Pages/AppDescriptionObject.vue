@@ -58,7 +58,7 @@
           </div>
         </div>
       </div>
-      <div class="grid__68-32 gap-7 xxl:gap-5 xl:gap-4">
+      <div class="grid__68-30 justify-between">
         <div class="flex flex-col">
           <swiper
             :navigation="true"
@@ -70,13 +70,13 @@
             class="mySwiper w-full"
           >
             <swiper-slide class="h-full flex justify-center">
-              <img @click="album = true" class="h-full" :src="'/storage/' + house.image" alt="">
+              <img @click="album = true" class="h-full w-full" :src="'/storage/' + house.image" alt="">
             </swiper-slide>
             <swiper-slide class="h-full flex justify-center">
-              <img @click="album = true" class="h-full" src="../../assets/slider_img.jpg" alt="">
+              <img @click="album = true" class="h-full w-full" src="../../assets/slider_img.jpg" alt="">
             </swiper-slide>
             <swiper-slide class="h-full flex justify-center">
-              <img @click="album = true" class="h-full" src="../../assets/slider_img.jpg" alt="">
+              <img @click="album = true" class="h-full w-full" src="../../assets/slider_img.jpg" alt="">
             </swiper-slide>
           </swiper>
           <div class="border border-solid border-[#E5DFEE] h-[100px] xxl:h-[80px] xl:h-[60px] flex items-center justify-evenly rounded-[12px] mt-7 xxl:mt-5 xl:mt-4 mb-16 xxl:mb-12 xl:mb-10">

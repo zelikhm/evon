@@ -25,6 +25,7 @@ Route::get('/', function () {
     ]);
 });
 
+
 Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
   Route::get('/', ['App\Http\Controllers\User\ProfileController', 'index']);
 

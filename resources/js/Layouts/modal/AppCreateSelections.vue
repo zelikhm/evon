@@ -1,6 +1,6 @@
 <template>
   <div v-if="openSelection" class="fixed flex justify-end z-[100] top-0 ring-0 w-full h-full">
-    <div :class="{'translate-x-0': openSideBar}" class="transition-all ease-linear duration-500 flex flex-col relative z-50 w-[50%] translate-x-full h-full bg-white px-28 xxl:px-24 xl:px-20 py-14 xxl:py-10 xl:py-8">
+    <div :class="{'translate__x__0': openSideBar}" class="transition-all ease-linear duration-500 flex flex-col relative z-50 w-[50%] translate-x-full h-full bg-white px-28 xxl:px-24 xl:px-20 py-14 xxl:py-10 xl:py-8">
       <div class="relative mb-10 xxl:mb-8 xl:mb-6">
         <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold">Вход в приложение Avon</h2>
         <button @click="closeCreateSelection" class="w-4 h-4 absolute top-[20%] right-0 z-50">
@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="grid grid-cols-2 gap-8 xxl:gap-6 xl:gap-5">
-      <button class="bg-[#E84680] text-white text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Создать</button>
+      <button class="login__btn--bg text-white text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Создать</button>
       <button class="bg-litepink text-[#E84680] text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Отправить</button>
     </div>
     </div>

@@ -15,9 +15,11 @@
           :city="city"
           :builders="builders"
         />
-        <app-list-new-building @open-filter="openFilter = true"
-                               :houses="houses"
-                               :count="count"
+        <app-list-new-building
+          @open-filter="openFilter = true"
+          @open-add-selections="openAddSelection = true"
+          :houses="houses"
+          :count="count"
 
         />
         <app-news-developer />
