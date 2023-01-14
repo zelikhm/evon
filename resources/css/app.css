@@ -377,11 +377,19 @@ input::placeholder {
 
 .immovables__grid {
   display: grid;
-  grid-template-columns: 16.7vw 1fr 15.6vw;
+  grid-template-columns: 1fr 15.6vw;
+}
+
+.grid__list-new-build {
+  display: grid;
+  grid-template-columns: 17.4vw 1fr;
 }
 
 @media (max-width: 992px) {
   .immovables__grid {
+    grid-template-columns: 1fr;
+  }
+  .grid__list-new-build {
     grid-template-columns: 1fr;
   }
 }

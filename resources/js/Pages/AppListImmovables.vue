@@ -6,21 +6,14 @@
   <main>
     <div class="_container">
       <div class="immovables__grid relative my-14 xxl:my-10 xl:my-8">
-        <app-filter
-          class="filter__left lg:absolute lg:z-40 lg:top-0 transition-all duration-500 w-full"
-          :class="{'animation__filter': openFilter}"
-          @close-filter="openFilter = false"
+        <app-list-new-building
+          @open-add-selections="openAddSelection = true"
+          :houses="houses"
+          :count="count"
           :dops="dops"
           :infos="infos"
           :city="city"
           :builders="builders"
-        />
-        <app-list-new-building
-          @open-filter="openFilter = true"
-          @open-add-selections="openAddSelection = true"
-          :houses="houses"
-          :count="count"
-
         />
         <app-news-developer />
       </div>
@@ -35,7 +28,6 @@
 <script>
 import AppHeader from '../Layouts/AppHeader.vue'
 import AppFooter from "../Layouts/AppFooter.vue"
-import AppFilter from "../Components/AppFilter.vue"
 import AppListNewBuilding from "../Components/AppListNewBuilding.vue"
 import AppNewsDeveloper from "../Components/AppNewsDeveloper.vue"
 import AppModalNotification from "../Layouts/modal/AppModalNotification.vue"
@@ -58,16 +50,15 @@ export default {
       openNotification: false,
       openAddSelection: false,
       openCreateSelection: false,
-      openFilter: false,
       count: 6
     }
   },
   methods: {
+
   },
   components: {
     AppHeader,
     AppFooter,
-    AppFilter,
     AppListNewBuilding,
     AppNewsDeveloper,
     AppModalNotification,

@@ -1,8 +1,12 @@
 <template>
+  <app-add-selections v-if="openAddSelection" @close-add-selection="openAddSelection = false"/>
+  <app-create-selection v-if="openCreateSelection" @close-create-selection="openCreateSelection = false" />
   <app-header :user="user" />
   <main class="relative">
 
-    <div class="absolute w-full text-center favorites__banner py-3 xxl:py-2.5 xl:py-2 text-[#30CB6E] text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">Euro Avsallar Residence добавлен в избранное</div>
+    <div class="absolute w-full text-center favorites__banner py-3 xxl:py-2.5 xl:py-2 text-[#30CB6E] text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">
+      Euro Avsallar Residence добавлен в избранное
+    </div>
     <div v-if="1 != 1" class="absolute w-full text-center bg-[#E84780] py-3 xxl:py-2.5 xl:py-2 text-white text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">
       Euro Avsallar Residence удален из избранного
       <button class="bg-white text-[#E84780] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none px-2 xxl:py-1.5 xl:p-1 py-1.5 rounded-[3px]">Отменить</button>
@@ -33,20 +37,21 @@
         </div>
       </div>
 
-      <div  class="grid grid-cols-5 my-8 xxl:my-6 xl:my-5 gap-5 xxl:gap-4 xl:gap-3">
+      <div class="grid grid-cols-5 my-8 xxl:my-6 xl:my-5 gap-5 xxl:gap-4 xl:gap-3">
 
         <div class="relative block__favorites rounded-[5px] transition-all">
           <div class="relative">
             <img src="../../assets/immovables_img_one.png" class="relative z-0 h-[12.5vw] w-full rounded-[5px]" alt="">
             <div class="seek opacity-0 transition-all immovables__overlay top-0 h-full w-full absolute z-10 rounded-[5px]"></div>
             <div class="seek opacity-0 transition-all absolute top-1/2 -translate-y-1/2 left-0 z-10 flex flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
-              <button class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
+              <button @click="openAddSelection = true" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
                 <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В подборку</span>
                 <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
               </button>
               <button class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
                 <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В избранное</span>
                 <img src="../../assets/svg/heart_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="Сердце">
+                <img v-if="1 !== 1" src="../../assets/svg/heart_icon_pink.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
               </button>
             </div>
             <div class="absolute left-0 bottom-0 flex items-center gap-2 xl:gap-1.5 z-20 p-5 xxl:p-4 xl:p-3">
@@ -59,6 +64,7 @@
             <div class="flex justify-between items-center">
               <h3 class="text-[#1E1D2D] text-[20px] xxl:text-[16px] xl:text-[14px] font-semibold leading-none">Euro Avsallar Residence</h3>
               <img src="../../assets/svg/heart_icon_pink.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
+              <img src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4" alt="Сердце">
             </div>
             <span class="text-[17px] xxl:text-[14px] xl:tex-[12px] text-[#1E1D2D] leading-none">от 1 490 000 ₽</span>
             <div class="flex items-center gap-2 xl:gap-1.5 text-[14px] xxl:text-[12px] xl:text-[10px]">
@@ -74,13 +80,14 @@
             <img src="../../assets/immovables_img_one.png" class="relative z-0 h-[12.5vw] w-full rounded-[5px]" alt="">
             <div class="seek opacity-0 transition-all immovables__overlay top-0 h-full w-full absolute z-10 rounded-[5px]"></div>
             <div class="seek opacity-0 transition-all absolute top-1/2 -translate-y-1/2 left-0 z-10 flex flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
-              <button class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
+              <button @click="openAddSelection = true" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
                 <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В подборку</span>
                 <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
               </button>
               <button class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
                 <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В избранное</span>
                 <img src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="Сердце">
+                <img v-if="1 !== 1" src="../../assets/svg/heart_icon_pink.svg" class="w-5 xxl:w-4 xl:w-3" alt="Сердце">
               </button>
             </div>
             <div class="absolute left-0 bottom-0 flex items-center gap-2 xl:gap-1.5 z-20 p-5 xxl:p-4 xl:p-3">
@@ -93,6 +100,7 @@
             <div class="flex justify-between items-center">
               <h3 class="text-[#1E1D2D] text-[20px] xxl:text-[16px] xl:text-[14px] font-semibold leading-none">Euro Avsallar Residence</h3>
               <img src="../../assets/svg/heart_icon_pink.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
+              <img src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4" alt="Сердце">
             </div>
             <span class="text-[17px] xxl:text-[14px] xl:tex-[12px] text-[#1E1D2D] leading-none">от 1 490 000 ₽</span>
             <div class="flex items-center gap-2 xl:gap-1.5 text-[14px] xxl:text-[12px] xl:text-[10px]">
@@ -108,13 +116,14 @@
             <img src="../../assets/immovables_img_one.png" class="relative z-0 h-[12.5vw] w-full rounded-[5px]" alt="">
             <div class="seek opacity-0 transition-all immovables__overlay top-0 h-full w-full absolute z-10 rounded-[5px]"></div>
             <div class="seek opacity-0 transition-all absolute top-1/2 -translate-y-1/2 left-0 z-10 flex flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
-              <button class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
+              <button @click="openAddSelection = true" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
                 <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В подборку</span>
                 <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
               </button>
               <button class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
                 <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В избранное</span>
                 <img src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="Сердце">
+                <img v-if="1 !== 1" src="../../assets/svg/heart_icon_pink.svg" class="w-5 xxl:w-4 xl:w-3" alt="Сердце">
               </button>
             </div>
             <div class="absolute left-0 bottom-0 flex items-center gap-2 xl:gap-1.5 z-20 p-5 xxl:p-4 xl:p-3">
@@ -127,6 +136,7 @@
             <div class="flex justify-between items-center">
               <h3 class="text-[#1E1D2D] text-[20px] xxl:text-[16px] xl:text-[14px] font-semibold leading-none">Euro Avsallar Residence</h3>
               <img src="../../assets/svg/heart_icon_pink.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
+              <img src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4" alt="Сердце">
             </div>
             <span class="text-[17px] xxl:text-[14px] xl:tex-[12px] text-[#1E1D2D] leading-none">от 1 490 000 ₽</span>
             <div class="flex items-center gap-2 xl:gap-1.5 text-[14px] xxl:text-[12px] xl:text-[10px]">
@@ -142,13 +152,14 @@
             <img src="../../assets/immovables_img_one.png" class="relative z-0 h-[12.5vw] w-full rounded-[5px]" alt="">
             <div class="seek opacity-0 transition-all immovables__overlay top-0 h-full w-full absolute z-10 rounded-[5px]"></div>
             <div class="seek opacity-0 transition-all absolute top-1/2 -translate-y-1/2 left-0 z-10 flex flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
-              <button class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
+              <button @click="openAddSelection = true" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
                 <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В подборку</span>
                 <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
               </button>
               <button class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
                 <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В избранное</span>
                 <img src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="Сердце">
+                <img v-if="1 !== 1" src="../../assets/svg/heart_icon_pink.svg" class="w-5 xxl:w-4 xl:w-3" alt="Сердце">
               </button>
             </div>
             <div class="absolute left-0 bottom-0 flex items-center gap-2 xl:gap-1.5 z-20 p-5 xxl:p-4 xl:p-3">
@@ -161,6 +172,7 @@
             <div class="flex justify-between items-center">
               <h3 class="text-[#1E1D2D] text-[20px] xxl:text-[16px] xl:text-[14px] font-semibold leading-none">Euro Avsallar Residence</h3>
               <img src="../../assets/svg/heart_icon_pink.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
+              <img src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4" alt="Сердце">
             </div>
             <span class="text-[17px] xxl:text-[14px] xl:tex-[12px] text-[#1E1D2D] leading-none">от 1 490 000 ₽</span>
             <div class="flex items-center gap-2 xl:gap-1.5 text-[14px] xxl:text-[12px] xl:text-[10px]">
@@ -176,13 +188,14 @@
             <img src="../../assets/immovables_img_one.png" class="relative z-0 h-[12.5vw] w-full rounded-[5px]" alt="">
             <div class="seek opacity-0 transition-all immovables__overlay top-0 h-full w-full absolute z-10 rounded-[5px]"></div>
             <div class="seek opacity-0 transition-all absolute top-1/2 -translate-y-1/2 left-0 z-10 flex flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
-              <button class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
+              <button @click="openAddSelection = true" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
                 <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В подборку</span>
                 <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
               </button>
               <button class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
                 <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В избранное</span>
                 <img src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="Сердце">
+                <img v-if="1 !== 1" src="../../assets/svg/heart_icon_pink.svg" class="w-5 xxl:w-4 xl:w-3" alt="Сердце">
               </button>
             </div>
             <div class="absolute left-0 bottom-0 flex items-center gap-2 xl:gap-1.5 z-20 p-5 xxl:p-4 xl:p-3">
@@ -195,6 +208,7 @@
             <div class="flex justify-between items-center">
               <h3 class="text-[#1E1D2D] text-[20px] xxl:text-[16px] xl:text-[14px] font-semibold leading-none">Euro Avsallar Residence</h3>
               <img src="../../assets/svg/heart_icon_pink.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
+              <img src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4" alt="Сердце">
             </div>
             <span class="text-[17px] xxl:text-[14px] xl:tex-[12px] text-[#1E1D2D] leading-none">от 1 490 000 ₽</span>
             <div class="flex items-center gap-2 xl:gap-1.5 text-[14px] xxl:text-[12px] xl:text-[10px]">
@@ -214,6 +228,8 @@
 <script>
 import AppHeader from "@/Layouts/AppHeader.vue"
 import AppFooter from "@/Layouts/AppFooter.vue"
+import AppAddSelections from "@/Layouts/modal/AppAddSelections.vue"
+import AppCreateSelections from "@/Layouts/modal/AppAddSelections.vue"
 
 import { computed } from 'vue'
 import { usePage } from '@inertiajs/inertia-vue3'
@@ -222,10 +238,14 @@ export default {
   components: {
     AppHeader,
     AppFooter,
+    AppAddSelections,
+    AppCreateSelections,
   },
   data() {
     return {
-      user: computed(() => usePage().props.value.auth.user)
+      user: computed(() => usePage().props.value.auth.user),
+      openAddSelection: false,
+      openCreateSelection: false,
     }
   },
   mounted() {
