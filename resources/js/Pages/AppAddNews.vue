@@ -18,7 +18,7 @@ import { Link } from '@inertiajs/inertia-vue3'
               <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">ЖК</span>
               <div class="relative">
                 <div @click="openSelectJK = !openSelectJK" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
-                  <span>{{ isCreate ? selectJK.title : selectJK }}</span>
+                  <span>{{ selectJK }}</span>
                   <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectJK }" alt="">
                 </div>
                 <div v-if="openSelectJK" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
@@ -104,17 +104,16 @@ export default {
           title: this.dataNews.title,
           description: this.dataNews.description,
           token: this.globalToken
-        })
+        }).then(response => window.location.href = '/profile/news/')
       } else {
-        console.log(this.idNews)
-        console.log(this.dataNews)
+        console.log(this.new.id)
         axios.post('/api/news/edit', {
-          house_id: this.idNews,
-          new_id: this.dataNews.house_id,
+          house_id: this.dataNews.house_id,
+          new_id: this.idNews,
           title: this.dataNews.title,
           description: this.dataNews.description,
           token: this.globalToken
-        })
+        }).then(response => window.location.href = '/profile/news/')
       }
     },
   },
@@ -126,8 +125,9 @@ export default {
       this.selectJK = this.houses.find(item => item.id === +link[1])
     }
     if (Number.isInteger(+link2.at(-1))) {
-      this.dataNews.house_id = this.houses.find(item => item.id === +link2.at(-1)).id
-      this.selectJK = this.houses.find(item => item.id === +link2.at(-1)).title
+      this.dataNews.house_id = this.houses.find(item => item.id === this.new.house_id).id
+      this.selectJK = this.houses.find(item => item.id === this.new.house_id).title
+      console.log(this.selectJK)
     } else {
       this.isCreate = true
     }

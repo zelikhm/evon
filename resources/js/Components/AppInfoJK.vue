@@ -1,5 +1,6 @@
 <script setup>
 import {Link} from '@inertiajs/inertia-vue3'
+
 </script>
 
 <template>
@@ -87,33 +88,17 @@ import {Link} from '@inertiajs/inertia-vue3'
     </div>
 
     <div :class="{ validation: validation.coordinates }" class="flex flex-col border border-solid border-[#E5DFEE] gap-2.5 xxl:gap-2 xl:gap-1.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-      <label :class="{ validationText: validation.coordinates }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="coord_object">Введите координаты
-        объекта</label>
+      <label :class="{ validationText: validation.coordinates }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="coord_object">Введите координаты объекта</label>
       <input v-model="object.coordinates"
              @input="checkValidation(4)"
+             @blur="setMarker"
              class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
-             type="number" id="coord_object">
+             type="text" id="coord_object">
     </div>
 
-    <!--  class="w-full h-[300px] rounded-[6px] my-10 xxl:my-8 xl:my-6"  -->
-
-    <GMapMap :center="center" :zoom="10" map-type-id="terrain" class="w-full h-[300px] rounded-[6px] my-10 xxl:my-8 xl:my-6">
+    <GMapMap :center="center" :zoom="6" map-type-id="terrain" class="w-full h-[300px] rounded-[6px] my-10 xxl:my-8 xl:my-6" :draggable="true" @click="handleClick"  ref="myMapRef" :click="true">
       <GMapMarker :key="index" v-for="(m, index) in markers" :position="m.position" :clickable="true" :draggable="true"
                   @click="openMarker(m.id)" >
-        <GMapInfoWindow
-            :closeclick="true"
-            @closeclick="openMarker(null)"
-            :opened="openedMarkerID === m.id"
-        >
-          <div>
-            <h1>Euro Avsallar Residence</h1>
-            <h3>Туапсе, А147</h3>
-            <h3>Туапсе, А147</h3>
-            <hr>
-            <h4>от 149000$</h4>
-            <button>В подборку</button>
-          </div>
-        </GMapInfoWindow>
       </GMapMarker>
     </GMapMap>
 
@@ -442,23 +427,8 @@ export default {
   data() {
     return {
       openedMarkerID: null,
-      center: {lat: 51.093048, lng: 6.84212},
-      markers: [
-        {
-          id: 1,
-          position: {
-            lat: 51.093048,
-            lng: 6.84212
-          }
-        },
-        {
-          id: 2,
-          position: {
-            lat: 51.198429,
-            lng: 6.69529
-          }
-        }
-      ],
+      center: {lat: 38.789057678005726, lng: 35.39768557787735},
+      markers: [],
       borderServices: false,
       borderInfrastructure: false,
       selectCity: 'Сочи',
@@ -553,6 +523,28 @@ export default {
     }
   },
   methods: {
+    setMarker() {
+      let coordinates = this.object.coordinates.split(' ')
+
+      this.markers = []
+      this.markers.push({
+        position: {
+          lat: +coordinates[0],
+          lng: +coordinates[1]
+        }
+      })
+    },
+    handleClick(event) {
+      this.markers = []
+      this.markers.push({
+        position: {
+          lat: event.latLng.lat(),
+          lng: event.latLng.lng()
+        }
+      })
+      this.object.coordinates = event.latLng.lat() + ' ' + event.latLng.lng()
+      console.log(this.object)
+    },
     openMarker(id) {
       this.openedMarkerID = id
     },
@@ -577,13 +569,15 @@ export default {
 
         let formData = new FormData();
 
+        let coord = this.object.coordinates.split(' ')
+
         formData.append('user_id', this.user.id);
         formData.append('title', this.object.title);
         formData.append('description', this.object.description);
         formData.append('city', this.selectCity);
         formData.append('area', this.selectRegion);
-        formData.append('longitude', this.object.coordinates);
-        formData.append('latitude', this.object.coordinates);
+        formData.append('latitude', +coord[0]);
+        formData.append('longitude', +coord[1]);
         formData.append('percent', this.object.percent);
         formData.append('comment', this.object.comment);
         formData.append('statusHouse', this.selectDeadline);
@@ -653,7 +647,7 @@ export default {
         // this.$emit('addAndContinue')
       })
     },
-    checkValidation(num) {
+    checkValidation(num, title) {
       if (num === 1) {
         this.object.title === '' ? this.validation.title = true : this.validation.title = false
         this.object.description === '' ? this.validation.description = true : this.validation.description = false
@@ -663,7 +657,7 @@ export default {
       } else {
         if (this.validation.title && num === 2) this.validation.title = false
         if (this.validation.description && num === 3) this.validation.description = false
-        if (this.validation.coordinates && num === 4) this.validation.coordinates = false
+        if (this.validation.coordinates && num === 4) {this.validation.coordinates = false}
         if (this.validation.floors && num === 5) this.validation.floors = false
         if (this.validation.percent && num === 6) this.validation.percent = false
       }

@@ -8,7 +8,7 @@
           <div class="grid__prof-agent gap-7 xxl:gap-5 xl:gap-4">
             <div class="flex flex-col gap-12 xxl:gap-10 xl:gap-8">
               <div class="relative w-[13.28vw] h-[13.28vw] rounded-full">
-                <img v-if="avatar" class="absolute w-full h-full rounded-full" :src="myPhoto" alt="">
+                <img v-if="avatar" class="absolute w-full h-full rounded-full" :src="'/storage/' + myPhoto" alt="">
                 <div class="avatar__contact w-full h-full rounded-full">
                   <div class="absolute rounded-full w-full h-full top-0 left-0">
                     <label for="avatar" :class="{'-z-10': avatar}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-full">
@@ -66,7 +66,7 @@
                 </div>
                 <div class="relative flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
                   <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="talk">Расскажите о себе</label>
-                  <textarea v-model="profile.description" maxlength="250" @input="this.lengthTextarea = this.valueTextarea.length" class="custom__scroll-grey text-[#1E1D2D] resize-none h-[90px] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none focus:ring-0" type="text" id="talk" placeholder="Расскажите о себе"></textarea>
+                  <textarea v-model="profile.description" maxlength="250" @input="lengthTextarea = profile.description.length" class="custom__scroll-grey text-[#1E1D2D] resize-none h-[90px] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none focus:ring-0" type="text" id="talk" placeholder="Расскажите о себе"></textarea>
                   <div class="absolute bottom-0 right-0 text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none p-5 xxl:p-4 xl:p-3">{{ lengthTextarea }}/250</div>
                 </div>
                 <button @click="saveEdit" class="bg-[#6435A5] text-[15px] xxl:text-[13px] py-4 xxl:py-3 xl:py-2.5 xl:text-[11px] leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">Сохранить</button>
@@ -132,16 +132,15 @@ export default {
       avatar: false,
       agencyPhoto: '',
       agency: false,
-      valueTextarea: null,
       lengthTextarea: 0,
       profile: {
-        name: '',
-        surname: '',
-        tel: '',
-        email: '',
-        position: '',
-        link: '',
-        description: ''
+        name: null,
+        surname: null,
+        tel: null,
+        email: null,
+        position: null,
+        link: null,
+        description: null
       }
     }
   },
@@ -167,6 +166,7 @@ export default {
 
       let formData = new FormData()
 
+      formData.append('user_id', this.user.id)
       formData.append('first_name', this.profile.name)
       formData.append('last_name', this.profile.surname)
       formData.append('status', this.profile.position)
@@ -191,6 +191,10 @@ export default {
     this.profile.position = this.user.status
     this.profile.link = this.user.link
     this.profile.email = this.user.email
+    if (this.user.image !== null) {
+      this.myPhoto = this.user.image
+      this.avatar = true
+    }
     this.profile.description = this.user.description
   },
   components: {

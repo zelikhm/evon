@@ -157,8 +157,10 @@ import { Link } from '@inertiajs/inertia-vue3'
                     <span class="slider round"></span>
                   </label>
                 </div>
-                <div class="hover__select border__bottom--not whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">Профиль</div>
-                <div class="hover:bg-[#F6F3FA] border__bottom--not text-[#E84680] whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">Выйти</div>
+                <Link href="/profile" class="hover__select border__bottom--not whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">Профиль</Link>
+                <form action="/logout" method="post">
+                  <button type="submit" class="hover:bg-[#F6F3FA] border__bottom--not text-[#E84680] whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">Выйти</button>
+                </form>
               </div>
             </div>
           </div>

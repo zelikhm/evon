@@ -2,24 +2,14 @@
   <div class="bg-[#F6F3FA] p-7 xxl:p-5 xl:p-5 h-fit mb-10 xxl:mb-8 xl:mb-6 rounded-[10px]">
     <div class="text-sm xxl:text-xs xl:text-[10px] pb-10 xxl:pb-8 xl:pb-6">
       <span class="font-medium text-lg xxl:text-[15px] xl:text-[13px] pt-6 xxl:pt-5 xl:pt-4">Новости</span>
-      <div class="py-5 xxl:py-4 xl:py-3 border__bottom">
-        <span class="text-[#8A8996]">15 июля</span>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </p>
-        <button class="text-[#6435A5]">Читать далее</button>
-      </div>
-      <div class="py-5 xxl:py-4 xl:py-3 border__bottom">
-        <span class="text-[#8A8996]">15 июля</span>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </p>
-        <button class="text-[#6435A5]">Читать далее</button>
-      </div>
-      <div class="py-5 xxl:py-4 xl:py-3 border__bottom">
-        <span class="text-[#8A8996]">15 июля</span>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </p>
-        <button class="text-[#6435A5]">Читать далее</button>
+      <div class="py-5 xxl:py-4 xl:py-3 border__bottom" v-for="item in news">
+        <span class="text-[#8A8996]">{{ new Date(Date.parse(item.created_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span>
+        <p v-html="item.description.slice(0, 100)"></p>
+        <button class="text-[#6435A5]" @click="this.$emit('open-all-news')">Читать далее</button>
       </div>
       <div class="flex justify-center w-full pt-5 xxl:pt-4 xl:pt-3">
         <button @click="this.$emit('open-all-news')" class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5 animation__arrow">
-          <span class="text-[#6435A5] text-sm xxl:text-xs xl:text-[10px]">Смотреть все новости (23)</span>
+          <span class="text-[#6435A5] text-sm xxl:text-xs xl:text-[10px]">Смотреть все новости ({{ house.news.length }})</span>
           <img src="../../assets/svg/arrow_right_purple.svg" class="transition-all duration-300 h-4 xxl:h-3 xl:h-2.5" alt="Стелочка">
         </button>
       </div>
@@ -99,8 +89,11 @@ export default {
   },
   data() {
     return {
-
+      news: null
     }
+  },
+  created() {
+    this.news = this.house.news.slice(0, 4)
   }
 }
 </script>

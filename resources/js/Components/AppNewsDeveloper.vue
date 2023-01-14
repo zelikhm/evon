@@ -2,7 +2,7 @@
   <div class="h-fit">
     <div class="relative z-20 border__top-6 bg-[#F6F3FA] flex items-center justify-between p-7 xxl:p-5 xl:p-4">
       <span class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] whitespace-nowrap leading-none">Новости застройщика </span>
-      <img src="../../assets/circle_arrow.png" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="">
+      <img src="../../assets/svg/reload_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="">
     </div>
     <div class="relative z-10 h-[1px] w-full bg-[#E5DFEE]"></div>
     <div class="overflow-hidden">

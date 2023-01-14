@@ -21,7 +21,7 @@ import { Link } from "@inertiajs/inertia-vue3";
           <span class="text-[#1E1D2D] font-semibold text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">{{ item.title }}</span>
           <span class="text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">от {{ Number.isInteger(item.minPrice) ? item.minPrice : "-" }} ₽</span>
           <div class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] flex items-center gap-2">
-            <span class="leading-none">{{ isNaN(item.minSquare / item.minPrice) ?  "-" : Math.round(item.minSquare / item.minPrice) }} ₽ за м²</span>
+            <span class="leading-none">{{ isNaN(item.minSquare / item.minPrice) ?  "-" : Math.round(item.minSquare / item.minPrice) }} € за м²</span>
             <span class="bg-[#8A8996] h-1 w-1 rounded-full"></span>
             <span class="leading-none">{{ Number.isInteger(item.minSquare) ? item.minSquare : "-" }} м² - {{ Number.isInteger(item.maxSquare) ? item.maxSquare : "-" }} м²</span>
           </div>
