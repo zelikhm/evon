@@ -4,7 +4,7 @@ import {Link} from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
-  <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px]">Добавить объект</h2>
+  <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px]">{{ isEdit ? "Редактирование объекта" : "Добавить объект" }}</h2>
   <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Найдено {{ count }} новостроек</span>
   <div class="flex-col flex gap-5 xxl:gap-4 xl:gap-3 pt-5 xxl:pt-4 xl:pt-3">
 
@@ -399,7 +399,7 @@ import {Link} from '@inertiajs/inertia-vue3'
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-10 xxl:gap-8 xl:gap-6 my-10 xxl:my-8 xl:my-6 w-full">
+      <div class="grid grid-cols-2 gap-10 xxl:gap-8 xl:gap-6 my-10 xxl:my-8 xl:my-6 w-full" v-if="!isEdit">
         <Link href="/profile/houses" @click="addAndContinue"
               class="login__btn--bg w-full text-center mr-4 font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">
           Добавить
@@ -409,6 +409,14 @@ import {Link} from '@inertiajs/inertia-vue3'
           class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]"
         >
           Добавить и продолжить
+        </button>
+      </div>
+      <div class="grid gap-10 xxl:gap-8 xl:gap-6 my-10 xxl:my-8 xl:my-6 w-full" v-else>
+        <button
+          @click="addAndContinue()"
+          class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]"
+        >
+          Сохранить
         </button>
       </div>
     </div>
@@ -519,7 +527,8 @@ export default {
         percent: false,
         floors: false,
         image: false
-      }
+      },
+      isEdit: false
     }
   },
   methods: {
@@ -721,6 +730,11 @@ export default {
     Multiselect, VueMultiselect
   },
   mounted() {
+    let link = +window.location.href.split('/').at(-1)
+    if (Number.isInteger( link )) {
+      this.isEdit = true
+    }
+
     if (this.city[0] !== null) {
       this.selectCity = this.city[0].title
       this.selectRegion = this.city[0].regions[0].title
@@ -737,7 +751,7 @@ export default {
 
     this.supportsReady = this.supports
 
-    if (this.house !== undefined ) {
+    if (this.house !== undefined) {
       this.object.title = this.house.title
       this.object.description = this.house.description
       this.selectCity = this.house.city
@@ -755,24 +769,28 @@ export default {
       this.object.comment = this.house.comment
       this.object.percent = this.house.percent
 
-      for (let key of this.house.info.info) {
-        if (!+isNaN(key)) {
-          this.object.info.push(this.infos.find(item => item.id === +key))
-          this.valueSelectInfrastructure.push(this.infos.find(item => item.id === +key).name)
+      if (this.house.info.info !== null) {
+        for (let key of this.house.info.info) {
+          if (!+isNaN(key)) {
+            this.object.info.push(this.infos.find(item => item.id === +key))
+            this.valueSelectInfrastructure.push(this.infos.find(item => item.id === +key).name)
+          }
         }
       }
 
-      for (let key of this.house.info.dop) {
-        if (!+isNaN(key)) {
-          this.object.dop.push(this.dops.find(item => item.id === +key))
-          this.valueSelectServices.push(this.dops.find(item => item.id === +key).name)
+      if (this.house.info.dop !== null) {
+        for (let key of this.house.info.dop) {
+          if (!+isNaN(key)) {
+            this.object.dop.push(this.dops.find(item => item.id === +key))
+            this.valueSelectServices.push(this.dops.find(item => item.id === +key).name)
+          }
         }
       }
 
       this.supportsReady = this.house.supports
     }
 
-    console.log(this.house)
+
   },
   computed: {
     filteredCity() {

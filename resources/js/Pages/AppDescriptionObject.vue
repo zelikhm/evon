@@ -3,7 +3,7 @@
   <app-modal-album v-if="album" @close-album="album = false"/>
   <app-add-selections v-if="openAddSelection" @close-add-selection="openAddSelection = false"/>
   <app-create-selection v-if="openCreateSelection" @close-create-selection="openCreateSelection = false" />
-  <app-all-news v-if="openAllNews" @close-all-news="openAllNews = false" />
+  <app-all-news v-if="openAllNews" @close-all-news="openAllNews = false" :house="house" />
   <main>
     <div class="_container flex flex-col">
       <div class="decription__head h-20 xxl:h-16 xl:h-12 rounded-[12px] my-7 xxl:my-5 xl:my-4">

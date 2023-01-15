@@ -140,27 +140,27 @@ import { Link } from '@inertiajs/inertia-vue3'
             <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
               <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_sea">от моря (м)</label>
-                <input class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_sea">
+                <input v-model="filters.toSea" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_sea">
               </div>
               <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_school">от школы (м)</label>
-                <input class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_school">
+                <input v-model="filters.toSchool" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_school">
               </div>
               <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_shoping">от торгового центра (м)</label>
-                <input class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_shoping">
+                <input v-model="filters.toShop" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_shoping">
               </div>
               <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_park">от парка (м)</label>
-                <input class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_park">
+                <input v-model="filters.toPark" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_park">
               </div>
               <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_child">от детского садика (м)</label>
-                <input class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_child">
+                <input v-model="filters.toChildrenSchool" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_child">
               </div>
               <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_stop">от остановки (м)</label>
-                <input class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_stop">
+                <input v-model="filters.toBus" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_stop">
               </div>
             </div>
           </div>
@@ -217,7 +217,7 @@ import { Link } from '@inertiajs/inertia-vue3'
               </div>
             </div>
           </div>
-          <button class="login__btn--bg text-white text-[18px] xxl:text-[15px] xl:text-[13px] leading-none bg-[#E84680] rounded-[5px] font-semibold py-5 xxl:py-4 xl:py-3">Фильтрация</button>
+          <button @click="startFilter" class="login__btn--bg text-white text-[18px] xxl:text-[15px] xl:text-[13px] leading-none bg-[#E84680] rounded-[5px] font-semibold py-5 xxl:py-4 xl:py-3">Фильтрация</button>
         </div>
       </div>
     </div>
@@ -240,7 +240,7 @@ import { Link } from '@inertiajs/inertia-vue3'
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] whitespace-nowrap text-center">Найдено {{ houses.length }} новостроек</span>
           </div>
           <div class="flex items-center md:flex-col gap-8 xxl:gap-6 xl:gap-5 md:gap-3">
-            <div v-if="openNeeded !== 3" class="relative">
+            <div v-if="!map" class="relative">
               <div @click="openDate = !openDate" class="cursor-pointer flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
                 <span class="text-base xxl:text-sm xl:text-xs leading-none whitespace-nowrap">
                   По {{ selectDate }}
@@ -257,11 +257,11 @@ import { Link } from '@inertiajs/inertia-vue3'
               </div>
             </div>
             <div class="flex items-center gap-8 xxl:gap-6 xl:gap-5">
-              <button v-if="openNeeded !== 3" @click="openNeeded = 3" class="button__map flex items-center gap-3 xxl:gap-2 xl:gap-1.5 p-3 xxl:p-2.5 xl:p-2 rounded-[6px]">
+              <button @click="map = !map" class="button__map flex items-center gap-3 xxl:gap-2 xl:gap-1.5 p-3 xxl:p-2.5 xl:p-2 rounded-[6px]">
                 <img src="../../assets/svg/map_pointer.svg" class="h-6 xxl:h-5 xl:h-4" alt="Метка">
-                <span class="text-[#6435A5] font-medium text-base xxl:text-sm xl:text-xs whitespace-nowrap">Искать на карте</span>
+                <span class="text-[#6435A5] font-medium text-base xxl:text-sm xl:text-xs whitespace-nowrap">{{ map ? "Скрыть карту" : "Искать на карте" }}</span>
               </button>
-              <div class="flex gap-3 xxl:gap-2 xl:gap-1.5">
+              <div class="flex gap-3 xxl:gap-2 xl:gap-1.5" v-if="!map">
                 <button @click="toggle = false" :class="{'grid--active': !toggle}" class="button__choices--grid h-9 xxl:h-7 xl:h-6 w-9 xxl:w-7 xl:w-6 gap-1 xxl:gap-0.5 rounded-[6px] p-[8px] xxl:p-[6px] xl:p-[5px]">
                   <div class="w-full rounded-[1px] h-full"></div>
                   <div class="w-full rounded-[1px] h-full"></div>
@@ -279,8 +279,8 @@ import { Link } from '@inertiajs/inertia-vue3'
       </div>
 
       <!--  Новостройки в виде таблицы -->
-      <div v-if="!toggle" class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3 mt-5 xxl:mt-4 xl:mt-3">
-        <div class="flex flex-col" v-for="item in readyHouses">
+      <div v-if="!toggle && !map" class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3 mt-5 xxl:mt-4 xl:mt-3">
+        <div class="flex flex-col" v-for="(item, idx) in readyHouses" :key="item.id">
           <div class="object__block relative z-10 h-[16vw] lg:h-[24vw] md:h-[36vw] sm:h-[56vw] rounded-[6px]">
           <img :src="'/storage/' + item.image" class="absolute -z-10 w-full h-full rounded-[6px]" alt="">
           <div class="seek immovables__overlay opacity-0 transition-all h-full w-full absolute -z-10 rounded-[6px]"></div>
@@ -380,7 +380,7 @@ import { Link } from '@inertiajs/inertia-vue3'
   <!--      </div>-->
   <!--    </div>-->
 
-      <div v-if="toggle" class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 mt-5 xxl:mt-4 xl:mt-3">
+      <div v-if="toggle && !map" class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 mt-5 xxl:mt-4 xl:mt-3">
         <div class="grid__75-25 border border-solid border-[#E5DFEE] rounded-[6px]" v-for="item in readyHouses">
           <div class="border__right">
             <div class="grid__35-65 p-2.5 xxl:p-2 xl:p-1.5">
@@ -437,7 +437,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
         </div>
       </div>
-      <app-map />
+      <app-map v-if="map" :houses="houses" />
     </div>
   </div>
 </template>
@@ -455,11 +455,35 @@ export default {
     city: [],
     infos: [],
     builders: [],
-    dops: []
+    dops: [],
+    map: false,
   },
   emits: ['open-filter', 'open-add-selections' ,'close-filter'],
   data() {
     return {
+      filters: {
+        type: null,
+        city: null,
+        area: null,
+        priceMin: null,
+        priceMax: null,
+        deadline: null,
+        squareMin: null,
+        squareMax: null,
+        builder: null,
+        toSea: null,
+        toSchool: null,
+        toShop: null,
+        toPark: null,
+        toBus: null,
+        toChildrenSchool: null,
+        infos: [],
+        dops: [],
+        installment: true,
+        newJK: false,
+        promotions: false,
+        popular: false
+      },
       openFilter: false,
       borderType: false,
       valueSelectType: null,
@@ -499,19 +523,25 @@ export default {
         { date: 'уменьшению цены', id: 3 },
       ],
       selectDateId: 1,
-      readyHouses: null,
+      readyHouses: [],
     }
   },
   methods: {
+    startFilter() {
+      if (this.filters.toSea) {
+        this.readyHouses = this.readyHouses.find(item => item.info.toSea >= this.filters.toSea)
+        console.log(this.readyHouses)
+      }
+    },
     changeDate(date) {
       this.selectDate = date.date
       this.selectDateId = date.id
       this.openDate = false
 
       if (this.selectDateId === 2) {
-        this.readyHouses = this.houses.sort((a, b) => a.minPrice - b.minPrice)
+        this.readyHouses = this.readyHouses.sort((a, b) => a.minPrice - b.minPrice)
       } else if (this.selectDateId === 3) {
-        this.readyHouses = this.houses.sort((a, b) => b.minPrice - a.minPrice)
+        this.readyHouses = this.readyHouses.sort((a, b) => b.minPrice - a.minPrice)
       }
     },
     changeSelectCity(city) {
@@ -539,18 +569,15 @@ export default {
     }
   },
   created() {
+    this.readyHouses = this.houses
+
     if (this.city[0] !== null) {
       this.selectDev = this.builders[0].first_name
       this.selectCity = this.city[0].title
       this.selectRegion = this.city[0].regions[0].title
       this.regions = this.city[0].regions
-    }
 
-    console.log(this.dops)
-    console.log(this.infos)
-    console.log(this.city)
-    console.log(this.builders)
-    this.readyHouses = this.houses
+    }
 
     this.readyHouses.forEach(house => {
       let arr = [],
