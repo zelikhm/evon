@@ -19,7 +19,7 @@ class FavoriteController extends Controller
 
   public function index() {
     return Inertia::render('AppFavorites', [
-      'favorites' => FavoritesModel::where('user_id', Auth::id())->get(),
+      'favorites' => FavoritesModel::where('user_id', Auth::id())->with(['house'])->get(),
     ]);
   }
 
