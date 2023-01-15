@@ -92,16 +92,25 @@ export default {
   },
   created() {
     let id = 0;
-    this.houses.forEach(item => {
-      ++id
+    if (this.houses.length > 0) {
+      this.houses.forEach(item => {
+        ++id
+        this.markers.push({
+          id,
+          position: {
+            lat: +item.latitude,
+            lng: +item.longitude
+          }
+        })
+      })
+    } else {
       this.markers.push({
-        id,
         position: {
-          lat: +item.latitude,
-          lng: +item.longitude
+          lat: +this.houses.latitude,
+          lng: +this.houses.longitude
         }
       })
-    })
+    }
   },
 }
 </script>

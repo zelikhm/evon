@@ -26,9 +26,9 @@
                 <img src="../../assets/svg/reload_icon.svg" class="h-4 xx:h-3.5 xl:h-3" alt="reload">
                 <span class="text-sm xxl:text-xs xl:text-[10px]">Сегодня</span>
               </div>
-              <div class="flex items-center justify-center cursor-pointer bg-[#F6F3FA] gap-2 xxl:gap-1.5 xl:gap-1 h-10 xxl:h-8 xl:h-6 px-4 xxl:px-3 xl:px-2.5 rounded-[3px]">
+              <div @click="map = !map" class="flex items-center justify-center cursor-pointer bg-[#F6F3FA] gap-2 xxl:gap-1.5 xl:gap-1 h-10 xxl:h-8 xl:h-6 px-4 xxl:px-3 xl:px-2.5 rounded-[3px]">
                 <img src="../../assets/svg/map_pointer.svg" class="h-6 xxl:h-5 xl:h-4" alt="mark">
-                <span class="text-[#6435A5] text-sm xxl:text-xs xl:text-[10px] leading-none">Показать на карте</span>
+                <span class="text-[#6435A5] text-sm xxl:text-xs xl:text-[10px] leading-none">{{ map ? "Скрыть карту" : "Показать на карте" }}</span>
               </div>
             </div>
 
@@ -37,15 +37,15 @@
             <div class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5 p-4 xxl:p-3 xl:p-2">
               <button @click="openAddSelection = true" class="relative plus__hover flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
                 <img src="../../assets/svg/plus_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="plus">
-                <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">{{ hints.selection }}</div>
+                <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">Добавить в подборку</div>
               </button>
               <button v-if="showHeart === 1"  @click="addToFavorite" class="relative heart__hover flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
                 <img src="../../assets/svg/heart_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="Сердце">
-                <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">{{ hints.favorite }}</div>
+                <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">Добавить в избранное</div>
               </button>
               <button v-if="showHeart === 2" @click="removeToFavorite" class="relative heart__hover flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
                 <img src="../../assets/svg/heart_icon_pink.svg" class="h-6 xxl:h-5 xl:h-4" alt="Сердце">
-                <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">{{ hints.favorite }}</div>
+                <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">Добавить в избранное</div>
               </button>
 
             </div>
@@ -58,7 +58,8 @@
           </div>
         </div>
       </div>
-      <div class="grid__68-30 justify-between">
+      <app-map v-if="map" :houses="house" />
+      <div class="grid__68-30 justify-between" v-if="!map">
         <div class="flex flex-col">
           <swiper
             :navigation="true"
@@ -195,6 +196,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination} from "swiper";
+import AppMap from "@/Components/AppMap.vue";
 
 export default {
   props: {
@@ -209,14 +211,11 @@ export default {
       fullDescription: false,
       arrayInfos: [],
       album: false,
-      hints: {
-        selection: 'Добавить в подборки',
-        favorite: 'Добавить в избранное'
-      },
       openAllNews: false,
       showHeart: 1,
       openAddSelection: false,
       openCreateSelection: false,
+      map: false
     }
   },
   methods: {
@@ -231,13 +230,14 @@ export default {
         user_id: this.user.id,
         house_id: this.house.id,
         token: this.globalToken
-      }).then(() => this.hints.favorite = 'Добавлено!')
+      })
     },
     removeToFavorite() {
       this.showHeart = 1
     }
   },
   components: {
+    AppMap,
     AppHeader,
     AppFooter,
     AppDecritionObjectSidebar,
