@@ -1,7 +1,10 @@
 <template>
   <app-modal-notification v-if="openNotification" @close-notification="openNotification = false" />
-  <app-add-selections v-if="openAddSelection" @close-add-selection="openAddSelection = false"/>
-  <app-create-selection v-if="openCreateSelection" @close-create-selection="openCreateSelection = false" />
+  <app-add-selections @open-i-create-selections="openCreateSel" v-if="openAddSelection" @close-add-selection="openAddSelection = false"/>
+  <app-immovables-create-selection
+    v-if="openCreateSelection"
+    @close-i-create-selection="closeCreateSel"
+  />
   <app-header :user="user" />
   <main>
     <div class="_container">
@@ -32,7 +35,7 @@ import AppListNewBuilding from "../Components/AppListNewBuilding.vue"
 import AppNewsDeveloper from "../Components/AppNewsDeveloper.vue"
 import AppModalNotification from "../Layouts/modal/AppModalNotification.vue"
 import AppAddSelections from "@/Layouts/modal/AppAddSelections.vue"
-import AppCreateSelection from "@/Layouts/modal/AppImmovablesCreateSelection.vue"
+import AppImmovablesCreateSelection from "@/Layouts/modal/AppImmovablesCreateSelection.vue"
 import {usePage} from "@inertiajs/inertia-vue3";
 import {computed} from "vue";
 
@@ -54,7 +57,14 @@ export default {
     }
   },
   methods: {
-
+    openCreateSel() {
+      this.openCreateSelection = true
+      this.openAddSelection = false
+    },
+    closeCreateSel() {
+      this.openCreateSelection = false
+      this.openAddSelection = true
+    },
   },
   components: {
     AppHeader,
@@ -63,7 +73,7 @@ export default {
     AppNewsDeveloper,
     AppModalNotification,
     AppAddSelections,
-    AppCreateSelection,
+    AppImmovablesCreateSelection,
   },
   created() {
   },

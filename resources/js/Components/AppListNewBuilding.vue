@@ -437,7 +437,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
         </div>
       </div>
-      <app-map v-if="map" :houses="houses" />
+      <app-map @open-add-selections="this.$emit('open-add-selections')" v-if="map" :houses="houses" />
     </div>
   </div>
 </template>

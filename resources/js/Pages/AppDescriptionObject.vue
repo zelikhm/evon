@@ -1,16 +1,29 @@
 <template>
   <app-header :user="user" />
-  <app-modal-album v-if="album" @close-album="album = false"/>
-  <app-add-selections v-if="openAddSelection" @close-add-selection="openAddSelection = false"/>
-  <app-create-selection v-if="openCreateSelection" @close-create-selection="openCreateSelection = false" />
-  <app-all-news v-if="openAllNews" @close-all-news="openAllNews = false" :house="house" />
+  <app-modal-album
+    v-if="album"
+    @close-album="album = false"
+  />
+  <app-add-selections
+    v-if="openAddSelection"
+    @open-i-create-selections="openCreateSel"
+    @close-add-selection="openAddSelection = false"
+  />
+  <app-immovables-create-selection
+    v-if="openCreateSelection"
+    @close-i-create-selection="closeCreateSel"
+  />
+  <app-all-news
+    v-if="openAllNews"
+    @close-all-news="openAllNews = false"
+    :house="house" />
   <main>
     <div class="_container flex flex-col">
-      <div class="decription__head h-20 xxl:h-16 xl:h-12 rounded-[12px] my-7 xxl:my-5 xl:my-4">
-        <div class=" flex items-center justify-between">
+      <div class="decription__head h-20 xxl:h-16 xl:h-12 md:h-fit rounded-[12px] my-7 xxl:my-5 xl:my-4">
+        <div class="flex md:flex-col items-center justify-between">
 
           <div class="flex flex-col p-4 xxl:p-3 xl:p-2">
-            <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
+            <div class="flex items-center md:justify-center gap-5 xxl:gap-4 xl:gap-3">
               <span class="font-semibold text-xl xxl:text-lg xl:text-sm">{{ house.title }}</span>
               <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1 text-[14px] xxl:text-[12px] xl:text-[10px]">
                 <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="house.info.status !== null">{{ house.info.status }}</span>
@@ -20,8 +33,8 @@
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">{{ house.city }}, {{ house.area }}</span>
           </div>
 
-          <div class="flex h-20 xxl:h-16 xl:h-12">
-            <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 p-4 xxl:p-3 xl:p-2">
+          <div class="flex md:flex-col md:items-center h-20 xxl:h-16 xl:h-12 md:h-fit">
+            <div class="border__right md:border-0 flex items-center md:flex-col gap-5 xxl:gap-4 xl:gap-3 p-4 xxl:p-3 xl:p-2">
               <div class="flex items-center gap-1.5 xxl:gap-1 xl:gap-0.5">
                 <img src="../../assets/svg/reload_icon.svg" class="h-4 xx:h-3.5 xl:h-3" alt="reload">
                 <span class="text-sm xxl:text-xs xl:text-[10px]">Сегодня</span>
@@ -32,9 +45,7 @@
               </div>
             </div>
 
-            <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
-
-            <div class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5 p-4 xxl:p-3 xl:p-2">
+            <div class="border__right md:border-0 flex items-center gap-3 xxl:gap-2 xl:gap-1.5 p-4 xxl:p-3 xl:p-2">
               <button @click="openAddSelection = true" class="relative plus__hover flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
                 <img src="../../assets/svg/plus_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="plus">
                 <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">Добавить в подборку</div>
@@ -47,20 +58,17 @@
                 <img src="../../assets/svg/heart_icon_pink.svg" class="h-6 xxl:h-5 xl:h-4" alt="Сердце">
                 <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">Добавить в избранное</div>
               </button>
-
             </div>
 
-            <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
-
             <div class="flex items-center p-4 xxl:p-3 xl:p-2">
-              <button class="bg-[#E84680] px-4 xxl:px-4 xl:px-2.5 rounded-[3px] h-10 xxl:h-8 xl:h-6 font-semibold text-white text-base xxl:text-[13px] xl:text-[11px] leading-none">Смотреть шахматку</button>
+              <button class="login__btn--bg bg-[#E84680] px-4 xxl:px-4 xl:px-2.5 rounded-[3px] h-10 xxl:h-8 xl:h-6 font-semibold text-white text-base xxl:text-[13px] xl:text-[11px] leading-none">Смотреть шахматку</button>
             </div>
           </div>
         </div>
       </div>
-      <app-map v-if="map" :houses="house" />
+      <app-map @open-add-selections="openAddSelection = true" v-if="map" :houses="house" />
       <div class="grid__68-30 justify-between" v-if="!map">
-        <div class="flex flex-col">
+        <div class="w-full flex flex-col">
           <swiper
             :navigation="true"
             :pagination="{
@@ -80,28 +88,28 @@
               <img @click="album = true" class="h-full w-full" src="../../assets/slider_img.jpg" alt="">
             </swiper-slide>
           </swiper>
-          <div class="border border-solid border-[#E5DFEE] h-[100px] xxl:h-[80px] xl:h-[60px] flex items-center justify-evenly rounded-[12px] mt-7 xxl:mt-5 xl:mt-4 mb-16 xxl:mb-12 xl:mb-10">
-            <div class="flex flex-col justify-center">
+          <div class="border border-solid border-[#E5DFEE] h-[100px] xxl:h-[80px] xl:h-[60px] sm:h-fit flex items-center sm:flex-col justify-evenly rounded-[12px] mt-7 xxl:mt-5 xl:mt-4 mb-16 xxl:mb-12 xl:mb-10">
+            <div class="flex flex-col justify-center sm:p-2">
               <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">{{ house.info.type }}</span>
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Тип дома</span>
             </div>
-            <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
-            <div class="flex flex-col justify-center">
+            <div class="h-full w-[1px] sm:h-[1px] sm:w-full bg-[#E5DFEE]"></div>
+            <div class="flex flex-col justify-center sm:p-2">
               <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">{{ countFlats }}</span>
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Квартир</span>
             </div>
-            <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
-            <div class="flex flex-col justify-center">
+            <div class="h-full w-[1px] sm:h-[1px] sm:w-full bg-[#E5DFEE]"></div>
+            <div class="flex flex-col justify-center sm:p-2">
               <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">{{  Number.isInteger(minPriceForM) ? minPriceForM : "-"  }} €</span>
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Мин за м²</span>
             </div>
-            <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
-            <div class="flex flex-col justify-center">
+            <div class="h-full w-[1px] sm:h-[1px] sm:w-full bg-[#E5DFEE]"></div>
+            <div class="flex flex-col justify-center sm:p-2">
               <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">{{ Number.isInteger(minPriceFlat) ? minPriceFlat : "-" }} €</span>
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Мин. цена</span>
             </div>
-            <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
-            <div class="flex flex-col justify-center">
+            <div class="h-full w-[1px] sm:h-[1px] sm:w-full bg-[#E5DFEE]"></div>
+            <div class="flex flex-col justify-center sm:p-2">
               <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">{{ Number.isInteger(minSquareFlat) ? minSquareFlat : "-" }} - {{ Number.isInteger(maxSquareFlat) ? maxSquareFlat : "-" }}</span>
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Площади, м²</span>
             </div>
@@ -124,7 +132,7 @@
               >{{ item.name }}</span>
             </div>
           </div>
-          <div class="grid grid-cols-2 gap-7 xxl:gap-5 xl:gap-4 pb-14 xxl:pb-10 xl:pb-8">
+          <div class="grid grid-cols-2 md:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4 pb-14 xxl:pb-10 xl:pb-8">
             <div class="border border-solid border-[#E5DFEE] p-7 xxl:p-5 xl:p-4 rounded-[12px]">
               <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px]">Дополнительные услуги</span>
               <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 pt-6 xxl:pt-5 xl:pt-4">
@@ -170,7 +178,7 @@
             </div>
           </div>
         </div>
-        <app-decrition-object-sidebar @open-all-news="openAllNews = true" :house="house" />
+        <app-decrition-object-sidebar class="w-full" @open-all-news="openAllNews = true" :house="house" />
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
@@ -189,7 +197,7 @@ import AppDescriptionObjectOtherJK from "../Components/AppDescriptionObjectOther
 import AppModalAlbum from "@/Layouts/modal/AppModalAlbum.vue"
 import AppAllNews from "@/Layouts/modal/AppAllNews.vue"
 import AppAddSelections from "@/Layouts/modal/AppAddSelections.vue"
-import AppCreateSelections from "@/Layouts/modal/AppCreateSelections.vue"
+import AppImmovablesCreateSelection from "@/Layouts/modal/AppImmovablesCreateSelection.vue"
 
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
@@ -215,10 +223,18 @@ export default {
       showHeart: 1,
       openAddSelection: false,
       openCreateSelection: false,
-      map: false
+      map: false,
     }
   },
   methods: {
+    openCreateSel() {
+      this.openCreateSelection = true
+      this.openAddSelection = false
+    },
+    closeCreateSel() {
+      this.openCreateSelection = false
+      this.openAddSelection = true
+    },
     addToFavorite() {
       this.showHeart = 2
       console.log({
@@ -247,7 +263,7 @@ export default {
     SwiperSlide,
     AppAllNews,
     AppAddSelections,
-    AppCreateSelections,
+    AppImmovablesCreateSelection,
   },
   setup() {
     return {

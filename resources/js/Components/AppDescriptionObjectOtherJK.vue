@@ -6,7 +6,7 @@ import { Link } from "@inertiajs/inertia-vue3";
 <template>
   <div class="my-14 xl:my-10 xl:my-8">
     <h2 class="text-lg xxl:text-[15px] xl:text-[13px] leading-none font-semibold pb-7 xxl:pb-5 xl:pb-4">Другие ЖК в районе {{ house.area }}</h2>
-    <div class="grid grid-cols-5 gap-5 xxl:gap-4 xl:gap-3">
+    <div class="grid grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3">
 
       <div class="flex flex-col" v-for="item in slider">
         <Link class="object__block relative">
@@ -27,7 +27,6 @@ import { Link } from "@inertiajs/inertia-vue3";
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
