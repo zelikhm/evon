@@ -44,7 +44,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                 theme="snow"
               />
             </div>
-            <div @click="addNews" class="login__btn--bg rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
+            <div @click="addNews" class="cursor-pointer login__btn--bg rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
               <div class="text-white text-center font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">{{ itemEdit === undefined ? 'Добавить' : 'Редактировать' }}</div>
             </div>
           </div>
@@ -86,7 +86,8 @@ export default {
         JK: true,
         title: true,
         description: true
-      }
+      },
+      isCreate: null
     }
   },
   methods: {
@@ -103,17 +104,16 @@ export default {
           title: this.dataNews.title,
           description: this.dataNews.description,
           token: this.globalToken
-        })
+        }).then(response => window.location.href = '/profile/news/')
       } else {
-        console.log(this.idNews)
-        console.log(this.dataNews)
+        console.log(this.new.id)
         axios.post('/api/news/edit', {
-          house_id: this.idNews,
-          new_id: this.dataNews.house_id,
+          house_id: this.dataNews.house_id,
+          new_id: this.idNews,
           title: this.dataNews.title,
           description: this.dataNews.description,
           token: this.globalToken
-        })
+        }).then(response => window.location.href = '/profile/news/')
       }
     },
   },
@@ -125,8 +125,11 @@ export default {
       this.selectJK = this.houses.find(item => item.id === +link[1])
     }
     if (Number.isInteger(+link2.at(-1))) {
-      this.dataNews.house_id = this.houses.find(item => item.id === +link2.at(-1)).id
-      this.selectJK = this.houses.find(item => item.id === +link2.at(-1)).title
+      this.dataNews.house_id = this.houses.find(item => item.id === this.new.house_id).id
+      this.selectJK = this.houses.find(item => item.id === this.new.house_id).title
+      console.log(this.selectJK)
+    } else {
+      this.isCreate = true
     }
     this.itemEdit = this.new
 

@@ -9,35 +9,10 @@
         </button>
       </div>
       <div class="text-[16px] xxl:text-[14px] xl:text-[12px] pr-2 overflow-x-auto custom__scroll--chess max-h-[70vh]">
-        <div class="py-5 xxl:py-4 xl:py-3 border__bottom">
-          <span class="text-[#8A8996]">15 июля</span>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </p>
-          <button class="text-[#6435A5]">Читать далее</button>
-        </div>
-        <div class="py-5 xxl:py-4 xl:py-3 border__bottom">
-          <span class="text-[#8A8996]">15 июля</span>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </p>
-          <button class="text-[#6435A5]">Читать далее</button>
-        </div>
-        <div class="py-5 xxl:py-4 xl:py-3 border__bottom">
-          <span class="text-[#8A8996]">15 июля</span>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </p>
-          <button class="text-[#6435A5]">Читать далее</button>
-        </div>
-        <div class="py-5 xxl:py-4 xl:py-3 border__bottom">
-          <span class="text-[#8A8996]">15 июля</span>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </p>
-          <button class="text-[#6435A5]">Читать далее</button>
-        </div>
-        <div class="py-5 xxl:py-4 xl:py-3 border__bottom">
-          <span class="text-[#8A8996]">15 июля</span>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </p>
-          <button class="text-[#6435A5]">Читать далее</button>
-        </div>
-        <div class="py-5 xxl:py-4 xl:py-3 border__bottom">
-          <span class="text-[#8A8996]">15 июля</span>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </p>
-          <button class="text-[#6435A5]">Читать далее</button>
+        <div class="py-5 xxl:py-4 xl:py-3 border__bottom" v-for="item in house.news">
+          <span class="text-[#8A8996]">{{ new Date(Date.parse(item.created_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span>
+          <p v-html="item.description"></p>
+<!--          <button class="text-[#6435A5]">Читать далее</button>-->
         </div>
       </div>
     </div>
@@ -48,6 +23,7 @@
 <script>
 export default {
   emits: ['close-all-news'],
+  props: ['house'],
   data() {
     return {
 

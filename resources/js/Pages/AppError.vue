@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
-  <app-header />
+  <app-header :user="user" />
   <main>
     <div class="_container">
       <div class="flex flex-col items-center gap-7 xxl:gap-5 xl:gap-4 my-40 xxl:my-32 xl:my-28">
@@ -21,11 +21,13 @@ import { Link } from '@inertiajs/inertia-vue3'
 <script>
 import AppHeader from '../Layouts/AppHeader.vue'
 import AppFooter from "../Layouts/AppFooter.vue"
+import {computed} from "vue";
+import {usePage} from "@inertiajs/inertia-vue3";
 
 export default {
   data() {
     return {
-
+      user: computed(() => usePage().props.value.auth.user),
     }
   },
   components: {
