@@ -119,12 +119,17 @@ import { Link } from '@inertiajs/inertia-vue3'
   <header v-if="user !== undefined && user.role === 1 || user !== undefined && user.role === 2 || user !== undefined && user.role === 3" class="relative z-50 bg-[#6435A5] leading-[100%]">
     <div class="_container h-[60px] xxl:h-12 xl:h-10">
       <div class="flex items-center justify-between h-full ">
-        <div class="flex gap-20 xxl:gap-16 xl:gap-12 items-center">
+        <div class="flex gap-20 xxl:gap-16 xl:gap-12 lg:gap-2 items-center">
+          <div @click="openBurgerSmall" class="hidden lg:flex relative flex-col justify-evenly py-0.5 items-center cursor-pointer h-6 w-6 rounded-[5px] bg-[#6435A5]">
+            <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
+            <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
+            <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
+          </div>
           <Link href="/" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
             <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4" alt="Логотип">
-            <span class="uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon.com</span>
+            <span class="sm:hidden uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon.com</span>
           </Link>
-          <div class="text-white text-[16px] xxl:text-[13px] xl:text-[11px] flex gap-20 xxl:gap-16 xl:gap-12">
+          <div :class="{'left__0': openBurgerSm }" class="transition-all duration-300 lg:-left-full lg:absolute lg:flex-col lg:h-[100vh] lg:top-10 border__top-white lg:px-[6.25vw] lg:py-2 lg:bg-[#6435A5] text-white text-[16px] xxl:text-[13px] xl:text-[11px] flex gap-20 xxl:gap-16 xl:gap-12 lg:gap-2">
             <Link href="/profile/houses" class="">Объекты</Link>
             <Link href="/profile/news" class="">Новости</Link>
           </div>
@@ -187,6 +192,7 @@ import { useForm } from '@inertiajs/inertia-vue3'
 
 export default {
   props: {
+    heightMain: Number,
     user: []
   },
   data() {
@@ -200,10 +206,14 @@ export default {
       langSelected: 'ru',
       loginOpen: false,
       openProfileMenu: false,
+      openBurgerSm: false
     }
   },
   emits: ['login-realtor', 'login-developer', 'open-register'],
   methods: {
+    openBurgerSmall() {
+      this.openBurgerSm = !this.openBurgerSm
+    },
     logout() {
       const form = useForm({});
       form.post('/logout');

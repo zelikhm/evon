@@ -1,6 +1,6 @@
 <template>
   <div class="fixed z-[100] w-full h-full flex items-center justify-center">
-    <div class="relative flex flex-col bg-white rounded-[12px] z-50 w-[43%] h-fit">
+    <div class="relative flex flex-col bg-white rounded-[12px] z-50 w-[43%] lg:w-[56%] md:w-[70%] sm:w-[94%] h-fit">
       <div class="relative border__bottom flex justify-between items-center p-8 xxl:p-6 xl:p-5">
         <h2 class="text-lg xxl:text-[15px] xl:text-[13px] font-semibold leading-none">Добавить в подборку</h2>
         <button @click="this.$emit('close-add-selection')" class="relative w-3 h-3 z-50">
@@ -117,17 +117,17 @@
       <div class="relative">
         <div v-if="buttonSelection" class="px-8 xxl:px-6 xl:px-5 pb-8 xxl:pb-6 xl:pb-5 flex gap-4 xxl:gap-3 xl:gap-2.5 w-full text-lg xxl:text-[15px] xl:text-[13px]">
           <button @click="openCreate" class="w-full bg-litepink text-[#E84680] leading-none font-medium rounded-[5px] p-5 xxl:p-4 xl:p-3">Создать подборку</button>
-          <button class="w-full bg-[#E84680] text-white leading-none font-semibold rounded-[5px] p-5 xxl:p-4 xl:p-3">Готово</button>
+          <button class="login__btn--bg w-full text-white leading-none font-semibold rounded-[5px] p-5 xxl:p-4 xl:p-3">Готово</button>
         </div>
-        <div v-if="createSelection" class="px-8 xxl:px-6 xl:px-5 pb-8 xxl:pb-6 xl:pb-5 flex gap-4 xxl:gap-3 xl:gap-2.5 w-full text-lg xxl:text-[15px] xl:text-[13px] ">
-          <div class="relative w-[64%]">
+        <div v-if="createSelection" class="px-8 xxl:px-6 xl:px-5 pb-8 xxl:pb-6 xl:pb-5 flex sm:flex-col gap-4 xxl:gap-3 xl:gap-2.5 w-full text-lg xxl:text-[15px] xl:text-[13px] ">
+          <div class="relative w-[64%] sm:w-full">
             <input class="w-full h-full placeholder-[#8A8996] pr-12 xxl:pr-10 xl:pr-8 text-[16px] xxl:text-[14px] xl:text-[12px] focus:ring-[#6435A5] border border-solid border-[#E84680] rounded-[5px]" placeholder="Введите название новой подборки" type="text">
             <button @click="closeCreate" class="absolute w-3 h-3 top-1/2 right-0 -translate-x-full -translate-y-1/2">
               <span class="absolute h-[1px] top-1/2 left-0 w-3 bg-[#E84680] rotate-45"></span>
               <span class="absolute h-[1px] top-1/2 left-0 w-3 bg-[#E84680] -rotate-45"></span>
             </button>
           </div>
-          <button class="w-[36%] bg-[#E84680] text-white leading-none font-semibold rounded-[5px] p-5 xxl:p-4 xl:p-3 whitespace-nowrap">Создать подборку</button>
+          <button @click="this.$emit('open-i-create-selections')" class="login__btn--bg w-[36%] sm:w-full text-white leading-none font-semibold rounded-[5px] p-5 xxl:p-4 xl:p-3 whitespace-nowrap">Создать подборку</button>
         </div>
       </div>
     </div>
@@ -143,7 +143,7 @@ export default {
       createSelection: false,
     }
   },
-  emits: ['close-add-selection'],
+  emits: ['close-add-selection', 'open-create-sel'],
   methods: {
     openCreate() {
       this.createSelection = true

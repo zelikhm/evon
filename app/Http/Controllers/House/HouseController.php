@@ -40,11 +40,6 @@ class HouseController extends Controller
 
     $houses = $this->getAllHouse();
 
-    foreach ($houses as $house) {
-      $house->dop_array = TypesModel::where('id', $house->dop)->get();
-      $house->info_array = StructureModel::where('id', $house->info)->get();
-    }
-
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
       'dops' => TypesModel::all(),
@@ -52,6 +47,7 @@ class HouseController extends Controller
       'city' => CityModel::with(['regions'])->get(),
       'builders' => User::where('role', 1)->get(),
       'notification' => $this->getNotification(),
+      'compilation' => $this->getCompilation(Auth::id()),
       'user' => Auth::user(),
     ]);
   }
@@ -119,6 +115,7 @@ class HouseController extends Controller
       'city' => $this->getCity(),
       'notification' => $this->getNotification(),
       'user' => Auth::user(),
+      'compilation' => $this->getCompilation(Auth::id()),
       'slider' => $this->getSlider($this->getHouseSlug($slug)),
     ]);
 

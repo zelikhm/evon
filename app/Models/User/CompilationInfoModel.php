@@ -25,6 +25,6 @@ class CompilationInfoModel extends Model
     }
 
     public function house() {
-      return $this->belongsTo(HouseModel::class, 'house_id', 'id');
+      return $this->hasMany(HouseModel::class, 'id', 'house_id');
     }
 }

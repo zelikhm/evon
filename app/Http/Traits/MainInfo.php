@@ -12,12 +12,15 @@ use App\Models\Builder\Info\TypesModel;
 use App\Models\Messages\ChatModel;
 use App\Models\Messages\MessageModel;
 use App\Models\NotificationModel;
+use App\Models\User\CompilationInfoModel;
 use App\Models\User\CompilationModel;
+use App\Models\User\FavoritesModel;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use function Symfony\Component\Routing\Loader\Configurator\collection;
 
-trait MainInfo {
+trait MainInfo
+{
 
   /**
    * get houses for slider in the page house
@@ -25,18 +28,19 @@ trait MainInfo {
    * @return mixed
    */
 
-  protected function getSlider($house) {
+  protected function getSlider($house)
+  {
 
     $requestCity = HouseModel::where('city', $house->city)->whereNot('id', $house->id)->with(['flats'])->get();
 
     $requestArea = HouseModel::where('area', $house->area)->whereNot('id', $house->id)->with(['flats'])->get();
 
-    if(count($requestCity) > 5) {
+    if (count($requestCity) > 5) {
     } else {
       $requestCity->merge($requestArea);
     }
 
-    if(count($requestCity) === 0) {
+    if (count($requestCity) === 0) {
       $requestCity = HouseModel::limit(5)->whereNot('id', $house->id)->with(['flats'])->get();
     }
 
@@ -46,23 +50,46 @@ trait MainInfo {
   }
 
   /**
+   * get compilation for user
+   * @param $id
+   * @return mixed
+   */
+
+  protected function getCompilation($id)
+  {
+    $compilation = CompilationModel::where('user_id', $id)->get();
+
+    foreach ($compilation as $item) {
+      $houses = collect();
+      $comp = CompilationInfoModel::where('compilation_id', $item->id)->with(['house'])->get();
+      foreach ($comp as $value) {
+        $houses->push($value);
+      }
+      $item->houses = $houses;
+    }
+
+    return $compilation;
+  }
+
+  /**
    * check chat
    * @param $id
    * @return mixed
    */
 
-  protected function checkChat($id){
+  protected function checkChat($id)
+  {
     $chat = ChatModel::where('from_id', $id)
       ->orWhere('to_id', Auth::id())
       ->first();
 
-    if($chat === null) {
+    if ($chat === null) {
       $chat = ChatModel::where('to_id', $id)
         ->orWhere('from_id', Auth::id())
         ->first();
     }
 
-    if($chat === null) {
+    if ($chat === null) {
       $chat = $this->createChat($id);
     }
 
@@ -75,7 +102,8 @@ trait MainInfo {
    * @return mixed
    */
 
-  protected function createChat($id) {
+  protected function createChat($id)
+  {
     return ChatModel::create([
       'from_id' => Auth::id(),
       'to_id' => $id,
@@ -89,7 +117,8 @@ trait MainInfo {
    * @return mixed
    */
 
-  protected function getHouseForUser($id) {
+  protected function getHouseForUser($id)
+  {
     $houses = HouseModel::where('user_id', $id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->get();
 
     foreach ($houses as $house) {
@@ -111,7 +140,8 @@ trait MainInfo {
    * @return mixed
    */
 
-  protected function getHouseForUserPagination($id) {
+  protected function getHouseForUserPagination($id)
+  {
     $houses = HouseModel::where('user_id', $id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->paginate(2);
 
     foreach ($houses as $house) {
@@ -133,7 +163,8 @@ trait MainInfo {
    * @return \Symfony\Component\Routing\Loader\Configurator\CollectionConfigurator
    */
 
-  protected function getNews($id) {
+  protected function getNews($id)
+  {
     $houses = $this->getHouseForUser($id);
 
     $news = collect();
@@ -154,11 +185,29 @@ trait MainInfo {
    * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
    */
 
-  protected function getAllHouse() {
-    return HouseModel::where('visible', 1)
+  protected function getAllHouse()
+  {
+    $houses = HouseModel::where('visible', 1)
       ->where('active', 2)
       ->with(['info', 'supports', 'files', 'frames', 'images', 'flats'])
       ->get();
+
+    foreach ($houses as $house) {
+      $house->dop_array = TypesModel::where('id', $house->dop)->get();
+      $house->info_array = StructureModel::where('id', $house->info)->get();
+
+      $favorite = FavoritesModel::where('user_id', Auth::id())
+        ->where('house_id', $house->id)
+        ->first();
+
+      if($favorite !== null) {
+        $house->favorite = true;
+      } else {
+        $house->favorite = false;
+      }
+    }
+
+    return $houses;
   }
 
   /**
@@ -166,7 +215,8 @@ trait MainInfo {
    * @return mixed
    */
 
-  protected function getNotification() {
+  protected function getNotification()
+  {
     $notifications = NotificationModel::where('user_id', Auth::id())->get();
 
     NotificationModel::where('user_id', Auth::id())->delete();
@@ -179,17 +229,18 @@ trait MainInfo {
    * @return mixed
    */
 
-  protected function getChats() {
-   $chats = ChatModel::where('from_id', Auth::id())
-     ->orWhere('to_id', Auth::id())
-     ->with(['from', 'to'])
-     ->get();
+  protected function getChats()
+  {
+    $chats = ChatModel::where('from_id', Auth::id())
+      ->orWhere('to_id', Auth::id())
+      ->with(['from', 'to'])
+      ->get();
 
-   foreach ($chats as $chat) {
-     $chat->last_message = MessageModel::where('chat_id', $chat->id)->orderBy('DESC')->first();
-   }
+    foreach ($chats as $chat) {
+      $chat->last_message = MessageModel::where('chat_id', $chat->id)->orderBy('DESC')->first();
+    }
 
-   return $chats;
+    return $chats;
   }
 
   /**
@@ -198,7 +249,8 @@ trait MainInfo {
    * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
    */
 
-  protected function getHouse($id) {
+  protected function getHouse($id)
+  {
     $house = HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'user', 'news'])
       ->where('id', $id)
       ->first();
@@ -206,6 +258,17 @@ trait MainInfo {
     foreach ($house->frames as $frame) {
       $frame->flats = FlatModel::where('frame_id', $frame->id)->with(['images'])->get();
     }
+
+    $favorite = FavoritesModel::where('user_id', Auth::id())
+      ->where('house_id', $id)
+      ->first();
+
+    if ($favorite === null) {
+      $house->favorite = false;
+    } else {
+      $house->favorite = true;
+    }
+
 
     return $house;
   }
@@ -216,13 +279,25 @@ trait MainInfo {
    * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
    */
 
-  protected function getHouseSlug($slug) {
+  protected function getHouseSlug($slug)
+  {
     $house = HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'user', 'news'])
       ->where('slug', $slug)
       ->first();
 
     foreach ($house->frames as $frame) {
       $frame->flats = FlatModel::where('frame_id', $frame->id)->with(['images'])->get();
+    }
+
+
+    $favorite = FavoritesModel::where('user_id', Auth::id())
+      ->where('house_id', $house->id)
+      ->first();
+
+    if ($favorite === null) {
+      $house->favorite = false;
+    } else {
+      $house->favorite = true;
     }
 
     return $house;
@@ -234,7 +309,8 @@ trait MainInfo {
    * @return mixed
    */
 
-  protected function getCompilations($id) {
+  protected function getCompilations($id)
+  {
     return CompilationModel::where('user_id', $id)->with(['values'])->get();
   }
 
@@ -244,9 +320,9 @@ trait MainInfo {
    * @return mixed
    */
 
-  protected function getCompilation($id) {
-    return CompilationModel::where('id', $id)->with(['values'])->get();
-  }
+//  protected function getCompilation($id) {
+//    return CompilationModel::where('id', $id)->with(['values'])->get();
+//  }
 
 
   /**
@@ -254,7 +330,8 @@ trait MainInfo {
    * @return \Illuminate\Database\Eloquent\Collection
    */
 
-  protected function getDop() {
+  protected function getDop()
+  {
     return TypesModel::all();
   }
 
@@ -263,7 +340,8 @@ trait MainInfo {
    * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
    */
 
-  protected function getCity() {
+  protected function getCity()
+  {
     return CityModel::with(['regions'])->get();
   }
 
@@ -272,7 +350,8 @@ trait MainInfo {
    * @return \Illuminate\Database\Eloquent\Collection
    */
 
-  protected function getInfo() {
+  protected function getInfo()
+  {
     return StructureModel::all();
   }
 }
