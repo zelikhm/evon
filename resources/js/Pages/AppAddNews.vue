@@ -121,8 +121,8 @@ export default {
     let link = window.location.href.split('#')
     let link2 = window.location.href.split('/')
     if (link[1] !== undefined) {
-      this.dataNews.house_id = this.houses.find(item => item.id === +link[1])
-      this.selectJK = this.houses.find(item => item.id === +link[1])
+      this.dataNews.house_id = this.houses.find(item => item.id === +link[1]).id
+      this.selectJK = this.houses.find(item => item.id === +link[1]).title
     }
     if (Number.isInteger(+link2.at(-1))) {
       this.dataNews.house_id = this.houses.find(item => item.id === this.new.house_id).id

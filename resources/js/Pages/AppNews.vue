@@ -43,17 +43,17 @@ import { Link } from '@inertiajs/inertia-vue3'
         </div>
       </div>
       <div class="w-full flex justify-center gap-7 xxl:gap-5 xl:gap-4 my-14 xxl:my-10 xl:my-8 text-[22px] xxl:text-lg xl:text-[15px]">
-        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer">
-          <img src="../../assets/svg/arrow_right_grey.svg" class="rotate-180 w-8 xxl:w-6 xl:w-5" alt="">
-        </div>
-        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">1</div>
-        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">2</div>
-        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">3</div>
-        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">...</div>
-        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">24</div>
-        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">
-          <img src="../../assets/svg/arrow_right_grey.svg" class="w-8 xxl:w-6 xl:w-5" alt="">
-        </div>
+<!--        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer">-->
+<!--          <img src="../../assets/svg/arrow_right_grey.svg" class="rotate-180 w-8 xxl:w-6 xl:w-5" alt="">-->
+<!--        </div>-->
+<!--        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">1</div>-->
+<!--        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">2</div>-->
+<!--        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">3</div>-->
+<!--        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">...</div>-->
+<!--        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">24</div>-->
+<!--        <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">-->
+<!--          <img src="../../assets/svg/arrow_right_grey.svg" class="w-8 xxl:w-6 xl:w-5" alt="">-->
+<!--        </div>-->
       </div>
     </div>
   </main>

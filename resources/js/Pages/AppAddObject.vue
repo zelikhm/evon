@@ -54,7 +54,7 @@
 
 <!--  Корпуса и квартиры  -->
         <div v-if="page === 1">
-          <app-apartments @open-add-frame="modalAddFrame = !modalAddFrame"
+          <app-apartments @open-add-frame="openAddFrame"
                           :house="readyHouse"
                           @change-frame="changeFrame"
           />
@@ -139,6 +139,9 @@ export default {
     changeFrame(data) {
       this.activeFrame = data
     },
+    openAddFrame() {
+      this.modalAddFrame = !this.modalAddFrame
+    }
   },
   created() {
     this.readyHouse = this.house

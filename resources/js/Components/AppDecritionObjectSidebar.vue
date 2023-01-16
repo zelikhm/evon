@@ -1,6 +1,6 @@
 <template>
   <div class="bg-[#F6F3FA] p-7 xxl:p-5 xl:p-5 h-fit mb-10 xxl:mb-8 xl:mb-6 rounded-[10px]">
-    <div class="text-sm xxl:text-xs xl:text-[10px] pb-10 xxl:pb-8 xl:pb-6">
+    <div class="text-sm xxl:text-xs xl:text-[10px] pb-10 xxl:pb-8 xl:pb-6" v-if="news.length > 0">
       <span class="font-medium text-lg xxl:text-[15px] xl:text-[13px] pt-6 xxl:pt-5 xl:pt-4">Новости</span>
       <div class="py-5 xxl:py-4 xl:py-3 border__bottom" v-for="item in news">
         <span class="text-[#8A8996]">{{ new Date(Date.parse(item.created_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span>

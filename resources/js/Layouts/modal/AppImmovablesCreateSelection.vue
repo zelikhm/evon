@@ -1,9 +1,9 @@
 <template>
   <div class="fixed z-[100] w-full h-full flex items-center justify-center">
-    <div class="relative flex flex-col bg-white rounded-[12px] z-50 w-[43%] h-fit">
+    <div class="relative flex flex-col bg-white rounded-[12px] z-50 w-[43%] lg:w-[56%] md:w-[70%] sm:w-[94%] h-fit">
       <div class="relative border__bottom flex justify-between items-center p-8 xxl:p-6 xl:p-5">
         <h2 class="text-lg xxl:text-[15px] xl:text-[13px] font-semibold leading-none">Добавить в подборку</h2>
-        <button @click="this.$emit('close-add-selection')" class="relative w-3 h-3 z-50">
+        <button @click="this.$emit('close-i-create-selection')" class="relative w-3 h-3 z-50">
           <span class="absolute h-[1px] top-1/2 left-0 w-3 bg-[#8A8996] rotate-45"></span>
           <span class="absolute h-[1px] top-1/2 left-0 w-3 bg-[#8A8996] -rotate-45"></span>
         </button>
@@ -22,15 +22,15 @@
         </div>
         <div class="mb-8 xxl:mb-6 xl:mb-5">
           <input class="custom__checkbox" type="checkbox" id="chekbox">
-          <label class="text-[#1E1D2D] font-medium text-lg xxl:text-[15px] xl:text-[13px]" for="chekbox">показывать ЖК и его месторасположение</label>
+          <label class="text-[#1E1D2D] font-medium text-lg xxl:text-[15px] xl:text-[13px] leading-none" for="chekbox">показывать ЖК и его месторасположение</label>
         </div>
         <div class="grid grid-cols-2 gap-8 xxl:gap-6 xl:gap-5">
-          <button class="bg-[#E84680] text-white text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Создать</button>
+          <button @click="this.$emit('open-i-create-selection')" class="login__btn--bg text-white text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Создать</button>
           <button class="bg-litepink text-[#E84680] text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Отправить</button>
         </div>
       </div>
     </div>
-    <div @click="this.$emit('close-add-selection')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
+    <div @click="this.$emit('close-i-create-selection')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
   </div>
 </template>
 
@@ -42,7 +42,7 @@ export default {
       createSelection: false,
     }
   },
-  emits: ['close-add-selection'],
+  emits: ['close-add-selection', 'close-i-create-selection'],
   methods: {
     openCreate() {
       this.createSelection = true

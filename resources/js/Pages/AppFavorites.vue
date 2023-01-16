@@ -7,7 +7,7 @@
     <div class="absolute w-full text-center favorites__banner py-3 xxl:py-2.5 xl:py-2 text-[#30CB6E] text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">
       Euro Avsallar Residence добавлен в избранное
     </div>
-    <div v-if="1 != 1" class="absolute w-full text-center bg-[#E84780] py-3 xxl:py-2.5 xl:py-2 text-white text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">
+    <div v-if="1 !== 1" class="absolute w-full text-center bg-[#E84780] py-3 xxl:py-2.5 xl:py-2 text-white text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">
       Euro Avsallar Residence удален из избранного
       <button class="bg-white text-[#E84780] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none px-2 xxl:py-1.5 xl:p-1 py-1.5 rounded-[3px]">Отменить</button>
     </div>
@@ -235,6 +235,7 @@ import { computed } from 'vue'
 import { usePage } from '@inertiajs/inertia-vue3'
 
 export default {
+  props: ['favorites'],
   components: {
     AppHeader,
     AppFooter,
@@ -249,7 +250,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.user)
+    console.log(this.favorites)
   }
 }
 
