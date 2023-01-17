@@ -1,16 +1,23 @@
 <template>
   <app-modal-notification v-if="openNotification" @close-notification="openNotification = false" />
-  <app-add-selections @open-i-create-selections="openCreateSel" v-if="openAddSelection" @close-add-selection="openAddSelection = false"/>
+  <app-add-selections @open-i-create-selections="openCreateSel"
+                      v-if="openAddSelection"
+                      @close-add-selection="openAddSelection = false"
+                      :house="house"
+                      :compilation="compilation"
+  />
   <app-immovables-create-selection
     v-if="openCreateSelection"
     @close-i-create-selection="closeCreateSel"
+    :title="titleNewCompilation"
+    :house="house"
   />
   <app-header :user="user" />
   <main>
     <div class="_container">
       <div class="immovables__grid relative my-14 xxl:my-10 xl:my-8">
         <app-list-new-building
-          @open-add-selections="openAddSelection = true"
+          @open-add-selections="openSelection"
           :houses="houses"
           :count="count"
           :dops="dops"
@@ -46,7 +53,8 @@ export default {
     dops: [],
     infos: [],
     city: [],
-    builders: []
+    builders: [],
+    compilation: []
   },
   data() {
     return {
@@ -54,18 +62,25 @@ export default {
       openNotification: false,
       openAddSelection: false,
       openCreateSelection: false,
-      count: 6
+      count: 6,
+      house: null,
+      titleNewCompilation: ''
     }
   },
   methods: {
-    openCreateSel() {
+    openCreateSel(title) {
       this.openCreateSelection = true
       this.openAddSelection = false
+      this.titleNewCompilation = title
     },
     closeCreateSel() {
       this.openCreateSelection = false
       this.openAddSelection = true
     },
+    openSelection(house) {
+      this.openAddSelection = true
+      this.house = house
+    }
   },
   components: {
     AppHeader,

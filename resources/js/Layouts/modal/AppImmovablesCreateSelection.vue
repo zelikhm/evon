@@ -13,7 +13,7 @@
         <div class="flex items-center gap-4 xxl:gap-3 xl:gap-2.5 mb-8 xxl:mb-6 xl:mb-5">
           <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name">Название</label>
-            <input class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="name" placeholder="Название">
+            <input v-model="titleCompilation" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="name" placeholder="Название">
           </div>
           <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="comment">Комментарий</label>
@@ -36,10 +36,12 @@
 
 <script>
 export default {
+  props: ['house', 'title'],
   data() {
     return {
       buttonSelection: true,
       createSelection: false,
+      titleCompilation: ''
     }
   },
   emits: ['close-add-selection', 'close-i-create-selection'],
@@ -52,6 +54,9 @@ export default {
       this.createSelection = false
       this.buttonSelection = true
     },
+  },
+  created() {
+    this.titleCompilation = this.title
   }
 }
 </script>

@@ -41,13 +41,13 @@
         </div>
         <div v-if="createSelection" class="px-8 xxl:px-6 xl:px-5 pb-8 xxl:pb-6 xl:pb-5 flex sm:flex-col gap-4 xxl:gap-3 xl:gap-2.5 w-full text-lg xxl:text-[15px] xl:text-[13px] ">
           <div class="relative w-[64%] sm:w-full">
-            <input class="w-full h-full placeholder-[#8A8996] pr-12 xxl:pr-10 xl:pr-8 text-[16px] xxl:text-[14px] xl:text-[12px] focus:ring-[#6435A5] border border-solid border-[#E84680] rounded-[5px]" placeholder="Введите название новой подборки" type="text">
+            <input v-model="titleNewCompilation" class="w-full h-full placeholder-[#8A8996] pr-12 xxl:pr-10 xl:pr-8 text-[16px] xxl:text-[14px] xl:text-[12px] focus:ring-[#6435A5] border border-solid border-[#E84680] rounded-[5px]" placeholder="Введите название новой подборки" type="text">
             <button @click="closeCreate" class="absolute w-3 h-3 top-1/2 right-0 -translate-x-full -translate-y-1/2">
               <span class="absolute h-[1px] top-1/2 left-0 w-3 bg-[#E84680] rotate-45"></span>
               <span class="absolute h-[1px] top-1/2 left-0 w-3 bg-[#E84680] -rotate-45"></span>
             </button>
           </div>
-          <button @click="this.$emit('open-i-create-selections')" class="login__btn--bg w-[36%] sm:w-full text-white leading-none font-semibold rounded-[5px] p-5 xxl:p-4 xl:p-3 whitespace-nowrap">Создать подборку</button>
+          <button @click="this.$emit('open-i-create-selections', titleNewCompilation)" class="login__btn--bg w-[36%] sm:w-full text-white leading-none font-semibold rounded-[5px] p-5 xxl:p-4 xl:p-3 whitespace-nowrap">Создать подборку</button>
         </div>
       </div>
     </div>
@@ -62,6 +62,7 @@ export default {
     return {
       buttonSelection: true,
       createSelection: false,
+      titleNewCompilation: ''
     }
   },
   emits: ['close-add-selection', 'open-create-sel'],

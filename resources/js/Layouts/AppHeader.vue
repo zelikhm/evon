@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
 <template>
 <!--  Меню до входа-->
-  <header v-if="user === undefined" class="relative z-50 bg-[#6435A5] leading-[100%]">
+  <header v-if="user === null" class="relative z-50 bg-[#6435A5] leading-[100%]">
     <div class="_container h-[60px] xxl:h-12 xl:h-10">
       <div class="flex items-center justify-between h-full ">
         <Link href="/" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
@@ -43,7 +43,7 @@ import { Link } from '@inertiajs/inertia-vue3'
   </header>
 
 <!-- Меню агента -->
-  <header v-if="user !== undefined && user.role === 0" class="relative z-50 bg-[#6435A5] leading-[100%]">
+  <header v-if="user !== null && user.role === 0" class="relative z-50 bg-[#6435A5] leading-[100%]">
     <div class="_container h-[60px] xxl:h-12 xl:h-10">
       <div class="flex items-center justify-between h-full ">
         <div class="flex gap-20 xxl:gap-16 xl:gap-12 items-center">
@@ -116,7 +116,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
   <!-- Меню Застройщик-->
 <!--  v-if="user.role === 1" -->
-  <header v-if="user !== undefined && user.role === 1 || user !== undefined && user.role === 2 || user !== undefined && user.role === 3" class="relative z-50 bg-[#6435A5] leading-[100%]">
+  <header v-if="user !== null && user.role === 1 || user !== null && user.role === 2 || user !== null && user.role === 3" class="relative z-50 bg-[#6435A5] leading-[100%]">
     <div class="_container h-[60px] xxl:h-12 xl:h-10">
       <div class="flex items-center justify-between h-full ">
         <div class="flex gap-20 xxl:gap-16 xl:gap-12 lg:gap-2 items-center">

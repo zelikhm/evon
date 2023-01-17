@@ -1,13 +1,17 @@
 <template>
   <app-modal-notification v-if="openNotification" @close-notification="openNotification = false"/>
-  <app-create-selections :user="user" @close-create-selection="closeCreateSelection" :openSideBar="openSideBar" :openSelection="openCreateSelection"/>
+  <app-create-selections :user="user"
+                         @close-create-selection="closeCreateSelection"
+                         @close-selection="closeSelection"
+                         :openSideBar="openSideBar"
+                         :openSelection="openCreateSelection"/>
   <app-header :user="user" />
   <main>
     <div class="_container">
       <div class="flex justify-between items-center mt-14 xxl:mt-10 xl:mt-8">
         <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5">
           <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] leading-none">Мои подборки</h2>
-          <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Найдено {{ compilation.length }} новостроек</span>
+          <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Найдено {{ compilation.length }} подборки</span>
         </div>
         <button @click="openSelection" class="login__btn--bg text-white text-base text-sm text-xs px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5 rounded-[3px] leading-none">Создать подборку</button>
       </div>
@@ -59,7 +63,7 @@ import {computed} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
 
 export default {
-  props: ['compilation'],
+  props: ['compilation', 'houses'],
   data() {
     return {
       user: computed(() => usePage().props.value.auth.user),
@@ -78,8 +82,14 @@ export default {
     },
     closeCreateSelection(obj, id) {
       this.openSideBar = false
-      if (obj !== undefined) obj.id = id
+      obj.id = id
       this.compilation.push(obj)
+      setTimeout(() => {
+        this.openCreateSelection = false
+      }, 500)
+    },
+    closeSelection() {
+      this.openSideBar = false
       setTimeout(() => {
         this.openCreateSelection = false
       }, 500)
@@ -99,7 +109,7 @@ export default {
     }
   },
   created() {
-    console.log(this.compilation)
+    console.log(this.houses)
   },
   components: {AppHeader, AppFooter, AppModalNotification, AppCreateSelections}
 }
