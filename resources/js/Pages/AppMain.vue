@@ -11,6 +11,7 @@
     @login-developer="openLoginDeveloper = !openLoginDeveloper"
     @login-realtor="openLoginRealtor = !openLoginRealtor"
     @open-register="openRegister = !openRegister"
+    :user="user"
   />
   <main>
     <div class="_container">
@@ -113,10 +114,13 @@
 import AppHeader from '../Layouts/AppHeader.vue'
 import AppFooter from "../Layouts/AppFooter.vue"
 import AppModalAuth from "../Layouts/modal/AppModalAuth.vue"
+import {computed} from "vue";
+import {usePage} from "@inertiajs/inertia-vue3";
 
 export default {
   data() {
     return {
+      user: computed(() => usePage().props.value.auth.user),
       openLoginRealtor: false,
       openLoginDeveloper: false,
       openRegister: false,

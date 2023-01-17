@@ -294,10 +294,13 @@ import { Link } from '@inertiajs/inertia-vue3'
                   <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В подборку</span>
                   <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
                 </button>
-                <button class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
+                <button v-if="item.favorite" @click="removeFavorite(item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
+                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">Убрать</span>
+                  <img src="../../assets/svg/heart_icon_fill.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                </button>
+                <button v-else @click="addFavorite(item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
                   <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В избранное</span>
-                  <img src="../../assets/svg/heart_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Сердце">
-                  <img v-if="1 !== 1" src="../../assets/svg/heart_icon_pink.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                  <img src="../../assets/svg/heart_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="">
                 </button>
               </div>
               <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1">
@@ -451,7 +454,7 @@ export default {
   props: {
     houses: [],
     count: Number,
-    user: [],
+    user: {},
     city: [],
     infos: [],
     builders: [],
@@ -527,6 +530,23 @@ export default {
     }
   },
   methods: {
+    addFavorite(item) {
+      console.log(this.user.id)
+      axios.post('/api/favorite/add', {
+        user_id: this.user.id,
+        house_id: item.id,
+        token: this.globalToken
+      })
+      item.favorite = true
+    },
+    removeFavorite(item) {
+      axios.post('/api/favorite/deleted', {
+        user_id: this.user.id,
+        house_id: item.id,
+        token: this.globalToken
+      })
+      item.favorite = false
+    },
     startFilter() {
       if (this.filters.toSea) {
         this.readyHouses = this.readyHouses.find(item => item.info.toSea >= this.filters.toSea)

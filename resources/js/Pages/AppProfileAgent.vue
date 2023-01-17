@@ -165,6 +165,7 @@ export default {
     saveEdit() {
 
       let formData = new FormData()
+      console.log(this.$refs.user_avatar.files[0])
 
       formData.append('user_id', this.user.id)
       formData.append('first_name', this.profile.name)
@@ -182,9 +183,11 @@ export default {
         headers: {"Content-type": "multipart/form-data"},
         data: formData,
       }).then(response => console.log(response))
+
     }
   },
   created() {
+    console.log(this.user)
     this.profile.name = this.user.first_name
     this.profile.surname = this.user.last_name
     this.profile.tel = this.user.phone

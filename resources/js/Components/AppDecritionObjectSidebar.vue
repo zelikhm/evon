@@ -18,18 +18,18 @@
       <div class="font-medium text-lg xxl:text-[15px] xl:text-[13px] pb-5 xxl:pb-4 xl:pb-3 leading-none">Застройщик</div>
       <div class="bg-white flex flex-col gap-5 xxl:gap-4 xl:gap-3 rounded-[10px] p-4 xxl:p-3 xl:p-2.5">
         <div class="flex items-center gap-4 xxl:gap-3 xl:gap-2.5">
-          <img :src="'/storage/' + house.user.image" class="h-14 xxl:h-12 xl:h-10" alt="avatar">
+<!--          <img :src="'/storage/' + house.user.image" class="h-14 xxl:h-12 xl:h-10" alt="avatar">-->
           <div class="flex flex-col gap-1.5 xxl:gap-1 xl:gap-0.5">
             <span class="font-medium text-lg xxl:text-[15px] xl:text-[13px] leading-none">{{ house.user.first_name }} {{ house.user.last_name }}</span>
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none">Застройщик</span>
           </div>
         </div>
-        <button class="w-full bg-[#F6F3FA] text-[#6536A5] text-base xxl:text-sm xl:text-xs rounded-[6px] py-4 xxl:py-3 xl:py-2.5">Написать в чат</button>
+        <button class="w-full  bg-[#F6F3FA] text-[#6536A5] text-base xxl:text-sm xl:text-xs rounded-[6px] py-4 xxl:py-3 xl:py-2.5">Написать в чат</button>
       </div>
     </div>
     <div class="pb-10 xxl:pb-8 xl:pb-6">
       <div class="font-medium text-lg xxl:text-[15px] xl:text-[13px] pb-5 xxl:pb-4 xl:pb-3 leading-none">Эксклюзив для агентства:</div>
-      <p class="text-base text-[#8A8996]  xxl:text-sm xl:text-xs">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid architecto aut eveniet excepturi explicabo ipsum maiores necessitatibus tempora voluptatum?</p>
+      <p class="text-base text-[#8A8996] xxl:text-sm xl:text-xs">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam aliquid architecto aut eveniet excepturi explicabo ipsum maiores necessitatibus tempora voluptatum?</p>
     </div>
     <div class="pb-14 xxl:pb-10 xl:pb-8">
       <div class="font-medium text-lg xxl:text-[15px] xl:text-[13px] pb-5 xxl:pb-4 xl:pb-3 leading-none">Комиссия</div>

@@ -15,6 +15,7 @@
           :count="count"
           :dops="dops"
           :infos="infos"
+          :user="user"
           :city="city"
           :builders="builders"
         />

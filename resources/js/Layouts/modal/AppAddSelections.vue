@@ -9,105 +9,25 @@
         </button>
       </div>
       <div class="relative border__bottom flex items-center gap-4 xxl:gap-3 xl:gap-2.5 px-8 xxl:px-6 xl:px-5 py-5 xxl:py-4 xl:py-3">
-        <img src="../../../assets/chat_avatar.png" class="w-12 xxl:w-10 xl:w-8" alt="">
+<!--        <img src="../../../assets/chat_avatar.png" class="w-12 xxl:w-10 xl:w-8" alt="">-->
         <div class="flex flex-col">
           <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-            <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none">Euro Avsallar Residence</span>
-            <span class="border border-solid border-[#30CB49] text-[#30CB49] text-[14px] xxl:text-[12px] xl:text-[10px] px-2 xl:px-1.5 py-1.5 xl:py-1 rounded-[3px] leading-none">СДАН</span>
+            <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none m">{{ house.title }}</span>
+            <span class="border uppercase border-solid border-[#30CB49] text-[#30CB49] text-[14px] xxl:text-[12px] xl:text-[10px] px-2 xl:px-1.5 py-1.5 xl:py-1 rounded-[3px] leading-none">{{ house.info.status }}</span>
           </div>
-          <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Бакинская ул., 14, Адлер, Краснодарский край, Россия, 354383</span>
+          <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none mt-2">{{ house.city }}, {{ house.area }}</span>
         </div>
       </div>
       <div class="p-8 xxl:p-6 xl:p-5">
         <div class="main__title-block border border-solid border-[#E5DFEE] rounded-[5px] pl-5 xxl:pl-4 xl:pl-3 py-5 xxl:py-4 xl:py-3 pr-1 text-[16px] xxl:text-[14px] xl:text-[12px]">
           <div class="flex flex-col h-[40vh] overflow-y-auto custom__scroll--chess pr-4 xxl:pr-3 xl:pr-2 gap-2.5 xxl:gap-2 xl:gap-1.5">
-            <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]">
+            <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]" v-for="item in compilation">
               <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
                 <div class="flex">
-                  <input id="name_1" type="checkbox" class="custom__checkbox">
-                  <label for="name_1"></label>
+                  <input :id="'name' + item.id" type="checkbox" class="custom__checkbox">
+                  <label :for="'name' + item.id"></label>
                 </div>
-                <span class="leading-none">Дмитрию</span>
-              </div>
-              <span class="leading-none">11 ЖК</span>
-            </div>
-            <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]">
-              <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                <div class="flex">
-                  <input id="name_1" type="checkbox" class="custom__checkbox">
-                  <label for="name_1"></label>
-                </div>
-                <span class="leading-none">Дмитрию</span>
-              </div>
-              <span class="leading-none">11 ЖК</span>
-            </div>
-            <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]">
-              <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                <div class="flex">
-                  <input id="name_2" type="checkbox" class="custom__checkbox">
-                  <label for="name_2"></label>
-                </div>
-                <span class="leading-none">Дмитрию</span>
-              </div>
-              <span class="leading-none">11 ЖК</span>
-            </div>
-            <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]">
-              <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                <div class="flex">
-                  <input id="name_3" type="checkbox" class="custom__checkbox">
-                  <label for="name_3"></label>
-                </div>
-                <span class="leading-none">Дмитрию</span>
-              </div>
-              <span class="leading-none">11 ЖК</span>
-            </div>
-            <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]">
-              <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                <div class="flex">
-                  <input id="name_4" type="checkbox" class="custom__checkbox">
-                  <label for="name_4"></label>
-                </div>
-                <span class="leading-none">Дмитрию</span>
-              </div>
-              <span class="leading-none">11 ЖК</span>
-            </div>
-            <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]">
-              <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                <div class="flex">
-                  <input id="name_5" type="checkbox" class="custom__checkbox">
-                  <label for="name_5"></label>
-                </div>
-                <span class="leading-none">Дмитрию</span>
-              </div>
-              <span class="leading-none">11 ЖК</span>
-            </div>
-            <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]">
-              <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                <div class="flex">
-                  <input id="name_6" type="checkbox" class="custom__checkbox">
-                  <label for="name_6"></label>
-                </div>
-                <span class="leading-none">Дмитрию</span>
-              </div>
-              <span class="leading-none">11 ЖК</span>
-            </div>
-            <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]">
-              <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                <div class="flex">
-                  <input id="name_7" type="checkbox" class="custom__checkbox">
-                  <label for="name_8"></label>
-                </div>
-                <span class="leading-none">Дмитрию</span>
-              </div>
-              <span class="leading-none">11 ЖК</span>
-            </div>
-            <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]">
-              <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                <div class="flex">
-                  <input id="name_8" type="checkbox" class="custom__checkbox">
-                  <label for="name_8"></label>
-                </div>
-                <span class="leading-none">Дмитрию</span>
+                <span class="leading-none">{{ item.title }}</span>
               </div>
               <span class="leading-none">11 ЖК</span>
             </div>
@@ -137,6 +57,7 @@
 
 <script>
 export default {
+  props: ['compilation', 'house'],
   data() {
     return {
       buttonSelection: true,
