@@ -23,10 +23,35 @@
           <label class="text-base xxl:text-[13px] xl:text-[11px]" for="chekbox">показывать ЖК и его месторасположение</label>
         </div>
       </div>
+      <div class="text-[#1E1D2D] font-medium text-[18px] xxl:text-[15px] xl:text-[13px] mb-4 xxl:mb-3 xl:mb-2.5">ЖК (2)</div>
+      <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 mb-8 xxl:mb-6 xl:mb-5 overflow-y-auto max-h-56 xxl:max-h-48 xl:max-h-40 custom__scroll-grey">
+        <div
+          class="contact__selling p-2.5 xxl:p-2 xl:p-1.5 rounded-[10px]"
+          v-for="JK in JKs"
+        >
+          <div class="flex justify-between items-center mb-3 xxl:mb-2.5 xl:mb-2">
+            <div class="flex gap-5 xxl:gap-4 xl:gap-3 items-center">
+              <img src="../../../assets/immovables_img_one.png" class="w-[70px] xxl:w-[60px] xl:w-[50px] h-[70px] xl:h-[60px] xl:h-[50px] rounded-[3px]" alt="">
+              <div class="flex flex-col gap-3 xxl:gap-2.5 xl:gap-2">
+                <span class="text-[#1E1D2D] font-medium text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">Euro Avsallar Residence</span>
+                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Бакинская ул., 14, Адлер, Краснодарский край, Россия, 354383</span>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <img v-if="!JK.openInput" @click="openInput(JK)" src="../../../assets/svg/chat_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 mx-5 xxl:mx-4 xl:mx-3" alt="">
+              <img src="../../../assets/svg/bucket_icon_red.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 mx-5 xxl:mx-4 xl:mx-3" alt="">
+            </div>
+          </div>
+          <div v-if="JK.openInput" class="relative">
+            <input class="w-full text-[#1E1D2D] text-[16px] focus:ring-[#6435A5] focus:border-[#6435A5] xxl:text-[14px] xl:text-[12px] pl-5 xxl:pl-4 xl:pl-3 py-3 xxl:py-2.5 xl:py-2 leading-none rounded-[5px] border border-solid border-[#E5DFEE] pr-12 xxl:pr-10 xl:pr-8" type="text">
+            <img @click="closeInput(JK)" class="absolute cursor-pointer top-1/2 -translate-y-1/2 w-6 xxl:w-5 xl:w-4 right-5 xxl:right-4 xl:right-3" src="../../../assets/svg/close_grey.svg" alt="">
+          </div>
+        </div>
+      </div>
       <div class="grid grid-cols-2 gap-8 xxl:gap-6 xl:gap-5">
-      <button @click="createCompilation" class="login__btn--bg text-white text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Создать</button>
-      <button @click="this.$emit('close-selection')" class="bg-litepink text-[#E84680] text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Отменить</button>
-    </div>
+        <button @click="createCompilation" class="login__btn--bg text-white text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Создать</button>
+        <button @click="this.$emit('close-selection')" class="bg-litepink text-[#E84680] text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Отменить</button>
+      </div>
     </div>
     <div @click="this.$emit('close-selection')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
   </div>
@@ -38,7 +63,14 @@ export default {
   props: {
     openSelection: Boolean,
     openSideBar: Boolean,
-    user: {}
+    user: {},
+    JKs: [
+      { openInput: false },
+      { openInput: false },
+      { openInput: false },
+      { openInput: false },
+      { openInput: false },
+    ],
   },
   data() {
     return {
@@ -55,6 +87,12 @@ export default {
   },
   emits: ['close-create-selection', 'close-selection'],
   methods: {
+    openInput(JK) {
+      JK.openInput = true
+    },
+    closeInput(JK) {
+      JK.openInput = false
+    },
     createCompilation() {
       if (this.compilation.title && this.compilation.description) {
         let obj = {
