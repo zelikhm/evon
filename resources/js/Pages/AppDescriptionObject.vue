@@ -8,6 +8,8 @@
     v-if="openAddSelection"
     @open-i-create-selections="openCreateSel"
     @close-add-selection="openAddSelection = false"
+    :compilation="compilation"
+    :house="house"
   />
   <app-immovables-create-selection
     v-if="openCreateSelection"
@@ -50,13 +52,13 @@
                 <img src="../../assets/svg/plus_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="plus">
                 <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">Добавить в подборку</div>
               </button>
-              <button v-if="showHeart === 1"  @click="addToFavorite" class="relative heart__hover flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
+              <button v-if="!flagFavorite" @click="addToFavorite" class="relative heart__hover flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
                 <img src="../../assets/svg/heart_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="Сердце">
                 <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">Добавить в избранное</div>
               </button>
-              <button v-if="showHeart === 2" @click="removeToFavorite" class="relative heart__hover flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
+              <button v-if="flagFavorite" @click="removeToFavorite" class="relative heart__hover flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
                 <img src="../../assets/svg/heart_icon_pink.svg" class="h-6 xxl:h-5 xl:h-4" alt="Сердце">
-                <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">Добавить в избранное</div>
+                <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">Удалить с избранных</div>
               </button>
             </div>
 
@@ -66,7 +68,7 @@
           </div>
         </div>
       </div>
-      <app-map @open-add-selections="openAddSelection = true" v-if="map" :houses="house" />
+      <app-map @open-add-selections="openAddSelection = true" v-if="map" :houses="house" :state="false" />
       <div class="grid__68-30 justify-between" v-if="!map">
         <div class="w-full flex flex-col">
           <swiper
@@ -212,7 +214,8 @@ export default {
     dops: [],
     infos: [],
     slider: [],
-    user: []
+    user: [],
+    compilation: []
   },
   data() {
     return {
@@ -220,10 +223,10 @@ export default {
       arrayInfos: [],
       album: false,
       openAllNews: false,
-      showHeart: 1,
       openAddSelection: false,
       openCreateSelection: false,
       map: false,
+      flagFavorite: null
     }
   },
   methods: {
@@ -236,12 +239,7 @@ export default {
       this.openAddSelection = true
     },
     addToFavorite() {
-      this.showHeart = 2
-      console.log({
-        user_id: this.user.id,
-        house_id: this.house.id,
-        token: this.globalToken
-      })
+      this.flagFavorite = true
       axios.post('/api/favorite/add', {
         user_id: this.user.id,
         house_id: this.house.id,
@@ -249,28 +247,16 @@ export default {
       })
     },
     removeToFavorite() {
-      this.showHeart = 1
+      this.flagFavorite = false
+      axios.post('/api/favorite/deleted', {
+        user_id: this.user.id,
+        house_id: this.house.id,
+        token: this.globalToken
+      })
     }
   },
-  components: {
-    AppMap,
-    AppHeader,
-    AppFooter,
-    AppDecritionObjectSidebar,
-    AppDescriptionObjectOtherJK,
-    AppModalAlbum,
-    Swiper,
-    SwiperSlide,
-    AppAllNews,
-    AppAddSelections,
-    AppImmovablesCreateSelection,
-  },
-  setup() {
-    return {
-      modules: [Navigation, Pagination],
-    };
-  },
   mounted() {
+    this.flagFavorite = this.house.favorite
     this.arrayInfos = []
 
     if (this.house.info.info !== null) {
@@ -338,6 +324,24 @@ export default {
     minPriceForM() {
       return Math.round(this.minPriceFlat / this.minSquareFlat)
     },
+  },
+  components: {
+    AppMap,
+    AppHeader,
+    AppFooter,
+    AppDecritionObjectSidebar,
+    AppDescriptionObjectOtherJK,
+    AppModalAlbum,
+    Swiper,
+    SwiperSlide,
+    AppAllNews,
+    AppAddSelections,
+    AppImmovablesCreateSelection,
+  },
+  setup() {
+    return {
+      modules: [Navigation, Pagination],
+    };
   },
 }
 </script>

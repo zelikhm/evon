@@ -290,14 +290,17 @@ import { Link } from '@inertiajs/inertia-vue3'
                 <span class="uppercase bg-[#E84680] text-white text-sm xxl:text-xs xl:text-[10px] leading-none font-semibold rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1">2/2024</span>
               </div>
               <div class="seek flex opacity-0 transition-all flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
-                <button @click="this.$emit('open-add-selections')" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
+                <button @click="this.$emit('open-add-selections', item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
                   <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В подборку</span>
                   <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
                 </button>
-                <button class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
+                <button v-if="item.favorite" @click="removeFavorite(item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
+                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">Убрать</span>
+                  <img src="../../assets/svg/heart_icon_fill.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                </button>
+                <button v-else @click="addFavorite(item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
                   <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В избранное</span>
-                  <img src="../../assets/svg/heart_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Сердце">
-                  <img v-if="1 !== 1" src="../../assets/svg/heart_icon_pink.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                  <img src="../../assets/svg/heart_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="">
                 </button>
               </div>
               <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1">
@@ -316,70 +319,6 @@ import { Link } from '@inertiajs/inertia-vue3'
       </div>
 
       <!--  Новостройки в виде списка -->
-  <!--    <div v-if="toggle" class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 mt-5 xxl:mt-4 xl:mt-3">-->
-  <!--      <div class="grid__75-25 border border-solid border-[#E5DFEE] rounded-[6px]" v-for="item in readyHouses">-->
-  <!--        <div class="border__right">-->
-  <!--          <div class="grid__35-65 p-2.5 xxl:p-2 xl:p-1.5">-->
-  <!--            <div class="relative object__block">-->
-  <!--              <div class="seek opacity-0 transition-all immovables__overlay h-full w-full absolute z-10 rounded-[6px]"></div>-->
-  <!--              <img :src="'/storage/' + item.image" class="w-full h-[9.3vw]" alt="">-->
-  <!--              <div class="seek opacity-0 transition-all absolute top-1/2 -translate-y-1/2 left-0 z-10 flex flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">-->
-  <!--                <button @click="this.$emit('open-add-selections')" class="immovables__button&#45;&#45;card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[70%]">-->
-  <!--                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В подборку</span>-->
-  <!--                  <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">-->
-  <!--                </button>-->
-  <!--                <button class="immovables__button&#45;&#45;card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[70%]">-->
-  <!--                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В избранное</span>-->
-  <!--                  <img src="../../assets/svg/heart_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Сердце">-->
-  <!--                </button>-->
-  <!--              </div>-->
-  <!--            </div>-->
-  <!--            <div class="flex flex-col justify-between px-4 xxl:px-3 xl:px-2.5 py-2 xxl:py-1.5 xl:py-1">-->
-  <!--              <div class="flex justify-between">-->
-  <!--                <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">-->
-  <!--                  <Link :href="'/house/' + item.slug" class="leading-none font-semibold text-lg xxl:text-[15px] xl:text-[13px]">{{ item.title }}</Link>-->
-  <!--                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">{{ item.area }}</span>-->
-  <!--                </div>-->
-  <!--                <div class="flex flex-wrap gap-x-1">-->
-  <!--                  <span class="bg-[#E84680] h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1">{{ item.status }}</span>-->
-  <!--&lt;!&ndash;                  <span class="bg-[#FA8D50] h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1">акция</span>&ndash;&gt;-->
-  <!--                </div>-->
-  <!--              </div>-->
-  <!--              <div class="flex flex-wrap gap-1 text-[15px] xxl:text-[13px] xl:text-[11px]">-->
-  <!--                <span class="text-[#8A8996] leading-none border border-solid border-[#E5DFEE] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5">Договор займа</span>-->
-  <!--                <span class="text-[#8A8996] leading-none border border-solid border-[#E5DFEE] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5">Рассрочка</span>-->
-  <!--                <span class="text-[#8A8996] leading-none border border-solid border-[#E5DFEE] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5">ВНЖ</span>-->
-  <!--                <span class="text-[#8A8996] leading-none border border-solid border-[#E5DFEE] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5">Гражданство</span>-->
-  <!--                <span class="text-[#8A8996] leading-none border border-solid border-[#E5DFEE] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5">Договор купли-продажи</span>-->
-  <!--              </div>-->
-  <!--            </div>-->
-  <!--          </div>-->
-  <!--        </div>-->
-  <!--        <div class="grid__75-25 border border-solid border-[#E5DFEE] rounded-[6px]">-->
-  <!--          <div class="border__right">-->
-  <!--            <div class="grid__35-65 p-2.5 xxl:p-2 xl:p-1.5">-->
-  <!--              <div class="relative object__block">-->
-  <!--                <div class="seek opacity-0 transition-all immovables__overlay h-full w-full absolute z-10 rounded-[6px]"></div>-->
-  <!--                <img src="../../assets/immovables_img_two.png" class="w-full h-[9.3vw]" alt="">-->
-  <!--                <div class="seek opacity-0 transition-all absolute top-1/2 -translate-y-1/2 left-0 z-10 flex flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">-->
-  <!--                  <button @click="this.$emit('open-add-selections')" class="immovables__button&#45;&#45;card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[70%]">-->
-  <!--                    <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В подборку</span>-->
-  <!--                    <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">-->
-  <!--                  </button>-->
-  <!--                  <button class="immovables__button&#45;&#45;card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[70%]">-->
-  <!--                    <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В избранное</span>-->
-  <!--                    <img src="../../assets/svg/heart_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Сердце">-->
-  <!--                  </button>-->
-  <!--                </div>-->
-  <!--              </div>-->
-  <!--            </div>-->
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--      <div class="w-full flex justify-center mb-14 xxl:mb-10 xl:mb-8" @click="count += 3">-->
-  <!--        <button class="more__button transition-all text-[#E84680] border border-solid border-[#E84680] text-base xxl:text-sm xl:text-xs px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2.5 xl:py-1.5 rounded-[3px]">Показать еще</button>-->
-  <!--      </div>-->
-  <!--    </div>-->
-
       <div v-if="toggle && !map" class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 mt-5 xxl:mt-4 xl:mt-3">
         <div class="grid__75-25 border border-solid border-[#E5DFEE] rounded-[6px]" v-for="item in readyHouses">
           <div class="border__right">
@@ -411,11 +350,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                   </div>
                 </div>
                 <div class="flex flex-wrap gap-1 text-[15px] xxl:text-[13px] xl:text-[11px]">
-                  <span class="text-[#8A8996] leading-none border border-solid border-[#E5DFEE] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5">Договор займа</span>
-                  <span class="text-[#8A8996] leading-none border border-solid border-[#E5DFEE] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5">Рассрочка</span>
-                  <span class="text-[#8A8996] leading-none border border-solid border-[#E5DFEE] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5">ВНЖ</span>
-                  <span class="text-[#8A8996] leading-none border border-solid border-[#E5DFEE] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5">Гражданство</span>
-                  <span class="text-[#8A8996] leading-none border border-solid border-[#E5DFEE] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5">Договор купли-продажи</span>
+                  <span v-for="dop in item.readyDops" class="text-[#8A8996] leading-none border border-solid border-[#E5DFEE] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5">{{ dop.name }}</span>
                 </div>
               </div>
             </div>
@@ -451,7 +386,7 @@ export default {
   props: {
     houses: [],
     count: Number,
-    user: [],
+    user: {},
     city: [],
     infos: [],
     builders: [],
@@ -527,6 +462,23 @@ export default {
     }
   },
   methods: {
+    addFavorite(item) {
+      console.log(this.user.id)
+      axios.post('/api/favorite/add', {
+        user_id: this.user.id,
+        house_id: item.id,
+        token: this.globalToken
+      })
+      item.favorite = true
+    },
+    removeFavorite(item) {
+      axios.post('/api/favorite/deleted', {
+        user_id: this.user.id,
+        house_id: item.id,
+        token: this.globalToken
+      })
+      item.favorite = false
+    },
     startFilter() {
       if (this.filters.toSea) {
         this.readyHouses = this.readyHouses.find(item => item.info.toSea >= this.filters.toSea)
@@ -579,9 +531,21 @@ export default {
 
     }
 
+    let dops = this.dops
+
     this.readyHouses.forEach(house => {
       let arr = [],
           squareFlats = []
+
+      house.readyDops = []
+
+      if (house.info.dop !== null) {
+        for (let key of house.info.dop) {
+          if (!+isNaN(key)) {
+            house.readyDops.push(dops.find(item => item.id === +key))
+          }
+        }
+      }
 
       house.flats.forEach(item => {
         arr.push(item.price)

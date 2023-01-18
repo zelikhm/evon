@@ -4,22 +4,21 @@
   <app-header :user="user" />
   <main class="relative">
 
-    <div class="absolute w-full text-center favorites__banner py-3 xxl:py-2.5 xl:py-2 text-[#30CB6E] text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">
-      Euro Avsallar Residence добавлен в избранное
+    <div v-if="state === 0" class="absolute w-full text-center favorites__banner py-3 xxl:py-2.5 xl:py-2 text-[#30CB6E] text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">
+      {{ notificationTitle }} добавлен в избранное
     </div>
-    <div v-if="1 !== 1" class="absolute w-full text-center bg-[#E84780] py-3 xxl:py-2.5 xl:py-2 text-white text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">
-      Euro Avsallar Residence удален из избранного
-      <button class="bg-white text-[#E84780] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none px-2 xxl:py-1.5 xl:p-1 py-1.5 rounded-[3px]">Отменить</button>
+    <div v-if="state === 1" class="absolute w-full text-center bg-[#E84780] py-3 xxl:py-2.5 xl:py-2 text-white text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">
+      {{ notificationTitle }} удален из избранного
+      <button @click="cancelDeleted" class="bg-white text-[#E84780] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none px-2 xxl:py-1.5 xl:p-1 py-1.5 rounded-[3px]">Отменить</button>
     </div>
 
     <div class="_container">
       <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5 mt-16 xxl:mt-12 xl:mt-10">
         <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] leading-none">Избранное</h2>
-        <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Найдено 6 объектов</span>
+        <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Найдено {{ favorites.length }} объектов</span>
       </div>
 
-<!--      В избранном ничего нет-->
-      <div v-if="false" class="grid grid-cols-2 mt-10 xxl:mt-8 xl:mt-6">
+      <div v-if="favorites.length === 0" class="grid grid-cols-2 mt-10 xxl:mt-8 xl:mt-6">
         <div class="flex justify-between p-7 xxl:p-5 xl:p-4 bg-[#F6F3FA] rounded-[10px]">
           <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
             <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none font-medium">У вас в избранном еще ничего нет</span>
@@ -39,7 +38,7 @@
 
       <div class="grid grid-cols-5 my-8 xxl:my-6 xl:my-5 gap-5 xxl:gap-4 xl:gap-3">
 
-        <div class="relative block__favorites rounded-[5px] transition-all">
+        <div class="relative block__favorites rounded-[5px] transition-all" v-for="item in favorites">
           <div class="relative">
             <img src="../../assets/immovables_img_one.png" class="relative z-0 h-[12.5vw] w-full rounded-[5px]" alt="">
             <div class="seek opacity-0 transition-all immovables__overlay top-0 h-full w-full absolute z-10 rounded-[5px]"></div>
@@ -48,167 +47,26 @@
                 <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В подборку</span>
                 <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
               </button>
-              <button class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
+              <button v-if="item.house.favorite" @click="removeFavorite(item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
+                <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">Убрать</span>
+                <img src="../../assets/svg/heart_icon_fill.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+              </button>
+              <button v-else @click="addFavorite(item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
                 <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В избранное</span>
-                <img src="../../assets/svg/heart_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="Сердце">
-                <img v-if="1 !== 1" src="../../assets/svg/heart_icon_pink.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                <img src="../../assets/svg/heart_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="">
               </button>
             </div>
             <div class="absolute left-0 bottom-0 flex items-center gap-2 xl:gap-1.5 z-20 p-5 xxl:p-4 xl:p-3">
-              <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">Дагомыс</span>
+              <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">{{ item.house.title }}</span>
               <div class="bg-white w-1 h-1 rounded-full"></div>
               <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">49 Квартир</span>
             </div>
           </div>
           <div class="p-5 xxl:p-4 xl:p-3 flex flex-col gap-3.5 xxl:gap-3 xl:gap-2.5">
             <div class="flex justify-between items-center">
-              <h3 class="text-[#1E1D2D] text-[20px] xxl:text-[16px] xl:text-[14px] font-semibold leading-none">Euro Avsallar Residence</h3>
-              <img src="../../assets/svg/heart_icon_pink.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
-              <img src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4" alt="Сердце">
-            </div>
-            <span class="text-[17px] xxl:text-[14px] xl:tex-[12px] text-[#1E1D2D] leading-none">от 1 490 000 ₽</span>
-            <div class="flex items-center gap-2 xl:gap-1.5 text-[14px] xxl:text-[12px] xl:text-[10px]">
-              <span class="leading-none">85 000 ₽ за м²</span>
-              <div class="w-1 h-1 bg-[#8A8996] rounded-full"></div>
-              <span class="leading-none">14.9 м² - 23.4 м²</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="relative block__favorites rounded-[5px] transition-all">
-          <div class="relative">
-            <img src="../../assets/immovables_img_one.png" class="relative z-0 h-[12.5vw] w-full rounded-[5px]" alt="">
-            <div class="seek opacity-0 transition-all immovables__overlay top-0 h-full w-full absolute z-10 rounded-[5px]"></div>
-            <div class="seek opacity-0 transition-all absolute top-1/2 -translate-y-1/2 left-0 z-10 flex flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
-              <button @click="openAddSelection = true" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
-                <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В подборку</span>
-                <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
-              </button>
-              <button class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
-                <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В избранное</span>
-                <img src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="Сердце">
-                <img v-if="1 !== 1" src="../../assets/svg/heart_icon_pink.svg" class="w-5 xxl:w-4 xl:w-3" alt="Сердце">
-              </button>
-            </div>
-            <div class="absolute left-0 bottom-0 flex items-center gap-2 xl:gap-1.5 z-20 p-5 xxl:p-4 xl:p-3">
-              <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">Дагомыс</span>
-              <div class="bg-white w-1 h-1 rounded-full"></div>
-              <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">49 Квартир</span>
-            </div>
-          </div>
-          <div class="p-5 xxl:p-4 xl:p-3 flex flex-col gap-3.5 xxl:gap-3 xl:gap-2.5">
-            <div class="flex justify-between items-center">
-              <h3 class="text-[#1E1D2D] text-[20px] xxl:text-[16px] xl:text-[14px] font-semibold leading-none">Euro Avsallar Residence</h3>
-              <img src="../../assets/svg/heart_icon_pink.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
-              <img src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4" alt="Сердце">
-            </div>
-            <span class="text-[17px] xxl:text-[14px] xl:tex-[12px] text-[#1E1D2D] leading-none">от 1 490 000 ₽</span>
-            <div class="flex items-center gap-2 xl:gap-1.5 text-[14px] xxl:text-[12px] xl:text-[10px]">
-              <span class="leading-none">85 000 ₽ за м²</span>
-              <div class="w-1 h-1 bg-[#8A8996] rounded-full"></div>
-              <span class="leading-none">14.9 м² - 23.4 м²</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="relative block__favorites rounded-[5px] transition-all">
-          <div class="relative">
-            <img src="../../assets/immovables_img_one.png" class="relative z-0 h-[12.5vw] w-full rounded-[5px]" alt="">
-            <div class="seek opacity-0 transition-all immovables__overlay top-0 h-full w-full absolute z-10 rounded-[5px]"></div>
-            <div class="seek opacity-0 transition-all absolute top-1/2 -translate-y-1/2 left-0 z-10 flex flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
-              <button @click="openAddSelection = true" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
-                <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В подборку</span>
-                <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
-              </button>
-              <button class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
-                <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В избранное</span>
-                <img src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="Сердце">
-                <img v-if="1 !== 1" src="../../assets/svg/heart_icon_pink.svg" class="w-5 xxl:w-4 xl:w-3" alt="Сердце">
-              </button>
-            </div>
-            <div class="absolute left-0 bottom-0 flex items-center gap-2 xl:gap-1.5 z-20 p-5 xxl:p-4 xl:p-3">
-              <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">Дагомыс</span>
-              <div class="bg-white w-1 h-1 rounded-full"></div>
-              <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">49 Квартир</span>
-            </div>
-          </div>
-          <div class="p-5 xxl:p-4 xl:p-3 flex flex-col gap-3.5 xxl:gap-3 xl:gap-2.5">
-            <div class="flex justify-between items-center">
-              <h3 class="text-[#1E1D2D] text-[20px] xxl:text-[16px] xl:text-[14px] font-semibold leading-none">Euro Avsallar Residence</h3>
-              <img src="../../assets/svg/heart_icon_pink.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
-              <img src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4" alt="Сердце">
-            </div>
-            <span class="text-[17px] xxl:text-[14px] xl:tex-[12px] text-[#1E1D2D] leading-none">от 1 490 000 ₽</span>
-            <div class="flex items-center gap-2 xl:gap-1.5 text-[14px] xxl:text-[12px] xl:text-[10px]">
-              <span class="leading-none">85 000 ₽ за м²</span>
-              <div class="w-1 h-1 bg-[#8A8996] rounded-full"></div>
-              <span class="leading-none">14.9 м² - 23.4 м²</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="relative block__favorites rounded-[5px] transition-all">
-          <div class="relative">
-            <img src="../../assets/immovables_img_one.png" class="relative z-0 h-[12.5vw] w-full rounded-[5px]" alt="">
-            <div class="seek opacity-0 transition-all immovables__overlay top-0 h-full w-full absolute z-10 rounded-[5px]"></div>
-            <div class="seek opacity-0 transition-all absolute top-1/2 -translate-y-1/2 left-0 z-10 flex flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
-              <button @click="openAddSelection = true" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
-                <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В подборку</span>
-                <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
-              </button>
-              <button class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
-                <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В избранное</span>
-                <img src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="Сердце">
-                <img v-if="1 !== 1" src="../../assets/svg/heart_icon_pink.svg" class="w-5 xxl:w-4 xl:w-3" alt="Сердце">
-              </button>
-            </div>
-            <div class="absolute left-0 bottom-0 flex items-center gap-2 xl:gap-1.5 z-20 p-5 xxl:p-4 xl:p-3">
-              <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">Дагомыс</span>
-              <div class="bg-white w-1 h-1 rounded-full"></div>
-              <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">49 Квартир</span>
-            </div>
-          </div>
-          <div class="p-5 xxl:p-4 xl:p-3 flex flex-col gap-3.5 xxl:gap-3 xl:gap-2.5">
-            <div class="flex justify-between items-center">
-              <h3 class="text-[#1E1D2D] text-[20px] xxl:text-[16px] xl:text-[14px] font-semibold leading-none">Euro Avsallar Residence</h3>
-              <img src="../../assets/svg/heart_icon_pink.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
-              <img src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4" alt="Сердце">
-            </div>
-            <span class="text-[17px] xxl:text-[14px] xl:tex-[12px] text-[#1E1D2D] leading-none">от 1 490 000 ₽</span>
-            <div class="flex items-center gap-2 xl:gap-1.5 text-[14px] xxl:text-[12px] xl:text-[10px]">
-              <span class="leading-none">85 000 ₽ за м²</span>
-              <div class="w-1 h-1 bg-[#8A8996] rounded-full"></div>
-              <span class="leading-none">14.9 м² - 23.4 м²</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="relative block__favorites rounded-[5px] transition-all">
-          <div class="relative">
-            <img src="../../assets/immovables_img_one.png" class="relative z-0 h-[12.5vw] w-full rounded-[5px]" alt="">
-            <div class="seek opacity-0 transition-all immovables__overlay top-0 h-full w-full absolute z-10 rounded-[5px]"></div>
-            <div class="seek opacity-0 transition-all absolute top-1/2 -translate-y-1/2 left-0 z-10 flex flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
-              <button @click="openAddSelection = true" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
-                <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В подборку</span>
-                <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
-              </button>
-              <button class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
-                <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В избранное</span>
-                <img src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="Сердце">
-                <img v-if="1 !== 1" src="../../assets/svg/heart_icon_pink.svg" class="w-5 xxl:w-4 xl:w-3" alt="Сердце">
-              </button>
-            </div>
-            <div class="absolute left-0 bottom-0 flex items-center gap-2 xl:gap-1.5 z-20 p-5 xxl:p-4 xl:p-3">
-              <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">Дагомыс</span>
-              <div class="bg-white w-1 h-1 rounded-full"></div>
-              <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">49 Квартир</span>
-            </div>
-          </div>
-          <div class="p-5 xxl:p-4 xl:p-3 flex flex-col gap-3.5 xxl:gap-3 xl:gap-2.5">
-            <div class="flex justify-between items-center">
-              <h3 class="text-[#1E1D2D] text-[20px] xxl:text-[16px] xl:text-[14px] font-semibold leading-none">Euro Avsallar Residence</h3>
-              <img src="../../assets/svg/heart_icon_pink.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
-              <img src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4" alt="Сердце">
+              <h3 class="text-[#1E1D2D] text-[20px] xxl:text-[16px] xl:text-[14px] font-semibold leading-none">{{ item.house.title }}</h3>
+              <img @click="addFavorite(item)" v-if="!item.house.favorite" src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4" alt="Сердце" >
+              <img @click="removeFavorite(item)" v-else src="../../assets/svg/heart_icon_pink.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4" alt="">
             </div>
             <span class="text-[17px] xxl:text-[14px] xl:tex-[12px] text-[#1E1D2D] leading-none">от 1 490 000 ₽</span>
             <div class="flex items-center gap-2 xl:gap-1.5 text-[14px] xxl:text-[12px] xl:text-[10px]">
@@ -247,10 +105,57 @@ export default {
       user: computed(() => usePage().props.value.auth.user),
       openAddSelection: false,
       openCreateSelection: false,
+      state: null,
+      notificationTitle: null,
+      deleteItemId: null
     }
   },
+  methods: {
+    removeFavorite(item) {
+      this.deleteItemId = item.house.id
+
+      axios.post('/api/favorite/deleted', {
+        user_id: this.user.id,
+        house_id: this.deleteItemId,
+        token: this.globalToken
+      })
+
+      item.house.favorite = false
+      this.state = 1
+      this.notificationTitle = item.house.title
+    },
+    addFavorite(item) {
+
+      axios.post('/api/favorite/add', {
+        user_id: this.user.id,
+        house_id: this.deleteItemId,
+        token: this.globalToken
+      })
+
+      item.house.favorite = true
+      this.state = 0
+      this.notificationTitle = item.house.title
+    },
+    cancelDeleted() {
+      axios.post('/api/favorite/add', {
+        user_id: this.user.id,
+        house_id: this.deleteItemId,
+        token: this.globalToken
+      })
+
+      this.state = 0
+
+      for (let key of this.favorites) {
+        if (key.house.id === this.deleteItemId) {
+          key.house.favorite = true
+        }
+      }
+    },
+  },
   mounted() {
-    console.log(this.favorites)
+    this.favorites.forEach(item => {
+        item.house.favorite = true
+    })
   }
 }
 

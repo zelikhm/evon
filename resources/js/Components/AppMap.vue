@@ -5,7 +5,9 @@
      <GMapMarker :key="index" v-for="(m, index) in markers" :position="m.position" @click="openMarker(m)">
        <GMapInfoWindow :closeclick="true"
                        @closeclick="openMarker(null)"
-                       :opened="openedMarkerID === m.id">
+                       :opened="openedMarkerID === m.id"
+                       v-if="state === undefined"
+       >
          <div class="relative decription__head top-0 right-0 bg-white rounded-[10px]">
            <div class="p-6 xxl:p-5 xl:p-4 border__bottom">
              <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 mb-7 xxl:mb-5 xl:mb-4">
@@ -68,7 +70,7 @@
 
 <script>
 export default {
-  props: ['houses'],
+  props: ['houses', 'state'],
   data() {
     return {
       openedMarkerID: null,

@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
 <template>
 <!--  Меню до входа-->
-  <header v-if="user === undefined" class="relative z-50 bg-[#6435A5] leading-[100%]">
+  <header v-if="user === null" class="relative z-50 bg-[#6435A5] leading-[100%]">
     <div class="_container h-[60px] xxl:h-12 xl:h-10">
       <div class="flex items-center justify-between h-full ">
         <Link href="/" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
@@ -43,7 +43,7 @@ import { Link } from '@inertiajs/inertia-vue3'
   </header>
 
 <!-- Меню агента -->
-  <header v-if="user !== undefined && user.role === 0" class="relative z-50 bg-[#6435A5] leading-[100%]">
+  <header v-if="user !== null && user.role === 0" class="relative z-50 bg-[#6435A5] leading-[100%]">
     <div class="_container h-[60px] xxl:h-12 xl:h-10">
       <div class="flex items-center justify-between h-full ">
         <div class="flex gap-20 xxl:gap-16 xl:gap-12 items-center">
@@ -52,10 +52,10 @@ import { Link } from '@inertiajs/inertia-vue3'
             <span class="uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon.com</span>
           </Link>
           <div class="text-white text-[16px] xxl:text-[13px] xl:text-[11px] flex gap-20 xxl:gap-16 xl:gap-12">
-            <Link href="/houses" class="">Новостройки</Link>
+            <Link href="/houses" :class="{ 'opacity-60': $page.url !== '/houses' }">Новостройки</Link>
             <a href="#" class="opacity-60">Виллы</a>
-            <a href="#" class="opacity-60">Подборки</a>
-            <a href="#" class="opacity-60">Избранное</a>
+            <Link href="/profile/compilation" :class="{ 'opacity-60': $page.url !== '/profile/compilation' }">Подборки</Link>
+            <Link href="/profile/favorites" :class="{ 'opacity-60': $page.url !== '/profile/favorites' }">Избранное</Link>
           </div>
         </div>
         <div class="flex items-center gap-7 xxl:gap-5 text-[16px] xxl:text-[13px] xl:text-[11px]">
@@ -87,11 +87,26 @@ import { Link } from '@inertiajs/inertia-vue3'
               </div>
             </div>
             <div class="flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
-              <img src="../../assets/header_user_photo.png" class="h-9 xxl:h-7 xl:h-6" alt="Фотография пользователя">
-              <button class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                <span class="text-white text-lg xxl:text-sm xl:text-xs leading-none">Ольга Рыбкина</span>
+              <img :src="'/storage/' + user.image" class="h-9 xxl:h-7 xl:h-6" alt="avatar">
+              <button @click="openProfileMenu = !openProfileMenu" class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
+                <span class="text-white text-lg xxl:text-sm xl:text-xs leading-none">{{ user.first_name + ' ' + user.last_name }}</span>
                 <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелка вниз">
               </button>
+              <div v-if="openProfileMenu" class="border border-solid border-[#E5DFEE] absolute top-[90%] flex flex-col bg-white rounded-[5px]">
+                <div class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
+                  <span class="leading-none whitespace-nowrap">Подписка PRO</span>
+                  <span class="leading-none whitespace-nowrap">6 дней</span>
+                </div>
+                <div v-if="user.role === 0" class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
+                  <span class="leading-none whitespace-nowrap">Я с клиентом</span>
+                  <label class="relative cursor-pointer inline-block w-[42px] xxl:w-[36px] xl:w-[30px] h-[24px] xxl:h-[20px] xl:h-[18px]">
+                    <input class="hidden" type="checkbox">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <Link href="/profile" class="hover__select border__bottom--not whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">Профиль</Link>
+                <div @click="logout" class="hover:bg-[#F6F3FA] border__bottom--not text-[#E84680] whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">Выйти</div>
+              </div>
             </div>
           </div>
         </div>
@@ -101,7 +116,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
   <!-- Меню Застройщик-->
 <!--  v-if="user.role === 1" -->
-  <header v-if="user !== undefined && user.role === 1 || user !== undefined && user.role === 2 || user !== undefined && user.role === 3" class="relative z-50 bg-[#6435A5] leading-[100%]">
+  <header v-if="user !== null && user.role === 1 || user !== null && user.role === 2 || user !== null && user.role === 3" class="relative z-50 bg-[#6435A5] leading-[100%]">
     <div class="_container h-[60px] xxl:h-12 xl:h-10">
       <div class="flex items-center justify-between h-full ">
         <div class="flex gap-20 xxl:gap-16 xl:gap-12 lg:gap-2 items-center">
@@ -115,8 +130,8 @@ import { Link } from '@inertiajs/inertia-vue3'
             <span class="sm:hidden uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon.com</span>
           </Link>
           <div :class="{'left__0': openBurgerSm }" class="transition-all duration-300 lg:-left-full lg:absolute lg:flex-col lg:h-[100vh] lg:top-10 border__top-white lg:px-[6.25vw] lg:py-2 lg:bg-[#6435A5] text-white text-[16px] xxl:text-[13px] xl:text-[11px] flex gap-20 xxl:gap-16 xl:gap-12 lg:gap-2">
-            <Link href="/profile/houses" class="">Объекты</Link>
-            <Link href="/profile/news" class="">Новости</Link>
+            <Link href="/profile/houses" :class="{ 'opacity-60': $page.url !== '/profile/houses' }">Объекты</Link>
+            <Link href="/profile/news" :class="{ 'opacity-60': $page.url !== '/profile/news' }">Новости</Link>
           </div>
         </div>
         <div class="flex items-center gap-7 xxl:gap-5 text-[16px] xxl:text-[13px] xl:text-[11px]">
@@ -145,7 +160,6 @@ import { Link } from '@inertiajs/inertia-vue3'
               </div>
             </div>
             <div class="relative flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
-              <img src="../../assets/header_user_photo.png" class="h-9 xxl:h-7 xl:h-6 rounded-full" alt="Фотография пользователя">
               <button @click="openProfileMenu = !openProfileMenu" class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
                 <span class="text-white text-lg xxl:text-sm xl:text-xs leading-none">{{ user.first_name }} {{ user.last_name }}</span>
                 <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелка вниз">
