@@ -579,7 +579,7 @@ class HouseController extends Controller
   public function addedImages(Request $request)
   {
 
-    if ($request->token === env('TOKEN')) {
+//    if ($request->token === env('TOKEN')) {
 
       HouseImagesModel::where('house_id', $request->house_id)
         ->where('category_id', $request->category_id)
@@ -601,8 +601,8 @@ class HouseController extends Controller
       }
 
       return response()->json($item, 200);
-    } else {
-      return response()->json('not auth', 401);
-    }
+//    } else {
+//      return response()->json('not auth', 401);
+//    }
   }
 }
