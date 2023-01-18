@@ -39,12 +39,17 @@ Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
   });
 
   Route::get('/compilation', ['App\Http\Controllers\User\CompilationController', 'index']);
-  Route::get('/compilation/{id}', ['App\Http\Controllers\User\CompilationController', 'show']);
+
   Route::get('/favorites', ['App\Http\Controllers\User\FavoriteController', 'index']);
 //
   Route::get('/chat', ['App\Http\Controllers\User\ChatController', 'index']);
 
 });
+Route::prefix('/compilation')->group(function () {
+  Route::get('/{id}', ['App\Http\Controllers\User\CompilationController', 'show']);
+  Route::get('/{id}/{house}', ['App\Http\Controllers\User\CompilationController', 'house']);
+});
+
 
 Route::middleware('auth', 'session')->group(function () {
   Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'index']);

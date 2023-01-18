@@ -13,6 +13,7 @@ class CompilationInfoModel extends Model
     protected $fillable = [
       'compilation_id',
       'house_id',
+      'description',
     ];
 
     protected $hidden = [
