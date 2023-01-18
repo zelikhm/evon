@@ -52,8 +52,9 @@ export default {
   },
   created() {
     this.frameName = this.frame.name
-    console.log(this.frameName)
-    if (this.frameName !== null) this.isEditReady = true
+    if (this.frameName) {
+      this.isEditReady = true
+    }
   }
 }
 </script>
