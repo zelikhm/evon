@@ -423,7 +423,7 @@ class HouseController extends Controller
         'updated_at' => Carbon::now()->addHour(3),
       ]);
 
-      return response()->json(FrameModel::where('house_id', $request->house_id)->get(), 200);
+      return response()->json(FrameModel::where('house_id', $request->house_id)->with(['flats'])->get(), 200);
     } else {
       return response()->json('not auth', 401);
     }
