@@ -40,11 +40,10 @@
               <span class="text-[#6435A5] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Загрузить фото</span>
             </label>
             <input
-              ref="files"
+              ref="photos"
               multiple class="w-full h-full rounded-full opacity-0 absolute top-0 left-0 pointer-events-none"
               id="image" type="file"
-
-              v-on:change="handleFilesUpload()"
+              @change="addPhotos"
             >
           </div>
 
@@ -52,7 +51,7 @@
       </div>
     </div>
   </div>
-  <button v-on:click="save()">
+  <button @click="save()">
     save
   </button>
   <div class="my-10 xxl:my-8 xl:my-6 w-full gap-10 xxl:gap-8 xl:gap-6">
@@ -80,16 +79,17 @@ export default {
   },
   methods: {
     save() {
-
       let formData = new FormData();
-      for( var i = 0; i < this.files.length; i++ ){
+      console.log(this.files)
+      for( let i = 0; i < this.files.length; i++ ) {
         let file = this.files[i];
+        console.log(file)
         formData.append('files[' + i + ']', file);
-        formData.append('house_id', 48);
-        formData.append('category_id', 1);
+        formData.append('house_id', this.house.id);
+        formData.append('category_id', 0);
       }
 
-      axios.post( '/api/house/addedImages',
+      axios.post('/api/house/addedImages',
         formData,
         {
           headers: {
@@ -108,6 +108,7 @@ export default {
       photo.active = 1
     },
     addPhotos(e) {
+      this.save()
       Array.from(e.target.files).forEach((i) => {
         let formatBytes,
           bytes = i.size,
@@ -126,25 +127,6 @@ export default {
       setTimeout(() => {
         this.$refs.progressBar.forEach((i) => {
           i.style.display = 'none'
-        })
-
-        this.files.forEach(item => {
-          let formData = new FormData()
-
-          formData.append('image', item)
-          formData.append('house_id', this.house.id)
-          formData.append('category', 3)
-          formData.append('token', this.globalToken)
-
-          axios({
-            method: 'post',
-            url: '/api/house/addedImages',
-            headers: {"Content-type": "multipart/form-data"},
-            data: formData,
-          }).then(response => console.log(response))
-
-          console.log(0)
-
         })
       }, 1000)
       this.files.push(...this.$refs.photos.files)

@@ -182,7 +182,9 @@ export default {
       openStatus: false,
       statuses: [
         { status: 'Свободно', value: 1},
-        { status: 'Занято', value: 2},
+        { status: 'Продажи закрыты', value: 2},
+        { status: 'Акция', value: 3},
+        { status: 'Перепродажа', value: 4},
       ],
       selectStairs: '1',
       openStairs: false,
@@ -246,7 +248,10 @@ export default {
         url: '/api/house/createFlat',
         headers: { "Content-type": "multipart/form-data" },
         data: formData,
-      }).then(response => this.$emit('close-add-apartments', response.data.frames))
+      }).then(response => {
+        console.log(response.data)
+        this.$emit('close-add-apartments', response.data.frames)
+      })
         .catch(e => console.error(e))
 
     },

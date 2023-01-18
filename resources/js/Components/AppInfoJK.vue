@@ -494,12 +494,11 @@ export default {
         {deadline: 'В разработке', value: 3},
       ],
 
-      selectType: 'Эконом',
+      selectType: 'Новостройка',
       openSelectType: false,
       types: [
-        {type: 'Эконом', value: 1},
-        {type: 'Средний', value: 2},
-        {type: 'Элит', value: 3},
+        {type: 'Новостройка', value: 1},
+        {type: 'Вилла', value: 2},
       ],
 
       selectInstallment: 'Да',

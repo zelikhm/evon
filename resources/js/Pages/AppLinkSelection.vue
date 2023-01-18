@@ -138,22 +138,22 @@ import { Link } from '@inertiajs/inertia-vue3'
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 mb-5 xxl:mb-4 xl:mb-4">
               <img src="../../assets/chat_avatar.png" class="w-14 xxl:w-12 xl:w-10" alt="">
               <div class="flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
-                <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none font-medium">Елена</span>
-                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Отдел продаж</span>
+                <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none font-medium">{{ compilation.user.first_name + ' ' + compilation.user.last_name }}</span>
+                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ compilation.user.status }}</span>
               </div>
             </div>
             <div class="flex items-center mb-5 xxl:mb-4 xl:mb-4 text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">
-              <span class="text-[#8A8996] leading-none">Язык:&nbsp;</span>
-              <span class="leading-none">Русский, Турецкий, Английский</span>
+              <span class="text-[#8A8996] leading-none">Языки:&nbsp;</span>
+              <span class="leading-none">{{ compilation.user.link }}</span>
             </div>
             <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
               <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]">
                 <img src="../../assets/svg/chat_tel_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
-                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px]">+7 930 245 15 20</span>
+                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px]">{{ compilation.user.phone }}</span>
               </div>
               <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]">
                 <img src="../../assets/svg/chat_mail_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
-                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px]">elena@mail.ru</span>
+                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px]">{{ compilation.user.email }}</span>
               </div>
             </div>
           </div>
@@ -171,7 +171,9 @@ import AppModalNotification from "@/Layouts/modal/AppModalNotification.vue"
 
 export default {
   props: {
-
+    houses: [],
+    compilation: [],
+    user: {}
   },
   data() {
     return {
@@ -180,6 +182,11 @@ export default {
   },
   methods: {
 
+  },
+  created() {
+    console.log(this.houses)
+    console.log(this.compilation)
+    console.log(this.user)
   },
   components: {
     AppFooter,

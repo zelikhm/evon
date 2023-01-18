@@ -21,7 +21,7 @@
           <img class="p-2.5 xxl:p-2 xl:p-1.5 w-full h-[8.5vw] lg:h-[17vw] sm:h-auto rounded-[3px]" src="../../assets/immovables_img_one.png" alt="">
           <div class="flex items-center">
             <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5 w-full py-2.5 xxl:py-2 xl:py-1.5 pl-2.5 xxl:pl-2 xl:pl-1.5 pr-20 xxl:pr-16 xl:pr-12">
-              <span class="text-lg xxl:text-[15px] xl:text-[13px] text-[#1E1D2D] font-medium leading-none">{{ item.title }}</span>
+              <span class="text-lg xxl:text-[15px] xl:text-[13px] text-[#1E1D2D] font-medium leading-none">{{ item.id }}</span>
               <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">1 ЖК</span>
               <div class="flex w-full border border-solid border-[#6435A5] rounded-[5px] p-3 xxl:p-2.5 xl:p-2">
                 <input class="p-0 text-[16px] xxl:text-[14px] xl:text-[12px] w-full leading-none focus:ring-0" v-model="item.description" type="text">

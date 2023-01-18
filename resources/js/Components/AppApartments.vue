@@ -133,9 +133,9 @@ export default {
     changeSelectStatus(status, item) {
       item.status = status.status
       item.statusActive = !item.statusActive
-      console.log(item)
+      console.log(item.status)
       axios.post('/api/house/editFlat', {
-        flat_id: item.id,
+        house_id: this.house.id,
         number: item.number,
         square: item.square,
         count: item.count,
@@ -144,9 +144,9 @@ export default {
         price: item.price,
         image_up: item.image_up,
         image_down: item.image_down,
-        status: status.status,
+        status: item.status,
         token: this.globalToken
-      })
+      }).then(response => console.log(response.data))
     },
     targetFrame(frame) {
       this.house.frames.forEach(item => item.active = 0)

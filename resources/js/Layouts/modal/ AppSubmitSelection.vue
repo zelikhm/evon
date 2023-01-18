@@ -9,8 +9,8 @@
       </div>
       <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Отправляйте ссылку на вашу подборку клиентам</span>
       <div class="relative mt-10 xxl:mt-8 xl:mt-6">
-        <input value="http://102895812h9051h2081102j9" class="w-full text-[#1E1D2D] text-[16px] focus:ring-[#6435A5] focus:border-[#6435A5] xxl:text-[14px] xl:text-[12px] pl-5 xxl:pl-4 xl:pl-3 py-3 xxl:py-2.5 xl:py-2 leading-none rounded-[5px] border border-solid border-[#E5DFEE] pr-12 xxl:pr-10 xl:pr-8" type="text">
-        <img class="absolute cursor-pointer top-1/2 -translate-y-1/2 w-6 xxl:w-5 xl:w-4 right-5 xxl:right-4 xl:right-3" src="../../../assets/svg/copy_icon_purple.svg" alt="">
+        <input :value="valueLink" ref="text" disabled class="w-full text-[#1E1D2D] text-[16px] focus:ring-[#6435A5] focus:border-[#6435A5] xxl:text-[14px] xl:text-[12px] pl-5 xxl:pl-4 xl:pl-3 py-3 xxl:py-2.5 xl:py-2 leading-none rounded-[5px] border border-solid border-[#E5DFEE] pr-12 xxl:pr-10 xl:pr-8" type="text">
+        <img @click="copy" class="absolute cursor-pointer top-1/2 -translate-y-1/2 w-6 xxl:w-5 xl:w-4 right-5 xxl:right-4 xl:right-3" src="../../../assets/svg/copy_icon_purple.svg" alt="">
       </div>
     </div>
     <div @click="this.$emit('closeSubmitSelection')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
@@ -25,11 +25,13 @@ export default {
   emits: ['closeSubmitSelection'],
   data() {
     return {
-
+      valueLink: 'http://102895812h9051h2081102j9'
     }
   },
   methods: {
-
+    copy() {
+      navigator.clipboard.writeText(this.valueLink)
+    }
   }
 }
 </script>
