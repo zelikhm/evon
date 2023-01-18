@@ -246,10 +246,9 @@ export default {
         url: '/api/house/createFlat',
         headers: { "Content-type": "multipart/form-data" },
         data: formData,
-      }).then(response => console.log(response.data))
+      }).then(response => this.$emit('close-add-apartments', response.data.frames))
         .catch(e => console.error(e))
 
-      this.$emit('close-add-apartments')
     },
     changeSelectLayout(layout) {
       this.selectLayout = layout.layout

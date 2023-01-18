@@ -12,17 +12,17 @@ import { Link } from '@inertiajs/inertia-vue3'
           <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ frame.flats.length }} квартир</span>
         </div>
         <div class="relative flex flex-col items-center justify-between gap-3.5 xxl:gap-3 xl:gap-2.5">
-          <button @click="this.$emit('open-add-frame', isEdit)">
+          <button @click="this.$emit('open-add-frame', frame)">
             <img class="w-5 xxl:w-4 xl:w-3" src="../../assets/svg/pen_icon_grey.svg" alt="">
           </button>
-          <button @click="deleteConfirm = true" class="relative">
+          <button @click="deleteConfirmOn(frame)" class="relative">
             <img class="w-5 xxl:w-4 xl:w-3" src="../../assets/svg/bucket_icon_red.svg" alt="">
           </button>
-          <div v-if="deleteConfirm" class="cursor-auto z-20 text-[16px] xxl:text-[14px] xl:text-[12px] absolute top-[120%] bg-white left-[] flex flex-col border border-solid border-[#CEC3DD] rounded-[5px]">
+          <div v-if="frame.deleteConfirm" class="cursor-auto z-20 text-[16px] xxl:text-[14px] xl:text-[12px] absolute top-[120%] bg-white left-[] flex flex-col border border-solid border-[#CEC3DD] rounded-[5px]">
             <span class="whitespace-nowrap text-center border__bottom p-2.5 xxl:p-2 xl:p-1.5 leading-none">Вы уверены что хотите удалить?</span>
             <div class="cursor-pointer flex">
               <div class="hover__select w-full text-center border__right p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[red]" @click="deleteFrame(frame)">Да</div>
-              <div @click="deleteConfirm = false" class="hover__select w-full text-center p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[green]">Нет</div>
+              <div @click="frame.deleteConfirm = false" class="hover__select w-full text-center p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[green]">Нет</div>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           v-for="item in titleTable"
         >
           <span class="leading-none">{{ item.title }}</span>
-          <div @click="changeFilter(item)" class="flex flex-col gap-[1px] xl:gap-[0.5px]">
+          <div v-if="item.filter" @click="changeFilter(item)" class="flex flex-col gap-[1px] xl:gap-[0.5px]">
             <svg class="cursor-pointer rotate-180 w-[9px] h-[7px] w-[9px] xxl:w-[8px] xl:w-[7px]" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path :class="{ 'fill-[#6435A5]': item.active === 1 }" d="M4.5 7L8.39711 0.25H0.602886L4.5 7Z" fill="#E5DFEE"/>
             </svg>
@@ -74,7 +74,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           <button class="border__right h-[56px] xxl:h-[48px] xl:h-[40px] w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
             <img src="../../assets/svg/pen_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
           </button>
-          <button class="w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
+          <button @click="deleteFlat(item)" class="w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
             <img src="../../assets/svg/bucket_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
           </button>
         </div>
@@ -108,12 +108,12 @@ export default {
     return {
       deleteConfirm: false,
       titleTable: [
-        { name: 'id', title: '№', active: 0 },
-        { name: 'square', title: 'Площадь', active: 0 },
-        { name: 'price', title: 'Цена', active: 0 },
-        { name: 'plan', title: 'Планировка', active: 0 },
-        { name: 'floor', title: 'Этаж', active: 0 },
-        { name: 'status', title: 'Статус', active: 0 }
+        { name: 'id', title: '№', active: 0, filter: true },
+        { name: 'square', title: 'Площадь', active: 0, filter: true },
+        { name: 'price', title: 'Цена', active: 0, filter: true },
+        { name: 'plan', title: 'Планировка', active: 0, filter: false },
+        { name: 'floor', title: 'Этаж', active: 0, filter: true },
+        { name: 'status', title: 'Статус', active: 0, filter: false }
       ],
       selectStatus: 'Свободно',
       id: null,
@@ -134,6 +134,19 @@ export default {
       item.status = status.status
       item.statusActive = !item.statusActive
       console.log(item)
+      axios.post('/api/house/editFlat', {
+        flat_id: item.id,
+        number: item.number,
+        square: item.square,
+        count: item.count,
+        floor: item.floor,
+        stairs: item.number_from_stairs,
+        price: item.price,
+        image_up: item.image_up,
+        image_down: item.image_down,
+        status: status.status,
+        token: this.globalToken
+      })
     },
     targetFrame(frame) {
       this.house.frames.forEach(item => item.active = 0)
@@ -164,6 +177,38 @@ export default {
         this.flats = this.house.frames.find(item => item.id === this.frameId).flats
         console.log(this.flats)
       }
+    },
+    deleteConfirmOn(frame) {
+      this.house.frames.forEach(item => {
+        item.deleteConfirm = false
+      })
+      frame.deleteConfirm = true
+    },
+    deleteFrame(frame) {
+      axios.post('/api/house/deleteFrame', {
+        frame_id: frame.id,
+        token: this.globalToken
+      })
+
+      this.house.frames.forEach((item, idx) => {
+        if (frame.id === item.id) {
+          this.house.frames.splice(idx, 1)
+        }
+      })
+    },
+    deleteFlat(item) {
+      axios.post('/api/house/deletedFlat', {
+        flat_id: item.id,
+        token: this.globalToken
+      }).then(response => console.log(response))
+
+      this.house.frames.forEach((i, index) => {
+        i.flats.forEach((flat, idx) => {
+          if (flat.id === item.id) {
+            this.house.frames[index].flats.splice(idx, 1)
+          }
+        })
+      })
     }
   },
   created() {
@@ -188,6 +233,7 @@ export default {
         if (item.flats) {
           item.statusActive = 0
         }
+        item.deleteConfirm = false
       })
     }
 

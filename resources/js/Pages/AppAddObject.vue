@@ -5,7 +5,7 @@
                             :house="house"
                             :activeFrame="activeFrame"
   />
-  <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="closeAddFrame" :house="house" />
+  <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="closeAddFrame" :house="house" :isEdit="isEdit" :frame="frame" />
   <app-modal-notification v-if="openNotification" @close-notification="openNotification = false"
   />
   <app-header :user="user" />
@@ -114,6 +114,7 @@ export default {
       isEdit: true,
       readyHouse: null,
       activeFrame: null,
+      frame: null
     }
   },
   methods: {
@@ -139,8 +140,9 @@ export default {
     changeFrame(data) {
       this.activeFrame = data
     },
-    openAddFrame() {
+    openAddFrame(frame) {
       this.modalAddFrame = !this.modalAddFrame
+      this.frame = frame
     }
   },
   created() {
