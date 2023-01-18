@@ -31,9 +31,10 @@ export default {
   methods: {
     addFrame() {
       if (this.isEdit) {
-        axios.post('/api/house/editFrame', { frame_id: this.frame.id, name: this.frameName, token: this.globalToken })
+        axios.post('/api/house/editFrame', { house_id: this.house.id, frame_id: this.frame.id, name: this.frameName, token: this.globalToken })
              .then(response => {
                this.house.frames = response.data
+               console.log(this.house.frames)
                this.$emit('close-add-frame', this.house)
              })
             .catch(e => console.error(e))
