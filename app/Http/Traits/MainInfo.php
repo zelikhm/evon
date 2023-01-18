@@ -65,7 +65,7 @@ trait MainInfo
    */
 
   protected function getAdminNews() {
-    return AdminNewsModel::orderByDesc('created_at')->limit(30);
+    return \App\Models\News\AdminNewsModel::orderByDesc('created_at')->limit(30);
   }
 
   /**
