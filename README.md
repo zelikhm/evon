@@ -109,6 +109,7 @@ path createFrame \ [post] / поля:
 path editFrame \ [post] / поля:
 
 - frame_id - айди корпуса
+- house_id - айди хауса
 - name - Название
 - token
 
@@ -137,6 +138,7 @@ path createFlat \ [post] / поля:
 path editFlat \ [post] / поля:
 
 - flat_id - айди квартиры
+- house_id - айди жк
 - number - Номер
 - square - Площадь
 - count - Планировка

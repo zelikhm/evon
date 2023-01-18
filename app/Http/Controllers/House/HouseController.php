@@ -358,7 +358,7 @@ class HouseController extends Controller
       }
 
       $flat = FlatModel::where('id', $request->flat_id)
-        ->create([
+        ->update([
         'number' => $request->number,
         'square' => $request->square,
         'count' => $request->count,
