@@ -582,7 +582,7 @@ class HouseController extends Controller
 //    if ($request->token === env('TOKEN')) {
 
       HouseImagesModel::where('house_id', $request->house_id)
-        ->where('category_id', $request->category_id)
+        ->where('category', $request->category_id)
         ->delete();
 
       foreach ($request->file() as $value) {
