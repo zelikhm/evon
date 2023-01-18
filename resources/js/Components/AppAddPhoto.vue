@@ -40,23 +40,30 @@
               <span class="text-[#6435A5] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Загрузить фото</span>
             </label>
             <input
-              ref="photos"
+              ref="files"
               multiple class="w-full h-full rounded-full opacity-0 absolute top-0 left-0 pointer-events-none"
               id="image" type="file"
-              @change="addPhotos"
+
+              v-on:change="handleFilesUpload()"
             >
           </div>
+
         </div>
       </div>
     </div>
   </div>
+  <button v-on:click="save()">
+    save
+  </button>
   <div class="my-10 xxl:my-8 xl:my-6 w-full gap-10 xxl:gap-8 xl:gap-6">
     <button @click="addObject(1)" class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Закончить</button>
   </div>
 </template>
 
 <script>
+
 export default {
+
   props: ['house'],
   data() {
     return {
@@ -68,10 +75,34 @@ export default {
       ],
       myPhotos: [],
       avatar: false,
-      files: []
+      files: [],
     }
   },
   methods: {
+    save() {
+
+      let formData = new FormData();
+      for( var i = 0; i < this.files.length; i++ ){
+        let file = this.files[i];
+        formData.append('files[' + i + ']', file);
+        formData.append('house_id', 48);
+        formData.append('category_id', 1);
+      }
+
+      axios.post( '/api/house/addedImages',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }
+      ).then(res => {
+        console.log(res);
+      })
+    },
+    handleFilesUpload(){
+      this.files = this.$refs.files.files;
+    },
     targetBlockPhoto(photo) {
       this.photos.forEach(item => item.active = 0)
       photo.active = 1

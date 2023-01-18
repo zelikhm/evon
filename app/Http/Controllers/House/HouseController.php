@@ -262,10 +262,6 @@ class HouseController extends Controller
     }
   }
 
-  public function addedFiles(Request $request) {
-
-  }
-
   /**
    * create flat for frame
    * @param Request $request
@@ -544,6 +540,37 @@ class HouseController extends Controller
   }
 
   /**
+   * added files for houses
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function addedFiles(Request $request) {
+    if ($request->token === env('TOKEN')) {
+
+      HouseFilesModel::where('house_id', $request->house_id)->delete();
+
+      foreach ($request->file() as $value) {
+        foreach ($value as $item) {
+          $imageName = time() . '.' . $item->getClientOriginalName();
+          $item->move(public_path('/storage/files'), $imageName);
+
+          HouseFilesModel::create([
+            'house_id' => $request->house_id,
+            'name' => $imageName,
+            'created_at' => Carbon::now()->addHour(3),
+            'updated_at' => Carbon::now()->addHour(3),
+          ]);
+        }
+      }
+
+      return response()->json(true, 200);
+    } else {
+      return response()->json('not auth', 401);
+    }
+  }
+
+  /**
    * added images for house
    * @param Request $request
    * @return \Illuminate\Http\JsonResponse
@@ -551,20 +578,29 @@ class HouseController extends Controller
 
   public function addedImages(Request $request)
   {
+
     if ($request->token === env('TOKEN')) {
 
-      $imageName = time() . '.' . $request->image->getClientOriginalName();
-      $request->image->move(public_path('/storage/'), $imageName);
+      HouseImagesModel::where('house_id', $request->house_id)
+        ->where('category_id', $request->category_id)
+        ->delete();
 
-      HouseImagesModel::create([
-        'house_id' => $request->house_id,
-        'name' => $imageName,
-        'category' => $request->category_id,
-        'created_at' => Carbon::now()->addHour(3),
-        'updated_at' => Carbon::now()->addHour(3),
-      ]);
+      foreach ($request->file() as $value) {
+        foreach ($value as $item) {
+          $imageName = time() . '.' . $item->getClientOriginalName();
+          $item->move(public_path('/storage/images'), $imageName);
 
-      return response()->json(true, 200);
+          HouseImagesModel::create([
+            'house_id' => $request->house_id,
+            'name' => $imageName,
+            'category' => $request->category_id,
+            'created_at' => Carbon::now()->addHour(3),
+            'updated_at' => Carbon::now()->addHour(3),
+          ]);
+        }
+      }
+
+      return response()->json($item, 200);
     } else {
       return response()->json('not auth', 401);
     }

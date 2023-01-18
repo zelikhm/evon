@@ -23,6 +23,7 @@
     "dependencies": {
         "-": "^0.0.1",
         "@fawmi/vue-google-maps": "^0.9.79",
+        "@inertiajs/vue3": "^1.0.0",
         "@vueform/multiselect": "^2.5.7",
         "@vueup/vue-quill": "^1.0.1",
         "swiper": "^8.4.5",
