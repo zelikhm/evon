@@ -368,17 +368,17 @@ class HouseController extends Controller
         'price' => $request->price,
       ]);
 
-      FlatImagesModel::create([
-        'flat_id' => $flat->id,
-        'name' => $imageUp,
-        'category' => 0,
-      ]);
-
-      FlatImagesModel::create([
-        'flat_id' => $flat->id,
-        'name' => $imageDown,
-        'category' => 1,
-      ]);
+//      FlatImagesModel::create([
+//        'flat_id' => $flat->id,
+//        'name' => $imageUp,
+//        'category' => 0,
+//      ]);
+//
+//      FlatImagesModel::create([
+//        'flat_id' => $flat->id,
+//        'name' => $imageDown,
+//        'category' => 1,
+//      ]);
 
       return response()->json($this->getHouse($request->house_id), 200);
     } else {
