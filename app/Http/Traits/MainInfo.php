@@ -56,7 +56,7 @@ trait MainInfo
    */
 
   protected function getNewsForPage() {
-    return HouseNewsModel::orderBy('desc', 'created_at')->limit(20);
+    return HouseNewsModel::orderByDesc('created_at')->limit(30);
   }
 
   /**
@@ -65,7 +65,7 @@ trait MainInfo
    */
 
   protected function getAdminNews() {
-    return AdminNewsModel::orderBy('desc', 'created_at')->limit(20);
+    return AdminNewsModel::orderByDesc('created_at')->limit(30);
   }
 
   /**
