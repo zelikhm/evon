@@ -30,7 +30,7 @@
             <div class="progress-bar bg-white h-full rounded-[100px]"></div>
           </div>
         </div>
-        <img class="absolute w-full h-full rounded-[5px]" :src="photo.url" alt="">
+        <img class="absolute w-full h-full rounded-[5px]" :src="photo.url ? photo.url : '/storage/images/' + photo.name" alt="">
       </div>
       <div class="relative border border-solid border-[#E5DFEE] w-full h-[8.5vw] lg:h-[16.7vw] md:h-[20.8vw] sm:h-[42.2vw] rounded-[5px]">
         <div class="w-full h-full rounded-[5px]">
@@ -51,11 +51,8 @@
       </div>
     </div>
   </div>
-  <button @click="save()">
-    save
-  </button>
-  <div class="my-10 xxl:my-8 xl:my-6 w-full gap-10 xxl:gap-8 xl:gap-6">
-    <button @click="addObject(1)" class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Закончить</button>
+  <div class="my-10 xxl:my-8 xl:my-6 w-full gap-10 xxl:gap-8 xl:gap-6" @click="save">
+    <button class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Сохранить</button>
   </div>
 </template>
 
@@ -80,14 +77,33 @@ export default {
   methods: {
     save() {
       let formData = new FormData();
+
+      this.house.images.forEach(item => {
+        console.log(item)
+      })
+
+      this.myPhotos.forEach(item => {
+        this.files.push(item.file)
+      })
+
       console.log(this.files)
-      for( let i = 0; i < this.files.length; i++ ) {
+
+      this.files.forEach((item, i) => {
         let file = this.files[i];
+        // console.log(file)
+        // if (item.url !== undefined) file = null
+        // console.log(file)
         console.log(file)
-        formData.append('files[' + i + ']', file);
+        if (file.url !== undefined) {
+          formData.append('files[' + i + ']', file.file);
+          console.log(file.file)
+        } else {
+          console.log(file)
+          formData.append('files[' + i + ']', file);
+        }
         formData.append('house_id', this.house.id);
         formData.append('category_id', 0);
-      }
+      })
 
       axios.post('/api/house/addedImages',
         formData,
@@ -100,15 +116,11 @@ export default {
         console.log(res);
       })
     },
-    handleFilesUpload(){
-      this.files = this.$refs.files.files;
-    },
     targetBlockPhoto(photo) {
       this.photos.forEach(item => item.active = 0)
       photo.active = 1
     },
     addPhotos(e) {
-      this.save()
       Array.from(e.target.files).forEach((i) => {
         let formatBytes,
           bytes = i.size,
@@ -122,14 +134,13 @@ export default {
             it = Math.floor(Math.log(bytes) / Math.log(k))
           formatBytes = parseFloat((bytes / Math.pow(k, it)).toFixed(dm)) + ' ' + sizes[it]
         }
-        this.myPhotos.push({ url: URL.createObjectURL(i), name: i.name, size: formatBytes })
+        this.myPhotos.push({ url: URL.createObjectURL(i), name: i.name, size: formatBytes, file: i })
       })
       setTimeout(() => {
         this.$refs.progressBar.forEach((i) => {
           i.style.display = 'none'
         })
       }, 1000)
-      this.files.push(...this.$refs.photos.files)
       setTimeout(() => {
         this.$refs.uploudBackground.forEach((i) => {
           i.style.display = 'none'
@@ -149,6 +160,14 @@ export default {
       if (idx === 0) item.active = 1
       else item.active = 0
     })
+
+    this.myPhotos = this.house.images
+
+    setTimeout(() => {
+      this.$refs.uploudBackground.forEach((i) => {
+        i.style.display = 'none'
+      })
+    }, 10)
   },
 }
 

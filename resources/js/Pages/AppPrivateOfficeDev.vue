@@ -67,48 +67,47 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
 
         </div>
-        <p>
-          {{ page + ' ' + pages}}
-        </p>
-        <div class="w-full flex justify-center mt-24 xxl:mt-20 xl:mt-16 gap-3 xxl:gap-2.5 xl:gap-2 items-center text-[#8A8996] text-lg xxl:text-[15px] xl:text-[13px]">
-          <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer">
-            <img src="../../assets/svg/arrow_right_grey.svg" class="rotate-180 w-5 xxl:w-4 xl:w-3" alt="">
-          </div>
+<!--        <p>-->
+<!--          {{ page + ' ' + pages}}-->
+<!--        </p>-->
+<!--        <div class="w-full flex justify-center mt-24 xxl:mt-20 xl:mt-16 gap-3 xxl:gap-2.5 xl:gap-2 items-center text-[#8A8996] text-lg xxl:text-[15px] xl:text-[13px]">-->
+<!--          <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer">-->
+<!--            <img src="../../assets/svg/arrow_right_grey.svg" class="rotate-180 w-5 xxl:w-4 xl:w-3" alt="">-->
+<!--          </div>-->
 
-          <div class="flex gap-2" v-if="page + 2 <= pages">
-            <Link
-              v-for="index in pages"
-              :key="index"
-              @click="tab.active = !tab.active"
-              :class="{'select__pagination': 1}"
-              class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer"
-              :href="'?page=' + index"
-            >
-              {{ index }}
-            </Link>
-          </div>
-          <div v-else-if="page + 2 > pages">
-             <div v-if="page - 2 >= 1 && page - 2 <= 3">
-               <Link
-                 v-for="number in pages"
-                 @click="tab.active = !tab.active"
-                 :class="{'select__pagination': 1}"
-                 class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer"
-                 :href="'?page=' + number"
-               >
-                 {{ number }}
-               </Link>
-             </div>
-            <div v-else-if="page - 2 > 3">
+<!--          <div class="flex gap-2" v-if="page + 2 <= pages">-->
+<!--            <Link-->
+<!--              v-for="index in pages"-->
+<!--              :key="index"-->
+<!--              @click="tab.active = !tab.active"-->
+<!--              :class="{'select__pagination': 1}"-->
+<!--              class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer"-->
+<!--              :href="'?page=' + index"-->
+<!--            >-->
+<!--              {{ index }}-->
+<!--            </Link>-->
+<!--          </div>-->
+<!--          <div v-else-if="page + 2 > pages">-->
+<!--             <div v-if="page - 2 >= 1 && page - 2 <= 3">-->
+<!--               <Link-->
+<!--                 v-for="number in pages"-->
+<!--                 @click="tab.active = !tab.active"-->
+<!--                 :class="{'select__pagination': 1}"-->
+<!--                 class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer"-->
+<!--                 :href="'?page=' + number"-->
+<!--               >-->
+<!--                 {{ number }}-->
+<!--               </Link>-->
+<!--             </div>-->
+<!--            <div v-else-if="page - 2 > 3">-->
 
-            </div>
-          </div>
+<!--            </div>-->
+<!--          </div>-->
 
 
-          <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer">
-            <img src="../../assets/svg/arrow_right_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          </div>
-        </div>
+<!--          <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer">-->
+<!--            <img src="../../assets/svg/arrow_right_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">-->
+<!--          </div>-->
       </div>
     </div>
   </main>

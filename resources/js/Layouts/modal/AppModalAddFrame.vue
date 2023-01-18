@@ -42,7 +42,6 @@ export default {
       } else {
         axios.post('/api/house/createFrame', { house_id: this.house.id, name: this.frameName, token: this.globalToken })
             .then(response => {
-              console.log(response.data)
               this.house.frames = response.data
               this.$emit('close-add-frame', this.house)
             })
