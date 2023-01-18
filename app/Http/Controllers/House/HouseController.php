@@ -370,13 +370,13 @@ class HouseController extends Controller
 
       FlatImagesModel::create([
         'flat_id' => $request->flat_id,
-        'name' => $imageUp,
+        'name' => $imageUp === null ? 'string' : $imageUp,
         'category' => 0,
       ]);
 
       FlatImagesModel::create([
         'flat_id' => $request->flat_id,
-        'name' => $imageDown,
+        'name' => $imageDown === null ? 'string' : $imageDown,
         'category' => 1,
       ]);
 
