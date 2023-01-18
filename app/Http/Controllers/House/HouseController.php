@@ -48,6 +48,8 @@ class HouseController extends Controller
       'builders' => User::where('role', 1)->get(),
       'notification' => $this->getNotification(),
       'compilation' => $this->getCompilation(Auth::id()),
+      'news' => $this->getNewsForPage(),
+      'adminNews' => $this->getAdminNews(),
       'user' => Auth::user(),
     ]);
   }
@@ -260,6 +262,10 @@ class HouseController extends Controller
     }
   }
 
+  public function addedFiles(Request $request) {
+
+  }
+
   /**
    * create flat for frame
    * @param Request $request
@@ -378,9 +384,7 @@ class HouseController extends Controller
         'category' => 1,
       ]);
 
-      $frame = FrameModel::where('id', $request->frame_id)->first();
-
-      return response()->json($this->getHouse($frame->house_id), 200);
+      return response()->json($this->getHouse($request->house_id), 200);
     } else {
       return response()->json('not auth', 401);
     }

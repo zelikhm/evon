@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\News\AdminNewsModel;
 use SleepingOwl\Admin\Providers\AdminSectionsServiceProvider as ServiceProvider;
 use AdminNavigation;
 
@@ -23,6 +24,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
     \App\Models\Builder\HouseSupportModel::class => 'App\Http\Admin\House\HouseSupport',
     \App\Models\Builder\Flat\FrameModel::class => 'App\Http\Admin\House\Flat\Frame',
     \App\Models\Builder\Flat\FlatModel::class => 'App\Http\Admin\House\Flat\Flat',
+    AdminNewsModel::class => 'App\Http\Admin\News\AdminNewsModel',
   ];
 
   /**

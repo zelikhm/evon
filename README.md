@@ -242,6 +242,7 @@ path addHouse \ [post] / поля:
 
 - compilation_id - Айди подборки
 - house_id - Айди ЖК
+- description - коммент
 - token
 
 Удаление подборки \

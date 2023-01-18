@@ -2,6 +2,7 @@
 
 namespace App\Http\Traits;
 
+use App\Http\Admin\News\AdminNewsModel;
 use App\Models\Builder\Flat\FlatModel;
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\HouseNewsModel;
@@ -47,6 +48,24 @@ trait MainInfo
     $requestCity->splice(5);
 
     return $requestCity;
+  }
+
+  /**
+   * get last 20 news
+   * @return mixed
+   */
+
+  protected function getNewsForPage() {
+    return HouseNewsModel::orderBy('desc', 'created_at')->limit(20);
+  }
+
+  /**
+   * get 20 last admin news
+   * @return mixed
+   */
+
+  protected function getAdminNews() {
+    return AdminNewsModel::orderBy('desc', 'created_at')->limit(20);
   }
 
   /**
@@ -112,14 +131,24 @@ trait MainInfo
   }
 
   /**
-   * get house for user
-   * @param $id
+   * get house on house id
+   * @param $house_id
    * @return mixed
    */
 
-  protected function getHouseForUser($id)
+  protected function getHouseOnId($house_id) {
+    return HouseModel::where('id', $house_id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->first();
+  }
+
+  /**
+   * get house for user
+   * @param $user_id
+   * @return mixed
+   */
+
+  protected function getHouseForUser($user_id)
   {
-    $houses = HouseModel::where('user_id', $id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->get();
+    $houses = HouseModel::where('user_id', $user_id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->get();
 
     foreach ($houses as $house) {
       $house->view = [
@@ -142,7 +171,7 @@ trait MainInfo
 
   protected function getHouseForUserPagination($id)
   {
-    $houses = HouseModel::where('user_id', $id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->paginate(2);
+    $houses = HouseModel::where('user_id', $id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->paginate(6);
 
     foreach ($houses as $house) {
       $house->view = [
@@ -160,7 +189,7 @@ trait MainInfo
   /**
    * get all news for user
    * @param $id
-   * @return \Symfony\Component\Routing\Loader\Configurator\CollectionConfigurator
+   * @return \Illuminate\Support\Collection
    */
 
   protected function getNews($id)

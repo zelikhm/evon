@@ -4,11 +4,14 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\MainInfo;
+use App\Models\Builder\HouseModel;
+use App\Models\User;
 use App\Models\User\CompilationInfoModel;
 use App\Models\User\CompilationModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\In;
 use Inertia\Inertia;
 
 class CompilationController extends Controller
@@ -44,8 +47,63 @@ class CompilationController extends Controller
     return $this->getCompilation($request->id);
   }
 
+  /**
+   * show houses in the compilation
+   * @param $id
+   * @return \Inertia\Response
+   */
+
   public function show($id)
   {
+    $compilation = CompilationModel::where('id', $id - 10000)->with(['values', 'user', 'company'])->firstOrFail();
+    $houses = collect();
+    foreach ($compilation->values as $value) {
+      $houses->push($this->getHouseOnId($value->house_id));
+    }
+
+    if(Auth::check()) {
+      $user = User::where('id', Auth::id())->with(['company'])->first();
+    } else {
+      $user = [];
+    }
+
+    return Inertia::render('AppLinkSelection', [
+      'houses' => $houses,
+      'compilation' => $compilation,
+      'user' => $user,
+    ]);
+
+  }
+
+  /**
+   * show house in the compilation
+   * @param $id
+   * @param $house
+   * @return \Inertia\Response
+   */
+
+  public function house($id, $house) {
+
+    HouseModel::where('slug', $house)->firstOrFail();
+
+    $house = $this->getHouseSlug($house);
+
+    $compilation = CompilationInfoModel::where('compilation_id', $id - 10000)
+      ->where('house_id', $house->id)
+      ->with(['values', 'user', 'company'])
+      ->firstOrFail();
+
+    if(Auth::check()) {
+      $user = User::where('id', Auth::id())->with(['company'])->first();
+    } else {
+      $user = [];
+    }
+
+    return Inertia::render('AppLinkDescriptionObject', [
+      'house' => $house,
+      'compilation' => $compilation,
+      'user' => $user,
+    ]);
 
   }
 
@@ -68,6 +126,7 @@ class CompilationController extends Controller
         'title' => $request->title,
         'description' => $request->description,
         'isVisible' => $request->isVisible,
+        'comment' => $request->comment,
         'created_at' => Carbon::now()->addHour(3),
         'updated_at' => Carbon::now()->addHour(3),
       ]);
@@ -90,6 +149,7 @@ class CompilationController extends Controller
       CompilationInfoModel::create([
         'compilation_id' => $request->compilation_id,
         'house_id' => $request->house_id,
+        'description' => $request->description,
         'created_at' => Carbon::now()->addHour(3),
         'updated_at' => Carbon::now()->addHour(3),
       ]);
