@@ -329,7 +329,7 @@ import {Link} from '@inertiajs/inertia-vue3'
         <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">
           Приложите файлы для наполнения</h3>
         <div class="relative my-3 xxl:my-2.5 xl:my-2">
-          <input multiple @change="changeInputFile" type="file" id="input_file" class="opacity-0 absolute invisible">
+          <input multiple @change="changeInputFile" type="file" ref="files" id="input_file" class="opacity-0 absolute invisible">
           <label
             class="register__button--white w-fit text-[#6435A5] flex items-center cursor-pointer gap-2 xl:gap-1.5 border border-solid border-[#6435A5] rounded-[6px] px-4 xxl:px-3 xl:px-2.5 py-3 xxl:py-2.5 xl:py-2"
             for="input_file"
@@ -400,10 +400,10 @@ import {Link} from '@inertiajs/inertia-vue3'
         </div>
       </div>
       <div class="grid grid-cols-2 gap-10 xxl:gap-8 xl:gap-6 my-10 xxl:my-8 xl:my-6 w-full" v-if="!isEdit">
-        <Link href="/profile/houses" @click="addAndContinue"
+        <button @click="addAndContinue"
               class="login__btn--bg w-full text-center mr-4 font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">
           Добавить
-        </Link>
+        </button>
         <button
           @click="addAndContinue(1)"
           class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]"
@@ -644,6 +644,8 @@ export default {
       if (flag === 1) {
         window.location.href = '/profile/edit/' + house.slug + '#create'
         // this.$emit('addAndContinue', house)
+      } else {
+        window.location.href = '/profile/houses'
       }
     },
     saveSupport(data) {

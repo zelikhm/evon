@@ -7,10 +7,12 @@
                       :compilation="compilation"
   />
   <app-immovables-create-selection
-    v-if="openCreateSelection"
-    @close-i-create-selection="closeCreateSel"
-    :title="titleNewCompilation"
-    :house="house"
+      :user="user"
+      v-if="openCreateSelection"
+      @close-add-selection="openAddSelection = false"
+      @close-i-create-selection="closeCreateSel"
+      :title="titleNewCompilation"
+      :house="house"
   />
   <app-header :user="user" />
   <main>

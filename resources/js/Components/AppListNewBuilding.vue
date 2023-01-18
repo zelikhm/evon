@@ -236,7 +236,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         </div>
         <div class="flex justify-between md:flex-col md:gap-3 items-center">
           <div class="flex flex-col items-start">
-            <h2 class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] whitespace-nowrap text-center">Новостройки в Сочи</h2>
+            <h2 class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] whitespace-nowrap text-center">Новостройки</h2>
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] whitespace-nowrap text-center">Найдено {{ houses.length }} новостроек</span>
           </div>
           <div class="flex items-center md:flex-col gap-8 xxl:gap-6 xl:gap-5 md:gap-3">
