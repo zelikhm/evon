@@ -249,8 +249,7 @@ export default {
         headers: { "Content-type": "multipart/form-data" },
         data: formData,
       }).then(response => {
-        console.log(response.data)
-        this.$emit('close-add-apartments', response.data.frames)
+        this.$emit('close-add-apartments', response.data)
       })
         .catch(e => console.error(e))
 

@@ -1,6 +1,6 @@
 <template>
   <app-modal-add-contact @close-add-contact="closeModalContact" v-if="modalAddContact"/>
-  <app-modal-add-apartments @close-add-apartments="modalAddApatments = false"
+  <app-modal-add-apartments @close-add-apartments="closeAddApartments"
                             v-if="modalAddApatments"
                             :house="house"
                             :activeFrame="activeFrame"
@@ -143,6 +143,10 @@ export default {
     openAddFrame(frame) {
       this.modalAddFrame = !this.modalAddFrame
       this.frame = frame
+    },
+    closeAddApartments(data) {
+      this.readyHouse = data
+      this.modalAddApatments = false
     }
   },
   created() {

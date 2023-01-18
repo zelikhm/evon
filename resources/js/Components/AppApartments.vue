@@ -9,7 +9,8 @@ import { Link } from '@inertiajs/inertia-vue3'
       <div @click="targetFrame(frame)" v-for="frame in house.frames" :class="{ border: frame.active === 1 }" class="corpus__banner flex justify-between cursor-pointer rounded-[5px] border-solid border-[#6435A5] px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
         <div class="flex flex-col justify-center gap-3.5 xxl:gap-3 xl:gap-2.5">
           <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">{{ frame.name }}</span>
-          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ frame.flats.length }} квартир</span>
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap" v-if="frame.flats">{{ frame.flats.length }} квартир</span>
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap" v-else>0 квартир</span>
         </div>
         <div class="relative flex flex-col items-center justify-between gap-3.5 xxl:gap-3 xl:gap-2.5">
           <button @click="this.$emit('open-add-frame', frame)">
@@ -28,7 +29,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         </div>
       </div>
       <div class="flex items-center">
-        <img @click="this.$emit('open-add-frame')" src="../../assets/svg/plus_icon_purple.svg" class="cursor-pointer ml-3 xxl:ml-2.5 xl:ml-2 w-8 xxl:w-6 xl:w-5" alt="">
+        <img @click="this.$emit('open-add-frame', isEdit ? 0 : 1)" src="../../assets/svg/plus_icon_purple.svg" class="cursor-pointer ml-3 xxl:ml-2.5 xl:ml-2 w-8 xxl:w-6 xl:w-5" alt="">
       </div>
     </div>
     <div class="grid lg:w-[87.5vw] pb-2 custom__scroll--chess gap-4 xxl:gap-3.5 xl:gap-3 my-16 xxl:my-12 xl:my-10 text-[#1E1D2D] text-base xxl:text-sm xl:text-xs">
@@ -50,7 +51,7 @@ import { Link } from '@inertiajs/inertia-vue3'
       </div>
       <div v-for="item in flats" class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
         <div class="grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
-          <div class="leading-none bg-white">{{ item.id }}</div>
+          <div class="leading-none bg-white">{{ item.number }}</div>
           <div class="leading-none">{{ item.square }}</div>
           <div class="leading-none">{{ item.price }}</div>
           <div class="leading-none">{{ item.count }}</div>
@@ -136,6 +137,7 @@ export default {
       console.log(item.status)
       axios.post('/api/house/editFlat', {
         house_id: this.house.id,
+        flat_id: item.id,
         number: item.number,
         square: item.square,
         count: item.count,
@@ -213,6 +215,8 @@ export default {
   },
   created() {
     let link = +window.location.href.split('/').at(-1)
+
+    console.log(this.house)
 
     if (Number.isInteger(link)) {
       this.isEdit = true
