@@ -6,7 +6,7 @@
     </div>
     <div class="relative z-10 h-[1px] w-full bg-[#E5DFEE]"></div>
     <div class="overflow-hidden">
-      <div class="relative custom__scroll border__bottom-6 overflow-y-auto bg-[#F6F3FA] transition-all duration-500 h-[90vh] p-7 xxl:p-5 xl:p-4 leading-none">
+      <div class="relative custom__scroll border__bottom-6 overflow-y-auto bg-[#F6F3FA] transition-all duration-500 max-h-[90vh] p-7 xxl:p-5 xl:p-4 leading-none">
         <span class="cursor-pointer text-sm xxl:text-xs xl:text-[10px] text-[#6435A5]">Сегодня</span>
         <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 mt-7 xxl:mt-5 xl:mt-4">
           <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">

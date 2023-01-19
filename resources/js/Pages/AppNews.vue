@@ -21,8 +21,8 @@ import { Link } from '@inertiajs/inertia-vue3'
         </div>
         <div class="news__line flex justify-between items-center rounded-[12px]" v-for="item in news">
           <div class="grid__news text-base xxl:text-sm xl:text-xs">
-            <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap">{{ item.house.title }}</span>
-            <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap">{{ item.title }}</span>
+            <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap overflow-hidden">{{ item.house.title }}</span>
+            <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap overflow-hidden">{{ item.title }}</span>
             <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap">{{ new Date(Date.parse(item.created_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1')}}</span>
           </div>
           <div class="flex flex-shrink-0 gap-4 xxl:gap-3 xl:gap-2.5 p-5 xxl:p-4 xl:p-3">
