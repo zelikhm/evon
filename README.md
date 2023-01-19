@@ -257,6 +257,14 @@ path create \ [post] / поля:
 - description - Комментарий
 - isVisible - Показывать местоположение (true\false) - default false
 
+Редактирование подборки \
+path edit \ [post] / поля:
+
+- id - айди подборки
+- title - Заголовок
+- description - Комментарий
+- isVisible - Показывать местоположение (true\false) - default false
+
 Добавление обьекта в подборку \
 path addHouse \ [post] / поля:
 

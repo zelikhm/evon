@@ -50,6 +50,7 @@ Route::prefix('compilation')->group(function () {
   Route::post('/delete', ['App\Http\Controllers\User\CompilationController', 'delete']);
   Route::post('/get', ['App\Http\Controllers\User\CompilationController', 'get']);
   Route::post('/getAll', ['App\Http\Controllers\User\CompilationController', 'getAll']);
+  Route::post('/edit', ['App\Http\Controllers\User\CompilationController', 'edit']);
 });
 
 Route::prefix('notification')->group(function () {

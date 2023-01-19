@@ -107,8 +107,28 @@ class CompilationController extends Controller
 
   }
 
-  public function edit($id)
+  /**
+   * edit compilation
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function edit(Request $request)
   {
+
+    if ($request->token === env('TOKEN')) {
+
+      $compl = CompilationModel::where('id', $request->id)->update([
+        'title' => $request->title,
+        'description' => $request->description,
+        'isVisible' => $request->isVisible,
+        'comment' => $request->comment,
+      ]);
+
+      return response()->json($compl, 200);
+    } else {
+      return response()->json('not auth', 401);
+    }
 
   }
 
