@@ -40,8 +40,6 @@ class HouseController extends Controller
 
     $houses = $this->getAllHouse();
 
-    dd($this->getNewsForPage());
-
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
       'dops' => TypesModel::all(),
