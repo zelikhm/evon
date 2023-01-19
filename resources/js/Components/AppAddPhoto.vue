@@ -75,35 +75,36 @@ export default {
     }
   },
   methods: {
-    save() {
+    save(file, formatBytes) {
       let formData = new FormData();
+      // let file = this.files[0];
+      // this.house.images.forEach(item => {
+      //   console.log(item)
+      // })
+      //
+      // this.myPhotos.forEach(item => {
+      //   this.files.push(item.file)
+      // })
+      //
+      // console.log(this.files)
 
-      this.house.images.forEach(item => {
-        console.log(item)
-      })
-
-      this.myPhotos.forEach(item => {
-        this.files.push(item.file)
-      })
-
-      console.log(this.files)
-
-      this.files.forEach((item, i) => {
-        let file = this.files[i];
+      // this.files.forEach((item, i) => {
+      //
         // console.log(file)
         // if (item.url !== undefined) file = null
         // console.log(file)
-        console.log(file)
-        if (file.url !== undefined) {
-          formData.append('files[' + i + ']', file.file);
-          console.log(file.file)
-        } else {
-          console.log(file)
-          formData.append('files[' + i + ']', file);
-        }
+        // console.log(file)
+        // if (file.url !== undefined) {
+
+          // console.log(file.file)
+        // } else {
+        //   console.log(file)
+        //   formData.append('files[' + i + ']', file);
+        // }
+        formData.append('image', file);
         formData.append('house_id', this.house.id);
         formData.append('category_id', 0);
-      })
+      // })
 
       axios.post('/api/house/addedImages',
         formData,
@@ -113,7 +114,7 @@ export default {
           }
         }
       ).then(res => {
-        console.log(res);
+        this.myPhotos.push({ url: URL.createObjectURL(file), name: res.data.name, size: formatBytes, file: file })
       })
     },
     targetBlockPhoto(photo) {
@@ -134,7 +135,7 @@ export default {
             it = Math.floor(Math.log(bytes) / Math.log(k))
           formatBytes = parseFloat((bytes / Math.pow(k, it)).toFixed(dm)) + ' ' + sizes[it]
         }
-        this.myPhotos.push({ url: URL.createObjectURL(i), name: i.name, size: formatBytes, file: i })
+        this.save(i, formatBytes);
       })
       setTimeout(() => {
         this.$refs.progressBar.forEach((i) => {
@@ -149,9 +150,14 @@ export default {
     },
     deletePhoto(photo) {
       this.myPhotos.forEach((item, idx) => {
-        if (photo.url === item.url) {
+        if (photo.name === item.name) {
           this.myPhotos.splice(idx, 1)
         }
+      })
+
+      axios.post('/api/house/deletedImage', {
+        house_id: this.house_id,
+        image_name: photo.name,
       })
     }
   },

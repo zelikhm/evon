@@ -85,11 +85,13 @@ class HouseController extends Controller
     ]);
   }
 
-  public function getHouseApi(Request $request) {
+  public function getHouseApi(Request $request)
+  {
     return $this->house($request->slug);
   }
 
-  public function getHousesApi(Request $request) {
+  public function getHousesApi(Request $request)
+  {
     return $this->getAllHouse();
   }
 
@@ -129,7 +131,8 @@ class HouseController extends Controller
    * @return \Inertia\Response
    */
 
-  public function edit($slug) {
+  public function edit($slug)
+  {
     HouseModel::where('slug', $slug)->firstOrFail();
 
     return Inertia::render('AppAddObject', [
@@ -202,12 +205,12 @@ class HouseController extends Controller
         'updated_at' => Carbon::now()->addHour(3),
       ]);
 
-      if($request->info !== null) {
+      if ($request->info !== null) {
         $info = explode(',', $request->info);
         $str = '[';
         $i = 0;
         foreach ($info as $item) {
-          if($i !== 0) {
+          if ($i !== 0) {
             $str .= ',"' . $item . '"';
           } else {
             $str .= '"' . $item . '"';
@@ -220,13 +223,13 @@ class HouseController extends Controller
         $str = null;
       }
 
-      if($request->dop !== null) {
+      if ($request->dop !== null) {
         $dop = explode(',', $request->dop);
 
         $str1 = '[';
         $i = 0;
         foreach ($dop as $item) {
-          if($i !== 0) {
+          if ($i !== 0) {
             $str1 .= ',"' . $item . '"';
           } else {
             $str1 .= '"' . $item . '"';
@@ -323,7 +326,8 @@ class HouseController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function deletedFlat(Request $request) {
+  public function deletedFlat(Request $request)
+  {
     if ($request->token === env('TOKEN')) {
 
       FlatModel::where('id', $request->flat_id)->delete();
@@ -340,7 +344,8 @@ class HouseController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function editFlat(Request $request) {
+  public function editFlat(Request $request)
+  {
     if ($request->token === env('TOKEN')) {
 
       if ($request->image_up) {
@@ -359,14 +364,14 @@ class HouseController extends Controller
 
       $flat = FlatModel::where('id', $request->flat_id)
         ->update([
-        'number' => $request->number,
-        'square' => $request->square,
-        'count' => $request->count,
-        'floor' => $request->floor,
-        'status' => $request->status,
-        'number_from_stairs' => $request->stairs,
-        'price' => $request->price,
-      ]);
+          'number' => $request->number,
+          'square' => $request->square,
+          'count' => $request->count,
+          'floor' => $request->floor,
+          'status' => $request->status,
+          'number_from_stairs' => $request->stairs,
+          'price' => $request->price,
+        ]);
 
       FlatImagesModel::create([
         'flat_id' => $request->flat_id,
@@ -414,14 +419,15 @@ class HouseController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function editFrame(Request $request) {
+  public function editFrame(Request $request)
+  {
     if ($request->token === env('TOKEN')) {
 
       FrameModel::where('id', $request->frame_id)
         ->update([
-        'name' => $request->name,
-        'updated_at' => Carbon::now()->addHour(3),
-      ]);
+          'name' => $request->name,
+          'updated_at' => Carbon::now()->addHour(3),
+        ]);
 
       return response()->json(FrameModel::where('house_id', $request->house_id)->with(['flats'])->get(), 200);
     } else {
@@ -435,7 +441,8 @@ class HouseController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function deleteFrame(Request $request) {
+  public function deleteFrame(Request $request)
+  {
     if ($request->token === env('TOKEN')) {
 
       FrameModel::where('id', $request->frame_id)->delete();
@@ -456,26 +463,26 @@ class HouseController extends Controller
   {
 //    if ($request->token === env('TOKEN')) {
 
-      if ($request->avatar) {
-        $imageName = time() . '.' . $request->avatar->getClientOriginalName();
-        $request->avatar->move(public_path('/storage/'), $imageName);
-      } else {
-        $imageName = null;
-      }
+    if ($request->avatar) {
+      $imageName = time() . '.' . $request->avatar->getClientOriginalName();
+      $request->avatar->move(public_path('/storage/'), $imageName);
+    } else {
+      $imageName = null;
+    }
 
-      $support = HouseSupportModel::create([
-        'house_id' => $request->house_id,
-        'avatar' => $imageName,
-        'name' => $request->name,
-        'phone' => $request->phone,
-        'email' => $request->email,
-        'status' => $request->status,
-        'link' => $request->link,
-        'created_at' => Carbon::now()->addHour(3),
-        'updated_at' => Carbon::now()->addHour(3),
-      ]);
+    $support = HouseSupportModel::create([
+      'house_id' => $request->house_id,
+      'avatar' => $imageName,
+      'name' => $request->name,
+      'phone' => $request->phone,
+      'email' => $request->email,
+      'status' => $request->status,
+      'link' => $request->link,
+      'created_at' => Carbon::now()->addHour(3),
+      'updated_at' => Carbon::now()->addHour(3),
+    ]);
 
-      return response()->json($support, 200);
+    return response()->json($support, 200);
 //      }
 //    } else {
 //      return response()->json('not auth', 401);
@@ -487,7 +494,8 @@ class HouseController extends Controller
    * @param Request $request
    */
 
-  public function deleteSupport(Request $request) {
+  public function deleteSupport(Request $request)
+  {
     HouseSupportModel::where('id', $request->id)->delete();
   }
 
@@ -496,7 +504,8 @@ class HouseController extends Controller
    * @param Request $request
    */
 
-  public function clearSupport(Request $request) {
+  public function clearSupport(Request $request)
+  {
     HouseSupportModel::where('house_id', $request->house_id)->delete();
   }
 
@@ -545,7 +554,8 @@ class HouseController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function addedFiles(Request $request) {
+  public function addedFiles(Request $request)
+  {
     if ($request->token === env('TOKEN')) {
 
       HouseFilesModel::where('house_id', $request->house_id)->delete();
@@ -581,28 +591,40 @@ class HouseController extends Controller
 
 //    if ($request->token === env('TOKEN')) {
 
-      HouseImagesModel::where('house_id', $request->house_id)
-        ->where('category', $request->category_id)
-        ->delete();
+      $imageName = time() . '.' . $request->file('image')->getClientOriginalName();
+      $request->file('image')->move(public_path('/storage/images'), $imageName);
 
-      foreach ($request->file() as $value) {
-        foreach ($value as $item) {
-          $imageName = time() . '.' . $item->getClientOriginalName();
-          $item->move(public_path('/storage/images'), $imageName);
+      $image = HouseImagesModel::create([
+        'house_id' => $request->house_id,
+        'name' => $imageName,
+        'category' => $request->category_id,
+        'created_at' => Carbon::now()->addHour(3),
+        'updated_at' => Carbon::now()->addHour(3),
+      ]);
 
-          HouseImagesModel::create([
-            'house_id' => $request->house_id,
-            'name' => $imageName,
-            'category' => $request->category_id,
-            'created_at' => Carbon::now()->addHour(3),
-            'updated_at' => Carbon::now()->addHour(3),
-          ]);
-        }
-      }
-
-      return response()->json($item, 200);
+      return response()->json($image, 200);
 //    } else {
 //      return response()->json('not auth', 401);
 //    }
   }
+
+  /**
+   * deleted image
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function deletedImage(Request $request) {
+
+//    if ($request->token === env('TOKEN')) {
+
+      HouseImagesModel::where('name', $request->image_name)->delete();
+
+      return response()->json(HouseImagesModel::where('house_id', $request->house_id)->get(), 200);
+//    } else {
+//      return response()->json('not auth', 401);
+//    }
+
+  }
+
 }
