@@ -20,7 +20,7 @@
 <script>
 export default {
   props: {
-
+    link: String
   },
   emits: ['closeSubmitSelection'],
   data() {
@@ -32,6 +32,9 @@ export default {
     copy() {
       navigator.clipboard.writeText(this.valueLink)
     }
+  },
+  created() {
+    this.valueLink = this.link
   }
 }
 </script>

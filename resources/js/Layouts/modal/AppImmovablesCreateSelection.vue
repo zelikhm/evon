@@ -14,7 +14,7 @@
           </div>
           <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="comment">Комментарий</label>
-            <input v-model="commentCompilation" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="comment" placeholder="Комментарий">
+            <input v-model="commentCompilation" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="comment">
           </div>
         </div>
         <div class="mb-8 xxl:mb-6 xl:mb-5">
@@ -52,7 +52,7 @@
         </div>
       </div>
     </div>
-    <div @click="this.$emit('close-add-selection')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
+    <div @click="this.$emit('close-i-create-selection')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
   </div>
 </template>
 
@@ -71,7 +71,6 @@ export default {
   emits: ['close-add-selection', 'close-i-create-selection'],
   methods: {
     createSelection() {
-      this.$emit('close-add-selection')
 
       axios.post('/api/compilation/create', {
         user_id: this.user.id,
@@ -79,7 +78,7 @@ export default {
         description: this.commentCompilation,
         isVisible: this.isShow,
         token: this.globalToken
-      }).then(response => console.log(response.data))
+      }).then(response => this.addHouse(response.data))
     },
     addHouse(id) {
       axios.post('/api/compilation/addHouse', {
@@ -88,6 +87,8 @@ export default {
         house_id: this.house.id,
         token: this.globalToken
       })
+
+      this.$emit('close-i-create-selection')
 
     }
   },

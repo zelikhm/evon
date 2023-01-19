@@ -6,74 +6,22 @@
     </div>
     <div class="relative z-10 h-[1px] w-full bg-[#E5DFEE]"></div>
     <div class="overflow-hidden">
-      <div class="relative custom__scroll border__bottom-6 overflow-y-auto bg-[#F6F3FA] transition-all duration-500 max-h-[90vh] p-7 xxl:p-5 xl:p-4 leading-none">
-        <span class="cursor-pointer text-sm xxl:text-xs xl:text-[10px] text-[#6435A5]">Сегодня</span>
-        <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 mt-7 xxl:mt-5 xl:mt-4">
-          <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
-            <div class="flex gap-3 xxl:gap-2 xl:gap-1.5">
-              <img src="../../assets/header_user_photo.png" class="h-8 xxl:h-6 xl:h-5" alt="Фото пользователя">
-              <div class="flex flex-col gap-1 xxl:gap-0.5">
-                <span class="font-semibold text-[13px] xxl:text-[11px] xl:text-[10px]">Euro Avsallar Residence</span>
-                <span class="text-[11px] xxl:text-[9px] xl:text-[8px]">Сегодня, 12:45</span>
+      <div class="relative custom__scroll border__bottom-6 overflow-y-auto bg-[#F6F3FA] transition-all duration-500 max-h-[90vh] p-6 xxl:p-4 xl:p-3 leading-none">
+        <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3">
+
+          <div v-for="item in news">
+            <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
+              <div class="flex gap-3 xxl:gap-2 xl:gap-1.5">
+                <div class="flex flex-col gap-1 xxl:gap-0.5">
+                  <span class="font-semibold text-[13px] xxl:text-[11px] xl:text-[10px]">{{ item.house.title }}</span>
+                  <span class="text-[11px] xxl:text-[9px] xl:text-[8px]">{{ new Date(Date.parse(item.created_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span>
+                </div>
               </div>
+              <p class="text-sm xxl:text-xs xl:text-[10px]">{{ item.title }}</p>
             </div>
-            <p class="text-sm xxl:text-xs xl:text-[10px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </p>
+            <div class="h-[1px] mt-3 w-full bg-[#E5DFEE]"></div>
           </div>
-          <div class="h-[1px] w-full bg-[#E5DFEE]"></div>
-          <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
-            <div class="flex gap-3 xxl:gap-2 xl:gap-1.5">
-              <img src="../../assets/header_user_photo.png" class="h-8 xxl:h-6 xl:h-5" alt="Фото пользователя">
-              <div class="flex flex-col gap-1 xxl:gap-0.5">
-                <span class="font-semibold text-[13px] xxl:text-[11px] xl:text-[10px]">Euro Avsallar Residence</span>
-                <span class="text-[11px] xxl:text-[9px] xl:text-[8px]">Сегодня, 12:45</span>
-              </div>
-            </div>
-            <p class="text-sm xxl:text-xs xl:text-[10px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </p>
-          </div>
-          <div class="h-[1px] w-full bg-[#E5DFEE]"></div>
-          <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
-            <div class="flex gap-3 xxl:gap-2 xl:gap-1.5">
-              <img src="../../assets/header_user_photo.png" class="h-8 xxl:h-6 xl:h-5" alt="Фото пользователя">
-              <div class="flex flex-col gap-1 xxl:gap-0.5">
-                <span class="font-semibold text-[13px] xxl:text-[11px] xl:text-[10px]">Euro Avsallar Residence</span>
-                <span class="text-[11px] xxl:text-[9px] xl:text-[8px]">Сегодня, 12:45</span>
-              </div>
-            </div>
-            <p class="text-sm xxl:text-xs xl:text-[10px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </p>
-          </div>
-          <div class="h-[1px] w-full bg-[#E5DFEE]"></div>
-          <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
-            <div class="flex gap-3 xxl:gap-2 xl:gap-1.5">
-              <img src="../../assets/header_user_photo.png" class="h-8 xxl:h-6 xl:h-5" alt="Фото пользователя">
-              <div class="flex flex-col gap-1 xxl:gap-0.5">
-                <span class="font-semibold text-[13px] xxl:text-[11px] xl:text-[10px]">Euro Avsallar Residence</span>
-                <span class="text-[11px] xxl:text-[9px] xl:text-[8px]">Сегодня, 12:45</span>
-              </div>
-            </div>
-            <p class="text-sm xxl:text-xs xl:text-[10px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </p>
-          </div>
-          <div class="h-[1px] w-full bg-[#E5DFEE]"></div>
-          <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
-            <div class="flex gap-3 xxl:gap-2 xl:gap-1.5">
-              <img src="../../assets/header_user_photo.png" class="h-8 xxl:h-6 xl:h-5" alt="Фото пользователя">
-              <div class="flex flex-col gap-1 xxl:gap-0.5">
-                <span class="font-semibold text-[13px] xxl:text-[11px] xl:text-[10px]">Euro Avsallar Residence</span>
-                <span class="text-[11px] xxl:text-[9px] xl:text-[8px]">Сегодня, 12:45</span>
-              </div>
-            </div>
-            <p class="text-sm xxl:text-xs xl:text-[10px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </p>
-          </div>
-          <div class="h-[1px] w-full bg-[#E5DFEE]"></div>
-          <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
-            <div class="flex gap-3 xxl:gap-2 xl:gap-1.5">
-              <img src="../../assets/header_user_photo.png" class="h-8 xxl:h-6 xl:h-5" alt="Фото пользователя">
-              <div class="flex flex-col gap-1 xxl:gap-0.5">
-                <span class="font-semibold text-[13px] xxl:text-[11px] xl:text-[10px]">Euro Avsallar Residence</span>
-                <span class="text-[11px] xxl:text-[9px] xl:text-[8px]">Сегодня, 12:45</span>
-              </div>
-            </div>
-            <p class="text-sm xxl:text-xs xl:text-[10px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt </p>
-          </div>
+
         </div>
       </div>
     </div>
@@ -82,6 +30,7 @@
 
 <script>
 export default {
+  props: ['adminNews', 'news'],
   data() {
     return {
 

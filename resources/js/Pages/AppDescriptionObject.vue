@@ -47,7 +47,7 @@
               </div>
             </div>
 
-            <div class="border__right md:border-0 flex items-center gap-3 xxl:gap-2 xl:gap-1.5 p-4 xxl:p-3 xl:p-2">
+            <div v-if="user.role === 0" class="border__right md:border-0 flex items-center gap-3 xxl:gap-2 xl:gap-1.5 p-4 xxl:p-3 xl:p-2">
               <button @click="openAddSelection = true" class="relative plus__hover flex items-center justify-center h-10 xxl:h-8 xl:h-6 w-10 xxl:w-8 xl:w-6 bg-[#F6F3FA] rounded-[3px]">
                 <img src="../../assets/svg/plus_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4" alt="plus">
                 <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">Добавить в подборку</div>
