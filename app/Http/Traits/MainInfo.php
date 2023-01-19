@@ -56,7 +56,7 @@ trait MainInfo
    */
 
   protected function getNewsForPage() {
-    return HouseNewsModel::orderByDesc('created_at')->limit(30)->get();
+    return HouseNewsModel::orderByDesc('created_at')->with(['house'])->limit(30)->get();
   }
 
   /**
