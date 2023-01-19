@@ -8,7 +8,7 @@
           <div class="grid__prof-agent gap-7 xxl:gap-5 xl:gap-4">
             <div class="flex flex-col gap-12 xxl:gap-10 xl:gap-8">
               <div class="relative w-[13.28vw] h-[13.28vw] rounded-full">
-                <img v-if="avatar" class="absolute w-full h-full rounded-full" :src="'/storage/' + myPhoto" alt="">
+                <img v-if="avatar" class="absolute w-full h-full rounded-full" :src="'/storage/user/' + user.image" alt="">
                 <div class="avatar__contact w-full h-full rounded-full">
                   <div class="absolute rounded-full w-full h-full top-0 left-0">
                     <label for="avatar" :class="{'-z-10': avatar}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-full">
@@ -125,22 +125,24 @@ import {computed} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
 
 export default {
+
+  props:['user'],
   data() {
     return {
-      user: computed(() => usePage().props.value.auth.user),
+      // user: computed(() => usePage().props.value.auth.user),
       myPhoto: '',
       avatar: false,
       agencyPhoto: '',
       agency: false,
       lengthTextarea: 0,
       profile: {
-        name: null,
-        surname: null,
-        tel: null,
-        email: null,
-        position: null,
-        link: null,
-        description: null
+        name: '',
+        surname: '',
+        tel: '',
+        email: '',
+        position: '',
+        link: '',
+        description: ''
       }
     }
   },
@@ -172,7 +174,7 @@ export default {
       formData.append('last_name', this.profile.surname)
       formData.append('status', this.profile.position)
       formData.append('link', this.profile.link)
-      formData.append('description', this.profile.link)
+      formData.append('description', this.profile.description)
       formData.append('image', this.$refs.user_avatar.files[0])
       formData.append('email', this.profile.email)
       formData.append('token', this.globalToken)
@@ -192,13 +194,24 @@ export default {
     this.profile.surname = this.user.last_name
     this.profile.tel = this.user.phone
     this.profile.position = this.user.status
-    this.profile.link = this.user.link
+    if(this.user.link === null) {
+      this.profile.link = ''
+    } else {
+      this.profile.link = this.user.link
+    }
+
+    if(this.user.description === null) {
+      this.profile.description = ''
+    } else {
+      this.profile.description = this.user.description
+    }
+
     this.profile.email = this.user.email
     if (this.user.image !== null) {
       this.myPhoto = this.user.image
       this.avatar = true
     }
-    this.profile.description = this.user.description
+
   },
   components: {
     AppHeader,

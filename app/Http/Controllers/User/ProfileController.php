@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\MainInfo;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -24,7 +25,7 @@ class ProfileController extends Controller
       } else {
 
         return Inertia::render('AppProfileAgent', [
-          'user' => Auth::user(),
+          'user' => User::where('id', Auth::id())->with(['company'])->first(),
           'notification' => $this->getNotification(),
         ]);
 

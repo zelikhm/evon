@@ -38,6 +38,15 @@ class IndexController extends Controller
   public function edit(Request $request)
   {
     if ($request->token === env('TOKEN')) {
+
+      if($request->image !== 'undefined') {
+        $imageName = time() . '.' . $request->image->getClientOriginalName();
+        $request->image->move(public_path('/storage/user'), $imageName);
+      } else {
+       $user = User::where('id', $request->user_id)->first();
+       $imageName = $user->image;
+      }
+
       User::where('id', $request->user_id)->update([
         'first_name' => $request->first_name,
         'last_name' => $request->last_name,
@@ -45,9 +54,9 @@ class IndexController extends Controller
         'link' => $request->link,
         'description' => $request->description,
         'email' => $request->email,
-        'image' => $request->image,
+        'image' => $imageName,
       ]);
-      return response()->json(true, 200);
+      return response()->json($request->image, 200);
     } else {
       return response()->json('not auth', 401);
     }
