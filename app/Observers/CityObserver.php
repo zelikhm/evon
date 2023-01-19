@@ -2,8 +2,8 @@
 
 namespace App\Observers;
 
+use App\Models\Builder\Info\CityModel;
 use App\Models\Builder\Info\RegionModel;
-use App\Models\CityModel;
 
 class CityObserver
 {

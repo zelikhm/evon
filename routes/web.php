@@ -61,7 +61,7 @@ Route::get('/404', function () {
 });
 
 Route::get('test', function () {
-  return  Inertia::render('TestApp');
+  dd(\App\Models\Builder\HouseImagesModel::all());
 });
 
 Route::get('/privacy', ['App\Http\Controllers\PrivacyController', 'index']);

@@ -57,6 +57,9 @@ class CompilationController extends Controller
   {
     $compilation = CompilationModel::where('id', $id - 10000)->with(['values', 'user', 'company'])->firstOrFail();
     $houses = collect();
+
+
+
     foreach ($compilation->values as $value) {
       $houses->push($this->getHouseOnId($value->house_id));
     }
