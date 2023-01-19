@@ -1,4 +1,5 @@
 <template>
+  <app-modal-notification v-if="openNotification" @close-notification="openNotification = false"/>
   <app-header :user="user" />
   <main class="relative">
     <div class="_container">
@@ -123,15 +124,16 @@ import AppHeader from "@/Layouts/AppHeader.vue"
 import AppFooter from "@/Layouts/AppFooter.vue"
 import {computed} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
+import AppModalNotification from "@/Layouts/modal/AppModalNotification.vue"
 
 export default {
-
   props:['user'],
   data() {
     return {
       // user: computed(() => usePage().props.value.auth.user),
       myPhoto: '',
       avatar: false,
+      openNotification: true,
       agencyPhoto: '',
       agency: false,
       lengthTextarea: 0,
@@ -216,6 +218,7 @@ export default {
   components: {
     AppHeader,
     AppFooter,
+    AppModalNotification
   }
 }
 

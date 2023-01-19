@@ -391,7 +391,6 @@ export default {
     infos: [],
     builders: [],
     dops: [],
-    map: false,
   },
   emits: ['open-filter', 'open-add-selections' ,'close-filter'],
   data() {
@@ -419,6 +418,7 @@ export default {
         promotions: false,
         popular: false
       },
+      map: false,
       openFilter: false,
       borderType: false,
       valueSelectType: null,

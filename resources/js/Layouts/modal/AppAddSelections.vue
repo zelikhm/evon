@@ -19,17 +19,19 @@
         </div>
       </div>
       <div class="p-8 xxl:p-6 xl:p-5">
-        <div class="main__title-block border border-solid border-[#E5DFEE] rounded-[5px] pl-5 xxl:pl-4 xl:pl-3 py-5 xxl:py-4 xl:py-3 pr-1 text-[16px] xxl:text-[14px] xl:text-[12px]">
+        <span v-if="idCompilation === true" style="color: red;">Выберите подборку, в которую желаете добавить!</span>
+        <span v-if="success" style="color: green;">Жилищный комплекс {{ house.title }} успешно добавлен в подборку {{ activeNameCompilation }}!</span>
+        <div class="mt-2 main__title-block border border-solid border-[#E5DFEE] rounded-[5px] pl-5 xxl:pl-4 xl:pl-3 py-5 xxl:py-4 xl:py-3 pr-1 text-[16px] xxl:text-[14px] xl:text-[12px]">
           <div class="flex flex-col h-[40vh] overflow-y-auto custom__scroll--chess pr-4 xxl:pr-3 xl:pr-2 gap-2.5 xxl:gap-2 xl:gap-1.5">
             <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]" v-for="item in compilation">
               <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                <div class="flex">
-                  <input :id="'name' + item.id" type="checkbox" class="custom__checkbox">
+                <div class="flex" @click="selectCompilation(item)">
+                  <input :id="'name' + item.id" type="radio" name="selections" class="custom__checkbox">
                   <label :for="'name' + item.id"></label>
                 </div>
                 <span class="leading-none">{{ item.title }}</span>
               </div>
-              <span class="leading-none">11 ЖК</span>
+              <span class="leading-none">{{ item.houses.length }} ЖК</span>
             </div>
           </div>
         </div>
@@ -37,7 +39,7 @@
       <div class="relative">
         <div v-if="buttonSelection" class="px-8 xxl:px-6 xl:px-5 pb-8 xxl:pb-6 xl:pb-5 flex gap-4 xxl:gap-3 xl:gap-2.5 w-full text-lg xxl:text-[15px] xl:text-[13px]">
           <button @click="openCreate" class="w-full bg-litepink text-[#E84680] leading-none font-medium rounded-[5px] p-5 xxl:p-4 xl:p-3">Создать подборку</button>
-          <button class="login__btn--bg w-full text-white leading-none font-semibold rounded-[5px] p-5 xxl:p-4 xl:p-3">Готово</button>
+          <button @click="addSelection" class="login__btn--bg w-full text-white leading-none font-semibold rounded-[5px] p-5 xxl:p-4 xl:p-3">Готово</button>
         </div>
         <div v-if="createSelection" class="px-8 xxl:px-6 xl:px-5 pb-8 xxl:pb-6 xl:pb-5 flex sm:flex-col gap-4 xxl:gap-3 xl:gap-2.5 w-full text-lg xxl:text-[15px] xl:text-[13px] ">
           <div class="relative w-[64%] sm:w-full">
@@ -62,7 +64,10 @@ export default {
     return {
       buttonSelection: true,
       createSelection: false,
-      titleNewCompilation: ''
+      titleNewCompilation: '',
+      idCompilation: null,
+      success: false,
+      activeNameCompilation: null
     }
   },
   emits: ['close-add-selection', 'open-create-sel'],
@@ -75,6 +80,22 @@ export default {
       this.createSelection = false
       this.buttonSelection = true
     },
+    selectCompilation(item) {
+      this.idCompilation = item.id
+      this.activeNameCompilation = item.title
+    },
+    addSelection() {
+      if (this.idCompilation === null) {
+        this.idCompilation = true
+      } else {
+        axios.post('/api/compilation/addHouse', {
+          compilation_id: this.idCompilation,
+          house_id: this.house.id,
+          description: '',
+          token: this.globalToken
+        }).then(response => this.success = true)
+      }
+    }
   }
 }
 </script>
