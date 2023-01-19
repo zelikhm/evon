@@ -27,6 +27,7 @@ Route::prefix('house')->group(function () {
   Route::post('addedImages', ['App\Http\Controllers\House\HouseController', 'addedImages']);
   Route::post('deletedImage', ['App\Http\Controllers\House\HouseController', 'deletedImage']);
   Route::post('addedFiles', ['App\Http\Controllers\House\HouseController', 'addedFiles']);
+  Route::post('deletedFile', ['App\Http\Controllers\House\HouseController', 'deletedFile']);
   //
   Route::post('createFrame', ['App\Http\Controllers\House\HouseController', 'createFrame']);
   Route::post('deleteFrame', ['App\Http\Controllers\House\HouseController', 'deleteFrame']);

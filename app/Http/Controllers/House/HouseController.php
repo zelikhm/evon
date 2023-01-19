@@ -556,28 +556,37 @@ class HouseController extends Controller
 
   public function addedFiles(Request $request)
   {
-    if ($request->token === env('TOKEN')) {
+//    if ($request->token === env('TOKEN')) {
 
-      HouseFilesModel::where('house_id', $request->house_id)->delete();
 
-      foreach ($request->file() as $value) {
-        foreach ($value as $item) {
-          $imageName = time() . '.' . $item->getClientOriginalName();
-          $item->move(public_path('/storage/files'), $imageName);
+    $fileName = time() . '.' . $request->file('file')->getClientOriginalName();
+    $request->file('file')->move(public_path('/storage/files'), $fileName);
 
-          HouseFilesModel::create([
-            'house_id' => $request->house_id,
-            'name' => $imageName,
-            'created_at' => Carbon::now()->addHour(3),
-            'updated_at' => Carbon::now()->addHour(3),
-          ]);
-        }
-      }
+    $file = HouseFilesModel::create([
+      'house_id' => $request->house_id,
+      'name' => $fileName,
+      'created_at' => Carbon::now()->addHour(3),
+      'updated_at' => Carbon::now()->addHour(3),
+    ]);
 
-      return response()->json(true, 200);
-    } else {
-      return response()->json('not auth', 401);
-    }
+    return response()->json($file, 200);
+//    } else {
+//      return response()->json('not auth', 401);
+//    }
+  }
+
+  /**
+   * deleted file
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function deletedFile(Request $request) {
+
+    HouseFilesModel::where('name', $request->fileName)->delete();
+
+    return response()->json(HouseFilesModel::where('house_id', $request->house_id)->get(), 200);
+
   }
 
   /**
@@ -591,18 +600,18 @@ class HouseController extends Controller
 
 //    if ($request->token === env('TOKEN')) {
 
-      $imageName = time() . '.' . $request->file('image')->getClientOriginalName();
-      $request->file('image')->move(public_path('/storage/images'), $imageName);
+    $imageName = time() . '.' . $request->file('image')->getClientOriginalName();
+    $request->file('image')->move(public_path('/storage/images'), $imageName);
 
-      $image = HouseImagesModel::create([
-        'house_id' => $request->house_id,
-        'name' => $imageName,
-        'category' => $request->category_id,
-        'created_at' => Carbon::now()->addHour(3),
-        'updated_at' => Carbon::now()->addHour(3),
-      ]);
+    $image = HouseImagesModel::create([
+      'house_id' => $request->house_id,
+      'name' => $imageName,
+      'category' => $request->category_id,
+      'created_at' => Carbon::now()->addHour(3),
+      'updated_at' => Carbon::now()->addHour(3),
+    ]);
 
-      return response()->json($image, 200);
+    return response()->json($image, 200);
 //    } else {
 //      return response()->json('not auth', 401);
 //    }
@@ -614,13 +623,14 @@ class HouseController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function deletedImage(Request $request) {
+  public function deletedImage(Request $request)
+  {
 
 //    if ($request->token === env('TOKEN')) {
 
-      HouseImagesModel::where('name', $request->image_name)->delete();
+    HouseImagesModel::where('name', $request->image_name)->delete();
 
-      return response()->json(HouseImagesModel::where('house_id', $request->house_id)->get(), 200);
+    return response()->json(HouseImagesModel::where('house_id', $request->house_id)->get(), 200);
 //    } else {
 //      return response()->json('not auth', 401);
 //    }
