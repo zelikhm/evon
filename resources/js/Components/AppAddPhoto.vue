@@ -51,7 +51,7 @@
       </div>
     </div>
   </div>
-  <div class="my-10 xxl:my-8 xl:my-6 w-full gap-10 xxl:gap-8 xl:gap-6" @click="save">
+  <div class="my-10 xxl:my-8 xl:my-6 w-full gap-10 xxl:gap-8 xl:gap-6">
     <button class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Сохранить</button>
   </div>
 </template>
@@ -64,14 +64,15 @@ export default {
   data() {
     return {
       photos: [
-        { name: '3D Рендеры', count: 0 },
-        { name: 'Инфраструктура', count: 11 },
-        { name: 'Дизайн', count: 15 },
-        { name: 'Ход строительства', count: 7 },
+        { name: '3D Рендеры', count: 0, id: 0},
+        { name: 'Инфраструктура', count: 11, id: 1 },
+        { name: 'Дизайн', count: 15, id: 2 },
+        { name: 'Ход строительства', count: 7, id: 3 },
       ],
       myPhotos: [],
       avatar: false,
       files: [],
+      category: 0,
     }
   },
   methods: {
@@ -103,7 +104,7 @@ export default {
         // }
         formData.append('image', file);
         formData.append('house_id', this.house.id);
-        formData.append('category_id', 0);
+        formData.append('category_id', this.category);
       // })
 
       axios.post('/api/house/addedImages',
@@ -115,11 +116,21 @@ export default {
         }
       ).then(res => {
         this.myPhotos.push({ url: URL.createObjectURL(file), name: res.data.name, size: formatBytes, file: file })
+        this.house.images.push({
+          id: 15,
+          name: res.data.name,
+          house_id: this.house.id,
+          category: this.category,
+        });
       })
     },
     targetBlockPhoto(photo) {
       this.photos.forEach(item => item.active = 0)
       photo.active = 1
+
+      this.category = photo.id;
+
+      this.loadPhotos();
     },
     addPhotos(e) {
       Array.from(e.target.files).forEach((i) => {
@@ -156,18 +167,35 @@ export default {
       })
 
       axios.post('/api/house/deletedImage', {
-        house_id: this.house_id,
+        house_id: this.house.id,
         image_name: photo.name,
       })
-    }
+    },
+    loadPhotos() {
+      this.myPhotos = [];
+
+      this.house.images.forEach(item => {
+        if(this.category === item.category) {
+          this.myPhotos.push(item);
+        }
+      })
+
+      setTimeout(() => {
+        this.$refs.uploudBackground.forEach((i) => {
+          i.style.display = 'none'
+        })
+      }, 10)
+    },
   },
   created() {
+    this.loadPhotos();
+
     this.photos.forEach((item, idx) => {
       if (idx === 0) item.active = 1
       else item.active = 0
     })
 
-    this.myPhotos = this.house.images
+    // this.myPhotos = this.house.images
 
     setTimeout(() => {
       this.$refs.uploudBackground.forEach((i) => {
