@@ -180,7 +180,7 @@ class HouseController extends Controller
   {
     if ($request->image) {
       $imageName = time() . '.' . $request->image->getClientOriginalName();
-      $request->image->move(public_path('storage'), $imageName);
+      $request->image->move(public_path('/storage/'), $imageName);
     } else {
       $imageName = null;
     }
@@ -199,7 +199,7 @@ class HouseController extends Controller
         'comment' => $request->comment,
         'active' => 0,
         'status' => 'нету',
-        'image' => $imageName,
+        'image' => '/storage/' . $imageName,
         'fool_price' => $request->fool_price,
         'created_at' => Carbon::now()->addHour(3),
         'updated_at' => Carbon::now()->addHour(3),
@@ -277,14 +277,14 @@ class HouseController extends Controller
 
       if ($request->image_up) {
         $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
-        $request->image_up->move(public_path('/storage/'), $imageUp);
+        $request->image_up->move(public_path('/storage/flat/'), $imageUp);
       } else {
         $imageUp = null;
       }
 
       if ($request->image_down) {
         $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
-        $request->image_down->move(public_path('/storage/'), $imageDown);
+        $request->image_down->move(public_path('/storage/flat/'), $imageDown);
       } else {
         $imageDown = null;
       }
@@ -302,13 +302,13 @@ class HouseController extends Controller
 
       FlatImagesModel::create([
         'flat_id' => $flat->id,
-        'name' => $imageUp,
+        'name' => '/storage/flat/' . $imageUp,
         'category' => 0,
       ]);
 
       FlatImagesModel::create([
         'flat_id' => $flat->id,
-        'name' => $imageDown,
+        'name' => '/storage/flat/' . $imageDown,
         'category' => 1,
       ]);
 
@@ -350,14 +350,14 @@ class HouseController extends Controller
 
       if ($request->image_up) {
         $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
-        $request->image_up->move(public_path('/storage/'), $imageUp);
+        $request->image_up->move(public_path('/storage/flat/'), $imageUp);
       } else {
         $imageUp = null;
       }
 
       if ($request->image_down) {
         $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
-        $request->image_down->move(public_path('/storage/'), $imageDown);
+        $request->image_down->move(public_path('/storage/flat/'), $imageDown);
       } else {
         $imageDown = null;
       }
@@ -375,13 +375,13 @@ class HouseController extends Controller
 
       FlatImagesModel::create([
         'flat_id' => $request->flat_id,
-        'name' => $imageUp === null ? 'string' : $imageUp,
+        'name' => $imageUp === null ? 'string' : '/storage/flat/' . $imageUp,
         'category' => 0,
       ]);
 
       FlatImagesModel::create([
         'flat_id' => $request->flat_id,
-        'name' => $imageDown === null ? 'string' : $imageDown,
+        'name' => $imageDown === null ? 'string' : '/storage/flat/' . $imageDown,
         'category' => 1,
       ]);
 
@@ -407,7 +407,7 @@ class HouseController extends Controller
         'updated_at' => Carbon::now()->addHour(3),
       ]);
 
-      return response()->json(FrameModel::where('house_id', $request->house_id)->get(), 200);
+      return response()->json(FrameModel::where('house_id', $request->house_id)->with(['flats'])->get(), 200);
     } else {
       return response()->json('not auth', 401);
     }
@@ -472,7 +472,7 @@ class HouseController extends Controller
 
     $support = HouseSupportModel::create([
       'house_id' => $request->house_id,
-      'avatar' => $imageName,
+      'avatar' => '/storage/' . $imageName,
       'name' => $request->name,
       'phone' => $request->phone,
       'email' => $request->email,

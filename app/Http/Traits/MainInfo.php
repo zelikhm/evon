@@ -310,14 +310,13 @@ trait MainInfo
 
   protected function getHouseSlug($slug)
   {
-    $house = HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'user', 'news'])
+    $house = HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'user', 'news', 'flats'])
       ->where('slug', $slug)
       ->first();
 
     foreach ($house->frames as $frame) {
       $frame->flats = FlatModel::where('frame_id', $frame->id)->with(['images'])->get();
     }
-
 
     $favorite = FavoritesModel::where('user_id', Auth::id())
       ->where('house_id', $house->id)

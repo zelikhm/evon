@@ -35,6 +35,6 @@ class FlatModel extends Model
     }
 
     public function images() {
-      return $this->hasMany(FlatImagesModel::class, 'id', 'flat_id');
+      return $this->hasMany(FlatImagesModel::class, 'flat_id', 'id');
     }
 }

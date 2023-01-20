@@ -7,6 +7,8 @@ use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
 use AdminNavigation;
+use App\Models\Builder\HouseModel;
+use App\Models\Builder\Info\CityModel;
 use App\Models\LandingModel;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -105,7 +107,7 @@ class House extends Section implements Initializable
       AdminFormElement::columns()
         ->addColumn([
           AdminFormElement::text('title', 'Заголовок'),
-          AdminFormElement::text('city', 'Город'),
+          AdminFormElement::select('city', 'Город')->setModelForOptions(CityModel::class)->SetUsageKey('title'),
           AdminFormElement::text('longitude', 'Долгота'),
           AdminFormElement::number('percent', 'Процент')->setMin(0),
           AdminFormElement::select('active', 'Прошел модерацию?', [

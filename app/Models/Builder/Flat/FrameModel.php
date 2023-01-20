@@ -25,6 +25,6 @@ class FrameModel extends Model
   }
 
   public function flats() {
-    return $this->hasMany(FlatModel::class, 'id', 'frame_id');
+    return $this->hasMany(FlatModel::class, 'frame_id', 'id');
   }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\MainInfo;
 use App\Models\Builder\HouseModel;
+use App\Models\Builder\Info\CityModel;
 use App\Models\User;
 use App\Models\User\CompilationInfoModel;
 use App\Models\User\CompilationModel;
@@ -21,9 +22,24 @@ class CompilationController extends Controller
 
   public function index()
   {
+
+
+    $compilations = $this->getCompilations(Auth::id());
+
+    if(count($compilations) > 0) {
+
+      foreach ($compilations as $compilation) {
+        if(count($compilation->values) > 0) {
+            $compilation->house = $this->getHouseOnId($compilation->values[0]->house_id)->first();
+        } else {
+          $compilation->house = null;
+        }
+      }
+    }
+
     return Inertia::render('AppSelections', [
 
-      'compilation' => $this->getCompilations(Auth::id()),
+      'compilation' => $compilations,
       'user' => Auth::user(),
       'notification' => $this->getNotification(),
 
@@ -62,6 +78,22 @@ class CompilationController extends Controller
       $houses->push($this->getHouseOnId($value->house_id));
     }
 
+    $cities = CityModel::all();
+
+    $houses_cities = array();
+
+    foreach ($houses as $house) {
+      foreach ($cities as $city) {
+        if($city->title === $house->city) {
+          if(array_key_exists($city->title, $houses_cities)) {
+            array_push($houses_cities[$city->title], $house);
+          } else {
+            $houses_cities[$city->title] = [$house];
+          }
+        }
+      }
+    }
+
     if(Auth::check()) {
       $user = User::where('id', Auth::id())->with(['company'])->first();
     } else {
@@ -69,7 +101,7 @@ class CompilationController extends Controller
     }
 
     return Inertia::render('AppLinkSelection', [
-      'houses' => $houses,
+      'houses' => $houses_cities,
       'compilation' => $compilation,
       'user' => $user,
     ]);
@@ -91,7 +123,6 @@ class CompilationController extends Controller
 
     $compilation = CompilationInfoModel::where('compilation_id', $id - 10000)
       ->where('house_id', $house->id)
-      ->with(['values', 'user', 'company'])
       ->firstOrFail();
 
     if(Auth::check()) {
