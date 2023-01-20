@@ -30,7 +30,7 @@ class CompilationController extends Controller
 
       foreach ($compilations as $compilation) {
         if(count($compilation->values) > 0) {
-            $compilation->house = $this->getHouseOnId($compilation->values[0]->house_id)->first();
+            $compilation->house = $this->getHouseOnId($compilation->values[0]->house_id);
         } else {
           $compilation->house = null;
         }
