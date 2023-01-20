@@ -24,13 +24,13 @@
         <div class="overflow-hidden absolute z-20 bottom-0 left-0 p-2 w-full">
           <div class="flex flex-col gap-1.5 xl:gap-1">
             <span class="text-white text-[14px] xxl:text-[12px] xl:text-[10px] leading-none font-medium">{{ photo.size }}</span>
-            <span class="text-white text-[12px] xxl:text-[10px] xl:text-[9px] leading-none">{{ photo.name }}</span>
+<!--            <span class="text-white text-[12px] xxl:text-[10px] xl:text-[9px] leading-none">{{ photo.name.split('/') }}</span>-->
           </div>
           <div ref="progressBar" class="bg__progress-bar h-2.5 xxl:h-2 xl:h-1.5 w-full rounded-[100px]">
             <div class="progress-bar bg-white h-full rounded-[100px]"></div>
           </div>
         </div>
-        <img class="absolute w-full h-full rounded-[5px]" :src="photo.url ? photo.url : '/storage/images/' + photo.name" alt="">
+        <img class="absolute w-full h-full rounded-[5px]" :src="photo.url ? photo.url : photo.name" alt="">
       </div>
       <div class="relative border border-solid border-[#E5DFEE] w-full h-[8.5vw] lg:h-[16.7vw] md:h-[20.8vw] sm:h-[42.2vw] rounded-[5px]">
         <div class="w-full h-full rounded-[5px]">
@@ -64,10 +64,10 @@ export default {
   data() {
     return {
       photos: [
-        { name: '3D Рендеры', count: 0, id: 0},
-        { name: 'Инфраструктура', count: 11, id: 1 },
-        { name: 'Дизайн', count: 15, id: 2 },
-        { name: 'Ход строительства', count: 7, id: 3 },
+        { name: '3D Рендеры', id: 0, count: 0 },
+        { name: 'Инфраструктура', id: 1, count: 0 },
+        { name: 'Дизайн', id: 2, count: 0 },
+        { name: 'Ход строительства', id: 3, count: 0 },
       ],
       myPhotos: [],
       avatar: false,
@@ -78,34 +78,10 @@ export default {
   methods: {
     save(file, formatBytes) {
       let formData = new FormData();
-      // let file = this.files[0];
-      // this.house.images.forEach(item => {
-      //   console.log(item)
-      // })
-      //
-      // this.myPhotos.forEach(item => {
-      //   this.files.push(item.file)
-      // })
-      //
-      // console.log(this.files)
 
-      // this.files.forEach((item, i) => {
-      //
-        // console.log(file)
-        // if (item.url !== undefined) file = null
-        // console.log(file)
-        // console.log(file)
-        // if (file.url !== undefined) {
-
-          // console.log(file.file)
-        // } else {
-        //   console.log(file)
-        //   formData.append('files[' + i + ']', file);
-        // }
         formData.append('image', file);
         formData.append('house_id', this.house.id);
         formData.append('category_id', this.category);
-      // })
 
       axios.post('/api/house/addedImages',
         formData,
@@ -122,6 +98,10 @@ export default {
           house_id: this.house.id,
           category: this.category,
         });
+      })
+
+      this.photos.forEach((item, idx) => {
+        item.count = this.house.images.filter(i => i.category === idx).length
       })
     },
     targetBlockPhoto(photo) {
@@ -148,6 +128,8 @@ export default {
         }
         this.save(i, formatBytes);
       })
+
+
       setTimeout(() => {
         this.$refs.progressBar.forEach((i) => {
           i.style.display = 'none'
@@ -170,14 +152,21 @@ export default {
         house_id: this.house.id,
         image_name: photo.name,
       })
+
+
     },
     loadPhotos() {
       this.myPhotos = [];
 
+
       this.house.images.forEach(item => {
-        if(this.category === item.category) {
+        if (this.category === item.category) {
           this.myPhotos.push(item);
         }
+      })
+
+      this.photos.forEach((item, idx) => {
+        item.count = this.house.images.filter(i => i.category === idx).length
       })
 
       setTimeout(() => {
@@ -194,6 +183,7 @@ export default {
       if (idx === 0) item.active = 1
       else item.active = 0
     })
+
 
     // this.myPhotos = this.house.images
 

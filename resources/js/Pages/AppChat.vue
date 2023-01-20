@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
-  <app-header />
+  <app-header :user="user" />
   <main class="bg-[#F6F3FA]">
     <div class="_container">
       <div class="grid__chat h-[85vh] my-14 xxl:my-10 xl:my-8">
@@ -256,10 +256,13 @@ import { Link } from '@inertiajs/inertia-vue3'
 <script>
 import AppFooter from "@/Layouts/AppFooter.vue"
 import AppHeader from "@/Layouts/AppHeader.vue"
+import {computed} from "vue";
+import {usePage} from "@inertiajs/inertia-vue3";
 
 export default {
   data() {
     return {
+      user: computed(() => usePage().props.value.auth.user),
       chatProfile: false,
     }
   },

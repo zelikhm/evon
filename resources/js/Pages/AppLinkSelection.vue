@@ -25,23 +25,23 @@ import { Link } from '@inertiajs/inertia-vue3'
         <div class="grid__75-25 gap-7 xxl:gap-5 xl:gap-4">
           <div class="flex flex-col gap-y-14 xxl:gap-y-10 xl:gap-y-8">
             <div class="grid grid-cols-3 gap-x-7 xxl:gap-x-5 xl:gap-x-4 gap-y-14 xxl:gap-y-10 xl:gap-y-8">
-              <div class="flex flex-col" v-for="item in compilation">
+              <Link class="flex flex-col" v-for="item in houses" :href="href + '/' + item.slug">
                 <div class="relative rounded-[5px]">
                   <img class="h-[15vw] w-full" src="../../assets/immovables_img_two.png" alt="">
                   <div class="absolute flex flex-col justify-between top-0 left-0 w-full h-full text-[14px] xxl:text-[12px] xl:text-[10px]">
-                    <span class="bg-[#30CB49] uppercase self-end text-white leading-none px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 m-4 xxl:m-3 xl:m-2.5 rounded-[3px]">Сдан</span>
+                    <span class="bg-[#30CB49] uppercase self-end text-white leading-none px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 m-4 xxl:m-3 xl:m-2.5 rounded-[3px]">{{ item.info.status }}</span>
                     <div class="flex items-center text-white gap-2 xxl:gap-1.5 xl:gap-1 p-5 xxl:p-4 xl:p-3">
-                      <span class="leading-none">{{ compilation }}</span>
-                      <div class="bg-white h-1 w-1 rounded-full "></div>
+                      <span class="leading-none">{{ item.area }}</span>
+                      <div class="bg-white h-1 w-1 rounded-full"></div>
                       <span class="leading-none">49 Квартир</span>
                     </div>
                   </div>
                 </div>
                 <div class="text-[#1E1D2D] flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 p-5 xxl:p-4 xl:p-3">
-                  <span class="font-bold text-[20px] xxl:text-[16px] xl:text-[13px] leading-none">Euro Avsallar Residence</span>
+                  <span class="font-bold text-[20px] xxl:text-[16px] xl:text-[13px] leading-none">{{ item.title }}</span>
                   <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">от 3 850 000 €, от 180 329 € за м2</span>
                 </div>
-              </div>
+              </Link>
             </div>
             <div>
               <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] mb-5 xxl:mb-4 xl:mb-3">Сочи</h2>
@@ -85,7 +85,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
           <div class="contact__selling h-fit bg-white rounded-[10px] p-4 xxl:p-3 xl:p-2.5">
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 mb-5 xxl:mb-4 xl:mb-4">
-              <img src="../../assets/chat_avatar.png" class="w-14 xxl:w-12 xl:w-10" alt="">
+              <img :src="'/storage/user/' + compilation.user.image" class="w-14 xxl:w-12 xl:w-10 rounded-full h-14 xxl:h-12 xl:h-10" alt="">
               <div class="flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
                 <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none font-medium">{{ compilation.user.first_name + ' ' + compilation.user.last_name }}</span>
                 <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ compilation.user.status }}</span>
@@ -127,12 +127,14 @@ export default {
   data() {
     return {
       openNotification: false,
+      href: null
     }
   },
   methods: {
 
   },
   created() {
+    this.href = window.location.href
     console.log(this.houses)
     console.log(this.compilation)
   },

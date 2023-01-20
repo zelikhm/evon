@@ -187,16 +187,16 @@ export default {
       frame.deleteConfirm = true
     },
     deleteFrame(frame) {
-      axios.post('/api/house/deleteFrame', {
-        frame_id: frame.id,
-        token: this.globalToken
-      })
-
       this.house.frames.forEach((item, idx) => {
         if (frame.id === item.id) {
           this.house.frames.splice(idx, 1)
         }
       })
+
+      axios.post('/api/house/deleteFrame', {
+        frame_id: frame.id,
+        token: this.globalToken
+      }).then(response => console.log(response.data))
     },
     deleteFlat(item) {
       axios.post('/api/house/deletedFlat', {
@@ -216,18 +216,25 @@ export default {
   created() {
     let link = +window.location.href.split('/').at(-1)
 
+
     console.log(this.house)
 
     if (Number.isInteger(link)) {
       this.isEdit = true
     }
 
+
     if (this.house.frames.length > 0) {
       let startFrame = this.house.frames[0].id
 
       this.house.frames.forEach((item, idx) => {
-        if (idx === 0) item.active = 1
-        else item.active = 0
+        if (idx === 0) {
+          this.frameId = item.id
+          item.active = 1
+        }
+        else {
+          item.active = 0
+        }
       })
       this.flats = this.house.frames.find(item => item.id === startFrame).flats
 
@@ -242,6 +249,9 @@ export default {
     }
 
   },
+  updated() {
+    // this.flats = this.house.frames.find(item => item.id === this.frameId).flats
+  }
 }
 
 </script>
