@@ -58,8 +58,6 @@ class CompilationController extends Controller
     $compilation = CompilationModel::where('id', $id - 10000)->with(['values', 'user', 'company'])->firstOrFail();
     $houses = collect();
 
-
-
     foreach ($compilation->values as $value) {
       $houses->push($this->getHouseOnId($value->house_id));
     }
@@ -125,7 +123,6 @@ class CompilationController extends Controller
         'title' => $request->title,
         'description' => $request->description,
         'isVisible' => $request->isVisible,
-        'comment' => $request->comment,
       ]);
 
       return response()->json($compl, 200);
