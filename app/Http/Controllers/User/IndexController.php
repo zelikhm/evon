@@ -70,7 +70,7 @@ class IndexController extends Controller
 
   public function addedCompany(Request $request)
   {
-    if ($request->token === env('TOKEN')) {
+//    if ($request->token === env('TOKEN')) {
       User\CompanyModel::create([
         'user_id' => $request->user_id,
         'title' => $request->title,
@@ -79,9 +79,9 @@ class IndexController extends Controller
       ]);
 
       return response()->json(true, 200);
-    } else {
-      return response()->json('not auth', 401);
-    }
+//    } else {
+//      return response()->json('not auth', 401);
+//    }
   }
 
   /**
