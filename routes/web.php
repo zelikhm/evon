@@ -45,6 +45,7 @@ Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
   Route::get('/chat', ['App\Http\Controllers\User\ChatController', 'index']);
 
 });
+
 Route::prefix('/compilation')->group(function () {
   Route::get('/{id}', ['App\Http\Controllers\User\CompilationController', 'show']);
   Route::get('/{id}/{house}', ['App\Http\Controllers\User\CompilationController', 'house']);

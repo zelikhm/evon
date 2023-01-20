@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\MainInfo;
 use App\Models\User\FavoritesModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -12,14 +13,25 @@ use Inertia\Inertia;
 class FavoriteController extends Controller
 {
 
+  use MainInfo;
+
   /**
    * get favorites
    * @return \Inertia\Response
    */
 
   public function index() {
+
+    $favorite = FavoritesModel::where('user_id', Auth::id())->get();
+
+    foreach ($favorite as $item) {
+
+      $item->house = $this->getHouseOnId($item->house_id);
+
+    }
+
     return Inertia::render('AppFavorites', [
-      'favorites' => FavoritesModel::where('user_id', Auth::id())->with(['house'])->get(),
+      'favorites' => $favorite,
     ]);
   }
 
