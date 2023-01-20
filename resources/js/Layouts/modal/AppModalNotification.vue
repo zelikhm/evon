@@ -1,7 +1,7 @@
 <template>
-  <div class="fixed bottom-[70px] xxl:text-[] left-[2vw] z-[100]">
-    <div class="relative notification__shadow w-full flex flex-col gap-7 xxl:gap-6 xl:gap-5 bg-white rounded-[12px] p-4.5 xxl:p-4 xl:p-3.5 z-50 h-fit">
-      <div class="relative w-full flex justify-between items-center gap-4.5 xxl:gap-4 xl:gap-3.5">
+  <div class="fixed bottom-[70px] z-[100]">
+    <div class="relative notification__shadow w-full flex flex-col gap-7 xxl:gap-6 xl:gap-5 bg-white rounded-[12px] p-5 xxl:p-4 xl:p-3 z-50 h-fit">
+      <div class="relative w-full flex justify-between items-center gap-5 xxl:gap-4 xl:gap-3">
         <div class="notification__icon-bg flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px]">
           <img src="../../../assets/svg/notification__icon.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
         </div>

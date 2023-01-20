@@ -169,6 +169,10 @@ input::placeholder {
   transition: all 0.3s;
 }
 
+.left__625 {
+  left: 6.25vw !important;
+}
+
 /*****************HEADER*******************/
 /*****************HEADER*******************/
 /*****************HEADER*******************/
@@ -284,6 +288,20 @@ input::placeholder {
   background: #E84680;
   color: white;
   transition: all 0.2s;
+}
+
+.hover__chat-arrow:hover {
+  background: rgba(100, 53, 165, 0.15);
+  transition: all 0.15s;
+}
+
+.hover__chat-arrow:active {
+  background: #6435A5;
+  transition: all 0.15s;
+}
+
+.hover__chat-arrow:active path {
+  fill: #fff;
 }
 
 /*********/
@@ -1069,7 +1087,7 @@ input::placeholder {
 
 .grid__chat {
   display: grid;
-  grid-template-columns: 28.125vw 1fr;
+  grid-template-columns: 30vw 1fr;
 }
 
 .chat__userlist {
@@ -1099,6 +1117,24 @@ input::placeholder {
 
 .chat__container--flex {
   flex: 1 1 auto;
+}
+
+.chat__avatar-hidden img:nth-child(1) {
+  opacity: 0;
+}
+
+@media (max-width: 992px) {
+  .grid__chat {
+    grid-template-columns: 1fr;
+  }
+
+  .chat__userlist {
+    border-radius: 10px;
+  }
+
+  .chat__container {
+    border-radius: 10px;
+  }
 }
 
 .overflow__custom::-webkit-scrollbar {
