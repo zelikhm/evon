@@ -136,6 +136,7 @@ export default {
       if (this.readyHouse.frames.length === 1) {
         this.activeFrame = this.readyHouse.frames[0].id
       }
+
     },
     changeFrame(data) {
       this.activeFrame = data

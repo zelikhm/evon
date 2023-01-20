@@ -4,7 +4,7 @@ import {Link} from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
-  <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px]">{{ isEdit ? "Редактирование объекта" : "Добавить объект" }}</h2>
+  <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px]">{{ isEdit ? "Добавить объект" : "Редактирование объекта" }}</h2>
   <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Найдено {{ count }} новостроек</span>
   <div class="flex-col flex gap-5 xxl:gap-4 xl:gap-3 pt-5 xxl:pt-4 xl:pt-3">
 
@@ -387,7 +387,28 @@ import {Link} from '@inertiajs/inertia-vue3'
             <span class="font-medium text-base xxl:text-sm xl:text-xs leading-none">Загрузить файл</span>
           </label>
         </div>
-        <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
+
+        <div v-if="house" class="relative w-[20%] h-[8.5vw] lg:h-[16.7vw] md:h-[20.8vw] sm:h-[42.2vw] rounded-[5px]">
+          <div @click="deletePhoto" class="bg__close-photo cursor-pointer absolute top-0 right-0 z-20 m-1 w-6 xxl:w-5 xl:w-4 h-6 xxl:h-5 xl:h-4 rounded-[3px]">
+            <span class="absolute h-[2px] xl:h-[1px] w-[80%] bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 rounded-[10px]"></span>
+            <span class="absolute h-[2px] xl:h-[1px] w-[80%] bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45 rounded-[10px]"></span>
+          </div>
+          <div class="bg-[#30CB49] absolute top-0 left-0 z-10 m-1 w-6 xxl:w-5 xl:w-4 h-6 xxl:h-5 xl:h-4 rounded-[3px]">
+            <img src="../../assets/svg/check_icon.svg" class="w-full" alt="">
+          </div>
+          <div ref="uploudBackground" class="absolute rounded-[5px] bg-[#6435A5] w-full h-full z-10"></div>
+          <div class="overflow-hidden absolute z-20 bottom-0 left-0 p-2 w-full">
+            <div class="flex flex-col gap-1.5 xl:gap-1">
+<!--              <span class="text-white text-[14px] xxl:text-[12px] xl:text-[10px] leading-none font-medium">{{ house.image }}</span>-->
+              <!--            <span class="text-white text-[12px] xxl:text-[10px] xl:text-[9px] leading-none">{{ photo.name.split('/') }}</span>-->
+            </div>
+            <div ref="progressBar" class="bg__progress-bar h-2.5 xxl:h-2 xl:h-1.5 w-full rounded-[100px]">
+              <div class="progress-bar bg-white h-full rounded-[100px]"></div>
+            </div>
+          </div>
+          <img class="absolute w-full h-full rounded-[5px]" :src="'/storage/' + house.image" alt="">
+        </div>
+        <div v-if="!house" class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
           <div class="flex justify-between items-center">
             <div v-for="image in images" class="relative flex items-center gap-4 xxl:gap-3 xl:gap-2.5">
               <img src="../../assets/svg/file-icon_jpg.svg" v-if="extension === 'jpg'">
@@ -399,7 +420,7 @@ import {Link} from '@inertiajs/inertia-vue3'
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-10 xxl:gap-8 xl:gap-6 my-10 xxl:my-8 xl:my-6 w-full" v-if="!isEdit">
+      <div class="grid grid-cols-2 gap-10 xxl:gap-8 xl:gap-6 my-10 xxl:my-8 xl:my-6 w-full" v-if="isEdit">
         <button @click="addAndContinue"
               class="login__btn--bg w-full text-center mr-4 font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">
           Добавить
@@ -736,6 +757,9 @@ export default {
       this.isEdit = true
     }
 
+    if (this.house) this.isEdit = false
+    else this.isEdit = true
+
     if (this.city[0] !== null) {
       this.selectCity = this.city[0].title
       this.selectRegion = this.city[0].regions[0].title
@@ -791,6 +815,9 @@ export default {
       this.supportsReady = this.house.supports
     }
 
+    setTimeout(() => {
+      this.$refs.uploudBackground.style.display = 'none'
+    }, 10)
 
   },
   computed: {

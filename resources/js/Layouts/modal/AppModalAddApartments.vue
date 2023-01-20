@@ -159,6 +159,8 @@ export default {
         status: '',
         stairs: '',
         price: '',
+        image_up: '',
+        image_down: ''
       },
       selectLayout: '1 + 1',
       openSelectLayout: false,
@@ -203,15 +205,19 @@ export default {
   methods: {
     addImageOne(e) {
       this.imageOne = URL.createObjectURL(e.target.files[0])
-      if (e.target.files.length == 1) {
+      if (e.target.files.length === 1) {
         this.imageLoadOne = true
       }
+
+      this.flat.image_up = e.target.files[0]
     },
     addImageTwo(e) {
       this.imageTwo = URL.createObjectURL(e.target.files[0])
-      if (e.target.files.length == 1) {
+      if (e.target.files.length === 1) {
         this.imageLoadTwo = true
       }
+
+      this.flat.image_down = e.target.files[0]
     },
     deleteImageOne() {
       this.imageOne = ''
@@ -224,12 +230,13 @@ export default {
     addFlat() {
       let formData = new FormData()
 
-      console.log(this.$refs)
-
       this.flat.count = this.selectLayout
       this.flat.floor = +this.selectFloors
       this.flat.stairs = +this.selectStairs
+
       this.flat.status = this.selectStatus
+      console.log(this.flat.image_up)
+      console.log(this.flat.image_down)
 
       formData.append('frame_id', this.activeFrame)
       formData.append('number', this.flat.id)
@@ -239,8 +246,8 @@ export default {
       formData.append('status', this.flat.status)
       formData.append('stairs', this.flat.stairs)
       formData.append('price', this.flat.price)
-      formData.append('image_up', this.$refs.image_up.files[0])
-      formData.append('image_down', this.$refs.image_down.files[0])
+      formData.append('image_up', this.flat.image_up)
+      formData.append('image_down', this.flat.image_down)
       formData.append('token', this.globalToken)
 
       axios({
@@ -249,6 +256,7 @@ export default {
         headers: { "Content-type": "multipart/form-data" },
         data: formData,
       }).then(response => {
+        console.log(response.data)
         this.$emit('close-add-apartments', response.data)
       })
         .catch(e => console.error(e))

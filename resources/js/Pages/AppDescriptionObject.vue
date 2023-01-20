@@ -2,6 +2,7 @@
   <app-header :user="user" />
   <app-modal-album
     v-if="album"
+    :image="house.images"
     @close-album="album = false"
   />
   <app-add-selections
@@ -83,11 +84,8 @@
             <swiper-slide class="h-full flex justify-center">
               <img @click="album = true" class="h-full w-full" :src="'/storage/' + house.image" alt="">
             </swiper-slide>
-            <swiper-slide class="h-full flex justify-center">
-              <img @click="album = true" class="h-full w-full" src="../../assets/slider_img.jpg" alt="">
-            </swiper-slide>
-            <swiper-slide class="h-full flex justify-center">
-              <img @click="album = true" class="h-full w-full" src="../../assets/slider_img.jpg" alt="">
+            <swiper-slide class="h-full flex justify-center" v-for="item in mainPhotos">
+              <img @click="album = true" class="h-full w-full" :src="item.name" alt="">
             </swiper-slide>
           </swiper>
           <div class="border border-solid border-[#E5DFEE] h-[100px] xxl:h-[80px] xl:h-[60px] sm:h-fit flex items-center sm:flex-col justify-evenly rounded-[12px] mt-7 xxl:mt-5 xl:mt-4 mb-16 xxl:mb-12 xl:mb-10">
@@ -119,8 +117,8 @@
           <div class="flex flex-col pb-14 xxl:pb-10 xl:pb-8">
             <span class="uppercase font-medium text-[18px] xxl:text-[15px] xl:text-[13px] pb-5 xxl:pb-4 xl:pb-3 leading-none">О ЖК</span>
             <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="fullDescription">{{ house.description }}</p>
-            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{ house.description.slice(0, 300) + '...' }}</p>
-<!--            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{ house.description }}</p>-->
+<!--            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{ house.description.slice(0, 300) + '...' }}</p>-->
+            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{ house.images }}</p>
             <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 items-center w-fit animation__arrow" @click="fullDescription = !fullDescription">
               <span class="text-[#6435A5] font-medium text-sm xxl:text-xs xl:text-[10px]">{{ fullDescription ? 'Скрыть' : 'Подробнее' }}</span>
               <img src="../../assets/svg/arrow_right_purple.svg" class="transition-all duration-300 w-3.5 xxl:w-3 xl:wp-2.5" alt="Стрелочка в право">
@@ -226,7 +224,8 @@ export default {
       openAddSelection: false,
       openCreateSelection: false,
       map: false,
-      flagFavorite: null
+      flagFavorite: null,
+      mainPhotos: []
     }
   },
   methods: {
@@ -278,7 +277,8 @@ export default {
         }
       }
     }
-    console.log(this.slider)
+
+    this.mainPhotos.push(...this.house.images.filter(item => item.category === 0))
   },
   computed: {
     countFlats() {

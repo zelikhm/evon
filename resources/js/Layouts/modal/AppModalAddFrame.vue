@@ -42,6 +42,12 @@ export default {
       } else {
         axios.post('/api/house/createFrame', { house_id: this.house.id, name: this.frameName, token: this.globalToken })
             .then(response => {
+              response.data.forEach((item, idx) => {
+                item.active = 0
+                if ((idx + 1) === response.data.length) {
+                  item.active = 1
+                }
+              })
               this.house.frames = response.data
               this.$emit('close-add-frame', this.house)
             })

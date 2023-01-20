@@ -61,7 +61,7 @@
                     <input v-model="profile.position" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="job">
                   </div>
                   <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-                    <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="social">Ссылка на соц сеть</label>
+                    <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="social">Языки</label>
                     <input v-model="profile.link" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="social">
                   </div>
                 </div>
@@ -79,7 +79,7 @@
                 <div class="flex gap-7 xxl:gap-5 xl:gap-4">
                   <div class="flex w-full flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
                     <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="company">Компания</label>
-                    <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="company" placeholder="First">
+                    <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="company">
                   </div>
                   <div class="relative shrink-0 h-[78px] xxl:h-[61px] xl:h-[55px] w-[78px] xxl:w-[61px] xl:w-[55px] rounded-full">
                     <img v-if="agency" class="absolute w-full h-full rounded-full" :src="agencyPhoto" alt="">
@@ -133,7 +133,7 @@ export default {
       // user: computed(() => usePage().props.value.auth.user),
       myPhoto: '',
       avatar: false,
-      openNotification: true,
+      openNotification: false,
       agencyPhoto: '',
       agency: false,
       lengthTextarea: 0,
@@ -169,7 +169,6 @@ export default {
     saveEdit() {
 
       let formData = new FormData()
-      console.log(this.$refs.user_avatar.files[0])
 
       formData.append('user_id', this.user.id)
       formData.append('first_name', this.profile.name)
@@ -187,6 +186,17 @@ export default {
         headers: {"Content-type": "multipart/form-data"},
         data: formData,
       }).then(response => console.log(response))
+
+      // let formDataAgency = new FormData()
+
+      console.log(this.user)
+
+      // axios({
+      //   method: 'post',
+      //   url: '/api/user/edit',
+      //   headers: {"Content-type": "multipart/form-data"},
+      //   data: dataForm,
+      // }).then(response => console.log(response))
 
     }
   },
