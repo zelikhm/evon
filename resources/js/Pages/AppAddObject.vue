@@ -16,9 +16,9 @@
           <div class="sticky lg:relative top-10 lg:top-0 z-50 w-[20vw] lg:w-full">
             <div class="bg-[#F6F3FA] h-fit p-7 xxl:p-5 xl:p-4 rounded-[6px]">
               <div class="flex flex-col gap-3 xxl:gap-2.5 xl:gap-2">
-                <div @click="openPage(0)" :class="{ 'menu-add-obj': page === 0}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] p-5 xxl:p-4 xl:p-3">Информация о ЖК</div>
-                <div @click="openPage(1)" :class="{ 'menu-add-obj': page === 1}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] p-5 xxl:p-4 xl:p-3">Корпуса и квартиры</div>
-                <div @click="openPage(2)" :class="{ 'menu-add-obj': page === 2}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] p-5 xxl:p-4 xl:p-3">Фото</div>
+                <div @click="openPage(0)" :class="{ 'menu-add-obj': page === 0}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">Информация о ЖК</div>
+                <div @click="openPage(1)" :class="{ 'menu-add-obj': page === 1}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">Корпуса и квартиры</div>
+                <div @click="openPage(2)" :class="{ 'menu-add-obj': page === 2}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">Фото</div>
               </div>
             </div>
             <div :class="{'hidden': page !== 1}" class="flex justify-center mt-12 xxl:mt-10 xl:mt-8">
@@ -33,7 +33,7 @@
                     </clipPath>
                   </defs>
                 </svg>
-                <span class="leading-none text-base xxl:text-sm xl:text-xs font-medium">Добавить квартиру</span>
+                <span class="leading-none text-base xxl:text-sm xl:text-xs lg:text-[15px] font-medium">Добавить квартиру</span>
               </button>
             </div>
           </div>

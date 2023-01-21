@@ -4,34 +4,34 @@ import {Link} from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
-  <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px]">{{ isEdit ? "Добавить объект" : "Редактирование объекта" }}</h2>
-  <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Найдено {{ count }} новостроек</span>
+  <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px]">{{ isEdit ? "Добавить объект" : "Редактирование объекта" }}</h2>
+  <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">Найдено {{ count }} новостроек</span>
   <div class="flex-col flex gap-5 xxl:gap-4 xl:gap-3 pt-5 xxl:pt-4 xl:pt-3">
 
     <div :class="{ validation: validation.title }"
          class="flex flex-col border gap-2 xxl:gap-1.5 border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-      <label :class="{ validationText: validation.title }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name_object">Название</label>
+      <label :class="{ validationText: validation.title }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="name_object">Название</label>
       <input v-model="object.title"
              @input="checkValidation(2)"
-             class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
+             class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[14px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
              type="text" id="name_object" >
     </div>
 
     <div :class="{ validation: validation.description }" class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]">
-      <label :class="{ validationText: validation.description }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"
+      <label :class="{ validationText: validation.description }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"
              for="description_object">Описание объекта</label>
       <textarea v-model="object.description"
                 @input="checkValidation(3)"
-                class="custom__scroll text-[#1E1D2D] resize-none text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0"
+                class="custom__scroll text-[#1E1D2D] resize-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0"
                 type="text" id="description_object"></textarea>
     </div>
 
     <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]"
          :class="{ 'border__bottom--0': openSelectCity}">
-      <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Город</span>
+      <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Город</span>
       <div class="relative">
         <div @click="openSelectCity = !openSelectCity"
-             class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3">
+             class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3">
           <span>{{ selectCity }}</span>
           <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all"
                :class="{ 'rotate-180': openSelectCity }" alt="">
@@ -67,7 +67,7 @@ import {Link} from '@inertiajs/inertia-vue3'
                :class="{ 'rotate-180': openSelectRegion }" alt="">
         </div>
         <div v-if="openSelectRegion"
-             class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
+             class="max-h-[150px] overflow-y-auto absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
           <span
               v-for="(region, idx) in regions" :key="idx"
               @click="changeSelectRegion(region)"
@@ -119,7 +119,7 @@ import {Link} from '@inertiajs/inertia-vue3'
                    :class="{ 'rotate-180': openSelectDeadline }" alt="">
             </div>
             <div v-if="openSelectDeadline"
-                 class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
+                 class="max-h-[150px] overflow-x-auto custom__scroll-grey absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
                   <span
                       v-for="(deadline, idx) in deadlines" :key="idx"
                       @click="changeSelectDeadline(deadline)"
@@ -150,7 +150,7 @@ import {Link} from '@inertiajs/inertia-vue3'
                    :class="{ 'rotate-180': openSelectType }" alt="">
             </div>
             <div v-if="openSelectType"
-                 class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
+                 class="max-h-[150px] absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
                   <span
                       v-for="(type, idx) in types" :key="idx"
                       @click="changeSelectType(type)"
@@ -173,14 +173,14 @@ import {Link} from '@inertiajs/inertia-vue3'
                    :class="{ 'rotate-180': openInstallment }" alt="">
             </div>
             <div v-if="openInstallment"
-                 class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
-                  <span
-                      v-for="(installment, idx) in installments" :key="idx"
-                      @click="changeSelectInstallment(installment)"
-                      class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
-                  >
-                    {{ installment.installment }}
-                  </span>
+               class="max-h-[150px] absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
+                <span
+                    v-for="(installment, idx) in installments" :key="idx"
+                    @click="changeSelectInstallment(installment)"
+                    class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
+                >
+                  {{ installment.installment }}
+                </span>
             </div>
           </div>
         </div>

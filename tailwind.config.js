@@ -11,6 +11,7 @@ module.exports = {
 
     theme: {
         screens: {
+            'exl': {'max': '1920px'},
             'xxl': {'max': '1572px'},
             'xl': {'max': '1366px'},
             'x': {'max': '1180px'},

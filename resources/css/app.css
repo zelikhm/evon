@@ -46,6 +46,7 @@ main {
   position: relative;
   margin: 0 auto;
   box-sizing: content-box;
+  max-width: 1680px;
   padding: 0 6.25vw;
 }
 
