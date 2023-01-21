@@ -82,7 +82,7 @@
             class="mySwiper w-full"
           >
             <swiper-slide class="h-full flex justify-center">
-              <img @click="album = true" class="h-full w-full" :src="'/storage/' + house.image" alt="">
+              <img @click="album = true" class="h-full w-full" :src="house.image" alt="">
             </swiper-slide>
             <swiper-slide class="h-full flex justify-center" v-for="item in mainPhotos">
               <img @click="album = true" class="h-full w-full" :src="item.name" alt="">
@@ -118,7 +118,7 @@
             <span class="uppercase font-medium text-[18px] xxl:text-[15px] xl:text-[13px] pb-5 xxl:pb-4 xl:pb-3 leading-none">О ЖК</span>
             <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="fullDescription">{{ house.description }}</p>
 <!--            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{ house.description.slice(0, 300) + '...' }}</p>-->
-            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{ house.images }}</p>
+            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{ house }}</p>
             <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 items-center w-fit animation__arrow" @click="fullDescription = !fullDescription">
               <span class="text-[#6435A5] font-medium text-sm xxl:text-xs xl:text-[10px]">{{ fullDescription ? 'Скрыть' : 'Подробнее' }}</span>
               <img src="../../assets/svg/arrow_right_purple.svg" class="transition-all duration-300 w-3.5 xxl:w-3 xl:wp-2.5" alt="Стрелочка в право">

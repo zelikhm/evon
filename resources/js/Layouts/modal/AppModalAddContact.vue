@@ -28,27 +28,27 @@
         </div>
         <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
           <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name_contact">Имя</label>
-          <input v-model="dataSupport.name" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="name_contact" placeholder="Введите имя...">
+          <input v-model="dataSupport.name" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="name_contact">
         </div>
       </div>
       <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
         <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">Должность</label>
-        <input v-model="dataSupport.status" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="post_contact" placeholder="Введите должность...">
+        <input v-model="dataSupport.status" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="post_contact">
       </div>
       <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
         <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="tel_contact">Телефон</label>
-        <input v-model="dataSupport.phone" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="tel_contact" placeholder="+7 930 245 15 20">
+        <input v-model="dataSupport.phone" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="tel_contact">
       </div>
       <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
         <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="email_contact">Почта</label>
-        <input v-model="dataSupport.email" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="email_contact" placeholder="elena@mail.ru">
+        <input v-model="dataSupport.email" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="email_contact">
       </div>
       <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-        <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="soc_contact">Ссылка на соц сеть</label>
-        <input v-model="dataSupport.link" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="soc_contact" placeholder="http://172468712687">
+        <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="soc_contact">Языки</label>
+        <input v-model="dataSupport.link" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="soc_contact">
       </div>
-      <button class="login__btn--bg rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
-        <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none" @click="addSupport">Добавить</span>
+      <button class="login__btn--bg rounded-[5px] w-full py-5 xxl:py-4 xl:py-3" @click="addSupport">
+        <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">Добавить</span>
       </button>
     </div>
     <div @click="this.$emit('close-add-contact')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>

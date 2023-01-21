@@ -21,64 +21,32 @@ import { Link } from '@inertiajs/inertia-vue3'
   <main>
     <div class="_container">
       <div class="my-10 xxl:my-8 xl:my-6">
-        <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] mb-5 xxl:mb-4 xl:mb-3">Веселое село</h2>
+        <div>
+
+        </div>
         <div class="grid__75-25 gap-7 xxl:gap-5 xl:gap-4">
           <div class="flex flex-col gap-y-14 xxl:gap-y-10 xl:gap-y-8">
-            <div class="grid grid-cols-3 gap-x-7 xxl:gap-x-5 xl:gap-x-4 gap-y-14 xxl:gap-y-10 xl:gap-y-8">
-              <Link class="flex flex-col" v-for="item in houses" :href="href + '/' + item.slug">
-                <div class="relative rounded-[5px]">
-                  <img class="h-[15vw] w-full" src="../../assets/immovables_img_two.png" alt="">
-                  <div class="absolute flex flex-col justify-between top-0 left-0 w-full h-full text-[14px] xxl:text-[12px] xl:text-[10px]">
-                    <span class="bg-[#30CB49] uppercase self-end text-white leading-none px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 m-4 xxl:m-3 xl:m-2.5 rounded-[3px]">{{ item.info.status }}</span>
-                    <div class="flex items-center text-white gap-2 xxl:gap-1.5 xl:gap-1 p-5 xxl:p-4 xl:p-3">
-                      <span class="leading-none">{{ item.area }}</span>
-                      <div class="bg-white h-1 w-1 rounded-full"></div>
-                      <span class="leading-none">49 Квартир</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="text-[#1E1D2D] flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 p-5 xxl:p-4 xl:p-3">
-                  <span class="font-bold text-[20px] xxl:text-[16px] xl:text-[13px] leading-none">{{ item.title }}</span>
-                  <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">от 3 850 000 €, от 180 329 € за м2</span>
-                </div>
-              </Link>
-            </div>
-            <div>
-              <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] mb-5 xxl:mb-4 xl:mb-3">Сочи</h2>
+            <div v-for="i in houses">
+              <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] mb-5 xxl:mb-4 xl:mb-3">{{ i[0].city }}</h2>
               <div class="grid grid-cols-3 gap-x-7 xxl:gap-x-5 xl:gap-x-4 gap-y-14 xxl:gap-y-10 xl:gap-y-8">
-                <div class="flex flex-col">
-                  <div class="relative rounded-[5px]">
-                    <img class="h-[15vw] w-full" src="../../assets/immovables_img_two.png" alt="">
-                    <div class="absolute flex flex-col justify-between top-0 left-0 w-full h-full text-[14px] xxl:text-[12px] xl:text-[10px]">
-                      <span class="bg-[#30CB49] uppercase self-end text-white leading-none px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 m-4 xxl:m-3 xl:m-2.5 rounded-[3px]">Сдан</span>
-                      <div class="flex items-center text-white gap-2 xxl:gap-1.5 xl:gap-1 p-5 xxl:p-4 xl:p-3">
-                        <span class="leading-none">Веселое село</span>
-                        <div class="bg-white h-1 w-1 rounded-full "></div>
-                        <span class="leading-none">49 Квартир</span>
+                <div class="flex flex-col" v-for="item in i">
+                  <Link :href="href + '/' + item.slug">
+                    <div class="relative rounded-[5px]">
+                      <img class="h-[15vw] w-full" src="../../assets/immovables_img_two.png" alt="">
+                      <div class="absolute flex flex-col justify-between top-0 left-0 w-full h-full text-[14px] xxl:text-[12px] xl:text-[10px]">
+                        <span class="bg-[#30CB49] uppercase self-end text-white leading-none px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 m-4 xxl:m-3 xl:m-2.5 rounded-[3px]">Сдан</span>
+                        <div class="flex items-center text-white gap-2 xxl:gap-1.5 xl:gap-1 p-5 xxl:p-4 xl:p-3">
+                          <span class="leading-none">{{ item.area }}</span>
+                          <div class="bg-white h-1 w-1 rounded-full "></div>
+                          <span class="leading-none">{{ item.flats.length }} Квартир</span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="text-[#1E1D2D] flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 p-5 xxl:p-4 xl:p-3">
-                    <span class="font-bold text-[20px] xxl:text-[16px] xl:text-[13px] leading-none">Euro Avsallar Residence</span>
-                    <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">от 3 850 000 €, от 180 329 € за м2</span>
-                  </div>
-                </div>
-                <div class="flex flex-col">
-                  <div class="relative rounded-[5px]">
-                    <img class="h-[15vw] w-full" src="../../assets/immovables_img_two.png" alt="">
-                    <div class="absolute flex flex-col justify-between top-0 left-0 w-full h-full text-[14px] xxl:text-[12px] xl:text-[10px]">
-                      <span class="bg-[#30CB49] uppercase self-end text-white leading-none px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 m-4 xxl:m-3 xl:m-2.5 rounded-[3px]">Сдан</span>
-                      <div class="flex items-center text-white gap-2 xxl:gap-1.5 xl:gap-1 p-5 xxl:p-4 xl:p-3">
-                        <span class="leading-none">Веселое село</span>
-                        <div class="bg-white h-1 w-1 rounded-full "></div>
-                        <span class="leading-none">49 Квартир</span>
-                      </div>
+                    <div class="text-[#1E1D2D] flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 p-5 xxl:p-4 xl:p-3">
+                      <span class="font-bold text-[20px] xxl:text-[16px] xl:text-[13px] leading-none">{{ item.title }}</span>
+                      <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">от {{ item.minPrice }} €, от {{ item.minSquare / item.minPrice }} € за м2</span>
                     </div>
-                  </div>
-                  <div class="text-[#1E1D2D] flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 p-5 xxl:p-4 xl:p-3">
-                    <span class="font-bold text-[20px] xxl:text-[16px] xl:text-[13px] leading-none">Euro Avsallar Residence</span>
-                    <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">от 3 850 000 €, от 180 329 € за м2</span>
-                  </div>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -135,8 +103,19 @@ export default {
   },
   created() {
     this.href = window.location.href
-    console.log(this.houses)
-    console.log(this.compilation)
+
+    for (let key in this.houses) {
+      this.houses[key].forEach(item => {
+        let minSquare = [],
+            minPrice = []
+        item.flats.forEach(flat => {
+          minSquare.push(flat.square)
+          minPrice.push(flat.price)
+        })
+        item.minSquare = Math.min(...minSquare)
+        item.minPrice = Math.min(...minPrice)
+      })
+    }
   },
   components: {
     AppFooter,
