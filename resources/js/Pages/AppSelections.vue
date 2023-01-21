@@ -4,7 +4,9 @@
                          @close-create-selection="closeCreateSelection"
                          @close-selection="closeSelection"
                          :openSideBar="openSideBar"
-                         :openSelection="openCreateSelection"/>
+                         :openSelection="openCreateSelection"
+                         :itemCompilation="itemCompilation"
+  />
   <app-submit-selection v-if="submitSelection" @closeSubmitSelection="submitSelection = false" :link="link" />
   <app-header :user="user" />
   <main>
@@ -14,11 +16,11 @@
           <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] leading-none">Мои подборки</h2>
           <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Найдено {{ compilation.length }} подборки</span>
         </div>
-        <button @click="openSelection" class="login__btn--bg text-white text-base xxl:text-sm xl:text-xs px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5 rounded-[3px] leading-none">Создать подборку</button>
+<!--        <button class="login__btn&#45;&#45;bg text-white text-base xxl:text-sm xl:text-xs px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5 rounded-[3px] leading-none">Создать подборку</button>-->
       </div>
       <div class="grid grid-cols-2 lg:grid-cols-1 gap-x-10 gap-y-4 mt-8 xxl:mt-7 xl:mt-6 mb-28 xxl:mb-24 xl:mb-20">
         <div class="contact__selling grid__selection-block rounded-[10px]" v-for="(item, idx) in compilation">
-          <img class="p-2.5 xxl:p-2 xl:p-1.5 w-full h-[8.5vw] lg:h-[17vw] sm:h-full rounded-[3px]" :src="'/storage/' + item.values[0].image" alt="">
+          <img class="p-2.5 xxl:p-2 xl:p-1.5 w-full h-[8.5vw] lg:h-[17vw] sm:h-full rounded-[3px]" :src="'/storage/' + item.house.image" alt="">
           <div class="flex items-center">
             <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5 w-full py-2.5 xxl:py-2 xl:py-1.5 pl-2.5 xxl:pl-2 xl:pl-1.5 pr-20 xxl:pr-16 xl:pr-12 md:pr-2.5">
               <span class="text-lg xxl:text-[15px] xl:text-[13px] text-[#1E1D2D] font-medium leading-none">{{ item.title }}</span>
@@ -29,7 +31,7 @@
               </div>
             </div>
             <div class="border__left flex flex-col h-full justify-evenly">
-              <button class="px-5 xxl:px-4 xl:px-3 h-full">
+              <button @click="openSelectionWithProps(item)" class="px-5 xxl:px-4 xl:px-3 h-full">
                 <img src="../../assets/svg/pen_icon_grey.svg" class="w-6 xxl:w-5.5 xl:w-5" alt="">
               </button>
               <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
@@ -65,7 +67,7 @@ import {computed} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
 
 export default {
-  props: ['compilation', 'houses'],
+  props: ['compilation', 'houses', 'house'],
   data() {
     return {
       user: computed(() => usePage().props.value.auth.user),
@@ -74,7 +76,8 @@ export default {
       openSideBar: false,
       deleteConfirm: false,
       submitSelection: false,
-      link: null
+      link: null,
+      itemCompilation: null
     }
   },
   methods: {
@@ -83,6 +86,10 @@ export default {
       setTimeout(() => {
         this.openSideBar = true
       }, 10)
+    },
+    openSelectionWithProps(item) {
+      this.itemCompilation = item
+      this.openSelection()
     },
     closeCreateSelection(obj, id) {
       this.openSideBar = false
@@ -133,8 +140,6 @@ export default {
     }
   },
   created() {
-    console.log(this.houses)
-
     this.compilation.forEach(item => {
       item.isEdit = false
     })

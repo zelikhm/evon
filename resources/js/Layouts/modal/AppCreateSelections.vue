@@ -2,7 +2,7 @@
   <div v-if="openSelection" class="fixed flex justify-end z-[100] top-0 ring-0 w-full h-full">
     <div :class="{'translate__x__0': openSideBar}" class="transition-all ease-linear duration-500 flex flex-col relative z-50 w-[50%] lg:w-[64%] sm:w-full translate-x-full h-full bg-white px-28 xxl:px-24 xl:px-20 lg:px-10 sm:px-5 py-14 xxl:py-10 xl:py-8 lg:py-5">
       <div class="relative mb-10 xxl:mb-8 xl:mb-6">
-        <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold">Создание подборки</h2>
+        <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold">Редактирование подборки</h2>
         <button @click="this.$emit('close-selection')" class="w-4 h-4 absolute top-[20%] right-0 z-50">
           <div class="absolute h-[1px] w-4 bg-[#8A8996] rotate-45"></div>
           <div class="absolute h-[1px] w-4 bg-[#8A8996] -rotate-45"></div>
@@ -22,18 +22,18 @@
           <input v-model="compilation.isVisible" class="custom__checkbox" type="checkbox" id="chekbox">
           <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="chekbox">показывать ЖК и его месторасположение</label>
         </div>
-        <div class="text-[#1E1D2D] font-medium text-[18px] xxl:text-[15px] xl:text-[13px] mb-4 xxl:mb-3 xl:mb-2.5">ЖК (2)</div>
+        <div class="text-[#1E1D2D] font-medium text-[18px] xxl:text-[15px] xl:text-[13px] mb-4 xxl:mb-3 xl:mb-2.5">ЖК ({{ compilation.JK.length }})</div>
         <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 mb-8 xxl:mb-6 xl:mb-5 overflow-y-auto max-h-56 xxl:max-h-48 xl:max-h-40 custom__scroll-grey">
           <div
             class="contact__selling p-2.5 xxl:p-2 xl:p-1.5 rounded-[10px]"
-            v-for="JK in JKs"
+            v-for="JK in compilation.JK"
           >
             <div class="flex justify-between items-center mb-3 xxl:mb-2.5 xl:mb-2">
               <div class="flex gap-5 xxl:gap-4 xl:gap-3 items-center">
-                <img src="../../../assets/immovables_img_one.png" class="w-[70px] xxl:w-[60px] xl:w-[50px] h-[70px] xl:h-[60px] xl:h-[50px] rounded-[3px]" alt="">
+                <img :src="'/storage/' + JK.image" class="w-[70px] xxl:w-[60px] xl:w-[50px] h-[70px] xl:h-[60px] xl:h-[50px] rounded-[3px]" alt="">
                 <div class="flex flex-col gap-3 xxl:gap-2.5 xl:gap-2">
-                  <span class="text-[#1E1D2D] font-medium text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">Euro Avsallar Residence</span>
-                  <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Бакинская ул., 14, Адлер, Краснодарский край, Россия, 354383</span>
+                  <span class="text-[#1E1D2D] font-medium text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">{{ JK.title }}</span>
+                  <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ JK.city }}, {{ JK.area }}</span>
                 </div>
               </div>
               <div class="flex items-center">
@@ -49,7 +49,7 @@
         </div>
       </div>
       <div class="grid grid-cols-2 gap-8 xxl:gap-6 xl:gap-5">
-        <button @click="createCompilation" class="login__btn--bg text-white text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Создать</button>
+        <button @click="createCompilation" class="login__btn--bg text-white text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Сохранить</button>
         <button @click="this.$emit('close-selection')" class="bg-litepink text-[#E84680] text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Отменить</button>
       </div>
     </div>
@@ -60,29 +60,20 @@
 <script>
 
 export default {
-  props: {
-    openSelection: Boolean,
-    openSideBar: Boolean,
-    user: {},
-    JKs: [
-      { openInput: false },
-      { openInput: false },
-      { openInput: false },
-      { openInput: false },
-      { openInput: false },
-    ],
-  },
+  props: ['openSelection', 'openSideBar', 'user', 'itemCompilation'],
   data() {
     return {
       compilation: {
         title: '',
         description: '',
-        isVisible: false
+        isVisible: false,
+        JK: []
       },
       validation: {
         title: false,
         description: false
-      }
+      },
+      JK: []
     }
   },
   emits: ['close-create-selection', 'close-selection'],
@@ -122,8 +113,23 @@ export default {
     validationCheck(id) {
       if (id === 0) this.compilation.title.length > 0 ? this.validation.title = false : this.validation.title = true
       else if (id === 1) this.compilation.description.length > 0 ? this.validation.description = false : this.validation.description = true
+    },
+    fillInput() {
+      console.log(this.itemCompilation)
+      if (this.itemCompilation) {
+        this.compilation.title = this.itemCompilation.title
+        this.compilation.description = this.itemCompilation.description
+        this.compilation.isVisible = this.itemCompilation.isVisible === 1 ? true : false
+        this.compilation.JK = this.itemCompilation.houses
+      }
     }
   },
+  created() {
+    this.fillInput()
+  },
+  updated() {
+    this.fillInput()
+  }
 }
 </script>
 

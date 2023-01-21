@@ -511,8 +511,6 @@ export default {
       openSelectDeadline: false,
       deadlines: [
         {deadline: 'Сдан', value: 1},
-        {deadline: 'Не сдан', value: 2},
-        {deadline: 'В разработке', value: 3},
       ],
 
       selectType: 'Новостройка',
@@ -760,6 +758,16 @@ export default {
     if (this.house) this.isEdit = false
     else this.isEdit = true
 
+    let date = new Date(),
+        fullYear = date.getFullYear(),
+        fullPlus5 = fullYear + 5
+
+    for (fullYear; fullYear <= fullPlus5; fullYear++) {
+      for (let month = 1; month <= 12; month += 3) {
+        console.log(`${month}/${fullYear}`)
+      }
+    }
+
     if (this.city[0] !== null) {
       this.selectCity = this.city[0].title
       this.selectRegion = this.city[0].regions[0].title
@@ -815,9 +823,11 @@ export default {
       this.supportsReady = this.house.supports
     }
 
-    setTimeout(() => {
-      this.$refs.uploudBackground.style.display = 'none'
-    }, 10)
+    if (!this.isEdit) {
+      setTimeout(() => {
+        this.$refs.uploudBackground.style.display = 'none'
+      }, 10)
+    }
 
   },
   computed: {

@@ -79,7 +79,7 @@
                 <div class="flex gap-7 xxl:gap-5 xl:gap-4">
                   <div class="flex w-full flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
                     <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="company">Компания</label>
-                    <input class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="company">
+                    <input v-model="titleCompany" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="company">
                   </div>
                   <div class="relative shrink-0 h-[78px] xxl:h-[61px] xl:h-[55px] w-[78px] xxl:w-[61px] xl:w-[55px] rounded-full">
                     <img v-if="agency" class="absolute w-full h-full rounded-full" :src="agencyPhoto" alt="">
@@ -92,7 +92,7 @@
                         <label for="agency" :class="{'-z-10': agency}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-full">
                           <img src="../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
                         </label>
-                        <input class="w-full h-full rounded-full opacity-0 absolute top-0 left-0 pointer-events-none" id="agency" type="file" ref="file" @change="changeAgency">
+                        <input class="w-full h-full rounded-full opacity-0 absolute top-0 left-0 pointer-events-none" id="agency" type="file" ref="companyIcon" @change="changeAgency">
                       </div>
                     </div>
                   </div>
@@ -108,7 +108,7 @@
                     <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none">Загрузить обложку</span>
                   </div>
                 </label>
-                <input class="pointer-events-none overflow-hidden absolute top-0 left-0 opacity-0" id="cover" type="file">
+                <input class="pointer-events-none overflow-hidden absolute top-0 left-0 opacity-0" id="cover" type="file" ref="banner" @change="changeBanner">
               </div>
             </div>
           </div>
@@ -145,7 +145,10 @@ export default {
         position: '',
         link: '',
         description: ''
-      }
+      },
+      titleCompany: '',
+      banner: null,
+      user_avatar: null
     }
   },
   methods: {
@@ -157,10 +160,16 @@ export default {
     },
     changeAgency(e) {
       this.agencyPhoto = URL.createObjectURL(e.target.files[0])
-      console.log(e.target.files[0])
       if (e.target.files.length == 1) {
         this.agency = true
       }
+
+      this.user_avatar = e.target.files[0]
+      console.log(this.user_avatar)
+    },
+    changeBanner(e) {
+      this.banner = e.target.files[0]
+      console.log(this.banner)
     },
     deletePhoto() {
       this.agencyPhoto = ''
@@ -187,25 +196,40 @@ export default {
         data: formData,
       }).then(response => console.log(response))
 
-      // let formDataAgency = new FormData()
+      let formDataAgency = new FormData()
+      formDataAgency.append('user_id', this.user.id)
+      formDataAgency.append('title', this.titleCompany)
+      formDataAgency.append('banner', this.banner)
+      formDataAgency.append('image', this.user_avatar)
+      formDataAgency.append('token', this.globalToken)
 
-      console.log(this.user)
-
-      // axios({
-      //   method: 'post',
-      //   url: '/api/user/edit',
-      //   headers: {"Content-type": "multipart/form-data"},
-      //   data: dataForm,
-      // }).then(response => console.log(response))
+      if (this.user.company === null) {
+        axios({
+          method: 'post',
+          url: '/api/user/addedCompany',
+          headers: {"Content-type": "multipart/form-data"},
+          data: formDataAgency,
+        }).then(response => console.log(response))
+      } else {
+        axios({
+          method: 'post',
+          url: '/api/user/editCompany',
+          headers: {"Content-type": "multipart/form-data"},
+          data: formDataAgency,
+        }).then(response => console.log(response))
+      }
 
     }
   },
   created() {
-    console.log(this.user)
+    console.log(this.company)
     this.profile.name = this.user.first_name
     this.profile.surname = this.user.last_name
     this.profile.tel = this.user.phone
     this.profile.position = this.user.status
+    if (this.user.company) {
+      this.titleCompany = this.user.company.title
+    }
     if(this.user.link === null) {
       this.profile.link = ''
     } else {
