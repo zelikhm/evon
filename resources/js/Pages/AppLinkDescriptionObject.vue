@@ -21,24 +21,24 @@ import { Link } from '@inertiajs/inertia-vue3'
   <main>
     <div class="_container flex flex-col">
       <div class="decription__head rounded-[12px] p-5 xxl:p-4 xl:p-3 my-7 xxl:my-5 xl:my-4">
-        <div class="flex items-center justify-between">
-          <div class="flex flex-col">
-            <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-              <span class="font-semibold text-xl xxl:text-lg xl:text-sm">Euro Avsallar Residence</span>
-              <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1 text-[14px] xxl:text-[12px] xl:text-[10px]">
+        <div class="flex items-center justify-between sm:flex-col sm:items-start sm:gap-2">
+          <div class="flex flex-col sm:gap-3">
+            <div class="flex items-center sm:flex-col sm:items-start gap-5 xxl:gap-4 xl:gap-3">
+              <span class="font-semibold text-xl xxl:text-lg xl:text-sm lg:text-[18px]">Euro Avsallar Residence</span>
+              <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px]">
                 <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">СДАН</span>
                 <span class="flex items-center justify-center text-white font-semibold bg-[#FA8D50] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">акция</span>
               </div>
             </div>
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Туапсе, А147</span>
+            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">Туапсе, А147</span>
           </div>
           <div class="flex items-center gap-1.5 xxl:gap-1 xl:gap-0.5">
             <img src="../../assets/svg/reload_icon.svg" class="h-4 xx:h-3.5 xl:h-3" alt="reload">
-            <span class="text-sm xxl:text-xs xl:text-[10px]">Сегодня</span>
+            <span class="text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">Сегодня</span>
           </div>
         </div>
       </div>
-      <div class="grid__68-32 gap-7 xxl:gap-5 xl:gap-4">
+      <div class="grid__68-30 justify-between">
         <div class="flex flex-col">
           <swiper
             :navigation="true"
@@ -49,43 +49,43 @@ import { Link } from '@inertiajs/inertia-vue3'
             :loop="true"
             class="mySwiper w-full"
           >
-            <swiper-slide class="h-full flex justify-center">
-              <img @click="album = true" class="h-full" src="../../assets/slider_img.jpg" alt="">
+            <swiper-slide class="h-full w-full flex justify-center">
+              <img @click="album = true" class="w-full h-full" src="../../assets/slider_img.jpg" alt="">
             </swiper-slide>
-            <swiper-slide class="h-full flex justify-center">
-              <img @click="album = true" class="h-full" src="../../assets/slider_img.jpg" alt="">
+            <swiper-slide class="h-full w-full flex justify-center">
+              <img @click="album = true" class="w-full h-full" src="../../assets/slider_img.jpg" alt="">
             </swiper-slide>
           </swiper>
-          <div class="border border-solid border-[#E5DFEE] h-[100px] xxl:h-[80px] xl:h-[60px] flex items-center justify-evenly rounded-[12px] mt-7 xxl:mt-5 xl:mt-4 mb-16 xxl:mb-12 xl:mb-10">
-            <div class="flex flex-col justify-center">
-              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">49</span>
-              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Квартир</span>
+          <div class="border border-solid border-[#E5DFEE] h-[100px] xxl:h-[80px] xl:h-[60px] flex md:flex-col md:h-fit items-center justify-evenly rounded-[12px] mt-7 xxl:mt-5 xl:mt-4 mb-16 xxl:mb-12 xl:mb-10">
+            <div class="flex flex-col justify-center md:py-2">
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">49</span>
+              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">Квартир</span>
             </div>
-            <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
-            <div class="flex flex-col justify-center">
-              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">500 000 €</span>
-              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Мин за м²</span>
+            <div class="h-full md:h-[1px] w-[1px] md:w-full bg-[#E5DFEE]"></div>
+            <div class="flex flex-col justify-center md:py-2">
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">500 000 €</span>
+              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">Мин за м²</span>
             </div>
-            <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
-            <div class="flex flex-col justify-center">
-              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">5 000 000 €</span>
-              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Мин. ценаа</span>
+            <div class="h-full md:h-[1px] w-[1px] md:w-full bg-[#E5DFEE]"></div>
+            <div class="flex flex-col justify-center md:py-2">
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">5 000 000 €</span>
+              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">Мин. ценаа</span>
             </div>
-            <div class="h-full w-[1px] bg-[#E5DFEE]"></div>
-            <div class="flex flex-col justify-center">
-              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] text-center leading-none">14.9 - 23.4</span>
-              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px]">Площади, м²</span>
+            <div class="h-full md:h-[1px] w-[1px] md:w-full bg-[#E5DFEE]"></div>
+            <div class="flex flex-col justify-center md:py-2">
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">14.9 - 23.4</span>
+              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">Площади, м²</span>
             </div>
           </div>
           <div class="flex flex-col pb-14 xxl:pb-10 xl:pb-8">
-            <span class="uppercase font-medium text-[18px] xxl:text-[15px] xl:text-[13px] pb-5 xxl:pb-4 xl:pb-3 leading-none">О ЖК</span>
-            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum</p>
+            <span class="uppercase font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] pb-5 xxl:pb-4 xl:pb-3 leading-none">О ЖК</span>
+            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px] pb-6 xxl:pb-5 xl:pb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum</p>
             <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 w-fit items-center animation__arrow">
-              <span class="text-[#6435A5] font-medium text-sm xxl:text-xs xl:text-[10px]">Подробнее</span>
+              <span class="text-[#6435A5] font-medium text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">Подробнее</span>
               <img src="../../assets/svg/arrow_right_purple.svg" class="transition-all duration-300 w-3.5 xxl:w-3 xl:wp-2.5" alt="Стрелочка в право">
             </button>
           </div>
-          <div class="text-[18px] xxl:text-[15px] xl:text-[13px] pb-14 xxl:pb-10 xl:pb-8">
+          <div class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] pb-14 xxl:pb-10 xl:pb-8">
             <span class="font-medium">Инфраструктура</span>
             <div class="flex flex-wrap gap-3 xxl:gap-2.5 xl:gap-2m pt-4 xxl:pt-3 xl:pt-2.5">
               <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Спа</span>
@@ -98,88 +98,88 @@ import { Link } from '@inertiajs/inertia-vue3'
               <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Кинотеатр</span>
             </div>
           </div>
-          <div class="grid grid-cols-2 gap-7 xxl:gap-5 xl:gap-4 pb-16 xxl:pb-12 xl:pb-10">
+          <div class="grid grid-cols-2 md:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4 pb-16 xxl:pb-12 xl:pb-10">
             <div class="border border-solid border-[#E5DFEE] p-7 xxl:p-5 xl:p-4 rounded-[12px]">
-              <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px]">Дополнительные услуги</span>
+              <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px]">Дополнительные услуги</span>
               <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 pt-6 xxl:pt-5 xl:pt-4">
                 <div class="flex justify-between items-center">
-                  <span class="text-base xxl:text-sm xl:text-xs">Предоставляется ВНЖ</span>
-                  <div class="bg-[#30CB49] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
-                    <img src="../../assets/svg/check_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                  <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px]">Предоставляется ВНЖ</span>
+                  <div class="bg-[#30CB49] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 lg:h-4 lg:w-4 rounded-full flex items-center justify-center">
+                    <img src="../../assets/svg/check_icon.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-3" alt="">
                   </div>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">Получение Гражданства</span>
-                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
-                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">Получение Гражданства</span>
+                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 lg:h-4 lg:w-4 rounded-full flex items-center justify-center">
+                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-3" alt="">
                   </div>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">Возможен онлайн-показ</span>
-                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
-                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">Возможен онлайн-показ</span>
+                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 lg:h-4 lg:w-4 rounded-full flex items-center justify-center">
+                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-3" alt="">
                   </div>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">Кадастр >75000$</span>
-                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
-                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">Кадастр >75000$</span>
+                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 lg:h-4 lg:w-4 rounded-full flex items-center justify-center">
+                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-3" alt="">
                   </div>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">Возможна удалённая сделка</span>
-                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
-                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">Возможна удалённая сделка</span>
+                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 lg:h-4 lg:w-4 rounded-full flex items-center justify-center">
+                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-3" alt="">
                   </div>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">Послепродажный сервис</span>
-                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
-                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">Послепродажный сервис</span>
+                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 lg:h-4 lg:w-4 rounded-full flex items-center justify-center">
+                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-3" alt="">
                   </div>
                 </div>
               </div>
             </div>
             <div class="border border-solid border-[#E5DFEE] p-7 xxl:p-5 xl:p-4 rounded-[12px]">
-              <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px]">Расположение</span>
+              <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px ]lg:text-[15px]">Расположение</span>
               <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 pt-6 xxl:pt-5 xl:pt-4">
                 <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от моря</span>
-                  <span class="text-base xxl:text-sm xl:text-xs">500 м</span>
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">от моря</span>
+                  <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px]">500 м</span>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от торгового центра</span>
-                  <span class="text-base xxl:text-sm xl:text-xs">500 м</span>
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">от торгового центра</span>
+                  <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px]">500 м</span>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от детского садика</span>
-                  <span class="text-base xxl:text-sm xl:text-xs">500 м</span>
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">от детского садика</span>
+                  <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px]">500 м</span>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от парка</span>
-                  <span class="text-base xxl:text-sm xl:text-xs">500 м</span>
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">от парка</span>
+                  <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px]">500 м</span>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от остановки</span>
-                  <span class="text-base xxl:text-sm xl:text-xs">500 м</span>
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">от остановки</span>
+                  <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px]">500 м</span>
                 </div>
                 <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от школы</span>
-                  <span class="text-base xxl:text-sm xl:text-xs">500 м</span>
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">от школы</span>
+                  <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px]">500 м</span>
                 </div>
               </div>
             </div>
           </div>
           <div class="pb-16 xxl:pb-12 xl:pb-10">
-            <div class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] leading-none mb-7 xxl:mb-5 xl:mb-4">Корпуса (2)</div>
-            <div class="grid grid-cols-3 gap-5 xxl:gap-4 xl:gap-3">
+            <div class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none mb-7 xxl:mb-5 xl:mb-4">Корпуса (2)</div>
+            <div class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1   gap-5 xxl:gap-4 xl:gap-3">
               <div class="decription__head relative rounded-[10px]">
                 <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 p-7 xxl:p-5 xl:p-4">
                   <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                    <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">Корпус 1</span>
-                    <span class="flex items-center justify-center text-[14px] xxl:text-[12px] xl:text-[10px] uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">СДАН</span>
+                    <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none">Корпус 1</span>
+                    <span class="flex items-center justify-center text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">СДАН</span>
                   </div>
-                  <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">8 квартир. от 3 850 000 €. от 1280 220 € за м</span>
+                  <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">8 квартир. от 3 850 000 €. от 1280 220 € за м</span>
                 </div>
                 <div class="absolute top-0 right-0 p-2.5 xxl:p-2 xl:p-1.5">
                   <label class="payd__checkbox"  for="pay_1">
@@ -190,10 +190,10 @@ import { Link } from '@inertiajs/inertia-vue3'
               <div class="relative rounded-[10px]">
                 <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 p-7 xxl:p-5 xl:p-4">
                   <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                    <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">Корпус 1</span>
-                    <span class="flex items-center justify-center text-[14px] xxl:text-[12px] xl:text-[10px] uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">СДАН</span>
+                    <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none">Корпус 1</span>
+                    <span class="flex items-center justify-center text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">СДАН</span>
                   </div>
-                  <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">8 квартир. от 3 850 000 €. от 1280 220 € за м</span>
+                  <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">8 квартир. от 3 850 000 €. от 1280 220 € за м</span>
                 </div>
                 <div class="absolute top-0 right-0 p-2.5 xxl:p-2 xl:p-1.5">
                   <label class="payd__checkbox"  for="pay_2">
@@ -204,42 +204,42 @@ import { Link } from '@inertiajs/inertia-vue3'
             </div>
           </div>
           <div class="pb-16 xxl:pb-12 xl:pb-10">
-            <div class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] leading-none mb-7 xxl:mb-5 xl:mb-4">8 Квартир</div>
-            <div class="grid grid-cols-4 gap-5 xxl:gap-4 xl:gap-3 mb-7 xxl:mb-5 xl:mb-4">
+            <div class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none mb-7 xxl:mb-5 xl:mb-4">8 Квартир</div>
+            <div class="grid grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3 mb-7 xxl:mb-5 xl:mb-4">
               <div class="border border-solid border-[#E5DFEE] rounded-[6px] px-4 xx:px-3 xl:px-2.5 py-2 xxl:py-1.5 xl:py-1">
-                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Цена</span>
+                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">Цена</span>
                 <div class="flex gap-2">
                   <div class="flex items-center gap-1">
-                    <label class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none" for="cost_from">от</label>
-                    <input class="text-[18px] xxl:text-[15px] xl:text-[13px] border__bottom leading-none p-0 w-full border-transparent focus:ring-0" type="number" id="cost_from">
+                    <label class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none" for="cost_from">от</label>
+                    <input class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] border__bottom leading-none p-0 w-full border-transparent focus:ring-0" type="number" id="cost_from">
                   </div>
                   <div class="flex items-center gap-1">
-                    <label class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none" for="cost_before">до</label>
-                    <input class="text-[18px] xxl:text-[15px] xl:text-[13px] border__bottom leading-none p-0 w-full border-transparent focus:ring-0" type="number" id="cost_before">
+                    <label class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none" for="cost_before">до</label>
+                    <input class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] border__bottom leading-none p-0 w-full border-transparent focus:ring-0" type="number" id="cost_before">
                   </div>
                 </div>
               </div>
               <div class="border border-solid border-[#E5DFEE] rounded-[6px] px-4 xx:px-3 xl:px-2.5 py-2 xxl:py-1.5 xl:py-1">
-                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Площадь м²</span>
+                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">Площадь м²</span>
                 <div class="flex gap-2">
                   <div class="flex items-center gap-1">
-                    <label class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none" for="from">от</label>
-                    <input class="text-[18px] xxl:text-[15px] xl:text-[13px] border__bottom leading-none p-0 w-full border-transparent focus:ring-0" type="number" id="from">
+                    <label class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none" for="from">от</label>
+                    <input class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] border__bottom leading-none p-0 w-full border-transparent focus:ring-0" type="number" id="from">
                   </div>
                   <div class="flex items-center gap-1">
-                    <label class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none" for="before">до</label>
-                    <input class="text-[18px] xxl:text-[15px] xl:text-[13px] border__bottom leading-none p-0 w-full border-transparent focus:ring-0" type="number" id="before">
+                    <label class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none" for="before">до</label>
+                    <input class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] border__bottom leading-none p-0 w-full border-transparent focus:ring-0" type="number" id="before">
                   </div>
                 </div>
               </div>
               <div class="flex flex-col w-full h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectLayout}">
-                <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Планировка</span>
+                <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[12px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Планировка</span>
                 <div class="relative">
-                  <div @click="openSelectLayout = !openSelectLayout" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
+                  <div @click="openSelectLayout = !openSelectLayout" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
                     <span>{{ selectLayout }}</span>
                     <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectLayout }" alt="">
                   </div>
-                  <div v-if="openSelectLayout" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
+                  <div v-if="openSelectLayout" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px]">
                     <span
                       v-for="(layout, idx) in layouts" :key="idx"
                       @click="changeSelectLayout(layout)"
@@ -250,14 +250,14 @@ import { Link } from '@inertiajs/inertia-vue3'
                   </div>
                 </div>
               </div>
-              <div class="relative h-fit justify-self-end">
+              <div class="relative h-fit justify-self-end md:justify-self-center md:flex md:items-center md:h-full">
                 <div @click="openDate = !openDate" class="cursor-pointer flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
-                  <span class="text-base xxl:text-sm xl:text-xs leading-none">
+                  <span class="text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none">
                     По {{ selectDate }}
                   </span>
                   <img src="../../assets/svg/arrow_down_black.svg" alt="Стрелочка вниз">
                 </div>
-                <div v-if="openDate" class="bg-white right-0 top-[120%] rounded-[6px] text-base xxl:text-sm xl:text-xs border border-solid border-[#E5DFEE] absolute flex flex-col z-10">
+                <div v-if="openDate" class="bg-white right-0 top-[120%] md:top-[80%] sm:top-[120%] md:-right-[50px] rounded-[6px] text-base xxl:text-sm xl:text-xs lg:text-[14px] border border-solid border-[#E5DFEE] absolute flex flex-col z-10">
                   <span
                     v-for="date in dates"
                     @click="changeDate(date)"
@@ -269,204 +269,206 @@ import { Link } from '@inertiajs/inertia-vue3'
             </div>
 
 <!--    Когда квартиры есть        -->
-            <div class="flex flex-col">
-              <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
-                <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                  <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
-                  <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                    <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                      <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
-                      <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
-                    </div>
-                    <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
-                  </div>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
-                </div>
-              </div>
-              <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
-                <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                  <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
-                  <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                    <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                      <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
-                      <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
-                    </div>
-                    <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
-                  </div>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
-                </div>
-              </div>
-              <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
-                <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                  <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
-                  <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                    <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                      <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
-                      <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
-                    </div>
-                    <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
-                  </div>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
-                </div>
-              </div>
-              <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
-                <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                  <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
-                  <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                    <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                      <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
-                      <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
-                    </div>
-                    <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
-                  </div>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
-                </div>
-              </div>
-              <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
-                <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                  <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
-                  <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                    <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                      <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
-                      <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
-                    </div>
-                    <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
-                  </div>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
-                </div>
-              </div>
-              <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
-                <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                  <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
-                  <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                    <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                      <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
-                      <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
-                    </div>
-                    <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
-                  </div>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
-                </div>
-              </div>
-              <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
-                <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                  <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
-                  <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                    <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                      <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
-                      <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
-                    </div>
-                    <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
-                  </div>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
-                </div>
-              </div>
-              <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
-                <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                  <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
-                  <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                    <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                      <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
-                      <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
-                    </div>
-                    <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
-                  </div>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
-                </div>
-              </div>
-              <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
-                <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                  <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
-                  <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                    <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                      <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
-                      <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
-                    </div>
-                    <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
-                  </div>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
-                </div>
-                <div>
-                  <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
-                </div>
-              </div>
-            </div>
+           <div class="sm:overflow-auto sm:custom__scroll-grey">
+             <div class="flex flex-col sm:w-[500px]">
+               <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
+                 <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
+                   <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
+                   <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
+                     <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
+                       <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
+                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
+                     </div>
+                     <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
+                   </div>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
+                 </div>
+               </div>
+               <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
+                 <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
+                   <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
+                   <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
+                     <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
+                       <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
+                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
+                     </div>
+                     <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
+                   </div>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
+                 </div>
+               </div>
+               <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
+                 <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
+                   <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
+                   <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
+                     <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
+                       <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
+                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
+                     </div>
+                     <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
+                   </div>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
+                 </div>
+               </div>
+               <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
+                 <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
+                   <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
+                   <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
+                     <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
+                       <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
+                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
+                     </div>
+                     <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
+                   </div>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
+                 </div>
+               </div>
+               <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
+                 <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
+                   <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
+                   <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
+                     <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
+                       <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
+                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
+                     </div>
+                     <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
+                   </div>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
+                 </div>
+               </div>
+               <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
+                 <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
+                   <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
+                   <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
+                     <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
+                       <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
+                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
+                     </div>
+                     <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
+                   </div>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
+                 </div>
+               </div>
+               <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
+                 <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
+                   <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
+                   <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
+                     <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
+                       <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
+                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
+                     </div>
+                     <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
+                   </div>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
+                 </div>
+               </div>
+               <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
+                 <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
+                   <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
+                   <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
+                     <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
+                       <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
+                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
+                     </div>
+                     <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
+                   </div>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
+                 </div>
+               </div>
+               <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
+                 <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
+                   <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
+                   <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
+                     <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
+                       <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
+                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
+                     </div>
+                     <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
+                   </div>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
+                 </div>
+                 <div>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
+                 </div>
+               </div>
+             </div>
+           </div>
 
 <!--    Когда квартир нет-->
-            <div class="border__top py-12 xxl:py-10 xl:py-8">
-              <div class="flex justify-between items-center rounded-[10px] bg-[#F6F3FA] p-10 xxl:p-8 xl:p-6">
+            <div v-if="false" class="border__top py-12 xxl:py-10 xl:py-8">
+              <div class="flex justify-between md:flex-col items-center rounded-[10px] bg-[#F6F3FA] p-10 xxl:p-8 xl:p-6">
                 <div class="flex flex-col">
-                  <span class="text-[20px] xxl:text-[17px] xl:text-[14px] font-medium">Нет доступных квартир</span>
-                  <p class="w-[70%] text-[#8A8996] text-[16px] xxl:text-[14px] xl:text-[12px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+                  <span class="text-[20px] xxl:text-[17px] xl:text-[14px] lg:text-[17px] font-medium">Нет доступных квартир</span>
+                  <p class="w-[70%] md:w-full text-[#8A8996] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[14px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
                 </div>
                 <svg class="h-full" width="162" height="113" viewBox="0 0 162 113" fill="#6435A5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <rect width="162" height="113" fill="url(#pattern0)"/>
@@ -479,33 +481,34 @@ import { Link } from '@inertiajs/inertia-vue3'
                 </svg>
               </div>
             </div>
+
           </div>
         </div>
         <div>
           <div class="contact__selling h-fit bg-white rounded-[10px] p-4 xxl:p-3 xl:p-2.5 mb-7 xxl:mb-5 xl:mb-4">
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 mb-5 xxl:mb-4 xl:mb-4">
-              <img src="../../assets/chat_avatar.png" class="w-14 xxl:w-12 xl:w-10" alt="">
+              <img src="../../assets/chat_avatar.png" class="w-14 xxl:w-12 xl:w-10 lg:w-12" alt="">
               <div class="flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
-                <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none font-medium">Елена</span>
-                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Отдел продаж</span>
+                <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none font-medium">Елена</span>
+                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">Отдел продаж</span>
               </div>
             </div>
-            <div class="flex items-center mb-5 xxl:mb-4 xl:mb-4 text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">
+            <div class="flex items-center mb-5 xxl:mb-4 xl:mb-4 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">
               <span class="text-[#8A8996] leading-none">Язык:&nbsp;</span>
               <span class="leading-none">Русский, Турецкий, Английский</span>
             </div>
             <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
               <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]">
                 <img src="../../assets/svg/chat_tel_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
-                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px]">+7 930 245 15 20</span>
+                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[14px]">+7 930 245 15 20</span>
               </div>
               <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]">
                 <img src="../../assets/svg/chat_mail_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
-                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px]">elena@mail.ru</span>
+                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[14px]">elena@mail.ru</span>
               </div>
             </div>
           </div>
-          <iframe class="w-full h-[18vw] rounded-[10px]" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d156378.40517354145!2d20.983940554492182!3d52.235889311934415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2spl!4v1672768266512!5m2!1sru!2spl" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <iframe class="w-full h-[18vw] lg:h-[28vw] sm:h-[36vw] rounded-[10px] mb-10" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d156378.40517354145!2d20.983940554492182!3d52.235889311934415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2spl!4v1672768266512!5m2!1sru!2spl" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
       </div>
     </div>
