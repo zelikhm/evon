@@ -135,8 +135,8 @@
 </template>
 
 <script>
-import AppHeader from "../layouts/AppHeader.vue"
-import AppFooter from "../layouts/AppFooter.vue"
+import AppHeader from "../Layouts/AppHeader.vue"
+import AppFooter from "../Layouts/AppFooter.vue"
 import AppChessGrid from "../Components/AppChessGrid.vue"
 import AppChessList from "../Components/AppChessList.vue"
 import AppChessScheme from "../Layouts/modal/AppChessScheme.vue"
