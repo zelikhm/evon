@@ -25,7 +25,6 @@ class CompilationController extends Controller
 
 
     $compilations = $this->getCompilations(Auth::id());
-    dd($compilations);
 
     if(count($compilations) > 0) {
 
