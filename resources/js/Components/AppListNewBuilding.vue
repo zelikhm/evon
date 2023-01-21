@@ -236,7 +236,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         </div>
         <div class="flex justify-between md:flex-col md:gap-3 items-center">
           <div class="flex flex-col items-start lg:gap-2">
-            <h2 class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] md:text-[20px] whitespace-nowrap text-center">Новостройки</h2>
+            <h2 class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] md:text-[20px] whitespace-nowrap text-center">Объекты</h2>
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] md:text-[12px] whitespace-nowrap text-center">Найдено {{ houses.length }} новостроек</span>
           </div>
           <div class="flex items-center md:flex-col gap-8 xxl:gap-6 xl:gap-5 md:gap-3">
@@ -372,7 +372,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
         </div>
       </div>
-      <app-map @open-add-selections="this.$emit('open-add-selections')" v-if="map" :houses="houses" />
+      <app-map @open-add-selections="openAddSelections" v-if="map" :houses="houses" :user="user"  />
     </div>
   </div>
 </template>
@@ -518,6 +518,9 @@ export default {
     changeSelectInstallment(installment) {
       this.selectInstallment = installment.installment
       this.openSelectInstallment = false
+    },
+    openAddSelections(data) {
+      this.$emit('open-add-selections', data)
     }
   },
   created() {

@@ -11,7 +11,7 @@
          <div class="relative decription__head top-0 right-0 bg-white rounded-[10px]">
            <div class="p-6 xxl:p-5 xl:p-4 border__bottom">
              <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 mb-7 xxl:mb-5 xl:mb-4">
-               <img src="../../assets/chat_avatar.png" class="w-14 xxl:w-12 xl:w-8" alt="">
+               <img :src="'/storage/' + house.image" class="w-14 xxl:w-12 xl:w-8 h-14 xxl:h-12 xl:h-8 rounded-full" alt="">
                <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5">
                  <span class="text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] font-medium leading-none">{{ house.title }}</span>
                  <span class="text-[#8A8996] text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ house.city }}, {{ house.area }}</span>
@@ -32,7 +32,7 @@
                <span class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ house.minSquare }} м² - {{ house.maxSquare }} м²</span>
              </div>
              <div class="flex gap-5 xxl:gap-4 xl:gap-3 w-full">
-               <button @click="this.$emit('open-add-selections')" class="register__button--white w-full flex items-center justify-between gap-3 xxl:gap-2.5 xl:gap-2  border border-solid border-[#6435A5] rounded-[4px] p-3 xxl:p-2 xl:p-1.5">
+               <button @click="this.$emit('open-add-selections', house)" class="register__button--white w-full flex items-center justify-between gap-3 xxl:gap-2.5 xl:gap-2  border border-solid border-[#6435A5] rounded-[4px] p-3 xxl:p-2 xl:p-1.5">
                  <span class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">В подборку</span>
                  <svg width="16" height="16" class="w-4.5 xxl:w-4 xl:w-3.5" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                    <g clip-path="url(#clip0_519_1862)">
@@ -45,7 +45,12 @@
                    </defs>
                  </svg>
                </button>
-               <button class="register__button--white w-full flex items-center justify-between gap-3 xxl:gap-2.5 xl:gap-2 border border-solid border-[#6435A5] rounded-[4px] p-3 xxl:p-2 xl:p-1.5">
+               <button v-if="house.favorite" @click="removeFavorite" class="register__button--white w-full flex items-center justify-between gap-3 xxl:gap-2.5 xl:gap-2 border border-solid border-[#6435A5] rounded-[4px] p-3 xxl:p-2 xl:p-1.5">
+                 <span class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">В избранное</span>
+                 <img src="../../assets/svg/heart_icon_pink.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
+               </button>
+
+               <button v-else @click="addFavorite" class="register__button--white w-full flex items-center justify-between gap-3 xxl:gap-2.5 xl:gap-2 border border-solid border-[#6435A5] rounded-[4px] p-3 xxl:p-2 xl:p-1.5">
                  <span class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">В избранное</span>
                  <svg width="16" height="16" class="w-4.5 xxl:w-4 xl:w-3.5" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                    <g clip-path="url(#clip0_158_957)">
@@ -57,7 +62,6 @@
                      </clipPath>
                    </defs>
                  </svg>
-                 <img v-if="1 !== 1" src="../../assets/svg/heart_icon_pink.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
                </button>
              </div>
            </div>
@@ -70,7 +74,7 @@
 
 <script>
 export default {
-  props: ['houses', 'state'],
+  props: ['houses', 'state', 'user'],
   data() {
     return {
       openedMarkerID: null,
@@ -86,7 +90,22 @@ export default {
     }
   },
   methods: {
-    //latitude  ,   longitude
+    addFavorite() {
+      axios.post('/api/favorite/add', {
+        user_id: this.user.id,
+        house_id: this.house.id,
+        token: this.globalToken
+      })
+      this.house.favorite = true
+    },
+    removeFavorite() {
+      axios.post('/api/favorite/deleted', {
+        user_id: this.user.id,
+        house_id: this.house.id,
+        token: this.globalToken
+      })
+      this.house.favorite = false
+    },
     openMarker(marker) {
       if (marker === null) {
         this.openedMarkerID = null

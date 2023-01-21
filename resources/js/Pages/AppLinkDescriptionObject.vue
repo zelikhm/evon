@@ -24,13 +24,13 @@ import { Link } from '@inertiajs/inertia-vue3'
         <div class="flex items-center justify-between sm:flex-col sm:items-start sm:gap-2">
           <div class="flex flex-col sm:gap-3">
             <div class="flex items-center sm:flex-col sm:items-start gap-5 xxl:gap-4 xl:gap-3">
-              <span class="font-semibold text-xl xxl:text-lg xl:text-sm lg:text-[18px]">Euro Avsallar Residence</span>
+              <span class="font-semibold text-xl xxl:text-lg xl:text-sm lg:text-[18px]">{{ house.title }}</span>
               <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px]">
-                <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">СДАН</span>
+                <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">{{ house.info.status }}</span>
                 <span class="flex items-center justify-center text-white font-semibold bg-[#FA8D50] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">акция</span>
               </div>
             </div>
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">Туапсе, А147</span>
+            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">{{ house.city }}, {{ house.area }}</span>
           </div>
           <div class="flex items-center gap-1.5 xxl:gap-1 xl:gap-0.5">
             <img src="../../assets/svg/reload_icon.svg" class="h-4 xx:h-3.5 xl:h-3" alt="reload">
@@ -58,30 +58,31 @@ import { Link } from '@inertiajs/inertia-vue3'
           </swiper>
           <div class="border border-solid border-[#E5DFEE] h-[100px] xxl:h-[80px] xl:h-[60px] flex md:flex-col md:h-fit items-center justify-evenly rounded-[12px] mt-7 xxl:mt-5 xl:mt-4 mb-16 xxl:mb-12 xl:mb-10">
             <div class="flex flex-col justify-center md:py-2">
-              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">49</span>
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">{{ house.flats.length }}</span>
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">Квартир</span>
             </div>
             <div class="h-full md:h-[1px] w-[1px] md:w-full bg-[#E5DFEE]"></div>
             <div class="flex flex-col justify-center md:py-2">
-              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">500 000 €</span>
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">{{ minPriceForM }} €</span>
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">Мин за м²</span>
             </div>
             <div class="h-full md:h-[1px] w-[1px] md:w-full bg-[#E5DFEE]"></div>
             <div class="flex flex-col justify-center md:py-2">
-              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">5 000 000 €</span>
-              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">Мин. ценаа</span>
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">{{ minPriceFlat }} €</span>
+              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">Мин. цена</span>
             </div>
             <div class="h-full md:h-[1px] w-[1px] md:w-full bg-[#E5DFEE]"></div>
             <div class="flex flex-col justify-center md:py-2">
-              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">14.9 - 23.4</span>
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">{{ minSquareFlat }} - {{ maxSquareFlat }}</span>
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">Площади, м²</span>
             </div>
           </div>
           <div class="flex flex-col pb-14 xxl:pb-10 xl:pb-8">
             <span class="uppercase font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] pb-5 xxl:pb-4 xl:pb-3 leading-none">О ЖК</span>
-            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px] pb-6 xxl:pb-5 xl:pb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum</p>
-            <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 w-fit items-center animation__arrow">
-              <span class="text-[#6435A5] font-medium text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">Подробнее</span>
+            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="fullDescription">{{ house.description }}</p>
+                        <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{ house.description.slice(0, 300) + '...' }}</p>
+            <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 w-fit items-center animation__arrow" @click="fullDescription = !fullDescription">
+              <span class="text-[#6435A5] font-medium text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">{{ fullDescription ? 'Скрыть' : 'Подробнее' }}</span>
               <img src="../../assets/svg/arrow_right_purple.svg" class="transition-all duration-300 w-3.5 xxl:w-3 xl:wp-2.5" alt="Стрелочка в право">
             </button>
           </div>
@@ -126,16 +127,13 @@ import { Link } from '@inertiajs/inertia-vue3'
                     <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-3" alt="">
                   </div>
                 </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">Возможна удалённая сделка</span>
-                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 lg:h-4 lg:w-4 rounded-full flex items-center justify-center">
-                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-3" alt="">
+                <div class="flex justify-between items-center" v-for="dop in dops">
+                  <span :class="{ disableColor: dop.active !== 1 }" class="text-base xxl:text-sm xl:text-xs">{{ dop.name }}</span>
+                  <div v-if="dop.active === 1" class="bg-[#30CB49] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
+                    <img src="../../assets/svg/check_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
                   </div>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">Послепродажный сервис</span>
-                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 lg:h-4 lg:w-4 rounded-full flex items-center justify-center">
-                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-3" alt="">
+                  <div v-else class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
+                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
                   </div>
                 </div>
               </div>
@@ -143,79 +141,65 @@ import { Link } from '@inertiajs/inertia-vue3'
             <div class="border border-solid border-[#E5DFEE] p-7 xxl:p-5 xl:p-4 rounded-[12px]">
               <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px ]lg:text-[15px]">Расположение</span>
               <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 pt-6 xxl:pt-5 xl:pt-4">
-                <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">от моря</span>
-                  <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px]">500 м</span>
+                <div class="flex justify-between items-center" v-if="house.info.toSea !== null">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от моря</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toSea }} м</span>
                 </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">от торгового центра</span>
-                  <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px]">500 м</span>
+                <div class="flex justify-between items-center" v-if="house.info.toShop !== null">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от торгового центра</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toShop }} м</span>
                 </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">от детского садика</span>
-                  <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px]">500 м</span>
+                <div class="flex justify-between items-center" v-if="house.info.toChildrenSchool !== null">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от детского садика</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toChildrenSchool }} м</span>
                 </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">от парка</span>
-                  <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px]">500 м</span>
+                <div class="flex justify-between items-center" v-if="house.info.toPark !== null">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от парка</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toPark }} м</span>
                 </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">от остановки</span>
-                  <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px]">500 м</span>
+                <div class="flex justify-between items-center" v-if="house.info.toBus !== null">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от остановки</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toBus }} м</span>
                 </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">от школы</span>
-                  <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px]">500 м</span>
+                <div class="flex justify-between items-center" v-if="house.info.toSchool !== null">
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от школы</span>
+                  <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toSchool }} м</span>
                 </div>
               </div>
             </div>
           </div>
           <div class="pb-16 xxl:pb-12 xl:pb-10">
-            <div class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none mb-7 xxl:mb-5 xl:mb-4">Корпуса (2)</div>
-            <div class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1   gap-5 xxl:gap-4 xl:gap-3">
-              <div class="decription__head relative rounded-[10px]">
+            <div class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none mb-7 xxl:mb-5 xl:mb-4">Корпуса ({{ frames.length }})</div>
+            <div class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3">
+              <div :class="{'decription__head': item.active === 1}" @click="targetFrame(item)" class="cursor-pointer relative rounded-[10px]" v-for="item in frames">
                 <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 p-7 xxl:p-5 xl:p-4">
                   <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                    <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none">Корпус 1</span>
+                    <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none">{{ item.name }}</span>
                     <span class="flex items-center justify-center text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">СДАН</span>
                   </div>
-                  <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">8 квартир. от 3 850 000 €. от 1280 220 € за м</span>
+                  <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">{{ item.flats.length }} квартир. от {{ Math.round(item.minPrice / item.minSquare) }} € до {{ Math.round(item.maxPrice / item.maxSquare) }} € за м2</span>
                 </div>
                 <div class="absolute top-0 right-0 p-2.5 xxl:p-2 xl:p-1.5">
-                  <label class="payd__checkbox"  for="pay_1">
-                    <input type="checkbox" value="1" id="pay_1" name="payd"><span></span>
-                  </label>
-                </div>
-              </div>
-              <div class="relative rounded-[10px]">
-                <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 p-7 xxl:p-5 xl:p-4">
-                  <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                    <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none">Корпус 1</span>
-                    <span class="flex items-center justify-center text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">СДАН</span>
-                  </div>
-                  <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">8 квартир. от 3 850 000 €. от 1280 220 € за м</span>
-                </div>
-                <div class="absolute top-0 right-0 p-2.5 xxl:p-2 xl:p-1.5">
-                  <label class="payd__checkbox"  for="pay_2">
-                    <input type="checkbox" value="1" id="pay_2" name="payd"><span></span>
+                  <label class="payd__checkbox" :for="'pay' + item.id">
+                    <input type="radio" value="1" :id="'pay' + item.id" :checked="item.active === 1" name="payd"><span></span>
                   </label>
                 </div>
               </div>
             </div>
           </div>
           <div class="pb-16 xxl:pb-12 xl:pb-10">
-            <div class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none mb-7 xxl:mb-5 xl:mb-4">8 Квартир</div>
+            <div class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none mb-7 xxl:mb-5 xl:mb-4">{{ flats.flats.length }} Квартир</div>
             <div class="grid grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3 mb-7 xxl:mb-5 xl:mb-4">
               <div class="border border-solid border-[#E5DFEE] rounded-[6px] px-4 xx:px-3 xl:px-2.5 py-2 xxl:py-1.5 xl:py-1">
                 <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">Цена</span>
                 <div class="flex gap-2">
                   <div class="flex items-center gap-1">
                     <label class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none" for="cost_from">от</label>
-                    <input class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] border__bottom leading-none p-0 w-full border-transparent focus:ring-0" type="number" id="cost_from">
+                    <input v-model="priceFrom" @input="filterPrice" class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] border__bottom leading-none p-0 w-full border-transparent focus:ring-0" type="number" id="cost_from">
                   </div>
                   <div class="flex items-center gap-1">
                     <label class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none" for="cost_before">до</label>
-                    <input class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] border__bottom leading-none p-0 w-full border-transparent focus:ring-0" type="number" id="cost_before">
+                    <input v-model="priceTo" @input="filterPrice" class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] border__bottom leading-none p-0 w-full border-transparent focus:ring-0" type="number" id="cost_before">
                   </div>
                 </div>
               </div>
@@ -268,203 +252,35 @@ import { Link } from '@inertiajs/inertia-vue3'
               </div>
             </div>
 
-<!--    Когда квартиры есть        -->
+<!--    Когда квартиры есть    -->
            <div class="sm:overflow-auto sm:custom__scroll-grey">
              <div class="flex flex-col sm:w-[500px]">
-               <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
+               <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3" v-for="item in flats.flats">
                  <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                   <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
+                   <img :src="'/storage/' + item.images[0].name" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
                    <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
                      <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                       <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
-                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
+                       <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ item.square }} м</span>
+                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]" v-if="item.status === 'Акция'">акция</span>
                      </div>
                      <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
                    </div>
                  </div>
                  <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ item.count }}</span>
                  </div>
                  <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ item.floor }} этаж</span>
                  </div>
                  <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
-                 </div>
-               </div>
-               <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
-                 <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                   <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
-                   <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                     <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                       <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
-                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
-                     </div>
-                     <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
-                   </div>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
-                 </div>
-               </div>
-               <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
-                 <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                   <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
-                   <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                     <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                       <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
-                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
-                     </div>
-                     <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
-                   </div>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
-                 </div>
-               </div>
-               <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
-                 <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                   <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
-                   <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                     <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                       <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
-                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
-                     </div>
-                     <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
-                   </div>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
-                 </div>
-               </div>
-               <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
-                 <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                   <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
-                   <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                     <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                       <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
-                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
-                     </div>
-                     <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
-                   </div>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
-                 </div>
-               </div>
-               <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
-                 <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                   <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
-                   <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                     <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                       <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
-                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
-                     </div>
-                     <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
-                   </div>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
-                 </div>
-               </div>
-               <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
-                 <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                   <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
-                   <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                     <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                       <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
-                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
-                     </div>
-                     <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
-                   </div>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
-                 </div>
-               </div>
-               <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
-                 <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                   <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
-                   <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                     <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                       <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
-                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
-                     </div>
-                     <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
-                   </div>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
-                 </div>
-               </div>
-               <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3">
-                 <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                   <img src="../../assets/drawing_small.png" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
-                   <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                     <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                       <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">20.6 м</span>
-                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]">акция</span>
-                     </div>
-                     <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
-                   </div>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 + 1</span>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">1 этаж</span>
-                 </div>
-                 <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">3 850 000 €</span>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ item.price }} €</span>
                  </div>
                </div>
              </div>
            </div>
 
 <!--    Когда квартир нет-->
-            <div v-if="false" class="border__top py-12 xxl:py-10 xl:py-8">
+            <div class="border__top py-12 xxl:py-10 xl:py-8" v-if="flats.flats.length === 0">
               <div class="flex justify-between md:flex-col items-center rounded-[10px] bg-[#F6F3FA] p-10 xxl:p-8 xl:p-6">
                 <div class="flex flex-col">
                   <span class="text-[20px] xxl:text-[17px] xl:text-[14px] lg:text-[17px] font-medium">Нет доступных квартир</span>
@@ -528,9 +344,7 @@ import "swiper/css/pagination";
 import { Navigation, Pagination} from "swiper";
 
 export default {
-  props: {
-
-  },
+  props: ['house', 'dops', 'infos'],
   data() {
     return {
       album: false,
@@ -549,7 +363,12 @@ export default {
         { date: 'дате', id: 1 },
         { date: 'увеличению цены', id: 2 },
         { date: 'уменьшению цены', id: 3 },
-      ]
+      ],
+      fullDescription: false,
+      frames: [],
+      flats: [],
+      priceFrom: null,
+      priceTo: null
     }
   },
   methods: {
@@ -560,7 +379,104 @@ export default {
     changeDate(date) {
       this.selectDate = date.date
       this.openDate = false
+    },
+    targetFrame(i) {
+      this.frames.forEach(item => {
+        item.active = 0
+        if (i.id === item.id) {
+          i.active = 1
+          this.flats = item
+        }
+      })
+    },
+    filterPrice() {
+      console.log(this.flats.flats)
+      this.flats.flats = this.flats.find(item => item.flats.price > this.priceFrom)
     }
+  },
+  created() {
+    this.frames = this.house.frames
+
+    this.frames.forEach((item, idx) => {
+      if (idx === 0) {
+        this.flats = item
+        item.active = 1
+      }
+      else {
+        item.active = 0
+      }
+
+      let allPricesForFrames = []
+      let allSquareForFrames = []
+
+      item.flats.forEach(flat => {
+        allPricesForFrames.push(flat.price)
+        allSquareForFrames.push(flat.square)
+      })
+
+      item.minPrice = Math.min(...allPricesForFrames)
+      item.maxPrice = Math.max(...allPricesForFrames)
+      item.minSquare = Math.min(...allSquareForFrames)
+      item.maxSquare = Math.max(...allSquareForFrames)
+
+    })
+
+    // if (this.house.info.dop !== null) {
+    //   for (let key of this.house.info.dop) {
+    //     if (!+isNaN(key)) {
+    //       this.dops.forEach(item => {
+    //         if (+key === item.id) {
+    //           item.active = 1
+    //         }
+    //       })
+    //     }
+    //   }
+    // }
+  },
+  computed: {
+    countFlats() {
+      let count = 0;
+      this.house.frames.forEach(item => {
+        item.flats.forEach(flat => {
+          count += 1
+        })
+      })
+
+      return count
+    },
+    minPriceFlat() {
+      let prices = []
+      this.house.frames.forEach(item => {
+        item.flats.forEach(flat => {
+          prices.push(flat.price)
+        })
+      })
+
+      return Math.min(...prices)
+    },
+    minSquareFlat() {
+      let minSquare = []
+      for (let key of this.house.frames) {
+        for (let flat of key.flats) {
+          minSquare.push(flat.square)
+        }
+      }
+
+      return Math.min(...minSquare)
+    },
+    maxSquareFlat() {
+      let maxSquare = []
+      for (let key of this.house.frames) {
+        for (let flat of key.flats) {
+          maxSquare.push(flat.square)
+        }
+      }
+
+      return Math.max(...maxSquare)
+    },
+    minPriceForM() {
+      return Math.round(this.minPriceFlat / this.minSquareFlat)
+    },
   },
   components: {
     AppFooter,
@@ -573,9 +489,6 @@ export default {
       modules: [Navigation, Pagination],
     };
   },
-  mounted() {
-
-  }
 }
 </script>
 

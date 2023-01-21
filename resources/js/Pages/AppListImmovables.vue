@@ -91,6 +91,7 @@ export default {
       this.openAddSelection = true
     },
     openSelection(house) {
+      console.log(house)
       this.openAddSelection = true
       this.house = house
     }
