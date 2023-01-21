@@ -96,6 +96,9 @@ export default {
         }).then(response => this.success = true)
       }
     }
+  },
+  created() {
+    console.log(this.house)
   }
 }
 </script>

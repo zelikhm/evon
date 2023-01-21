@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import AppHeader from "../layouts/AppHeader.vue"
-import AppFooter from "../layouts/AppFooter.vue"
+import AppHeader from "../Layouts/AppHeader.vue"
+import AppFooter from "../Layouts/AppFooter.vue"
 
 export default {
   components: {
