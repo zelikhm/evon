@@ -25,6 +25,7 @@ class CompilationController extends Controller
 
 
     $compilations = $this->getCompilations(Auth::id());
+    dd($compilations);
 
     if(count($compilations) > 0) {
 
@@ -34,6 +35,7 @@ class CompilationController extends Controller
         } else {
           $compilation->house = null;
         }
+
       }
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\Models\Builder\HouseModel;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -28,6 +29,17 @@ class CompilationModel extends Model
 
     public function user() {
       return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function houses() {
+      return $this->hasManyThrough(
+        HouseModel::class,
+        CompilationInfoModel::class,
+        'compilation_id',
+        'id',
+        'id',
+        'house_id'
+      );
     }
 
     public function company() {

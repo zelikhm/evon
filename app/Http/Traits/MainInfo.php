@@ -339,7 +339,7 @@ trait MainInfo
 
   protected function getCompilations($id)
   {
-    return CompilationModel::where('user_id', $id)->with(['values'])->get();
+    return CompilationModel::where('user_id', $id)->with(['values', 'houses'])->get();
   }
 
   /**
