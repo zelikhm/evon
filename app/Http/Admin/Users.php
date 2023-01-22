@@ -8,6 +8,7 @@ use AdminForm;
 use AdminFormElement;
 use AdminNavigation;
 use App\Models\LandingModel;
+use App\Models\User\CompanyModel;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
@@ -100,7 +101,7 @@ class Users extends Section implements Initializable
       AdminFormElement::columns()
         ->addColumn([
           AdminFormElement::text('email', 'Емаил'),
-          AdminFormElement::text('phone', 'Телефон')
+          AdminFormElement::text('phone', 'Телефон (риелтор)')
             ->required(),
           AdminFormElement::text('first_name', 'Имя'),
           AdminFormElement::password('password', 'Пароль')->hashWithBcrypt(),
@@ -113,8 +114,12 @@ class Users extends Section implements Initializable
             '2' => 'Модератор',
             '3' => 'Администратор',
           ])->required(),
-          AdminFormElement::text('link', 'Ссылка на соц.сеть'),
+          AdminFormElement::text('link', 'Языки'),
         ]),
+
+      AdminFormElement::select('company_id', 'Компания')->setModelForOptions(CompanyModel::class),
+
+      AdminFormElement::image('image', 'Изображение'),
 
 
     ]);

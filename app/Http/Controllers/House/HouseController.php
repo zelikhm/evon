@@ -198,7 +198,6 @@ class HouseController extends Controller
         'percent' => $request->percent,
         'comment' => $request->comment,
         'active' => 0,
-        'status' => 'нету',
         'image' => '/storage/' . $imageName,
         'fool_price' => $request->fool_price,
         'created_at' => Carbon::now()->addHour(3),
@@ -244,7 +243,7 @@ class HouseController extends Controller
 
       HouseCharacteristicsModel::create([
         'house_id' => $house->id,
-        'status' => $request->statusHouse,
+        'exclusive' => $request->exclusive,
         'floors' => $request->floors,
         'type' => $request->type,
         'dop' => $str1,

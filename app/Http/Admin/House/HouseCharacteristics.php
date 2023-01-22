@@ -42,7 +42,7 @@ class HouseCharacteristics extends Section implements Initializable
   /**
    * @var string
    */
-  protected $title = 'Характеристики';
+  protected $title = 'Характеристики для ЖК';
 
   /**
    * @var string
@@ -73,7 +73,7 @@ class HouseCharacteristics extends Section implements Initializable
         ->setWidth('50px')
         ->setHtmlAttribute('class', 'text-center'),
       AdminColumn::relatedLink('house.title', 'ЖК')->setWidth('350px'),
-      AdminColumn::text('status', 'Статус')->setWidth('350px'),
+      AdminColumn::text('type', 'Тип здания')->setWidth('350px'),
       AdminColumn::text('floors', 'Этажи')->setWidth('350px'),
     ];
 
@@ -99,42 +99,66 @@ class HouseCharacteristics extends Section implements Initializable
   {
     $card = AdminForm::card();
 
-    $form = AdminForm::elements([
-      AdminFormElement::select('house_id', 'ЖК')
-        ->setModelForOptions(HouseModel::class, 'title')
-        ->setUsageKey('id'),
-      AdminFormElement::columns()
-        ->addColumn([
-          AdminFormElement::multiselect('dop', 'Доп.Услуги')->SetDisplay('name')->setUsageKey('value')
-            ->setOptions($this->types()),
-          AdminFormElement::select('type', 'Тип здания', [
-            'Эконом' => 'Эконом',
-            'Премиум' => 'Премиум',
-            'Люкс' => 'Люкс',
-          ])->required(),
-        ], 6)->addColumn([
-          AdminFormElement::multiselect('info', 'Инфаструктура')->SetDisplay('name')->setUsageKey('value')
-            ->setOptions($this->infos()),
-          AdminFormElement::select('status', 'Статус', [
-            'Сдан' => 'Продажи закрыты',
-            'В процессе' => 'Свободно',
-            'Не достроено' => 'Акция',
-          ])->required(),
-        ]),
+    if($id === null) {
+      $form = AdminForm::elements([
+        AdminFormElement::select('house_id', 'ЖК')
+          ->setModelForOptions(HouseModel::class, 'title')
+          ->setUsageKey('id'),
+        AdminFormElement::columns()
+          ->addColumn([
+            AdminFormElement::select('type', 'Тип здания', [
+              'Виллы' => 'Виллы',
+              'Новостройки' => 'Новостройки',
+            ])->required(),
+          ], 6)->addColumn([
+            AdminFormElement::number('count_flat', 'Стояки'),
+          ]),
 
-      AdminFormElement::columns()
-        ->addColumn([
-          AdminFormElement::number('floors', 'Этажи'),
-          AdminFormElement::number('toSea', 'До моря'),
-          AdminFormElement::number('toSchool', 'До школы'),
-        ], 6)->addColumn([
-          AdminFormElement::number('toShop', 'До магазина'),
-          AdminFormElement::number('toPark', 'До парка'),
-          AdminFormElement::number('toChildrenSchool', 'До детского сада'),
-          AdminFormElement::number('toBus', 'До остановки'),
-        ]),
+        AdminFormElement::columns()
+          ->addColumn([
+            AdminFormElement::number('toSea', 'До моря'),
+            AdminFormElement::number('toSchool', 'До школы'),
+            AdminFormElement::number('toBus', 'До остановки'),
+          ], 6)->addColumn([
+            AdminFormElement::number('toShop', 'До магазина'),
+            AdminFormElement::number('toPark', 'До парка'),
+            AdminFormElement::number('toChildrenSchool', 'До детского сада'),
+          ]),
+      ]);
+    } else {
+      $form = AdminForm::elements([
+        AdminFormElement::select('house_id', 'ЖК')
+          ->setModelForOptions(HouseModel::class, 'title')
+          ->setUsageKey('id'),
+        AdminFormElement::columns()
+          ->addColumn([
+            AdminFormElement::multiselect('dop', 'Доп.Услуги')->SetDisplay('name')->setUsageKey('id')
+              ->setOptions($this->types()),
+            AdminFormElement::select('type', 'Тип здания', [
+              'Виллы' => 'Виллы',
+              'Новостройки' => 'Новостройки',
+            ])->required(),
+          ], 6)->addColumn([
+            AdminFormElement::multiselect('info', 'Инфаструктура')->SetDisplay('name')->setUsageKey('id')
+              ->setOptions($this->infos()),
+            AdminFormElement::number('floors', 'Этажи'),
+            AdminFormElement::number('count_flat', 'Стояки'),
+          ]),
 
-    ]);
+        AdminFormElement::columns()
+          ->addColumn([
+            AdminFormElement::number('toSea', 'До моря'),
+            AdminFormElement::number('toSchool', 'До школы'),
+            AdminFormElement::number('toBus', 'До остановки'),
+          ], 6)->addColumn([
+            AdminFormElement::number('toShop', 'До магазина'),
+            AdminFormElement::number('toPark', 'До парка'),
+            AdminFormElement::number('toChildrenSchool', 'До детского сада'),
+          ]),
+      ]);
+    }
+
+
 
     $card->getButtons()->setButtons([
       'save_and_continue' => (new Save())->setText('Применить'),

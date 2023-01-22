@@ -6,6 +6,7 @@ use App\Models\Builder\HouseFilesModel;
 use App\Models\Builder\HouseImagesModel;
 use App\Models\Builder\Info\RegionModel;
 use App\Models\News\AdminNewsModel;
+use App\Models\User\CompanyModel;
 use SleepingOwl\Admin\Providers\AdminSectionsServiceProvider as ServiceProvider;
 use AdminNavigation;
 
@@ -30,6 +31,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
     AdminNewsModel::class => 'App\Http\Admin\News\AdminNewsModel',
     HouseImagesModel::class => 'App\Http\Admin\House\Images',
     HouseFilesModel::class => 'App\Http\Admin\House\Files',
+    CompanyModel::class => 'App\Http\Admin\Company',
   ];
 
   /**

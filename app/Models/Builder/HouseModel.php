@@ -23,7 +23,6 @@ class HouseModel extends Model
     'percent',
     'comment',
     'active',
-    'status',
     'slug',
     'fool_price',
     'image',

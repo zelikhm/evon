@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('house_characteristics_models', function (Blueprint $table) {
             $table->id();
             $table->integer('house_id')->comment('Айди жк');
-            $table->string('status')->comment('Статус сдачи');
             $table->integer('floors')->comment('Этажи');
             $table->string('type')->comment('Тип здания');
             $table->string('dop')->comment('Дополнительные услуги');

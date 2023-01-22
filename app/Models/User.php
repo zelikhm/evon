@@ -30,6 +30,7 @@ class User extends Authenticatable
     'link',
     'description',
     'image',
+    'company_id'
   ];
 
   /**
@@ -60,6 +61,6 @@ class User extends Authenticatable
   }
 
   public function company() {
-    return $this->belongsTo(CompanyModel::class, 'id', 'user_id');
+    return $this->belongsTo(CompanyModel::class, 'company_id', 'id');
   }
 }

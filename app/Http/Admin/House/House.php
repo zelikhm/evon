@@ -69,13 +69,12 @@ class House extends Section implements Initializable
       AdminColumn::text('id', '#')
         ->setWidth('50px')
         ->setHtmlAttribute('class', 'text-center'),
-      AdminColumn::link('user.email', 'Пользователь')->setWidth('350px'),
+      AdminColumn::relatedLink('user.email', 'Пользователь')->setWidth('350px'),
       AdminColumn::text('title', 'Название')->setWidth('350px'),
       AdminColumn::text('description', 'Описание')->setWidth('350px'),
       AdminColumn::text('city', 'Город')->setWidth('350px'),
       AdminColumn::text('area', 'Район')->setWidth('350px'),
-      AdminColumn::text('longitude', 'Долгота')->setWidth('350px'),
-      AdminColumn::text('latitude', 'Широта')->setWidth('350px'),
+      AdminColumn::text('active', 'Модерация')->setWidth('350px'),
     ];
 
     $display = AdminDisplay::datatablesAsync()
@@ -110,21 +109,16 @@ class House extends Section implements Initializable
           AdminFormElement::select('city', 'Город')->setModelForOptions(CityModel::class)->SetUsageKey('title'),
           AdminFormElement::text('longitude', 'Долгота'),
           AdminFormElement::number('percent', 'Процент')->setMin(0),
+          AdminFormElement::text('slug', 'Слаг (для ссылки, название на английском)')->required(),
+        ], 6)->addColumn([
+          AdminFormElement::text('area', 'Район'),
+          AdminFormElement::text('latitude', 'Широта'),
+          AdminFormElement::text('comment', 'Комментарий'),
           AdminFormElement::select('active', 'Прошел модерацию?', [
             '0' => 'На модерации',
             '1' => 'Не прошел модерацию',
             '2' => 'Прошел модерацию',
           ]),
-        ], 6)->addColumn([
-          AdminFormElement::text('area', 'Район'),
-          AdminFormElement::text('latitude', 'Широта'),
-          AdminFormElement::text('comment', 'Комментарий'),
-          AdminFormElement::select('status', 'Статус', [
-            'Продажи закрыты' => 'Продажи закрыты',
-            'Свободно' => 'Свободно',
-            'Акция' => 'Акция',
-            'Перепродажа' => 'Перепродажа',
-          ])->required(),
         ]),
 
       AdminFormElement::textarea('description', 'Описание'),

@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Http\Admin\House\Flat;
+namespace App\Http\Admin;
 
 use AdminColumn;
 use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
 use AdminNavigation;
-use App\Models\Builder\Flat\FlatModel;
-use App\Models\Builder\Flat\FrameModel;
-use App\Models\Builder\HouseModel;
+use App\Models\LandingModel;
+use App\Models\User\CompanyModel;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
@@ -28,7 +27,7 @@ use SleepingOwl\Admin\Section;
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */
-class Flat extends Section implements Initializable
+class Company extends Section implements Initializable
 {
   /**
    * @var bool
@@ -38,7 +37,7 @@ class Flat extends Section implements Initializable
   /**
    * @var string
    */
-  protected $title = 'Квартиры';
+  protected $title = 'Компании';
 
   /**
    * @var string
@@ -50,10 +49,10 @@ class Flat extends Section implements Initializable
    */
   public function initialize()
   {
-    $page = AdminNavigation::getPages()->findById('houses');
+    $page = AdminNavigation::getPages()->findById('settings');
 
     $page->addPage(
-      $this->makePage(600)->setIcon('fas fa-user-lock')
+      $this->makePage(200)->setIcon('fas fa-user-lock')
     );
   }
 
@@ -68,14 +67,9 @@ class Flat extends Section implements Initializable
       AdminColumn::text('id', '#')
         ->setWidth('50px')
         ->setHtmlAttribute('class', 'text-center'),
-      AdminColumn::relatedLink('house.title', 'ЖК')->setWidth('350px'),
-      AdminColumn::relatedLink('frame.name', 'Корпус')->setWidth('350px'),
-      AdminColumn::text('number', 'Номер')->setWidth('350px'),
-      AdminColumn::text('square', 'Площадь')->setWidth('350px'),
-      AdminColumn::text('count', 'Планировка')->setWidth('350px'),
-      AdminColumn::text('floor', 'Этаж')->setWidth('350px'),
-      AdminColumn::text('status', 'Статус')->setWidth('350px'),
-      AdminColumn::text('price', 'Цена')->setWidth('350px'),
+      AdminColumn::text('title', 'Название')->setWidth('350px'),
+      AdminColumn::text('image', 'Изображение')->setWidth('350px'),
+      AdminColumn::text('banner', 'Баннер')->setWidth('350px'),
     ];
 
     $display = AdminDisplay::datatablesAsync()
@@ -86,7 +80,7 @@ class Flat extends Section implements Initializable
 
     $display->setApply(function (Builder $query) {
       $query->OrderBy('id', 'asc');
-    })->setNewEntryButtonText('Добавь квартиру');
+    })->setNewEntryButtonText('Создать пользователя');
 
     return $display;
   }
@@ -101,32 +95,13 @@ class Flat extends Section implements Initializable
     $card = AdminForm::card();
 
     $form = AdminForm::elements([
-
-      AdminFormElement::select('frame_id', 'ЖК')
-        ->setOptions($this->getFlats(), 'name')
-        ->setUsageKey('id'),
-
-      AdminFormElement::number('number', 'Номер'),
-      AdminFormElement::number('square', 'Площадь'),
-      AdminFormElement::select('count', 'Планировка')->setOptions([
-        '1+1' => '1+1',
-        '2+1' => '2+1',
-        '3+1' => '3+1',
-        '4+1' => '4+1',
-        'duplex' => 'duplex',
-        'studia' => 'studia',
-      ]),
-      AdminFormElement::number('floor', 'Этаж'),
-      AdminFormElement::select('status', 'Статус')->setOptions([
-        0 => 'Акция',
-        1 => 'Перепродажа',
-        2 => 'Бронь',
-        3 => 'Продажи закрыты',
-        4 => 'В продаже',
-
-      ]),
-      AdminFormElement::number('number_from_stairs', 'От леснечной клетки'),
-      AdminFormElement::number('price', 'Цена')->setStep(0.01),
+      AdminFormElement::columns()
+        ->addColumn([
+          AdminFormElement::text('title', 'Название'),
+        ], 6)->addColumn([
+          AdminFormElement::image('image', 'Изображение'),
+          AdminFormElement::image('banner', 'Баннер'),
+        ]),
     ]);
 
     $card->getButtons()->setButtons([
@@ -180,16 +155,5 @@ class Flat extends Section implements Initializable
   public function onRestore(int $id)
   {
     // remove if unused
-  }
-
-  protected function getFlats() {
-    $flats = FrameModel::with(['house'])->get();
-
-    return $flats->map(static function ($item, $types) {
-      return [
-        'id' => $item->id,
-        'value' => $item->house->title . ' ' . $item->name,
-      ];
-    })->pluck('value', 'id')->toArray();
   }
 }

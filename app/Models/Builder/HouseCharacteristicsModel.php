@@ -12,7 +12,6 @@ class HouseCharacteristicsModel extends Model
 
   protected $fillable = [
     'house_id',
-    'status',
     'floors',
     'type',
     'dop',
@@ -23,6 +22,7 @@ class HouseCharacteristicsModel extends Model
     'toPark',
     'toBus',
     'toChildrenSchool',
+    'count_flat',
   ];
 
   protected $hidden = [
