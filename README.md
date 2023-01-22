@@ -86,6 +86,8 @@ path create \ [post] / поля:
 - toShop - до магазина
 - toPark - до парка
 - toBus - до остановки
+- count_flat - кол-во стояков
+- exclusive - эксклюзив для агенств
 - toChildrenSchool - до дет.сада
 - token
 

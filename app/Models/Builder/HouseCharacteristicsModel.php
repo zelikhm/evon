@@ -23,6 +23,7 @@ class HouseCharacteristicsModel extends Model
     'toBus',
     'toChildrenSchool',
     'count_flat',
+    'exclusive',
   ];
 
   protected $hidden = [

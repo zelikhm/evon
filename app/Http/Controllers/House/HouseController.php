@@ -254,6 +254,7 @@ class HouseController extends Controller
         'toPark' => $request->toPark,
         'toBus' => $request->toBus,
         'toChildrenSchool' => $request->toChildrenSchool,
+        'count_flat' => $request->count_flat,
         'created_at' => Carbon::now()->addHour(3),
         'updated_at' => Carbon::now()->addHour(3),
       ]);
