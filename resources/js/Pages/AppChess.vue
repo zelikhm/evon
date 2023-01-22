@@ -65,7 +65,7 @@
                 <span class="text-base xxl:text-sm xl:text-xs leading-none">Цена</span>
                 <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2" alt="">
               </div>
-              <div v-if="openCost" class="h-[125px] bg-white overflow-y-auto custom__scroll-grey flex flex-col absolute w-full rounded-[5px] top-[120%] left-0 flex border border-solid border-[#E5DFEE]">
+              <div v-if="openCost" class="max-h-[150px] bg-white overflow-y-auto custom__scroll-grey flex flex-col absolute w-full rounded-[5px] top-[120%] left-0 flex border border-solid border-[#E5DFEE]">
                 <span
                   @click="openCost = false"
                   v-for="cost in costs"
@@ -80,7 +80,7 @@
                 <span class="text-base xxl:text-sm xl:text-xs leading-none">Площадь</span>
                 <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2" alt="">
               </div>
-              <div v-if="openSquare" class="h-[125px] bg-white overflow-y-auto custom__scroll-grey flex flex-col absolute w-full rounded-[5px] top-[120%] left-0 flex border border-solid border-[#E5DFEE]">
+              <div v-if="openSquare" class="max-h-[150px] bg-white overflow-y-auto custom__scroll-grey flex flex-col absolute w-full rounded-[5px] top-[120%] left-0 flex border border-solid border-[#E5DFEE]">
                 <span
                   @click="openSquare = false"
                   v-for="square in squares"
@@ -95,7 +95,7 @@
                 <span class="text-base xxl:text-sm xl:text-xs leading-none">Планировка</span>
                 <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2" alt="">
               </div>
-              <div v-if="openLayout" class="h-[125px] bg-white overflow-y-auto custom__scroll-grey flex flex-col absolute w-full rounded-[5px] top-[120%] left-0 flex border border-solid border-[#E5DFEE]">
+              <div v-if="openLayout" class="max-h-[150px] bg-white overflow-y-auto custom__scroll-grey flex flex-col absolute w-full rounded-[5px] top-[120%] left-0 flex border border-solid border-[#E5DFEE]">
                 <span
                   @click="openLayout = false"
                   v-for="layout in layouts"
@@ -135,8 +135,8 @@
 </template>
 
 <script>
-import AppHeader from "../layouts/AppHeader.vue"
-import AppFooter from "../layouts/AppFooter.vue"
+import AppHeader from "../Layouts/AppHeader.vue"
+import AppFooter from "../Layouts/AppFooter.vue"
 import AppChessGrid from "../Components/AppChessGrid.vue"
 import AppChessList from "../Components/AppChessList.vue"
 import AppChessScheme from "../Layouts/modal/AppChessScheme.vue"
