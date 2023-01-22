@@ -216,7 +216,7 @@ export default {
           url: '/api/user/editCompany',
           headers: {"Content-type": "multipart/form-data"},
           data: formDataAgency,
-        }).then(response => console.log(response))
+        }).then(response => console.log(response.data))
       }
 
     }

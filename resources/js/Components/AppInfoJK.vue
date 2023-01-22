@@ -406,7 +406,7 @@ import {Link} from '@inertiajs/inertia-vue3'
               <div class="progress-bar bg-white h-full rounded-[100px]"></div>
             </div>
           </div>
-          <img class="absolute w-full h-full rounded-[5px]" :src="'/storage/' + house.image" alt="">
+          <img class="absolute w-full h-full rounded-[5px]" :src="house.image" alt="">
         </div>
         <div v-if="!house" class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
           <div class="flex justify-between items-center">
@@ -621,7 +621,6 @@ export default {
         formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
         formData.append('image', this.$refs.file.files[0]);
         formData.append('token', this.globalToken);
-        console.log(formData)
 
         axios({
           method: 'post',
@@ -634,6 +633,7 @@ export default {
     addedSupports(res, flag) {
       let idNewJk = res.data.id,
           house = res.data
+      console.log(res)
 
       axios.post('/api/house/clearSupport', {
         house_id: idNewJk
@@ -649,31 +649,29 @@ export default {
           arr.append('house_id', idNewJk)
           arr.append('token', this.globalToken)
 
-          this.saveSupport(arr);
+          this.saveSupport(arr, flag, house);
         })
+      }).catch(e => {
+        if (flag === 1) {
+          window.location.href = '/profile/edit/' + house.slug + '#create'
+        } else {
+          window.location.href = '/profile/houses'
+        }
       })
-      // this.object.title = ''
-      // this.object.description = ''
-      // this.object.floors = ''
-      // this.object.comment = ''
-      // this.object.percent = ''
-      // this.$refs.file.value = null
-      // this.files = []
-      if (flag === 1) {
-        window.location.href = '/profile/edit/' + house.slug + '#create'
-        // this.$emit('addAndContinue', house)
-      } else {
-        window.location.href = '/profile/houses'
-      }
+
     },
-    saveSupport(data) {
+    saveSupport(data, flag, house) {
       axios({
         method: 'post',
         url: '/api/house/addedSupport',
         headers: {"Content-type": "multipart/form-data"},
         data: data,
       }).then(res => {
-        // this.$emit('addAndContinue')
+        if (flag === 1) {
+          window.location.href = '/profile/edit/' + house.slug + '#create'
+        } else {
+          window.location.href = '/profile/houses'
+        }
       })
     },
     checkValidation(num, title) {

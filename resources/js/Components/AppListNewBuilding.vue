@@ -490,7 +490,9 @@ export default {
       this.selectDateId = date.id
       this.openDate = false
 
-      if (this.selectDateId === 2) {
+      if (this.selectDateId === 1) {
+        this.readyHouses = this.readyHouses.sort((a, b) => b.time - a.time)
+      } else if (this.selectDateId === 2) {
         this.readyHouses = this.readyHouses.sort((a, b) => a.minPrice - b.minPrice)
       } else if (this.selectDateId === 3) {
         this.readyHouses = this.readyHouses.sort((a, b) => b.minPrice - a.minPrice)
@@ -526,6 +528,7 @@ export default {
   created() {
     this.readyHouses = this.houses
 
+
     if (this.city[0] !== null) {
       this.selectDev = this.builders[0].first_name
       this.selectCity = this.city[0].title
@@ -537,6 +540,9 @@ export default {
     let dops = this.dops
 
     this.readyHouses.forEach(house => {
+
+      house.time = Date.parse(house.created_at)
+
       let arr = [],
           squareFlats = []
 
@@ -549,6 +555,8 @@ export default {
           }
         }
       }
+
+      this.readyHouses = this.readyHouses.sort((a, b) => b.time - a.time)
 
       house.flats.forEach(item => {
         arr.push(item.price)
