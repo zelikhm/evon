@@ -27,7 +27,7 @@
               <span>{{ selectLayout }}</span>
               <img src="../../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectLayout }" alt="">
             </div>
-            <div v-if="openSelectLayout" class="h-[120px] overflow-y-auto custom__scroll absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
+            <div v-if="openSelectLayout" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
               <span
                 v-for="(layout, idx) in layouts" :key="idx"
                 @click="changeSelectLayout(layout)"
@@ -46,7 +46,7 @@
               <span>{{ selectFloors }}</span>
               <img src="../../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openFloors }" alt="">
             </div>
-            <div v-if="openFloors" class="h-[120px] overflow-y-auto custom__scroll absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
+            <div v-if="openFloors" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
               <span
                 v-for="(floor, idx) in house.info.floors" :key="idx"
                 @click="changeSelectFloors(floor)"
@@ -65,7 +65,7 @@
               <span>{{ selectStatus}}</span>
               <img src="../../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openStatus }" alt="">
             </div>
-            <div v-if="openStatus" class="h-[120px] overflow-y-auto custom__scroll absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
+            <div v-if="openStatus" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
               <span
                 v-for="(status, idx) in statuses" :key="idx"
                 @click="changeSelectStatus(status)"
@@ -84,7 +84,7 @@
               <span>{{ selectStairs }}</span>
               <img src="../../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openStairs }" alt="">
             </div>
-            <div v-if="openStairs" class="h-[120px] overflow-y-auto custom__scroll absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
+            <div v-if="openStairs" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
               <span
                 v-for="(stairs, idx) in stairses" :key="idx"
                 @click="changeSelectStairs(stairs)"

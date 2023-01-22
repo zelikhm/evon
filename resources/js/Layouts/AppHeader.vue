@@ -8,10 +8,10 @@ import { Link } from '@inertiajs/inertia-vue3'
     <div class="_container h-[60px] xxl:h-12 xl:h-10">
       <div class="flex items-center justify-between h-full ">
         <Link href="/" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
-          <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4" alt="Логотип">
+          <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="Логотип">
           <span class="sm:hidden uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon.com</span>
         </Link>
-        <div class="flex items-center gap-7 xxl:gap-5 lg:gap-2 text-[16px] xxl:text-[13px] xl:text-[11px]">
+        <div class="flex items-center gap-7 xxl:gap-5 lg:gap-2 text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[14px]">
           <div class="header__lang--select uppercase relative flex items-center h-[60px] xxl:h-12 xl:h-10">
             <div class="flex h-full text-white items-center cursor-pointer px-7 xxl:px-5 xl:px-4 gap-2.5 xl:gap-1.5" @click="langOptionVisible = !langOptionVisible">
               <span>{{ langSelected }}</span>
