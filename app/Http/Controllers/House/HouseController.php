@@ -193,6 +193,7 @@ class HouseController extends Controller
         'description' => $request->description,
         'city' => $request->city,
         'area' => $request->area,
+        'created' => $request->created,
         'longitude' => $request->longitude,
         'latitude' => $request->latitude,
         'percent' => $request->percent,
@@ -254,6 +255,7 @@ class HouseController extends Controller
         'toPark' => $request->toPark,
         'toBus' => $request->toBus,
         'toChildrenSchool' => $request->toChildrenSchool,
+        'count_flat' => $request->count_flat,
         'created_at' => Carbon::now()->addHour(3),
         'updated_at' => Carbon::now()->addHour(3),
       ]);

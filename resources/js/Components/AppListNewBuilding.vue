@@ -350,7 +350,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                   </div>
                 </div>
                 <div class="flex flex-wrap gap-1 text-[15px] xxl:text-[13px] xl:text-[11px] md:text-[13px]">
-                  <span v-for="dop in item.readyDops" class="text-[#8A8996] leading-none border border-solid border-[#E5DFEE] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5">{{ dop.name }}</span>
+                  <span v-for="dop in item.readyDops" v-if="item.readyDops.length > 0" class="text-[#8A8996] leading-none border border-solid border-[#E5DFEE] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5">{{ dop.name }}</span>
                 </div>
               </div>
             </div>
@@ -363,7 +363,7 @@ import { Link } from '@inertiajs/inertia-vue3'
             </div>
             <div class="flex flex-col">
               <span class="font-medium whitespace-nowrap text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">от {{ Number.isInteger(item.minPrice) ? item.minPrice : "-" }} €</span>
-              <span class="text-[#8A8996] whitespace-nowrap text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px]">{{ isNaN(item.minSquare / item.minPrice) ? "-" : Math.round(item.minSquare / item.minPrice) }} € за м²</span>
+              <span class="text-[#8A8996] whitespace-nowrap text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px]">{{ isNaN(item.minPrice / item.minSquare) ? "-" : Math.round(item.minPrice / item.minSquare) }} € за м²</span>
             </div>
             <div class="gray-backg flex items-center justify-center w-fit px-3 xxl:px-2.5 xl:px-2 gap-2 xxl:gap-1.5 xl:gap-1">
               <img src="../../assets/svg/ruller_icon.svg" class="h-4 xxl:h-3 xl:h-2.5" alt="Линейка">

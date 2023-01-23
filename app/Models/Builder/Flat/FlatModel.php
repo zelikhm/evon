@@ -27,7 +27,7 @@ class FlatModel extends Model
     ];
 
     public function house() {
-      return $this->hasOneThrough(HouseModel::class, FrameModel::class, 'house_id', 'id', 'id', 'id');
+      return $this->hasOneThrough(HouseModel::class, FrameModel::class, 'id', 'id', 'frame_id', 'house_id');
     }
 
     public function frame() {

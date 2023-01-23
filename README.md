@@ -73,7 +73,7 @@ path create \ [post] / поля:
 - percent - Процент
 - comment - Комментарий
 - active - * не передаем
-- status - * не передаем
+- created - срок сдачи
 - fool_price - рассрочка*
 - statusHouse - Статус
 - floors - Этажи
@@ -86,6 +86,8 @@ path create \ [post] / поля:
 - toShop - до магазина
 - toPark - до парка
 - toBus - до остановки
+- count_flat - кол-во стояков
+- exclusive - эксклюзив для агенств
 - toChildrenSchool - до дет.сада
 - token
 

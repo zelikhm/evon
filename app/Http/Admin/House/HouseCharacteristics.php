@@ -111,6 +111,7 @@ class HouseCharacteristics extends Section implements Initializable
               'Новостройки' => 'Новостройки',
             ])->required(),
           ], 6)->addColumn([
+            AdminFormElement::number('floors', 'Этажи'),
             AdminFormElement::number('count_flat', 'Стояки'),
           ]),
 

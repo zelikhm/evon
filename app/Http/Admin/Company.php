@@ -37,7 +37,7 @@ class Company extends Section implements Initializable
   /**
    * @var string
    */
-  protected $title = 'Компании';
+  protected $title = 'Агенства недвижимости';
 
   /**
    * @var string

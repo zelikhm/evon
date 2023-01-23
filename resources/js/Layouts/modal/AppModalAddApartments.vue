@@ -62,7 +62,7 @@
           <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Статус</span>
           <div class="relative">
             <div @click="openStatus = !openStatus" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
-              <span>{{ selectStatus}}</span>
+              <span>{{ selectStatus }}</span>
               <img src="../../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openStatus }" alt="">
             </div>
             <div v-if="openStatus" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
@@ -86,11 +86,11 @@
             </div>
             <div v-if="openStairs" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
               <span
-                v-for="(stairs, idx) in stairses" :key="idx"
+                v-for="(stairs, idx) in house.info.count_flat" :key="idx"
                 @click="changeSelectStairs(stairs)"
                 class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
               >
-                {{ stairs.stairs }}
+                {{ stairs }}
               </span>
             </div>
           </div>
@@ -166,10 +166,11 @@ export default {
       openSelectLayout: false,
       layouts: [
         { layout: '1 + 1', value: 1 },
-        { layout: '1 + 2', value: 2 },
-        { layout: '1 + 3', value: 3 },
-        { layout: '1 + 4', value: 4 },
-        { layout: '1 + 5', value: 5 },
+        { layout: '2 + 1', value: 2 },
+        { layout: '3 + 1', value: 3 },
+        { layout: '4 + 1', value: 4 },
+        { layout: 'Duplex', value: 5 },
+        { layout: 'Studia', value: 6 },
       ],
       selectFloors: '1',
       openFloors: false,
@@ -183,10 +184,11 @@ export default {
       selectStatus: 'Свободно',
       openStatus: false,
       statuses: [
-        { status: 'Свободно', value: 1},
-        { status: 'Продажи закрыты', value: 2},
-        { status: 'Акция', value: 3},
-        { status: 'Перепродажа', value: 4},
+        { status: 'Акция', value: 1},
+        { status: 'Перепродажа', value: 2},
+        { status: 'Бронь', value: 3},
+        { status: 'Продажи закрыты', value: 4},
+        { status: 'В продаже', value: 5},
       ],
       selectStairs: '1',
       openStairs: false,
@@ -275,7 +277,7 @@ export default {
       this.openStatus = false
     },
     changeSelectStairs(stairs) {
-      this.selectStairs = stairs.stairs
+      this.selectStairs = stairs
       this.openStairs = false
     }
   },

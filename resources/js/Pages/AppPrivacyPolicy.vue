@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col min-h-[100vh]">
-    <app-header />
+    <app-header :user="user" />
     <main class="_container_policy">
       <div class="mt-14 xxl:mt-12 xl:mt-10 mb-20 xxl:">
         <h1 class="text-[#3B3A45] text-center pb-7 xxl:pb-5 xl:pb-4 text-3xl xxl:text-2xl xl:text-xl lg:text-2xl">Privacy policy</h1>
@@ -19,6 +19,7 @@ import AppHeader from "../Layouts/AppHeader.vue"
 import AppFooter from "../Layouts/AppFooter.vue"
 
 export default {
+  props: ['user'],
   components: {
     AppHeader,
     AppFooter,
