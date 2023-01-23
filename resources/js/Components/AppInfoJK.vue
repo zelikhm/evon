@@ -37,10 +37,10 @@ import {Link} from '@inertiajs/inertia-vue3'
                :class="{ 'rotate-180': openSelectCity }" alt="">
         </div>
         <div v-if="openSelectCity"
-             class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
+             class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px]">
           <div class="relative w-full p-5 xxl:p-4 xl:p-3">
             <input v-model="searchValue"
-                   class="py-3 xxl:py-2.5 xl:py-2 pl-12 xxl:pl-10 xl:pl-8 w-full text-lg xxl:text-[15px] xl:text-[13px] rounded-[6px] leading-none border border-solid border-[#E5DFEE]"
+                   class="py-3 xxl:py-2.5 xl:py-2 pl-12 xxl:pl-10 xl:pl-8 w-full text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] rounded-[6px] leading-none border border-solid border-[#E5DFEE]"
                    type="text">
             <img class="absolute top-1/2 -translate-y-1/2 left-[4%] w-4.5 xxl:w-4 xl:w-3.5"
                  src="../../assets/svg/search_icon_grey.svg" alt="">
@@ -58,10 +58,10 @@ import {Link} from '@inertiajs/inertia-vue3'
     <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]"
          :class="{ 'border__bottom--0': openSelectRegion}">
       <span
-          class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-5 xxl:pt-4 xl:pt-3">Район</span>
+          class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-5 xxl:pt-4 xl:pt-3">Район</span>
       <div class="relative">
         <div @click="openSelectRegion = !openSelectRegion"
-             class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
+             class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
           <span>{{ selectRegion }}</span>
           <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all"
                :class="{ 'rotate-180': openSelectRegion }" alt="">
@@ -79,12 +79,19 @@ import {Link} from '@inertiajs/inertia-vue3'
       </div>
     </div>
 
+    <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]">
+      <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"
+             for="text_agency">Эксклюзив для агентства</label>
+      <textarea v-model="object.text_agency"
+                class="custom__scroll text-[#1E1D2D] resize-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0"
+                type="text" id="text_agency"></textarea>
+    </div>
     <div :class="{ validation: validation.coordinates }" class="flex flex-col border border-solid border-[#E5DFEE] gap-2.5 xxl:gap-2 xl:gap-1.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-      <label :class="{ validationText: validation.coordinates }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="coord_object">Введите координаты объекта</label>
+      <label :class="{ validationText: validation.coordinates }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="coord_object">Введите координаты объекта</label>
       <input v-model="object.coordinates"
              @input="checkValidation(4)"
              @blur="setMarker"
-             class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
+             class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
              type="text" id="coord_object">
     </div>
 
@@ -96,22 +103,22 @@ import {Link} from '@inertiajs/inertia-vue3'
 
 
     <div class="my-5 xxl:my-4 xl:my-3">
-      <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium mb-5 xxl:mb-4 xl:mb-3">
+      <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] font-medium mb-5 xxl:mb-4 xl:mb-3">
         Характеристики</h3>
       <div class="grid grid-cols-2 sm:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4">
 
         <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]"
              :class="{ 'border__bottom--0': openSelectDeadline}">
-          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Срок сдачи</span>
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Срок сдачи</span>
           <div class="relative">
             <div @click="openSelectDeadline = !openSelectDeadline"
-                 class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
+                 class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
               <span>{{ selectDeadline }}</span>
               <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all"
                    :class="{ 'rotate-180': openSelectDeadline }" alt="">
             </div>
             <div v-if="openSelectDeadline"
-                 class="max-h-[150px] overflow-x-auto custom__scroll-grey absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
+                 class="max-h-[150px] overflow-x-auto custom__scroll-grey absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px]">
                   <span
                       v-for="(deadline, idx) in deadlines" :key="idx"
                       @click="changeSelectDeadline(deadline)"
@@ -123,11 +130,11 @@ import {Link} from '@inertiajs/inertia-vue3'
           </div>
         </div>
 
-        <div :class="{ validation: validation.floors }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">
-          <label :class="{ validationText: validation.floors }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_floors">Количество этажей</label>
+        <div :class="{ validation: validation.floors }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
+          <label :class="{ validationText: validation.floors }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_floors">Количество этажей</label>
           <input v-model="object.floors"
                  @input="checkValidation(5)"
-                 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
+                 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                  type="number" id="for_floors">
         </div>
 
@@ -148,16 +155,16 @@ import {Link} from '@inertiajs/inertia-vue3'
 
         <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]"
              :class="{ 'border__bottom--0': openSelectType}">
-          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Тип</span>
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Тип</span>
           <div class="relative">
             <div @click="openSelectType = !openSelectType"
-                 class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
+                 class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
               <span>{{ selectType }}</span>
               <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all"
                    :class="{ 'rotate-180': openSelectType }" alt="">
             </div>
             <div v-if="openSelectType"
-                 class="max-h-[150px] absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
+                 class="max-h-[150px] absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px]">
                   <span
                       v-for="(type, idx) in types" :key="idx"
                       @click="changeSelectType(type)"
@@ -171,16 +178,16 @@ import {Link} from '@inertiajs/inertia-vue3'
 
         <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]"
              :class="{ 'border__bottom--0': openInstallment}">
-          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Рассрочка</span>
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Рассрочка</span>
           <div class="relative">
             <div @click="openInstallment = !openInstallment"
-                 class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-4 xxl:pb-3 xl:pb-2.5">
+                 class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 pb-4 xxl:pb-3 xl:pb-2.5">
               <span>{{ selectInstallment }}</span>
               <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all"
                    :class="{ 'rotate-180': openInstallment }" alt="">
             </div>
             <div v-if="openInstallment"
-               class="max-h-[150px] absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
+               class="max-h-[150px] absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px]">
                 <span
                     v-for="(installment, idx) in installments" :key="idx"
                     @click="changeSelectInstallment(installment)"
@@ -194,7 +201,7 @@ import {Link} from '@inertiajs/inertia-vue3'
 
         <div :class="{ 'border__bottom--0': borderServices }"
              class="multi__select flex flex-col gap-2 xxl:gap-1.5 h-fit border border-solid border-[#E5DFEE] rounded-[6px]">
-          <div class="px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5 text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">
+          <div class="px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5 text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">
             Дополнительные услуги
           </div>
           <Multiselect
@@ -211,7 +218,7 @@ import {Link} from '@inertiajs/inertia-vue3'
 
         <div :class="{'border__bottom--0': borderInfrastructure}"
              class="multi__select flex flex-col gap-2 xxl:gap-1.5 h-fit border border-solid border-[#E5DFEE] rounded-[6px]">
-          <div class="px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5 text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">
+          <div class="px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5 text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">
             Инфраструктура
           </div>
           <Multiselect
@@ -229,7 +236,7 @@ import {Link} from '@inertiajs/inertia-vue3'
       </div>
       <div class="my-10 xxl:my-8 xl:my-6">
         <div class="flex justify-between items-center">
-          <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none">Контакты отдела продаж</h3>
+          <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] font-medium leading-none">Контакты отдела продаж</h3>
           <button
             @click="this.$emit('open-add-contact')"
             class="flex items-center register__button--white text-[#6435A5] border border-solid border-[#6435A5] rounded-[5px] py-3 xxl:py-2.5 xl:py-2 px-4 xxl:px-3 xl:px-2.5">
@@ -243,11 +250,11 @@ import {Link} from '@inertiajs/inertia-vue3'
                 </clipPath>
               </defs>
             </svg>
-            <span class="font-medium text-base xxl:text-sm xl:text-xs leading-none">Добавить</span>
+            <span class="font-medium text-base xxl:text-sm xl:text-xs lg:text-[14px] leading-none">Добавить</span>
           </button>
         </div>
         <div v-for="item in supportsReady"
-             class="contact__selling my-5 xxl:my-4 xl:my-3 text-lg xxl:text-[15px] xl:text-[13px] flex justify-between items-center rounded-[5px] p-1.5 xl:p-1">
+             class="contact__selling my-5 xxl:my-4 xl:my-3 text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] flex justify-between items-center rounded-[5px] p-1.5 xl:p-1">
           <div class="flex items-center gap-14 xxl:gap-10 xl:gap-8">
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
               <img :src="item.avatar" v-if="house !== undefined" class="h-12 xxl:h-10 xl:h-8 w-12 xxl:w-10 xl:w-8 rounded-full" alt="">
@@ -258,82 +265,84 @@ import {Link} from '@inertiajs/inertia-vue3'
             <span class="text-[#8A8996]">{{ item.email }}</span>
           </div>
           <div class="flex gap-7 xxl:gap-5 xl:gap-4">
-            <img src="../../assets/svg/pen_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4" alt="">
-            <img src="../../assets/svg/bucket_icon_red.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4" alt="">
+            <img src="../../assets/svg/pen_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 lg:w-6" alt="">
+            <img src="../../assets/svg/bucket_icon_red.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 lg:w-6" alt="">
           </div>
         </div>
       </div>
       <div class="my-10 xxl:my-8 xl:my-6">
-        <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">
-          Расположение</h3>
+        <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">
+          Расположение
+        </h3>
         <div class="grid grid-cols-2 sm:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4">
           <div
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_sea">от моря (м)</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_sea">от моря (м)</label>
             <input v-model="object.toSea"
-                   class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
+                   class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                    type="number" id="for_sea">
           </div>
           <div
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_school">от школы (м)</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_school">от школы (м)</label>
             <input v-model="object.toSchool"
-                   class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
+                   class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                    type="number" id="for_school">
           </div>
           <div
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_shoping">от торгового центра (м)</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_shoping">от торгового центра (м)</label>
             <input v-model="object.toShop"
-                   class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
+                   class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                    type="number" id="for_shoping">
           </div>
           <div
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_park">от парка (м)</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_park">от парка (м)</label>
             <input v-model="object.toPark"
-                   class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
+                   class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                    type="number" id="for_park">
           </div>
           <div
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_child">от детского садика (м)</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_child">от детского садика (м)</label>
             <input v-model="object.toChildrenSchool"
-                   class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
+                   class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                    type="number" id="for_child">
           </div>
           <div
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_stop">от остановки (м)</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_stop">от остановки (м)</label>
             <input v-model="object.toBus"
-                   class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
+                   class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                    type="number" id="for_stop">
           </div>
         </div>
       </div>
 
       <div class="my-10 xxl:my-8 xl:my-6">
-        <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">
-          Вознаграждение</h3>
-        <div class="grid grid-cols-2 gap-7 xxl:gap-5 xl:gap-4">
+        <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">
+          Вознаграждение
+        </h3>
+        <div class="grid grid-cols-2 md:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4">
           <div :class="{ validation: validation.percent }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label :class="{ validationText: validation.percent }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="commission">Комиссия (%)</label>
+            <label :class="{ validationText: validation.percent }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="commission">Комиссия (%)</label>
             <input v-model="object.percent"
                    @input="checkValidation(6)"
-                   class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
+                   class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                    type="number" id="commission">
           </div>
           <div
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="comment">Комментарий</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="comment">Комментарий</label>
             <input v-model="object.comment"
-                   class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
+                   class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                    type="text" id="comment">
           </div>
         </div>
       </div>
       <div class="my-10 xxl:my-8 xl:my-6">
-        <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">
+        <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">
           Приложите файлы для наполнения</h3>
         <div class="relative my-3 xxl:my-2.5 xl:my-2">
           <input multiple @change="changeInputFile" type="file" ref="documents" id="input_file" class="opacity-0 absolute invisible">
@@ -351,29 +360,29 @@ import {Link} from '@inertiajs/inertia-vue3'
                 </clipPath>
               </defs>
             </svg>
-            <span class="font-medium text-base xxl:text-sm xl:text-xs leading-none">Загрузить файл</span>
+            <span class="font-medium text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none">Загрузить файл</span>
           </label>
         </div>
         <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
           <div v-for="input in files" class="flex justify-between items-center">
             <div class="flex items-center gap-4 xxl:gap-3 xl:gap-2.5">
               <img src="../../assets/svg/file-icon_docx.svg" alt="">
-              <span class="text-lg xxl:text-[15px] xl:text-[13px] font-medium">{{ input.title }}</span>
+              <span class="text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] font-medium">{{ input.title }}</span>
             </div>
             <button>
-              <img @click="deleteFile(input)" class="w-6 xxl:w-5 xl:w-4" src="../../assets/svg/bucket_icon_red.svg" alt="">
+              <img @click="deleteFile(input)" class="w-6 xxl:w-5 xl:w-4 lg:w-6" src="../../assets/svg/bucket_icon_red.svg" alt="">
             </button>
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-10 xxl:gap-8 xl:gap-6 my-10 xxl:my-8 xl:my-6 w-full" v-if="isEdit">
+      <div class="grid grid-cols-2 sm:grid-cols-1 gap-10 xxl:gap-8 xl:gap-6 lg:gap-5 my-10 xxl:my-8 xl:my-6 w-full" v-if="isEdit">
         <button @click="addAndContinue"
-              class="login__btn--bg w-full text-center mr-4 font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">
+              class="login__btn--bg w-full text-center mr-4 font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-white bg-[#E84680] rounded-[6px]">
           Добавить
         </button>
         <button
           @click="addAndContinue(1)"
-          class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]"
+          class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-white bg-[#E84680] rounded-[6px]"
         >
           Добавить и продолжить
         </button>
@@ -381,7 +390,7 @@ import {Link} from '@inertiajs/inertia-vue3'
       <div class="grid gap-10 xxl:gap-8 xl:gap-6 my-10 xxl:my-8 xl:my-6 w-full" v-else>
         <button
           @click="addAndContinue()"
-          class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]"
+          class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-white bg-[#E84680] rounded-[6px]"
         >
           Сохранить
         </button>

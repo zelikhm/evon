@@ -371,6 +371,7 @@ input::placeholder {
 
 .custom__checkbox + label {
   display: inline-flex;
+  align-items: center;
   user-select: none;
 }
 
@@ -387,7 +388,6 @@ input::placeholder {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 90% 90%;
-  margin-top: -3px;
 }
 
 .custom__checkbox:checked + label::before {
@@ -398,18 +398,26 @@ input::placeholder {
 
 @media (max-width: 1572px) {
   .custom__checkbox + label::before {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     border-radius: 5px;
     margin-right: 8px;
-    margin-top: -2px;
   }
 }
 
 @media (max-width: 1366px) {
   .custom__checkbox + label::before {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    margin-right: 6px;
+  }
+}
+
+@media (max-width: 992px) {
+  .custom__checkbox + label::before {
+    width: 14px;
+    height: 14px;
     border-radius: 4px;
     margin-right: 6px;
   }
@@ -421,12 +429,23 @@ input::placeholder {
 
 .immovables__grid {
   display: grid;
-  grid-template-columns: 1fr 15.6vw;
+  grid-template-columns: 1fr 300px;
 }
 
 .grid__list-new-build {
   display: grid;
-  grid-template-columns: 17.4vw 1fr;
+  grid-template-columns: 320px 1fr;
+}
+
+@media (max-width: 1920px) {
+  .immovables__grid {
+    grid-template-columns: 1fr 15.6vw;
+  }
+
+  .grid__list-new-build {
+    display: grid;
+    grid-template-columns: 17.4vw 1fr;
+  }
 }
 
 @media (max-width: 992px) {
@@ -638,6 +657,31 @@ input::placeholder {
   .multiselect-option {
     padding: 5px 12px !important;
     font-size: 12px !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .multi__select .multiselect {
+    font-size: 15px !important;
+  }
+
+  .ones__select .multiselect {
+    font-size: 15px !important;
+  }
+
+  .multiselect-option {
+    padding: 6px 12px !important;
+    font-size: 14px !important;
+  }
+
+  .multi__select .multiselect-tag,
+  .ones__select .multiselect-tag {
+    font-size: 14px !important;
+  }
+
+  .multiselect-tag-remove {
+    height: 14px;
+    width: 14px;
   }
 }
 
@@ -1213,7 +1257,13 @@ input::placeholder {
 }
 
 .swiper-wrapper {
-  height: 31.25vw !important;
+  height: 600px !important;
+}
+
+@media (max-width: 1920px) {
+  .swiper-wrapper {
+    height: 31.25vw !important;
+  }
 }
 
 @media (max-width: 1572px) {

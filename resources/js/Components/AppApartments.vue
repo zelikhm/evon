@@ -8,9 +8,9 @@ import { Link } from '@inertiajs/inertia-vue3'
     <div class="grid grid-cols-6 lg:grid-cols-4 sm:grid-cols-3 gap-3 xxl:gap-2.5 xl:gap-2">
       <div @click="targetFrame(frame, idx)" v-for="(frame, idx) in house.frames" :class="{ border: frame.active === 1 }" class="corpus__banner flex justify-between cursor-pointer rounded-[5px] border-solid border-[#6435A5] px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
         <div class="flex flex-col justify-center gap-3.5 xxl:gap-3 xl:gap-2.5">
-          <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">{{ frame.name }}</span>
-          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap" v-if="frame.flats">{{ frame.flats.length }} квартир</span>
-          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap" v-else>0 квартир</span>
+          <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none whitespace-nowrap">{{ frame.name }}</span>
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap" v-if="frame.flats">{{ frame.flats.length }} квартир</span>
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap" v-else>0 квартир</span>
         </div>
         <div class="relative flex flex-col items-center justify-between gap-3.5 xxl:gap-3 xl:gap-2.5">
           <button @click="this.$emit('open-add-frame', frame)">
@@ -19,7 +19,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           <button @click="deleteConfirmOn(frame)" class="relative">
             <img class="w-5 xxl:w-4 xl:w-3" src="../../assets/svg/bucket_icon_red.svg" alt="">
           </button>
-          <div v-if="frame.deleteConfirm" class="cursor-auto z-20 text-[16px] xxl:text-[14px] xl:text-[12px] absolute top-[120%] bg-white left-[] flex flex-col border border-solid border-[#CEC3DD] rounded-[5px]">
+          <div v-if="frame.deleteConfirm" class="cursor-auto z-20 text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] absolute top-[120%] bg-white left-[] flex flex-col border border-solid border-[#CEC3DD] rounded-[5px]">
             <span class="whitespace-nowrap text-center border__bottom p-2.5 xxl:p-2 xl:p-1.5 leading-none">Вы уверены что хотите удалить?</span>
             <div class="cursor-pointer flex">
               <div class="hover__select w-full text-center border__right p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[red]" @click="deleteFrame(frame)">Да</div>
@@ -32,7 +32,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         <img @click="this.$emit('open-add-frame', isEdit ? 0 : 1)" src="../../assets/svg/plus_icon_purple.svg" class="cursor-pointer ml-3 xxl:ml-2.5 xl:ml-2 w-8 xxl:w-6 xl:w-5" alt="">
       </div>
     </div>
-    <div class="grid lg:w-[87.5vw] pb-2 custom__scroll--chess gap-4 xxl:gap-3.5 xl:gap-3 my-16 xxl:my-12 xl:my-10 text-[#1E1D2D] text-base xxl:text-sm xl:text-xs">
+    <div class="grid lg:w-[87.5vw] pb-2 custom__scroll--chess gap-4 xxl:gap-3.5 xl:gap-3 my-16 xxl:my-12 xl:my-10 text-[#1E1D2D] text-base xxl:text-sm xl:text-xs lg:text-[15px]">
       <div class="text-[#8A8996] grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
         <div
           class="leading-none bg-white flex items-center gap-2 xl:gap-1.5"
@@ -82,7 +82,7 @@ import { Link } from '@inertiajs/inertia-vue3'
       </div>
     </div>
   </div>
-<!--  <div class= "w-full flex justify-center mt-5 xxl:mt-4 xl:mt-3 gap-3 xxl:gap-2.5 xl:gap-2 items-center text-[#8A8996] text-lg xxl:text-[15px] xl:text-[13px]">-->
+<!--  <div class= "w-full flex justify-center mt-5 xxl:mt-4 xl:mt-3 gap-3 xxl:gap-2.5 xl:gap-2 items-center text-[#8A8996] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px]">-->
 <!--    <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer">-->
 <!--      <img src="../../assets/svg/arrow_right_grey.svg" class="rotate-180 w-5 xxl:w-4 xl:w-3" alt="">-->
 <!--    </div>-->
@@ -96,7 +96,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 <!--    </div>-->
 <!--  </div>-->
   <div class="my-10 xxl:my-8 xl:my-6 w-full gap-10 xxl:gap-8 xl:gap-6">
-    <button @click="addObject(1)" class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Продолжить</button>
+    <button @click="addObject(1)" class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-white bg-[#E84680] rounded-[6px]">Продолжить</button>
   </div>
 </template>
 
