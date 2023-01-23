@@ -203,29 +203,13 @@ export default {
       formDataAgency.append('image', this.user_avatar)
       formDataAgency.append('token', this.globalToken)
 
-      if (this.user.company === null) {
-        axios({
-          method: 'post',
-          url: '/api/user/addedCompany',
-          headers: {"Content-type": "multipart/form-data"},
-          data: formDataAgency,
-        }).then(response => console.log(response))
-      } else {
-        axios({
-          method: 'post',
-          url: '/api/user/editCompany',
-          headers: {"Content-type": "multipart/form-data"},
-          data: formDataAgency,
-        }).then(response => console.log(response.data))
-      }
-
     }
   },
   created() {
-    console.log(this.company)
     this.profile.name = this.user.first_name
     this.profile.surname = this.user.last_name
     this.profile.tel = this.user.phone
+    console.log(this.user)
     this.profile.position = this.user.status
     if (this.user.company) {
       this.titleCompany = this.user.company.title

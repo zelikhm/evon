@@ -79,14 +79,6 @@ import {Link} from '@inertiajs/inertia-vue3'
       </div>
     </div>
 
-    <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]">
-      <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"
-             for="text_agency">Эксклюзив для агентства</label>
-      <textarea v-model="object.text_agency"
-                class="custom__scroll text-[#1E1D2D] resize-none text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0"
-                type="text" id="text_agency"></textarea>
-    </div>
-
     <div :class="{ validation: validation.coordinates }" class="flex flex-col border border-solid border-[#E5DFEE] gap-2.5 xxl:gap-2 xl:gap-1.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
       <label :class="{ validationText: validation.coordinates }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="coord_object">Введите координаты объекта</label>
       <input v-model="object.coordinates"
@@ -137,6 +129,21 @@ import {Link} from '@inertiajs/inertia-vue3'
                  @input="checkValidation(5)"
                  class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                  type="number" id="for_floors">
+        </div>
+
+        <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 pt-4 pb-4 xxl:pt-3 xl:pt-2.5">
+          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_agency_text">Эксклюзив для агентства</label>
+          <input v-model="object.text_agency"
+                 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
+                 type="text" id="for_agency_text">
+        </div>
+
+
+        <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">
+          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="count_flat">Количество стояков</label>
+          <input v-model="object.count_flat"
+                 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
+                 type="number" id="count_flat">
         </div>
 
         <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]"
@@ -243,11 +250,11 @@ import {Link} from '@inertiajs/inertia-vue3'
              class="contact__selling my-5 xxl:my-4 xl:my-3 text-lg xxl:text-[15px] xl:text-[13px] flex justify-between items-center rounded-[5px] p-1.5 xl:p-1">
           <div class="flex items-center gap-14 xxl:gap-10 xl:gap-8">
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-              <img :src="'/storage/' + item.avatar" v-if="house !== undefined" class="h-12 xxl:h-10 xl:h-8 w-12 xxl:w-10 xl:w-8 rounded-full" alt="">
+              <img :src="item.avatar" v-if="house !== undefined" class="h-12 xxl:h-10 xl:h-8 w-12 xxl:w-10 xl:w-8 rounded-full" alt="">
               <img :src="item.image_front" v-else class="h-12 xxl:h-10 xl:h-8 w-12 xxl:w-10 xl:w-8 rounded-full" alt="">
               <span class="text-[#1E1D2D]">{{ item.name }}</span>
             </div>
-            <span class="text-[#8A8996]">{{ item.tel }}</span>
+            <span class="text-[#8A8996]">{{ item.phone }}</span>
             <span class="text-[#8A8996]">{{ item.email }}</span>
           </div>
           <div class="flex gap-7 xxl:gap-5 xl:gap-4">
@@ -259,7 +266,7 @@ import {Link} from '@inertiajs/inertia-vue3'
       <div class="my-10 xxl:my-8 xl:my-6">
         <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">
           Расположение</h3>
-        <div class="grid grid-cols-2 sm:grid-cols-1  gap-7 xxl:gap-5 xl:gap-4">
+        <div class="grid grid-cols-2 sm:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4">
           <div
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_sea">от моря (м)</label>
@@ -329,7 +336,7 @@ import {Link} from '@inertiajs/inertia-vue3'
         <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">
           Приложите файлы для наполнения</h3>
         <div class="relative my-3 xxl:my-2.5 xl:my-2">
-          <input multiple @change="changeInputFile" type="file" ref="files" id="input_file" class="opacity-0 absolute invisible">
+          <input multiple @change="changeInputFile" type="file" ref="documents" id="input_file" class="opacity-0 absolute invisible">
           <label
             class="register__button--white w-fit text-[#6435A5] flex items-center cursor-pointer gap-2 xl:gap-1.5 border border-solid border-[#6435A5] rounded-[6px] px-4 xxl:px-3 xl:px-2.5 py-3 xxl:py-2.5 xl:py-2"
             for="input_file"
@@ -484,6 +491,7 @@ export default {
         toBus: "",
         toChildrenSchool: "",
         installment: 0,
+        count_flat: "",
         text_agency: "",
         token: this.globalToken
       },
@@ -617,6 +625,8 @@ export default {
         formData.append('toShop', this.object.toShop);
         formData.append('toPark', this.object.toPark);
         formData.append('toBus', this.object.toBus);
+        formData.append('count_flat', this.object.count_flat);
+        formData.append('exclusive', this.object.text_agency);
         formData.append('toChildrenSchool',this.object.toChildrenSchool);
         formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
         formData.append('image', this.$refs.file.files[0]);
@@ -634,6 +644,10 @@ export default {
       let idNewJk = res.data.id,
           house = res.data
       console.log(res)
+
+      axios.post('/api/house/addedFiles', {
+
+      })
 
       axios.post('/api/house/clearSupport', {
         house_id: idNewJk
@@ -761,8 +775,8 @@ export default {
         fullPlus5 = fullYear + 5
 
     for (fullYear; fullYear <= fullPlus5; fullYear++) {
-      for (let month = 1; month <= 12; month += 3) {
-        console.log(`${month}/${fullYear}`)
+      for (let month = 1; month <= 4; month += 1) {
+        this.deadlines.push({ deadline:`${month}/${fullYear}` })
       }
     }
 
