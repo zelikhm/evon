@@ -73,7 +73,7 @@ path create \ [post] / поля:
 - percent - Процент
 - comment - Комментарий
 - active - * не передаем
-- status - * не передаем
+- created - срок сдачи
 - fool_price - рассрочка*
 - statusHouse - Статус
 - floors - Этажи

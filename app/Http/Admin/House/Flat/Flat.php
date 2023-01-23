@@ -57,13 +57,13 @@ class Flat extends Section implements Initializable
     );
   }
 
-
   /**
    *
    * @return DisplayInterface
    */
   public function onDisplay()
   {
+
     $columns = [
       AdminColumn::text('id', '#')
         ->setWidth('50px')
@@ -74,7 +74,19 @@ class Flat extends Section implements Initializable
       AdminColumn::text('square', 'Площадь')->setWidth('350px'),
       AdminColumn::text('count', 'Планировка')->setWidth('350px'),
       AdminColumn::text('floor', 'Этаж')->setWidth('350px'),
-      AdminColumn::text('status', 'Статус')->setWidth('350px'),
+      AdminColumn::custom('Статус', function(\Illuminate\Database\Eloquent\Model $model) {
+        if($model->status == 0) {
+          return 'Акция';
+        } elseif ($model->status == 1) {
+          return 'Перепродажа';
+        } elseif ($model->status == 2) {
+          return'Бронь';
+        } elseif ($model->status == 3) {
+          return'Продажи закрыты';
+        } elseif ($model->status == 4) {
+          return 'В продаже';
+        }
+      })->setWidth('350px'),
       AdminColumn::text('price', 'Цена')->setWidth('350px'),
     ];
 

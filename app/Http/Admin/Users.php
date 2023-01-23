@@ -71,8 +71,17 @@ class Users extends Section implements Initializable
       AdminColumn::text('phone', 'Телефон')->setWidth('350px'),
       AdminColumn::text('first_name', 'Имя')->setWidth('350px'),
       AdminColumn::text('last_name', 'Фамилия')->setWidth('350px'),
-      AdminColumn::text('status', 'Cтатус')->setWidth('350px'),
-      AdminColumn::text('link', 'Ссылка')->setWidth('350px'),
+      AdminColumn::custom('Роль', function(\Illuminate\Database\Eloquent\Model $model) {
+        if($model->role === 0) {
+          return 'Риелтор';
+        } elseif ($model->role === 1) {
+          return 'Застройщик';
+        } elseif ($model->role === 2) {
+          return'Модератор';
+        } elseif ($model->role === 3) {
+          return'Администратор';
+        }
+      })->setWidth('350px'),
     ];
 
     $display = AdminDisplay::datatablesAsync()

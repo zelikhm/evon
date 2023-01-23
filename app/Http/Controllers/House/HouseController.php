@@ -193,6 +193,7 @@ class HouseController extends Controller
         'description' => $request->description,
         'city' => $request->city,
         'area' => $request->area,
+        'created' => $request->created,
         'longitude' => $request->longitude,
         'latitude' => $request->latitude,
         'percent' => $request->percent,

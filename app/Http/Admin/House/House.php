@@ -9,6 +9,7 @@ use AdminFormElement;
 use AdminNavigation;
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\Info\CityModel;
+use App\Models\Builder\Info\RegionModel;
 use App\Models\LandingModel;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -71,10 +72,17 @@ class House extends Section implements Initializable
         ->setHtmlAttribute('class', 'text-center'),
       AdminColumn::relatedLink('user.email', 'Пользователь')->setWidth('350px'),
       AdminColumn::text('title', 'Название')->setWidth('350px'),
-      AdminColumn::text('description', 'Описание')->setWidth('350px'),
       AdminColumn::text('city', 'Город')->setWidth('350px'),
       AdminColumn::text('area', 'Район')->setWidth('350px'),
-      AdminColumn::text('active', 'Модерация')->setWidth('350px'),
+      AdminColumn::custom('Модерация', function(\Illuminate\Database\Eloquent\Model $model) {
+        if($model->active === 0) {
+          return 'На модерации';
+        } elseif ($model->active === 1) {
+          return 'Не прошел';
+        } elseif ($model->active === 2) {
+          return'Одобрено';
+        }
+      })->setWidth('350px'),
     ];
 
     $display = AdminDisplay::datatablesAsync()
@@ -99,34 +107,92 @@ class House extends Section implements Initializable
   {
     $card = AdminForm::card();
 
-    $form = AdminForm::elements([
-      AdminFormElement::select('user_id', 'Пользователь')
-        ->setModelForOptions(User::class, 'email')
-        ->setUsageKey('id'),
-      AdminFormElement::columns()
-        ->addColumn([
-          AdminFormElement::text('title', 'Заголовок'),
-          AdminFormElement::select('city', 'Город')->setModelForOptions(CityModel::class)->SetUsageKey('title'),
-          AdminFormElement::text('longitude', 'Долгота'),
-          AdminFormElement::number('percent', 'Процент')->setMin(0),
-          AdminFormElement::text('slug', 'Слаг (для ссылки, название на английском)')->required(),
-        ], 6)->addColumn([
-          AdminFormElement::text('area', 'Район'),
-          AdminFormElement::text('latitude', 'Широта'),
-          AdminFormElement::text('comment', 'Комментарий'),
-          AdminFormElement::select('active', 'Прошел модерацию?', [
-            '0' => 'На модерации',
-            '1' => 'Не прошел модерацию',
-            '2' => 'Прошел модерацию',
-          ]),
-        ]),
+    $model = HouseModel::where('id', $id)->first();
 
-      AdminFormElement::textarea('description', 'Описание'),
-    ]);
+    if($model->city) {
+      $city = CityModel::where('title', $model->city)->first();
+      $regions = RegionModel::where('city_id', $city->id)->get();
+
+      $options = $regions->map(static function ($item, $regions) {
+        return [
+//          'id' => $item->id,
+          'value' => $item->title,
+        ];
+      })->pluck('value')->toArray();
+    }
+
+    if($model->area) {
+      $area = RegionModel::where('title', $model->area)->first();
+    }
+
+    if($id === null) {
+      $form = AdminForm::elements([
+        AdminFormElement::select('user_id', 'Пользователь')
+          ->setModelForOptions(User::class, 'email')
+          ->setUsageKey('id'),
+        AdminFormElement::columns()
+          ->addColumn([
+            AdminFormElement::text('title', 'Заголовок'),
+            AdminFormElement::select('city', 'Город')->setModelForOptions(CityModel::class)->SetUsageKey('title'),
+            AdminFormElement::text('longitude', 'Долгота'),
+            AdminFormElement::number('percent', 'Процент')->setMin(0),
+            AdminFormElement::text('slug', 'Слаг (для ссылки, название на английском)')->required(),
+          ], 6)->addColumn([
+//            AdminFormElement::select('area', 'Район')->setModelForOptions(RegionModel::where('city_id', $city->id)->get()),
+            AdminFormElement::text('latitude', 'Широта'),
+            AdminFormElement::text('comment', 'Комментарий'),
+            AdminFormElement::select('active', 'Прошел модерацию?', [
+              '0' => 'На модерации',
+              '1' => 'Не прошел модерацию',
+              '2' => 'Прошел модерацию',
+            ]),
+            AdminFormElement::select('created', 'Срок сдачи', [
+              'Сдан' => 'Сдан',
+              'Не сдан' => 'Не сдан',
+              'В разработке' => 'В разработке',
+            ]),
+          ]),
+
+        AdminFormElement::textarea('description', 'Описание'),
+      ]);
+
+    } else {
+      $form = AdminForm::elements([
+        AdminFormElement::select('user_id', 'Пользователь')
+          ->setModelForOptions(User::class, 'email')
+          ->setUsageKey('id'),
+        AdminFormElement::columns()
+          ->addColumn([
+            AdminFormElement::text('title', 'Заголовок'),
+            AdminFormElement::select('city', 'Город')->setModelForOptions(CityModel::class)->setUsageKey('title'),
+            AdminFormElement::text('longitude', 'Долгота'),
+            AdminFormElement::number('percent', 'Процент')->setMin(0),
+            AdminFormElement::text('slug', 'Слаг (для ссылки, название на английском)')->required(),
+          ], 6)->addColumn([
+            AdminFormElement::select('area', 'Район')->setEnum($options),
+            AdminFormElement::text('latitude', 'Широта'),
+            AdminFormElement::text('comment', 'Комментарий'),
+            AdminFormElement::select('active', 'Прошел модерацию?', [
+              '0' => 'На модерации',
+              '1' => 'Не прошел модерацию',
+              '2' => 'Прошел модерацию',
+            ]),
+            AdminFormElement::select('created', 'Срок сдачи', [
+              'Сдан' => 'Сдан',
+              'Не сдан' => 'Не сдан',
+              'В разработке' => 'В разработке',
+            ]),
+          ]),
+
+        AdminFormElement::textarea('description', 'Описание'),
+      ]);
+
+    }
+
 
     $card->getButtons()->setButtons([
       'save_and_continue' => (new Save())->setText('Применить'),
-//            'save_and_close' => (new SaveAndClose())->setText('Сохранить и закрыть'),
+//      'save_and_close' => (new SaveAndClose())->setText('Сохранить и закрыть'),
       'delete' => (new Delete()),
     ]);
 

@@ -4,6 +4,7 @@ namespace App\Models\Builder;
 
 use App\Models\Builder\Flat\FlatModel;
 use App\Models\Builder\Flat\FrameModel;
+use App\Models\Builder\Info\RegionModel;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -27,6 +28,7 @@ class HouseModel extends Model
     'fool_price',
     'image',
     'visible',
+    'created'
   ];
 //
 //  protected $hidden = [

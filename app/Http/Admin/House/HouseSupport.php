@@ -37,7 +37,7 @@ class HouseSupport extends Section implements Initializable
   /**
    * @var string
    */
-  protected $title = 'Поддержка ЖК';
+  protected $title = 'Отдел продаж';
 
   /**
    * @var string
