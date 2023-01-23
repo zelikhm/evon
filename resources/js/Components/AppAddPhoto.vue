@@ -1,9 +1,9 @@
 <template>
-  <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] mb-5 xxl:mb-4 xl:mb-3">Добавить фото</h2>
+  <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px] mb-5 xxl:mb-4 xl:mb-3">Добавить фото</h2>
   <div class="grid grid-cols-4 sm:grid-cols-2 gap-3 xxl:gap-2.5 xl:gap-2">
     <div @click="targetBlockPhoto(item)" v-for="item in photos" :class="{ border: item.active === 1 }" class="corpus__banner cursor-pointer gap-3.5 xxl:gap-3 xl:gap-2.5 rounded-[5px] border-solid border-[#6435A5] flex flex-col justify-center px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3 ">
-      <span class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] leading-none">{{ item.name }}</span>
-      <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none">{{ item.count }} фото</span>
+      <span class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] leading-none">{{ item.name }}</span>
+      <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px] leading-none">{{ item.count }} фото</span>
     </div>
   </div>
   <div class="my-10 xxl:my-8 xl:my-6">
@@ -23,8 +23,8 @@
         <div ref="uploudBackground" class="absolute rounded-[5px] bg-[#6435A5] w-full h-full z-10"></div>
         <div class="overflow-hidden absolute z-20 bottom-0 left-0 p-2 w-full">
           <div class="flex flex-col gap-1.5 xl:gap-1">
-            <span class="text-white text-[14px] xxl:text-[12px] xl:text-[10px] leading-none font-medium">{{ photo.size }}</span>
-<!--            <span class="text-white text-[12px] xxl:text-[10px] xl:text-[9px] leading-none">{{ photo.name.split('/') }}</span>-->
+            <span class="text-white text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none font-medium">{{ photo.size }}</span>
+<!--            <span class="text-white text-[12px] xxl:text-[10px] xl:text-[9px] lg:text-[11px] leading-none">{{ photo.name.split('/') }}</span>-->
           </div>
           <div ref="progressBar" class="bg__progress-bar h-2.5 xxl:h-2 xl:h-1.5 w-full rounded-[100px]">
             <div class="progress-bar bg-white h-full rounded-[100px]"></div>
@@ -37,7 +37,7 @@
           <div class="absolute rounded-[5px] w-full h-full top-0 left-0">
             <label for="image" class="bg__uploud-photo transition-all relative cursor-pointer flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5 items-center justify-center w-full h-full rounded-[5px]">
               <img src="../../assets/svg/upload_photo.svg" class="w-7 xxl:w-6 xl:w-5" alt="">
-              <span class="text-[#6435A5] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Загрузить фото</span>
+              <span class="text-[#6435A5] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">Загрузить фото</span>
             </label>
             <input
               ref="photos"
@@ -52,7 +52,7 @@
     </div>
   </div>
   <div class="my-10 xxl:my-8 xl:my-6 w-full gap-10 xxl:gap-8 xl:gap-6">
-    <button class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">Сохранить</button>
+    <button class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-white bg-[#E84680] rounded-[6px]">Сохранить</button>
   </div>
 </template>
 
