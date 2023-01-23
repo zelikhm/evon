@@ -6,7 +6,7 @@ import { Link } from '@inertiajs/inertia-vue3'
   <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] mb-5 xxl:mb-4 xl:mb-3">Добавить корпус и квартиры</h2>
   <div class="flex flex-col">
     <div class="grid grid-cols-6 lg:grid-cols-4 sm:grid-cols-3 gap-3 xxl:gap-2.5 xl:gap-2">
-      <div @click="targetFrame(frame)" v-for="frame in house.frames" :class="{ border: frame.active === 1 }" class="corpus__banner flex justify-between cursor-pointer rounded-[5px] border-solid border-[#6435A5] px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
+      <div @click="targetFrame(frame, idx)" v-for="(frame, idx) in house.frames" :class="{ border: frame.active === 1 }" class="corpus__banner flex justify-between cursor-pointer rounded-[5px] border-solid border-[#6435A5] px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
         <div class="flex flex-col justify-center gap-3.5 xxl:gap-3 xl:gap-2.5">
           <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">{{ frame.name }}</span>
           <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap" v-if="frame.flats">{{ frame.flats.length }} квартир</span>
@@ -49,7 +49,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
         </div>
       </div>
-      <div v-for="item in flats" class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
+      <div v-for="item in house.frames[frameId].flats" class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
         <div class="grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
           <div class="leading-none bg-white">{{ item.number }}</div>
           <div class="leading-none">{{ item.square }}</div>
@@ -126,7 +126,7 @@ export default {
         { status: 'Перепродажа', value: 4 },
       ],
       flats: null,
-      frameId: null,
+      frameId: 0,
       isEdit: false
     }
   },
@@ -150,12 +150,11 @@ export default {
         token: this.globalToken
       }).then(response => console.log(response.data))
     },
-    targetFrame(frame) {
+    targetFrame(frame, idx) {
       this.house.frames.forEach(item => item.active = 0)
       frame.active = 1
       this.$emit('change-frame', frame.id)
-      this.frameId = frame.id
-      this.flats = this.house.frames.find(item => item.id === frame.id).flats
+      this.frameId = idx
       this.titleTable.forEach(item => item.active = 0)
     },
     changeFilter(item) {
@@ -172,12 +171,9 @@ export default {
     },
     filter(item, name) {
       if (item.name === name && item.active === 1) {
-        this.flats = this.flats.sort((a, b) => a[name] - b[name])
+        this.house.frames[this.frameId].flats = this.house.frames[this.frameId].flats.sort((a, b) => a[name] - b[name])
       } else if (item.name === name && item.active === 2) {
-        this.flats = this.flats.sort((a, b) => b[name] - a[name])
-      } else if (item.active === 0) {
-        this.flats = this.house.frames.find(item => item.id === this.frameId).flats
-        console.log(this.flats)
+        this.house.frames[this.frameId].flats = this.house.frames[this.frameId].flats.sort((a, b) => b[name] - a[name])
       }
     },
     deleteConfirmOn(frame) {
@@ -229,15 +225,13 @@ export default {
 
       this.house.frames.forEach((item, idx) => {
         if (idx === 0) {
-          this.frameId = item.id
+          // this.frameId = item.id
           item.active = 1
         }
         else {
           item.active = 0
         }
       })
-      this.flats = this.house.frames.find(item => item.id === startFrame).flats
-
       this.$emit('change-frame', startFrame)
 
       this.house.frames.forEach(item => {
@@ -250,7 +244,17 @@ export default {
 
   },
   updated() {
-    // this.flats = this.house.frames.find(item => item.id === this.frameId).flats
+    if (this.house.frames.length === 1) {
+      this.house.frames[0].active = 1
+    }
+
+    this.house.frames.forEach((item, idx) => {
+      if (item.active === 1) {
+        this.frameId = idx
+      }
+    })
+  },
+  watch: {
   }
 }
 

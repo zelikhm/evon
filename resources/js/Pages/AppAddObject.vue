@@ -136,7 +136,7 @@ export default {
       if (this.readyHouse.frames.length === 1) {
         this.activeFrame = this.readyHouse.frames[0].id
       }
-
+      this.readyHouse = data
     },
     changeFrame(data) {
       this.activeFrame = data
@@ -146,8 +146,25 @@ export default {
       this.frame = frame
     },
     closeAddApartments(data) {
-      this.readyHouse = data
       this.modalAddApatments = false
+      let activeFrameId = null
+      this.readyHouse.frames.forEach(frame => {
+        if (frame.active === 1) {
+          activeFrameId = frame.id
+        }
+      })
+
+      data.frames.forEach(frame => {
+        if (frame.active === 1) {
+          frame.active = 0
+        }
+
+        if (frame.id === activeFrameId) {
+          frame.active = 1
+        }
+      })
+
+      this.readyHouse = data
     }
   },
   created() {
