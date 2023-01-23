@@ -79,13 +79,6 @@ import {Link} from '@inertiajs/inertia-vue3'
       </div>
     </div>
 
-    <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]">
-      <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"
-             for="text_agency">Эксклюзив для агентства</label>
-      <textarea v-model="object.text_agency"
-                class="custom__scroll text-[#1E1D2D] resize-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0"
-                type="text" id="text_agency"></textarea>
-    </div>
     <div :class="{ validation: validation.coordinates }" class="flex flex-col border border-solid border-[#E5DFEE] gap-2.5 xxl:gap-2 xl:gap-1.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
       <label :class="{ validationText: validation.coordinates }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="coord_object">Введите координаты объекта</label>
       <input v-model="object.coordinates"
@@ -577,7 +570,7 @@ export default {
         formData.append('exclusive', this.object.text_agency);
         formData.append('toChildrenSchool',this.object.toChildrenSchool);
         formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
-        formData.append('image', this.$refs.file.files[0]);
+        formData.append('image', 'hello');
         formData.append('token', this.globalToken);
 
         axios({

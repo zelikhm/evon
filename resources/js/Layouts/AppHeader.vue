@@ -53,7 +53,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           </Link>
           <div class="text-white text-[16px] xxl:text-[13px] xl:text-[11px] flex gap-20 xxl:gap-16 xl:gap-12">
             <Link href="/houses" :class="{ 'opacity-60': $page.url !== '/houses' }">Новостройки</Link>
-            <a href="#" class="opacity-60">Виллы</a>
+<!--            <a href="#" class="opacity-60">Виллы</a>-->
             <Link href="/profile/compilation" :class="{ 'opacity-60': $page.url !== '/profile/compilation' }">Подборки</Link>
             <Link href="/profile/favorites" :class="{ 'opacity-60': $page.url !== '/profile/favorites' }">Избранное</Link>
           </div>
