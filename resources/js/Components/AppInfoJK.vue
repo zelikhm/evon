@@ -366,67 +366,6 @@ import {Link} from '@inertiajs/inertia-vue3'
           </div>
         </div>
       </div>
-      <div class="my-10 xxl:my-8 xl:my-6">
-        <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">
-          Загрузите главную картинку для ЖК</h3>
-        <div class="relative my-3 xxl:my-2.5 xl:my-2">
-          <input
-            @change="changeImage"
-            type="file"
-            id="input_file2"
-            class="opacity-0 absolute invisible"
-            ref="file"
-          >
-          <label
-            for="input_file2"
-            class=" register__button--white text-[#6435A5] w-fit flex items-center cursor-pointer gap-2 xl:gap-1.5 border border-solid border-[#6435A5] rounded-[6px] px-4 xxl:px-3 xl:px-2.5 py-3 xxl:py-2.5 xl:py-2"
-          >
-            <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-              <g clip-path="url(#clip0_519_1862)">
-                <path d="M7.33398 7.33301V3.33301H8.66732V7.33301H12.6673V8.66634H8.66732V12.6663H7.33398V8.66634H3.33398V7.33301H7.33398Z" fill="#6435A5"/>
-              </g>
-              <defs>
-                <clipPath id="clip0_519_1862">
-                  <rect width="16" height="16" fill="white"/>
-                </clipPath>
-              </defs>
-            </svg>
-            <span class="font-medium text-base xxl:text-sm xl:text-xs leading-none">Загрузить файл</span>
-          </label>
-        </div>
-
-        <div v-if="house" class="relative w-[20%] h-[8.5vw] lg:h-[16.7vw] md:h-[20.8vw] sm:h-[42.2vw] rounded-[5px]">
-          <div @click="deletePhoto" class="bg__close-photo cursor-pointer absolute top-0 right-0 z-20 m-1 w-6 xxl:w-5 xl:w-4 h-6 xxl:h-5 xl:h-4 rounded-[3px]">
-            <span class="absolute h-[2px] xl:h-[1px] w-[80%] bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 rounded-[10px]"></span>
-            <span class="absolute h-[2px] xl:h-[1px] w-[80%] bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45 rounded-[10px]"></span>
-          </div>
-          <div class="bg-[#30CB49] absolute top-0 left-0 z-10 m-1 w-6 xxl:w-5 xl:w-4 h-6 xxl:h-5 xl:h-4 rounded-[3px]">
-            <img src="../../assets/svg/check_icon.svg" class="w-full" alt="">
-          </div>
-          <div ref="uploudBackground" class="absolute rounded-[5px] bg-[#6435A5] w-full h-full z-10"></div>
-          <div class="overflow-hidden absolute z-20 bottom-0 left-0 p-2 w-full">
-            <div class="flex flex-col gap-1.5 xl:gap-1">
-<!--              <span class="text-white text-[14px] xxl:text-[12px] xl:text-[10px] leading-none font-medium">{{ house.image }}</span>-->
-              <!--            <span class="text-white text-[12px] xxl:text-[10px] xl:text-[9px] leading-none">{{ photo.name.split('/') }}</span>-->
-            </div>
-            <div ref="progressBar" class="bg__progress-bar h-2.5 xxl:h-2 xl:h-1.5 w-full rounded-[100px]">
-              <div class="progress-bar bg-white h-full rounded-[100px]"></div>
-            </div>
-          </div>
-          <img class="absolute w-full h-full rounded-[5px]" :src="house.image" alt="">
-        </div>
-        <div v-if="!house" class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
-          <div class="flex justify-between items-center">
-            <div v-for="image in images" class="relative flex items-center gap-4 xxl:gap-3 xl:gap-2.5">
-              <img src="../../assets/svg/file-icon_jpg.svg" v-if="extension === 'jpg'">
-              <span class="text-lg xxl:text-[15px] xl:text-[13px] font-medium">{{ image }}</span>
-            </div>
-            <button @click="deleteImage" v-if="images.length !== 0">
-              <img class="w-6 xxl:w-5 xl:w-4" src="../../assets/svg/bucket_icon_red.svg" alt="">
-            </button>
-          </div>
-        </div>
-      </div>
       <div class="grid grid-cols-2 gap-10 xxl:gap-8 xl:gap-6 my-10 xxl:my-8 xl:my-6 w-full" v-if="isEdit">
         <button @click="addAndContinue"
               class="login__btn--bg w-full text-center mr-4 font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] text-white bg-[#E84680] rounded-[6px]">

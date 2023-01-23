@@ -282,7 +282,7 @@ import { Link } from '@inertiajs/inertia-vue3'
       <div v-if="!toggle && !map" class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3 mt-5 xxl:mt-4 xl:mt-3">
         <div class="flex flex-col" v-for="(item, idx) in readyHouses" :key="item.id">
           <div class="object__block relative z-10 h-[16vw] lg:h-[24vw] md:h-[36vw] sm:h-[56vw] rounded-[6px]">
-          <img :src="item.image" class="absolute -z-10 w-full h-full rounded-[6px]" alt="">
+          <img v-if="item.images.length > 0" :src="item.images[0].name" class="absolute -z-10 w-full h-full rounded-[6px]" alt="">
           <div class="seek immovables__overlay opacity-0 transition-all h-full w-full absolute -z-10 rounded-[6px]"></div>
             <div class="flex flex-col h-full justify-between p-5 xxl-4 xl:p-3">
               <div class="hide transition-all">
@@ -325,16 +325,19 @@ import { Link } from '@inertiajs/inertia-vue3'
             <div class="grid__35-65 p-2.5 xxl:p-2 xl:p-1.5 h-full">
               <div class="relative object__block h-full">
                 <div class="seek opacity-0 transition-all immovables__overlay h-full w-full absolute z-10 rounded-[6px]"></div>
-                <img :src="item.image" class="w-full h-[9.3vw] x:h-[10vw] lg:h-[14vw] md:h-[32vw] sm:h-[42vw]" alt="">
+                <img v-if="item.images.length > 0" :src="item.images[0].name" class="w-full h-[9.3vw] x:h-[10vw] lg:h-[14vw] md:h-[32vw] sm:h-[42vw]" alt="">
                 <div class="seek opacity-0 transition-all absolute top-1/2 -translate-y-1/2 left-0 z-10 flex flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
                   <button @click="this.$emit('open-add-selections', item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[70%]">
                     <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">В подборку</span>
                     <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
                   </button>
-                  <button class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[70%]">
+                  <button v-if="item.favorite" @click="removeFavorite(item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[70%]">
+                    <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">Убрать</span>
+                    <img src="../../assets/svg/heart_icon_fill.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                  </button>
+                  <button v-else @click="addFavorite(item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[70%]">
                     <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">В избранное</span>
-                    <img src="../../assets/svg/heart_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Сердце">
-                    <img v-if="1 !== 1" src="../../assets/svg/heart_icon_pink.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                    <img src="../../assets/svg/heart_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="">
                   </button>
                 </div>
               </div>
@@ -348,9 +351,6 @@ import { Link } from '@inertiajs/inertia-vue3'
                     <span class="bg-[#E84680] h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] md:text-[11px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1">{{ item.status }}</span>
   <!--                  <span class="bg-[#FA8D50] h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1">акция</span>-->
                   </div>
-                </div>
-                <div class="flex flex-wrap gap-1 text-[15px] xxl:text-[13px] xl:text-[11px] md:text-[13px]">
-                  <span v-for="dop in item.readyDops" v-if="item.readyDops.length > 0" class="text-[#8A8996] leading-none border border-solid border-[#E5DFEE] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5">{{ dop.name }}</span>
                 </div>
               </div>
             </div>
@@ -423,10 +423,8 @@ export default {
       borderType: false,
       valueSelectType: null,
       optionsSelectType: [
-        'Эконом 1',
-        'Эконом 2',
-        'Элит 1',
-        'Элит 2',
+        'Новостройка',
+        'Вилла',
       ],
       selectCity: null,
       openSelectCity: false,
@@ -437,8 +435,6 @@ export default {
       openSelectDeadline: false,
       deadlines: [
         { deadline: 'Сдан', id: 0 },
-        { deadline: 'Не сдан', id: 1 },
-        { deadline: 'В разработке', id: 2 },
       ],
       selectDev: null,
       openSelectDev: false,
@@ -529,6 +525,16 @@ export default {
     this.readyHouses = this.houses
 
 
+    let date = new Date(),
+        fullYear = date.getFullYear(),
+        fullPlus5 = fullYear + 5
+
+    for (fullYear; fullYear <= fullPlus5; fullYear++) {
+      for (let month = 1; month <= 4; month += 1) {
+        this.deadlines.push({ deadline:`${month}/${fullYear}` })
+      }
+    }
+
     if (this.city[0] !== null) {
       this.selectDev = this.builders[0].first_name
       this.selectCity = this.city[0].title
@@ -569,6 +575,7 @@ export default {
 
     })
     this.readyHouses = this.readyHouses.slice(0, this.count)
+
 
   },
   computed: {

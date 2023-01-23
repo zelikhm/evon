@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col min-h-[100vh]">
     <app-chess-scheme v-if="openCheme" @close-chess="openCheme = !openCheme"/>
-    <app-header />
+    <app-header :user="user" />
     <main class="">
       <div class="_container">
         <div class="flex justify-between items-center my-4 xxl:my-3 xl:my-2.5">
@@ -36,7 +36,7 @@
                     </clipPath>
                   </defs>
                 </svg>
-                <span>Шахматки</span>
+                <span>Прайс-листы</span>
               </div>
               <div @click="changeList" :class="{'chess__button--active': activeList}" class="h-full cursor-pointer flex items-center gap-1 px-2 xl:px-1.5 rounded-[3px]">
                 <svg class="w-4.5 xxl:w-4 xl:w-3.5" width="18px" height="18px" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -140,10 +140,14 @@ import AppFooter from "../Layouts/AppFooter.vue"
 import AppChessGrid from "../Components/AppChessGrid.vue"
 import AppChessList from "../Components/AppChessList.vue"
 import AppChessScheme from "../Layouts/modal/AppChessScheme.vue"
+import {computed} from "vue";
+import {usePage} from "@inertiajs/inertia-vue3";
 
 export default {
+  props: ['user'],
   data() {
     return {
+      user: computed(() => usePage().props.value.auth.user),
       activeChess: true,
       activeList: false,
       openCost: false,

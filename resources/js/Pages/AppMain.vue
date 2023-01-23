@@ -44,7 +44,7 @@
             <img src="../../assets/svg/main_for_rieltor_one.svg" class="h-8 xxl:h-6 xl:h-5 lg:h-6" alt="Для риэлтора 1">
           </div>
           <div class="flex flex-col gap-3 justify-between items-start sm:items-center h-[190px] exl:h-fit exl:min-h-[9.9vw] border border-solid rounded-xl border-[#E5DFEE] p-7 xxl:p-5 xl:p-4">
-            <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Актуальная шахматка по объекту</span>
+            <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Актуальный прайс-лист по объекту</span>
             <img src="../../assets/svg/main_for_rieltor_two.svg" class="h-8 xxl:h-6 xl:h-5 lg:h-6" alt="Для риэлтора 2">
           </div>
           <div class="flex flex-col gap-3 justify-between items-start sm:items-center h-[190px] exl:h-fit exl:min-h-[9.9vw] border border-solid rounded-xl border-[#E5DFEE] p-7 xxl:p-5 xl:p-4">
