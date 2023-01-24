@@ -36,7 +36,7 @@ class AuthenticatedSessionController extends Controller
    * Handle an incoming authentication request.
    *
    * @param \App\Http\Requests\Auth\LoginRequest $request
-   * @return \Illuminate\Http\JsonResponse
+   * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
    * @throws \Illuminate\Validation\ValidationException
    */
   public function store(LoginRequest $request)
@@ -65,8 +65,12 @@ class AuthenticatedSessionController extends Controller
         $this->checkSession($user->id);
 
         Auth::login($user, $remember = true);
+        if(Auth::user()->role === 3) {
+          return redirect()->intended('/admin');
+        } else {
+          return redirect()->intended(RouteServiceProvider::HOME);
+        }
 
-        return redirect()->intended(RouteServiceProvider::HOME);
       } else {
         return response()->json('not auth', 401);
       }
