@@ -149,11 +149,7 @@ class House extends Section implements Initializable
               '1' => 'Не прошел модерацию',
               '2' => 'Прошел модерацию',
             ]),
-            AdminFormElement::select('created', 'Срок сдачи', [
-              'Сдан' => 'Сдан',
-              'Не сдан' => 'Не сдан',
-              'В разработке' => 'В разработке',
-            ]),
+            AdminFormElement::select('created', 'Срок сдачи')->setEnum($this->getCreated()),
           ]),
 
         AdminFormElement::textarea('description', 'Описание'),
