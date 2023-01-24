@@ -208,39 +208,39 @@ class House extends Section implements Initializable
 
         if($month < 4) {
           for ($l = 1; $l < 5; $l++) {
-            $array_created->push($date->year + $i  . '/' . $l . ' квартал');
+            $array_created->push($date->year + $i  . '/' . $l);
           }
         } elseif ($month > 3 && $month < 7) {
           for ($l = 2; $l < 5; $l++) {
-            $array_created->push($date->year + $i  . '/' . $l . ' квартал');
+            $array_created->push($date->year + $i  . '/' . $l);
           }
         } elseif ($month > 6 && $month < 10) {
           for ($l = 3; $l < 5; $l++) {
-            $array_created->push($date->year + $i  . '/' . $l . ' квартал');
+            $array_created->push($date->year + $i  . '/' . $l);
           }
         } elseif ($month > 9 && $month < 13) {
           for ($l = 4; $l < 5; $l++) {
-            $array_created->push($date->year + $i  . '/' . $l . ' квартал');
+            $array_created->push($date->year + $i  . '/' . $l);
           }
         }
 
       } elseif ($i > 1 && $i < 6) {
         for ($l = 1; $l < 5; $l++) {
-          $array_created->push($date->year + $i  . '/' . $l . ' квартал');
+          $array_created->push($date->year + $i  . '/' . $l);
         }
       } elseif ($i === 6) {
 
         if($month > 3 && $month < 7) {
           for ($l = 1; $l < 2; $l++) {
-            $array_created->push($date->year + $i  . '/' . $l . ' квартал');
+            $array_created->push($date->year + $i  . '/' . $l);
           }
         } elseif ($month > 6 && $month < 10) {
           for ($l = 1; $l < 3; $l++) {
-            $array_created->push($date->year + $i  . '/' . $l . ' квартал');
+            $array_created->push($date->year + $i  . '/' . $l);
           }
         } elseif ($month > 9 && $month < 13) {
           for ($l = 1; $l < 4; $l++) {
-            $array_created->push($date->year + $i  . '/' . $l . ' квартал');
+            $array_created->push($date->year + $i  . '/' . $l);
           }
         }
 
