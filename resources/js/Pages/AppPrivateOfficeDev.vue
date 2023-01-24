@@ -14,7 +14,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         <div class="grid grid-cols-2 md:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4 md:gap-10">
           <div class="flex flex-col" v-for="house in houses.data">
             <div class="object__block relative h-[500px] exl:h-fit exl:h-[26vw] md:h-[52vw]">
-              <img :src="house.image" class="w-full h-full rounded-[8px]" alt="">
+              <img v-if="house.images.length > 0" :src="house.images[0].name" class="w-full h-full rounded-[8px]" alt="">
               <div class="seek opacity-0 absolute top-0 left-0 immovables__overlay w-full h-full rounded-[8px]"></div>
               <div class="hide absolute flex gap-2 top-0 left-0 p-5 xxl:p-4 xl:p-3">
                 <span class="bg-[#E84680] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5 text-white text-sm xxl:text-xs xl:text-[10px] leading-none" v-if="house.active === 0">на модерации</span>
@@ -46,7 +46,8 @@ import { Link } from '@inertiajs/inertia-vue3'
               </div>
             </div>
             <div class="flex flex-col p-5 xxl:p-4 xl:p-3">
-              <span class="font-semibold text-xl xxl:text-base xl:text-[13px]">{{ house.title }}</span>
+<!--              <span class="font-semibold text-xl xxl:text-base xl:text-[13px]">{{ house.title }}</span>-->
+              <span class="font-semibold text-xl xxl:text-base xl:text-[13px]">{{ house.images[0] }}</span>
               <div class="relative">
                 <span @click="house.openWatchTime = !house.openWatchTime" class="w-fit cursor-pointer flex items-center gap-2 xxl:gap-1.5 xl:gap-1">
                   <img src="../../assets/svg/eye_icon_grey.svg" class="w-4 xxl:w-3.5 xl:w-3" alt="">

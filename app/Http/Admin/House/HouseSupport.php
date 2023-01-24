@@ -113,7 +113,14 @@ class HouseSupport extends Section implements Initializable
           AdminFormElement::text('link', 'Соц.сеть')->required(),
         ]),
 
-      AdminFormElement::image('avatar', 'Аватар')->required(),
+      AdminFormElement::image('avatar', 'Аватар')->setUploadPath(function(\Illuminate\Http\UploadedFile $file) {
+        return '/storage/support';
+      })->setSaveCallback(function ($file, $path, $filename, $settings) use ($id) {
+
+        $file->move(public_path('/storage/support'), $filename);
+
+        return ['path' => '/storage/support/' . $filename, 'value' => '/storage/support/' . $filename];
+      }),
     ]);
 
     $card->getButtons()->setButtons([

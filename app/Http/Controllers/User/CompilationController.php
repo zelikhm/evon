@@ -73,6 +73,7 @@ class CompilationController extends Controller
   public function show($id)
   {
     $compilation = CompilationModel::where('id', $id - 10000)->with(['values', 'user', 'company'])->firstOrFail();
+
     $houses = collect();
 
     foreach ($compilation->values as $value) {
@@ -136,6 +137,8 @@ class CompilationController extends Controller
       'house' => $house,
       'compilation' => $compilation,
       'user' => $user,
+      'dops' => $this->getDop(),
+      'infos' => $this->getInfo(),
     ]);
 
   }
@@ -210,6 +213,29 @@ class CompilationController extends Controller
     } else {
       return response()->json('not auth', 401);
     }
+  }
+
+  /**
+   * delete house in the compilation
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function deleteHouse(Request $request) {
+
+    if ($request->token === env('TOKEN')) {
+
+      CompilationInfoModel::where('compilation_id', $request->compilation_id)
+        ->where('house_id', $request->house_id)
+        ->delete();
+
+      $compilation = CompilationModel::where('id', $request->compilation_id)->with(['values', 'user', 'company'])->firstOrFail();
+
+      return response()->json($compilation, 200);
+    } else {
+      return response()->json('not auth', 401);
+    }
+
   }
 
   /**

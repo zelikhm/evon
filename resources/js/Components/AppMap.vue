@@ -1,3 +1,7 @@
+<script setup>
+import { Link } from "@inertiajs/inertia-vue3"
+</script>
+
 <template>
  <div class="relative w-full h-[90vh] my-5 xxl:my-4 xl:my-3">
 
@@ -13,7 +17,7 @@
              <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 mb-7 xxl:mb-5 xl:mb-4">
                <img :src="'/storage/' + house.image" class="w-14 xxl:w-12 xl:w-8 h-14 xxl:h-12 xl:h-8 rounded-full" alt="">
                <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5">
-                 <span class="text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] font-medium leading-none">{{ house.title }}</span>
+                 <Link :href="'/house/' + house.slug" class="text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] font-medium leading-none">{{ house.title }}</Link>
                  <span class="text-[#8A8996] text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ house.city }}, {{ house.area }}</span>
                </div>
              </div>

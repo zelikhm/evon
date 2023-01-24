@@ -64,7 +64,7 @@
             </div>
 
             <div class="flex items-center p-4 xxl:p-3 xl:p-2">
-              <button class="login__btn--bg bg-[#E84680] px-4 xxl:px-4 xl:px-2.5 rounded-[3px] h-10 xxl:h-8 xl:h-6 font-semibold text-white text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px] leading-none">Смотреть шахматку</button>
+              <button class="login__btn--bg bg-[#E84680] px-4 xxl:px-4 xl:px-2.5 rounded-[3px] h-10 xxl:h-8 xl:h-6 font-semibold text-white text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px] leading-none">Смотреть прайс-лист</button>
             </div>
           </div>
         </div>

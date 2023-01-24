@@ -26,7 +26,6 @@ class HouseModel extends Model
     'active',
     'slug',
     'fool_price',
-    'image',
     'visible',
     'created'
   ];

@@ -20,12 +20,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('house')->group(function () {
   Route::post('create', ['App\Http\Controllers\House\HouseController', 'create']);
+  Route::post('editHouse', ['App\Http\Controllers\House\HouseController', 'editHouse']);
   Route::post('addedSupport', ['App\Http\Controllers\House\HouseController', 'supports']);
   Route::post('clearSupport', ['App\Http\Controllers\House\HouseController', 'clearSupport']);
   Route::post('deleteSupport', ['App\Http\Controllers\House\HouseController', 'deleteSupport']);
+  Route::post('editSupport', ['App\Http\Controllers\House\HouseController', 'editSupport']);
   Route::post('get', ['App\Http\Controllers\House\HouseController', 'get']);
+  //images
   Route::post('addedImages', ['App\Http\Controllers\House\HouseController', 'addedImages']);
   Route::post('deletedImage', ['App\Http\Controllers\House\HouseController', 'deletedImage']);
+  //files
   Route::post('addedFiles', ['App\Http\Controllers\House\HouseController', 'addedFiles']);
   Route::post('deletedFile', ['App\Http\Controllers\House\HouseController', 'deletedFile']);
   //
@@ -36,7 +40,6 @@ Route::prefix('house')->group(function () {
   Route::post('deletedFlat', ['App\Http\Controllers\House\HouseController', 'deletedFlat']);
   Route::post('editFlat', ['App\Http\Controllers\House\HouseController', 'editFlat']);
   //
-  Route::post('addedImages', ['App\Http\Controllers\House\HouseController', 'addedImages']);
   Route::post('setVisible', ['App\Http\Controllers\House\HouseController', 'setVisible']);
   Route::post('delete', ['App\Http\Controllers\House\HouseController', 'delete']);
   //
@@ -48,6 +51,7 @@ Route::prefix('compilation')->group(function () {
   Route::post('/addHouse', ['App\Http\Controllers\User\CompilationController', 'addHouse']);
   Route::post('/create', ['App\Http\Controllers\User\CompilationController', 'create']);
   Route::post('/delete', ['App\Http\Controllers\User\CompilationController', 'delete']);
+  Route::post('/deleteHouse', ['App\Http\Controllers\User\CompilationController', 'deleteHouse']);
   Route::post('/get', ['App\Http\Controllers\User\CompilationController', 'get']);
   Route::post('/getAll', ['App\Http\Controllers\User\CompilationController', 'getAll']);
   Route::post('/edit', ['App\Http\Controllers\User\CompilationController', 'edit']);

@@ -80,7 +80,36 @@ path create \ [post] / поля:
 - type - тип ЖК
 - dop - Доп.услуги - массив из названий
 - info - Инфраструктуры - массив из названий
-- image - изображение
+- toSea - до моря
+- toSchool - до школы
+- toShop - до магазина
+- toPark - до парка
+- toBus - до остановки
+- count_flat - кол-во стояков
+- exclusive - эксклюзив для агенств
+- toChildrenSchool - до дет.сада
+- token
+
+Редактирование ЖК и его характеристики \
+path editHouse \ [post] / поля: 
+
+- house_id - айди ЖК
+- title - Название ЖК
+- description - Описание ЖК
+- city - Город
+- area - Район
+- longitude - Долгота
+- latitude - Широта
+- percent - Процент
+- comment - Комментарий
+- active - * не передаем
+- created - срок сдачи
+- fool_price - рассрочка*
+- statusHouse - Статус
+- floors - Этажи
+- type - тип ЖК
+- dop - Доп.услуги - массив из названий
+- info - Инфраструктуры - массив из названий
 - toSea - до моря
 - toSchool - до школы
 - toShop - до магазина
@@ -102,6 +131,23 @@ path addedSupport \ [post] / поля:
 - status - Должность
 - link - Ссылка на соц.сеть
 - token
+
+Редактирование саппортов для ЖК \
+path editSupport \ [post] / поля:
+
+- id - айди
+- avatar - Изображение
+- name - Имя
+- phone - Телефон
+- email - Емеил
+- status - Должность
+- link - Ссылка на соц.сеть
+- token
+
+Удаление саппорт для ЖК \
+path deleteSupport \ [post] / поля:
+
+- id - айди саппорта
 
 Получение ЖК по ид \
 path get \ [post] / поля:
@@ -282,6 +328,13 @@ path addHouse \ [post] / поля:
 - house_id - Айди ЖК
 - description - коммент
 - token
+
+Удаление жк из подборки \
+path deleteHouse \ [post] / поля:
+
+- token - токен
+- compilation_id - айди подборки
+- house_id - айди жк
 
 Удаление подборки \
 path delete \ [post] / поля:

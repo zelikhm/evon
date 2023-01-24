@@ -11,7 +11,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           <img class="w-10 xxl:w-8 xl:w-6" src="../../assets/svg/city_icon_white.svg" alt="">
         </div>
         <div class="text-white flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
-          <span class="text-[30px] xxl:text-[25px] xl:text-[20px] font-bold leading-none">Euro Avsallar Residence</span>
+          <span class="text-[30px] xxl:text-[25px] xl:text-[20px] font-bold leading-none">{{ user.company.title }}</span>
           <span class="text-[15px] xxl:text-[13px] xl:text-[11px] leading-none">Агенство недвижимости</span>
         </div>
       </div>
@@ -301,7 +301,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
         </div>
         <div>
-          <div class="contact__selling h-fit bg-white rounded-[10px] p-4 xxl:p-3 xl:p-2.5 mb-7 xxl:mb-5 xl:mb-4">
+          <div class="contact__selling h-fit bg-white rounded-[10px] p-4 xxl:p-3 xl:p-2.5 mb-7 xxl:mb-5 xl:mb-4" v-for="item in house.supports">
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 mb-5 xxl:mb-4 xl:mb-4">
               <img src="../../assets/chat_avatar.png" class="w-14 xxl:w-12 xl:w-10 lg:w-12" alt="">
               <div class="flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
@@ -311,12 +311,12 @@ import { Link } from '@inertiajs/inertia-vue3'
             </div>
             <div class="flex items-center mb-5 xxl:mb-4 xl:mb-4 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">
               <span class="text-[#8A8996] leading-none">Язык:&nbsp;</span>
-              <span class="leading-none">Русский, Турецкий, Английский</span>
+              <span class="leading-none">{{ item.link }}</span>
             </div>
             <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
               <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]">
                 <img src="../../assets/svg/chat_tel_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
-                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[14px]">+7 930 245 15 20</span>
+                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[14px]">{{ item.phone }}</span>
               </div>
               <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]">
                 <img src="../../assets/svg/chat_mail_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
@@ -344,7 +344,7 @@ import "swiper/css/pagination";
 import { Navigation, Pagination} from "swiper";
 
 export default {
-  props: ['house', 'dops', 'infos'],
+  props: ['house', 'dops', 'infos', 'user'],
   data() {
     return {
       album: false,

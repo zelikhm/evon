@@ -49,11 +49,11 @@ import { Link } from '@inertiajs/inertia-vue3'
         <div class="flex gap-20 xxl:gap-16 xl:gap-12 items-center">
           <Link href="/" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
             <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4" alt="Логотип">
-            <span class="uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon.com</span>
+            <span class="uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon</span>
           </Link>
           <div class="text-white text-[16px] xxl:text-[13px] xl:text-[11px] flex gap-20 xxl:gap-16 xl:gap-12">
             <Link href="/houses" :class="{ 'opacity-60': $page.url !== '/houses' }">Новостройки</Link>
-            <a href="#" class="opacity-60">Виллы</a>
+<!--            <a href="#" class="opacity-60">Виллы</a>-->
             <Link href="/profile/compilation" :class="{ 'opacity-60': $page.url !== '/profile/compilation' }">Подборки</Link>
             <Link href="/profile/favorites" :class="{ 'opacity-60': $page.url !== '/profile/favorites' }">Избранное</Link>
           </div>
@@ -127,7 +127,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
           <Link href="/" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
             <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4" alt="Логотип">
-            <span class="sm:hidden uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon.com</span>
+            <span class="sm:hidden uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon</span>
           </Link>
           <div :class="{'left__0': openBurgerSm }" class="transition-all duration-300 lg:-left-full lg:absolute lg:flex-col lg:h-[100vh] lg:top-10 border__top-white lg:px-[6.25vw] lg:py-2 lg:bg-[#6435A5] text-white text-[16px] xxl:text-[13px] xl:text-[11px] flex gap-20 xxl:gap-16 xl:gap-12 lg:gap-2">
             <Link href="/profile/houses" :class="{ 'opacity-60': $page.url !== '/profile/houses' }">Объекты</Link>

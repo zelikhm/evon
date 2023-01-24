@@ -37,14 +37,14 @@
                 </div>
               </div>
               <div class="flex items-center">
-                <img v-if="!JK.openInput" @click="openInput(JK)" src="../../../assets/svg/chat_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 mx-5 xxl:mx-4 xl:mx-3" alt="">
+<!--                <img v-if="!JK.openInput" @click="openInput(JK)" src="../../../assets/svg/chat_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 mx-5 xxl:mx-4 xl:mx-3" alt="">-->
                 <img src="../../../assets/svg/bucket_icon_red.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 mx-5 xxl:mx-4 xl:mx-3" alt="">
               </div>
             </div>
-            <div v-if="JK.openInput" class="relative">
-              <input class="w-full text-[#1E1D2D] focus:ring-[#6435A5] focus:border-[#6435A5] text-[16px] xxl:text-[14px] xl:text-[12px] pl-5 xxl:pl-4 xl:pl-3 py-3 xxl:py-2.5 xl:py-2 leading-none rounded-[5px] border border-solid border-[#E5DFEE] pr-12 xxl:pr-10 xl:pr-8" type="text">
-              <img @click="closeInput(JK)" class="absolute cursor-pointer top-1/2 -translate-y-1/2 w-6 xxl:w-5 xl:w-4 right-5 xxl:right-4 xl:right-3" src="../../../assets/svg/close_grey.svg" alt="">
-            </div>
+<!--            <div v-if="JK.openInput" class="relative">-->
+<!--              <input class="w-full text-[#1E1D2D] focus:ring-[#6435A5] focus:border-[#6435A5] text-[16px] xxl:text-[14px] xl:text-[12px] pl-5 xxl:pl-4 xl:pl-3 py-3 xxl:py-2.5 xl:py-2 leading-none rounded-[5px] border border-solid border-[#E5DFEE] pr-12 xxl:pr-10 xl:pr-8" type="text">-->
+<!--              <img @click="closeInput(JK)" class="absolute cursor-pointer top-1/2 -translate-y-1/2 w-6 xxl:w-5 xl:w-4 right-5 xxl:right-4 xl:right-3" src="../../../assets/svg/close_grey.svg" alt="">-->
+<!--            </div>-->
           </div>
         </div>
       </div>

@@ -12,6 +12,7 @@ use App\Models\Builder\Info\CityModel;
 use App\Models\Builder\Info\RegionModel;
 use App\Models\LandingModel;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
@@ -109,21 +110,23 @@ class House extends Section implements Initializable
 
     $model = HouseModel::where('id', $id)->first();
 
-    if($model->city) {
-      $city = CityModel::where('title', $model->city)->first();
-      $regions = RegionModel::where('city_id', $city->id)->get();
+    if($model !== null) {
+      if($model->city) {
+        $city = CityModel::where('title', $model->city)->first();
+        $regions = RegionModel::where('city_id', $city->id)->get();
 
-      $options = $regions->map(static function ($item, $regions) {
-        return [
-//          'id' => $item->id,
-          'value' => $item->title,
-        ];
-      })->pluck('value')->toArray();
+        $options = $regions->map(static function ($item, $regions) {
+          return [
+            'value' => $item->title,
+          ];
+        })->pluck('value')->toArray();
+      }
+
+      if($model->area) {
+        $area = RegionModel::where('title', $model->area)->first();
+      }
     }
 
-    if($model->area) {
-      $area = RegionModel::where('title', $model->area)->first();
-    }
 
     if($id === null) {
       $form = AdminForm::elements([
@@ -146,11 +149,7 @@ class House extends Section implements Initializable
               '1' => 'Не прошел модерацию',
               '2' => 'Прошел модерацию',
             ]),
-            AdminFormElement::select('created', 'Срок сдачи', [
-              'Сдан' => 'Сдан',
-              'Не сдан' => 'Не сдан',
-              'В разработке' => 'В разработке',
-            ]),
+            AdminFormElement::select('created', 'Срок сдачи')->setEnum($this->getCreated()),
           ]),
 
         AdminFormElement::textarea('description', 'Описание'),
@@ -177,11 +176,7 @@ class House extends Section implements Initializable
               '1' => 'Не прошел модерацию',
               '2' => 'Прошел модерацию',
             ]),
-            AdminFormElement::select('created', 'Срок сдачи', [
-              'Сдан' => 'Сдан',
-              'Не сдан' => 'Не сдан',
-              'В разработке' => 'В разработке',
-            ]),
+            AdminFormElement::select('created', 'Срок сдачи')->setEnum($this->getCreated()),
           ]),
 
         AdminFormElement::textarea('description', 'Описание'),
@@ -197,6 +192,71 @@ class House extends Section implements Initializable
     ]);
 
     return $card->addBody([$form]);
+  }
+
+  protected function getCreated() {
+    $date = Carbon::now();
+
+    $array = ['Сдан' => 'сдан'];
+
+    $array_created = collect();
+
+    $month = $date->month;
+
+    for ($i = 0; $i < 7; $i++) {
+      if($i === 0) {
+
+        if($month < 4) {
+          for ($l = 1; $l < 5; $l++) {
+            $array_created->push($date->year + $i  . '/' . $l);
+          }
+        } elseif ($month > 3 && $month < 7) {
+          for ($l = 2; $l < 5; $l++) {
+            $array_created->push($date->year + $i  . '/' . $l);
+          }
+        } elseif ($month > 6 && $month < 10) {
+          for ($l = 3; $l < 5; $l++) {
+            $array_created->push($date->year + $i  . '/' . $l);
+          }
+        } elseif ($month > 9 && $month < 13) {
+          for ($l = 4; $l < 5; $l++) {
+            $array_created->push($date->year + $i  . '/' . $l);
+          }
+        }
+
+      } elseif ($i > 1 && $i < 6) {
+        for ($l = 1; $l < 5; $l++) {
+          $array_created->push($date->year + $i  . '/' . $l);
+        }
+      } elseif ($i === 6) {
+
+        if($month > 3 && $month < 7) {
+          for ($l = 1; $l < 2; $l++) {
+            $array_created->push($date->year + $i  . '/' . $l);
+          }
+        } elseif ($month > 6 && $month < 10) {
+          for ($l = 1; $l < 3; $l++) {
+            $array_created->push($date->year + $i  . '/' . $l);
+          }
+        } elseif ($month > 9 && $month < 13) {
+          for ($l = 1; $l < 4; $l++) {
+            $array_created->push($date->year + $i  . '/' . $l);
+          }
+        }
+
+      }
+
+    }
+
+    $array_created->push('Сдан');
+
+    $options = $array_created->map(static function ($item, $array_created) {
+      return [
+        'value' => $item,
+      ];
+    })->pluck('value')->toArray();
+
+    return $options;
   }
 
   /**
