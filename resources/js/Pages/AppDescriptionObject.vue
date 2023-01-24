@@ -20,6 +20,7 @@
     v-if="openAllNews"
     @close-all-news="openAllNews = false"
     :house="house" />
+  <app-chess v-if="false" />
   <main>
     <div class="_container flex flex-col">
       <div class="decription__head h-20 xxl:h-16 xl:h-12 md:h-fit rounded-[12px] my-7 xxl:my-5 xl:my-4">
@@ -198,6 +199,7 @@ import AppModalAlbum from "@/Layouts/modal/AppModalAlbum.vue"
 import AppAllNews from "@/Layouts/modal/AppAllNews.vue"
 import AppAddSelections from "@/Layouts/modal/AppAddSelections.vue"
 import AppImmovablesCreateSelection from "@/Layouts/modal/AppImmovablesCreateSelection.vue"
+import AppChess from "@/Components/AppChess.vue"
 
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
@@ -337,6 +339,7 @@ export default {
     AppAllNews,
     AppAddSelections,
     AppImmovablesCreateSelection,
+    AppChess
   },
   setup() {
     return {

@@ -534,7 +534,6 @@ export default {
       this.openSelectDev = false
       this.openSelectDeadline = false
       this.openSelectRegion = false
-      this.openSelectCity = false
       this.openDate = false
       this.openSelectType = false
     },
