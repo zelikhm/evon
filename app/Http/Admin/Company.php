@@ -68,8 +68,8 @@ class Company extends Section implements Initializable
         ->setWidth('50px')
         ->setHtmlAttribute('class', 'text-center'),
       AdminColumn::text('title', 'Название')->setWidth('350px'),
-      AdminColumn::text('image', 'Изображение')->setWidth('350px'),
-      AdminColumn::text('banner', 'Баннер')->setWidth('350px'),
+      AdminColumn::image('image', 'Изображение')->setWidth('350px'),
+      AdminColumn::image('banner', 'Баннер')->setWidth('350px'),
     ];
 
     $display = AdminDisplay::datatablesAsync()
@@ -99,8 +99,22 @@ class Company extends Section implements Initializable
         ->addColumn([
           AdminFormElement::text('title', 'Название'),
         ], 6)->addColumn([
-          AdminFormElement::image('image', 'Изображение'),
-          AdminFormElement::image('banner', 'Баннер'),
+          AdminFormElement::image('image', 'Изображение')->setUploadPath(function(\Illuminate\Http\UploadedFile $file) {
+            return '/storage/company';
+          })->setSaveCallback(function ($file, $path, $filename, $settings) use ($id) {
+
+            $file->move(public_path('/storage/company'), $filename);
+
+            return ['path' => '/storage/company/' . $filename, 'value' => '/storage/company/' . $filename];
+          }),
+          AdminFormElement::image('banner', 'Баннер')->setUploadPath(function(\Illuminate\Http\UploadedFile $file) {
+            return '/storage/images';
+          })->setSaveCallback(function ($file, $path, $filename, $settings) use ($id) {
+
+            $file->move(public_path('/storage/company/banner'), $filename);
+
+            return ['path' => '/storage/company/banner/' . $filename, 'value' => '/storage/company/banner/' . $filename];
+          }),
         ]),
     ]);
 

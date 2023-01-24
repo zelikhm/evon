@@ -241,7 +241,7 @@ class HouseCharacteristics extends Section implements Initializable
 
     $structure = StructureModel::all();
 
-    return $structure->map(static function ($item, $types) {
+    return $structure->map(static function ($item, $structure) {
       return [
         'id' => $item->id,
         'value' => $item->name,

@@ -178,12 +178,6 @@ class HouseController extends Controller
 
   public function create(Request $request)
   {
-    if ($request->image) {
-      $imageName = time() . '.' . $request->image->getClientOriginalName();
-      $request->image->move(public_path('/storage/'), $imageName);
-    } else {
-      $imageName = null;
-    }
 
     if ($request->token === env('TOKEN')) {
       $house = HouseModel::create([
@@ -199,7 +193,6 @@ class HouseController extends Controller
         'percent' => $request->percent,
         'comment' => $request->comment,
         'active' => 0,
-        'image' => '/storage/' . $imageName,
         'fool_price' => $request->fool_price,
         'created_at' => Carbon::now()->addHour(3),
         'updated_at' => Carbon::now()->addHour(3),
@@ -264,6 +257,94 @@ class HouseController extends Controller
     } else {
       return response()->json('not auth', 401);
     }
+  }
+
+  /**
+   * edit house
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function editHouse(Request $request) {
+
+    if ($request->token === env('TOKEN')) {
+
+      $house = HouseModel::where('id', $request->house_id)
+        ->update([
+        'title' => $request->title,
+        'description' => $request->description,
+        'city' => $request->city,
+        'area' => $request->area,
+        'created' => $request->created,
+        'longitude' => $request->longitude,
+        'latitude' => $request->latitude,
+        'percent' => $request->percent,
+        'comment' => $request->comment,
+        'active' => 0,
+        'fool_price' => $request->fool_price,
+        'updated_at' => Carbon::now()->addHour(3),
+      ]);
+
+      if ($request->info !== null) {
+        $info = explode(',', $request->info);
+        $str = '[';
+        $i = 0;
+        foreach ($info as $item) {
+          if ($i !== 0) {
+            $str .= ',"' . $item . '"';
+          } else {
+            $str .= '"' . $item . '"';
+          }
+
+          $i++;
+        }
+        $str .= ']';
+      } else {
+        $str = null;
+      }
+
+      if ($request->dop !== null) {
+        $dop = explode(',', $request->dop);
+
+        $str1 = '[';
+        $i = 0;
+        foreach ($dop as $item) {
+          if ($i !== 0) {
+            $str1 .= ',"' . $item . '"';
+          } else {
+            $str1 .= '"' . $item . '"';
+          }
+
+          $i++;
+        }
+        $str1 .= ']';
+      } else {
+        $str1 = null;
+      }
+
+      HouseCharacteristicsModel::where('house_id', $request->house_id)
+        ->create([
+        'exclusive' => $request->exclusive,
+        'floors' => $request->floors,
+        'type' => $request->type,
+        'dop' => $str1,
+        'info' => $str,
+        'toSea' => $request->toSea,
+        'toSchool' => $request->toSchool,
+        'toShop' => $request->toShop,
+        'toPark' => $request->toPark,
+        'toBus' => $request->toBus,
+        'toChildrenSchool' => $request->toChildrenSchool,
+        'count_flat' => $request->count_flat,
+        'updated_at' => Carbon::now()->addHour(3),
+      ]);
+
+
+      return response()->json($house, 200);
+    } else {
+      return response()->json('not auth', 401);
+    }
+
   }
 
   /**

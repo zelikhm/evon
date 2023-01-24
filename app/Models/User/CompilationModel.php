@@ -44,12 +44,12 @@ class CompilationModel extends Model
 
     public function company() {
       return $this->hasOneThrough(
-        User::class,
         CompanyModel::class,
-        'user_id',
+        User::class,
+        'id',
         'id',
         'user_id',
-        'id'
+        'company_id'
       );
     }
 }
