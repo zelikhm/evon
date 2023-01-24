@@ -19,6 +19,8 @@ class FlatModel extends Model
       'status',
       'number_from_stairs',
       'price',
+      'imageUp',
+      'imageDown',
     ];
 
     protected $hidden = [

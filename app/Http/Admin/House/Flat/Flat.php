@@ -114,32 +114,57 @@ class Flat extends Section implements Initializable
 
     $form = AdminForm::elements([
 
-      AdminFormElement::select('frame_id', 'ЖК')
-        ->setOptions($this->getFlats(), 'name')
-        ->setUsageKey('id'),
+      AdminFormElement::columns()
+        ->addColumn([
+          AdminFormElement::select('frame_id', 'ЖК')
+            ->setOptions($this->getFlats(), 'name')
+            ->setUsageKey('id'),
 
-      AdminFormElement::number('number', 'Номер'),
-      AdminFormElement::number('square', 'Площадь'),
-      AdminFormElement::select('count', 'Планировка')->setOptions([
-        '1+1' => '1+1',
-        '2+1' => '2+1',
-        '3+1' => '3+1',
-        '4+1' => '4+1',
-        'duplex' => 'duplex',
-        'studia' => 'studia',
-      ]),
-      AdminFormElement::number('floor', 'Этаж'),
-      AdminFormElement::select('status', 'Статус')->setOptions([
-        0 => 'Акция',
-        1 => 'Перепродажа',
-        2 => 'Бронь',
-        3 => 'Продажи закрыты',
-        4 => 'В продаже',
+          AdminFormElement::number('number', 'Номер'),
+          AdminFormElement::number('square', 'Площадь'),
+          AdminFormElement::select('count', 'Планировка')->setOptions([
+            '1+1' => '1+1',
+            '2+1' => '2+1',
+            '3+1' => '3+1',
+            '4+1' => '4+1',
+            'duplex' => 'duplex',
+            'studia' => 'studia',
+          ]),
 
-      ]),
-      AdminFormElement::number('number_from_stairs', 'От леснечной клетки'),
-      AdminFormElement::number('price', 'Цена')->setStep(0.01),
+          AdminFormElement::image('imageUp', 'Верхнее')->setUploadPath(function(\Illuminate\Http\UploadedFile $file) {
+            return '/storage/flat';
+          })->setSaveCallback(function ($file, $path, $filename, $settings) use ($id) {
+
+            $file->move(public_path('/storage/flat'), $filename);
+
+            return ['path' => '/storage/flat/' . $filename, 'value' => '/storage/flat/' . $filename];
+          }),
+
+        ], 6)->addColumn([
+          AdminFormElement::number('floor', 'Этаж'),
+          AdminFormElement::select('status', 'Статус')->setOptions([
+            0 => 'Акция',
+            1 => 'Перепродажа',
+            2 => 'Бронь',
+            3 => 'Продажи закрыты',
+            4 => 'В продаже',
+
+          ]),
+          AdminFormElement::number('number_from_stairs', 'От леснечной клетки'),
+          AdminFormElement::number('price', 'Цена')->setStep(0.01),
+
+          AdminFormElement::image('imageDown', 'Нижнее')->setUploadPath(function(\Illuminate\Http\UploadedFile $file) {
+            return '/storage/flat';
+          })->setSaveCallback(function ($file, $path, $filename, $settings) use ($id) {
+
+            $file->move(public_path('/storage/flat'), $filename);
+
+            return ['path' => '/storage/flat/' . $filename, 'value' => '/storage/flat/' . $filename];
+          }),
+        ]),
+
     ]);
+
 
     $card->getButtons()->setButtons([
       'save_and_continue' => (new Save())->setText('Применить'),

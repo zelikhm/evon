@@ -125,6 +125,8 @@ class HouseCharacteristics extends Section implements Initializable
             AdminFormElement::number('toPark', 'До парка'),
             AdminFormElement::number('toChildrenSchool', 'До детского сада'),
           ]),
+
+        AdminFormElement::textarea('exclusive', 'Эксклюзив для агенства'),
       ]);
     } else {
       $form = AdminForm::elements([
@@ -156,6 +158,8 @@ class HouseCharacteristics extends Section implements Initializable
             AdminFormElement::number('toPark', 'До парка'),
             AdminFormElement::number('toChildrenSchool', 'До детского сада'),
           ]),
+
+        AdminFormElement::textarea('exclusive', 'Эксклюзив для агенства'),
       ]);
     }
 

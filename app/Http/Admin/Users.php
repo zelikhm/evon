@@ -69,7 +69,7 @@ class Users extends Section implements Initializable
         ->setHtmlAttribute('class', 'text-center'),
       AdminColumn::text('email', 'Минимальное значение')->setWidth('350px'),
       AdminColumn::text('phone', 'Телефон')->setWidth('350px'),
-      AdminColumn::text('first_name', 'Имя')->setWidth('350px'),
+      AdminColumn::text('first_name', 'Имя / Название компании')->setWidth('350px'),
       AdminColumn::text('last_name', 'Фамилия')->setWidth('350px'),
       AdminColumn::custom('Роль', function(\Illuminate\Database\Eloquent\Model $model) {
         if($model->role === 0) {

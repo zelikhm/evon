@@ -39,7 +39,6 @@ Route::prefix('house')->group(function () {
   Route::post('deletedFlat', ['App\Http\Controllers\House\HouseController', 'deletedFlat']);
   Route::post('editFlat', ['App\Http\Controllers\House\HouseController', 'editFlat']);
   //
-  Route::post('addedImages', ['App\Http\Controllers\House\HouseController', 'addedImages']);
   Route::post('setVisible', ['App\Http\Controllers\House\HouseController', 'setVisible']);
   Route::post('delete', ['App\Http\Controllers\House\HouseController', 'delete']);
   //

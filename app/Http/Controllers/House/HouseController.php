@@ -380,18 +380,8 @@ class HouseController extends Controller
         'status' => $request->status,
         'number_from_stairs' => $request->stairs,
         'price' => $request->price,
-      ]);
-
-      FlatImagesModel::create([
-        'flat_id' => $flat->id,
-        'name' => '/storage/flat/' . $imageUp,
-        'category' => 0,
-      ]);
-
-      FlatImagesModel::create([
-        'flat_id' => $flat->id,
-        'name' => '/storage/flat/' . $imageDown,
-        'category' => 1,
+        'imageUp' => $imageUp,
+        'imageDown' => $imageDown,
       ]);
 
       $frame = FrameModel::where('id', $request->frame_id)->first();
@@ -547,14 +537,14 @@ class HouseController extends Controller
 
     if ($request->avatar) {
       $imageName = time() . '.' . $request->avatar->getClientOriginalName();
-      $request->avatar->move(public_path('/storage/'), $imageName);
+      $request->avatar->move(public_path('/storage/support'), $imageName);
     } else {
       $imageName = null;
     }
 
     $support = HouseSupportModel::create([
       'house_id' => $request->house_id,
-      'avatar' => '/storage/' . $imageName,
+      'avatar' => '/storage/support/' . $imageName,
       'name' => $request->name,
       'phone' => $request->phone,
       'email' => $request->email,
