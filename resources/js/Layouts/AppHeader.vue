@@ -229,11 +229,21 @@ export default {
     loginDeveloper() {
       this.$emit('login-developer')
       this.loginOpen = false
+    },
+    selectsHidden() {
+      this.langOptionVisible = false
+      this.loginOpen = false
     }
   },
   created() {
     console.log(this.user)
   },
+  mounted() {
+    document.addEventListener('click', this.selectsHidden.bind(this), true)
+  },
+  beforeDestroy() {
+    document.removeEventListener('click', this.selectsHidden)
+  }
 }
 </script>
 
