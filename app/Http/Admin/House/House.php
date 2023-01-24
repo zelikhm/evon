@@ -110,20 +110,23 @@ class House extends Section implements Initializable
 
     $model = HouseModel::where('id', $id)->first();
 
-    if($model->city) {
-      $city = CityModel::where('title', $model->city)->first();
-      $regions = RegionModel::where('city_id', $city->id)->get();
+    if($model !== null) {
+      if($model->city) {
+        $city = CityModel::where('title', $model->city)->first();
+        $regions = RegionModel::where('city_id', $city->id)->get();
 
-      $options = $regions->map(static function ($item, $regions) {
-        return [
-          'value' => $item->title,
-        ];
-      })->pluck('value')->toArray();
+        $options = $regions->map(static function ($item, $regions) {
+          return [
+            'value' => $item->title,
+          ];
+        })->pluck('value')->toArray();
+      }
+
+      if($model->area) {
+        $area = RegionModel::where('title', $model->area)->first();
+      }
     }
 
-    if($model->area) {
-      $area = RegionModel::where('title', $model->area)->first();
-    }
 
     if($id === null) {
       $form = AdminForm::elements([
