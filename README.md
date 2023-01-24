@@ -132,6 +132,23 @@ path addedSupport \ [post] / поля:
 - link - Ссылка на соц.сеть
 - token
 
+Редактирование саппортов для ЖК \
+path editSupport \ [post] / поля:
+
+- id - айди
+- avatar - Изображение
+- name - Имя
+- phone - Телефон
+- email - Емеил
+- status - Должность
+- link - Ссылка на соц.сеть
+- token
+
+Удаление саппорт для ЖК \
+path deleteSupport \ [post] / поля:
+
+- id - айди саппорта
+
 Получение ЖК по ид \
 path get \ [post] / поля:
 

@@ -562,6 +562,37 @@ class HouseController extends Controller
   }
 
   /**
+   * edit support
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function editSupport(Request $request) {
+
+    if ($request->avatar) {
+      $imageName = time() . '.' . $request->avatar->getClientOriginalName();
+      $request->avatar->move(public_path('/storage/support'), $imageName);
+    } else {
+      $imageName = null;
+    }
+
+    $support = HouseSupportModel::where('id', $request->id)
+      ->update([
+      'avatar' => '/storage/support/' . $imageName,
+      'name' => $request->name,
+      'phone' => $request->phone,
+      'email' => $request->email,
+      'status' => $request->status,
+      'link' => $request->link,
+      'created_at' => Carbon::now()->addHour(3),
+      'updated_at' => Carbon::now()->addHour(3),
+    ]);
+
+    return response()->json($support, 200);
+
+  }
+
+  /**
    * delete supports with help id
    * @param Request $request
    */

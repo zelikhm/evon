@@ -24,6 +24,7 @@ Route::prefix('house')->group(function () {
   Route::post('addedSupport', ['App\Http\Controllers\House\HouseController', 'supports']);
   Route::post('clearSupport', ['App\Http\Controllers\House\HouseController', 'clearSupport']);
   Route::post('deleteSupport', ['App\Http\Controllers\House\HouseController', 'deleteSupport']);
+  Route::post('editSupport', ['App\Http\Controllers\House\HouseController', 'editSupport']);
   Route::post('get', ['App\Http\Controllers\House\HouseController', 'get']);
   //images
   Route::post('addedImages', ['App\Http\Controllers\House\HouseController', 'addedImages']);
