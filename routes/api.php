@@ -42,7 +42,7 @@ Route::prefix('house')->group(function () {
   Route::post('setVisible', ['App\Http\Controllers\House\HouseController', 'setVisible']);
   Route::post('delete', ['App\Http\Controllers\House\HouseController', 'delete']);
   //
-  Route::post('getHouseApi', ['App\Http\Controllers\House\HouseController', 'getHouseApi']);
+//  Route::post('getHouseApi', ['App\Http\Controllers\House\HouseController', 'getHouseApi']);
   Route::get('getHousesApi', ['App\Http\Controllers\House\HouseController', 'getHousesApi']);
 });
 
