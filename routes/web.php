@@ -66,5 +66,6 @@ Route::get('test', function () {
 });
 
 Route::get('/privacy', ['App\Http\Controllers\PrivacyController', 'index']);
+Route::get('/agree', ['App\Http\Controllers\PrivacyController', 'agree']);
 
 require __DIR__.'/auth.php';

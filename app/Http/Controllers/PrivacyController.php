@@ -14,9 +14,16 @@ class PrivacyController extends Controller
     public function index() {
 
       return Inertia::render('AppPrivacyPolicy', [
-        'user' => Auth::user(),
+        'user' => $this->getUser(),
         'notification' => $this->getNotification(),
       ]);
 
+    }
+
+    public function agree() {
+      return Inertia::render('AppUserAgree', [
+        'user' => $this->getUser(),
+        'notification' => $this->getNotification(),
+      ]);
     }
 }
