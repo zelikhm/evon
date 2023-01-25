@@ -26,7 +26,7 @@ import { Link } from '@inertiajs/inertia-vue3'
             <div class="flex items-center sm:flex-col sm:items-start gap-5 xxl:gap-4 xl:gap-3">
               <span class="font-semibold text-xl xxl:text-lg xl:text-sm lg:text-[18px]">{{ house.title }}</span>
               <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px]">
-                <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">{{ house.info.status }}</span>
+                <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="house.info.status">{{ house.info.status }}</span>
                 <span class="flex items-center justify-center text-white font-semibold bg-[#FA8D50] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">акция</span>
               </div>
             </div>

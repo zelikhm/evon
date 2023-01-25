@@ -46,8 +46,7 @@ import { Link } from '@inertiajs/inertia-vue3'
               </div>
             </div>
             <div class="flex flex-col p-5 xxl:p-4 xl:p-3">
-<!--              <span class="font-semibold text-xl xxl:text-base xl:text-[13px]">{{ house.title }}</span>-->
-              <span class="font-semibold text-xl xxl:text-base xl:text-[13px]">{{ house.images[0] }}</span>
+              <span class="font-semibold text-xl xxl:text-base xl:text-[13px]">{{ house.title }}</span>
               <div class="relative">
                 <span @click="house.openWatchTime = !house.openWatchTime" class="w-fit cursor-pointer flex items-center gap-2 xxl:gap-1.5 xl:gap-1">
                   <img src="../../assets/svg/eye_icon_grey.svg" class="w-4 xxl:w-3.5 xl:w-3" alt="">

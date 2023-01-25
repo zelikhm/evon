@@ -82,11 +82,11 @@ import { Link } from '@inertiajs/inertia-vue3'
             <div class="flex gap-2">
               <div class="flex items-center gap-1">
                 <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="cost_from">от</label>
-                <input class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="cost_from">
+                <input v-model="filters.priceMin" class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="cost_from">
               </div>
               <div class="flex items-center gap-1">
                 <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="cost_before">до</label>
-                <input class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="cost_before">
+                <input v-model="filters.priceMax" class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="cost_before">
               </div>
             </div>
           </div>
@@ -115,11 +115,11 @@ import { Link } from '@inertiajs/inertia-vue3'
             <div class="flex gap-2">
               <div class="flex items-center gap-1">
                 <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="from">от</label>
-                <input class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="from">
+                <input v-model="filters.squareMin" class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="from">
               </div>
               <div class="flex items-center gap-1">
                 <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="before">до</label>
-                <input class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="before">
+                <input v-model="filters.squareMax" class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="before">
               </div>
             </div>
           </div>
@@ -293,8 +293,8 @@ import { Link } from '@inertiajs/inertia-vue3'
           <div class="seek immovables__overlay opacity-0 transition-all h-full w-full absolute -z-10 rounded-[6px]"></div>
             <div class="flex flex-col h-full justify-between p-5 xxl-4 xl:p-3">
               <div class="hide transition-all">
-                <span class="uppercase bg-[#30CB49] text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none font-semibold rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1 mr-2">{{ item.info.status }}</span>
-                <span class="uppercase bg-[#E84680] text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none font-semibold rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1">2/2024</span>
+                <span class="uppercase bg-[#30CB49] text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none font-semibold rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1 mr-2" v-if="item.created && !Number.isInteger(+item.created[0])">{{ item.created }}</span>
+                <span class="uppercase bg-[#E84680] text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none font-semibold rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1" v-else-if="item.created">{{ item.created }}</span>
               </div>
               <div class="seek flex opacity-0 transition-all flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
                 <button @click="this.$emit('open-add-selections', item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
@@ -313,12 +313,12 @@ import { Link } from '@inertiajs/inertia-vue3'
               <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1">
                 <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none">{{ item.area }}</span>
                 <div class="h-1 w-1 rounded-full bg-white"></div>
-                <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none">{{ item.flats.length }} Квартир</span>
+                <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none">{{ item.flats.length }} Квартиры</span>
               </div>
             </div>
           </div>
           <div class="flex flex-col text-[#1E1D2D] p-5 xxl-4 xl:p-3 leading-none">
-            <Link :href="'/house/' + item.slug" class="font-semibold text-xl xxl:text-base xl:text-sm md:text-[17px]">{{ item.city }}</Link>
+            <Link :href="'/house/' + item.slug" class="font-semibold text-xl xxl:text-base xl:text-sm md:text-[17px]">{{ item.title }}</Link>
             <span class="text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">от {{ Number.isInteger(item.minPrice) ? item.minPrice : "-" }} €</span>
           </div>
         </div>
@@ -355,8 +355,9 @@ import { Link } from '@inertiajs/inertia-vue3'
                     <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs md:text-[14px]">{{ item.area }}</span>
                   </div>
                   <div class="flex flex-wrap gap-x-1">
-<!--                    <span class="bg-[#E84680] h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] md:text-[11px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1">{{ item }}</span>-->
-  <!--                  <span class="bg-[#FA8D50] h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1">акция</span>-->
+                    <span class="bg-[#E84680] h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] md:text-[11px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1" v-if="Math.ceil(Math.abs(new Date().getTime() - new Date(item.created_at).getTime()) / (1000 * 3600 * 24) ) <= 30">новинки</span>
+                    <span class="bg-[#FA8D50] h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1" v-if="item.promotion">акция</span>
+                    <span class="bg-[#E84646] h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1" v-if="item.visible >= 50">популярное</span>
                   </div>
                 </div>
               </div>
@@ -364,9 +365,9 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
           <div class="flex flex-col justify-between px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2">
             <div class="flex justify-between items-center">
-              <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] md:text-[13px]">{{ item.flats.length }} Квартир</span>
-              <span class="uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[12px] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1">{{ item.info.status }}</span>
-  <!--            <span class="uppercase border border-solid border-[#E84680] h-fit text-[#E84680] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1">-->
+              <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] md:text-[13px]">{{ item.flats.length }} Квартиры</span>
+              <span class="uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[12px] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1" v-if="item.created && !Number.isInteger(+item.created[0])">{{ item.created }}</span>
+              <span class="uppercase border border-solid border-[#E84680] h-fit text-[#E84680] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1" v-else-if="item.created">{{ item.created }}</span>
             </div>
             <div class="flex flex-col">
               <span class="font-medium whitespace-nowrap text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">от {{ Number.isInteger(item.minPrice) ? item.minPrice : "-" }} €</span>
@@ -406,7 +407,7 @@ export default {
         type: null,
         city: null,
         area: null,
-        priceMin: null,
+          priceMin: null,
         priceMax: null,
         deadline: null,
         squareMin: null,
@@ -431,7 +432,7 @@ export default {
       valueSelectType: null,
       types: [
         { type: 'Новостройка', id: 0 },
-        { type: 'Вилла', id: 1 }
+        { type: 'Виллы', id: 1 }
       ],
       selectCity: null,
       openSelectCity: false,
@@ -529,6 +530,14 @@ export default {
     openAddSelections(data) {
       this.$emit('open-add-selections', data)
     },
+    selectsHidden() {
+      this.openSelectInstallment = false
+      this.openSelectDev = false
+      this.openSelectDeadline = false
+      this.openSelectRegion = false
+      this.openDate = false
+      this.openSelectType = false
+    },
     changeSelectTypes(type) {
       this.selectType = type.type
       this.openSelectType = false
@@ -544,7 +553,7 @@ export default {
 
     for (fullYear; fullYear <= fullPlus5; fullYear++) {
       for (let month = 1; month <= 4; month += 1) {
-        this.deadlines.push({ deadline:`${month}/${fullYear}` })
+        this.deadlines.push({ deadline:`${fullYear}/${month}` })
       }
     }
 
@@ -558,8 +567,12 @@ export default {
 
     let dops = this.dops
 
-    this.readyHouses.forEach(house => {
+    let minPriceForFilter = [],
+        maxPriceForFilter = [],
+        minSquareForFilter = [],
+        maxSquareForFilter = []
 
+    this.readyHouses.forEach(house => {
       house.time = Date.parse(house.created_at)
 
       let arr = [],
@@ -582,25 +595,49 @@ export default {
         squareFlats.push(item.square)
       })
 
+
       house.minPrice = Math.min(...arr)
+      house.maxPrice = Math.max(...arr)
       house.minSquare = Math.min(...squareFlats)
       house.maxSquare = Math.max(...squareFlats)
 
-    })
-    this.readyHouses = this.readyHouses.slice(0, this.count)
+      if (Number.isInteger(house.minPrice)) minPriceForFilter.push(house.minPrice)
+      if (Number.isInteger(house.maxPrice)) maxPriceForFilter.push(house.maxPrice)
+      if (Number.isInteger(house.minSquare)) minSquareForFilter.push(house.minSquare)
+      if (Number.isInteger(house.maxSquare)) maxSquareForFilter.push(house.maxSquare)
 
+
+      house.flats.forEach(item => {
+        if (item.status == 0) {
+          house.promotion = true
+          return
+        }
+        house.promotion = false
+      })
+    })
+
+
+    this.filters.priceMin = Math.min(...minPriceForFilter)
+    this.filters.priceMax = Math.max(...maxPriceForFilter)
+
+    this.readyHouses = this.readyHouses.slice(0, this.count)
 
   },
   computed: {
     readyHouses() {
 
-      // this.readyHouses = this.readyHouses.filter(item => item.info.type === this.selectType)
+      // let filters = []
       //
-      // console.log(this.readyHouses)
-      // console.log(this.selectRegion)
-      // this.readyHouses = this.readyHouses.filter(item => item.area === this.selectRegion)
+      // filters = this.readyHouses.filter(item => {
       //
-      // console.log(this.readyHouses)
+      //   console.log(item.minPrice <= this.filters.priceMin && Number.isInteger(item.minPrice))
+      //
+      //   if (item.city === this.selectCity &&
+      //       item.info.type === this.selectType &&
+      //       item.area === this.selectRegion) {
+      //     return item
+      //   }
+      // })
 
       return this.readyHouses
 
@@ -616,6 +653,12 @@ export default {
         return this.city
       }
     },
+  },
+  mounted() {
+    document.addEventListener('click', this.selectsHidden.bind(this), true)
+  },
+  beforeDestroy() {
+    document.removeEventListener('click', this.selectsHidden)
   },
   components: {
     AppMap,

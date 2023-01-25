@@ -20,6 +20,7 @@
     v-if="openAllNews"
     @close-all-news="openAllNews = false"
     :house="house" />
+  <app-chess v-if="false" />
   <main>
     <div class="_container flex flex-col">
       <div class="decription__head h-20 xxl:h-16 xl:h-12 md:h-fit rounded-[12px] my-7 xxl:my-5 xl:my-4">
@@ -29,8 +30,11 @@
             <div class="flex items-center md:justify-center gap-5 xxl:gap-4 xl:gap-3">
               <span class="font-semibold text-xl xxl:text-lg xl:text-sm lg:text-[19px]">{{ house.title }}</span>
               <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px]">
-                <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="house.info.status !== null">{{ house.info.status }}</span>
-                <span class="flex items-center justify-center text-white font-semibold bg-[#FA8D50] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="!house.fool_price">акция</span>
+                <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="!Number.isInteger(+house.created[0])">{{ house.created }}</span>
+                <span class="flex items-center justify-center uppercase border border-solid border-[#E84680] h-fit text-[#E84680] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-else>{{ house.created }}</span>
+                <span class="flex items-center justify-center text-white font-semibold bg-[#FA8D50] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="house.promotion">акция</span>
+                <span class="flex items-center justify-center text-white font-semibold bg-[#E84680] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="Math.ceil(Math.abs(new Date().getTime() - new Date(house.created_at).getTime()) / (1000 * 3600 * 24) ) <= 30">новинки</span>
+                <span class="flex items-center justify-center text-white font-semibold bg-[#E84646] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="house.visible >= 50">популярное</span>
               </div>
             </div>
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">{{ house.city }}, {{ house.area }}</span>
@@ -40,7 +44,7 @@
             <div class="border__right md:border-0 flex items-center md:flex-col gap-5 xxl:gap-4 xl:gap-3 p-4 xxl:p-3 xl:p-2">
               <div class="flex items-center gap-1.5 xxl:gap-1 xl:gap-0.5">
                 <img src="../../assets/svg/reload_icon.svg" class="h-4 xx:h-3.5 xl:h-3 lg:h-4" alt="reload">
-                <span class="text-sm xxl:text-xs xl:text-[10px] lg:text-[15px]">Сегодня</span>
+                <span class="text-sm xxl:text-xs xl:text-[10px] lg:text-[15px]">{{ new Date(Date.parse(house.updated_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1')  }}</span>
               </div>
               <div @click="map = !map" class="flex items-center justify-center cursor-pointer bg-[#F6F3FA] gap-2 xxl:gap-1.5 xl:gap-1 h-10 xxl:h-8 xl:h-6 lg:h-8 px-4 xxl:px-3 xl:px-2.5 rounded-[3px]">
                 <img src="../../assets/svg/map_pointer.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="mark">
@@ -82,7 +86,7 @@
             class="mySwiper w-full"
           >
             <swiper-slide class="h-full flex justify-center">
-              <img @click="album = true" class="h-full w-full" :src="house.image" alt="">
+              <img @click="album = true" class="h-full w-full" v-if="house.images.length > 0" :src="house.images[0].name" alt="">
             </swiper-slide>
             <swiper-slide class="h-full flex justify-center" v-for="item in mainPhotos">
               <img @click="album = true" class="h-full w-full" :src="item.name" alt="">
@@ -117,8 +121,8 @@
           <div class="flex flex-col pb-14 xxl:pb-10 xl:pb-8">
             <span class="uppercase font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] pb-5 xxl:pb-4 xl:pb-3 leading-none">О ЖК</span>
             <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="fullDescription">{{ house.description }}</p>
-<!--            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{ house.description.slice(0, 300) + '...' }}</p>-->
-            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{ house }}</p>
+            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{ house.description.slice(0, 300) + '...' }}</p>
+<!--            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{ house }}</p>-->
             <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 items-center w-fit animation__arrow" @click="fullDescription = !fullDescription">
               <span class="text-[#6435A5] font-medium text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">{{ fullDescription ? 'Скрыть' : 'Подробнее' }}</span>
               <img src="../../assets/svg/arrow_right_purple.svg" class="transition-all duration-300 w-3.5 xxl:w-3 xl:wp-2.5" alt="Стрелочка в право">
@@ -198,6 +202,7 @@ import AppModalAlbum from "@/Layouts/modal/AppModalAlbum.vue"
 import AppAllNews from "@/Layouts/modal/AppAllNews.vue"
 import AppAddSelections from "@/Layouts/modal/AppAddSelections.vue"
 import AppImmovablesCreateSelection from "@/Layouts/modal/AppImmovablesCreateSelection.vue"
+import AppChess from "@/Components/AppChess.vue"
 
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
@@ -278,6 +283,15 @@ export default {
       }
     }
 
+    this.house.flats.forEach(item => {
+      if (item.status == 0) {
+        this.house.promotion = true
+        return
+      }
+
+      this.house.promotion = false
+    })
+
     this.mainPhotos.push(...this.house.images.filter(item => item.category === 0))
   },
   computed: {
@@ -337,6 +351,7 @@ export default {
     AppAllNews,
     AppAddSelections,
     AppImmovablesCreateSelection,
+    AppChess
   },
   setup() {
     return {
