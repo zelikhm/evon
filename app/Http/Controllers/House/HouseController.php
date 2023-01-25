@@ -323,7 +323,7 @@ class HouseController extends Controller
       }
 
       HouseCharacteristicsModel::where('house_id', $request->house_id)
-        ->create([
+        ->update([
         'exclusive' => $request->exclusive,
         'floors' => $request->floors,
         'type' => $request->type,

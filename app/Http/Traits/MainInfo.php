@@ -61,7 +61,12 @@ trait MainInfo
 
     $user = User::where('id', Auth::id())->with(['company', 'subscriptionInfo'])->first();
 
-    $user->subscription = $user->subscription();
+    if($user !== null) {
+      $user->subscription = $user->subscription();
+    } else {
+      $user = [];
+    }
+
 
     return $user;
 
