@@ -62,7 +62,7 @@
           <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Статус</span>
           <div class="relative">
             <div @click="openStatus = !openStatus" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
-              <span>{{ selectStatus }}</span>
+              <span>{{ selectStatus === 0 ? "Акция" : selectStatus === 1 ? "Перепродажа" : selectStatus === 2 ? "Бронь" : selectStatus === 3 ? "Продажи закрыты" : "В продаже" }}</span>
               <img src="../../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openStatus }" alt="">
             </div>
             <div v-if="openStatus" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
@@ -181,14 +181,14 @@ export default {
         { floor: '4', value: 4},
         { floor: '5', value: 5},
       ],
-      selectStatus: 'Свободно',
+      selectStatus: 0,
       openStatus: false,
       statuses: [
-        { status: 'Акция', value: 1},
-        { status: 'Перепродажа', value: 2},
-        { status: 'Бронь', value: 3},
-        { status: 'Продажи закрыты', value: 4},
-        { status: 'В продаже', value: 5},
+        { status: 'Акция', id: 0 },
+        { status: 'Перепродажа', id: 1 },
+        { status: 'Бронь', id: 2 },
+        { status: 'Продажи закрыты', id: 3 },
+        { status: 'В продаже', id: 4 },
       ],
       selectStairs: '1',
       openStairs: false,
@@ -273,7 +273,7 @@ export default {
       this.openFloors = false
     },
     changeSelectStatus(status) {
-      this.selectStatus = status.status
+      this.selectStatus = status.id
       this.openStatus = false
     },
     changeSelectStairs(stairs) {
