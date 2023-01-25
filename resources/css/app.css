@@ -1425,6 +1425,12 @@ input::placeholder {
   grid-template-columns: 66vw 34vw;
 }
 
+@media (max-width: 992px) {
+  .grid__chess {
+    grid-template-columns: 1fr;
+  }
+}
+
 .grid__chess--inner {
   grid-auto-rows: 48px;
 }

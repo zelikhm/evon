@@ -20,8 +20,8 @@
     v-if="openAllNews"
     @close-all-news="openAllNews = false"
     :house="house" />
-  <app-chess v-if="false" />
-  <main>
+  <app-chess  />
+  <main v-if="false">
     <div class="_container flex flex-col">
       <div class="decription__head h-20 xxl:h-16 xl:h-12 md:h-fit rounded-[12px] my-7 xxl:my-5 xl:my-4">
         <div class="flex md:flex-col items-center justify-between">
@@ -339,7 +339,7 @@ export default {
     AppAllNews,
     AppAddSelections,
     AppImmovablesCreateSelection,
-    AppChess
+    AppChess,
   },
   setup() {
     return {
