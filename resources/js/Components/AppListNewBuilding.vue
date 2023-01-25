@@ -530,6 +530,14 @@ export default {
     openAddSelections(data) {
       this.$emit('open-add-selections', data)
     },
+    selectsHidden() {
+      this.openSelectInstallment = false
+      this.openSelectDev = false
+      this.openSelectDeadline = false
+      this.openSelectRegion = false
+      this.openDate = false
+      this.openSelectType = false
+    },
     changeSelectTypes(type) {
       this.selectType = type.type
       this.openSelectType = false
@@ -645,6 +653,12 @@ export default {
         return this.city
       }
     },
+  },
+  mounted() {
+    document.addEventListener('click', this.selectsHidden.bind(this), true)
+  },
+  beforeDestroy() {
+    document.removeEventListener('click', this.selectsHidden)
   },
   components: {
     AppMap,
