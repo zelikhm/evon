@@ -16,7 +16,10 @@ import { Link } from '@inertiajs/inertia-vue3'
       </div>
       <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 text-[#3B3A45] opacity-50 pb-14 xxl:pb-10 xl:pb-8 pt-10 xxl:pt-8 xl:pt-6">
         <div class="flex justify-between">
-          <Link href="/privacy" class="underline">Gizlilik Politikası</Link>
+          <div>
+            <Link href="/privacy" class="underline mr-5">Gizlilik Politikası</Link>
+            <Link href="/agree" class="underline">Kullanıcı Sözleşmesi</Link>
+          </div>
           <span>{{ new Date().getFullYear() }}. Tüm Hakları Saklıdır</span>
         </div>
         <div class="grid grid-cols-3 lg:flex lg:flex-col items-center lg:gap-2">

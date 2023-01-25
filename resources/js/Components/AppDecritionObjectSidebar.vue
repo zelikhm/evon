@@ -42,7 +42,7 @@
       <div class="font-medium text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] pb-5 xxl:pb-4 xl:pb-3 leading-none">Контакты</div>
       <div class="bg-white p-4 xxl:p-3 xl:p-2.5 rounded-[10px] mb-3" v-for="item in house.supports">
         <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 pb-5 xxl:pb-4 xl:pb-3">
-          <img class="w-14 xxl:w-12 xl:w-10 h-14 xxl:h-12 xl:h-10 rounded-full" :src="item.avatar" alt="">
+          <img class="w-14 xxl:w-12 xl:w-10 h-14 xxl:h-12 xl:h-10 rounded-full" v-if="item.avatar" :src="'/storage/' + item.avatar" alt="">
           <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5">
             <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">{{ item.name }}</span>
             <span class="text-[14px] xxl:text-[12px] xl:text-[10px] text-[#8A8996] leading-none">{{ item.status }}</span>

@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -17,12 +18,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('AppMain', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return Inertia::render('AppMain');
 });
 
 
@@ -62,9 +58,14 @@ Route::get('/404', function () {
 });
 
 Route::get('test', function () {
-  dd(\App\Models\Builder\HouseImagesModel::all());
+  $sub = User\SubscriptionModel::where('user_id', 3)->first();
+
+  $date = new Carbon($sub->finished_at);
+
+  dd($date->addDay(30));
 });
 
 Route::get('/privacy', ['App\Http\Controllers\PrivacyController', 'index']);
+Route::get('/agree', ['App\Http\Controllers\PrivacyController', 'agree']);
 
 require __DIR__.'/auth.php';

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Traits\MainInfo;
+use App\Models\TarifModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,14 +19,16 @@ class ProfileController extends Controller
       if(Auth::user()->role !== 0) {
 
         return Inertia::render('AppProfileDev', [
-          'user' => Auth::user(),
+          'user' => $this->getUser(),
+          'tarifs' => TarifModel::all(),
           'notification' => $this->getNotification(),
         ]);
 
       } else {
 
         return Inertia::render('AppProfileAgent', [
-          'user' => User::where('id', Auth::id())->with(['company'])->first(),
+          'user' => $this->getUser(),
+          'tarifs' => TarifModel::all(),
           'notification' => $this->getNotification(),
         ]);
 

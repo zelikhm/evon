@@ -49,7 +49,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
         </div>
       </div>
-      <div v-for="item in house.frames[frameId].flats" class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
+      <div v-for="item in house.frames[frameId].flats" v-if="house.frames.length > 0" class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
         <div class="grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
           <div class="leading-none bg-white">{{ item.number }}</div>
           <div class="leading-none">{{ item.square }}</div>
@@ -58,7 +58,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           <div class="leading-none">{{ item.floor }}</div>
           <div class="relative">
             <div @click="item.statusActive = !item.statusActive" class="flex items-center cursor-pointer gap-5 xxl:gap-4 xl:gap-3">
-              <span class="whitespace-nowrap">{{ item.status }}
+              <span class="whitespace-nowrap">{{ item.status == 0 ? "Акция" : item.status == 1 ? "Перепродажа" : item.status == 2 ? "Бронь" : item.status == 3 ? "Продажи закрыты" : "В продаже" }}
               </span>
               <svg class="w-2.5 xl:w-2" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5.00005 3.879L8.71255 0.166504L9.77305 1.227L5.00005 6L0.227051 1.227L1.28755 0.166504L5.00005 3.879Z" fill="#8A8996"/>
@@ -116,14 +116,15 @@ export default {
         { name: 'floor', title: 'Этаж', active: 0, filter: true },
         { name: 'status', title: 'Статус', active: 0, filter: false }
       ],
-      selectStatus: 'Свободно',
+      selectStatus: 0,
       id: null,
       openStatus: false,
       statuses: [
-        { status: 'Свободно', value: 1 },
-        { status: 'Продажи закрыты', value: 2 },
-        { status: 'Акция', value: 3 },
-        { status: 'Перепродажа', value: 4 },
+        { status: 'Акция', id: 0 },
+        { status: 'Перепродажа', id: 1 },
+        { status: 'Бронь', id: 2 },
+        { status: 'Продажи закрыты', id: 3 },
+        { status: 'В продаже', id: 4 },
       ],
       flats: null,
       frameId: 0,
@@ -132,7 +133,7 @@ export default {
   },
   methods: {
     changeSelectStatus(status, item) {
-      item.status = status.status
+      item.status = status.id
       item.statusActive = !item.statusActive
       console.log(item.status)
       axios.post('/api/house/editFlat', {

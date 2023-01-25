@@ -259,7 +259,7 @@ import {Link} from '@inertiajs/inertia-vue3'
           </div>
           <div class="flex gap-7 xxl:gap-5 xl:gap-4">
             <img src="../../assets/svg/pen_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 lg:w-6" alt="">
-            <img src="../../assets/svg/bucket_icon_red.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 lg:w-6" alt="">
+            <img @click="deleteSupport(item)" src="../../assets/svg/bucket_icon_red.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 lg:w-6" alt="">
           </div>
         </div>
       </div>
@@ -466,7 +466,7 @@ export default {
       openSelectType: false,
       types: [
         {type: 'Новостройка', value: 1},
-        {type: 'Вилла', value: 2},
+        {type: 'Виллы', value: 2},
       ],
 
       selectInstallment: 'Да',
@@ -501,12 +501,27 @@ export default {
   methods: {
     setMarker() {
       let coordinates = this.object.coordinates.split(' ')
-
       this.markers = []
+
+      let position = {
+        lat: +coordinates[0],
+        lng: +coordinates[1]
+      }
+
       this.markers.push({
-        position: {
-          lat: +coordinates[0],
-          lng: +coordinates[1]
+        position
+      })
+      this.center = position
+    },
+    deleteSupport(item) {
+      axios.post('/api/house/deleteSupport', {
+        id: item.id,
+        token: this.globalToken
+      })
+
+      this.supportsReady.forEach((support, idx) => {
+        if (item.id === support.id) {
+          this.supportsReady.splice(idx, 1)
         }
       })
     },
@@ -528,57 +543,95 @@ export default {
 
       this.checkValidation(1)
 
+
       if (!this.validation.description && !this.validation.title && !this.validation.coordinates && !this.validation.percent && !this.validation.floors && !this.validation.image) {
-        this.object.info = []
-        this.object.dop = []
+        if (this.isEdit) {
+          this.object.info = []
+          this.object.dop = []
 
-        this.valueSelectServices.forEach(value => {
-          this.object.dop.push(this.dops.find(item => item.name === value).id)
-        })
+          this.valueSelectServices.forEach(value => {
+            this.object.dop.push(this.dops.find(item => item.name === value).id)
+          })
 
-        this.valueSelectInfrastructure.forEach(value => {
-          this.object.info.push(this.infos.find(item => item.name === value).id)
-        })
+          this.valueSelectInfrastructure.forEach(value => {
+            this.object.info.push(this.infos.find(item => item.name === value).id)
+          })
 
-        this.object.city = this.selectCity
-        this.object.area = this.selectRegion
+          this.object.city = this.selectCity
+          this.object.area = this.selectRegion
 
-        let formData = new FormData();
+          let formData = new FormData();
 
-        let coord = this.object.coordinates.split(' ')
+          let coord = this.object.coordinates.split(' ')
 
-        formData.append('user_id', this.user.id);
-        formData.append('title', this.object.title);
-        formData.append('description', this.object.description);
-        formData.append('city', this.selectCity);
-        formData.append('area', this.selectRegion);
-        formData.append('latitude', +coord[0]);
-        formData.append('longitude', +coord[1]);
-        formData.append('percent', this.object.percent);
-        formData.append('comment', this.object.comment);
-        formData.append('statusHouse', this.selectDeadline);
-        formData.append('type', this.selectType);
-        formData.append('dop', this.object.dop);
-        formData.append('info', this.object.info);
-        formData.append('floors', this.object.floors);
-        formData.append('toSea', this.object.toSea);
-        formData.append('toSchool', this.object.toSchool);
-        formData.append('toShop', this.object.toShop);
-        formData.append('toPark', this.object.toPark);
-        formData.append('toBus', this.object.toBus);
-        formData.append('count_flat', this.object.count_flat);
-        formData.append('exclusive', this.object.text_agency);
-        formData.append('toChildrenSchool',this.object.toChildrenSchool);
-        formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
-        formData.append('image', 'hello');
-        formData.append('token', this.globalToken);
+          formData.append('user_id', this.user.id);
+          formData.append('title', this.object.title);
+          formData.append('description', this.object.description);
+          formData.append('city', this.selectCity);
+          formData.append('area', this.selectRegion);
+          formData.append('latitude', +coord[0]);
+          formData.append('longitude', +coord[1]);
+          formData.append('percent', this.object.percent);
+          formData.append('comment', this.object.comment);
+          formData.append('created', this.selectDeadline);
+          formData.append('type', this.selectType);
+          formData.append('dop', this.object.dop);
+          formData.append('info', this.object.info);
+          formData.append('floors', this.object.floors);
+          formData.append('toSea', this.object.toSea);
+          formData.append('toSchool', this.object.toSchool);
+          formData.append('toShop', this.object.toShop);
+          formData.append('toPark', this.object.toPark);
+          formData.append('toBus', this.object.toBus);
+          formData.append('count_flat', this.object.count_flat);
+          formData.append('exclusive', this.object.text_agency);
+          formData.append('toChildrenSchool',this.object.toChildrenSchool);
+          formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
+          formData.append('token', this.globalToken);
 
-        axios({
-          method: 'post',
-          url: '/api/house/create',
-          headers: {"Content-type": "multipart/form-data"},
-          data: formData,
-        }).then(res => this.addedSupports(res, flag))
+          axios({
+            method: 'post',
+            url: '/api/house/create',
+            headers: {"Content-type": "multipart/form-data"},
+            data: formData,
+          }).then(res => this.addedSupports(res, flag))
+        } else {
+          let formData = new FormData();
+
+          let coord = this.object.coordinates.split(' ')
+
+          formData.append('house_id', this.house.id);
+          formData.append('title', this.object.title);
+          formData.append('description', this.object.description);
+          formData.append('city', this.selectCity);
+          formData.append('area', this.selectRegion);
+          formData.append('latitude', +coord[0]);
+          formData.append('longitude', +coord[1]);
+          formData.append('percent', this.object.percent);
+          formData.append('comment', this.object.comment);
+          formData.append('created', this.selectDeadline);
+          formData.append('type', this.selectType);
+          formData.append('dop', this.object.dop);
+          formData.append('info', this.object.info);
+          formData.append('floors', this.object.floors);
+          formData.append('toSea', this.object.toSea);
+          formData.append('toSchool', this.object.toSchool);
+          formData.append('toShop', this.object.toShop);
+          formData.append('toPark', this.object.toPark);
+          formData.append('toBus', this.object.toBus);
+          formData.append('count_flat', this.object.count_flat);
+          formData.append('exclusive', this.object.text_agency);
+          formData.append('toChildrenSchool',this.object.toChildrenSchool);
+          formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
+          formData.append('token', this.globalToken);
+
+          axios({
+            method: 'post',
+            url: '/api/house/editHouse',
+            headers: {"Content-type": "multipart/form-data"},
+            data: formData,
+          }).then(res => console.log(res.data))
+        }
       }
     },
     addedSupports(res, flag) {
@@ -717,7 +770,7 @@ export default {
 
     for (fullYear; fullYear <= fullPlus5; fullYear++) {
       for (let month = 1; month <= 4; month += 1) {
-        this.deadlines.push({ deadline:`${month}/${fullYear}` })
+        this.deadlines.push({ deadline:`${fullYear}/${month}` })
       }
     }
 
@@ -744,7 +797,7 @@ export default {
       this.selectRegion = this.house.area
       this.object.coordinates = this.house.latitude + ' ' + this.house.longitude
       this.selectType = this.house.info.type
-      this.selectDeadline = this.house.info.status
+      this.selectDeadline = this.house.created
       this.object.floors = this.house.info.floors
       this.object.toSea = this.house.info.toSea
       this.object.toPark = this.house.info.toPark
@@ -754,6 +807,10 @@ export default {
       this.object.toBus = this.house.info.toBus
       this.object.comment = this.house.comment
       this.object.percent = this.house.percent
+      this.object.text_agency = this.house.info.exclusive
+      this.object.count_flat = this.house.info.count_flat
+
+      this.setMarker()
 
       if (this.house.info.info !== null) {
         for (let key of this.house.info.info) {
@@ -774,12 +831,6 @@ export default {
       }
 
       this.supportsReady = this.house.supports
-    }
-
-    if (!this.isEdit) {
-      setTimeout(() => {
-        this.$refs.uploudBackground.style.display = 'none'
-      }, 10)
     }
 
   },

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use App\Models\User\CompanyModel;
+use App\Models\User\SubscriptionModel;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -58,6 +60,30 @@ class User extends Authenticatable
     } else {
       return false;
     }
+  }
+
+  public function subscription() {
+
+    $sub = SubscriptionModel::where('user_id', $this->id)->first();
+
+    if($sub !== null) {
+      if($sub->finished_at > Carbon::now()->addHour(3)) {
+        if($sub->active === 1) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+
+  }
+
+  public function subscriptionInfo() {
+    return $this->belongsTo(SubscriptionModel::class, 'id', 'user_id');
   }
 
   public function company() {

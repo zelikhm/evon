@@ -6,7 +6,9 @@ use App\Models\Builder\HouseFilesModel;
 use App\Models\Builder\HouseImagesModel;
 use App\Models\Builder\Info\RegionModel;
 use App\Models\News\AdminNewsModel;
+use App\Models\TarifModel;
 use App\Models\User\CompanyModel;
+use App\Models\User\SubscriptionModel;
 use SleepingOwl\Admin\Providers\AdminSectionsServiceProvider as ServiceProvider;
 use AdminNavigation;
 
@@ -28,10 +30,14 @@ class AdminSectionsServiceProvider extends ServiceProvider
     \App\Models\Builder\HouseSupportModel::class => 'App\Http\Admin\House\HouseSupport',
     \App\Models\Builder\Flat\FrameModel::class => 'App\Http\Admin\House\Flat\Frame',
     \App\Models\Builder\Flat\FlatModel::class => 'App\Http\Admin\House\Flat\Flat',
-    AdminNewsModel::class => 'App\Http\Admin\News\AdminNewsModel',
     HouseImagesModel::class => 'App\Http\Admin\House\Images',
     HouseFilesModel::class => 'App\Http\Admin\House\Files',
+    //
+    AdminNewsModel::class => 'App\Http\Admin\News\AdminNewsModel',
     CompanyModel::class => 'App\Http\Admin\Company',
+    //
+    TarifModel::class => 'App\Http\Admin\Tarif',
+    SubscriptionModel::class => 'App\Http\Admin\Subscription',
   ];
 
   /**
@@ -70,6 +76,12 @@ class AdminSectionsServiceProvider extends ServiceProvider
         'id' => 'files',
         'icon' => 'fab fa-dev',
         'priority' => 300,
+      ],
+      [
+        'title' => 'Подписки',
+        'id' => 'subscription',
+        'icon' => 'fab fa-dev',
+        'priority' => 400,
       ],
     ]);
   }
