@@ -13,9 +13,11 @@ use App\Models\Builder\Info\TypesModel;
 use App\Models\Messages\ChatModel;
 use App\Models\Messages\MessageModel;
 use App\Models\NotificationModel;
+use App\Models\User;
 use App\Models\User\CompilationInfoModel;
 use App\Models\User\CompilationModel;
 use App\Models\User\FavoritesModel;
+use App\Models\User\SubscriptionModel;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use function Symfony\Component\Routing\Loader\Configurator\collection;
@@ -48,6 +50,21 @@ trait MainInfo
     $requestCity->splice(5);
 
     return $requestCity;
+  }
+
+  /**
+   * get user
+   * @return mixed
+   */
+
+  protected function getUser() {
+
+    $user = User::where('id', Auth::id())->with(['company', 'subscriptionInfo'])->first();
+
+    $user->subscription = $user->subscription();
+
+    return $user;
+
   }
 
   /**
