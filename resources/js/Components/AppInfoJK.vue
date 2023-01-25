@@ -543,57 +543,95 @@ export default {
 
       this.checkValidation(1)
 
+
       if (!this.validation.description && !this.validation.title && !this.validation.coordinates && !this.validation.percent && !this.validation.floors && !this.validation.image) {
-        this.object.info = []
-        this.object.dop = []
+        if (this.isEdit) {
+          this.object.info = []
+          this.object.dop = []
 
-        this.valueSelectServices.forEach(value => {
-          this.object.dop.push(this.dops.find(item => item.name === value).id)
-        })
+          this.valueSelectServices.forEach(value => {
+            this.object.dop.push(this.dops.find(item => item.name === value).id)
+          })
 
-        this.valueSelectInfrastructure.forEach(value => {
-          this.object.info.push(this.infos.find(item => item.name === value).id)
-        })
+          this.valueSelectInfrastructure.forEach(value => {
+            this.object.info.push(this.infos.find(item => item.name === value).id)
+          })
 
-        this.object.city = this.selectCity
-        this.object.area = this.selectRegion
+          this.object.city = this.selectCity
+          this.object.area = this.selectRegion
 
-        let formData = new FormData();
+          let formData = new FormData();
 
-        let coord = this.object.coordinates.split(' ')
+          let coord = this.object.coordinates.split(' ')
 
-        formData.append('user_id', this.user.id);
-        formData.append('title', this.object.title);
-        formData.append('description', this.object.description);
-        formData.append('city', this.selectCity);
-        formData.append('area', this.selectRegion);
-        formData.append('latitude', +coord[0]);
-        formData.append('longitude', +coord[1]);
-        formData.append('percent', this.object.percent);
-        formData.append('comment', this.object.comment);
-        formData.append('created', this.selectDeadline);
-        formData.append('type', this.selectType);
-        formData.append('dop', this.object.dop);
-        formData.append('info', this.object.info);
-        formData.append('floors', this.object.floors);
-        formData.append('toSea', this.object.toSea);
-        formData.append('toSchool', this.object.toSchool);
-        formData.append('toShop', this.object.toShop);
-        formData.append('toPark', this.object.toPark);
-        formData.append('toBus', this.object.toBus);
-        formData.append('count_flat', this.object.count_flat);
-        formData.append('exclusive', this.object.text_agency);
-        formData.append('toChildrenSchool',this.object.toChildrenSchool);
-        formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
-        formData.append('image', 'hello');
-        formData.append('token', this.globalToken);
+          formData.append('user_id', this.user.id);
+          formData.append('title', this.object.title);
+          formData.append('description', this.object.description);
+          formData.append('city', this.selectCity);
+          formData.append('area', this.selectRegion);
+          formData.append('latitude', +coord[0]);
+          formData.append('longitude', +coord[1]);
+          formData.append('percent', this.object.percent);
+          formData.append('comment', this.object.comment);
+          formData.append('created', this.selectDeadline);
+          formData.append('type', this.selectType);
+          formData.append('dop', this.object.dop);
+          formData.append('info', this.object.info);
+          formData.append('floors', this.object.floors);
+          formData.append('toSea', this.object.toSea);
+          formData.append('toSchool', this.object.toSchool);
+          formData.append('toShop', this.object.toShop);
+          formData.append('toPark', this.object.toPark);
+          formData.append('toBus', this.object.toBus);
+          formData.append('count_flat', this.object.count_flat);
+          formData.append('exclusive', this.object.text_agency);
+          formData.append('toChildrenSchool',this.object.toChildrenSchool);
+          formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
+          formData.append('token', this.globalToken);
 
-        axios({
-          method: 'post',
-          url: '/api/house/create',
-          headers: {"Content-type": "multipart/form-data"},
-          data: formData,
-        }).then(res => this.addedSupports(res, flag))
+          axios({
+            method: 'post',
+            url: '/api/house/create',
+            headers: {"Content-type": "multipart/form-data"},
+            data: formData,
+          }).then(res => this.addedSupports(res, flag))
+        } else {
+          let formData = new FormData();
+
+          let coord = this.object.coordinates.split(' ')
+
+          formData.append('house_id', this.house.id);
+          formData.append('title', this.object.title);
+          formData.append('description', this.object.description);
+          formData.append('city', this.selectCity);
+          formData.append('area', this.selectRegion);
+          formData.append('latitude', +coord[0]);
+          formData.append('longitude', +coord[1]);
+          formData.append('percent', this.object.percent);
+          formData.append('comment', this.object.comment);
+          formData.append('created', this.selectDeadline);
+          formData.append('type', this.selectType);
+          formData.append('dop', this.object.dop);
+          formData.append('info', this.object.info);
+          formData.append('floors', this.object.floors);
+          formData.append('toSea', this.object.toSea);
+          formData.append('toSchool', this.object.toSchool);
+          formData.append('toShop', this.object.toShop);
+          formData.append('toPark', this.object.toPark);
+          formData.append('toBus', this.object.toBus);
+          formData.append('count_flat', this.object.count_flat);
+          formData.append('exclusive', this.object.text_agency);
+          formData.append('toChildrenSchool',this.object.toChildrenSchool);
+          formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
+          formData.append('token', this.globalToken);
+
+          axios({
+            method: 'post',
+            url: '/api/house/editHouse',
+            headers: {"Content-type": "multipart/form-data"},
+            data: formData,
+          }).then(res => console.log(res.data))
+        }
       }
     },
     addedSupports(res, flag) {

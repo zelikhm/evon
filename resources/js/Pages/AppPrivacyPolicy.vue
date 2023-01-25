@@ -3,7 +3,7 @@
     <app-header :user="user" />
     <main class="_container_policy">
       <div class="mt-14 xxl:mt-12 xl:mt-10 mb-20 xxl:">
-        <h1 class="text-[#3B3A45] text-center pb-7 xxl:pb-5 xl:pb-4 text-3xl xxl:text-2xl xl:text-xl lg:text-2xl">Gizlilik Politikası</h1>
+        <h3 class="text-[#3B3A45] text-center pb-7 xxl:pb-5 xl:pb-4 text-3xl xxl:text-2xl xl:text-xl lg:text-2xl">Политика конфиденциальности</h3>
         <div>
           <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">	«04» июня 2020 года
             Настоящая Политика конфиденциальности (далее по тексту – НПК) распространяется на всю информацию, которую компания «EVON BİLİŞİM SANAYİ VE TİCARET LİMİTED ŞIRKETİ» может получить о Пользователе во время пользования им сайтом Компании с доменным именем https://evon-tr.com/ (далее по тексту – сайт).
@@ -54,7 +54,7 @@
           <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">6.1. Администрация сайта оставляет за собой право вносить изменения и редактировать НПК без письменного согласия Пользователя.</p>
           <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">6.2. Новая Политика конфиденциальности начинает действовать сразу после ее публикации на Сайте, если иное не указано новой версией Политики конфиденциальности.</p>
           <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">6.2. Новая Политика конфиденциальности начинает действовать сразу после ее публикации на Сайте, если иное не указано новой версией Политики конфиденциальности.</p>
-          <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">24.01.2023г.</p>
+          <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">24.01.2023</p>
         </div>
       </div>
     </main>
