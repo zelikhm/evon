@@ -69,13 +69,15 @@ Route::prefix('favorite')->group(function () {
 });
 
 Route::prefix('user')->group(function () {
-  Route::post('phone', ['App\Http\Controllers\User\AuthController', 'checkUserPhone']);
-  Route::post('email', ['App\Http\Controllers\User\AuthController', 'checkUserEmail']);
+  Route::post('/phone', ['App\Http\Controllers\User\AuthController', 'checkUserPhone']);
+  Route::post('/email', ['App\Http\Controllers\User\AuthController', 'checkUserEmail']);
   //
-  Route::post('get', ['App\Http\Controllers\User\IndexController', 'get']);
-  Route::post('edit', ['App\Http\Controllers\User\IndexController', 'edit']);
-  Route::post('addedCompany', ['App\Http\Controllers\User\IndexController', 'addedCompany']);
-  Route::post('editCompany', ['App\Http\Controllers\User\IndexController', 'editCompany']);
+  Route::post('/get', ['App\Http\Controllers\User\IndexController', 'get']);
+  Route::post('/edit', ['App\Http\Controllers\User\IndexController', 'edit']);
+  Route::post('/addedCompany', ['App\Http\Controllers\User\IndexController', 'addedCompany']);
+  Route::post('/editCompany', ['App\Http\Controllers\User\IndexController', 'editCompany']);
+  //
+  Route::post('/payment', ['App\Http\Controllers\User\SubscriptionController', 'payment']);
 });
 
 Route::prefix('chat')->group(function () {
