@@ -274,7 +274,7 @@ export default {
       for (let key of this.house.info.info) {
         if (!+isNaN(key)) {
           console.log(+key)
-          console.log(this.infos.find(item => item.id === +key)
+          console.log(this.infos.find(item => item.id === +key))
           this.arrayInfos.push(this.infos.find(item => item.id === +key))
           console.log(this.arrayInfos)
         }
