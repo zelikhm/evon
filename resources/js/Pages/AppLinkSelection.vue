@@ -3,7 +3,11 @@ import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
-  <app-modal-notification v-if="openNotification" @close-notification="openNotification = false" />
+  <app-modal-notification
+    class="left-[2vw] transition-all duration-1000"
+    :class="{'-left-full': openNotification}"
+    @close-notification="openNotification = false"
+  />
   <header class="relative h-[13.4vw]">
     <img class="w-full absolute top-0 left-0 h-full" src="../../assets/bg_links.jpg" alt="">
     <div class="_container flex h-full">
