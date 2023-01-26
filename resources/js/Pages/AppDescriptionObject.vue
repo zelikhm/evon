@@ -278,6 +278,8 @@ export default {
       }
     }
 
+    console.log(this.arrayInfos);
+
     if (this.house.info.dop !== null) {
       for (let key of this.house.info.dop) {
         if (!+isNaN(key)) {
@@ -287,7 +289,6 @@ export default {
             }
           })
         }
-        console.log(this.dops);
       }
     }
 
