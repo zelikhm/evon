@@ -136,7 +136,7 @@
             <div class="flex flex-wrap gap-3 xxl:gap-2.5 xl:gap-2m pt-4 xxl:pt-3 xl:pt-2.5">
               <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5"
                     v-for="item in arrayInfos"
-              >{{ item }}</span>
+              >{{ item.name }}</span>
             </div>
           </div>
           <div class="grid grid-cols-2 md:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4 pb-14 xxl:pb-10 xl:pb-8">
@@ -144,7 +144,7 @@
               <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px]">Дополнительные услуги</span>
               <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 pt-6 xxl:pt-5 xl:pt-4">
                 <div class="flex justify-between items-center" v-for="dop in dops">
-<!--                  <span :class="{ disableColor: dop.active !== 1 }" class="text-base xxl:text-sm xl:text-xs lg:text-[15px]">{{ dop.name }}</span>-->
+                  <span :class="{ disableColor: dop.active !== 1 }" class="text-base xxl:text-sm xl:text-xs lg:text-[15px]">{{ dop.name }}</span>
                   <div v-if="dop.active === 1" class="bg-[#30CB49] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 lg:w-4 lg:h-4 rounded-full flex items-center justify-center">
                     <img src="../../assets/svg/check_icon.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-4" alt="">
                   </div>
