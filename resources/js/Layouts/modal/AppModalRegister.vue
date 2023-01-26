@@ -1,0 +1,90 @@
+<template>
+
+<!-- Вход в приложение как застройщик -->
+  <div v-if="oLoginRegister" class="fixed z-[100] w-full h-full flex items-center justify-center">
+    <div class="relative bg-white rounded-[12px] p-10 xxl:p-9 xl:p-8 lg:p-5 z-50 w-[30%] lg:w-[48%] md:w-[60%] sm:w-[90%] h-fit">
+      <div class="relative mb-10 xxl:mb-8 xl:mb-6">
+        <h2 class="text-center text-[22px] xxl:text-lg xl:text-base font-semibold">Регистрация на платформе</h2>
+        <button @click="closeModal" class="w-4 h-4 absolute top-[20%] right-0 z-50">
+          <div class="absolute h-[1px] w-4 bg-[#8A8996] rotate-45"></div>
+          <div class="absolute h-[1px] w-4 bg-[#8A8996] -rotate-45"></div>
+        </button>
+      </div>
+      <div class="flex flex-col p-5 xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5 border border-solid border-[#E5DFEE] rounded-[6px]">
+        <label for="email" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Имя</label>
+        <input
+          class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
+          type="email"
+          id="email"
+        >
+      </div>
+      <div class="flex flex-col p-5 xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5 border border-solid border-[#E5DFEE] rounded-[6px]">
+        <label for="password" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Фамилия</label>
+        <div class="relative">
+          <input class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0" type="text" id="password">
+        </div>
+      </div>
+      <h3 class="text-center text-[18px] xxl:text-base xl:text-base font-semibold">Выберите место работы:</h3>
+      <div class="relative my-4">
+        <div @click="openSelectPlaceWork = !openSelectPlaceWork" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5 py-3" style="border: 2px solid #E5DFEE;">
+          <span>{{ selectType }}</span>
+          <img src="../../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectPlaceWork }" alt="">
+        </div>
+        <div v-if="openSelectPlaceWork" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px]">
+          <span
+              v-for="(type, idx) in types" :key="idx"
+              @click="changeSelectTypes(type)"
+              class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
+          >
+            {{ type.type }}
+          </span>
+        </div>
+      </div>
+
+      <button @click="clickLoginDeveloper" class="mt-2 login__btn--bg text-white w-full text-lg xxl:text-[15px] xl:text-xs mb-5 xxl:mb-4 xl:mb-3 p-5 xxl:p-4 xl:p-3 border border-solid border-[#E5DFEE] rounded-[6px]">Отправить</button>
+
+    </div>
+    <div @click="closeModal" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
+  </div>
+</template>
+
+<script>
+import {useForm} from "@inertiajs/inertia-vue3";
+
+export default {
+  props: {
+    oLoginRegister: {
+      type: Boolean
+    },
+  },
+  data() {
+    return {
+      selectType: 'Агентство недвижимости (владелец/директор)',
+      openSelectPlaceWork: false,
+      types: [
+        { type: 'Агентство недвижимости (владелец/директор)' },
+        { type: 'Частный брокер' },
+        { type: 'Работаю в агентстве недвижимости' }
+      ]
+    }
+  },
+  emits: [
+    'close-modal',
+    'open-modal-realtor',
+    'open-modal-developer',
+  ],
+  methods: {
+    closeModal() {
+      this.$emit('close-modal')
+    },
+    changeSelectTypes(type) {
+      this.selectType = type.type
+      this.openSelectPlaceWork = false
+    }
+  }
+}
+</script>
+
+<style scoped>
+
+</style>

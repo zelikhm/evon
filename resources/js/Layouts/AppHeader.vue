@@ -30,9 +30,9 @@ import { Link } from '@inertiajs/inertia-vue3'
           <div class="flex gap-3 xxl:gap-2 font-medium">
             <div class="relative text-[#3B3A45]">
               <button @click="loginOpen = !loginOpen" class="login__btn--bg text-white px-5 xxl:px-4 xl:px-3 py-2.5 xxl:py-2 xl:py-1 rounded-[3px]">Вход</button>
-              <div v-if="loginOpen" class="login__dropdown absolute top-[120%] flex flex-col items-start bg-white rounded-[6px]">
-                <button @click="loginDeveloper" class="whitespace-nowrap leading-none px-3.5 py-2.5">Я застройщик</button>
-                <button @click="loginRealtor" class="whitespace-nowrap leading-none px-3.5 py-2.5">Я риэлтор</button>
+              <div v-if="loginOpen" class="login__dropdown absolute overflow-hidden top-[120%] flex flex-col items-start bg-white rounded-[6px]">
+                <button @click="loginDeveloper" class="hover__select whitespace-nowrap leading-none px-3.5 py-2.5 w-full">Я застройщик</button>
+                <button @click="loginRealtor" class="hover__select whitespace-nowrap leading-none text-left px-3.5 py-2.5 w-full">Я риэлтор</button>
               </div>
             </div>
             <button @click="this.$emit('open-register')" class="register__button--bg text-white px-5 xxl:px-4 xl:px-3 py-2.5 xxl:py-2 xl:py-1 rounded-[3px]">Регистрация</button>
@@ -233,6 +233,7 @@ export default {
     selectsHidden() {
       this.langOptionVisible = false
       this.loginOpen = false
+      this.openProfileMenu = false
     }
   },
   created() {

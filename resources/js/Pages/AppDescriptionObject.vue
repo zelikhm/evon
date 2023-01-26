@@ -20,8 +20,11 @@
     v-if="openAllNews"
     @close-all-news="openAllNews = false"
     :house="house" />
-  <app-chess v-if="false" />
-  <main>
+  <app-chess v-if="chess"
+             :house="house"
+             @close-chess="closeChess"
+  />
+  <main v-if="!chess">
     <div class="_container flex flex-col">
       <div class="decription__head h-20 xxl:h-16 xl:h-12 md:h-fit rounded-[12px] my-7 xxl:my-5 xl:my-4">
         <div class="flex md:flex-col items-center justify-between">
@@ -67,7 +70,7 @@
               </button>
             </div>
 
-            <div class="flex items-center p-4 xxl:p-3 xl:p-2">
+            <div class="flex items-center p-4 xxl:p-3 xl:p-2" @click="chess = true">
               <button class="login__btn--bg bg-[#E84680] px-4 xxl:px-4 xl:px-2.5 rounded-[3px] h-10 xxl:h-8 xl:h-6 font-semibold text-white text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px] leading-none">Смотреть прайс-лист</button>
             </div>
           </div>
@@ -230,13 +233,17 @@ export default {
       openCreateSelection: false,
       map: false,
       flagFavorite: null,
-      mainPhotos: []
+      mainPhotos: [],
+      chess: true
     }
   },
   methods: {
     openCreateSel() {
       this.openCreateSelection = true
       this.openAddSelection = false
+    },
+    closeChess() {
+      this.chess = false
     },
     closeCreateSel() {
       this.openCreateSelection = false
@@ -351,7 +358,7 @@ export default {
     AppAllNews,
     AppAddSelections,
     AppImmovablesCreateSelection,
-    AppChess
+    AppChess,
   },
   setup() {
     return {
