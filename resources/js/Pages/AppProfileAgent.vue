@@ -86,7 +86,8 @@
                     <input v-model="titleCompany" disabled class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="company">
                   </div>
                   <div class="relative shrink-0 h-[78px] xxl:h-[61px] xl:h-[55px] w-[78px] xxl:w-[61px] xl:w-[55px] rounded-full">
-                    <img class="absolute w-full h-full rounded-full" v-if="user.company.image !== 'undefined' && user.company.image" :src="user.company.image" alt="">
+                    <img class="absolute w-full h-full rounded-full" v-if="user.company && user.company.image" :src="user.company.image" alt="">
+
                     <button v-if="agency" @click="deletePhoto" class="absolute rounded-full bg-[#E84680] z-10 top-0 left-0 h-5 xxl:h-4.5 xl:h-4 w-5 xxl:w-4.5 xl:w-4">
                       <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-white h-[1px] w-[60%]"></span>
                       <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-white h-[1px] w-[60%]"></span>
@@ -102,7 +103,7 @@
                 </div>
               </div>
               <div class="relative my-7 xxl:my-5 xl:my-4">
-                <img :src="user.company.banner" v-if="user.company.banner !== 'undefined' && user.company.banner" class="w-full h-[6.56vw] rounded-[10px]">
+                <img :src="user.company.banner" v-if="user.company && user.company.banner" class="w-full h-[6.56vw] rounded-[10px]">
 <!--                      <img :src="'/storage/user/' + user.image">-->
 <!--                      <span class="text-[#6435A5] text-lg xxl:text-[15px] xl:text-[13px] font-semibold leading-none">1920 x 260 px</span>-->
 <!--                    <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none">Загрузить обложку</span>-->
