@@ -20,8 +20,8 @@
         <div class="flex items-center gap-4 xxl:gap-3 xl:gap-2.5">
 <!--          <img :src="'/storage/' + house.user.image" class="h-14 xxl:h-12 xl:h-10" alt="avatar">-->
           <div class="flex flex-col gap-1.5 xxl:gap-1 xl:gap-0.5">
-            <span class="font-medium text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none">{{ house.user.first_name }}</span>
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px] leading-none">{{ house.user.status }}</span>
+            <span class="font-medium text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none" v-if="house.user.first_name">{{ house.user.first_name }}</span>
+            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px] leading-none" v-if="house.user.status">{{ house.user.status }}</span>
           </div>
         </div>
         <button class="w-full  bg-[#F6F3FA] text-[#6536A5] text-base xxl:text-sm xl:text-xs lg:text-[15px] rounded-[6px] py-4 xxl:py-3 xl:py-2.5">Написать в чат</button>
@@ -44,7 +44,7 @@
         <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 pb-5 xxl:pb-4 xl:pb-3">
           <img class="w-14 xxl:w-12 xl:w-10 h-14 xxl:h-12 xl:h-10 rounded-full" v-if="item.avatar" :src="'/storage/' + item.avatar" alt="">
           <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5">
-            <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">{{ item.name }}</span>
+            <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">{{ item.avatar }}</span>
             <span class="text-[14px] xxl:text-[12px] xl:text-[10px] text-[#8A8996] leading-none">{{ item.status }}</span>
           </div>
         </div>
