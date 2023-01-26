@@ -144,7 +144,7 @@
               <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px]">Дополнительные услуги</span>
               <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 pt-6 xxl:pt-5 xl:pt-4">
                 <div class="flex justify-between items-center" v-for="dop in dops">
-                  <span :class="{ disableColor: dop.active !== 1 }" class="text-base xxl:text-sm xl:text-xs lg:text-[15px]">{{ dop.name }}</span>
+<!--                  <span :class="{ disableColor: dop.active !== 1 }" class="text-base xxl:text-sm xl:text-xs lg:text-[15px]">{{ dop.name }}</span>-->
                   <div v-if="dop.active === 1" class="bg-[#30CB49] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 lg:w-4 lg:h-4 rounded-full flex items-center justify-center">
                     <img src="../../assets/svg/check_icon.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-4" alt="">
                   </div>
@@ -287,6 +287,7 @@ export default {
             }
           })
         }
+        console.log(this.dops);
       }
     }
 
