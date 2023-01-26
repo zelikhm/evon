@@ -11,14 +11,14 @@ import { Link } from '@inertiajs/inertia-vue3'
           <span class="sm:hidden uppercase text-[#6435A5] font-semibold">Evon</span>
         </Link>
         <div class="flex gap-12 xxl:gap-10 xl:gap-8 text-[#3B3A45]">
-          <span>evon.information@gmail.com</span>
+          <a href="mailto:evon.information@gmail.com">evon.information@gmail.com</a>
         </div>
       </div>
       <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 text-[#3B3A45] opacity-50 pb-14 xxl:pb-10 xl:pb-8 pt-10 xxl:pt-8 xl:pt-6">
         <div class="flex justify-between">
           <div>
-            <Link href="/privacy" class="underline mr-5">Gizlilik Politikası</Link>
-            <Link href="/agree" class="underline">Kullanıcı Sözleşmesi</Link>
+            <a target="_blank" href="/privacy" class="underline mr-5">Gizlilik Politikası</a>
+            <a target="_blank" href="/agree" class="underline">Kullanıcı Sözleşmesi</a>
           </div>
           <span>{{ new Date().getFullYear() }}. Tüm Hakları Saklıdır</span>
         </div>
@@ -38,8 +38,11 @@ import { Link } from '@inertiajs/inertia-vue3'
 export default {
   data() {
     return {
-
+      isMain: false
     }
+  },
+  created() {
+    console.log()
   }
 }
 

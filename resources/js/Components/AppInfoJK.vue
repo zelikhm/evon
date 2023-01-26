@@ -5,7 +5,7 @@ import {Link} from '@inertiajs/inertia-vue3'
 
 <template>
   <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px]">{{ isEdit ? "Добавить объект" : "Редактирование объекта" }}</h2>
-  <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">Найдено {{ count }} новостроек</span>
+  <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" v-if="isEdit">Найдено {{ count }} новостроек</span>
   <div class="flex-col flex gap-5 xxl:gap-4 xl:gap-3 pt-5 xxl:pt-4 xl:pt-3">
 
     <div :class="{ validation: validation.title }"
@@ -596,6 +596,18 @@ export default {
             data: formData,
           }).then(res => this.addedSupports(res, flag))
         } else {
+
+          this.object.info = []
+          this.object.dop = []
+
+          this.valueSelectServices.forEach(value => {
+            this.object.dop.push(this.dops.find(item => item.name === value).id)
+          })
+
+          this.valueSelectInfrastructure.forEach(value => {
+            this.object.info.push(this.infos.find(item => item.name === value).id)
+          })
+
           let formData = new FormData();
 
           let coord = this.object.coordinates.split(' ')
@@ -797,6 +809,7 @@ export default {
       this.selectRegion = this.house.area
       this.object.coordinates = this.house.latitude + ' ' + this.house.longitude
       this.selectType = this.house.info.type
+      console.log(this.house)
       this.selectDeadline = this.house.created
       this.object.floors = this.house.info.floors
       this.object.toSea = this.house.info.toSea
