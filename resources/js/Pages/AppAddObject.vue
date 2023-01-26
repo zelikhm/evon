@@ -6,7 +6,10 @@
                             :activeFrame="activeFrame"
   />
   <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="closeAddFrame" :house="house" :isEdit="isEdit" :frame="frame" />
-  <app-modal-notification v-if="openNotification" @close-notification="openNotification = false"
+  <app-modal-notification
+    class="left-[2vw] transition-all duration-1000"
+    :class="{'-left-full': openNotification}"
+    @close-notification="openNotification = false"
   />
   <app-header :user="user" />
   <main>

@@ -1,9 +1,11 @@
 <template>
-  <app-modal-notification v-if="openNotification"
-                          @close-notification="openNotification = false"
-                          :text="text"
-  />
   <app-header :user="userHeader" />
+  <app-modal-notification
+    class="left-[2vw] transition-all duration-1000"
+    :class="{'-left-full': openNotification}"
+    @close-notification="openNotification = false"
+    :text="text"
+  />
   <main class="relative">
     <div class="_container">
       <div class="my-14 xxl:my-12 xl:my-10">
