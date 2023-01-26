@@ -271,6 +271,7 @@ export default {
     this.arrayInfos = []
 
     if (this.house.info.info !== null) {
+      console.log(this.house.info.info)
       for (let key of this.house.info.info) {
         if (!+isNaN(key)) {
           console.log(+key)
