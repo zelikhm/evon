@@ -20,8 +20,8 @@
         <div class="flex items-center gap-4 xxl:gap-3 xl:gap-2.5">
 <!--          <img :src="'/storage/' + house.user.image" class="h-14 xxl:h-12 xl:h-10" alt="avatar">-->
           <div class="flex flex-col gap-1.5 xxl:gap-1 xl:gap-0.5">
-            <span class="font-medium text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none">{{ house.user.first_name }}</span>
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px] leading-none">{{ house.user.status }}</span>
+            <span class="font-medium text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none" v-if="house.user.first_name">{{ house.user.first_name }}</span>
+            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px] leading-none" v-if="house.user.status">{{ house.user.status }}</span>
           </div>
         </div>
         <button class="w-full  bg-[#F6F3FA] text-[#6536A5] text-base xxl:text-sm xl:text-xs lg:text-[15px] rounded-[6px] py-4 xxl:py-3 xl:py-2.5">Написать в чат</button>
