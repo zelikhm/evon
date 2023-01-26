@@ -39,7 +39,7 @@ class IndexController extends Controller
   {
     if ($request->token === env('TOKEN')) {
 
-      if($request->image !== 'undefined') {
+      if($request->image !== '') {
         $imageName = time() . '.' . $request->image->getClientOriginalName();
         $request->image->move(public_path('/storage/user'), $imageName);
       } else {
