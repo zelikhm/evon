@@ -136,7 +136,7 @@
             <div class="flex flex-wrap gap-3 xxl:gap-2.5 xl:gap-2m pt-4 xxl:pt-3 xl:pt-2.5">
               <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5"
                     v-for="item in arrayInfos"
-              >{{ '1' }}</span>
+              >{{ item.name }}</span>
             </div>
           </div>
           <div class="grid grid-cols-2 md:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4 pb-14 xxl:pb-10 xl:pb-8">
@@ -271,13 +271,11 @@ export default {
     this.arrayInfos = []
 
     if (this.house.info.info !== null) {
-      console.log(this.house.info.info)
-      for (let key of this.house.info.info) {
-        if (!+isNaN(key)) {
-          console.log(+key)
-          console.log(this.infos.find(item => item.id === +key))
+      let info = this.house.info.info.replace(/[^\d]/g, ' '),
+          arrayInfo = info.split(' ')
+      for (let key of arrayInfo) {
+        if (key !== '') {
           this.arrayInfos.push(this.infos.find(item => item.id === +key))
-          console.log(this.arrayInfos)
         }
       }
     }
@@ -285,8 +283,10 @@ export default {
     console.log(this.arrayInfos);
 
     if (this.house.info.dop !== null) {
-      for (let key of this.house.info.dop) {
-        if (!+isNaN(key)) {
+      let dop = this.house.info.dop.replace(/[^\d]/g, ' '),
+          arrayDop = dop.split(' ')
+      for (let key of arrayDop) {
+        if (key !== '') {
           this.dops.forEach(item => {
             if (+key === item.id) {
               item.active = 1
