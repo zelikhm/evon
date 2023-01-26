@@ -3,7 +3,7 @@
     <div class="relative bg-white rounded-[12px] p-10 xxl:p-9 xl:p-8 lg:p-5 z-50 w-[30%] lg:w-[48%] md:w-[60%] sm:w-[90%] h-fit">
       <div class="flex justify-between items-center mb-5 xxl:mb-4 xl:mb-3">
         <h2 class="text-[22px] xxl:text-[18px] xl:text-[16px] font-semibold leading-none">Отправить подборку</h2>
-        <button @click="this.$emit('closeSubmitSelection')" class="right-0 z-50">
+        <button @click="$emit('closeSubmitSelection')" class="right-0 z-50">
           <img src="../../../assets/svg/close_grey.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
         </button>
       </div>
@@ -13,7 +13,7 @@
         <img @click="copy" class="absolute cursor-pointer top-1/2 -translate-y-1/2 w-6 xxl:w-5 xl:w-4 right-5 xxl:right-4 xl:right-3" src="../../../assets/svg/copy_icon_purple.svg" alt="">
       </div>
     </div>
-    <div @click="this.$emit('closeSubmitSelection')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
+    <div @click="$emit('closeSubmitSelection')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
   </div>
 </template>
 

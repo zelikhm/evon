@@ -6,7 +6,7 @@ import { Link } from "@inertiajs/inertia-vue3"
  <div class="relative w-full h-[90vh] my-5 xxl:my-4 xl:my-3">
 
    <GMapMap :center="center" :zoom="6" map-type-id="terrain" class="w-full h-[90vh]">
-     <GMapMarker :key="index" v-for="(m, index) in markers" :position="m.position" @click="openMarker(m)">
+     <GMapMarker :key="index" v-for="(m, index) in markers" :icon="'/images/icon-marker-map.svg'" :position="m.position" @click="openMarker(m)">
        <GMapInfoWindow :closeclick="true"
                        @closeclick="openMarker(null)"
                        :opened="openedMarkerID === m.id"
@@ -36,7 +36,7 @@ import { Link } from "@inertiajs/inertia-vue3"
                <span class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ house.minSquare }} м² - {{ house.maxSquare }} м²</span>
              </div>
              <div class="flex gap-5 xxl:gap-4 xl:gap-3 w-full">
-               <button @click="this.$emit('open-add-selections', house)" class="register__button--white w-full flex items-center justify-between gap-3 xxl:gap-2.5 xl:gap-2  border border-solid border-[#6435A5] rounded-[4px] p-3 xxl:p-2 xl:p-1.5">
+               <button @click="$emit('open-add-selections', house)" class="register__button--white w-full flex items-center justify-between gap-3 xxl:gap-2.5 xl:gap-2  border border-solid border-[#6435A5] rounded-[4px] p-3 xxl:p-2 xl:p-1.5">
                  <span class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">В подборку</span>
                  <svg width="16" height="16" class="w-4.5 xxl:w-4 xl:w-3.5" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                    <g clip-path="url(#clip0_519_1862)">

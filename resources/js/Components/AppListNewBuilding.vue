@@ -290,6 +290,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         <div class="flex flex-col" v-for="(item, idx) in readyHouses" :key="item.id">
           <div class="object__block relative z-10 h-[300px] exl:h-fit exl:h-[16vw] lg:h-[24vw] md:h-[36vw] sm:h-[56vw] rounded-[6px]">
           <img v-if="item.images.length > 0" :src="item.images[0].name" class="absolute -z-10 w-full h-full rounded-[6px]" alt="">
+          <img v-else src="../../assets/no-img-houses.jpg" class="absolute -z-10 w-full h-full rounded-[6px]" alt="">
           <div class="seek immovables__overlay opacity-0 transition-all h-full w-full absolute -z-10 rounded-[6px]"></div>
             <div class="flex flex-col h-full justify-between p-5 xxl-4 xl:p-3">
               <div class="hide transition-all">
@@ -297,7 +298,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                 <span class="uppercase bg-[#E84680] text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none font-semibold rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1" v-else-if="item.created">{{ item.created }}</span>
               </div>
               <div class="seek flex opacity-0 transition-all flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
-                <button @click="this.$emit('open-add-selections', item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
+                <button @click="$emit('open-add-selections', item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
                   <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none">В подборку</span>
                   <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
                 </button>
@@ -313,7 +314,7 @@ import { Link } from '@inertiajs/inertia-vue3'
               <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1">
                 <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none">{{ item.area }}</span>
                 <div class="h-1 w-1 rounded-full bg-white"></div>
-                <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none">{{ item.flats.length }} Квартиры</span>
+                <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none">{{ item.flats.length }} {{ item.flats.length === 1 ? "Квартира" : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
               </div>
             </div>
           </div>
@@ -333,8 +334,9 @@ import { Link } from '@inertiajs/inertia-vue3'
               <div class="relative object__block h-full">
                 <div class="seek opacity-0 transition-all immovables__overlay h-full w-full absolute z-10 rounded-[6px]"></div>
                 <img v-if="item.images.length > 0" :src="item.images[0].name" class="w-full h-[180px] exl:h-fit exl:h-[9.3vw] x:h-[10vw] lg:h-[14vw] md:h-[32vw] sm:h-[42vw]" alt="">
+                <img v-else src="../../assets/no-img-houses.jpg" class="w-full h-[180px] exl:h-fit exl:h-[9.3vw] x:h-[10vw] lg:h-[14vw] md:h-[32vw] sm:h-[42vw]" alt="">
                 <div class="seek opacity-0 transition-all absolute top-1/2 -translate-y-1/2 left-0 z-10 flex flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
-                  <button @click="this.$emit('open-add-selections', item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[70%]">
+                  <button @click="$emit('open-add-selections', item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[70%]">
                     <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">В подборку</span>
                     <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
                   </button>
@@ -365,7 +367,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
           <div class="flex flex-col justify-between px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2">
             <div class="flex justify-between items-center">
-              <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] md:text-[13px]">{{ item.flats.length }} Квартиры</span>
+              <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] md:text-[13px]">{{ item.flats.length }} {{ item.flats.length === 1 ? "Квартира" : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
               <span class="uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[12px] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1" v-if="item.created && !Number.isInteger(+item.created[0])">{{ item.created }}</span>
               <span class="uppercase border border-solid border-[#E84680] h-fit text-[#E84680] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1" v-else-if="item.created">{{ item.created }}</span>
             </div>
@@ -639,7 +641,7 @@ export default {
       //   }
       // })
 
-      return this.readyHouses
+      return this.readyHouses.splice(0, 21)
 
     },
     filteredCity() {

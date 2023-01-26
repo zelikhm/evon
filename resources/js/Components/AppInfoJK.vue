@@ -5,7 +5,6 @@ import {Link} from '@inertiajs/inertia-vue3'
 
 <template>
   <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px]">{{ isEdit ? "Добавить объект" : "Редактирование объекта" }}</h2>
-  <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" v-if="isEdit">Найдено {{ count }} новостроек</span>
   <div class="flex-col flex gap-5 xxl:gap-4 xl:gap-3 pt-5 xxl:pt-4 xl:pt-3">
 
     <div :class="{ validation: validation.title }"
@@ -89,7 +88,7 @@ import {Link} from '@inertiajs/inertia-vue3'
     </div>
 
     <GMapMap :center="center" :zoom="6" map-type-id="terrain" class="w-full h-[300px] rounded-[6px] my-10 xxl:my-8 xl:my-6" :draggable="true" @click="handleClick"  ref="myMapRef" :click="true">
-      <GMapMarker :key="index" v-for="(m, index) in markers" :position="m.position" :clickable="true" :draggable="true"
+      <GMapMarker :key="index" v-for="(m, index) in markers" :icon="'/images/icon-marker-map.svg'" :position="m.position" :clickable="true" :draggable="true"
                   @click="openMarker(m.id)" >
       </GMapMarker>
     </GMapMap>
@@ -231,7 +230,7 @@ import {Link} from '@inertiajs/inertia-vue3'
         <div class="flex justify-between items-center">
           <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] font-medium leading-none">Контакты отдела продаж</h3>
           <button
-            @click="this.$emit('open-add-contact')"
+            @click="$emit('open-add-contact')"
             class="flex items-center register__button--white text-[#6435A5] border border-solid border-[#6435A5] rounded-[5px] py-3 xxl:py-2.5 xl:py-2 px-4 xxl:px-3 xl:px-2.5">
             <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0_519_1862)">

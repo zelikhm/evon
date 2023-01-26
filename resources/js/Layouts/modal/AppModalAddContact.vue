@@ -3,7 +3,7 @@
     <div class="relative flex flex-col gap-5 xxl:gap-4 xl:gap-3 bg-white rounded-[12px] px-12 xxl:px-10 xl:px-8 py-8 xxl:py-6 xl:py-5 z-50 w-[32%] lg:w-[50%] md:w-[64%] sm:w-[90%] h-fit">
       <div class="relative flex justify-between items-center">
         <h2 class=" text-[22px] xxl:text-lg xl:text-base font-semibold">Добавить контакт</h2>
-        <button @click="this.$emit('close-add-contact')" class="relative w-4 h-4 z-50">
+        <button @click="$emit('close-add-contact')" class="relative w-4 h-4 z-50">
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] rotate-45"></span>
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] -rotate-45"></span>
         </button>
@@ -51,7 +51,7 @@
         <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">Добавить</span>
       </button>
     </div>
-    <div @click="this.$emit('close-add-contact')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
+    <div @click="$emit('close-add-contact')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
   </div>
 </template>
 

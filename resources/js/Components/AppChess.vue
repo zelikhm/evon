@@ -77,7 +77,7 @@
               <span class="whitespace-nowrap">Список</span>
             </div>
           </div>
-          <button @click="this.$emit('close-chess')" class="bg-[#E84680] h-9 xxl:h-8 xl:h-7 rounded-[3px] px-6 xxl:px-5 xl:px-4 whitespace-nowrap text-base xxl:text-sm xl:text-xs leading-none font-semibold text-white">Информация о ЖК</button>
+          <button @click="$emit('close-chess')" class="bg-[#E84680] h-9 xxl:h-8 xl:h-7 rounded-[3px] px-6 xxl:px-5 xl:px-4 whitespace-nowrap text-base xxl:text-sm xl:text-xs leading-none font-semibold text-white">Информация о ЖК</button>
         </div>
       </div>
     </div>

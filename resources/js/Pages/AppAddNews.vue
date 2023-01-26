@@ -23,7 +23,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                 </div>
                 <div v-if="openSelectJK" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px]">
                   <span
-                    v-for="(JK, idx) in houses" :key="idx"
+                    v-for="(JK, idx) in selectHouse" :key="idx"
                     @click="changeSelectJK(JK)"
                     class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
                   >
@@ -87,7 +87,8 @@ export default {
         title: true,
         description: true
       },
-      isCreate: null
+      isCreate: null,
+      selectHouse: []
     }
   },
   methods: {
@@ -140,6 +141,12 @@ export default {
       this.idNews = this.itemEdit.id
       console.log(this.itemEdit)
     }
+
+    this.houses.forEach(item => {
+      if (item.active === 2) {
+        this.selectHouse.push(item)
+      }
+    })
 
   },
   components: {

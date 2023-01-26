@@ -6,8 +6,8 @@
           <img src="../../../assets/svg/notification__icon.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
         </div>
         <div class="flex gap-9 xxl:gap-7 xl:gap-6 items-center">
-          <h2 class="text-lg xxl:text-[15px] xl:text-[13px] font-semibold leading-none whitespace-nowrap">3 дня до окончания платной подписки</h2>
-          <button @click="this.$emit('close-notification')" class="relative w-4 h-4 z-50">
+          <h2 class="text-lg xxl:text-[15px] xl:text-[13px] font-semibold leading-none whitespace-nowrap">{{ text }}</h2>
+          <button @click="$emit('close-notification')" class="relative w-4 h-4 z-50">
             <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] rotate-45"></span>
             <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] -rotate-45"></span>
           </button>
@@ -19,7 +19,7 @@
 
 <script>
 export default {
-
+  props: ['text'],
 }
 </script>
 

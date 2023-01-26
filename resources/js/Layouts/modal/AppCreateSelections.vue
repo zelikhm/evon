@@ -3,7 +3,7 @@
     <div :class="{'translate__x__0': openSideBar}" class="transition-all ease-linear duration-500 flex flex-col relative z-50 w-[50%] lg:w-[64%] sm:w-full translate-x-full h-full bg-white px-28 xxl:px-24 xl:px-20 lg:px-10 sm:px-5 py-14 xxl:py-10 xl:py-8 lg:py-5">
       <div class="relative mb-10 xxl:mb-8 xl:mb-6">
         <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold">Редактирование подборки</h2>
-        <button @click="this.$emit('close-selection')" class="w-4 h-4 absolute top-[20%] right-0 z-50">
+        <button @click="$emit('close-selection')" class="w-4 h-4 absolute top-[20%] right-0 z-50">
           <div class="absolute h-[1px] w-4 bg-[#8A8996] rotate-45"></div>
           <div class="absolute h-[1px] w-4 bg-[#8A8996] -rotate-45"></div>
         </button>
@@ -50,10 +50,10 @@
       </div>
       <div class="grid grid-cols-2 gap-8 xxl:gap-6 xl:gap-5">
         <button @click="createCompilation" class="login__btn--bg text-white text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Сохранить</button>
-        <button @click="this.$emit('close-selection')" class="bg-litepink text-[#E84680] text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Отменить</button>
+        <button @click="$emit('close-selection')" class="bg-litepink text-[#E84680] text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Отменить</button>
       </div>
     </div>
-    <div @click="this.$emit('close-selection')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
+    <div @click="$emit('close-selection')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
   </div>
 </template>
 

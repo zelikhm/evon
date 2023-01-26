@@ -37,7 +37,7 @@
         </button>
       </div>
     </div>
-    <div @click="this.$emit('close-album')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
+    <div @click="$emit('close-album')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
   </div>
 </template>
 

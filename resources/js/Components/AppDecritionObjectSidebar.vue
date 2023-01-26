@@ -5,10 +5,10 @@
       <div class="py-5 xxl:py-4 xl:py-3 border__bottom" v-for="item in news">
         <span class="text-[#8A8996]">{{ new Date(Date.parse(item.created_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span>
         <p v-html="item.description.slice(0, 100)"></p>
-        <button class="text-[#6435A5]" @click="this.$emit('open-all-news')">Читать далее</button>
+        <button class="text-[#6435A5]" @click="$emit('open-all-news')">Читать далее</button>
       </div>
       <div class="flex justify-center w-full pt-5 xxl:pt-4 xl:pt-3">
-        <button @click="this.$emit('open-all-news')" class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5 animation__arrow">
+        <button @click="$emit('open-all-news')" class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5 animation__arrow">
           <span class="text-[#6435A5] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px]">Смотреть все новости ({{ house.news.length }})</span>
           <img src="../../assets/svg/arrow_right_purple.svg" class="transition-all duration-300 h-4 xxl:h-3 xl:h-2.5" alt="Стелочка">
         </button>

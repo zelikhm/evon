@@ -38,7 +38,7 @@
             :adminNews="adminNews"
         />
       </div>
-      <div class="w-full flex justify-center mb-14 xxl:mb-10 xl:mb-8" @click="count += 6" v-if="houses.length > count">
+      <div class="w-full flex justify-center mb-14 xxl:mb-10 xl:mb-8" @click="count += 21" v-if="houses.length > count">
         <button class="more__button transition-all text-[#E84680] border border-solid border-[#E84680] text-base xxl:text-sm xl:text-xs lg:text-[15px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2.5 xl:py-1.5 rounded-[3px]">Показать еще</button>
       </div>
       <app-news-developer class="hidden lg:block mb-14 xxl:mb-10 xl:mb-8" />
@@ -75,7 +75,7 @@ export default {
       openNotification: false,
       openAddSelection: false,
       openCreateSelection: false,
-      count: 12,
+      count: 21,
       house: null,
       titleNewCompilation: ''
     }

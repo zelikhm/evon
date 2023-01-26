@@ -13,7 +13,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap" v-else>0 квартир</span>
         </div>
         <div class="relative flex flex-col items-center justify-between gap-3.5 xxl:gap-3 xl:gap-2.5">
-          <button @click="this.$emit('open-add-frame', frame)">
+          <button @click="$emit('open-add-frame', frame)">
             <img class="w-5 xxl:w-4 xl:w-3" src="../../assets/svg/pen_icon_grey.svg" alt="">
           </button>
           <button @click="deleteConfirmOn(frame)" class="relative">
@@ -29,7 +29,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         </div>
       </div>
       <div class="flex items-center">
-        <img @click="this.$emit('open-add-frame', isEdit ? 0 : 1)" src="../../assets/svg/plus_icon_purple.svg" class="cursor-pointer ml-3 xxl:ml-2.5 xl:ml-2 w-8 xxl:w-6 xl:w-5" alt="">
+        <img @click="$emit('open-add-frame', isEdit ? 0 : 1)" src="../../assets/svg/plus_icon_purple.svg" class="cursor-pointer ml-3 xxl:ml-2.5 xl:ml-2 w-8 xxl:w-6 xl:w-5" alt="">
       </div>
     </div>
     <div class="grid lg:w-[87.5vw] pb-2 custom__scroll--chess gap-4 xxl:gap-3.5 xl:gap-3 my-16 xxl:my-12 xl:my-10 text-[#1E1D2D] text-base xxl:text-sm xl:text-xs lg:text-[15px]">

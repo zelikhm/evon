@@ -3,7 +3,7 @@
     <div class="relative flex flex-col bg-white rounded-[12px] z-50 w-[43%] lg:w-[56%] md:w-[70%] sm:w-[94%] h-fit">
       <div class="relative border__bottom flex justify-between items-center p-8 xxl:p-6 xl:p-5">
         <h2 class="text-lg xxl:text-[15px] xl:text-[13px] font-semibold leading-none">Создание подборки</h2>
-        <img @click="this.$emit('close-i-create-selection')" class="cursor-pointer w-6 xxl:w-5 xl:w-4" src="../../../assets/svg/close_grey.svg" alt="">
+        <img @click="$emit('close-i-create-selection')" class="cursor-pointer w-6 xxl:w-5 xl:w-4" src="../../../assets/svg/close_grey.svg" alt="">
       </div>
       <div class="relative p-8 xxl:p-6 xl:p-5">
         <div class="text-lg xxl:text-[15px] xl:text-[13px] font-semibold pb-4 xxl:pb-3 xl:pb-2.5 leading-none">Данные</div>
@@ -48,11 +48,11 @@
         </div>
         <div class="grid grid-cols-2 gap-8 xxl:gap-6 xl:gap-5">
           <button @click="createSelection" class="login__btn--bg text-white text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Создать</button>
-          <button @click="this.$emit('close-i-create-selection')" class="bg-litepink text-[#E84680] text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Отменить</button>
+          <button @click="$emit('close-i-create-selection')" class="bg-litepink text-[#E84680] text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Отменить</button>
         </div>
       </div>
     </div>
-    <div @click="this.$emit('close-i-create-selection')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
+    <div @click="$emit('close-i-create-selection')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
   </div>
 </template>
 
