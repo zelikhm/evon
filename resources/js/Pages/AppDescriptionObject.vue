@@ -272,17 +272,13 @@ export default {
 
     if (this.house.info.info !== null) {
       for (let key of this.house.info.info) {
-        console.log(this.house.info)
         if (!+isNaN(key)) {
-          console.log(key)
           this.arrayInfos.push(this.infos.find(item => item.id === +key))
-          console.log(this.infos)
-          console.log(this.arrayInfos)
         }
       }
     }
 
-    console.log(this.arrayInfos);
+    console.log(this.infos);
 
     if (this.house.info.dop !== null) {
       for (let key of this.house.info.dop) {
