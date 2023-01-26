@@ -39,7 +39,7 @@ class IndexController extends Controller
   {
     if ($request->token === env('TOKEN')) {
 
-      if($request->image !== 'undefined') {
+      if($request->image !== '') {
         $imageName = time() . '.' . $request->image->getClientOriginalName();
         $request->image->move(public_path('/storage/user'), $imageName);
       } else {
@@ -56,7 +56,8 @@ class IndexController extends Controller
         'email' => $request->email,
         'image' => $imageName,
       ]);
-      return response()->json($request->image, 200);
+
+      return response()->json(User::where('id', $request->user_id)->first(), 200);
     } else {
       return response()->json('not auth', 401);
     }

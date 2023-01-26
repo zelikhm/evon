@@ -2,7 +2,6 @@
   <app-modal-auth
     :oLoginRealtor="openLoginRealtor"
     :oLoginDeveloper="openLoginDeveloper"
-    :oOpenRegister="openRegister"
     @close-modal="closeModal"
     @open-modal-realtor="openModalRealtor"
     @open-modal-developer="openModalDeveloper"
@@ -12,6 +11,11 @@
     @login-realtor="openLoginRealtor = !openLoginRealtor"
     @open-register="openRegister = !openRegister"
     :user="user"
+  />
+
+  <app-modal-register
+      :oLoginRegister="openRegister"
+      @close-modal="closeModalRegister"
   />
   <main>
     <div class="_container">
@@ -116,6 +120,7 @@ import AppFooter from "../Layouts/AppFooter.vue"
 import AppModalAuth from "../Layouts/modal/AppModalAuth.vue"
 import {computed} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
+import AppModalRegister from "@/Layouts/modal/AppModalRegister.vue";
 
 export default {
   data() {
@@ -139,9 +144,13 @@ export default {
     openModalDeveloper() {
       this.openLoginRealtor = false
       this.openLoginDeveloper = true
+    },
+    closeModalRegister() {
+      this.openRegister = false
     }
   },
   components: {
+    AppModalRegister,
     AppHeader,
     AppFooter,
     AppModalAuth,

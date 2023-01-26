@@ -3,25 +3,9 @@
     <div class="_container">
       <div class="flex justify-between items-center my-4 xxl:my-3 xl:my-2.5">
         <div class="block lg:hidden grid grid-cols-5 gap-3 xxl:gap-2.5 xl:gap-2">
-          <div class="corpus__banner border border-solid border-[#6435A5] w-[9.5vw] gap-3.5 xxl:gap-3 xl:gap-2.5 cursor-pointer rounded-[5px] flex flex-col justify-center p-5 xxl:p-3.5 x:p-2.5">
-            <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">Корпус 1</span>
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">0 квартир</span>
-          </div>
-          <div class="corpus__banner w-[9.5vw] gap-3.5 xxl:gap-3 xl:gap-2.5 cursor-pointer rounded-[5px] flex flex-col justify-center p-5 xxl:p-3.5 x:p-2.5">
-            <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">Корпус 1</span>
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">0 квартир</span>
-          </div>
-          <div class="corpus__banner w-[9.5vw] gap-3.5 xxl:gap-3 xl:gap-2.5 cursor-pointer rounded-[5px] flex flex-col justify-center p-5 xxl:p-3.5 x:p-2.5">
-            <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">Корпус 1</span>
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">0 квартир</span>
-          </div>
-          <div class="corpus__banner w-[9.5vw] gap-3.5 xxl:gap-3 xl:gap-2.5 cursor-pointer rounded-[5px] flex flex-col justify-center p-5 xxl:p-3.5 x:p-2.5">
-            <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">Корпус 1</span>
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">0 квартир</span>
-          </div>
-          <div class="corpus__banner w-[9.5vw] gap-3.5 xxl:gap-3 xl:gap-2.5 cursor-pointer rounded-[5px] flex flex-col justify-center p-5 xxl:p-3.5 x:p-2.5">
-            <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">Корпус 1</span>
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">0 квартир</span>
+          <div v-for="item in house.frames" :class="{ 'border': item.active === 1 }" @click="targetFrame(item)" class="corpus__banner border-solid border-[#6435A5] w-[9.5vw] gap-3.5 xxl:gap-3 xl:gap-2.5 cursor-pointer rounded-[5px] flex flex-col justify-center p-5 xxl:p-3.5 x:p-2.5">
+            <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">{{ item.name }}</span>
+            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ item.flats.length }} квартир</span>
           </div>
         </div>
 
@@ -93,7 +77,7 @@
               <span class="whitespace-nowrap">Список</span>
             </div>
           </div>
-          <button class="bg-[#E84680] h-9 xxl:h-8 xl:h-7 rounded-[3px] px-6 xxl:px-5 xl:px-4 whitespace-nowrap text-base xxl:text-sm xl:text-xs leading-none font-semibold text-white">Информация о ЖК</button>
+          <button @click="this.$emit('close-chess')" class="bg-[#E84680] h-9 xxl:h-8 xl:h-7 rounded-[3px] px-6 xxl:px-5 xl:px-4 whitespace-nowrap text-base xxl:text-sm xl:text-xs leading-none font-semibold text-white">Информация о ЖК</button>
         </div>
       </div>
     </div>
@@ -148,25 +132,28 @@
           </div>
         </div>
         <app-chess-grid v-if="activeChess"/>
-        <app-chess-list v-if="activeList"/>
+        <app-chess-list v-if="activeList"
+                        :flats="house.frames[frameId].flats"
+                        @target-flat="targetFlat"
+        />
       </div>
       <div>
         <div class="border__bottom">
           <div class="mr-[6.25vw] lg:mx-auto lg:px-[6.25vw] lg:py-6 flex justify-between lg:justify-start lg:gap-5 p-14 xxl:p-10 xl:p-8">
             <div class="flex flex-col">
-              <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs leading-none">№204</span>
-              <span class="text-[22px] xxl:text-[18px] xl:text-[15px] font-semibold leading-none pb-4 xxl:pb-3 xl:pb-2.5">7 000 000 €</span>
-              <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none pb-5 xxl:pb-4 xl:pb-3">7 000 000 € за м²</span>
+              <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs leading-none pb-3 xxl:pb-2.5 xl:pb-2">№{{ selectFlat.number }}</span>
+              <span class="text-[22px] xxl:text-[18px] xl:text-[15px] font-semibold leading-none pb-4 xxl:pb-3 xl:pb-2.5">{{ selectFlat.price }} €</span>
+              <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none pb-5 xxl:pb-4 xl:pb-3">{{ Math.round(selectFlat.price / selectFlat.square) }} € за м²</span>
               <div class="gray-backg flex items-center gap-1 w-fit px-2 xl:px-1.5 py-1.5 xl:py-1">
                 <img class="w-4 xxl:w-3.5 xl:w-3" src="../../assets/svg/ruller_icon.svg" alt="">
-                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">200 м²</span>
+                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ selectFlat.square }} м²</span>
               </div>
             </div>
-            <img src="../../assets/drawing_small.png" class="w-40 xxl:w-36 xl:w-32" alt="">
+            <img :src="'/storage/flat/' + selectFlat.imageUp" class="w-40 xxl:w-36 xl:w-32" alt="">
           </div>
         </div>
         <div class="flex items-center justify-center justify-between lg:justify-start lg:my-6 mr-[6.25vw] mr-[6.25vw] lg:mx-auto lg:px-[6.25vw]">
-          <img @click="openCheme = true" src="../../assets/drawing_big.png" class="cursor-pointer w-[480px] xxl:w-[380px] xl:w-[300px]" alt="">
+          <img @click="openCheme = true" :src="'/storage/flat/' + selectFlat.imageDown" class="cursor-pointer w-[480px] xxl:w-[380px] xl:w-[300px]" alt="">
         </div>
       </div>
     </div>
@@ -182,13 +169,15 @@ import {computed} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
 
 export default {
-  props: ['user'],
+  props: ['user', 'house'],
   data() {
     return {
       user: computed(() => usePage().props.value.auth.user),
       activeChess: true,
       activeList: false,
+      frameId: null,
       openCost: false,
+      selectFlat: null,
       costs: [
         {cost: '1 000', id: 0},
         {cost: '2 000', id: 1},
@@ -227,12 +216,42 @@ export default {
       this.activeChess = false
       this.activeList = true
     },
-    selectsHidden() {
-
+    targetFrame(item) {
+      this.house.frames.forEach((frame, idx) => {
+        if (frame.id === item.id) {
+          this.frameId = idx
+          item.active = 1
+        } else {
+          frame.active = 0
+        }
+      })
+    },
+    targetFlat(flat) {
+      this.selectFlat = flat
     }
   },
-  mounted() {
-    document.addEventListener('click', this.selectsHidden.bind(this), true)
+  created() {
+    if (this.house.frames.length > 0) {
+      this.frameId = 0
+      this.house.frames.forEach((item, idx) => {
+        if (idx === 0) item.active = 1
+        else item.active = 0
+
+        if (item.flats.length > 0) {
+          item.flats.forEach((flat, i) => {
+            if (i === 0) flat.active = 1
+            else flat.active = 0
+          })
+        }
+
+        if (idx === this.frameId) {
+          item.flats.forEach((item, idx) => {
+            if (idx === 0) this.selectFlat = item
+          })
+        }
+      })
+
+    }
   },
   beforeDestroy() {
     document.removeEventListener('click', this.selectsHidden)
