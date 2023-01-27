@@ -589,7 +589,7 @@ class HouseController extends Controller
       'updated_at' => Carbon::now()->addHour(3),
     ]);
 
-    return response()->json(HouseSupportModel::where('id', $request->id)->first(), 200);
+    return response()->json(HouseSupportModel::where('house_id', $sup->house_id)->get(), 200);
 
   }
 
