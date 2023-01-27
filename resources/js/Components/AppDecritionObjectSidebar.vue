@@ -59,23 +59,13 @@
         </div>
       </div>
     </div>
-    <div class="">
+    <div class="" v-if="house.files.length > 0">
       <div class="font-medium text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] pb-5 xxl:pb-4 xl:pb-3 leading-none">Документы</div>
       <div class="flex flex-col gap-6 xxl:gap-5 xl:gap-4">
-        <div class="flex items-center gap-3 xxl:gap-2.5 xl:gap-2">
-          <img src="../../assets/svg/file-icon_docx.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          <span class="text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none">Выписка ЕГРН СК №1 от февраля 2020 г.</span>
-        </div>
-        <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
-        <div class="flex items-center gap-3 xxl:gap-2.5 xl:gap-2">
-          <img src="../../assets/svg/file-icon_docx.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          <span class="text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none">Выписка ЕГРН СК №1 от февраля 2020 г.</span>
-        </div>
-        <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
-        <div class="flex items-center gap-3 xxl:gap-2.5 xl:gap-2">
-          <img src="../../assets/svg/file-icon_docx.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-          <span class="text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none">Выписка ЕГРН СК №1 от февраля 2020 г.</span>
-        </div>
+        <a :href="link + item.name" class="flex items-center gap-3 xxl:gap-2.5 xl:gap-2 cursor-pointer" v-for="item in house.files">
+          <img :src="`/images/file-icon_${item.name.split('.')[2]}.svg`" class="w-5 xxl:w-4 xl:w-3" alt="">
+          <span class="text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none">{{ item.name.split('.')[1] + '.' + item.name.split('.').at(-1) }}</span>
+        </a>
       </div>
     </div>
   </div>
@@ -89,11 +79,13 @@ export default {
   },
   data() {
     return {
-      news: null
+      news: null,
+      link: window.location.protocol + '//' + window.location.host
     }
   },
   created() {
     this.news = this.house.news.slice(0, 4)
+    console.log(window.location.protocol + '//' + window.location.host)
   }
 }
 </script>

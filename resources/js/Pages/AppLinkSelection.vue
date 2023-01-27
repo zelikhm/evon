@@ -5,7 +5,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 <template>
   <app-modal-notification
     class="left-[2vw] transition-all duration-1000"
-    :class="{'-left-full': openNotification}"
+    :class="{'-left-full': !openNotification}"
     @close-notification="openNotification = false"
   />
   <header class="relative h-[13.4vw]">
