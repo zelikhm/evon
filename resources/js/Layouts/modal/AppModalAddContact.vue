@@ -2,7 +2,7 @@
   <div class="fixed z-[100] w-full h-full flex items-center justify-center">
     <div class="relative flex flex-col gap-5 xxl:gap-4 xl:gap-3 bg-white rounded-[12px] px-12 xxl:px-10 xl:px-8 py-8 xxl:py-6 xl:py-5 z-50 w-[32%] lg:w-[50%] md:w-[64%] sm:w-[90%] h-fit">
       <div class="relative flex justify-between items-center">
-        <h2 class=" text-[22px] xxl:text-lg xl:text-base font-semibold">Добавить контакт</h2>
+        <h2 class=" text-[22px] xxl:text-lg xl:text-base font-semibold">{{ contact ? 'Редактировать' : 'Добавить' }} контакт</h2>
         <button @click="$emit('close-add-contact')" class="relative w-4 h-4 z-50">
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] rotate-45"></span>
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] -rotate-45"></span>
@@ -48,7 +48,7 @@
         <input v-model="dataSupport.link" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="soc_contact">
       </div>
       <button class="login__btn--bg rounded-[5px] w-full py-5 xxl:py-4 xl:py-3" @click="addSupport">
-        <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">Добавить</span>
+        <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">{{ contact ? 'Редактировать' : 'Добавить' }}</span>
       </button>
     </div>
     <div @click="$emit('close-add-contact')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
@@ -57,6 +57,7 @@
 
 <script>
 export default {
+  props: ['contact', 'isEdit'],
   data() {
     return {
       myPhoto: '',
@@ -70,12 +71,42 @@ export default {
         email: "",
         link: "",
         token: this.globalToken
-      }
+      },
     }
   },
   methods: {
     addSupport() {
-      this.$emit('close-add-contact', this.dataSupport)
+      if (this.isEdit && this.contact) { // Редактирование контакта на редактировании ЖК
+        let formData = new FormData()
+        formData.append('id', this.contact.id)
+        formData.append('name', this.dataSupport.name)
+        formData.append('phone', this.dataSupport.phone)
+        formData.append('email', this.dataSupport.email)
+        formData.append('status', this.dataSupport.status)
+        formData.append('link', this.dataSupport.link)
+        formData.append('token', this.globalToken)
+
+
+        if (this.$refs.file.files[0]) {
+          formData.append('avatar', this.$refs.file.files[0])
+          add()
+        } else {
+          formData.append('avatar', 'not')
+          add()
+        }
+
+        function add() {
+            axios({
+              method: 'post',
+              url: '/api/house/editSupport',
+              headers: {"Content-type": "multipart/form-data"},
+              data: formData,
+            }).then(res => console.log(res.data))
+        }
+
+      } else {
+        this.$emit('close-add-contact', this.dataSupport)
+      }
     },
     avatarContact(e) {
       this.dataSupport.image_front = URL.createObjectURL(e.target.files[0])
@@ -88,6 +119,16 @@ export default {
     deletePhoto() {
       this.myPhoto = ''
       this.avatar = false
+    }
+  },
+  created() {
+    console.log(this.isEdit)
+    if (this.contact) {
+      this.dataSupport.name = this.contact.name
+      this.dataSupport.status = this.contact.status
+      this.dataSupport.phone = this.contact.phone
+      this.dataSupport.email = this.contact.phone
+      this.dataSupport.link = this.contact.link
     }
   }
 }
