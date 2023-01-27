@@ -577,7 +577,7 @@ class HouseController extends Controller
       $imageName = $sup->image;
     }
 
-    $support = HouseSupportModel::where('id', $request->id)
+    HouseSupportModel::where('id', $request->id)
       ->update([
       'avatar' => '/storage/support/' . $imageName,
       'name' => $request->name,
