@@ -569,7 +569,7 @@ class HouseController extends Controller
 
   public function editSupport(Request $request) {
 
-    if ($request->avatar) {
+    if ($request->avatar !== null) {
       $imageName = time() . '.' . $request->avatar->getClientOriginalName();
       $request->avatar->move(public_path('/storage/support'), $imageName);
     } else {
@@ -588,7 +588,7 @@ class HouseController extends Controller
       'updated_at' => Carbon::now()->addHour(3),
     ]);
 
-    return response()->json($support, 200);
+    return response()->json(HouseSupportModel::where('id', $request->id)->first(), 200);
 
   }
 
