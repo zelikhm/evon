@@ -257,7 +257,7 @@ import {Link} from '@inertiajs/inertia-vue3'
             <span class="text-[#8A8996]">{{ item.email }}</span>
           </div>
           <div class="flex gap-7 xxl:gap-5 xl:gap-4">
-            <img src="../../assets/svg/pen_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 lg:w-6" alt="">
+            <img @click="editSupport(item)" src="../../assets/svg/pen_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 lg:w-6" alt="">
             <img @click="deleteSupport(item)" src="../../assets/svg/bucket_icon_red.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 lg:w-6" alt="">
           </div>
         </div>
@@ -477,6 +477,9 @@ export default {
         position
       })
       this.center = position
+    },
+    editSupport(item) {
+      this.$emit('open-add-contact', item)
     },
     deleteSupport(item) {
       axios.post('/api/house/deleteSupport', {
@@ -790,6 +793,7 @@ export default {
           }
         }
       }
+      console.log(this.house)
 
       this.supportsReady = this.house.supports
     }

@@ -1,5 +1,5 @@
 <template>
-  <app-modal-add-contact @close-add-contact="closeModalContact" v-if="modalAddContact"/>
+  <app-modal-add-contact @close-add-contact="closeModalContact" v-if="modalAddContact" :contact="activeContact" :isEdit="isEdit" />
   <app-modal-add-apartments @close-add-apartments="closeAddApartments"
                             v-if="modalAddApatments"
                             :house="house"
@@ -51,7 +51,7 @@
                         :count="count"
                         :house="house"
                         :supports="supports"
-                        @open-add-contact="modalAddContact = !modalAddContact"
+                        @open-add-contact="openAddContact"
                         @addAndContinue="addAndContinue"
           />
         </div>
@@ -104,7 +104,7 @@ export default {
     user: [],
     count: Number,
     frames: null,
-    house: [],
+    house: []
   },
   provide() {
     return {
@@ -113,6 +113,7 @@ export default {
   },
   data() {
     return {
+      activeContact: null,
       openNotification: false,
       page: 0,
       modalAddContact: false,
@@ -129,6 +130,10 @@ export default {
     }
   },
   methods: {
+    openAddContact(data) {
+      this.modalAddContact = !this.modalAddContact
+      this.activeContact = data
+    },
     openPage(id) {
       if (!this.isMainPage) {
         this.page = id
