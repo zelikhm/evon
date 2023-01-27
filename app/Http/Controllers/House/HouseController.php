@@ -667,7 +667,7 @@ class HouseController extends Controller
 
     $file = HouseFilesModel::create([
       'house_id' => $request->house_id,
-      'name' => '/storage/files' . $fileName,
+      'name' => '/storage/files/' . $fileName,
       'created_at' => Carbon::now()->addHour(3),
       'updated_at' => Carbon::now()->addHour(3),
     ]);
