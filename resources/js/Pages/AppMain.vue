@@ -123,6 +123,12 @@ import {usePage} from "@inertiajs/inertia-vue3";
 import AppModalRegister from "@/Layouts/modal/AppModalRegister.vue";
 
 export default {
+  props:['error'],
+  provide() {
+    return {
+      error: this.error,
+    }
+  },
   data() {
     return {
       user: computed(() => usePage().props.value.auth.user),

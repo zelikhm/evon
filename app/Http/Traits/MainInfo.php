@@ -4,6 +4,7 @@ namespace App\Http\Traits;
 
 use App\Http\Admin\News\AdminNewsModel;
 use App\Models\Builder\Flat\FlatModel;
+use App\Models\Builder\HouseCharacteristicsModel;
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\HouseNewsModel;
 use App\Models\Builder\HouseViewsModel;

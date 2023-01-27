@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Testing\Concerns\Has;
@@ -39,8 +40,13 @@ class AuthenticatedSessionController extends Controller
    * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
    * @throws \Illuminate\Validation\ValidationException
    */
-  public function store(LoginRequest $request)
+  public function store(Request $request)
   {
+    $request->validate([
+      'email' => ['required', 'max:50', 'exists:App\Models\User,email'],
+      'password' => ['required'],
+    ]);
+
 //    if($request->token === env('TOKEN')) {
       $user = User::where('email', $request->email)
         ->first();
@@ -54,8 +60,6 @@ class AuthenticatedSessionController extends Controller
 
           $this->checkSession($user_phone->id);
 
-        } else {
-          return response()->json('not auth', 401);
         }
       }
 
@@ -66,17 +70,12 @@ class AuthenticatedSessionController extends Controller
 
         Auth::login($user, $remember = true);
         if(Auth::user()->role === 3) {
-          return redirect()->intended('/admin');
+          return redirect()->intended(RouteServiceProvider::ADMIN);
         } else {
           return redirect()->intended(RouteServiceProvider::HOME);
         }
 
-      } else {
-        return response()->json('not auth', 401);
       }
-//    } else {
-//      return response()->json('not auth', 401);
-//    }
 
   }
 

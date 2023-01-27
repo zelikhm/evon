@@ -1,3 +1,30 @@
+<script setup>
+  import Checkbox from '@/Components/Checkbox.vue';
+  import GuestLayout from '@/Layouts/GuestLayout.vue';
+  import InputError from '@/Components/InputError.vue';
+  import InputLabel from '@/Components/InputLabel.vue';
+  import PrimaryButton from '@/Components/PrimaryButton.vue';
+  import TextInput from '@/Components/TextInput.vue';
+  import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+
+  // defineProps({
+  //   canResetPassword: Boolean,
+  //   status: String,
+  // });
+
+  const form = useForm({
+    email: '',
+    password: '',
+    remember: false,
+  });
+
+  const submit = () => {
+    form.post(route('login'), {
+      onFinish: () => form.reset('password'),
+    });
+  };
+</script>
+
 <template>
 <!--  Вход в приложение как риэлтор -->
   <div v-if="oLoginRealtor" class="fixed z-[100] w-full h-full flex items-center justify-center">
@@ -67,22 +94,23 @@
           <div class="absolute h-[1px] w-4 bg-[#8A8996] -rotate-45"></div>
         </button>
       </div>
+      <form @submit.prevent="submit">
       <div class="flex flex-col p-5 xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5 border border-solid border-[#E5DFEE] rounded-[6px]">
-        <label for="email" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Email</label>
+        <label for="email" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]" :class="{'error': form.errors.email}">Email \ Login {{ form.errors.email }}</label>
         <input
           class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
-          type="email"
           id="email"
-          v-model="developer.email"
+          v-model="form.email"
         >
       </div>
       <div class="flex flex-col p-5 xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5 border border-solid border-[#E5DFEE] rounded-[6px]">
-        <label for="password" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Пароль</label>
+        <label for="password" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]" :class="{ 'error': form.errors.password }">Пароль {{ form.errors.password }}</label>
         <div class="relative">
-          <input v-model="developer.password" class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0" type="password" id="password">
+          <input v-model="form.password" class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0" type="password" id="password">
         </div>
       </div>
-      <button @click="clickLoginDeveloper" class="login__btn--bg text-white w-full text-lg xxl:text-[15px] xl:text-xs mb-5 xxl:mb-4 xl:mb-3 p-5 xxl:p-4 xl:p-3 border border-solid border-[#E5DFEE] rounded-[6px]">Войти</button>
+      <button :class="{ 'opacity-25': form.processing }" :disabled="form.processing" class="login__btn--bg text-white w-full text-lg xxl:text-[15px] xl:text-xs mb-5 xxl:mb-4 xl:mb-3 p-5 xxl:p-4 xl:p-3 border border-solid border-[#E5DFEE] rounded-[6px]">Войти</button>
+      </form>
       <div class="flex items-center justify-center text-base xxl:text-sm xl:text-xs">
         <button @click="openLoginRealtor" class="text-[#E84680]">Войти как риэлтор</button>
       </div>
@@ -221,5 +249,9 @@ export default {
 </script>
 
 <style scoped>
+
+  .error {
+    color: red;
+  }
 
 </style>
