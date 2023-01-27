@@ -67,7 +67,7 @@ class Users extends Section implements Initializable
       AdminColumn::text('id', '#')
         ->setWidth('50px')
         ->setHtmlAttribute('class', 'text-center'),
-      AdminColumn::text('email', 'Минимальное значение')->setWidth('350px'),
+      AdminColumn::text('email', 'Логин или email')->setWidth('350px'),
       AdminColumn::text('phone', 'Телефон')->setWidth('350px'),
       AdminColumn::text('first_name', 'Имя / Название компании')->setWidth('350px'),
       AdminColumn::text('last_name', 'Фамилия')->setWidth('350px'),
@@ -109,7 +109,7 @@ class Users extends Section implements Initializable
     $form = AdminForm::elements([
       AdminFormElement::columns()
         ->addColumn([
-          AdminFormElement::text('email', 'Емаил'),
+          AdminFormElement::text('email', 'Email/Логин'),
           AdminFormElement::text('phone', 'Телефон (риелтор)')
             ->required(),
           AdminFormElement::text('first_name', 'Имя'),
