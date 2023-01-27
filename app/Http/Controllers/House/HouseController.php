@@ -569,14 +569,15 @@ class HouseController extends Controller
 
   public function editSupport(Request $request) {
 
-    if ($request->avatar !== null) {
+    if ($request->avatar !== 'not') {
       $imageName = time() . '.' . $request->avatar->getClientOriginalName();
       $request->avatar->move(public_path('/storage/support'), $imageName);
     } else {
-      $imageName = null;
+      $sup = HouseSupportModel::where('id', $request->id)->first();
+      $imageName = $sup->image;
     }
 
-    $support = HouseSupportModel::where('id', $request->id)
+    HouseSupportModel::where('id', $request->id)
       ->update([
       'avatar' => '/storage/support/' . $imageName,
       'name' => $request->name,
