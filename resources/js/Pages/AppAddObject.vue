@@ -8,7 +8,7 @@
   <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="closeAddFrame" :house="house" :isEdit="isEdit" :frame="frame" />
   <app-modal-notification
     class="left-[2vw] transition-all duration-1000"
-    :class="{'-left-full': openNotification}"
+    :class="{'-left-full': !openNotification}"
     @close-notification="openNotification = false"
   />
   <app-header :user="user" />
@@ -22,6 +22,7 @@
                 <div @click="openPage(0)" :class="{ 'menu-add-obj': page === 0}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">Информация о ЖК</div>
                 <div @click="openPage(1)" :class="{ 'menu-add-obj': page === 1}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">Корпуса и квартиры</div>
                 <div @click="openPage(2)" :class="{ 'menu-add-obj': page === 2}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">Фото</div>
+                <div @click="openPage(3)" :class="{ 'menu-add-obj': page === 3}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">Файлы</div>
               </div>
             </div>
             <div :class="{'hidden': page !== 1}" class="flex justify-center mt-12 xxl:mt-10 xl:mt-8">
@@ -69,6 +70,12 @@
           />
         </div>
 
+        <div v-if="page === 3">
+          <app-add-files
+              :house="readyHouse"
+          />
+        </div>
+
       </div>
     </div>
 
@@ -86,6 +93,7 @@ import AppModalAddContact from "../Layouts/modal/AppModalAddContact.vue"
 import AppModalAddApartments from "../Layouts/modal/AppModalAddApartments.vue"
 import AppModalAddFrame from "../Layouts/modal/AppModalAddFrame.vue"
 import AppModalNotification from "@/Layouts/modal/AppModalNotification.vue"
+import AppAddFiles from "@/Components/AppAddFiles.vue";
 
 
 export default {
@@ -181,6 +189,7 @@ export default {
     }
   },
   components: {
+    AppAddFiles,
     AppHeader,
     AppFooter,
     AppInfoJK,

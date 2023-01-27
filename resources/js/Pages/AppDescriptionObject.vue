@@ -34,7 +34,7 @@
               <span class="font-semibold text-xl xxl:text-lg xl:text-sm lg:text-[19px]">{{ house.title }}</span>
               <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px]">
                 <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="house.created && !Number.isInteger(+house.created[0])">{{ house.created }}</span>
-                <span class="flex items-center justify-center uppercase border border-solid border-[#E84680] h-fit text-[#E84680] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-else>{{ house.created }}</span>
+                <span class="flex items-center justify-center uppercase border border-solid border-[#E84680] h-fit text-[#E84680] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-else-if="house.created">{{ house.created }}</span>
                 <span class="flex items-center justify-center text-white font-semibold bg-[#FA8D50] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="house.promotion">акция</span>
                 <span class="flex items-center justify-center text-white font-semibold bg-[#E84680] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="Math.ceil(Math.abs(new Date().getTime() - new Date(house.created_at).getTime()) / (1000 * 3600 * 24) ) <= 30">новинки</span>
                 <span class="flex items-center justify-center text-white font-semibold bg-[#E84646] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="house.visible >= 50">популярное</span>
@@ -70,7 +70,7 @@
               </button>
             </div>
 
-            <div class="flex items-center p-4 xxl:p-3 xl:p-2" @click="chess = true">
+            <div class="flex items-center p-4 xxl:p-3 xl:p-2" @click="chess = true" v-if="house.flats.length > 0">
               <button class="login__btn--bg bg-[#E84680] px-4 xxl:px-4 xl:px-2.5 rounded-[3px] h-10 xxl:h-8 xl:h-6 font-semibold text-white text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px] leading-none">Смотреть прайс-лист</button>
             </div>
           </div>
@@ -88,11 +88,14 @@
             :loop="true"
             class="mySwiper w-full"
           >
-            <swiper-slide class="h-full flex justify-center">
-              <img @click="album = true" class="h-full w-full" v-if="house.images.length > 0" :src="house.images[0].name" alt="">
+            <swiper-slide class="h-full flex justify-center" v-if="house.images.length > 0">
+              <img @click="album = true" class="h-full w-full object-cover" :src="house.images[0].name" alt="">
+            </swiper-slide>
+            <swiper-slide class="h-full flex justify-center" v-else>
+              <img class="h-full w-full object-cover" src="../../assets/no-img-house.jpg" alt="">
             </swiper-slide>
             <swiper-slide class="h-full flex justify-center" v-for="item in mainPhotos">
-              <img @click="album = true" class="h-full w-full" :src="item.name" alt="">
+              <img @click="album = true" class="h-full w-full object-cover" :src="item.name" alt="">
             </swiper-slide>
           </swiper>
           <div class="border border-solid border-[#E5DFEE] h-[100px] xxl:h-[80px] xl:h-[60px] sm:h-fit flex items-center sm:flex-col justify-evenly rounded-[12px] mt-7 xxl:mt-5 xl:mt-4 mb-16 xxl:mb-12 xl:mb-10">

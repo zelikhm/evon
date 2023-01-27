@@ -1,7 +1,7 @@
 <template>
   <app-modal-notification
     class="left-[2vw] transition-all duration-1000"
-    :class="{'-left-full': openNotification}"
+    :class="{'-left-full': !openNotification}"
     @close-notification="openNotification = false"
   />
   <app-create-selections :user="user"
@@ -24,7 +24,8 @@
       </div>
       <div class="grid grid-cols-2 lg:grid-cols-1 gap-x-10 gap-y-4 mt-8 xxl:mt-7 xl:mt-6 mb-28 xxl:mb-24 xl:mb-20">
         <div class="contact__selling grid__selection-block rounded-[10px]" v-for="(item, idx) in compilation">
-          <img class="p-2.5 xxl:p-2 xl:p-1.5 w-full h-[8.5vw] lg:h-[17vw] sm:h-full rounded-[3px]" :src="'/storage/' + item.house.image" alt="">
+          <img class="p-2.5 xxl:p-2 xl:p-1.5 w-full h-[8.5vw] lg:h-[17vw] sm:h-full rounded-[3px]" v-if="item.house.images.length > 0" :src="item.house.images[0].name" alt="">
+          <img class="p-2.5 xxl:p-2 xl:p-1.5 w-full h-[8.5vw] lg:h-[17vw] sm:h-full rounded-[3px]" v-else src="../../assets/no-img-houses.jpg" alt="">
           <div class="flex items-center">
             <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5 w-full py-2.5 xxl:py-2 xl:py-1.5 pl-2.5 xxl:pl-2 xl:pl-1.5 pr-20 xxl:pr-16 xl:pr-12 md:pr-2.5">
               <span class="text-lg xxl:text-[15px] xl:text-[13px] text-[#1E1D2D] font-medium leading-none">{{ item.title }}</span>
