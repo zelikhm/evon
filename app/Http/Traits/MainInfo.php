@@ -364,7 +364,16 @@ trait MainInfo
 
   protected function getCompilations($id)
   {
-    return CompilationModel::where('user_id', $id)->with(['values', 'houses'])->get();
+    $compilations = CompilationModel::where('user_id', $id)->with(['values'])->get();
+
+    foreach ($compilations as $compilation) {
+      foreach ($compilation->values as $value) {
+        $value->house = $this->getHouseOnId($value->house_id);
+      }
+    }
+
+    return $compilations;
+
   }
 
   /**
