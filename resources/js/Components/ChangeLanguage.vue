@@ -1,5 +1,5 @@
 <template>
-  <div :tabindex="tabindex" @blur="langOptionVisible = false" class="header__lang--select uppercase relative flex items-center h-[60px] xxl:h-12 xl:h-10">
+  <div :tabindex="tabindex" @blur="langOptionVisible = false" class="z-50 header__lang--select uppercase relative flex items-center h-[60px] xxl:h-12 xl:h-10">
     <div class="lang lang_fixed">
       <div id="ytWidget" style="display: none;"></div>
       <div class="lang__link lang__link_select" data-lang-active="ru">
