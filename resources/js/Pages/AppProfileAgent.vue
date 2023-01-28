@@ -13,8 +13,8 @@
         <div class="mt-10 xxl:mt-8 xl:mt-6">
           <div class="grid__prof-agent gap-7 xxl:gap-5 xl:gap-4">
             <div class="flex flex-col gap-12 xxl:gap-10 xl:gap-8">
-              <div class="relative w-[13.28vw] h-[13.28vw] rounded-full">
-                <img class="absolute w-full h-full rounded-full" :src="'/storage/user/' + myPhoto" alt="">
+              <div class="relative w-[250px] h-[250px] exl:w-[13.28vw] exl:h-[13.28vw] rounded-full">
+                <img class="absolute object-cover w-full h-full rounded-full" :src="'/storage/user/' + myPhoto" alt="">
                 <div class="avatar__contact w-full h-full rounded-full">
                   <div class="absolute rounded-full w-full h-full top-0 left-0">
                     <label for="avatar" :class="{'-z-10': avatar}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-full">

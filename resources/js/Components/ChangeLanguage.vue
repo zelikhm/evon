@@ -9,7 +9,7 @@
       <span>{{ langSelected }}</span>
       <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелочка вниз" :class="{ 'rotate-180': langOptionVisible   }">
     </div>
-    <div v-if="langOptionVisible" class="border border-solid border-[#E5DFEE] absolute top-[90%] w-full left-0 flex flex-col bg-white rounded-[5px]">
+    <div v-if="langOptionVisible" class="border border-solid overflow-hidden border-[#E5DFEE] absolute top-[90%] w-full left-0 flex flex-col bg-white rounded-[5px]">
                  <span @click="selectOption('ru')" data-ya-lang="ru" class="hover__select border__bottom--not cursor-pointer leading-none p-4 xxl:p-3 xl:p-2.5">
                   {{ langSelected === 'ru' ? "RU" : "РУ"  }}
                 </span>

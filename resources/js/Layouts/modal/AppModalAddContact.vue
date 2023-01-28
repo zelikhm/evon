@@ -11,7 +11,7 @@
       <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
         <div>
           <div class="relative w-20 xxl:w-16 xl:w-14 h-20 xxl:h-16 xl:h-14 rounded-full">
-            <img v-if="myPhoto" class="absolute w-full h-full rounded-full" :src="myPhoto" alt="">
+            <img v-if="myPhoto" class="absolute object-cover w-full h-full rounded-full" :src="myPhoto" alt="">
             <button v-if="myPhoto" @click="deletePhoto" class="absolute rounded-full bg-[#E84680] z-10 top-0 left-0 h-5 xxl:h-4.5 xl:h-4 w-5 xxl:w-4.5 xl:w-4">
               <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-white h-[1px] w-[60%]"></span>
               <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-white h-[1px] w-[60%]"></span>

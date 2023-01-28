@@ -126,7 +126,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
           <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectDev}">
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Застройщик</span>
-            <div class="relative">
+            <div class="relative" :tabindex="tabindex" @blur="openSelectDev = false">
               <div @click="openSelectDev = !openSelectDev" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
                 <span class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ selectDev }}</span>
                 <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectDev }" alt="">
@@ -319,7 +319,7 @@ import { Link } from '@inertiajs/inertia-vue3'
             </div>
           </div>
           <div class="flex flex-col text-[#1E1D2D] p-5 xxl-4 xl:p-3 leading-none">
-            <Link :href="'/house/' + item.slug" class="font-semibold text-xl xxl:text-base xl:text-sm md:text-[17px]">{{ item.title }}</Link>
+            <Link :href="'/house/' + item.slug" class="hover__title-block transition-all font-semibold text-xl xxl:text-base xl:text-sm md:text-[17px] ">{{ item.title }}</Link>
             <span class="text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">от {{ Number.isInteger(item.minPrice) ? item.minPrice : "-" }} €</span>
           </div>
         </div>
@@ -353,7 +353,7 @@ import { Link } from '@inertiajs/inertia-vue3'
               <div class="flex flex-col justify-between px-4 xxl:px-3 xl:px-2.5 md:px-1.5 py-2 xxl:py-1.5 xl:py-1 md:py-3 md:gap-3.5">
                 <div class="flex justify-between sm:flex-col gap-2">
                   <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                    <Link :href="'/house/' + item.slug" class="leading-none font-semibold text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">{{ item.title }}</Link>
+                    <Link :href="'/house/' + item.slug" class="hover__title-block transition-all leading-none font-semibold text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">{{ item.title }}</Link>
                     <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs md:text-[14px]">{{ item.area }}</span>
                   </div>
                   <div class="flex flex-wrap gap-x-1">
