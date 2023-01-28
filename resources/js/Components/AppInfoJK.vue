@@ -16,12 +16,14 @@ import {Link} from '@inertiajs/inertia-vue3'
              type="text" id="name_object" >
     </div>
 
-    <div :class="{ validation: validation.description }" class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]">
-      <label :class="{ validationText: validation.description }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"
-             for="description_object">Описание объекта</label>
+    <div :class="{ validation: validation.description }" class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px] h-[140px] xxl:h-[115px] xl:h-[95px]">
+      <label
+        :class="{ validationText: validation.description }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"
+        for="description_object">Описание объекта
+      </label>
       <textarea v-model="object.description"
                 @input="checkValidation(3)"
-                class="custom__scroll text-[#1E1D2D] resize-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0"
+                class="custom__scroll text-[#1E1D2D] h-full resize-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0"
                 type="text" id="description_object"></textarea>
     </div>
 
@@ -225,42 +227,6 @@ import {Link} from '@inertiajs/inertia-vue3'
           />
         </div>
 
-      </div>
-      <div class="my-10 xxl:my-8 xl:my-6">
-        <div class="flex justify-between items-center">
-          <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] font-medium leading-none">Контакты отдела продаж</h3>
-          <button
-            @click="$emit('open-add-contact')"
-            class="flex items-center register__button--white text-[#6435A5] border border-solid border-[#6435A5] rounded-[5px] py-3 xxl:py-2.5 xl:py-2 px-4 xxl:px-3 xl:px-2.5">
-            <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-              <g clip-path="url(#clip0_519_1862)">
-                <path d="M7.33398 7.33301V3.33301H8.66732V7.33301H12.6673V8.66634H8.66732V12.6663H7.33398V8.66634H3.33398V7.33301H7.33398Z" fill="#6435A5"/>
-              </g>
-              <defs>
-                <clipPath id="clip0_519_1862">
-                  <rect width="16" height="16" fill="white"/>
-                </clipPath>
-              </defs>
-            </svg>
-            <span class="font-medium text-base xxl:text-sm xl:text-xs lg:text-[14px] leading-none">Добавить</span>
-          </button>
-        </div>
-        <div v-for="item in supportsReady"
-             class="contact__selling my-5 xxl:my-4 xl:my-3 text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] flex justify-between items-center rounded-[5px] p-1.5 xl:p-1">
-          <div class="flex items-center gap-14 xxl:gap-10 xl:gap-8">
-            <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-              <img :src="item.avatar" v-if="house !== undefined" class="h-12 xxl:h-10 xl:h-8 w-12 xxl:w-10 xl:w-8 rounded-full" alt="">
-              <img :src="item.image_front" v-else class="h-12 xxl:h-10 xl:h-8 w-12 xxl:w-10 xl:w-8 rounded-full" alt="">
-              <span class="text-[#1E1D2D]">{{ item.name }}</span>
-            </div>
-            <span class="text-[#8A8996]">{{ item.phone }}</span>
-            <span class="text-[#8A8996]">{{ item.email }}</span>
-          </div>
-          <div class="flex gap-7 xxl:gap-5 xl:gap-4">
-            <img @click="editSupport(item)" src="../../assets/svg/pen_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 lg:w-6" alt="">
-            <img @click="deleteSupport(item)" src="../../assets/svg/bucket_icon_red.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 lg:w-6" alt="">
-          </div>
-        </div>
       </div>
       <div class="my-10 xxl:my-8 xl:my-6">
         <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">
@@ -481,18 +447,6 @@ export default {
     editSupport(item) {
       this.$emit('open-add-contact', item)
     },
-    deleteSupport(item) {
-      axios.post('/api/house/deleteSupport', {
-        id: item.id,
-        token: this.globalToken
-      })
-
-      this.supportsReady.forEach((support, idx) => {
-        if (item.id === support.id) {
-          this.supportsReady.splice(idx, 1)
-        }
-      })
-    },
     handleClick(event) {
       this.markers = []
       this.markers.push({
@@ -562,7 +516,13 @@ export default {
             url: '/api/house/create',
             headers: {"Content-type": "multipart/form-data"},
             data: formData,
-          }).then(res => this.addedSupports(res, flag))
+          }).then(res => {
+            if (flag === 1) {
+              window.location.href = '/profile/edit/' + res.data.slug + '#create'
+            } else {
+              window.location.href = '/profile/houses'
+            }
+          })
         } else {
 
           this.object.info = []
@@ -619,10 +579,6 @@ export default {
           house = res.data
       console.log(res)
 
-      axios.post('/api/house/addedFiles', {
-
-      })
-
       axios.post('/api/house/clearSupport', {
         house_id: idNewJk
       }).then(res => {
@@ -655,11 +611,6 @@ export default {
         headers: {"Content-type": "multipart/form-data"},
         data: data,
       }).then(res => {
-        if (flag === 1) {
-          window.location.href = '/profile/edit/' + house.slug + '#create'
-        } else {
-          window.location.href = '/profile/houses'
-        }
       })
     },
     checkValidation(num, title) {
@@ -760,7 +711,6 @@ export default {
       this.selectRegion = this.house.area
       this.object.coordinates = this.house.latitude + ' ' + this.house.longitude
       this.selectType = this.house.info.type
-      console.log(this.house)
       this.selectDeadline = this.house.created
       this.object.floors = this.house.info.floors
       this.object.toSea = this.house.info.toSea
@@ -811,6 +761,11 @@ export default {
         return this.city
       }
     },
+  },
+  watch: {
+    house(oldSupports, newSupports) {
+      console.log(oldSupports, newSupports)
+    }
   }
 }
 

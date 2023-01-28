@@ -21,7 +21,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
           <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectType}">
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Тип</span>
-            <div class="relative">
+            <div class="relative" :tabindex="tabindex" @blur="openSelectType = false">
               <div @click="openSelectType = !openSelectType" class="flex items-center justify-between cursor-pointer text-[#1E1D2D]  text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
                 <span>{{ selectType }}</span>
                 <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectType }" alt="">
@@ -39,7 +39,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
           <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectCity}">
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Город</span>
-            <div class="relative">
+            <div class="relative" :tabindex="tabindex" @blur="openSelectCity = false">
               <div @click="openSelectCity = !openSelectCity" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3">
                 <span>{{ selectCity }}</span>
                 <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectCity }" alt="">
@@ -60,7 +60,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
           <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectRegion}">
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-5 xxl:pt-4 xl:pt-3">Район</span>
-            <div class="relative">
+            <div class="relative" :tabindex="tabindex" @blur="openSelectRegion = false">
               <div @click="openSelectRegion = !openSelectRegion" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
                 <span>{{ selectRegion }}</span>
                 <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectRegion }" alt="">
@@ -93,7 +93,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
           <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectDeadline}">
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Срок сдачи</span>
-            <div class="relative">
+            <div class="relative" :tabindex="tabindex" @blur="openSelectDeadline = false">
               <div @click="openSelectDeadline = !openSelectDeadline" class="flex items-center justify-between cursor-pointer text-[#1E1D2D]  text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
                 <span>{{ selectDeadline }}</span>
                 <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectDeadline }" alt="">
@@ -180,7 +180,7 @@ import { Link } from '@inertiajs/inertia-vue3'
               </div>
               <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectInstallment}">
                 <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Рассрочка</span>
-                <div class="relative">
+                <div class="relative" :tabindex="tabindex" @blur="openSelectInstallment = false">
                   <div @click="openSelectInstallment = !openSelectInstallment" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
                     <span class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ selectInstallment }}</span>
                     <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectInstallment }" alt="">
@@ -401,6 +401,11 @@ export default {
     infos: [],
     builders: [],
     dops: [],
+    tabindex: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
   },
   emits: ['open-filter', 'open-add-selections' ,'close-filter'],
   data() {
@@ -657,10 +662,10 @@ export default {
     },
   },
   mounted() {
-    document.addEventListener('click', this.selectsHidden.bind(this), true)
+    // document.addEventListener('click', this.selectsHidden.bind(this), true)
   },
   beforeDestroy() {
-    document.removeEventListener('click', this.selectsHidden)
+    // document.removeEventListener('click', this.selectsHidden)
   },
   components: {
     AppMap,

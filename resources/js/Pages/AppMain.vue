@@ -92,7 +92,7 @@
                 <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">При добавлении вашего объекта на платформу о нем узнает большинство агентств и частных риелторов</span>
                 <img src="../../assets/svg/main_for_developer_two.svg" class="h-8 xxl:h-6 xl:h-5 lg:h-6" alt="Для засторйщика 2">
               </div>
-              <div class="flex flex-col gap-3 justify-between items-start sm:items-center bg-white h-[200px] exl:h-fit exl:min-h-[10vw]rounded-xl p-7 xxl:p-5 xl:p-4">
+              <div class="flex flex-col gap-3 justify-between items-start sm:items-center bg-white h-[200px] exl:h-fit exl:min-h-[10vw] rounded-xl p-7 xxl:p-5 xl:p-4">
                 <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Делитесь новостями со всеми партнерами в режиме реального времени. На платформе реализован чат с партнером /риелтором</span>
                 <img src="../../assets/svg/main_for_developer_three.svg" class="h-8 xxl:h-6 xl:h-5 lg:h-6" alt="Для засторйщика 3">
               </div>

@@ -1,10 +1,12 @@
 <script setup>
 import { Link } from '@inertiajs/inertia-vue3'
+import ChangeLanguage from "@/Components/ChangeLanguage.vue";
 </script>
 
 <template>
+  <div v-if="overlaySelect" @click="closeOverlaySelect" class="absolute h-full w-full z-40"></div>
 <!--  Меню до входа-->
-  <header v-if="user === null" class="relative z-50 bg-[#6435A5] leading-[100%]">
+  <header v-if="user === null" class="relative bg-[#6435A5] leading-[100%]">
     <div class="_container h-[60px] xxl:h-12 xl:h-10">
       <div class="flex items-center justify-between h-full ">
         <Link href="/" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
@@ -12,24 +14,10 @@ import { Link } from '@inertiajs/inertia-vue3'
           <span class="sm:hidden uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon</span>
         </Link>
         <div class="flex items-center gap-7 xxl:gap-5 lg:gap-2 text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[14px]">
-          <div class="header__lang--select uppercase relative flex items-center h-[60px] xxl:h-12 xl:h-10">
-            <div @click="langOptionVisible = !langOptionVisible" class="lang flex h-full text-white items-center cursor-pointer px-7 xxl:px-5 xl:px-4 gap-2.5 xl:gap-1.5">
-              <span>{{ langSelected }}</span>
-              <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелочка вниз">
-            </div>
-            <div v-if="langOptionVisible" class="overflow-hidden border border-solid border-[#E5DFEE] absolute top-[90%] w-full left-0 flex flex-col bg-white rounded-[5px]">
-              <span
-                @click="selectOption(language)"
-                v-for="(language, idx) in languages" :key="idx"
-                class="hover__select border__bottom--not cursor-pointer leading-none p-4 xxl:p-3 xl:p-2.5"
-              >
-                  {{ language.lang }}
-                </span>
-            </div>
-          </div>
+          <change-language />
           <div class="flex gap-3 xxl:gap-2 font-medium">
-            <div class="relative text-[#3B3A45]">
-              <button @click="loginOpen = !loginOpen" class="login login__btn--bg text-white px-5 xxl:px-4 xl:px-3 py-2.5 xxl:py-2 xl:py-1 rounded-[3px]">Вход</button>
+            <div class="relative text-[#3B3A45] z-50">
+              <button @click="loginOpens" class="login login__btn--bg text-white px-5 xxl:px-4 xl:px-3 py-2.5 xxl:py-2 xl:py-1 rounded-[3px]">Вход</button>
               <div v-if="loginOpen" class="login__dropdown absolute overflow-hidden top-[120%] flex flex-col items-start bg-white rounded-[6px]">
                 <button @click="loginDeveloper" class="hover__select whitespace-nowrap leading-none px-3.5 py-2.5 w-full">Я застройщик</button>
                 <button @click="loginRealtor" class="hover__select whitespace-nowrap leading-none text-left px-3.5 py-2.5 w-full">Я риэлтор</button>
@@ -71,21 +59,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                 </div>
               </div>
             </div>
-            <div class="header__lang--select uppercase relative flex items-center h-[60px] xxl:h-12 xl:h-10">
-              <div class="flex h-full text-white items-center cursor-pointer px-7 xxl:px-5 xl:px-4 gap-2.5 xl:gap-1.5" @click="langOptionVisible = !langOptionVisible">
-                <span>{{ langSelected }}</span>
-                <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелочка вниз">
-              </div>
-              <div v-if="langOptionVisible" class="border border-solid border-[#E5DFEE] absolute top-[90%] w-full left-0 flex flex-col bg-white rounded-[5px]">
-              <span
-                @click="selectOption(language)"
-                v-for="(language, idx) in languages" :key="idx"
-                class="hover__select border__bottom--not cursor-pointer leading-none p-4 xxl:p-3 xl:p-2.5"
-              >
-                  {{ language.lang }}
-                </span>
-              </div>
-            </div>
+            <change-language />
             <div class="flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
               <img :src="'/storage/user/' + user.image" class="h-9 xxl:h-7 xl:h-6 w-9 xxl:w-7 xl:w-6 rounded-full" alt="avatar">
               <button @click="openProfileMenu = !openProfileMenu" class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
@@ -144,21 +118,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                 </div>
               </div>
             </Link>
-            <div class="header__lang--select uppercase relative flex items-center h-[60px] xxl:h-12 xl:h-10">
-              <div ref="lang" class="flex h-full text-white items-center cursor-pointer px-7 xxl:px-5 xl:px-4 gap-2.5 xl:gap-1.5" @click="langOptionVisible = !langOptionVisible">
-                <span>{{ langSelected }}</span>
-                <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелочка вниз">
-              </div>
-              <div v-if="langOptionVisible" class="border border-solid border-[#E5DFEE] absolute top-[90%] w-full left-0 flex flex-col bg-white rounded-[5px]">
-                <span
-                  @click="selectOption(language)"
-                  v-for="(language, idx) in languages" :key="idx"
-                  class="hover__select border__bottom--not cursor-pointer leading-none p-4 xxl:p-3 xl:p-2.5"
-                >
-                  {{ language.lang }}
-                </span>
-              </div>
-            </div>
+            <change-language />
             <div class="relative flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
               <button @click="openProfileMenu = !openProfileMenu" class="profileMenu flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
                 <span class="text-white text-lg xxl:text-sm xl:text-xs leading-none">{{ user.first_name }} {{ user.last_name }}</span>
@@ -193,7 +153,12 @@ import { useForm } from '@inertiajs/inertia-vue3'
 export default {
   props: {
     heightMain: Number,
-    user: []
+    user: [],
+    tabindex: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
   },
   data() {
     return {
@@ -206,11 +171,27 @@ export default {
       langSelected: 'ru',
       loginOpen: false,
       openProfileMenu: false,
-      openBurgerSm: false
+      openBurgerSm: false,
+      overlaySelect: false
     }
   },
   emits: ['login-realtor', 'login-developer', 'open-register'],
   methods: {
+    closeOverlaySelect() {
+      this.overlaySelect = false
+
+      this.langOptionVisible = false
+      this.loginOpen = false
+
+    },
+    langOptionVisibles() {
+      this.langOptionVisible = !this.langOptionVisible
+      this.overlaySelect = !this.overlaySelect
+    },
+    loginOpens() {
+      this.loginOpen = !this.loginOpen
+      this.overlaySelect = !this.overlaySelect
+    },
     openBurgerSmall() {
       this.openBurgerSm = !this.openBurgerSm
     },
@@ -219,34 +200,21 @@ export default {
       form.post('/logout');
     },
     selectOption(language) {
-      this.langSelected =  language.lang
+      this.langSelected =  language
+      localStorage.setItem('language', language)
       this.langOptionVisible = false
+      this.overlaySelect = false
     },
     loginRealtor() {
       this.$emit('login-realtor')
       this.loginOpen = false
+      this.overlaySelect = false
     },
     loginDeveloper() {
       this.$emit('login-developer')
       this.loginOpen = false
+      this.overlaySelect = false
     },
-    selectsHidden(e) {
-      // if(!document.querySelector(".lang").contains(e.target)) {
-      //   this.langOptionVisible = false
-      // }
-      // if(!document.querySelector(".login").contains(e.target)) {
-      //   this.loginOpen = false
-      // }
-      // if(!document.querySelector(".profileMenu").contains(e.target)) {
-      //   this.openProfileMenu = false
-      // }
-      this.openProfileMenu = false
-      this.loginOpen = false
-      this.langOptionVisible = false
-    }
-  },
-  created() {
-    console.log(this.user)
   },
   mounted() {
     document.addEventListener('click', this.selectsHidden, true)

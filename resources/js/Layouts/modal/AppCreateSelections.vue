@@ -30,7 +30,8 @@
           >
             <div class="flex justify-between items-center mb-3 xxl:mb-2.5 xl:mb-2">
               <div class="flex gap-5 xxl:gap-4 xl:gap-3 items-center">
-                <img :src="'/storage/' + JK.image" class="w-[70px] xxl:w-[60px] xl:w-[50px] h-[70px] xl:h-[60px] xl:h-[50px] rounded-[3px]" alt="">
+                <img v-if="JK.images.length > 0" :src="JK.images[0].name" class="w-[70px] xxl:w-[60px] xl:w-[50px] h-[70px] xl:h-[60px] xl:h-[50px] rounded-[3px]" alt="">
+                <img v-else src="../../../assets/no-img-house.jpg" class="w-[70px] xxl:w-[60px] xl:w-[50px] h-[70px] xl:h-[60px] xl:h-[50px] rounded-[3px]" alt="">
                 <div class="flex flex-col gap-3 xxl:gap-2.5 xl:gap-2">
                   <span class="text-[#1E1D2D] font-medium text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">{{ JK.title }}</span>
                   <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ JK.city }}, {{ JK.area }}</span>
@@ -115,7 +116,7 @@ export default {
       else if (id === 1) this.compilation.description.length > 0 ? this.validation.description = false : this.validation.description = true
     },
     fillInput() {
-      console.log(this.itemCompilation)
+      console.log(this.compilation)
       if (this.itemCompilation) {
         this.compilation.title = this.itemCompilation.title
         this.compilation.description = this.itemCompilation.description

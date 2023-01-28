@@ -37,14 +37,6 @@
         </div>
         <div class="flex items-center gap-1 p-5 xxl:p-4 xl:p-3">
           <span class="text-[#8A8996] text-base xxl:text-[14px] xl:text-[12px] leading-none">Планировка</span>
-          <div class="flex flex-col gap-[1px] xl:gap-[0.5px]">
-            <svg class="cursor-pointer rotate-180 w-[9px] xxl:w-[8px] xl:w-[7px] h-[7px]" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4.5 7L8.39711 0.25H0.602886L4.5 7Z" fill="#E5DFEE"/>
-            </svg>
-            <svg class="cursor-pointer w-[9px] h-[7px] w-[9px] xxl:w-[8px] xl:w-[7px]" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4.5 7L8.39711 0.25H0.602886L4.5 7Z" fill="#E5DFEE"/>
-            </svg>
-          </div>
         </div>
         <div class="flex items-center gap-1 p-5 xxl:p-4 xl:p-3">
           <span class="text-[#8A8996] text-base xxl:text-[14px] xl:text-[12px] leading-none">Этаж</span>
