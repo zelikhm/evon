@@ -572,6 +572,7 @@ class HouseController extends Controller
     if ($request->avatar !== 'not') {
       $imageName = time() . '.' . $request->avatar->getClientOriginalName();
       $request->avatar->move(public_path('/storage/support'), $imageName);
+      $imageName = '/storage/support/' . $imageName;
     } else {
       $sup = HouseSupportModel::where('id', $request->id)->first();
       $imageName = $sup->avatar;
@@ -579,7 +580,7 @@ class HouseController extends Controller
 
     HouseSupportModel::where('id', $request->id)
       ->update([
-      'avatar' => '/storage/support/' . $imageName,
+      'avatar' => $imageName,
       'name' => $request->name,
       'phone' => $request->phone,
       'email' => $request->email,
