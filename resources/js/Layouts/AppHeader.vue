@@ -4,8 +4,9 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
 </script>
 
 <template>
+  <div v-if="overlaySelect" @click="closeOverlaySelect" class="absolute h-full w-full z-40"></div>
 <!--  Меню до входа-->
-  <header v-if="user === null" class="relative z-50 bg-[#6435A5] leading-[100%]">
+  <header v-if="user === null" class="relative bg-[#6435A5] leading-[100%]">
     <div class="_container h-[60px] xxl:h-12 xl:h-10">
       <div class="flex items-center justify-between h-full ">
         <Link href="/" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
@@ -15,8 +16,8 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
         <div class="flex items-center gap-7 xxl:gap-5 lg:gap-2 text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[14px]">
           <change-language />
           <div class="flex gap-3 xxl:gap-2 font-medium">
-            <div class="relative text-[#3B3A45]">
-              <button @click="loginOpen = !loginOpen" class="login login__btn--bg text-white px-5 xxl:px-4 xl:px-3 py-2.5 xxl:py-2 xl:py-1 rounded-[3px]">Вход</button>
+            <div class="relative text-[#3B3A45] z-50">
+              <button @click="loginOpens" class="login login__btn--bg text-white px-5 xxl:px-4 xl:px-3 py-2.5 xxl:py-2 xl:py-1 rounded-[3px]">Вход</button>
               <div v-if="loginOpen" class="login__dropdown absolute overflow-hidden top-[120%] flex flex-col items-start bg-white rounded-[6px]">
                 <button @click="loginDeveloper" class="hover__select whitespace-nowrap leading-none px-3.5 py-2.5 w-full">Я застройщик</button>
                 <button @click="loginRealtor" class="hover__select whitespace-nowrap leading-none text-left px-3.5 py-2.5 w-full">Я риэлтор</button>
@@ -170,11 +171,27 @@ export default {
       langSelected: 'ru',
       loginOpen: false,
       openProfileMenu: false,
-      openBurgerSm: false
+      openBurgerSm: false,
+      overlaySelect: false
     }
   },
   emits: ['login-realtor', 'login-developer', 'open-register'],
   methods: {
+    closeOverlaySelect() {
+      this.overlaySelect = false
+
+      this.langOptionVisible = false
+      this.loginOpen = false
+
+    },
+    langOptionVisibles() {
+      this.langOptionVisible = !this.langOptionVisible
+      this.overlaySelect = !this.overlaySelect
+    },
+    loginOpens() {
+      this.loginOpen = !this.loginOpen
+      this.overlaySelect = !this.overlaySelect
+    },
     openBurgerSmall() {
       this.openBurgerSm = !this.openBurgerSm
     },
@@ -186,32 +203,18 @@ export default {
       this.langSelected =  language
       localStorage.setItem('language', language)
       this.langOptionVisible = false
+      this.overlaySelect = false
     },
     loginRealtor() {
       this.$emit('login-realtor')
       this.loginOpen = false
+      this.overlaySelect = false
     },
     loginDeveloper() {
       this.$emit('login-developer')
       this.loginOpen = false
+      this.overlaySelect = false
     },
-    selectsHidden(e) {
-      // if(!document.querySelector(".lang").contains(e.target)) {
-      //   this.langOptionVisible = false
-      // }
-      // if(!document.querySelector(".login").contains(e.target)) {
-      //   this.loginOpen = false
-      // }
-      // if(!document.querySelector(".profileMenu").contains(e.target)) {
-      //   this.openProfileMenu = false
-      // }
-      this.openProfileMenu = false
-      this.loginOpen = false
-      this.langOptionVisible = false
-    }
-  },
-  created() {
-    this.langSelected = localStorage.getItem('language')
   },
   mounted() {
     document.addEventListener('click', this.selectsHidden, true)
