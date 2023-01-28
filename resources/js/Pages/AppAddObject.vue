@@ -1,5 +1,5 @@
 <template>
-  <app-modal-add-contact @close-add-contact="closeModalContact"
+  <app-modal-add-con  tact @close-add-contact="closeModalContact"
                          @close-edit-contact="closeModalBeforeEdit"
                          v-if="modalAddContact"
                          :contact="contact"

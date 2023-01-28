@@ -30,14 +30,14 @@
           >
             <div class="flex justify-between items-center mb-3 xxl:mb-2.5 xl:mb-2">
               <div class="flex gap-5 xxl:gap-4 xl:gap-3 items-center">
-                <img v-if="JK.images.length > 0" :src="JK.images[0].name" class="w-[70px] xxl:w-[60px] xl:w-[50px] h-[70px] xl:h-[60px] xl:h-[50px] rounded-[3px]" alt="">
-                <img v-else src="../../../assets/no-img-house.jpg" class="w-[70px] xxl:w-[60px] xl:w-[50px] h-[70px] xl:h-[60px] xl:h-[50px] rounded-[3px]" alt="">
+                <img v-if="JK.house.images.length > 0" :src="JK.house.images[0].name" class="object-cover w-[70px] xxl:w-[60px] xl:w-[50px] h-[70px] xl:h-[60px] xl:h-[50px] rounded-[3px]" alt="">
+                <img v-else src="../../../assets/no-img-houses.jpg" class="w-[70px] xxl:w-[60px] xl:w-[50px] h-[70px] xl:h-[60px] xl:h-[50px] rounded-[3px]" alt="">
                 <div class="flex flex-col gap-3 xxl:gap-2.5 xl:gap-2">
-                  <span class="text-[#1E1D2D] font-medium text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">{{ JK.title }}</span>
-                  <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ JK.city }}, {{ JK.area }}</span>
+                  <span class="text-[#1E1D2D] font-medium text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">{{ JK.house.title }}</span>
+                  <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ JK.house.city }}, {{ JK.house.area }}</span>
                 </div>
               </div>
-              <div class="flex items-center">
+              <div class="flex items-center" @click="deleteJK(JK.house)">
 <!--                <img v-if="!JK.openInput" @click="openInput(JK)" src="../../../assets/svg/chat_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 mx-5 xxl:mx-4 xl:mx-3" alt="">-->
                 <img src="../../../assets/svg/bucket_icon_red.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 mx-5 xxl:mx-4 xl:mx-3" alt="">
               </div>
@@ -85,23 +85,29 @@ export default {
     closeInput(JK) {
       JK.openInput = false
     },
+    deleteJK(item) {
+      axios.post('/api/compilation/deleteHouse', {
+        token: this.globalToken,
+        compilation_id: this.itemCompilation.id,
+        house_id: item.id
+      })
+
+      this.compilation.JK.forEach((i, idx) => {
+        if (i.house.id === item.id) {
+          this.compilation.JK.splice(idx, 1)
+        }
+      })
+    },
     createCompilation() {
       if (this.compilation.title && this.compilation.description) {
-        let obj = {
+        axios.post('/api/compilation/edit', {
           user_id: this.user.id,
+          id: this.itemCompilation.id,
           title: this.compilation.title,
           description: this.compilation.description,
           isVisible: this.compilation.isVisible,
           token: this.globalToken
-        }
-
-        axios.post('/api/compilation/create', {
-          user_id: this.user.id,
-          title: this.compilation.title,
-          description: this.compilation.description,
-          isVisible: this.compilation.isVisible,
-          token: this.globalToken
-        }).then(response => this.$emit('close-create-selection', obj, response.data))
+        }).then(response => this.$emit('close-create-selection', response.data))
       }
 
       this.compilation.title === '' ? this.validation.title = true : this.validation.title = false
@@ -121,16 +127,13 @@ export default {
         this.compilation.title = this.itemCompilation.title
         this.compilation.description = this.itemCompilation.description
         this.compilation.isVisible = this.itemCompilation.isVisible === 1 ? true : false
-        this.compilation.JK = this.itemCompilation.houses
+        this.compilation.JK = this.itemCompilation.values
       }
     }
   },
   created() {
     this.fillInput()
   },
-  updated() {
-    this.fillInput()
-  }
 }
 </script>
 

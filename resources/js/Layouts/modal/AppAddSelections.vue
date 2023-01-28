@@ -13,7 +13,8 @@
         <div class="flex flex-col">
           <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
             <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none m">{{ house.title }}</span>
-            <span class="border uppercase border-solid border-[#30CB49] text-[#30CB49] text-[14px] xxl:text-[12px] xl:text-[10px] px-2 xl:px-1.5 py-1.5 xl:py-1 rounded-[3px] leading-none">{{ house.info.status }}</span>
+            <span class="border uppercase border-solid border-[#30CB49] text-[#30CB49] text-[14px] xxl:text-[12px] xl:text-[10px] px-2 xl:px-1.5 py-1.5 xl:py-1 rounded-[3px] leading-none" v-if="house.created && !Number.isInteger(+house.created[0])">{{ house.created }}</span>
+            <span class="border uppercase border-solid border-[#E84680] text-[#E84680] text-[14px] xxl:text-[12px] xl:text-[10px] px-2 xl:px-1.5 py-1.5 xl:py-1 rounded-[3px] leading-none" v-else-if="house.created">{{ house.created }}</span>
           </div>
           <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none mt-2">{{ house.city }}, {{ house.area }}</span>
         </div>

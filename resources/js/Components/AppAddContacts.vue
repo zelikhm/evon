@@ -28,7 +28,7 @@
       <span class="text-[#8A8996]">{{ item.email }}</span>
     </div>
     <div class="flex gap-7 xxl:gap-5 xl:gap-4">
-<!--      <img @click="this.$emit('open-edit-contact', item)" src="../../assets/svg/pen_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 lg:w-6" alt="">-->
+      <img @click="this.$emit('open-edit-contact', item)" src="../../assets/svg/pen_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 lg:w-6" alt="">
       <img @click="deleteSupport(item)" src="../../assets/svg/bucket_icon_red.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 lg:w-6" alt="">
     </div>
   </div>

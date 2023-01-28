@@ -15,7 +15,7 @@ import { Link } from "@inertiajs/inertia-vue3"
          <div class="relative decription__head top-0 right-0 bg-white rounded-[10px]">
            <div class="p-6 xxl:p-5 xl:p-4 border__bottom">
              <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 mb-7 xxl:mb-5 xl:mb-4">
-               <img v-if="house.images.length > 0" :src="house.images[0].name" class="w-14 xxl:w-12 xl:w-8 h-14 xxl:h-12 xl:h-8 rounded-full" alt="">
+               <img v-if="house.isImage" :src="house.images[0].name" class="w-14 xxl:w-12 xl:w-8 h-14 xxl:h-12 xl:h-8 rounded-full" alt="">
                <img v-else src="../../assets/no-img-houses.jpg" class="w-14 xxl:w-12 xl:w-8 h-14 xxl:h-12 xl:h-8 rounded-full" alt="">
                <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5">
                  <Link :href="'/house/' + house.slug" class="text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] font-medium leading-none">{{ house.title }}</Link>
@@ -124,6 +124,11 @@ export default {
       if (this.house) {
         let minPrice = [],
             square = []
+        if (this.house.images.length > 0) {
+          this.house.isImage = true
+        } else {
+          this.house.isImage = false
+        }
 
         this.house.flats.forEach(item => {
           minPrice.push(item.price)
