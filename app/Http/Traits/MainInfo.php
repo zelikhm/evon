@@ -160,7 +160,9 @@ trait MainInfo
    */
 
   protected function getHouseOnId($house_id) {
-    return HouseModel::where('id', $house_id)->with(['info', 'supports', 'files', 'frames', 'images', 'news', 'flats'])->first();
+    $house = HouseModel::where('id', $house_id)->with(['info', 'supports', 'files', 'frames', 'images', 'news', 'flats'])->first();
+
+    return $house;
   }
 
   /**

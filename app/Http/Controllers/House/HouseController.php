@@ -423,18 +423,22 @@ class HouseController extends Controller
       if ($request->image_up) {
         $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
         $request->image_up->move(public_path('/storage/flat/'), $imageUp);
+        $imageUp = '/storage/flat/' . $imageUp;
       } else {
-        $imageUp = null;
+        $flat = FlatModel::where('id', $request->flat_id)->first();
+        $imageUp = $flat->imageUp;
       }
 
       if ($request->image_down) {
         $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
         $request->image_down->move(public_path('/storage/flat/'), $imageDown);
+        $imageDown = '/storage/flat/' . $imageDown;
       } else {
-        $imageDown = null;
+        $flat = FlatModel::where('id', $request->flat_id)->first();
+        $imageDown = $flat->imageDown;
       }
 
-      $flat = FlatModel::where('id', $request->flat_id)
+       FlatModel::where('id', $request->flat_id)
         ->update([
           'number' => $request->number,
           'square' => $request->square,
@@ -443,19 +447,9 @@ class HouseController extends Controller
           'status' => $request->status,
           'number_from_stairs' => $request->stairs,
           'price' => $request->price,
+          'imageUp' => $imageUp,
+          'imageDown' => $imageDown,
         ]);
-
-      FlatImagesModel::create([
-        'flat_id' => $request->flat_id,
-        'name' => $imageUp === null ? 'string' : '/storage/flat/' . $imageUp,
-        'category' => 0,
-      ]);
-
-      FlatImagesModel::create([
-        'flat_id' => $request->flat_id,
-        'name' => $imageDown === null ? 'string' : '/storage/flat/' . $imageDown,
-        'category' => 1,
-      ]);
 
       return response()->json($this->getHouse($request->house_id), 200);
     } else {
@@ -542,7 +536,7 @@ class HouseController extends Controller
       $imageName = null;
     }
 
-    $support = HouseSupportModel::create([
+    HouseSupportModel::create([
       'house_id' => $request->house_id,
       'avatar' => '/storage/support/' . $imageName,
       'name' => $request->name,
@@ -554,7 +548,7 @@ class HouseController extends Controller
       'updated_at' => Carbon::now()->addHour(3),
     ]);
 
-    return response()->json($support, 200);
+    return response()->json(HouseSupportModel::where('house_id', $request->house_id)->get(), 200);
 //      }
 //    } else {
 //      return response()->json('not auth', 401);
