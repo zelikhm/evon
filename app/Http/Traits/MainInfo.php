@@ -368,7 +368,7 @@ trait MainInfo
 
     foreach ($compilations as $compilation) {
       foreach ($compilation->values as $value) {
-        $house = $this->getHouseOnId($compilation->values[0]->house_id);
+        $house = $this->getHouseOnId($value->house_id);
         $house->image = count($house->images) > 0 ? $house->images[0] : null;
         $value->house = $house;
       }
