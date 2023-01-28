@@ -73,7 +73,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         </div>
         <div class="flex items-center justify-end flex-shrink-0">
           <button class="border__right h-[56px] xxl:h-[48px] xl:h-[40px] w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/pen_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+            <img @click="editFlat(item)" src="../../assets/svg/pen_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
           </button>
           <button @click="deleteFlat(item)" class="w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
             <img src="../../assets/svg/bucket_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
@@ -95,9 +95,6 @@ import { Link } from '@inertiajs/inertia-vue3'
 <!--      <img src="../../assets/svg/arrow_right_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">-->
 <!--    </div>-->
 <!--  </div>-->
-  <div class="my-10 xxl:my-8 xl:my-6 w-full gap-10 xxl:gap-8 xl:gap-6">
-    <button @click="addObject(1)" class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-white bg-[#E84680] rounded-[6px]">Продолжить</button>
-  </div>
 </template>
 
 <script>
@@ -132,6 +129,9 @@ export default {
     }
   },
   methods: {
+    editFlat(item) {
+      this.$emit('edit-flat', item)
+    },
     changeSelectStatus(status, item) {
       item.status = status.id
       item.statusActive = !item.statusActive

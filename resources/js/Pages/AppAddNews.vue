@@ -17,7 +17,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3">
             <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectJK, 'validate': !validate.JK}">
               <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[12px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">ЖК</span>
-              <div class="relative">
+              <div class="relative" :tabindex="tabindex" @blur="openSelectJK = false">
                 <div @click="openSelectJK = !openSelectJK" class="flex items-center justify-between cursor-pointer text-[#1E1D2D]  text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
                   <span>{{ selectJK }}</span>
                   <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectJK }" alt="">
@@ -68,7 +68,12 @@ export default {
   props: {
     houses: [],
     new: [],
-    user: []
+    user: [],
+    tabindex: {
+      type: Number,
+      required: false,
+      default: 0,
+    },
   },
   data() {
     return {

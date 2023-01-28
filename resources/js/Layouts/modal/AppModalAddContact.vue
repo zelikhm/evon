@@ -57,7 +57,7 @@
 
 <script>
 export default {
-  props: ['contact', 'isEdit'],
+  props: ['contact', 'isEdit', 'house'],
   data() {
     return {
       myPhoto: '',
@@ -76,8 +76,9 @@ export default {
   },
   methods: {
     addSupport() {
-      if (this.isEdit && this.contact) { // Редактирование контакта на редактировании ЖК
+      if (!this.isEdit && this.contact) { // Редактирование контакта на редактировании ЖК
         let formData = new FormData()
+        console.log('fafaf')
         formData.append('id', this.contact.id)
         formData.append('name', this.dataSupport.name)
         formData.append('phone', this.dataSupport.phone)
@@ -101,10 +102,33 @@ export default {
               url: '/api/house/editSupport',
               headers: {"Content-type": "multipart/form-data"},
               data: formData,
-            }).then(res => console.log(res.data))
+            }).then(res => this.$emit('close-add-contact'))
         }
 
+      } else if (!this.isEdit && !this.contact) { // Добавление контакта на редактировании ЖК
+        console.log(this.isEdit)
+        let formData = new FormData()
+        formData.append('house_id', this.house.id)
+        formData.append('name', this.dataSupport.name)
+        formData.append('phone', this.dataSupport.phone)
+        formData.append('email', this.dataSupport.email)
+        formData.append('status', this.dataSupport.status)
+        formData.append('link', this.dataSupport.link)
+        formData.append('avatar', this.$refs.file.files[0])
+        formData.append('token', this.globalToken)
+
+        axios({
+          method: 'post',
+          url: '/api/house/addedSupport',
+          headers: {"Content-type": "multipart/form-data"},
+          data: formData,
+        }).then(res => {
+          console.log(res)
+          this.$emit('close-add-contact', res.data)
+        })
+
       } else {
+        console.log('res')
         this.$emit('close-add-contact', this.dataSupport)
       }
     },

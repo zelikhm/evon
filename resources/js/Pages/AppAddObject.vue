@@ -1,9 +1,14 @@
 <template>
-  <app-modal-add-contact @close-add-contact="closeModalContact" v-if="modalAddContact" :contact="activeContact" :isEdit="isEdit" />
+  <app-modal-add-contact @close-add-contact="closeModalContact"
+                         v-if="modalAddContact" :contact="activeContact"
+                         :isEdit="isEdit"
+                         :house="house"
+  />
   <app-modal-add-apartments @close-add-apartments="closeAddApartments"
                             v-if="modalAddApatments"
                             :house="house"
                             :activeFrame="activeFrame"
+                            :selectFlat="selectFlat"
   />
   <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="closeAddFrame" :house="house" :isEdit="isEdit" :frame="frame" />
   <app-modal-notification
@@ -61,6 +66,7 @@
           <app-apartments @open-add-frame="openAddFrame"
                           :house="readyHouse"
                           @change-frame="changeFrame"
+                          @edit-flat="editFlat"
           />
         </div>
 
@@ -126,10 +132,16 @@ export default {
       isEdit: true,
       readyHouse: null,
       activeFrame: null,
-      frame: null
+      frame: null,
+      selectFlat: null
     }
   },
   methods: {
+    editFlat(data) {
+      this.modalAddApatments = true
+      this.selectFlat = data
+      console.log(this.selectFlat)
+    },
     openAddContact(data) {
       this.modalAddContact = !this.modalAddContact
       this.activeContact = data
@@ -142,6 +154,7 @@ export default {
     closeModalContact(data) {
       this.modalAddContact = false
       this.supports.push(data)
+      console.log(this.supports)
     },
     addAndContinue(house) {
       this.page = 1
@@ -170,17 +183,19 @@ export default {
         }
       })
 
-      data.frames.forEach(frame => {
-        if (frame.active === 1) {
-          frame.active = 0
-        }
+      if (data) {
+        data.frames.forEach(frame => {
+          if (frame.active === 1) {
+            frame.active = 0
+          }
 
-        if (frame.id === activeFrameId) {
-          frame.active = 1
-        }
-      })
+          if (frame.id === activeFrameId) {
+            frame.active = 1
+          }
+        })
+        this.readyHouse = data
 
-      this.readyHouse = data
+      }
     }
   },
   created() {
@@ -190,6 +205,9 @@ export default {
 
     if (lastItemLink.split('#').at(-1) === 'create') {
       this.page = 1
+      this.isEdit = false
+    } else if (lastItemLink.split('#').at(-1) === 'edit') {
+      this.page = 0
       this.isEdit = false
     }
   },

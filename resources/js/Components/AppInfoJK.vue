@@ -760,7 +760,6 @@ export default {
       this.selectRegion = this.house.area
       this.object.coordinates = this.house.latitude + ' ' + this.house.longitude
       this.selectType = this.house.info.type
-      console.log(this.house)
       this.selectDeadline = this.house.created
       this.object.floors = this.house.info.floors
       this.object.toSea = this.house.info.toSea
@@ -811,6 +810,11 @@ export default {
         return this.city
       }
     },
+  },
+  watch: {
+    house(oldSupports, newSupports) {
+      console.log(oldSupports, newSupports)
+    }
   }
 }
 

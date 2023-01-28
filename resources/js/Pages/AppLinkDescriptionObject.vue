@@ -4,12 +4,14 @@ import { Link } from '@inertiajs/inertia-vue3'
 
 <template>
   <header class="relative h-[13.4vw]">
-    <img class="w-full absolute top-0 left-0 h-full" src="../../assets/bg_links.jpg" alt="">
+    <img v-if="!user.company.banner" class="w-full absolute top-0 left-0 h-full" src="../../assets/bg_links.jpg" alt="">
+    <img v-else class="w-full absolute top-0 left-0 h-full" :src="user.company.banner" alt="">
     <div class="_container flex h-full">
       <div class="self-end flex items-center gap-7 xxl:gap-6 xl:gap-5 mb-10 xxl:mb-8 xl:mb-6">
-        <div class="flex-shrink-0 bg-black w-20 xxl:w-16 xl:w-12 h-20 xxl:h-16 xl:h-12  rounded-full flex items-center justify-center">
+        <div v-if="!user.company.image" class="flex-shrink-0 bg-black w-20 xxl:w-16 xl:w-12 h-20 xxl:h-16 xl:h-12 rounded-full flex items-center justify-center">
           <img class="w-10 xxl:w-8 xl:w-6" src="../../assets/svg/city_icon_white.svg" alt="">
         </div>
+        <img class="flex-shrink-0 bg-black w-20 xxl:w-16 xl:w-12 h-20 xxl:h-16 xl:h-12 rounded-full flex items-center justify-center" :src="user.company.image" v-else alt="">
         <div class="text-white flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
           <span class="text-[30px] xxl:text-[25px] xl:text-[20px] font-bold leading-none">{{ user.company.title }}</span>
           <span class="text-[15px] xxl:text-[13px] xl:text-[11px] leading-none">Агенство недвижимости</span>
@@ -27,14 +29,16 @@ import { Link } from '@inertiajs/inertia-vue3'
               <span class="font-semibold text-xl xxl:text-lg xl:text-sm lg:text-[18px]">{{ house.title }}</span>
               <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px]">
                 <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="house.info.status">{{ house.info.status }}</span>
-                <span class="flex items-center justify-center text-white font-semibold bg-[#FA8D50] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">акция</span>
+                <span class="flex items-center justify-center text-white font-semibold bg-[#FA8D50] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="house.promotion">акция</span>
+                <span class="flex items-center justify-center text-white font-semibold bg-[#E84680] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="Math.ceil(Math.abs(new Date().getTime() - new Date(house.created_at).getTime()) / (1000 * 3600 * 24) ) <= 30">новинки</span>
+                <span class="flex items-center justify-center text-white font-semibold bg-[#E84646] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="house.visible >= 50">популярное</span>
               </div>
             </div>
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">{{ house.city }}, {{ house.area }}</span>
           </div>
           <div class="flex items-center gap-1.5 xxl:gap-1 xl:gap-0.5">
             <img src="../../assets/svg/reload_icon.svg" class="h-4 xx:h-3.5 xl:h-3" alt="reload">
-            <span class="text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">Сегодня</span>
+            <span class="text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">{{ new Date(Date.parse(house.updated_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span>
           </div>
         </div>
       </div>
@@ -49,8 +53,11 @@ import { Link } from '@inertiajs/inertia-vue3'
             :loop="true"
             class="mySwiper w-full"
           >
-            <swiper-slide class="h-full w-full flex justify-center">
-              <img @click="album = true" class="w-full h-full" src="../../assets/slider_img.jpg" alt="">
+            <swiper-slide class="h-full flex justify-center" v-if="house.images.length > 0">
+              <img @click="album = true" class="h-full w-full object-cover" :src="house.images[0].name" alt="">
+            </swiper-slide>
+            <swiper-slide class="h-full flex justify-center" v-else>
+              <img class="h-full w-full object-cover" src="../../assets/no-img-house.jpg" alt="">
             </swiper-slide>
             <swiper-slide class="h-full w-full flex justify-center">
               <img @click="album = true" class="w-full h-full" src="../../assets/slider_img.jpg" alt="">
@@ -86,47 +93,16 @@ import { Link } from '@inertiajs/inertia-vue3'
               <img src="../../assets/svg/arrow_right_purple.svg" class="transition-all duration-300 w-3.5 xxl:w-3 xl:wp-2.5" alt="Стрелочка в право">
             </button>
           </div>
-          <div class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] pb-14 xxl:pb-10 xl:pb-8">
+          <div class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] pb-14 xxl:pb-10 xl:pb-8" v-if="arrayInfos.length > 0">
             <span class="font-medium">Инфраструктура</span>
             <div class="flex flex-wrap gap-3 xxl:gap-2.5 xl:gap-2m pt-4 xxl:pt-3 xl:pt-2.5">
-              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Спа</span>
-              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Сауна\хамам</span>
-              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Трансфер до пляжа</span>
-              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Паркинг</span>
-              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Открытый бассейн</span>
-              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Закрытый бассейн</span>
-              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Спортзал</span>
-              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5">Кинотеатр</span>
+              <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5" v-for="item in arrayInfos">{{ item.name }}</span>
             </div>
           </div>
           <div class="grid grid-cols-2 md:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4 pb-16 xxl:pb-12 xl:pb-10">
             <div class="border border-solid border-[#E5DFEE] p-7 xxl:p-5 xl:p-4 rounded-[12px]">
               <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px]">Дополнительные услуги</span>
               <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 pt-6 xxl:pt-5 xl:pt-4">
-                <div class="flex justify-between items-center">
-                  <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px]">Предоставляется ВНЖ</span>
-                  <div class="bg-[#30CB49] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 lg:h-4 lg:w-4 rounded-full flex items-center justify-center">
-                    <img src="../../assets/svg/check_icon.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-3" alt="">
-                  </div>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">Получение Гражданства</span>
-                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 lg:h-4 lg:w-4 rounded-full flex items-center justify-center">
-                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-3" alt="">
-                  </div>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">Возможен онлайн-показ</span>
-                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 lg:h-4 lg:w-4 rounded-full flex items-center justify-center">
-                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-3" alt="">
-                  </div>
-                </div>
-                <div class="flex justify-between items-center">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">Кадастр >75000$</span>
-                  <div class="bg-[#E84680] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 lg:h-4 lg:w-4 rounded-full flex items-center justify-center">
-                    <img src="../../assets/svg/exit_icon_white.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-3" alt="">
-                  </div>
-                </div>
                 <div class="flex justify-between items-center" v-for="dop in dops">
                   <span :class="{ disableColor: dop.active !== 1 }" class="text-base xxl:text-sm xl:text-xs">{{ dop.name }}</span>
                   <div v-if="dop.active === 1" class="bg-[#30CB49] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
@@ -257,11 +233,12 @@ import { Link } from '@inertiajs/inertia-vue3'
              <div class="flex flex-col sm:w-[500px]">
                <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3" v-for="item in flats.flats">
                  <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                   <img :src="'/storage/' + item.images[0].name" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
+                   <img v-if="item.images.length > 0" :src="'/storage/' + item.images[0].name" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
+                   <img v-else src="../../assets/no-img-houses.jpg" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
                    <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
                      <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
                        <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ item.square }} м</span>
-                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]" v-if="item.status === 'Акция'">акция</span>
+                       <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]" v-if="item.status == 0">акция</span>
                      </div>
                      <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Корпус 1, секция 1</span>
                    </div>
@@ -324,7 +301,10 @@ import { Link } from '@inertiajs/inertia-vue3'
               </div>
             </div>
           </div>
-          <iframe class="w-full h-[18vw] lg:h-[28vw] sm:h-[36vw] rounded-[10px] mb-10" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d156378.40517354145!2d20.983940554492182!3d52.235889311934415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sru!2spl!4v1672768266512!5m2!1sru!2spl" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          <GMapMap :center="center" :zoom="10" map-type-id="terrain" class="w-full h-[18vw] lg:h-[28vw] sm:h-[36vw] rounded-[10px] mb-10" :draggable="true" @click="handleClick"  ref="myMapRef" :click="true">
+            <GMapMarker :key="index" v-for="(m, index) in markers" :icon="'/images/icon-marker-map.svg'" :position="m.position" :clickable="true" :draggable="true">
+            </GMapMarker>
+          </GMapMap>
         </div>
       </div>
     </div>
@@ -347,7 +327,9 @@ export default {
   props: ['house', 'dops', 'infos', 'user'],
   data() {
     return {
+      center: null,
       album: false,
+      markers: [],
       selectLayout: '1 + 1',
       openSelectLayout: false,
       layouts: [
@@ -358,6 +340,7 @@ export default {
         { layout: '1 + 5', value: 5 },
       ],
       selectDate: 'дате',
+      arrayInfos: [],
       openDate: false,
       dates: [
         { date: 'дате', id: 1 },
@@ -396,6 +379,10 @@ export default {
   },
   created() {
     this.frames = this.house.frames
+    console.log(this.house)
+
+    this.center = {lat: +this.house.latitude, lng: +this.house.longitude}
+    this.markers.push({ position: this.center })
 
     this.frames.forEach((item, idx) => {
       if (idx === 0) {
@@ -421,6 +408,40 @@ export default {
 
     })
 
+    this.house.flats.forEach(item => {
+      if (item.status == 0) {
+        this.house.promotion = true
+        return
+      }
+
+      this.house.promotion = false
+    })
+
+    this.arrayInfos = []
+
+    if (this.house.info.info !== null) {
+      let info = this.house.info.info.replace(/[^\d]/g, ' '),
+          arrayInfo = info.split(' ')
+      for (let key of arrayInfo) {
+        if (key !== '') {
+          this.arrayInfos.push(this.infos.find(item => item.id === +key))
+        }
+      }
+    }
+
+    if (this.house.info.dop !== null) {
+      let dop = this.house.info.dop.replace(/[^\d]/g, ' '),
+          arrayDop = dop.split(' ')
+      for (let key of arrayDop) {
+        if (key !== '') {
+          this.dops.forEach(item => {
+            if (+key === item.id) {
+              item.active = 1
+            }
+          })
+        }
+      }
+    }
     // if (this.house.info.dop !== null) {
     //   for (let key of this.house.info.dop) {
     //     if (!+isNaN(key)) {
@@ -493,5 +514,8 @@ export default {
 </script>
 
 <style scoped>
-
+.disableColor {
+  color: #8A8996;
+}
 </style>
+
