@@ -2,7 +2,7 @@
   <div class="fixed z-[100] w-full h-full flex items-center justify-center">
     <div class="relative flex flex-col gap-5 xxl:gap-4 xl:gap-3 bg-white rounded-[12px] px-12 xxl:px-10 xl:px-8 py-8 xxl:py-6 xl:py-5 z-50 w-[34%] lg:w-[50%] md:w-[64%] sm:w-[90%] h-fit">
       <div class="relative flex justify-between items-center">
-        <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold leading-none">{{ selectFlat ? "Добавить" : "Редактировать" }} квартиру</h2>
+        <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold leading-none">Добавить квартиру</h2>
         <button @click="$emit('close-add-apartments')" class="relative w-4 h-4 z-50">
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] rotate-45"></span>
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] -rotate-45"></span>
@@ -48,11 +48,11 @@
             </div>
             <div v-if="openFloors" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px]">
               <span
-                v-for="(floor, idx) in house.info.floors" :key="idx"
+                v-for="(floor, idx) in house.info.floors " :key="idx"
                 @click="changeSelectFloors(floor)"
                 class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
               >
-                {{ floor }}
+                {{ floor - 1 }}
               </span>
             </div>
           </div>
@@ -172,7 +172,7 @@ export default {
         { layout: 'Duplex', value: 5 },
         { layout: 'Studia', value: 6 },
       ],
-      selectFloors: '1',
+      selectFloors: '0',
       openFloors: false,
       floors: [
         { floor: '1', value: 1},
@@ -269,7 +269,7 @@ export default {
       this.openSelectLayout = false
     },
     changeSelectFloors(floor) {
-      this.selectFloors = floor
+      this.selectFloors = floor - 1
       this.openFloors = false
     },
     changeSelectStatus(status) {

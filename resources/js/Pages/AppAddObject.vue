@@ -1,7 +1,8 @@
 <template>
   <app-modal-add-contact @close-add-contact="closeModalContact"
-                         v-if="modalAddContact" :contact="activeContact"
-                         :isEdit="isEdit"
+                         @close-edit-contact="closeModalBeforeEdit"
+                         v-if="modalAddContact"
+                         :contact="contact"
                          :house="house"
   />
   <app-modal-add-apartments @close-add-apartments="closeAddApartments"
@@ -25,6 +26,7 @@
             <div class="bg-[#F6F3FA] h-fit p-7 xxl:p-5 xl:p-4 rounded-[6px]">
               <div class="flex flex-col gap-3 xxl:gap-2.5 xl:gap-2">
                 <div @click="openPage(0)" :class="{ 'menu-add-obj': page === 0}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">Информация о ЖК</div>
+                <div @click="openPage(4)" :class="{ 'menu-add-obj': page === 4}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">Контакты отдела продаж</div>
                 <div @click="openPage(1)" :class="{ 'menu-add-obj': page === 1}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">Корпуса и квартиры</div>
                 <div @click="openPage(2)" :class="{ 'menu-add-obj': page === 2}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">Фото</div>
                 <div @click="openPage(3)" :class="{ 'menu-add-obj': page === 3}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">Файлы</div>
@@ -82,6 +84,15 @@
           />
         </div>
 
+        <div v-if="page === 4">
+          <app-add-contacts
+              :house="readyHouse"
+              :supports="supports"
+              @open-add-contact="openAddContact"
+              @open-edit-contact="openEditContact"
+          />
+        </div>
+
       </div>
     </div>
 
@@ -100,6 +111,7 @@ import AppModalAddApartments from "../Layouts/modal/AppModalAddApartments.vue"
 import AppModalAddFrame from "../Layouts/modal/AppModalAddFrame.vue"
 import AppModalNotification from "@/Layouts/modal/AppModalNotification.vue"
 import AppAddFiles from "@/Components/AppAddFiles.vue";
+import AppAddContacts from "@/Components/AppAddContacts.vue";
 
 
 export default {
@@ -133,7 +145,8 @@ export default {
       readyHouse: null,
       activeFrame: null,
       frame: null,
-      selectFlat: null
+      selectFlat: null,
+      contact: null
     }
   },
   methods: {
@@ -142,9 +155,13 @@ export default {
       this.selectFlat = data
       console.log(this.selectFlat)
     },
-    openAddContact(data) {
+    openAddContact() {
+      this.contact = null
       this.modalAddContact = !this.modalAddContact
-      this.activeContact = data
+    },
+    openEditContact(data) {
+      this.modalAddContact = !this.modalAddContact
+      this.contact = data
     },
     openPage(id) {
       if (!this.isMainPage) {
@@ -154,10 +171,13 @@ export default {
     closeModalContact(data) {
       this.modalAddContact = false
       this.supports.push(data)
-      console.log(this.supports)
+    },
+    closeModalBeforeEdit(data) {
+      this.modalAddContact = false
+      this.supports = data
     },
     addAndContinue(house) {
-      this.page = 1
+      this.page = 4
       this.createHouse = house
     },
     closeAddFrame(data) {
@@ -204,14 +224,18 @@ export default {
     lastItemLink === 'addedHouse' ? this.isMainPage = true : this.isMainPage = false
 
     if (lastItemLink.split('#').at(-1) === 'create') {
-      this.page = 1
+      this.page = 4
       this.isEdit = false
     } else if (lastItemLink.split('#').at(-1) === 'edit') {
       this.page = 0
       this.isEdit = false
     }
+    if (this.house) {
+      this.supports = this.house.supports
+    }
   },
   components: {
+    AppAddContacts,
     AppAddFiles,
     AppHeader,
     AppFooter,

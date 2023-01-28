@@ -15,14 +15,16 @@ import { Link } from "@inertiajs/inertia-vue3"
          <div class="relative decription__head top-0 right-0 bg-white rounded-[10px]">
            <div class="p-6 xxl:p-5 xl:p-4 border__bottom">
              <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 mb-7 xxl:mb-5 xl:mb-4">
-               <img :src="'/storage/' + house.image" class="w-14 xxl:w-12 xl:w-8 h-14 xxl:h-12 xl:h-8 rounded-full" alt="">
+               <img v-if="house.images.length > 0" :src="house.images[0].name" class="w-14 xxl:w-12 xl:w-8 h-14 xxl:h-12 xl:h-8 rounded-full" alt="">
+               <img v-else src="../../assets/no-img-houses.jpg" class="w-14 xxl:w-12 xl:w-8 h-14 xxl:h-12 xl:h-8 rounded-full" alt="">
                <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5">
                  <Link :href="'/house/' + house.slug" class="text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] font-medium leading-none">{{ house.title }}</Link>
                  <span class="text-[#8A8996] text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ house.city }}, {{ house.area }}</span>
                </div>
              </div>
              <div class="flex gap-2.5 xxl:gap-2 xl:gap-1.5">
-               <span class="text-white text-[14px] xxl:text-[12px] xl:text-[10px] leading-none bg-[#30CB49] px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 rounded-[3px]">{{ house.status }}</span>
+               <span class="text-white text-[14px] xxl:text-[12px] xl:text-[10px] leading-none bg-[#30CB49] px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 rounded-[3px]" v-if="house.created && !Number.isInteger(+house.created[0])">{{ house.created }}</span>
+               <span class="text-white text-[14px] xxl:text-[12px] xl:text-[10px] leading-none bg-[#30CB49] px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 rounded-[3px]" v-else-if="house.created">{{ house.created }}</span>
 <!--               <span class="border border-solid border-[#E5DFEE] text-[#8A8996] text-[14px] xxl:text-[12px]  xl:text-[10px] leading-none px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 rounded-[3px]">Договор займа</span>-->
              </div>
            </div>

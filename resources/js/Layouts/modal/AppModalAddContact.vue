@@ -11,14 +11,14 @@
       <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
         <div>
           <div class="relative w-20 xxl:w-16 xl:w-14 h-20 xxl:h-16 xl:h-14 rounded-full">
-            <img v-if="avatar" class="absolute w-full h-full rounded-full" :src="myPhoto" alt="">
-            <button v-if="avatar" @click="deletePhoto" class="absolute rounded-full bg-[#E84680] z-10 top-0 left-0 h-5 xxl:h-4.5 xl:h-4 w-5 xxl:w-4.5 xl:w-4">
+            <img v-if="myPhoto" class="absolute w-full h-full rounded-full" :src="myPhoto" alt="">
+            <button v-if="myPhoto" @click="deletePhoto" class="absolute rounded-full bg-[#E84680] z-10 top-0 left-0 h-5 xxl:h-4.5 xl:h-4 w-5 xxl:w-4.5 xl:w-4">
               <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-white h-[1px] w-[60%]"></span>
               <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-white h-[1px] w-[60%]"></span>
             </button>
-            <div class="avatar__contact w-full h-full rounded-full">
+            <div v-if="!myPhoto" class="avatar__contact w-full h-full rounded-full">
               <div class="absolute rounded-full w-full h-full top-0 left-0">
-                <label for="avatar" :class="{'-z-10': avatar}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-full">
+                <label for="avatar" :class="{'-z-10': myPhoto}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-full">
                   <img src="../../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
                 </label>
                 <input class="w-full h-full rounded-full opacity-0 absolute top-0 left-0 pointer-events-none" id="avatar" type="file" ref="file" @change="avatarContact">
@@ -47,8 +47,12 @@
         <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="soc_contact">Языки</label>
         <input v-model="dataSupport.link" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="soc_contact">
       </div>
-      <button class="login__btn--bg rounded-[5px] w-full py-5 xxl:py-4 xl:py-3" @click="addSupport">
-        <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">{{ contact ? 'Редактировать' : 'Добавить' }}</span>
+      <span class="text-[red] text-center text-lg xxl:text-[15px] xl:text-[13px] leading-none" v-if="error">Не вся информация о контакте заполнена!</span>
+      <button class="login__btn--bg rounded-[5px] w-full py-5 xxl:py-4 xl:py-3" @click="addSupport" v-if="!contact">
+        <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">Добавить</span>
+      </button>
+      <button class="login__btn--bg rounded-[5px] w-full py-5 xxl:py-4 xl:py-3" @click="editSupport" v-else>
+        <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">Редактировать</span>
       </button>
     </div>
     <div @click="$emit('close-add-contact')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
@@ -72,65 +76,61 @@ export default {
         link: "",
         token: this.globalToken
       },
+      error: false
     }
   },
   methods: {
     addSupport() {
-      if (!this.isEdit && this.contact) { // Редактирование контакта на редактировании ЖК
-        let formData = new FormData()
-        console.log('fafaf')
-        formData.append('id', this.contact.id)
-        formData.append('name', this.dataSupport.name)
-        formData.append('phone', this.dataSupport.phone)
-        formData.append('email', this.dataSupport.email)
-        formData.append('status', this.dataSupport.status)
-        formData.append('link', this.dataSupport.link)
-        formData.append('token', this.globalToken)
+      let formData = new FormData()
+      formData.append('house_id', this.house.id)
+      formData.append('avatar', this.dataSupport.avatar)
+      formData.append('name', this.dataSupport.name)
+      formData.append('phone', this.dataSupport.phone)
+      formData.append('email', this.dataSupport.email)
+      formData.append('status', this.dataSupport.status)
+      formData.append('link', this.dataSupport.link)
+      formData.append('token', this.globalToken)
 
+      axios({
+        method: 'post',
+        url: '/api/house/addedSupport',
+        headers: {"Content-type": "multipart/form-data"},
+        data: formData,
+      }).then(res => {
+        this.$emit('close-add-contact', res.data)
+      }).catch(e => {
+        this.error = true
+      })
+    },
+    editSupport() {
+      let formData = new FormData()
 
-        if (this.$refs.file.files[0]) {
-          formData.append('avatar', this.$refs.file.files[0])
-          add()
-        } else {
-          formData.append('avatar', 'not')
-          add()
-        }
-
-        function add() {
-            axios({
-              method: 'post',
-              url: '/api/house/editSupport',
-              headers: {"Content-type": "multipart/form-data"},
-              data: formData,
-            }).then(res => this.$emit('close-add-contact'))
-        }
-
-      } else if (!this.isEdit && !this.contact) { // Добавление контакта на редактировании ЖК
-        console.log(this.isEdit)
-        let formData = new FormData()
-        formData.append('house_id', this.house.id)
-        formData.append('name', this.dataSupport.name)
-        formData.append('phone', this.dataSupport.phone)
-        formData.append('email', this.dataSupport.email)
-        formData.append('status', this.dataSupport.status)
-        formData.append('link', this.dataSupport.link)
+      if (this.$refs.file) {
+        console.log('file')
         formData.append('avatar', this.$refs.file.files[0])
-        formData.append('token', this.globalToken)
-
-        axios({
-          method: 'post',
-          url: '/api/house/addedSupport',
-          headers: {"Content-type": "multipart/form-data"},
-          data: formData,
-        }).then(res => {
-          console.log(res)
-          this.$emit('close-add-contact', res.data)
-        })
-
       } else {
-        console.log('res')
-        this.$emit('close-add-contact', this.dataSupport)
+        console.log('not')
+        formData.append('avatar', 'not')
       }
+
+      formData.append('id', this.contact.id)
+      formData.append('name', this.dataSupport.name)
+      formData.append('phone', this.dataSupport.phone)
+      formData.append('email', this.dataSupport.email)
+      formData.append('status', this.dataSupport.status)
+      formData.append('link', this.dataSupport.link)
+      formData.append('token', this.globalToken)
+
+      axios({
+        method: 'post',
+        url: '/api/house/editSupport',
+        headers: {"Content-type": "multipart/form-data"},
+        data: formData,
+      }).then(res => {
+        this.$emit('close-edit-contact', res.data)
+      }).catch(e => {
+        this.error = true
+      })
     },
     avatarContact(e) {
       this.dataSupport.image_front = URL.createObjectURL(e.target.files[0])
@@ -146,12 +146,12 @@ export default {
     }
   },
   created() {
-    console.log(this.isEdit)
     if (this.contact) {
       this.dataSupport.name = this.contact.name
       this.dataSupport.status = this.contact.status
       this.dataSupport.phone = this.contact.phone
       this.dataSupport.email = this.contact.phone
+      this.myPhoto = this.contact.avatar
       this.dataSupport.link = this.contact.link
     }
   }
