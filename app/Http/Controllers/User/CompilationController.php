@@ -155,13 +155,28 @@ class CompilationController extends Controller
 
     if ($request->token === env('TOKEN')) {
 
-      $compl = CompilationModel::where('id', $request->id)->update([
+       CompilationModel::where('id', $request->id)->update([
         'title' => $request->title,
         'description' => $request->description,
         'isVisible' => $request->isVisible,
       ]);
 
-      return response()->json($compl, 200);
+      $compilations = $this->getCompilations($request->user_id);
+
+      if(count($compilations) > 0) {
+
+        foreach ($compilations as $compilation) {
+          if(count($compilation->values) > 0) {
+            $house = $this->getHouseOnId($compilation->values[0]->house_id);
+            $compilation->image = count($house->images) > 0 ? $house->images[0] : null;;
+          } else {
+            $compilation->image = null;
+          }
+
+        }
+      }
+
+      return response()->json($compilations, 200);
     } else {
       return response()->json('not auth', 401);
     }
