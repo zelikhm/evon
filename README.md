@@ -317,6 +317,7 @@ path create \ [post] / поля:
 path edit \ [post] / поля:
 
 - id - айди подборки
+- user_id - Юзер Айди
 - title - Заголовок
 - description - Комментарий
 - isVisible - Показывать местоположение (true\false) - default false
