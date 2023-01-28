@@ -29,7 +29,8 @@
           >
             <div class="flex justify-between items-center mb-3 xxl:mb-2.5 xl:mb-2">
               <div class="flex gap-5 xxl:gap-4 xl:gap-3 items-center">
-                <img :src="'/storage/' + house.image" class="w-[70px] xxl:w-[60px] xl:w-[50px] h-[70px] xl:h-[60px] xl:h-[50px] rounded-[3px]" alt="">
+                <img v-if="house.images[0].length > 0" :src="house.images[0].name" class="w-[70px] xxl:w-[60px] xl:w-[50px] h-[70px] xl:h-[60px] xl:h-[50px] rounded-[3px]" alt="">
+                <img v-else src="../../../assets/no-img-houses.jpg" class="w-[70px] xxl:w-[60px] xl:w-[50px] h-[70px] xl:h-[60px] xl:h-[50px] rounded-[3px]" alt="">
                 <div class="flex flex-col gap-3 xxl:gap-2.5 xl:gap-2">
                   <span class="text-[#1E1D2D] font-medium text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">{{ house.title }}</span>
                   <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ house.city }}, {{ house.area }}</span>

@@ -105,14 +105,15 @@ export default {
     editSupport() {
       let formData = new FormData()
 
-      if (this.$refs.file) {
+      if (this.avatar) {
         console.log('file')
-        formData.append('avatar', this.$refs.file.files[0])
+        formData.append('avatar', this.dataSupport.avatar)
       } else {
         console.log('not')
         formData.append('avatar', 'not')
       }
 
+      formData.append('house_id', this.house.id)
       formData.append('id', this.contact.id)
       formData.append('name', this.dataSupport.name)
       formData.append('phone', this.dataSupport.phone)
@@ -129,6 +130,7 @@ export default {
       }).then(res => {
         this.$emit('close-edit-contact', res.data)
       }).catch(e => {
+        console.log(e)
         this.error = true
       })
     },

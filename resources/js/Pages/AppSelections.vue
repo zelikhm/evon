@@ -8,6 +8,7 @@
                          @close-create-selection="closeCreateSelection"
                          @close-selection="closeSelection"
                          :openSideBar="openSideBar"
+                         v-if="openCreateSelection"
                          :openSelection="openCreateSelection"
                          :itemCompilation="itemCompilation"
   />
@@ -23,8 +24,8 @@
 <!--        <button class="login__btn&#45;&#45;bg text-white text-base xxl:text-sm xl:text-xs px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5 rounded-[3px] leading-none">Создать подборку</button>-->
       </div>
       <div class="grid grid-cols-2 lg:grid-cols-1 gap-x-10 gap-y-4 mt-8 xxl:mt-7 xl:mt-6 mb-28 xxl:mb-24 xl:mb-20">
-        <div class="contact__selling grid__selection-block rounded-[10px]" v-for="(item, idx) in compilation">
-          <img class="p-2.5 xxl:p-2 xl:p-1.5 w-full h-[8.5vw] lg:h-[17vw] sm:h-full rounded-[3px]" v-if="item.house.images.length > 0" :src="item.house.images[0].name" alt="">
+        <div class="contact__selling grid__selection-block rounded-[10px]" v-for="(item, idx) in compilationReady">
+          <img class="p-2.5 xxl:p-2 xl:p-1.5 w-full h-[8.5vw] lg:h-[17vw] sm:h-full rounded-[3px] object-cover" v-if="item.image" :src="item.image.name" alt="">
           <img class="p-2.5 xxl:p-2 xl:p-1.5 w-full h-[8.5vw] lg:h-[17vw] sm:h-full rounded-[3px]" v-else src="../../assets/no-img-houses.jpg" alt="">
           <div class="flex items-center">
             <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5 w-full py-2.5 xxl:py-2 xl:py-1.5 pl-2.5 xxl:pl-2 xl:pl-1.5 pr-20 xxl:pr-16 xl:pr-12 md:pr-2.5">
@@ -82,7 +83,9 @@ export default {
       deleteConfirm: false,
       submitSelection: false,
       link: null,
-      itemCompilation: null
+      isOpenCreateSelections: false,
+      itemCompilation: null,
+      compilationReady: []
     }
   },
   methods: {
@@ -96,10 +99,10 @@ export default {
       this.itemCompilation = item
       this.openSelection()
     },
-    closeCreateSelection(obj, id) {
+    closeCreateSelection(data) {
+      this.compilationReady = data
       this.openSideBar = false
-      obj.id = id
-      this.compilation.push(obj)
+
       setTimeout(() => {
         this.openCreateSelection = false
       }, 500)
@@ -117,9 +120,9 @@ export default {
         token: this.globalToken
       })
 
-      this.compilation.forEach((i, idx) => {
+      this.compilationReady.forEach((i, idx) => {
         if (i.id === item.id) {
-          this.compilation.splice(idx, 1)
+          this.compilationReady.splice(idx, 1)
         }
       })
     },
@@ -145,7 +148,9 @@ export default {
     }
   },
   created() {
-    this.compilation.forEach(item => {
+    this.compilationReady = this.compilation
+
+    this.compilationReady.forEach(item => {
       item.isEdit = false
     })
   },

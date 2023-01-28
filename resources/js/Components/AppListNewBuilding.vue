@@ -581,27 +581,16 @@ export default {
 
     this.readyHouses.forEach(house => {
       house.time = Date.parse(house.created_at)
+      this.readyHouses = this.readyHouses.sort((a, b) => b.time - a.time)
+
 
       let arr = [],
           squareFlats = []
-
-      house.readyDops = []
-
-      if (house.info.dop !== null) {
-        for (let key of house.info.dop) {
-          if (!+isNaN(key)) {
-            house.readyDops.push(dops.find(item => item.id === +key))
-          }
-        }
-      }
-
-      this.readyHouses = this.readyHouses.sort((a, b) => b.time - a.time)
 
       house.flats.forEach(item => {
         arr.push(item.price)
         squareFlats.push(item.square)
       })
-
 
       house.minPrice = Math.min(...arr)
       house.maxPrice = Math.max(...arr)
