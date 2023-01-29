@@ -136,8 +136,6 @@ class CompilationController extends Controller
 
     $compilation = CompilationModel::where('id', $id - 10000)->with(['values', 'user', 'company'])->firstOrFail();
 
-    dd($compilation);
-
     return Inertia::render('AppLinkDescriptionObject', [
       'house' => $house,
       'compilation' => $compilation,
