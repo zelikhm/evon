@@ -1,5 +1,7 @@
 <script setup>
-import { Link } from '@inertiajs/inertia-vue3'
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 </script>
 
 <template>
@@ -316,12 +318,9 @@ import { Link } from '@inertiajs/inertia-vue3'
 
 <script>
 import AppFooter from "../Layouts/AppFooter.vue"
-import AppModalAlbum from "@/Layouts/modal/AppModalAlbum.vue"
+import AppModalAlbum from "../Layouts/modal/AppModalAlbum.vue"
 
 import { Swiper, SwiperSlide } from "swiper/vue";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper";
 
 export default {
