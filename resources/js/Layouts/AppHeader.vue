@@ -65,7 +65,6 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
             </div>
             <change-language />
             <div class="flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
-              <img :src="'/storage/user/' + user.image" class="h-9 xxl:h-7 xl:h-6 w-9 xxl:w-7 xl:w-6 object-cover rounded-full" alt="avatar">
               <button @click="openProfile" class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
                 <span class="text-white text-lg xxl:text-sm xl:text-xs leading-none whitespace-nowrap">{{ user.first_name + ' ' + user.last_name }}</span>
                 <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелка вниз">

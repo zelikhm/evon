@@ -4,11 +4,11 @@ import { Link } from '@inertiajs/inertia-vue3'
 
 <template>
   <header class="relative h-[13.4vw]">
-    <img v-if="!user.company.banner" class="w-full absolute top-0 left-0 h-full" src="../../assets/bg_links.jpg" alt="">
+    <img v-if="!user.company.banner || !user.company" class="w-full absolute top-0 left-0 h-full" src="../../assets/bg_links.jpg" alt="">
     <img v-else class="w-full absolute top-0 left-0 h-full" :src="user.company.banner" alt="">
     <div class="_container flex h-full">
       <div class="self-end flex items-center gap-7 xxl:gap-6 xl:gap-5 mb-10 xxl:mb-8 xl:mb-6">
-        <div v-if="!user.company.image" class="flex-shrink-0 bg-black w-20 xxl:w-16 xl:w-12 h-20 xxl:h-16 xl:h-12 rounded-full flex items-center justify-center">
+        <div v-if="!user.company.image || !user.company" class="flex-shrink-0 bg-black w-20 xxl:w-16 xl:w-12 h-20 xxl:h-16 xl:h-12 rounded-full flex items-center justify-center">
           <img class="w-10 xxl:w-8 xl:w-6" src="../../assets/svg/city_icon_white.svg" alt="">
         </div>
         <img class="flex-shrink-0 bg-black w-20 xxl:w-16 xl:w-12 h-20 xxl:h-16 xl:h-12 rounded-full flex items-center justify-center" :src="user.company.image" v-else alt="">
