@@ -14,7 +14,7 @@
   <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="closeAddFrame" :house="house" :isEdit="isEdit" :frame="frame" />
   <app-modal-notification
     class="left-[2vw] transition-all duration-1000"
-    :class="{'-left-full': !openNotification}"
+    :class="{'-left__full': !openNotification}"
     @close-notification="openNotification = false"
   />
   <app-header :user="user" />

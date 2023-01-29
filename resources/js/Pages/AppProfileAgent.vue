@@ -2,7 +2,7 @@
   <app-header :user="userHeader" />
   <app-modal-notification
     class="left-[2vw] transition-all duration-1000"
-    :class="{'-left-full': !openNotification}"
+    :class="{'-left__full': !openNotification}"
     @close-notification="openNotification = !openNotification"
     :text="text"
   />

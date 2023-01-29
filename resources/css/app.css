@@ -159,7 +159,6 @@ input::placeholder {
   border-top: 1px solid #fff;
 }
 
-
 .translate__x__0 {
   transform: translateX(0);
 }
@@ -175,6 +174,10 @@ input::placeholder {
 
 .white__bg {
   box-shadow: 0px 5px 80px rgba(52, 23, 94, 0.08);
+}
+
+.-left__full {
+  left: -100% !important;
 }
 
 /*****************HEADER*******************/
