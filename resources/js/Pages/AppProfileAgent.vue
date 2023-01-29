@@ -159,6 +159,7 @@ export default {
     saveEdit() {
 
       let formData = new FormData()
+      console.log(this.$refs.user_avatar.files[0])
 
       formData.append('user_id', this.user.id)
       formData.append('first_name', this.profile.name)
@@ -169,6 +170,7 @@ export default {
       formData.append('image', this.$refs.user_avatar.files[0])
       formData.append('email', this.profile.email)
       formData.append('token', this.globalToken)
+
 
       axios({
         method: 'post',
