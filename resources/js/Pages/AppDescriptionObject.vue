@@ -237,7 +237,7 @@ export default {
       map: false,
       flagFavorite: null,
       mainPhotos: [],
-      chess: false
+      chess: true
     }
   },
   methods: {

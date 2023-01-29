@@ -128,7 +128,7 @@ export default {
     },
     onModalWithLink(item) {
       this.submitSelection = true
-      this.link = `${document.location.protocol}//${document.location.host}/compilation/${10000 + item.id}`
+      this.link = `${document.location.protocol}//${document.location.host}/profile/compilation/${10000 + item.id}`
     },
     editComment(item) {
       item.isEdit = !item.isEdit

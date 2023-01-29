@@ -1,19 +1,21 @@
 <script setup>
-import { Link } from '@inertiajs/inertia-vue3'
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 </script>
 
 <template>
   <header class="relative h-[13.4vw]">
-    <img v-if="!user.company.banner" class="w-full absolute top-0 left-0 h-full" src="../../assets/bg_links.jpg" alt="">
-    <img v-else class="w-full absolute top-0 left-0 h-full" :src="user.company.banner" alt="">
+    <img v-if="compilation.company === null" class="w-full absolute top-0 left-0 h-full 1" src="../../assets/bg_links.jpg" alt="">
+    <img v-else class="w-full absolute top-0 left-0 h-full" :src="compilation.company.banner" alt="">
     <div class="_container flex h-full">
       <div class="self-end flex items-center gap-7 xxl:gap-6 xl:gap-5 mb-10 xxl:mb-8 xl:mb-6">
-        <div v-if="!user.company.image" class="flex-shrink-0 bg-black w-20 xxl:w-16 xl:w-12 h-20 xxl:h-16 xl:h-12 rounded-full flex items-center justify-center">
+        <div v-if="compilation.company === null" class="flex-shrink-0 bg-black w-20 xxl:w-16 xl:w-12 h-20 xxl:h-16 xl:h-12 rounded-full flex items-center justify-center">
           <img class="w-10 xxl:w-8 xl:w-6" src="../../assets/svg/city_icon_white.svg" alt="">
         </div>
-        <img class="flex-shrink-0 bg-black w-20 xxl:w-16 xl:w-12 h-20 xxl:h-16 xl:h-12 rounded-full flex items-center justify-center" :src="user.company.image" v-else alt="">
+        <img class="flex-shrink-0 bg-black w-20 xxl:w-16 xl:w-12 h-20 xxl:h-16 xl:h-12 rounded-full flex items-center justify-center" v-else :src="compilation.company.image" alt="">
         <div class="text-white flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
-          <span class="text-[30px] xxl:text-[25px] xl:text-[20px] font-bold leading-none">{{ user.company.title }}</span>
+          <span class="text-[15px] xxl:text-[13px] xl:text-[11px] leading-none" v-if="compilation.company !== null">{{ compilation.company.title }}</span>
           <span class="text-[15px] xxl:text-[13px] xl:text-[11px] leading-none">Агенство недвижимости</span>
         </div>
       </div>
@@ -316,16 +318,13 @@ import { Link } from '@inertiajs/inertia-vue3'
 
 <script>
 import AppFooter from "../Layouts/AppFooter.vue"
-import AppModalAlbum from "@/Layouts/modal/AppModalAlbum.vue"
+import AppModalAlbum from "../Layouts/modal/AppModalAlbum.vue"
 
 import { Swiper, SwiperSlide } from "swiper/vue";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { Navigation, Pagination} from "swiper";
+import { Navigation, Pagination } from "swiper";
 
 export default {
-  props: ['house', 'dops', 'infos', 'user'],
+  props: ['house', 'dops', 'infos', 'user', 'compilation'],
   data() {
     return {
       center: null,
@@ -379,8 +378,8 @@ export default {
     }
   },
   created() {
+    console.log(this.compilation)
     this.frames = this.house.frames
-    console.log(this.house)
 
     this.center = {lat: +this.house.latitude, lng: +this.house.longitude}
     this.markers.push({ position: this.center })

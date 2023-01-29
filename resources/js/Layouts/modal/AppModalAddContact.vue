@@ -97,6 +97,7 @@ export default {
         headers: {"Content-type": "multipart/form-data"},
         data: formData,
       }).then(res => {
+        console.log(res.data)
         this.$emit('close-add-contact', res.data)
       }).catch(e => {
         this.error = true

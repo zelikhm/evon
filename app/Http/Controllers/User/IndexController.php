@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Builder\HouseSupportModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -39,9 +40,10 @@ class IndexController extends Controller
   {
     if ($request->token === env('TOKEN')) {
 
-      if($request->image !== '') {
+      if($request->image !== 'undefined') {
         $imageName = time() . '.' . $request->image->getClientOriginalName();
         $request->image->move(public_path('/storage/user'), $imageName);
+        $imageName = '/storage/user/' . $imageName;
       } else {
        $user = User::where('id', $request->user_id)->first();
        $imageName = $user->image;

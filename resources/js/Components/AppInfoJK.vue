@@ -706,6 +706,7 @@ export default {
 
     this.supportsReady = this.supports
 
+    console.log(this.house)
     if (this.house !== undefined) {
       this.object.title = this.house.title
       this.object.description = this.house.description
@@ -729,8 +730,10 @@ export default {
       this.setMarker()
 
       if (this.house.info.info !== null) {
-        for (let key of this.house.info.info) {
-          if (!+isNaN(key)) {
+        let info = this.house.info.info.replace(/[^\d]/g, ' '),
+            arrayInfo = info.split(' ')
+        for (let key of arrayInfo) {
+          if (key !== '') {
             this.object.info.push(this.infos.find(item => item.id === +key))
             this.valueSelectInfrastructure.push(this.infos.find(item => item.id === +key).name)
           }
@@ -738,8 +741,10 @@ export default {
       }
 
       if (this.house.info.dop !== null) {
-        for (let key of this.house.info.dop) {
-          if (!+isNaN(key)) {
+        let dop = this.house.info.dop.replace(/[^\d]/g, ' '),
+            arrayDop = dop.split(' ')
+        for (let key of arrayDop) {
+          if (key !== '') {
             this.object.dop.push(this.dops.find(item => item.id === +key))
             this.valueSelectServices.push(this.dops.find(item => item.id === +key).name)
           }

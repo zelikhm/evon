@@ -112,6 +112,12 @@ class HouseController extends Controller
       'updated_at' => Carbon::now()->addHour(3),
     ]);
 
+    $house = $this->getHouseSlug($slug);
+
+    if($house->info === null) {
+      return redirect(404);
+    }
+
     return Inertia::render('AppDescriptionObject', [
       'house' => $this->getHouseSlug($slug),
       'dops' => $this->getDop(),
@@ -178,7 +184,6 @@ class HouseController extends Controller
 
   public function create(Request $request)
   {
-
     if ($request->token === env('TOKEN')) {
       $house = HouseModel::create([
         'user_id' => $request->user_id,
@@ -235,6 +240,7 @@ class HouseController extends Controller
         $str1 = null;
       }
 
+
       HouseCharacteristicsModel::create([
         'house_id' => $house->id,
         'exclusive' => $request->exclusive,
@@ -242,12 +248,12 @@ class HouseController extends Controller
         'type' => $request->type,
         'dop' => $str1,
         'info' => $str,
-        'toSea' => $request->toSea,
-        'toSchool' => $request->toSchool,
-        'toShop' => $request->toShop,
-        'toPark' => $request->toPark,
-        'toBus' => $request->toBus,
-        'toChildrenSchool' => $request->toChildrenSchool,
+        'toSea' => is_string($request->toSea) ? null : $request->toSea,
+        'toSchool' => is_string($request->toSchool) ? null : $request->toSchool,
+        'toShop' => is_string($request->toShop) ? null : $request->toShop,
+        'toPark' => is_string($request->toPark) ? null : $request->toPark,
+        'toBus' => is_string($request->toBus) ? null : $request->toBus,
+        'toChildrenSchool' => is_string($request->toChildrenSchool) ? null : $request->toChildrenSchool,
         'count_flat' => $request->count_flat,
         'created_at' => Carbon::now()->addHour(3),
         'updated_at' => Carbon::now()->addHour(3),
@@ -265,25 +271,26 @@ class HouseController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function editHouse(Request $request) {
+  public function editHouse(Request $request)
+  {
 
     if ($request->token === env('TOKEN')) {
 
       $house = HouseModel::where('id', $request->house_id)
         ->update([
-        'title' => $request->title,
-        'description' => $request->description,
-        'city' => $request->city,
-        'area' => $request->area,
-        'created' => $request->created,
-        'longitude' => $request->longitude,
-        'latitude' => $request->latitude,
-        'percent' => $request->percent,
-        'comment' => $request->comment,
-        'active' => 0,
-        'fool_price' => $request->fool_price,
-        'updated_at' => Carbon::now()->addHour(3),
-      ]);
+          'title' => $request->title,
+          'description' => $request->description,
+          'city' => $request->city,
+          'area' => $request->area,
+          'created' => $request->created,
+          'longitude' => $request->longitude,
+          'latitude' => $request->latitude,
+          'percent' => $request->percent,
+          'comment' => $request->comment,
+          'active' => 0,
+          'fool_price' => $request->fool_price,
+          'updated_at' => Carbon::now()->addHour(3),
+        ]);
 
       if ($request->info !== null) {
         $info = explode(',', $request->info);
@@ -324,20 +331,20 @@ class HouseController extends Controller
 
       HouseCharacteristicsModel::where('house_id', $request->house_id)
         ->update([
-        'exclusive' => $request->exclusive,
-        'floors' => $request->floors,
-        'type' => $request->type,
-        'dop' => $str1,
-        'info' => $str,
-        'toSea' => $request->toSea,
-        'toSchool' => $request->toSchool,
-        'toShop' => $request->toShop,
-        'toPark' => $request->toPark,
-        'toBus' => $request->toBus,
-        'toChildrenSchool' => $request->toChildrenSchool,
-        'count_flat' => $request->count_flat,
-        'updated_at' => Carbon::now()->addHour(3),
-      ]);
+          'exclusive' => $request->exclusive,
+          'floors' => $request->floors,
+          'type' => $request->type,
+          'dop' => $str1,
+          'info' => $str,
+          'toSea' => is_string($request->toSea) ? null : $request->toSea,
+          'toSchool' => is_string($request->toSchool) ? null : $request->toSchool,
+          'toShop' => is_string($request->toShop) ? null : $request->toShop,
+          'toPark' => is_string($request->toPark) ? null : $request->toPark,
+          'toBus' => is_string($request->toBus) ? null : $request->toBus,
+          'toChildrenSchool' => is_string($request->toChildrenSchool) ? null : $request->toChildrenSchool,
+          'count_flat' => $request->count_flat,
+          'updated_at' => Carbon::now()->addHour(3),
+        ]);
 
 
       return response()->json($house, 200);
@@ -438,7 +445,7 @@ class HouseController extends Controller
         $imageDown = $flat->imageDown;
       }
 
-       FlatModel::where('id', $request->flat_id)
+      FlatModel::where('id', $request->flat_id)
         ->update([
           'number' => $request->number,
           'square' => $request->square,
@@ -561,7 +568,8 @@ class HouseController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function editSupport(Request $request) {
+  public function editSupport(Request $request)
+  {
 
     if ($request->avatar !== 'not') {
       $imageName = time() . '.' . $request->avatar->getClientOriginalName();
@@ -574,15 +582,15 @@ class HouseController extends Controller
 
     HouseSupportModel::where('id', $request->id)
       ->update([
-      'avatar' => $imageName,
-      'name' => $request->name,
-      'phone' => $request->phone,
-      'email' => $request->email,
-      'status' => $request->status,
-      'link' => $request->link,
-      'created_at' => Carbon::now()->addHour(3),
-      'updated_at' => Carbon::now()->addHour(3),
-    ]);
+        'avatar' => $imageName,
+        'name' => $request->name,
+        'phone' => $request->phone,
+        'email' => $request->email,
+        'status' => $request->status,
+        'link' => $request->link,
+        'created_at' => Carbon::now()->addHour(3),
+        'updated_at' => Carbon::now()->addHour(3),
+      ]);
 
     return response()->json(HouseSupportModel::where('house_id', $request->house_id)->get(), 200);
 
@@ -680,7 +688,8 @@ class HouseController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function deletedFile(Request $request) {
+  public function deletedFile(Request $request)
+  {
 
     HouseFilesModel::where('name', $request->fileName)->delete();
 
