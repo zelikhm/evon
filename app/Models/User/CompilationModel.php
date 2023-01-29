@@ -31,6 +31,17 @@ class CompilationModel extends Model
       return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
+//    public function company() {
+//      return $this->hasOneThrough(
+//        CompanyModel::class,
+//        User::class,
+//        'id',
+//        'company_id',
+//        'user_id',
+//        'id'
+//      );
+//    }
+
     public function houses() {
       return $this->hasManyThrough(
         HouseModel::class,

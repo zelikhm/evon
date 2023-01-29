@@ -112,6 +112,12 @@ class HouseController extends Controller
       'updated_at' => Carbon::now()->addHour(3),
     ]);
 
+    $house = $this->getHouseSlug($slug);
+
+    if($house->info === null) {
+      return redirect(404);
+    }
+
     return Inertia::render('AppDescriptionObject', [
       'house' => $this->getHouseSlug($slug),
       'dops' => $this->getDop(),
