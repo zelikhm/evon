@@ -21,7 +21,8 @@
        class="contact__selling my-5 xxl:my-4 xl:my-3 text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] flex justify-between items-center rounded-[5px] p-1.5 xl:p-1">
     <div class="flex items-center gap-14 xxl:gap-10 xl:gap-8">
       <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-        <img :src="item.avatar" class="h-12 xxl:h-10 xl:h-8 w-12 xxl:w-10 xl:w-8 object-cover rounded-full" alt="">
+        <img v-if="item.avatar.length > 17" :src="item.avatar" class="h-12 xxl:h-10 xl:h-8 w-12 xxl:w-10 xl:w-8 object-cover rounded-full" alt="">
+        <img v-else src="../../assets/no-img-houses.jpg" class="h-12 xxl:h-10 xl:h-8 w-12 xxl:w-10 xl:w-8 object-cover rounded-full" alt="">
         <span class="text-[#1E1D2D]">{{ item.name }}</span>
       </div>
       <span class="text-[#8A8996]">{{ item.phone }}</span>
@@ -56,8 +57,7 @@ export default {
     }
   },
   created() {
-    this.contacts = this.house.supports
-  }
+  },
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <app-modal-add-con  tact @close-add-contact="closeModalContact"
+  <app-modal-add-contact @close-add-contact="closeModalContact"
                          @close-edit-contact="closeModalBeforeEdit"
                          v-if="modalAddContact"
                          :contact="contact"
@@ -58,7 +58,6 @@
                         :count="count"
                         :house="house"
                         :supports="supports"
-                        @open-add-contact="openAddContact"
                         @addAndContinue="addAndContinue"
           />
         </div>
@@ -170,7 +169,8 @@ export default {
     },
     closeModalContact(data) {
       this.modalAddContact = false
-      this.supports.push(data)
+      this.supports = []
+      this.supports = data
     },
     closeModalBeforeEdit(data) {
       this.modalAddContact = false
