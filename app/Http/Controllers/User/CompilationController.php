@@ -134,6 +134,8 @@ class CompilationController extends Controller
       $user = [];
     }
 
+    dd($compilation);
+
     return Inertia::render('AppLinkDescriptionObject', [
       'house' => $house,
       'compilation' => $compilation,
