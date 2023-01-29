@@ -13,7 +13,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         </div>
         <img class="flex-shrink-0 bg-black w-20 xxl:w-16 xl:w-12 h-20 xxl:h-16 xl:h-12 rounded-full flex items-center justify-center" v-else :src="user.company.image" alt="">
         <div class="text-white flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
-          <span class="text-[30px] xxl:text-[25px] xl:text-[20px] font-bold leading-none">{{ user.company.title }}</span>
+          <span class="text-[30px] xxl:text-[25px] xl:text-[20px] font-bold leading-none" v-if="house.user.company_id">{{ user.company.title }}</span>
           <span class="text-[15px] xxl:text-[13px] xl:text-[11px] leading-none">Агенство недвижимости</span>
         </div>
       </div>
