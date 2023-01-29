@@ -112,7 +112,7 @@ class Users extends Section implements Initializable
           AdminFormElement::text('email', 'Email/Логин'),
           AdminFormElement::text('phone', 'Телефон (риелтор)')
             ->required(),
-          AdminFormElement::text('first_name', 'Имя'),
+          AdminFormElement::text('first_name', 'Имя \ Название компании'),
           AdminFormElement::password('password', 'Пароль')->hashWithBcrypt(),
         ], 6)->addColumn([
           AdminFormElement::text('last_name', 'Фамилия'),

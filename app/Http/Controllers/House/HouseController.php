@@ -178,7 +178,6 @@ class HouseController extends Controller
 
   public function create(Request $request)
   {
-
     if ($request->token === env('TOKEN')) {
       $house = HouseModel::create([
         'user_id' => $request->user_id,
@@ -235,6 +234,7 @@ class HouseController extends Controller
         $str1 = null;
       }
 
+
       HouseCharacteristicsModel::create([
         'house_id' => $house->id,
         'exclusive' => $request->exclusive,
@@ -242,12 +242,12 @@ class HouseController extends Controller
         'type' => $request->type,
         'dop' => $str1,
         'info' => $str,
-        'toSea' => $request->toSea,
-        'toSchool' => $request->toSchool,
-        'toShop' => $request->toShop,
-        'toPark' => $request->toPark,
-        'toBus' => $request->toBus,
-        'toChildrenSchool' => $request->toChildrenSchool,
+        'toSea' => is_string($request->toSea) ? null : $request->toSea ,
+        'toSchool' => is_string($request->toSchool) ? null : $request->toSchool,
+        'toShop' => is_string($request->toShop) ? null : $request->toShop,
+        'toPark' => is_string($request->toPark) ? null : $request->toPark,
+        'toBus' => is_string($request->toBus) ? null : $request->toBus,
+        'toChildrenSchool' => is_string($request->toChildrenSchool) ? null : $request->toChildrenSchool,
         'count_flat' => $request->count_flat,
         'created_at' => Carbon::now()->addHour(3),
         'updated_at' => Carbon::now()->addHour(3),
