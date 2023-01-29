@@ -11,12 +11,23 @@
           <div class="flex gap-2.5 xl:gap-2" v-for="floor in house.info.floors">
             <div class="bg-[#E5DFEE] flex-shrink-0 font-semibold relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">{{ floor }}</div>
             <div v-for="count in house.info.count_flat" class="bg-white flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
-              {{ checkFlat(floor, count) }}
+              <div v-if="checkFlat(floor, count) === null" class="bg-white flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
+                <span class="relative z-10"></span>
+<!--                <img class="absolute w-full h-full top-0 left-0" src="../../assets/svg/chess_fence.svg" alt="">-->
+              </div>
+<!--              <div v-if="checkFlat(floor, count) == 0" class="bg-white flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">-->
+<!--                <span class="relative z-10"></span>-->
+<!--                <img class="absolute w-full h-full top-0 left-0" src="../../assets/svg/chess_fence.svg" alt="">-->
+<!--              </div>-->
+              <div v-if="checkFlat(floor, count) !== null">
+                <div v-if="checkFlat(floor, count).status == 2" v-on:click="clickFlat(checkFlat(floor, count).id)" class="bg-white flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
+                  <span class="relative z-10">{{ checkFlat(floor, count).square }}</span>
+                  <img class="absolute w-full h-full top-0 left-0" src="../../assets/svg/chess_fence.svg" alt="">
+                </div>
+              </div>
+
             </div>
-            <div class="bg-white flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
-              <span class="relative z-10">34.2</span>
-              <img class="absolute w-full h-full top-0 left-0" src="../../assets/svg/chess_fence.svg" alt="">
-            </div>
+
           </div>
 
 
@@ -70,17 +81,32 @@ export default {
   props: ['flats', 'house'],
   data() {
     return {
+
     }
   },
   methods: {
     log(item) {
-      console.log(item)
+      // console.log(item)
     },
     checkFlat(floor, count) {
+      let object = {};
+
       let flat = []
       flat = this.flats.filter(item => item.floor === floor && item.number_from_stairs === count)
-      return flat
+
+      if(flat.length > 0) {
+        object = {
+          id: flat[0].id,
+          status: flat[0].status,
+          square: flat[0].square,
+        }
+      }
+
+      return flat.length > 0 ? object : null;
     },
+    clickFlat(id) {
+      console.log(id)
+    }
   },
   created() {
     console.log(this.flats)

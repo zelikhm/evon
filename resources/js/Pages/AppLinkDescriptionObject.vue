@@ -6,7 +6,7 @@ import "swiper/css/pagination";
 
 <template>
   <header class="relative h-[13.4vw]">
-    <img v-if="compilation.company === null" class="w-full absolute top-0 left-0 h-full" src="../../assets/bg_links.jpg" alt="">
+    <img v-if="compilation.company === null" class="w-full absolute top-0 left-0 h-full 1" src="../../assets/bg_links.jpg" alt="">
     <img v-else class="w-full absolute top-0 left-0 h-full" :src="compilation.company.banner" alt="">
     <div class="_container flex h-full">
       <div class="self-end flex items-center gap-7 xxl:gap-6 xl:gap-5 mb-10 xxl:mb-8 xl:mb-6">
