@@ -8,14 +8,18 @@
             <div v-for="item in house.info.count_flat" class="bg-[#E5DFEE] flex-shrink-0 font-semibold relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE]">{{ item }}</div>
             <span class="text-[#8A8996] text-[12px] xxl:text-[10px] xl:text-[8px] leading-none">Нумерация квартир от лестничного пролета</span>
           </div>
-          <div class="flex gap-2.5 xl:gap-2" v-for="item in house.info.floors">
-            <div class="bg-[#E5DFEE] flex-shrink-0 font-semibold relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">{{ item }}</div>
-<!--            <div v-for="numbers in house.info.count_flat" class="bg-white flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer"></div>-->
+          <div class="flex gap-2.5 xl:gap-2" v-for="floor in house.info.floors">
+            <div class="bg-[#E5DFEE] flex-shrink-0 font-semibold relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">{{ floor }}</div>
+            <div v-for="count in house.info.count_flat" class="bg-white flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
+              {{ checkFlat(floor, count) }}
+            </div>
             <div class="bg-white flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
               <span class="relative z-10">34.2</span>
               <img class="absolute w-full h-full top-0 left-0" src="../../assets/svg/chess_fence.svg" alt="">
             </div>
           </div>
+
+
 <!--          <div class="flex gap-2.5 xl:gap-2">-->
 <!--            <div class="bg-[#E5DFEE] flex-shrink-0 font-semibold relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">2</div>-->
 <!--            <div class="bg-white flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer"></div>-->
@@ -71,9 +75,15 @@ export default {
   methods: {
     log(item) {
       console.log(item)
-    }
+    },
+    checkFlat(floor, count) {
+      let flat = []
+      flat = this.flats.filter(item => item.floor === floor && item.number_from_stairs === count)
+      return flat
+    },
   },
   created() {
+    console.log(this.flats)
 
 
     // console.log(this.flats.find(i => i.floor === 1 && i.number_from_stairs === 3))
