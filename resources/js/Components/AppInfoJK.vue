@@ -193,8 +193,10 @@ import {Link} from '@inertiajs/inertia-vue3'
           </div>
         </div>
 
-        <div :class="{ 'border__bottom--0': borderServices }"
-             class="multi__select flex flex-col gap-2 xxl:gap-1.5 h-fit border border-solid border-[#E5DFEE] rounded-[6px]">
+        <div
+          :class="{ 'border__bottom--0': borderServices }"
+          class="multi__select flex flex-col gap-2 xxl:gap-1.5 h-fit border border-solid border-[#E5DFEE] rounded-[6px]"
+        >
           <div class="px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5 text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">
             Дополнительные услуги
           </div>
@@ -216,7 +218,7 @@ import {Link} from '@inertiajs/inertia-vue3'
             Инфраструктура
           </div>
           <Multiselect
-              @click="borderServices = !borderServices"
+              @click="borderInfrastructure = !borderInfrastructure"
               class="px-5 xx:px-4 xl:px-3 pb-4 xx:pb-3 xl:pb-2.5 white__arrow"
               v-model="valueSelectInfrastructure"
               :options="optionsSelectInfrastructure"
