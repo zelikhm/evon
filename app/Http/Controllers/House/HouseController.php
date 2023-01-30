@@ -31,6 +31,33 @@ class HouseController extends Controller
   use MainInfo;
 
   /**
+   * search object for user
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function search(Request $request){
+
+    $search = collect();
+
+    $houses = HouseModel::where('title', 'LIKE', $request->title . '%')
+      ->orWhere('description', 'LIKE', $request->title . '%')
+      ->orWhere('city', 'LIKE', $request->title . '%')
+      ->orWhere('area', 'LIKE', $request->title . '%')
+      ->orWhere('created', 'LIKE', $request->title . '%')
+      ->get();
+
+    foreach ($houses as $house) {
+
+      $search->push($this->getHouseOnId($house->id));
+
+    }
+
+    return response()->json($search, 200);
+
+  }
+
+  /**
    * get page
    * @return \Inertia\Response
    */

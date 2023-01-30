@@ -23,10 +23,10 @@ class FlatModel extends Model
       'imageDown',
     ];
 
-    protected $hidden = [
-      'created_at',
-      'updated_at',
-    ];
+//    protected $hidden = [
+//      'created_at',
+//      'updated_at',
+//    ];
 
     public function house() {
       return $this->hasOneThrough(HouseModel::class, FrameModel::class, 'id', 'id', 'frame_id', 'house_id');

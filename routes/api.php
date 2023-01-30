@@ -45,6 +45,8 @@ Route::prefix('house')->group(function () {
   //
   Route::post('getHouseApi', ['App\Http\Controllers\House\HouseController', 'getHouseApi']);
   Route::get('getHousesApi', ['App\Http\Controllers\House\HouseController', 'getHousesApi']);
+  //
+  Route::post('search', ['App\Http\Controllers\House\HouseController', 'search']);
 });
 
 Route::prefix('compilation')->group(function () {

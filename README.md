@@ -55,6 +55,11 @@ path getHousesApi \ [get] / нет полей:
 
 - 
 
+Поиск по обьектам \
+path search \ [post] / поля:
+
+- title - введенное в поле
+
 Получить жк по Слагу \ 
 path getHouseApi \ [post] / поля:
 

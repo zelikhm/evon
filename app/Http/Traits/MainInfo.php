@@ -162,6 +162,8 @@ trait MainInfo
   protected function getHouseOnId($house_id) {
     $house = HouseModel::where('id', $house_id)->with(['info', 'supports', 'files', 'frames', 'images', 'news', 'flats'])->first();
 
+    $house->image = count($house->images) > 0 ? $house->images[0]->name : null;
+
     return $house;
   }
 
@@ -249,6 +251,7 @@ trait MainInfo
       ->get();
 
     foreach ($houses as $house) {
+      $house->image = count($house->images) > 0 ? $house->images[0]->name : null;
       $house->dop_array = TypesModel::where('id', $house->dop)->get();
       $house->info_array = StructureModel::where('id', $house->info)->get();
 
@@ -315,6 +318,8 @@ trait MainInfo
       $frame->flats = FlatModel::where('frame_id', $frame->id)->with(['images'])->get();
     }
 
+    $house->image = count($house->images) > 0 ? $house->images[0]->name : null;
+
     $favorite = FavoritesModel::where('user_id', Auth::id())
       ->where('house_id', $id)
       ->first();
@@ -344,6 +349,8 @@ trait MainInfo
     foreach ($house->frames as $frame) {
       $frame->flats = FlatModel::where('frame_id', $frame->id)->with(['images'])->get();
     }
+
+    $house->image = count($house->images) > 0 ? $house->images[0]->name : null;
 
     $favorite = FavoritesModel::where('user_id', Auth::id())
       ->where('house_id', $house->id)

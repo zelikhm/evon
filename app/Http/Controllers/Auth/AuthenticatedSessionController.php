@@ -23,14 +23,11 @@ class AuthenticatedSessionController extends Controller
   /**
    * Display the login view.
    *
-   * @return \Inertia\Response
+   * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
    */
   public function create()
   {
-    return Inertia::render('Auth/Login', [
-      'canResetPassword' => Route::has('password.request'),
-      'status' => session('status'),
-    ]);
+    return redirect('/');
   }
 
   /**
