@@ -1,5 +1,5 @@
 <template>
-  <app-header :user="user" />
+  <app-header :user="user" @update-block-client="updateBlockClient" />
   <app-modal-album
     v-if="album"
     :image="house.images"
@@ -86,12 +86,8 @@
             }"
             :modules="modules"
             :loop="true"
-            class="mySwiper w-full"
-          >
-            <swiper-slide class="h-full flex justify-center" v-if="house.images.length > 0">
-              <img @click="album = true" class="h-full w-full object-cover" :src="house.images[0].name" alt="">
-            </swiper-slide>
-            <swiper-slide class="h-full flex justify-center" v-else>
+            class="mySwiper w-full">
+            <swiper-slide class="h-full flex justify-center" v-if="house.images.length === 0">
               <img class="h-full w-full object-cover" src="../../assets/no-img-house.jpg" alt="">
             </swiper-slide>
             <swiper-slide class="h-full flex justify-center" v-for="item in mainPhotos">
@@ -188,7 +184,7 @@
             </div>
           </div>
         </div>
-        <app-decrition-object-sidebar class="w-full" @open-all-news="openAllNews = true" :house="house" />
+        <app-decrition-object-sidebar class="w-full" v-if="!isWithClient" @open-all-news="openAllNews = true" :house="house" />
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
@@ -237,10 +233,14 @@ export default {
       map: false,
       flagFavorite: null,
       mainPhotos: [],
-      chess: true
+      chess: false,
+      isWithClient: false
     }
   },
   methods: {
+    updateBlockClient(data) {
+      this.isWithClient = data
+    },
     openCreateSel() {
       this.openCreateSelection = true
       this.openAddSelection = false
@@ -270,6 +270,8 @@ export default {
     }
   },
   mounted() {
+    console.log(this.house)
+    this.isWithClient = localStorage.getItem('withClient') === 'true' ? true : false
     this.flagFavorite = this.house.favorite
     this.arrayInfos = []
 
@@ -308,7 +310,7 @@ export default {
       this.house.promotion = false
     })
 
-    this.mainPhotos.push(...this.house.images.filter(item => item.category === 0))
+    this.mainPhotos = this.house.images
   },
   computed: {
     countFlats() {

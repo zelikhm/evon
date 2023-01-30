@@ -572,7 +572,7 @@ export default {
             url: '/api/house/editHouse',
             headers: {"Content-type": "multipart/form-data"},
             data: formData,
-          }).then(res => console.log(res.data))
+          }).then(res => this.$emit('call-notification', 'Изменения успешно сохранены!'))
         }
       }
     },
@@ -722,9 +722,9 @@ export default {
       this.object.toSchool = this.house.info.toSchool
       this.object.toChildrenSchool = this.house.info.toChildrenSchool
       this.object.toBus = this.house.info.toBus
-      this.object.comment = this.house.comment
+      this.object.comment = this.house.comment === 'null' ? '' : this.house.comment
       this.object.percent = this.house.percent
-      this.object.text_agency = this.house.info.exclusive
+      this.object.text_agency = this.house.info.exclusive === 'null' ? '' : this.house.info.exclusive
       this.object.count_flat = this.house.info.count_flat
 
       this.setMarker()

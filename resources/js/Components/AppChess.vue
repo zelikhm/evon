@@ -5,7 +5,7 @@
         <div class="block lg:hidden grid grid-cols-5 gap-3 xxl:gap-2.5 xl:gap-2">
           <div v-for="item in house.frames" :class="{ 'border': item.active === 1 }" @click="targetFrame(item)" class="corpus__banner border-solid border-[#6435A5] w-[9.5vw] gap-3.5 xxl:gap-3 xl:gap-2.5 cursor-pointer rounded-[5px] flex flex-col justify-center p-5 xxl:p-3.5 x:p-2.5">
             <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">{{ item.name }}</span>
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ item.flats.length }} квартир</span>
+            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ item.flats.length }} {{ item.flats.length === 1 ? "Квартира" : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
           </div>
         </div>
 
@@ -134,6 +134,7 @@
         <app-chess-grid v-if="activeChess"
                         :flats="house.frames[frameId].flats"
                         :house="house"
+                        @target-flat="targetFlat"
         />
         <app-chess-list v-if="activeList"
                         :flats="house.frames[frameId].flats"

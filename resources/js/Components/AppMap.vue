@@ -24,7 +24,7 @@ import { Link } from "@inertiajs/inertia-vue3"
              </div>
              <div class="flex gap-2.5 xxl:gap-2 xl:gap-1.5">
                <span class="text-white text-[14px] xxl:text-[12px] xl:text-[10px] leading-none bg-[#30CB49] px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 rounded-[3px]" v-if="house.created && !Number.isInteger(+house.created[0])">{{ house.created }}</span>
-               <span class="text-white text-[14px] xxl:text-[12px] xl:text-[10px] leading-none bg-[#30CB49] px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 rounded-[3px]" v-else-if="house.created">{{ house.created }}</span>
+               <span class="text-white text-[14px] xxl:text-[12px] xl:text-[10px] leading-none bg-[#E84680] px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 rounded-[3px]" v-else-if="house.created">{{ house.created }}</span>
 <!--               <span class="border border-solid border-[#E5DFEE] text-[#8A8996] text-[14px] xxl:text-[12px]  xl:text-[10px] leading-none px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 rounded-[3px]">Договор займа</span>-->
              </div>
            </div>

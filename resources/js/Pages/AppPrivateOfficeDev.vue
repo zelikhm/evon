@@ -31,7 +31,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         <div v-else class="grid grid-cols-2 md:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4 md:gap-10">
           <div class="flex flex-col" v-for="house in houses.data">
             <div class="object__block relative h-[500px] exl:h-fit exl:h-[26vw] md:h-[52vw]">
-              <img v-if="house.images.length > 0" :src="house.images[0].name" class="w-full h-full rounded-[8px]" alt="">
+              <img v-if="house.images.length > 0" :src="house.image" class="w-full h-full rounded-[8px]" alt="">
               <img v-else src="../../assets/no-img-houses-zastroy.jpg" class="w-full h-full rounded-[8px]" alt="">
               <div class="seek opacity-0 absolute top-0 left-0 immovables__overlay w-full h-full rounded-[8px]"></div>
               <div class="hide absolute flex gap-2 top-0 left-0 p-5 xxl:p-4 xl:p-3">

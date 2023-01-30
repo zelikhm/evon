@@ -10,12 +10,14 @@
                             :house="house"
                             :activeFrame="activeFrame"
                             :selectFlat="selectFlat"
+                            @call-notification="callNotification"
   />
   <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="closeAddFrame" :house="house" :isEdit="isEdit" :frame="frame" />
   <app-modal-notification
     class="left-[2vw] transition-all duration-1000"
     :class="{'-left__full': !openNotification}"
     @close-notification="openNotification = false"
+    :text="text"
   />
   <app-header :user="user" />
   <main>
@@ -59,6 +61,7 @@
                         :house="house"
                         :supports="supports"
                         @addAndContinue="addAndContinue"
+                        @call-notification="callNotification"
           />
         </div>
 
@@ -145,10 +148,19 @@ export default {
       activeFrame: null,
       frame: null,
       selectFlat: null,
-      contact: null
+      contact: null,
+      text: null
     }
   },
   methods: {
+    callNotification(text) {
+      this.text = text
+      this.openNotification = true
+      setTimeout(() => {
+        this.openNotification = false
+        this.text = null
+      }, 2500)
+    },
     editFlat(data) {
       this.modalAddApatments = true
       this.selectFlat = data

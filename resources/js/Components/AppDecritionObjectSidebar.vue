@@ -4,8 +4,9 @@
       <span class="font-medium text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] pt-6 xxl:pt-5 xl:pt-4">Новости</span>
       <div class="py-5 xxl:py-4 xl:py-3 border__bottom" v-for="item in news">
         <span class="text-[#8A8996]">{{ new Date(Date.parse(item.created_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span>
+        <p class="font-bold my-1 text-sm xxl:text-xs xl:text-[10px] lg:text-[13px]">{{ item.title }}</p>
         <p v-html="item.description.slice(0, 100)"></p>
-        <button class="text-[#6435A5]" @click="$emit('open-all-news')">Читать далее</button>
+        <button class="text-[#6435A5] mt-1" @click="$emit('open-all-news')">Читать далее</button>
       </div>
       <div class="flex justify-center w-full pt-5 xxl:pt-4 xl:pt-3">
         <button @click="$emit('open-all-news')" class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5 animation__arrow">
@@ -27,7 +28,7 @@
         <button class="w-full  bg-[#F6F3FA] text-[#6536A5] text-base xxl:text-sm xl:text-xs lg:text-[15px] rounded-[6px] py-4 xxl:py-3 xl:py-2.5">Написать в чат</button>
       </div>
     </div>
-    <div class="pb-10 xxl:pb-8 xl:pb-6" v-if="house.info.exclusive">
+    <div class="pb-10 xxl:pb-8 xl:pb-6" v-if="house.info.exclusive && house.info.exclusive !== 'null'">
       <div class="font-medium text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] pb-5 xxl:pb-4 xl:pb-3 leading-none">Эксклюзив для агентства:</div>
       <p class="text-base text-[#8A8996] xxl:text-sm xl:text-xs">{{ house.info.exclusive }}</p>
     </div>
@@ -35,7 +36,7 @@
       <div class="font-medium text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] pb-5 xxl:pb-4 xl:pb-3 leading-none">Комиссия</div>
       <div class="flex items-start gap-4 xxl:gap-3 xl:gap-2.5">
         <span class="font-medium text-[32px] xxl:text-[26px] xl:text-[22px] lg:text-[26px]">{{ house.percent }}%</span>
-        <span class="text-base text-[#8A8996] xxl:text-sm xl:text-xs lg:text-[15px]">{{ house.comment }}</span>
+        <span class="text-base text-[#8A8996] xxl:text-sm xl:text-xs lg:text-[15px]" v-if="house.comment && house.comment !== 'null'">{{ house.comment }}</span>
       </div>
     </div>
     <div class="pb-14 xxl:pb-10 xl:pb-8" v-if="house.supports.length > 0">
