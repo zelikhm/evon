@@ -123,12 +123,12 @@ class Flat extends Section implements Initializable
           AdminFormElement::number('number', 'Номер'),
           AdminFormElement::number('square', 'Площадь'),
           AdminFormElement::select('count', 'Планировка')->setOptions([
-            '1+1' => '1+1',
-            '2+1' => '2+1',
-            '3+1' => '3+1',
-            '4+1' => '4+1',
-            'duplex' => 'duplex',
-            'studia' => 'studia',
+            '1 + 1' => '1 + 1',
+            '2 + 1' => '2 + 1',
+            '3 + 1' => '3 + 1',
+            '4 + 1' => '4 + 1',
+            'Duplex' => 'Duplex',
+            'Studia' => 'Studia',
           ]),
 
           AdminFormElement::image('imageUp', 'Верхнее')->setUploadPath(function(\Illuminate\Http\UploadedFile $file) {
