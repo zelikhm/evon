@@ -453,7 +453,7 @@ class HouseController extends Controller
   {
     if ($request->token === env('TOKEN')) {
 
-      if ($request->image_up !== 'undefined') {
+      if ($request->image_up !== 'null') {
         $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
         $request->image_up->move(public_path('/storage/flat/'), $imageUp);
         $imageUp = '/storage/flat/' . $imageUp;
@@ -462,7 +462,7 @@ class HouseController extends Controller
         $imageUp = $flat->imageUp;
       }
 
-      if ($request->image_down !== 'undefined') {
+      if ($request->image_down !== 'null') {
         $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
         $request->image_down->move(public_path('/storage/flat/'), $imageDown);
         $imageDown = '/storage/flat/' . $imageDown;
