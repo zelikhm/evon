@@ -196,26 +196,26 @@ export default {
     }
   },
   created() {
-    this.profile.name = this.user.first_name
-    this.profile.surname = this.user.last_name
-    this.profile.tel = this.user.phone
+    this.profile.name = this.user.first_name === 'null' ? '' : this.user.first_name
+    this.profile.surname = this.user.last_name === 'null' ? '' : this.user.last_name
+    this.profile.tel = this.user.phone === 'null' ? '' : this.user.phone
 
     this.userHeader = this.user
 
-    this.profile.position = this.user.status
+    this.profile.position = this.user.status === 'null' ? '' : this.user.status
     if (this.user.company) {
       this.titleCompany = this.user.company.title
     }
     if(this.user.link === null) {
       this.profile.link = ''
     } else {
-      this.profile.link = this.user.link
+      this.profile.link = this.user.link === 'null' ? '' : this.user.link
     }
 
     if(this.user.description === null) {
       this.profile.description = ''
     } else {
-      this.profile.description = this.user.description
+      this.profile.description = this.user.description === 'null' ? '' : this.user.description
     }
 
     this.profile.email = this.user.email
