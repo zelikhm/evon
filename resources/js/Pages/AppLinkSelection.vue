@@ -28,7 +28,6 @@ import { Link } from '@inertiajs/inertia-vue3'
     <div class="_container">
       <div class="my-10 xxl:my-8 xl:my-6">
         <div>
-
         </div>
         <div class="grid__75-25 gap-7 xxl:gap-5 xl:gap-4">
           <div class="flex flex-col gap-y-14 xxl:gap-y-10 xl:gap-y-8">
@@ -50,7 +49,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                     </div>
                     <div class="text-[#1E1D2D] flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 p-5 xxl:p-4 xl:p-3">
                       <span class="font-bold text-[20px] xxl:text-[16px] xl:text-[13px] leading-none">{{ compilation.isVisible === 1 ? item.title : `Лот №${item.id + 10000}` }}</span>
-                      <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">от {{ item.minPrice }} €, от {{ item.minSquare / item.minPrice }} € за м2</span>
+                      <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">от {{ item.minPrice }} €, от {{ Math.round(item.minSquare / item.minPrice) }} € за м2</span>
                     </div>
                   </Link>
                 </div>
@@ -59,7 +58,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
           <div class="contact__selling h-fit bg-white rounded-[10px] p-4 xxl:p-3 xl:p-2.5">
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 mb-5 xxl:mb-4 xl:mb-4">
-              <img :src="'/storage/user/' + compilation.user.image" class="w-14 xxl:w-12 xl:w-10 rounded-full h-14 xxl:h-12 xl:h-10" alt="">
+              <img :src="compilation.user.image" class="w-14 xxl:w-12 xl:w-10 rounded-full h-14 xxl:h-12 xl:h-10" alt="">
               <div class="flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
                 <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none font-medium">{{ compilation.user.first_name + ' ' + compilation.user.last_name }}</span>
                 <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ compilation.user.status }}</span>
@@ -69,7 +68,7 @@ import { Link } from '@inertiajs/inertia-vue3'
               <span class="text-[#8A8996] leading-none">Языки:&nbsp;</span>
               <span class="leading-none">{{ compilation.user.link }}</span>
             </div>
-            <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
+            <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 mb-5">
               <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]">
                 <img src="../../assets/svg/chat_tel_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
                 <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px]">{{ compilation.user.phone }}</span>
@@ -79,7 +78,9 @@ import { Link } from '@inertiajs/inertia-vue3'
                 <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px]">{{ compilation.user.email }}</span>
               </div>
             </div>
+            <span class="w-full text-[15px] xxl:text-[13px] xl:text-[11px]">Комментарий подборки: {{ compilation.description }}</span>
           </div>
+
         </div>
       </div>
     </div>
@@ -108,6 +109,7 @@ export default {
 
   },
   created() {
+    console.log(this.compilation)
     this.href = window.location.href
 
     for (let key in this.houses) {
