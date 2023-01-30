@@ -1,5 +1,5 @@
 <template>
-  <app-modal-profile v-if="openPayProfile" @close-pay-profile="openPayProfile = false"/>
+  <app-modal-profile v-if="openPayProfile" @close-pay-profile="openPayProfile = false" :tarifs="tarifs" />
   <app-header :user="user" />
   <main>
     <div class="_container">
@@ -29,10 +29,9 @@
               </div>
             </div>
             <div :class="{'border-[#6435A5]': activeInput.email, 'border-[#E5DFEE]': !activeInput.email}"  class="flex flex-col w-full border border-solid gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-              <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="email_dev">Почта</label>
+              <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="email_dev">Логин / e-mail</label>
               <div class="flex items-center">
-                <input v-model="userValue.email" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="email_dev">
-                <button class="text__purple text-[#6435A5] text-base xxl:text-sm xl:text-xs leading-none" @click="editProfile('email')">{{ activeInput.email ? "Сохранить" : "Изменить"  }}</button>
+                <input v-model="userValue.email" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" disabled type="text" id="email_dev">
               </div>
             </div>
           </div>
@@ -40,7 +39,7 @@
             <div class="flex sm:flex-col justify-between items-center p-5 xxl:p-4 xl:p-3">
               <div class="flex flex-col ml-2 xl:ml-1.5 sm:mb-3">
                 <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none mb-3">Управление подпиской</span>
-                <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs leading-none">Активна до: <span class="text-[#E84680]"> 20.11.2022</span></span>
+                <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs leading-none" v-if="user.subscription">Активна до: <span class="text-[#E84680]">{{ new Date(Date.parse(user.subscription_info.finished_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span></span>
               </div>
               <button @click="openPayProfile = !openPayProfile"  class="bg-[#6435A5] h-fit rounded-[6px] px-12 xxl:px-10 xl:px-8 py-3.5 xxl:py-2.5 xl:py-2">
                 <span class="text-white text-base xxl:text-sm xl:text-xs leading-none">Оплатить</span>
@@ -60,7 +59,7 @@ import AppHeader from "@/Layouts/AppHeader.vue"
 import AppModalProfile from "@/Layouts/modal/AppModalProfile.vue"
 
 export default {
-  props: ['user'],
+  props: ['user', 'tarifs'],
   data() {
     return {
       openPayProfile: false,

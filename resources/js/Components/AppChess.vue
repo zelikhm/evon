@@ -13,33 +13,17 @@
         <div class="hidden lg:block relative my-5 xxl:my-4 xl:my-3">
           <div @click="openCorpusList = !openCorpusList" class="flex flex-col cursor-pointer gap-2.5 xxl:gap-2 xl:gap-1.5">
             <div class="flex items-center gap-7 xxl:gap-5 xl:gap-4">
-              <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">Корпус 1</span>
-              <div class="bg-[#30CB49] text-[14px] xxl:text-[12px] xl:text-[10px] px-2 xl:px-1.5 py-1.5 xl:py-1 rounded-[3px] leading-none text-white">СДАН</div>
+              <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">{{ activeFrameMobile.name }}</span>
               <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2" alt="">
             </div>
-            <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">11 квартир</span>
+            <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">{{ activeFrameMobile.flats.length }} {{ activeFrameMobile.flats.length === 1 ? "Квартира" : activeFrameMobile.flats.length === 2 || activeFrameMobile.flats.length === 3 || activeFrameMobile.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
           </div>
           <div v-if="openCorpusList" class="overflow-y-auto custom__scroll-grey max-h-[180px] absolute z-40 top-[120%] bg-white left-0 border border-solid border-[#E5DFEE] rounded-[10px]">
-            <div class="hover__select flex flex-col cursor-pointer gap-2.5 xxl:gap-2 xl:gap-1.5 px-7 xxl:px-5 xl:px-4 py-5 xxl:py-4 xl:py-3">
+            <div v-for="item in house.frames" @click="targetFrameMobile(item)" class="hover__select flex flex-col cursor-pointer gap-2.5 xxl:gap-2 xl:gap-1.5 px-7 xxl:px-5 xl:px-4 py-5 xxl:py-4 xl:py-3">
               <div class="flex items-center gap-7 xxl:gap-5 xl:gap-4">
-                <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">Корпус 1</span>
-                <div class="bg-[#30CB49] text-[14px] xxl:text-[12px] xl:text-[10px] px-2 xl:px-1.5 py-1.5 xl:py-1 rounded-[3px] leading-none text-white">СДАН</div>
+                <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">{{ item.name }}</span>
               </div>
-              <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">11 квартир</span>
-            </div>
-            <div class="hover__select flex flex-col cursor-pointer gap-2.5 xxl:gap-2 xl:gap-1.5 px-7 xxl:px-5 xl:px-4 py-5 xxl:py-4 xl:py-3">
-              <div class="flex items-center gap-7 xxl:gap-5 xl:gap-4">
-                <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">Корпус 1</span>
-                <div class="bg-[#30CB49] text-[14px] xxl:text-[12px] xl:text-[10px] px-2 xl:px-1.5 py-1.5 xl:py-1 rounded-[3px] leading-none text-white whitespace-nowrap">СДАН</div>
-              </div>
-              <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">11 квартир</span>
-            </div>
-            <div class="hover__select flex flex-col cursor-pointer gap-2.5 xxl:gap-2 xl:gap-1.5 px-7 xxl:px-5 xl:px-4 py-5 xxl:py-4 xl:py-3">
-              <div class="flex items-center gap-7 xxl:gap-5 xl:gap-4">
-                <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">Корпус 1</span>
-                <div class="bg-[#30CB49] text-[14px] xxl:text-[12px] xl:text-[10px] px-2 xl:px-1.5 py-1.5 xl:py-1 rounded-[3px] leading-none text-white">СДАН</div>
-              </div>
-              <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">11 квартир</span>
+              <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">{{ item.flats.length }} {{ item.flats.length === 1 ? "Квартира" : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
             </div>
           </div>
         </div>
@@ -146,7 +130,13 @@
         <div class="border__bottom">
           <div class="mr-[6.25vw] lg:mx-auto lg:px-[6.25vw] lg:py-6 flex justify-between lg:justify-start lg:gap-5 p-14 xxl:p-10 xl:p-8">
             <div class="flex flex-col">
-              <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs leading-none pb-3 xxl:pb-2.5 xl:pb-2">№{{ selectFlat.number }}</span>
+              <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs leading-none pb-3 xxl:pb-2.5 xl:pb-2">№{{ selectFlat.number }}
+                <span class="ml-1" :class="{ 'text-[#FF6600]': selectFlat.status == 0,
+                            'text-[#8A8996]': selectFlat.status == 2,
+                            'text-[#E84680]': selectFlat.status == 3,
+                            'text-[#00A478]': selectFlat.status == 4
+            }">{{ selectFlat.status == 0 ? "Акция" : selectFlat.status == 1 ? "Перепродажа" : selectFlat.status == 2 ? "Бронь" : selectFlat.status == 3 ? "Продажи закрыты" : "В продаже" }}</span>
+              </span>
               <span class="text-[22px] xxl:text-[18px] xl:text-[15px] font-semibold leading-none pb-4 xxl:pb-3 xl:pb-2.5">{{ selectFlat.price }} €</span>
               <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none pb-5 xxl:pb-4 xl:pb-3">{{ Math.round(selectFlat.price / selectFlat.square) }} € за м²</span>
               <div class="gray-backg flex items-center gap-1 w-fit px-2 xl:px-1.5 py-1.5 xl:py-1">
@@ -210,6 +200,7 @@ export default {
       ],
       openCheme: false,
       openCorpusList: false,
+      activeFrameMobile: null
     }
   },
   methods: {
@@ -231,6 +222,17 @@ export default {
         }
       })
     },
+    targetFrameMobile(item) {
+      this.house.frames.forEach((frame, idx) => {
+        if (frame.id === item.id) {
+          this.frameId = idx
+          this.activeFrameMobile = frame
+          this.openCorpusList = false
+        }
+      })
+
+
+    },
     targetFlat(flat) {
       this.selectFlat = flat
     },
@@ -239,7 +241,10 @@ export default {
     if (this.house.frames.length > 0) {
       this.frameId = 0
       this.house.frames.forEach((item, idx) => {
-        if (idx === 0) item.active = 1
+        if (idx === 0) {
+          item.active = 1
+          this.activeFrameMobile = item
+        }
         else item.active = 0
 
         if (item.flats.length > 0) {

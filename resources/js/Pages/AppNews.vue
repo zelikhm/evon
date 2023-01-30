@@ -19,7 +19,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap">Заголовок</span>
           <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap">Дата публикации</span>
         </div>
-        <div class="news__line flex justify-between items-center rounded-[12px]" v-for="item in news">
+        <div class="news__line flex justify-between items-center rounded-[12px]" v-for="item in readyNews">
           <div class="grid__news text-base xxl:text-sm xl:text-xs">
             <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap overflow-hidden">{{ item.house.title }}</span>
             <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap overflow-hidden">{{ item.title }}</span>
@@ -71,13 +71,14 @@ export default {
   },
   data() {
     return {
+      readyNews: []
     }
   },
   methods: {
     delNews(news) {
-      this.news.forEach((item, idx) => {
+      this.readyNews.forEach((item, idx) => {
         if (item.id === news.id) {
-          this.news.splice(idx, 1)
+          this.readyNews.splice(idx, 1)
         }
       })
       axios.post('/api/news/delete', { new_id: news.id, token: this.globalToken })
@@ -92,8 +93,8 @@ export default {
     AppFooter,
   },
   created() {
-    console.log(this.user)
-    console.log(this.news)
+    this.readyNews = this.news.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at))
+    // console.log(this.user)
   }
 }
 </script>

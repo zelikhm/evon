@@ -49,7 +49,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
           </Link>
           <div class="lg:hidden text-white text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[15px] flex gap-20 xxl:gap-16 xl:gap-12 x:gap-10">
             <Link href="/houses" :class="{ 'opacity-60': $page.url !== '/houses' }" class="whitespace-nowrap">Новостройки</Link>
-<!--            <a href="#" class="opacity-60 whitespace-nowrap">Виллы</a>-->
+            <a href="#" class="opacity-60 whitespace-nowrap">Виллы</a>
             <Link href="/profile/compilation" :class="{ 'opacity-60': $page.url !== '/profile/compilation' }" class="whitespace-nowrap">Подборки</Link>
             <Link href="/profile/favorites" :class="{ 'opacity-60': $page.url !== '/profile/favorites' }" class="whitespace-nowrap">Избранное</Link>
           </div>
