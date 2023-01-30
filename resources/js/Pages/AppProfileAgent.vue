@@ -14,7 +14,7 @@
           <div class="grid__prof-agent gap-7 xxl:gap-5 xl:gap-4 lg:gap-6">
             <div class="flex flex-col lg:flex-row gap-12 xxl:gap-10 xl:gap-8 lg:gap-4">
               <div class="relative flex-shrink-0 w-[250px] h-[250px] exl:w-[13.28vw] exl:h-[13.28vw] lg:w-[128px] sm:w-[100px] lg:h-[128px] sm:h-[100px]  rounded-full">
-                <img class="absolute object-cover w-full h-full rounded-full" :src="'/storage/user/' + myPhoto" alt="">
+                <img class="absolute object-cover w-full h-full rounded-full" :src="myPhoto" alt="">
                 <div class="avatar__contact w-full h-full rounded-full">
                   <div class="absolute rounded-full w-full h-full top-0 left-0">
                     <label for="avatar" :class="{'-z-10': avatar}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-full">
