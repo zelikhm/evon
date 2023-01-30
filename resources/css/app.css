@@ -1468,7 +1468,7 @@ input::placeholder {
 }
 
 .grid__chess {
-  grid-template-columns: 66vw 34vw;
+  grid-template-columns: 66% 34%;
 }
 
 @media (max-width: 992px) {
