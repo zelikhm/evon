@@ -8,26 +8,12 @@
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] -rotate-45"></span>
         </button>
       </div>
-      <div class="flex justify-between items-center border border-solid border-[#E5DFEE] rounded-[5px] p-5 xxl:p-4 xl:p-3">
+      <div v-for="item in tarifs" class="flex justify-between items-center border border-solid border-[#E5DFEE] rounded-[5px] p-5 xxl:p-4 xl:p-3">
         <label class="payd__checkbox">
           <input type="radio" value="1" id="pay_1" name="payd">
-          <span class="text-[18px] xxl:text-[15px] xl:text-[13px]" for="pay_1">на 1 месяц</span>
+          <span class="text-[18px] xxl:text-[15px] xl:text-[13px]" for="pay_1">{{ item.days }} {{ item.title }}</span>
         </label>
-        <span class="text-[18px] xxl:text-[15px] xl:text-[13px]">100 ₤</span>
-      </div>
-      <div class="flex justify-between items-center border border-solid border-[#E5DFEE] rounded-[5px] p-5 xxl:p-4 xl:p-3">
-        <label class="payd__checkbox">
-          <input type="radio" value="6" id="pay_2" name="payd">
-          <span class="text-[18px] xxl:text-[15px] xl:text-[13px]" for="pay_2">на 6 месяцев</span>
-        </label>
-        <span class="text-[18px] xxl:text-[15px] xl:text-[13px]">500 ₤</span>
-      </div>
-      <div class="flex justify-between items-center border border-solid border-[#E5DFEE] rounded-[5px] p-5 xxl:p-4 xl:p-3">
-        <label class="payd__checkbox">
-          <input type="radio" value="12" id="pay_3" name="payd">
-          <span class="text-[18px] xxl:text-[15px] xl:text-[13px]" for="pay_3">на год</span>
-        </label>
-        <span class="text-[18px] xxl:text-[15px] xl:text-[13px]">1000 ₤</span>
+        <span class="text-[18px] xxl:text-[15px] xl:text-[13px]">{{ item.price }} €</span>
       </div>
       <button class="login__btn--bg  rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
         <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">Оплатить</span>
@@ -39,7 +25,7 @@
 
 <script>
 export default {
-
+  props: ['tarifs']
 }
 </script>
 

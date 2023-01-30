@@ -35,7 +35,7 @@
               </div>
             </div>
             <div :class="{'hidden': page !== 1}" class="flex justify-center mt-12 xxl:mt-10 xl:mt-8">
-              <button @click="modalAddApatments = !modalAddApatments" class="register__button--white text-[#6435A5] flex justify-center items-center gap-2 xl:gap-1.5 border border-solid rounded-[5px] border-[#6435A5] px-4 xxl:px-3 xl:px-2.5 py-2.5 xxl:py-2 xl:py-1.5">
+              <button @click="addFlatModal" class="register__button--white text-[#6435A5] flex justify-center items-center gap-2 xl:gap-1.5 border border-solid rounded-[5px] border-[#6435A5] px-4 xxl:px-3 xl:px-2.5 py-2.5 xxl:py-2 xl:py-1.5">
                 <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0_519_1862)">
                     <path d="M7.33398 7.33301V3.33301H8.66732V7.33301H12.6673V8.66634H8.66732V12.6663H7.33398V8.66634H3.33398V7.33301H7.33398Z" fill="#6435A5"/>
@@ -153,6 +153,10 @@ export default {
     }
   },
   methods: {
+    addFlatModal() {
+      this.selectFlat = null
+      this.modalAddApatments = !this.modalAddApatments
+    },
     callNotification(text) {
       this.text = text
       this.openNotification = true
@@ -164,7 +168,6 @@ export default {
     editFlat(data) {
       this.modalAddApatments = true
       this.selectFlat = data
-      console.log(this.selectFlat)
     },
     openAddContact() {
       this.contact = null

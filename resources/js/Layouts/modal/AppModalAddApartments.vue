@@ -2,7 +2,7 @@
   <div class="fixed z-[100] w-full h-full flex items-center justify-center">
     <div class="relative flex flex-col gap-5 xxl:gap-4 xl:gap-3 bg-white rounded-[12px] px-12 xxl:px-10 xl:px-8 py-8 xxl:py-6 xl:py-5 z-50 w-[34%] lg:w-[50%] md:w-[64%] sm:w-[90%] h-fit">
       <div class="relative flex justify-between items-center">
-        <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold leading-none">Добавить квартиру</h2>
+        <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold leading-none">{{ selectFlat ? "Редактировать" : "Добавить" }} квартиру</h2>
         <button @click="$emit('close-add-apartments')" class="relative w-4 h-4 z-50">
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] rotate-45"></span>
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] -rotate-45"></span>
@@ -104,13 +104,14 @@
 
       <div class="grid grid-cols-2 gap-5 xxl:gap-4 xl:gap-3">
         <div>
+
           <div class="relative w-full h-[10vw] lg:h-[14vw] md:h-[18vw] sm:h-[24vw] rounded-[5px]">
             <img v-if="imageLoadOne" class="absolute w-full h-full rounded-[5px]" :src="imageOne" alt="">
-            <button v-if="imageLoadOne" @click="deleteImageOne" class="absolute rounded-[5px] m-2 bg-[#E84680] z-10 top-0 right-0 h-5 xxl:h-4.5 xl:h-4 w-5 xxl:w-4.5 xl:w-4">
+            <button  @click="deleteImageOne" class="absolute rounded-[5px] m-2 bg-[#E84680] z-10 top-0 right-0 h-5 xxl:h-4.5 xl:h-4 w-5 xxl:w-4.5 xl:w-4">
               <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-white h-[1px] w-[60%] rounded-[10px]"></span>
               <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-white h-[1px] w-[60%] rounded-[10px]"></span>
             </button>
-            <div class="border border-solid border-[#E5DFEE] bg__uploud-photo w-full h-full rounded-[5px]">
+            <div v-if="!selectFlat" class="border border-solid border-[#E5DFEE] bg__uploud-photo w-full h-full rounded-[5px]">
               <div class="absolute rounded-[5px] w-full h-full top-0 left-0">
                 <label for="image_1" :class="{'-z-10': imageLoadOne}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-[5px]">
                   <img src="../../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
@@ -118,8 +119,17 @@
                 <input @change="addImageOne" class="w-full h-full rounded-[5px] opacity-0 absolute top-0 left-0 pointer-events-none" id="image_1" type="file" ref="image_up">
               </div>
             </div>
+            <div v-else-if="selectFlat" class="border border-solid border-[#E5DFEE] bg__uploud-photo w-full h-full rounded-[5px]">
+              <div class="absolute rounded-[5px] w-full h-full top-0 left-0">
+                <label for="image_1" :class="{'-z-10': imageLoadOne}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-[5px]">
+                  <img :src="'/storage/flat/' + selectFlat.imageUp" class="object-cover border border-solid border-[#E5DFEE] bg__uploud-photo w-full h-full rounded-[5px]" alt="">
+                </label>
+                <input @change="addImageOne" class="w-full h-full rounded-[5px] opacity-0 absolute top-0 left-0 pointer-events-none" id="image_1" type="file" ref="image_up">
+              </div>
+            </div>
           </div>
         </div>
+
         <div>
           <div class="relative w-full h-[10vw] lg:h-[14vw] md:h-[18vw] sm:h-[24vw] rounded-[5px]">
             <img v-if="imageLoadTwo" class="absolute w-full h-full rounded-[5px]" :src="imageTwo" alt="">
@@ -138,8 +148,11 @@
           </div>
         </div>
       </div>
-      <button @click="addFlat" class="login__btn--bg bg-[#E84680] rounded-[5px] w-full py-5 xxl:py-4 xl:py-3">
+      <button @click="addFlat" class="login__btn--bg bg-[#E84680] rounded-[5px] w-full py-5 xxl:py-4 xl:py-3" v-if="!selectFlat">
         <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">Добавить</span>
+      </button>
+      <button @click="editFlat" class="login__btn--bg bg-[#E84680] rounded-[5px] w-full py-5 xxl:py-4 xl:py-3" v-else>
+        <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">Редактировать</span>
       </button>
     </div>
     <div @click="$emit('close-add-apartments')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
@@ -223,6 +236,7 @@ export default {
     },
     deleteImageOne() {
       this.imageOne = ''
+      this.selectFlat.imageUp = ''
       this.imageLoadOne = false
     },
     deleteImageTwo() {
@@ -281,6 +295,17 @@ export default {
   },
   created() {
     console.log(this.selectFlat)
+    if (this.selectFlat) {
+      this.flat.id = this.selectFlat.number
+      this.flat.square = this.selectFlat.square
+      this.selectFloors = this.selectFlat.floor
+      this.selectLayout = this.selectFlat.count
+      this.selectStairs = this.selectFlat.number_from_stairs
+      this.selectStatus = +this.selectFlat.status
+      this.flat.price = this.selectFlat.price
+      this.flat.image_up = this.selectFlat.imageUp
+      this.flat.image_down = this.selectFlat.imageDown
+    }
   }
 }
 </script>

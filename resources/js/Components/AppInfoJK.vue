@@ -706,7 +706,6 @@ export default {
 
     this.supportsReady = this.supports
 
-    console.log(this.house)
     if (this.house !== undefined) {
       this.object.title = this.house.title
       this.object.description = this.house.description
