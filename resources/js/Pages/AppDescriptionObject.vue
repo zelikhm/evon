@@ -214,14 +214,7 @@ import { Navigation, Pagination} from "swiper";
 import AppMap from "@/Components/AppMap.vue";
 
 export default {
-  props: {
-    house: [],
-    dops: [],
-    infos: [],
-    slider: [],
-    user: [],
-    compilation: []
-  },
+  props: ['house', 'dops', 'user', 'slider', 'infos', 'compilation'],
   data() {
     return {
       fullDescription: false,
@@ -270,7 +263,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.house)
     this.isWithClient = localStorage.getItem('withClient') === 'true' ? true : false
     this.flagFavorite = this.house.favorite
     this.arrayInfos = []

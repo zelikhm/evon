@@ -56,8 +56,8 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
         </div>
         <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[15px]">
           <div class="relative hover__search">
-            <input class="text-white focus:ring-white pr-14 xxl:pr-10 xl:pr-8 lg:pr-6 pl-4 xxl:pl-3 xl:pl-2.5 lg:pl-1.5 text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none bg-[#6435A5] h-12 xxl:h-10 xl:h-8 w-[380px] exl:w-[18vw] lg:w-[160px] sm:w-[100px] rounded-[5px]" type="text" >
-            <img src="../../assets/svg/search_icon.svg" class="cursor-pointer absolute top-1/2 -translate-y-1/2 right-3 exl:right-[1vw] h-6 xxl:h-5 xl:h-4" alt="Поиск">
+            <input @keydown.enter="startSearch" v-model="search" class="text-white focus:ring-white pr-14 xxl:pr-10 xl:pr-8 lg:pr-6 pl-4 xxl:pl-3 xl:pl-2.5 lg:pl-1.5 text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none bg-[#6435A5] h-12 xxl:h-10 xl:h-8 w-[380px] exl:w-[18vw] lg:w-[160px] sm:w-[100px] rounded-[5px]" type="text" >
+            <img @click="startSearch" src="../../assets/svg/search_icon.svg" class="cursor-pointer absolute top-1/2 -translate-y-1/2 right-3 exl:right-[1vw] h-6 xxl:h-5 xl:h-4" alt="Поиск">
           </div>
           <div class="flex">
             <div class="header__chat cursor-pointer flex items-center justify-center h-[60px] lg:h-12 xxl:h-12 xl:h-10 px-8 xxl:px-6 xl:px-5 lg:px-4">
@@ -168,11 +168,19 @@ export default {
       openProfileMenu: false,
       openBurgerAgent: false,
       overlaySelect: false,
-      withClient: false
+      withClient: false,
+      search: null,
     }
   },
   emits: ['login-realtor', 'login-developer', 'open-register'],
   methods: {
+    startSearch() {
+      localStorage.setItem('searchData', this.search)
+      window.location.href = '/houses#search'
+      if (window.location.href.split('#').at(-1) === 'search') {
+        location.reload()
+      }
+    },
     openProfile() {
       this.openProfileMenu = !this.openProfileMenu
       this.overlaySelect = !this.overlaySelect
