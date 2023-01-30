@@ -4,6 +4,7 @@ namespace App\Http\Traits;
 
 use App\Http\Admin\News\AdminNewsModel;
 use App\Models\Builder\Flat\FlatModel;
+use App\Models\Builder\Flat\FrameModel;
 use App\Models\Builder\HouseCharacteristicsModel;
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\HouseNewsModel;
@@ -345,6 +346,29 @@ trait MainInfo
     $house = HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'user', 'news', 'flats'])
       ->where('slug', $slug)
       ->first();
+
+    if(count($house->flats) > 0) {
+      $flats = $house->flats;
+
+      $flats->sortBy(
+        [
+          fn ($a, $b) => $a->updated_at <=> $b->updated_at,
+          fn ($a, $b) => $b->updated_at <=> $a->updated_at,
+        ]
+      );
+
+      $house->flat_updated = $flats[0]->updated_at->format('d-m-Y');
+    } else {
+      $house->flat_updated = null;
+    }
+
+    $frame_updated = FrameModel::where('house_id', $house->id)->orderBy('updated_at', 'DESC')->first();
+
+    if(count($frame_updated) > 0) {
+      $house->frame_updated = $frame_updated->updated_at->format('d-m-Y');
+    } else {
+      $house->frame_updated = null;
+    }
 
     foreach ($house->frames as $frame) {
       $frame->flats = FlatModel::where('frame_id', $frame->id)->with(['images'])->get();

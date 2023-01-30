@@ -267,7 +267,6 @@ class HouseController extends Controller
         $str1 = null;
       }
 
-
       HouseCharacteristicsModel::create([
         'house_id' => $house->id,
         'exclusive' => $request->exclusive,
@@ -275,12 +274,12 @@ class HouseController extends Controller
         'type' => $request->type,
         'dop' => $str1,
         'info' => $str,
-        'toSea' => is_string($request->toSea) ? null : $request->toSea,
-        'toSchool' => is_string($request->toSchool) ? null : $request->toSchool,
-        'toShop' => is_string($request->toShop) ? null : $request->toShop,
-        'toPark' => is_string($request->toPark) ? null : $request->toPark,
-        'toBus' => is_string($request->toBus) ? null : $request->toBus,
-        'toChildrenSchool' => is_string($request->toChildrenSchool) ? null : $request->toChildrenSchool,
+        'toSea' => (int)$request->toSea === 0 ? null : (int)$request->toSea,
+        'toSchool' => (int)$request->toSchool === 0 ? null : (int)$request->toSchool,
+        'toShop' => (int)$request->toShop === 0 ? null : (int)$request->toShop,
+        'toPark' => (int)$request->toPark === 0 ? null : (int)$request->toPark,
+        'toBus' => (int)$request->toBus === 0 ? null : (int)$request->toBus,
+        'toChildrenSchool' => (int)$request->toChildrenSchool === 0 ? null : (int)$request->toChildrenSchool,
         'count_flat' => $request->count_flat,
         'created_at' => Carbon::now()->addHour(3),
         'updated_at' => Carbon::now()->addHour(3),
@@ -363,12 +362,12 @@ class HouseController extends Controller
           'type' => $request->type,
           'dop' => $str1,
           'info' => $str,
-          'toSea' => is_string($request->toSea) ? null : $request->toSea,
-          'toSchool' => is_string($request->toSchool) ? null : $request->toSchool,
-          'toShop' => is_string($request->toShop) ? null : $request->toShop,
-          'toPark' => is_string($request->toPark) ? null : $request->toPark,
-          'toBus' => is_string($request->toBus) ? null : $request->toBus,
-          'toChildrenSchool' => is_string($request->toChildrenSchool) ? null : $request->toChildrenSchool,
+          'toSea' => (int)$request->toSea === 0 ? null : (int)$request->toSea,
+          'toSchool' => (int)$request->toSchool === 0 ? null : (int)$request->toSchool,
+          'toShop' => (int)$request->toShop === 0 ? null : (int)$request->toShop,
+          'toPark' => (int)$request->toPark === 0 ? null : (int)$request->toPark,
+          'toBus' => (int)$request->toBus === 0 ? null : (int)$request->toBus,
+          'toChildrenSchool' => (int)$request->toChildrenSchool === 0 ? null : (int)$request->toChildrenSchool,
           'count_flat' => $request->count_flat,
           'updated_at' => Carbon::now()->addHour(3),
         ]);
@@ -454,7 +453,7 @@ class HouseController extends Controller
   {
     if ($request->token === env('TOKEN')) {
 
-      if ($request->image_up) {
+      if ($request->image_up !== 'undefined') {
         $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
         $request->image_up->move(public_path('/storage/flat/'), $imageUp);
         $imageUp = '/storage/flat/' . $imageUp;
@@ -463,7 +462,7 @@ class HouseController extends Controller
         $imageUp = $flat->imageUp;
       }
 
-      if ($request->image_down) {
+      if ($request->image_down !== 'undefined') {
         $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
         $request->image_down->move(public_path('/storage/flat/'), $imageDown);
         $imageDown = '/storage/flat/' . $imageDown;
