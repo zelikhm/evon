@@ -10,7 +10,7 @@
             class="mySwiper2 mb-4 xxl:mb-3 xl:mb-2"
           >
             <swiper-slide>
-              <img class="w-full" :src="mainImage" />
+              <img class="w-full object-cover" :src="mainImage" />
             </swiper-slide>
           </swiper>
           <div class="inner__slider">
@@ -24,7 +24,7 @@
               class="mySwiper h-[10vh]"
             >
               <swiper-slide class="w-full h-[10vh]" v-for="item in showImage" @click="targetWithPhoto(item)">
-                <img class="w-full" :src="item.name" />
+                <img class="w-full object-cover" :src="item.name" />
               </swiper-slide>
             </swiper>
           </div>

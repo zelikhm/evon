@@ -4,25 +4,25 @@
   <app-header :user="user" />
   <main class="relative">
 
-    <div v-if="state === 0" class="absolute w-full text-center favorites__banner py-3 xxl:py-2.5 xl:py-2 text-[#30CB6E] text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">
+    <div v-if="state === 0" class="absolute w-full text-center favorites__banner py-3 xxl:py-2.5 xl:py-2 text-[#30CB6E] text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none">
       {{ notificationTitle }} добавлен в избранное
     </div>
-    <div v-if="state === 1" class="absolute w-full text-center bg-[#E84780] py-3 xxl:py-2.5 xl:py-2 text-white text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">
+    <div v-if="state === 1" class="absolute w-full text-center bg-[#E84780] py-3 xxl:py-2.5 xl:py-2 text-white text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none">
       {{ notificationTitle }} удален из избранного
-      <button @click="cancelDeleted" class="bg-white text-[#E84780] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none px-2 xxl:py-1.5 xl:p-1 py-1.5 rounded-[3px]">Отменить</button>
+      <button @click="cancelDeleted" class="bg-white text-[#E84780] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none px-2 xxl:py-1.5 xl:p-1 py-1.5 rounded-[3px]">Отменить</button>
     </div>
 
     <div class="_container">
       <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5 mt-16 xxl:mt-12 xl:mt-10">
-        <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] leading-none">Избранное</h2>
-        <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Найдено {{ favorites.length }} объектов</span>
+        <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px] leading-none">Избранное</h2>
+        <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">Найдено {{ favorites.length }} объектов</span>
       </div>
 
       <div v-if="favorites.length === 0" class="grid grid-cols-2 lg:grid-cols-1 mt-10 xxl:mt-8 xl:mt-6">
         <div class="flex justify-between sm:flex-col sm:items-center p-7 xxl:p-5 xl:p-4 bg-[#F6F3FA] rounded-[10px]">
           <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
-            <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none font-medium">У вас в избранном еще ничего нет</span>
-            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs leading-none">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+            <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none font-medium">У вас в избранном еще ничего нет</span>
+            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
           </div>
           <svg class="h-full" width="162" height="113" viewBox="0 0 162 113" fill="#6435A5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <rect width="162" height="113" fill="url(#pattern0)"/>
@@ -40,37 +40,37 @@
 
         <div class="relative block__favorites rounded-[5px] transition-all" v-for="item in favorites">
           <div class="relative">
-            <img v-if="item.house.images.length === 0" src="../../assets/no-img-houses-zastroy.jpg" class="object-cover relative z-0 h-[12.5vw] x:h-[16vw] lg:h-[23vw] md:h-[30vw] sm:h-[52vw] w-full rounded-[5px]" alt="">
-            <img v-else :src="item.house.images[0].name" class="relative z-0 h-[12.5vw] x:h-[16vw] lg:h-[23vw] md:h-[30vw] sm:h-[52vw] w-full rounded-[5px]" alt="">
+            <img v-if="item.house.images.length === 0" src="../../assets/no-img-houses-zastroy.jpg" class="object-cover relative z-0 h-[240px] exl:h-[12.5vw] x:h-[16vw] lg:h-[23vw] md:h-[30vw] sm:h-[52vw] w-full rounded-[5px]" alt="">
+            <img v-else :src="item.house.images[0].name" class="object-cover relative z-0 h-[240px] exl:h-[12.5vw] x:h-[16vw] lg:h-[23vw] md:h-[30vw] sm:h-[52vw] w-full rounded-[5px]" alt="">
             <div class="seek opacity-0 transition-all immovables__overlay top-0 h-full w-full absolute z-10 rounded-[5px]"></div>
             <div class="seek opacity-0 transition-all absolute top-1/2 -translate-y-1/2 left-0 z-10 flex flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
               <button @click="openAddSelection = true" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
-                <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">В подборку</span>
-                <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
+                <span class="text-white text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap">В подборку</span>
+                <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-5" alt="Плюс">
               </button>
               <button v-if="item.house.favorite" @click="removeFavorite(item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
-                <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">Убрать</span>
-                <img src="../../assets/svg/heart_icon_fill.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                <span class="text-white text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap">Убрать</span>
+                <img src="../../assets/svg/heart_icon_fill.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-4" alt="">
               </button>
               <button v-else @click="addFavorite(item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
-                <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none">В избранное</span>
-                <img src="../../assets/svg/heart_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="">
+                <span class="text-white text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none">В избранное</span>
+                <img src="../../assets/svg/heart_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3 lg:w-4" alt="">
               </button>
             </div>
             <div class="absolute left-0 bottom-0 flex items-center gap-2 xl:gap-1.5 z-20 p-5 xxl:p-4 xl:p-3">
-              <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ item.house.title }}</span>
+              <span class="text-white text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none">{{ item.house.title }}</span>
               <div class="bg-white w-1 h-1 rounded-full"></div>
-              <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">49 Квартир</span>
+              <span class="text-white text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap">49 Квартир</span>
             </div>
           </div>
           <div class="p-5 xxl:p-4 xl:p-3 flex flex-col gap-3.5 xxl:gap-3 xl:gap-2.5">
             <div class="flex justify-between items-center">
-              <h3 class="text-[#1E1D2D] text-[20px] xxl:text-[16px] xl:text-[14px] font-semibold leading-none whitespace-nowrap">{{ item.house.title }}</h3>
-              <img @click="addFavorite(item)" v-if="!item.house.favorite" src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4" alt="Сердце" >
-              <img @click="removeFavorite(item)" v-else src="../../assets/svg/heart_icon_pink.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4" alt="">
+              <h3 class="text-[#1E1D2D] text-[20px] xxl:text-[16px] xl:text-[14px] lg:text-[20px] font-semibold leading-none">{{ item.house.title }}</h3>
+              <img @click="addFavorite(item)" v-if="!item.house.favorite" src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 lg:w-6" alt="Сердце" >
+              <img @click="removeFavorite(item)" v-else src="../../assets/svg/heart_icon_pink.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 lg:w-6" alt="">
             </div>
-            <span class="text-[17px] xxl:text-[14px] xl:tex-[12px] text-[#1E1D2D] leading-none whitespace-nowrap">от 1 490 000 €</span>
-            <div class="flex items-center gap-2 xl:gap-1.5 text-[14px] xxl:text-[12px] xl:text-[10px]">
+            <span class="text-[17px] xxl:text-[14px] xl:tex-[12px] lg:text-[16px]  text-[#1E1D2D] leading-none whitespace-nowrap">от 1 490 000 €</span>
+            <div class="flex items-center gap-2 xl:gap-1.5 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px]">
               <span class="leading-none whitespace-nowrap">85 000 € за м²</span>
               <div class="w-1 h-1 bg-[#8A8996] rounded-full"></div>
               <span class="leading-none whitespace-nowrap">14.9 м² - 23.4 м²</span>

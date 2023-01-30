@@ -9,20 +9,26 @@
             <span class="text-[#8A8996] text-[12px] xxl:text-[10px] xl:text-[8px] leading-none">Нумерация квартир от лестничного пролета</span>
           </div>
           <div class="flex gap-2.5 xl:gap-2" v-for="floor in house.info.floors">
-            <div class="bg-[#E5DFEE] flex-shrink-0 font-semibold relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">{{ floor }}</div>
+            <div class="bg-[#E5DFEE] flex-shrink-0 font-semibold relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE]">{{ floor - 1}}</div>
             <div v-for="count in house.info.count_flat" class="bg-white flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
-              <div v-if="checkFlat(floor, count) === null" class="bg-white flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
+              <div v-if="checkFlat(floor - 1, count) === null" class="bg-white flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
                 <span class="relative z-10"></span>
-<!--                <img class="absolute w-full h-full top-0 left-0" src="../../assets/svg/chess_fence.svg" alt="">-->
               </div>
-<!--              <div v-if="checkFlat(floor, count) == 0" class="bg-white flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">-->
-<!--                <span class="relative z-10"></span>-->
-<!--                <img class="absolute w-full h-full top-0 left-0" src="../../assets/svg/chess_fence.svg" alt="">-->
-<!--              </div>-->
-              <div v-if="checkFlat(floor, count) !== null">
-                <div v-if="checkFlat(floor, count).status == 2" v-on:click="clickFlat(checkFlat(floor, count).id)" class="bg-white flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
-                  <span class="relative z-10">{{ checkFlat(floor, count).square }}</span>
-                  <img class="absolute w-full h-full top-0 left-0" src="../../assets/svg/chess_fence.svg" alt="">
+              <div v-if="checkFlat(floor - 1, count) !== null">
+                <div v-if="checkFlat(floor - 1, count).status == 2" @click="clickFlat(checkFlat(floor - 1, count).id)" :class="{'bg-[#6435A5]': checkFlat(floor - 1, count).active}" class="flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
+                  <span class="relative z-10" :class="{'text-white': checkFlat(floor - 1, count).active === 1}">{{ checkFlat(floor - 1, count).square }}</span>
+                  <img class="absolute w-full h-full top-0 left-0" v-if="checkFlat(floor - 1, count).active !== 1" src="../../assets/svg/chess_fence.svg" alt="">
+                </div>
+              </div>
+              <div v-if="checkFlat(floor - 1, count) !== null">
+                <div v-if="checkFlat(floor - 1, count).status == 4" @click="clickFlat(checkFlat(floor - 1, count).id)" :class="{'text-white': checkFlat(floor - 1, count).active === 1, 'bg-[#6435A5]': checkFlat(floor - 1, count).active === 1}"
+                     class="bg-white flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
+                  {{ checkFlat(floor - 1, count).square }}
+                </div>
+              </div>
+              <div v-if="checkFlat(floor - 1, count) !== null">
+                <div v-if="checkFlat(floor - 1, count).status == 3" @click="clickFlat(checkFlat(floor - 1, count).id)" :class="{'bg-[#6435A5]': checkFlat(floor - 1, count).active === 1}" class="relative flex-shrink-0 flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
+                  <img src="../../assets/svg/lock.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
                 </div>
               </div>
 
@@ -81,7 +87,6 @@ export default {
   props: ['flats', 'house'],
   data() {
     return {
-
     }
   },
   methods: {
@@ -90,27 +95,39 @@ export default {
     },
     checkFlat(floor, count) {
       let object = {};
-
       let flat = []
+
       flat = this.flats.filter(item => item.floor === floor && item.number_from_stairs === count)
+
 
       if(flat.length > 0) {
         object = {
           id: flat[0].id,
           status: flat[0].status,
           square: flat[0].square,
+          active: flat[0].active
         }
       }
 
       return flat.length > 0 ? object : null;
     },
     clickFlat(id) {
-      console.log(id)
+      let flat = this.flats.find(item => item.id === id)
+
+      this.flats.forEach(item => {
+        item.active = 0
+      })
+
+      flat.active = 1
+      this.$emit('targetFlat', flat)
     }
   },
   created() {
     console.log(this.flats)
 
+    this.flats.forEach(item => {
+      item.active = 0
+    })
 
     // console.log(this.flats.find(i => i.floor === 1 && i.number_from_stairs === 3))
   }

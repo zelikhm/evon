@@ -105,7 +105,7 @@
       <div class="_container">
         <div class="_container--inter">
           <div class="flex items-center justify-center ">
-            <button @click="openRegister = true" class="text-white bg-[#6435A5] text-base xxl:text-sm xl:text-xs lg:text-[14px] leading-none rounded-[3px] px-6 xxl:px-5 xl:px-4 py-3 xxl:py-2 xl:py-1.5 my-7 xxl:my-5 xl:my-4">Зарегистрироваться</button>
+            <button @click="openRegister = true" class="hover__button--purple transition-all text-white bg-[#6435A5] text-base xxl:text-sm xl:text-xs lg:text-[14px] leading-none rounded-[3px] px-6 xxl:px-5 xl:px-4 py-3 xxl:py-2 xl:py-1.5 my-7 xxl:my-5 xl:my-4">Зарегистрироваться</button>
           </div>
         </div>
       </div>

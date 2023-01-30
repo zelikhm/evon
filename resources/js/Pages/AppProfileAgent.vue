@@ -2,19 +2,19 @@
   <app-header :user="userHeader" />
   <app-modal-notification
     class="left-[2vw] transition-all duration-1000"
-    :class="{'-left-full': !openNotification}"
+    :class="{'-left__full': !openNotification}"
     @close-notification="openNotification = !openNotification"
     :text="text"
   />
   <main class="relative">
     <div class="_container">
       <div class="my-14 xxl:my-12 xl:my-10">
-        <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] leading-none">Редактировать профиль</h2>
+        <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px] leading-none">Редактировать профиль</h2>
         <div class="mt-10 xxl:mt-8 xl:mt-6">
-          <div class="grid__prof-agent gap-7 xxl:gap-5 xl:gap-4">
-            <div class="flex flex-col gap-12 xxl:gap-10 xl:gap-8">
-              <div class="relative w-[250px] h-[250px] exl:w-[13.28vw] exl:h-[13.28vw] rounded-full">
-                <img class="absolute object-cover w-full h-full rounded-full" :src="'/storage/user/' + myPhoto" alt="">
+          <div class="grid__prof-agent gap-7 xxl:gap-5 xl:gap-4 lg:gap-6">
+            <div class="flex flex-col lg:flex-row gap-12 xxl:gap-10 xl:gap-8 lg:gap-4">
+              <div class="relative flex-shrink-0 w-[250px] h-[250px] exl:w-[13.28vw] exl:h-[13.28vw] lg:w-[128px] sm:w-[100px] lg:h-[128px] sm:h-[100px]  rounded-full">
+                <img class="absolute object-cover w-full h-full rounded-full" :src="myPhoto" alt="">
                 <div class="avatar__contact w-full h-full rounded-full">
                   <div class="absolute rounded-full w-full h-full top-0 left-0">
                     <label for="avatar" :class="{'-z-10': avatar}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-full">
@@ -29,65 +29,64 @@
                   </div>
                 </div>
               </div>
-              <div class="bg-[#F6F3FA] flex flex-col rounded-[10px]">
+              <div class="bg-[#F6F3FA] w-full flex flex-col rounded-[10px]">
                <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5 p-5 xxl:p-4 xl:p-3">
-                 <span class="text-[15px] xxl:text-[13px] xl:text-[11px] leading-none">Управление подпиской</span>
-                 <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">
+                 <span class="text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] leading-none">Управление подпиской</span>
+                 <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none">
                    Активна до:
                    <span class="text-[#E84680]"> 20.11.2022</span>
                  </span>
                </div>
                 <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
-                <button class="bg-[#6435A5] text-[15px] xxl:text-[13px] py-4 xxl:py-3 xl:py-2.5 xl:text-[11px] leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">Оплатить</button>
+                <button class="hover__button--purple transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">Оплатить</button>
               </div>
             </div>
             <div>
-              <h3 class="text-[18px] xxl:text-[15px] xl:text-[13px] text-[#1E1D2D]">Личные данные</h3>
+              <h3 class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">Личные данные</h3>
               <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 mt-7 xxl:mt-5 xl:mt-4">
-                <div class="grid grid-cols-2 gap-5 xxl:gap-4 xl:gap-3">
+                <div class="grid grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3">
                   <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-                    <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name">Имя</label>
-                    <input v-model="profile.name" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="name" placeholder="Введите имя...">
+                    <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px]" for="name">Имя</label>
+                    <input v-model="profile.name" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="name" placeholder="Введите имя...">
                   </div>
                   <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-                    <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="surname">Фамилия</label>
-                    <input v-model="profile.surname" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="surname" placeholder="Введите фамилию...">
+                    <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px]" for="surname">Фамилия</label>
+                    <input v-model="profile.surname" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="surname" placeholder="Введите фамилию...">
                   </div>
                   <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-                    <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="tel">Телефон</label>
-                    <input v-model="profile.tel" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="tel" id="tel" placeholder="+7 930 245 15 20">
+                    <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px]" for="tel">Телефон</label>
+                    <input v-model="profile.tel" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="tel" id="tel" placeholder="+7 930 245 15 20">
                   </div>
                   <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-                    <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="email">Почта</label>
-                    <input v-model="profile.email" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="email" placeholder="elena@mail.ru">
+                    <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px]" for="email">Почта</label>
+                    <input v-model="profile.email" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="email" placeholder="elena@mail.ru">
                   </div>
                   <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-                    <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="job">Должность</label>
-                    <input v-model="profile.position" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="job">
+                    <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px]" for="job">Должность</label>
+                    <input v-model="profile.position" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="job">
                   </div>
                   <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-                    <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="social">Языки</label>
-                    <input v-model="profile.link" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="social">
+                    <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px]" for="social">Языки</label>
+                    <input v-model="profile.link" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="social">
                   </div>
                 </div>
                 <div class="relative flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-                  <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="talk">Расскажите о себе</label>
-                  <textarea v-model="profile.description" maxlength="250" @input="lengthTextarea = profile.description.length" class="custom__scroll-grey text-[#1E1D2D] resize-none h-[90px] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none focus:ring-0" type="text" id="talk" placeholder="Расскажите о себе"></textarea>
+                  <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px] lg:text-[13px]" for="talk">Расскажите о себе</label>
+                  <textarea v-model="profile.description" maxlength="250" @input="lengthTextarea = profile.description.length" class="custom__scroll-grey text-[#1E1D2D] resize-none h-[90px] xxl:h-[80px] xl:h-[70px] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none focus:ring-0" type="text" id="talk" placeholder="Расскажите о себе"></textarea>
                 </div>
-                <button @click="saveEdit" class="bg-[#6435A5] text-[15px] xxl:text-[13px] py-4 xxl:py-3 xl:py-2.5 xl:text-[11px] leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">Сохранить</button>
+                <button @click="saveEdit" class="hover__button--purple transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5 leading-none text-white rounded-[5px]">Сохранить</button>
               </div>
             </div>
             <div class="flex flex-col">
-              <h3 class="text-[18px] xxl:text-[15px] xl:text-[13px] text-[#1E1D2D]">Данные Агенства недвижимости</h3>
-              <div class="p-7 xxl:p-5 xl:p-4 mt-7 xxl:mt-5 xl:mt-4">
-                <div class="flex gap-7 xxl:gap-5 xl:gap-4">
+              <h3 class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">Данные Агенства недвижимости</h3>
+              <div class="p-7 xxl:p-5 xl:p-4 x:p-3 mt-7 xxl:mt-5 xl:mt-4 white__bg">
+                <div class="flex gap-7 xxl:gap-5 xl:gap-4 x:gap-2.5">
                   <div class="flex w-full flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-                    <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="company">Компания</label>
-                    <input v-model="titleCompany" disabled class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="company">
+                    <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px]" for="company">Компания</label>
+                    <input v-model="titleCompany" disabled class="w-full text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="company">
                   </div>
                   <div class="relative shrink-0 h-[78px] xxl:h-[61px] xl:h-[55px] w-[78px] xxl:w-[61px] xl:w-[55px] rounded-full">
-                    <img class="absolute w-full h-full rounded-full" v-if="user.company && user.company.image" :src="user.company.image" alt="">
-
+                    <img class="absolute object-cover w-full h-full rounded-full" v-if="user.company && user.company.image" :src="user.company.image" alt="">
                     <button v-if="agency" @click="deletePhoto" class="absolute rounded-full bg-[#E84680] z-10 top-0 left-0 h-5 xxl:h-4.5 xl:h-4 w-5 xxl:w-4.5 xl:w-4">
                       <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-white h-[1px] w-[60%]"></span>
                       <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-white h-[1px] w-[60%]"></span>
@@ -105,8 +104,8 @@
               <div class="relative my-7 xxl:my-5 xl:my-4">
                 <img :src="user.company.banner" v-if="user.company && user.company.banner" class="w-full h-[6.56vw] rounded-[10px]">
 <!--                      <img :src="'/storage/user/' + user.image">-->
-<!--                      <span class="text-[#6435A5] text-lg xxl:text-[15px] xl:text-[13px] font-semibold leading-none">1920 x 260 px</span>-->
-<!--                    <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none">Загрузить обложку</span>-->
+<!--                      <span class="text-[#6435A5] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] font-semibold leading-none">1920 x 260 px</span>-->
+<!--                    <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px] leading-none">Загрузить обложку</span>-->
 <!--                <input class="pointer-events-none overflow-hidden absolute top-0 left-0 opacity-0" id="cover" type="file" ref="banner" @change="changeBanner">-->
               </div>
             </div>
@@ -197,26 +196,26 @@ export default {
     }
   },
   created() {
-    this.profile.name = this.user.first_name
-    this.profile.surname = this.user.last_name
-    this.profile.tel = this.user.phone
+    this.profile.name = this.user.first_name === 'null' ? '' : this.user.first_name
+    this.profile.surname = this.user.last_name === 'null' ? '' : this.user.last_name
+    this.profile.tel = this.user.phone === 'null' ? '' : this.user.phone
 
     this.userHeader = this.user
 
-    this.profile.position = this.user.status
+    this.profile.position = this.user.status === 'null' ? '' : this.user.status
     if (this.user.company) {
       this.titleCompany = this.user.company.title
     }
     if(this.user.link === null) {
       this.profile.link = ''
     } else {
-      this.profile.link = this.user.link
+      this.profile.link = this.user.link === 'null' ? '' : this.user.link
     }
 
     if(this.user.description === null) {
       this.profile.description = ''
     } else {
-      this.profile.description = this.user.description
+      this.profile.description = this.user.description === 'null' ? '' : this.user.description
     }
 
     this.profile.email = this.user.email

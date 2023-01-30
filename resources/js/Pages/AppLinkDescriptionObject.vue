@@ -69,7 +69,7 @@ import "swiper/css/pagination";
           <div class="border border-solid border-[#E5DFEE] h-[100px] xxl:h-[80px] xl:h-[60px] flex md:flex-col md:h-fit items-center justify-evenly rounded-[12px] mt-7 xxl:mt-5 xl:mt-4 mb-16 xxl:mb-12 xl:mb-10">
             <div class="flex flex-col justify-center md:py-2">
               <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">{{ house.flats.length }}</span>
-              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">Квартир</span>
+              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">{{ house.flats.length === 1 ? "Квартира" : house.flats.length === 2 || house.flats.length === 3 || house.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
             </div>
             <div class="h-full md:h-[1px] w-[1px] md:w-full bg-[#E5DFEE]"></div>
             <div class="flex flex-col justify-center md:py-2">
@@ -283,10 +283,10 @@ import "swiper/css/pagination";
         <div>
           <div class="contact__selling h-fit bg-white rounded-[10px] p-4 xxl:p-3 xl:p-2.5 mb-7 xxl:mb-5 xl:mb-4" v-for="item in house.supports">
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 mb-5 xxl:mb-4 xl:mb-4">
-              <img src="../../assets/chat_avatar.png" class="w-14 xxl:w-12 xl:w-10 lg:w-12" alt="">
+              <img class="w-14 xxl:w-12 xl:w-10 h-14 xxl:h-12 xl:h-10 rounded-full" v-if="item.avatar" :src="item.avatar" alt="">
               <div class="flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
-                <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none font-medium">Елена</span>
-                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">Отдел продаж</span>
+                <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none font-medium">{{ item.name }}</span>
+                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">{{ item.status }}</span>
               </div>
             </div>
             <div class="flex items-center mb-5 xxl:mb-4 xl:mb-4 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">
@@ -300,7 +300,7 @@ import "swiper/css/pagination";
               </div>
               <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]">
                 <img src="../../assets/svg/chat_mail_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
-                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[14px]">elena@mail.ru</span>
+                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[14px]">{{ item.email }}</span>
               </div>
             </div>
           </div>

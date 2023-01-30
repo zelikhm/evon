@@ -22,11 +22,11 @@ import { Link } from '@inertiajs/inertia-vue3'
           <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectType}">
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Тип</span>
             <div class="relative" :tabindex="tabindex" @blur="openSelectType = false">
-              <div @click="openSelectType = !openSelectType" class="flex items-center justify-between cursor-pointer text-[#1E1D2D]  text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
+              <div @click="openSelectType = !openSelectType" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
                 <span>{{ selectType }}</span>
                 <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectType }" alt="">
               </div>
-              <div v-if="openSelectType" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px]">
+              <div v-if="openSelectType" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
                 <span
                     v-for="(type, idx) in types" :key="idx"
                     @click="changeSelectTypes(type)"
@@ -39,14 +39,14 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
           <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectCity}">
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Город</span>
-            <div class="relative" :tabindex="tabindex" @blur="openSelectCity = false">
+            <div class="relative">
               <div @click="openSelectCity = !openSelectCity" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3">
                 <span>{{ selectCity }}</span>
                 <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectCity }" alt="">
               </div>
-              <div v-if="openSelectCity" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px]">
+              <div v-if="openSelectCity" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
                 <div class="relative w-full p-5 xxl:p-4 xl:p-3">
-                  <input v-model="searchValue" class="py-3 xxl:py-2.5 xl:py-2 pl-10 xxl:pl-8 xl:pl-6 w-full text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] rounded-[6px] leading-none border border-solid border-[#E5DFEE]" type="text">
+                  <input v-model="searchValue" class="py-3 xxl:py-2.5 xl:py-2 pl-10 xxl:pl-8 xl:pl-6 focus:ring-[#6435A5] focus:border-[#6435A5] w-full text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] rounded-[6px] leading-none border border-solid border-[#E5DFEE]" type="text">
                   <img class="absolute top-1/2 -translate-y-1/2 translate-x-1/2 w-4.5 xxl:w-4 xl:w-3.5" src="../../assets/svg/search_icon_grey.svg" alt="">
                 </div>
                 <span
@@ -65,7 +65,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                 <span>{{ selectRegion }}</span>
                 <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectRegion }" alt="">
               </div>
-              <div v-if="openSelectRegion" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px]">
+              <div v-if="openSelectRegion" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
                 <span
                   v-for="(region, idx) in regions" :key="idx"
                   @click="changeSelectRegion(region)"
@@ -98,7 +98,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                 <span>{{ selectDeadline }}</span>
                 <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectDeadline }" alt="">
               </div>
-              <div v-if="openSelectDeadline" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px]">
+              <div v-if="openSelectDeadline" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
                 <span
                   v-for="(deadline, idx) in deadlines" :key="idx"
                   @click="changeSelectTypes(deadline)"
@@ -131,7 +131,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                 <span class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ selectDev }}</span>
                 <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectDev }" alt="">
               </div>
-              <div v-if="openSelectDev" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px]">
+              <div v-if="openSelectDev" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
                 <span
                   v-for="(item, idx) in builders" :key="idx"
                   @click="changeSelectDev(item)"
@@ -185,7 +185,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                     <span class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ selectInstallment }}</span>
                     <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectInstallment }" alt="">
                   </div>
-                  <div v-if="openSelectInstallment" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px]">
+                  <div v-if="openSelectInstallment" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
                     <span
                       v-for="(installment, idx) in optionsInstallment" :key="idx"
                       @click="changeSelectInstallment(installment)"
