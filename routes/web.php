@@ -34,6 +34,8 @@ Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
     Route::get('/news/edit/{id}', ['App\Http\Controllers\House\NewsController', 'editNews']);
   });
 
+  Route::get('/compilation', ['App\Http\Controllers\User\CompilationController', 'index']);
+
   Route::get('/favorites', ['App\Http\Controllers\User\FavoriteController', 'index']);
 //
   Route::get('/chat', ['App\Http\Controllers\User\ChatController', 'index']);
@@ -41,7 +43,6 @@ Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
 });
 
 Route::prefix('/compilation')->group(function () {
-  Route::get('/', ['App\Http\Controllers\User\CompilationController', 'index']);
   Route::get('/{id}', ['App\Http\Controllers\User\CompilationController', 'show']);
   Route::get('/{id}/{house}', ['App\Http\Controllers\User\CompilationController', 'house']);
 });

@@ -23,7 +23,6 @@ class CompilationController extends Controller
   public function index()
   {
 
-
     $compilations = $this->getCompilations(Auth::id());
 
     if(count($compilations) > 0) {

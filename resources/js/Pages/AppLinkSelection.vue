@@ -56,7 +56,7 @@ import { Link } from '@inertiajs/inertia-vue3'
               </div>
             </div>
           </div>
-          <div class="contact__selling h-fit bg-white rounded-[10px] p-4 xxl:p-3 xl:p-2.5">
+          <div class="sticky w-full contact__selling h-fit bg-white rounded-[10px] p-4 xxl:p-3 xl:p-2.5">
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 mb-5 xxl:mb-4 xl:mb-4">
               <img :src="compilation.user.image" class="w-14 xxl:w-12 xl:w-10 rounded-full h-14 xxl:h-12 xl:h-10" alt="">
               <div class="flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
@@ -80,7 +80,6 @@ import { Link } from '@inertiajs/inertia-vue3'
             </div>
             <span class="w-full text-[15px] xxl:text-[13px] xl:text-[11px]">Комментарий подборки: {{ compilation.description }}</span>
           </div>
-
         </div>
       </div>
     </div>

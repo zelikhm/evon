@@ -1,6 +1,6 @@
 <template>
   <div class="bg-[#F6F3FA] border__right">
-    <div class="ml-[6.25vw] lg:w-[93vw] h-[40vw] py-10 xxl:py-8 xl:py-6 pr-10 xxl:pr-8 xl:pr-6">
+    <div class="ml-[6.25vw] ml-5 exl:ml-[6.25vw] lg:w-[93vw] h-[40vw] py-10 xxl:py-8 xl:py-6 pr-10 xxl:pr-8 xl:pr-6">
       <div class="h-full custom__scroll--chess overflow-scroll">
         <div class="grid grid__chess--inner gap-2.5 xl:gap-2 text-[#6435A5] text-base xxl:text-sm xl:text-[10px]">
           <div class="flex gap-2.5 xl:gap-2 items-center">

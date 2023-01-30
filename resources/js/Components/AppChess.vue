@@ -66,7 +66,7 @@
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
-    <div class="grid grid__chess">
+    <div class="grid grid__chess max-w-[1680px] mx-auto box-content exl:max-w-full">
       <div class="">
 <!--        <div class="flex border__right-bottom">-->
 <!--          <div class="relative z-30 ml-[6.25vw]">-->
@@ -147,8 +147,8 @@
             <img :src="'/storage/flat/' + selectFlat.imageUp" class="w-40 xxl:w-36 xl:w-32" alt="">
           </div>
         </div>
-        <div class="flex items-center justify-center justify-between lg:justify-start lg:my-6 mr-[6.25vw] mr-[6.25vw] lg:mx-auto lg:px-[6.25vw] ml-10 mt-5">
-          <img @click="openCheme = true" :src="'/storage/flat/' + selectFlat.imageDown" class="cursor-pointer w-[480px] xxl:w-[380px] xl:w-[300px]" alt="">
+        <div class="flex items-center justify-center justify-between lg:justify-start lg:my-6 mr-[6.25vw] lg:mx-auto lg:px-[6.25vw]">
+          <img @click="openCheme = true" :src="'/storage/flat/' + selectFlat.imageDown" class="pl-14 xxl:pl-10 xl:pl-8 pt-16 xxl:pt-12 xl:pt-10 w-full object-cover cursor-pointer" alt="">
         </div>
       </div>
     </div>
@@ -235,7 +235,7 @@ export default {
     },
     targetFlat(flat) {
       this.selectFlat = flat
-    }
+    },
   },
   created() {
     if (this.house.frames.length > 0) {
