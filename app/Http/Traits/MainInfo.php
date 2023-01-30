@@ -364,7 +364,7 @@ trait MainInfo
 
     $frame_updated = FrameModel::where('house_id', $house->id)->orderBy('updated_at', 'DESC')->first();
 
-    if(count($frame_updated) > 0) {
+    if($frame_updated !== null) {
       $house->frame_updated = $frame_updated->updated_at->format('d-m-Y');
     } else {
       $house->frame_updated = null;
