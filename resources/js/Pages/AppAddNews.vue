@@ -11,7 +11,7 @@ import { Link } from '@inertiajs/inertia-vue3'
   <app-header :user="user" />
   <main>
     <div class="_container">
-      <div class="px-[20vw] lg:px-[10vw] md:px-[6vw] sm:px-0 relative mx-auto max-w-[826px] box-content">
+      <div class="px-[384px] exl:px-[20vw] lg:px-[10vw] md:px-[6vw] sm:px-0 relative mx-auto max-w-[826px] box-content">
         <div class="my-14 xxl:my-10 xl:my-8">
           <h2 class="text-[22px] xxl:text-lg xl:text-[15px] lg:text-[18px] font-semibold pb-7 xxl:pb-5 xl:pb-4">{{ itemEdit === undefined ? 'Добавить новости' : 'Редактировать новость' }}</h2>
           <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3">

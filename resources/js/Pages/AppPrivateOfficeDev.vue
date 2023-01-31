@@ -44,10 +44,19 @@ import { Link } from '@inertiajs/inertia-vue3'
                   <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">Редактировать</span>
                   <img src="../../assets/svg/pen_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
                 </Link>
-                <button @click="deleteHouse(house)" class="immovables__button--card flex items-center justify-between w-[30%] lg:w-[50%]  border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5 sm:py-1">
+
+                <button @click="deleteConfirm = true" class="immovables__button--card flex items-center justify-between w-[30%] lg:w-[50%]  border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5 sm:py-1">
                   <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">Удалить</span>
                   <img src="../../assets/svg/bucket_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
                 </button>
+                <div v-if="deleteConfirm" class="cursor-auto z-20 text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] absolute top-[40%] bg-white left-1/2 -translate-x-1/2 flex flex-col border border-solid border-[#CEC3DD] rounded-[5px]">
+                  <span class="whitespace-nowrap text-center border__bottom p-2.5 xxl:p-2 xl:p-1.5 leading-none">Вы уверены что хотите удалить?</span>
+                  <div class="cursor-pointer flex">
+                    <div @click="deleteHouse(house)" class="hover__select w-full text-center border__right p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[red]">Да</div>
+                    <div @click="deleteConfirm = false" class="hover__select w-full text-center p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[green]">Нет</div>
+                  </div>
+                </div>
+
                 <button @click="changeVisible(house)" class="immovables__button--card flex items-center justify-between w-[30%] lg:w-[50%]  border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5 sm:py-1">
                   <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ house.visible ? 'Скрыть' : 'Показать' }}</span>
                   <img v-if="!house.visible" src="../../assets/svg/hide_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
@@ -161,6 +170,7 @@ export default {
       pages: 0,
       page: 0,
       nextPage: 0,
+      deleteConfirm: false,
     }
   },
   methods: {
@@ -176,6 +186,8 @@ export default {
         }
       })
       axios.post('/api/house/delete', { house_id: house.id, token: this.globalToken }).then(res => console.log(res)).catch(err => console.error(err))
+
+      this.deleteConfirm = false
     },
     changeVisible(item) {
       item.visible = !item.visible

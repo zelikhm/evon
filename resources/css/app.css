@@ -248,6 +248,7 @@ input::placeholder {
 
 .register__button--white {
   transition: all 0.2s;
+  color: #6435A5;
 }
 
 .register__button--white:hover {
