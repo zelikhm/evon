@@ -776,4 +776,16 @@ class HouseController extends Controller
 
   }
 
+  public function getInfos() {
+
+    return TypesModel::all();
+
+  }
+
+  public function getDops() {
+
+    return StructureModel::all();
+
+  }
+
 }

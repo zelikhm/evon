@@ -248,7 +248,7 @@ trait MainInfo
   {
     $houses = HouseModel::where('visible', 1)
       ->where('active', 2)
-      ->with(['info', 'supports', 'files', 'frames', 'images', 'flats'])
+      ->with(['info', 'supports', 'files', 'frames', 'images', 'flats', 'user', 'news'])
       ->get();
 
     foreach ($houses as $house) {
@@ -311,7 +311,7 @@ trait MainInfo
 
   protected function getHouse($id)
   {
-    $house = HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'user', 'news'])
+    $house = HouseModel::with(['info', 'supports', 'files', 'frames', 'user', 'news', 'images'])
       ->where('id', $id)
       ->first();
 
