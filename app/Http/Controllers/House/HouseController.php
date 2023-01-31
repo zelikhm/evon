@@ -41,6 +41,7 @@ class HouseController extends Controller
     $search = collect();
 
     $houses = HouseModel::where('title', 'LIKE', $request->title . '%')
+      ->where('active', 2)
       ->orWhere('description', 'LIKE', $request->title . '%')
       ->orWhere('city', 'LIKE', $request->title . '%')
       ->orWhere('area', 'LIKE', $request->title . '%')
@@ -393,15 +394,19 @@ class HouseController extends Controller
       if ($request->image_up) {
         $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
         $request->image_up->move(public_path('/storage/flat/'), $imageUp);
+        $imageUp = '/storage/flat/' . $imageUp;
       } else {
-        $imageUp = null;
+        $flat = FlatModel::where('id', $request->flat_id)->first();
+        $imageUp = $flat->imageUp;
       }
 
       if ($request->image_down) {
         $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
         $request->image_down->move(public_path('/storage/flat/'), $imageDown);
+        $imageDown = '/storage/flat/' . $imageDown;
       } else {
-        $imageDown = null;
+        $flat = FlatModel::where('id', $request->flat_id)->first();
+        $imageDown = $flat->imageDown;
       }
 
       $flat = FlatModel::create([
