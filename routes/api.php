@@ -49,6 +49,14 @@ Route::prefix('house')->group(function () {
   Route::post('search', ['App\Http\Controllers\House\HouseController', 'search']);
 });
 
+Route::prefix('info')->group(function () {
+
+  Route::get('getInfo', ['App\Http\Controllers\House\HouseController', 'getInfos']);
+  Route::get('getDop', ['App\Http\Controllers\House\HouseController', 'getDops']);
+  Route::get('getCity', ['App\Http\Controllers\House\HouseController', 'getCityes']);
+
+});
+
 Route::prefix('compilation')->group(function () {
   Route::post('/addHouse', ['App\Http\Controllers\User\CompilationController', 'addHouse']);
   Route::post('/create', ['App\Http\Controllers\User\CompilationController', 'create']);

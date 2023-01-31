@@ -42,6 +42,7 @@ class HouseController extends Controller
 
     $houses = HouseModel::where('title', 'LIKE', $request->title . '%')
       ->where('active', 2)
+      ->where('visible', 1)
       ->orWhere('description', 'LIKE', $request->title . '%')
       ->orWhere('city', 'LIKE', $request->title . '%')
       ->orWhere('area', 'LIKE', $request->title . '%')
@@ -785,6 +786,12 @@ class HouseController extends Controller
   public function getDops() {
 
     return StructureModel::all();
+
+  }
+
+  public function getCityes() {
+
+    return $this->getCity();
 
   }
 
