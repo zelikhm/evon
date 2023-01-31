@@ -1,9 +1,3 @@
-<script setup>
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-</script>
-
 <template>
   <header class="relative h-[13.4vw]">
     <img v-if="compilation.company === null" class="w-full absolute top-0 left-0 h-full 1" src="../../assets/bg_links.jpg" alt="">
@@ -57,7 +51,7 @@ import "swiper/css/pagination";
             class="mySwiper w-full"
           >
             <swiper-slide class="h-full flex justify-center" v-if="house.images.length > 0">
-              <img @click="album = true" class="h-full w-full object-cover" :src="house.images[0].name" alt="">
+              <img @click="album = true" class="h-full w-full object-cover" :src="house.image" alt="">
             </swiper-slide>
             <swiper-slide class="h-full flex justify-center" v-else>
               <img class="h-full w-full object-cover" src="../../assets/no-img-house.jpg" alt="">
@@ -90,7 +84,7 @@ import "swiper/css/pagination";
           <div class="flex flex-col pb-14 xxl:pb-10 xl:pb-8">
             <span class="uppercase font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] pb-5 xxl:pb-4 xl:pb-3 leading-none">О ЖК</span>
             <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="fullDescription">{{ house.description }}</p>
-                        <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{ house.description.slice(0, 300) + '...' }}</p>
+            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{ house.description.slice(0, 300) + '...' }}</p>
             <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 w-fit items-center animation__arrow" @click="fullDescription = !fullDescription">
               <span class="text-[#6435A5] font-medium text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">{{ fullDescription ? 'Скрыть' : 'Подробнее' }}</span>
               <img src="../../assets/svg/arrow_right_purple.svg" class="transition-all duration-300 w-3.5 xxl:w-3 xl:wp-2.5" alt="Стрелочка в право">
@@ -317,11 +311,14 @@ import "swiper/css/pagination";
 </template>
 
 <script>
-import AppFooter from "../Layouts/AppFooter.vue"
+import AppFooter from '../Layouts/AppFooter.vue'
 import AppModalAlbum from "../Layouts/modal/AppModalAlbum.vue"
 
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { Navigation, Pagination } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation, Pagination} from "swiper";
 
 export default {
   props: ['house', 'dops', 'infos', 'user', 'compilation'],

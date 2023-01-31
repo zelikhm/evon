@@ -94,13 +94,13 @@ export default {
           house_id: this.house.id,
           description: '',
           token: this.globalToken
-        }).then(response => this.success = true)
+        }).then(response => {
+          console.log(response.data)
+          this.success = true
+        })
       }
     }
   },
-  created() {
-    console.log(this.house)
-  }
 }
 </script>
 

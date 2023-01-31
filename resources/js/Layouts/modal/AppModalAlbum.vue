@@ -12,8 +12,8 @@
             :loop="true"
             class="mySwiper2 mb-4 xxl:mb-3 xl:mb-2"
           >
-            <swiper-slide>
-              <img class="w-full h-full object-cover" :src="mainImage" />
+            <swiper-slide v-for="item in showImage">
+              <img class="w-full h-full object-cover" :src="item.name" />
             </swiper-slide>
           </swiper>
         </div>

@@ -45,16 +45,16 @@
                 <img src="../../assets/svg/screp_icon_grey.svg" class="w-6 xxl:w-5.5 xl:w-5 lg:w-6" alt="">
               </button>
               <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
-              <button @click="deleteConfirm = true" class="px-5 xxl:px-4 xl:px-3 h-full">
+              <button @click="item.deleteConfirm = true" class="px-5 xxl:px-4 xl:px-3 h-full">
                 <img src="../../assets/svg/bucket_icon_red.svg" class="w-6 xxl:w-5.5 xl:w-5 lg:w-6" alt="">
               </button>
-<!--              <div v-if="deleteConfirm" class="cursor-auto z-20 text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] absolute top-[110%] bg-white left-0 flex flex-col border border-solid border-[#CEC3DD] rounded-[5px]">-->
-<!--                <span class="whitespace-nowrap text-center border__bottom p-2.5 xxl:p-2 xl:p-1.5 leading-none">Вы уверены что хотите удалить?</span>-->
-<!--                <div class="cursor-pointer flex">-->
-<!--                  <div class="hover__select w-full text-center border__right p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[red]" @click="deleteCompilation(item)">Да</div>-->
-<!--                  <div @click="deleteConfirm = false" class="hover__select w-full text-center p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[green]">Нет</div>-->
-<!--                </div>-->
-<!--              </div>-->
+              <div v-if="item.deleteConfirm" class="cursor-auto z-20 text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] absolute top-[110%] bg-white left-0 flex flex-col border border-solid border-[#CEC3DD] rounded-[5px]">
+                <span class="whitespace-nowrap text-center border__bottom p-2.5 xxl:p-2 xl:p-1.5 leading-none">Вы уверены что хотите удалить?</span>
+                <div class="cursor-pointer flex">
+                  <div class="hover__select w-full text-center border__right p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[red]" @click="deleteCompilation(item)">Да</div>
+                  <div @click="item.deleteConfirm = false" class="hover__select w-full text-center p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[green]">Нет</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -152,6 +152,7 @@ export default {
 
     this.compilationReady.forEach(item => {
       item.isEdit = false
+      item.deleteConfirm = false
     })
   },
   components: {
