@@ -18,7 +18,9 @@
       :title="titleNewCompilation"
       :house="house"
   />
-  <app-header :user="user" @update-block-client="updateBlockClient" />
+  <app-header :user="user"
+              @update-block-client="updateBlockClient"
+  />
   <main>
     <div class="_container">
       <div class="immovables__grid relative my-14 xxl:my-10 xl:my-8">

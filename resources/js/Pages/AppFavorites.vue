@@ -1,3 +1,7 @@
+<script setup>
+import { Link } from '@inertiajs/inertia-vue3'
+</script>
+
 <template>
   <app-add-selections v-if="openAddSelection" @close-add-selection="openAddSelection = false"/>
   <app-create-selection v-if="openCreateSelection" @close-create-selection="openCreateSelection = false" />
@@ -58,14 +62,14 @@
               </button>
             </div>
             <div class="absolute left-0 bottom-0 flex items-center gap-2 xl:gap-1.5 z-20 p-5 xxl:p-4 xl:p-3">
-              <span class="text-white text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none">{{ item.house.title }}</span>
+              <span class="text-white text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none">{{ item.house.area }}</span>
               <div class="bg-white w-1 h-1 rounded-full"></div>
               <span class="text-white text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap">49 Квартир</span>
             </div>
           </div>
           <div class="p-5 xxl:p-4 xl:p-3 flex flex-col gap-3.5 xxl:gap-3 xl:gap-2.5">
             <div class="flex justify-between items-center">
-              <h3 class="text-[#1E1D2D] text-[20px] xxl:text-[16px] xl:text-[14px] lg:text-[20px] font-semibold leading-none">{{ item.house.title }}</h3>
+              <Link :href="'/house/' + item.house.slug" class="text-[#1E1D2D] text-[20px] xxl:text-[16px] xl:text-[14px] lg:text-[20px] font-semibold leading-none">{{ item.house.title }}</Link>
               <img @click="addFavorite(item)" v-if="!item.house.favorite" src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 lg:w-6" alt="Сердце" >
               <img @click="removeFavorite(item)" v-else src="../../assets/svg/heart_icon_pink.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 lg:w-6" alt="">
             </div>

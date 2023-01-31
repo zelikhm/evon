@@ -65,9 +65,16 @@
 <script>
 import AppHeader from "../Layouts/AppHeader.vue"
 import AppFooter from "../Layouts/AppFooter.vue"
+import {computed} from "vue";
+import {usePage} from "@inertiajs/inertia-vue3";
 
 export default {
   props: ['user'],
+  data() {
+    return {
+      user: computed(() => usePage().props.value.auth.user),
+    }
+  },
   components: {
     AppHeader,
     AppFooter,

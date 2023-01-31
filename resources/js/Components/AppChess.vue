@@ -31,7 +31,7 @@
         <div class="flex items-center gap-7 xxl:gap-5 xl:gap-4 x:gap-2">
           <div class="flex items-center gap-2 xl:gap-1.5">
             <img src="../../assets/svg/calender_purple.svg" class="w-4 xxl:w-3" alt="">
-            <span class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">05.12.2022</span>
+            <span class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ house.flat_updated.replace(new RegExp('-', 'g'), '.') }}</span>
           </div>
           <div class="chess__buttons h-9 xxl:h-8 xl:h-7 flex items-center p-1 xl:p-0.5 rounded-[3px] text-[14px] xxl:text-[12px] xl:text-[10px]">
             <div @click="changeChess" :class="{'chess__button--active': activeChess}" class="h-full cursor-pointer flex items-center gap-1 px-2 xl:px-1.5 rounded-[3px]">
@@ -164,7 +164,7 @@ import {computed} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
 
 export default {
-  props: ['user', 'house'],
+  props: ['user', 'house', 'flatUpdated'],
   data() {
     return {
       user: computed(() => usePage().props.value.auth.user),

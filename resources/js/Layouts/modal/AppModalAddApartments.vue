@@ -104,10 +104,10 @@
 
       <div class="grid grid-cols-2 gap-5 xxl:gap-4 xl:gap-3">
         <div>
-
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Планировка квартиры:</span>
           <div class="relative w-full h-[10vw] lg:h-[14vw] md:h-[18vw] sm:h-[24vw] rounded-[5px]">
             <img v-if="imageLoadOne" class="absolute w-full h-full rounded-[5px]" :src="imageOne" alt="">
-            <button  @click="deleteImageOne" class="absolute rounded-[5px] m-2 bg-[#E84680] z-10 top-0 right-0 h-5 xxl:h-4.5 xl:h-4 w-5 xxl:w-4.5 xl:w-4">
+            <button v-if="selectFlat" @click="deleteImageOne" class="absolute rounded-[5px] m-2 bg-[#E84680] z-10 top-0 right-0 h-5 xxl:h-4.5 xl:h-4 w-5 xxl:w-4.5 xl:w-4">
               <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-white h-[1px] w-[60%] rounded-[10px]"></span>
               <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-white h-[1px] w-[60%] rounded-[10px]"></span>
             </button>
@@ -122,7 +122,7 @@
             <div v-else-if="selectFlat" class="border border-solid border-[#E5DFEE] bg__uploud-photo w-full h-full rounded-[5px]">
               <div class="absolute rounded-[5px] w-full h-full top-0 left-0">
                 <label for="image_1" :class="{'-z-10': imageLoadOne}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-[5px]">
-                  <img :src="'/storage/flat/' + selectFlat.imageUp" class="object-cover border border-solid border-[#E5DFEE] bg__uploud-photo w-full h-full rounded-[5px]" alt="">
+                  <img :src="selectFlat.imageUp" class="object-cover border border-solid border-[#E5DFEE] bg__uploud-photo w-full h-full rounded-[5px]" alt="">
                 </label>
                 <input @change="addImageOne" class="w-full h-full rounded-[5px] opacity-0 absolute top-0 left-0 pointer-events-none" id="image_1" type="file" ref="image_up">
               </div>
@@ -131,18 +131,27 @@
         </div>
 
         <div>
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Планировка этажа:</span>
           <div class="relative w-full h-[10vw] lg:h-[14vw] md:h-[18vw] sm:h-[24vw] rounded-[5px]">
             <img v-if="imageLoadTwo" class="absolute w-full h-full rounded-[5px]" :src="imageTwo" alt="">
-            <button v-if="imageLoadTwo" @click="deleteImageTwo" class="absolute rounded-[5px] m-2 bg-[#E84680] z-10 top-0 right-0  h-5 xxl:h-4.5 xl:h-4 w-5 xxl:w-4.5 xl:w-4">
+            <button v-if="selectFlat" @click="deleteImageTwo" class="absolute rounded-[5px] m-2 bg-[#E84680] z-10 top-0 right-0  h-5 xxl:h-4.5 xl:h-4 w-5 xxl:w-4.5 xl:w-4">
               <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-white h-[1px] w-[60%] rounded-[10px]"></span>
               <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-white h-[1px] w-[60%] rounded-[10px]"></span>
             </button>
-            <div class="border border-solid border-[#E5DFEE] bg__uploud-photo transition-all w-full h-full rounded-[5px]">
+            <div v-if="!selectFlat" class="border border-solid border-[#E5DFEE] bg__uploud-photo transition-all w-full h-full rounded-[5px]">
               <div class="absolute rounded-[5px] w-full h-full top-0 left-0">
                 <label for="image_2" :class="{'-z-10': imageLoadTwo}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-[5px]">
                   <img src="../../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
                 </label>
                 <input @change="addImageTwo" class="w-full h-full rounded-[5px] opacity-0 absolute top-0 left-0 pointer-events-none" id="image_2" type="file" ref="image_down">
+              </div>
+            </div>
+            <div v-else-if="selectFlat" class="border border-solid border-[#E5DFEE] bg__uploud-photo w-full h-full rounded-[5px]">
+              <div class="absolute rounded-[5px] w-full h-full top-0 left-0">
+                <label for="image_2" :class="{'-z-10': imageTwo}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-[5px]">
+                  <img :src="selectFlat.imageDown" class="object-cover border border-solid border-[#E5DFEE] bg__uploud-photo w-full h-full rounded-[5px]" alt="">
+                </label>
+                <input @change="addImageTwo" class="w-full h-full rounded-[5px] opacity-0 absolute top-0 left-0 pointer-events-none" id="image_2" type="file" ref="image_up">
               </div>
             </div>
           </div>
@@ -225,6 +234,8 @@ export default {
       }
 
       this.flat.image_up = e.target.files[0]
+      this.selectFlat.image_up = e.target.files[0]
+      console.log(this.flat.image_up)
     },
     addImageTwo(e) {
       this.imageTwo = URL.createObjectURL(e.target.files[0])
@@ -233,15 +244,63 @@ export default {
       }
 
       this.flat.image_down = e.target.files[0]
+      this.selectFlat.image_down = e.target.files[0]
+      console.log(this.flat.image_down)
     },
     deleteImageOne() {
       this.imageOne = ''
-      this.selectFlat.imageUp = ''
+      this.selectFlat.imageUp = null
+      this.flat.image_up = null
       this.imageLoadOne = false
     },
     deleteImageTwo() {
       this.imageTwo = ''
+      this.selectFlat.imageDown = null
+      this.flat.image_down = null
       this.imageLoadTwo = false
+    },
+    editFlat() {
+      let formData = new FormData()
+
+      this.flat.count = this.selectLayout
+      this.flat.floor = +this.selectFloors
+      this.flat.stairs = +this.selectStairs
+
+      this.flat.status = this.selectStatus
+
+      formData.append('house_id', this.house.id)
+      formData.append('flat_id', this.selectFlat.id)
+      formData.append('number', this.flat.id)
+      formData.append('square', this.flat.square)
+      formData.append('count', this.flat.count)
+      formData.append('floor', this.flat.floor)
+      formData.append('status', this.flat.status)
+      formData.append('stairs', this.flat.stairs)
+      formData.append('price', this.flat.price)
+      formData.append('token', this.globalToken)
+
+
+      console.log(this.selectFlat)
+      console.log(this.flat.image_up)
+      if (!this.selectFlat.imageDown) {
+        formData.append('image_down', this.flat.image_down)
+
+      }
+      if (!this.selectFlat.imageUp) {
+        console.log(this.flat.image_up)
+        formData.append('image_up', this.flat.image_up)
+      }
+
+
+      axios({
+        method: 'post',
+        url: '/api/house/editFlat',
+        headers: { "Content-type": "multipart/form-data" },
+        data: formData,
+      }).then(response => {
+        console.log(response.data)
+        this.$emit('close-add-apartments', response.data)
+      }).catch(e => this.$emit('call-notification', 'Не все поля заполнены!'))
     },
     addFlat() {
       let formData = new FormData()
@@ -251,8 +310,6 @@ export default {
       this.flat.stairs = +this.selectStairs
 
       this.flat.status = this.selectStatus
-      console.log(this.flat.image_up)
-      console.log(this.flat.image_down)
 
       formData.append('frame_id', this.activeFrame)
       formData.append('number', this.flat.id)
@@ -294,7 +351,6 @@ export default {
     }
   },
   created() {
-    console.log(this.selectFlat)
     if (this.selectFlat) {
       this.flat.id = this.selectFlat.number
       this.flat.square = this.selectFlat.square
