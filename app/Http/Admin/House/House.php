@@ -224,7 +224,7 @@ class House extends Section implements Initializable
           }
         }
 
-      } elseif ($i > 1 && $i < 6) {
+      } elseif ($i >= 1 && $i < 6) {
         for ($l = 1; $l < 5; $l++) {
           $array_created->push($date->year + $i  . '/' . $l);
         }
