@@ -1593,3 +1593,7 @@ input:checked + .slider:before {
   top: 0 !important;
   right: 0!important;
 }
+
+.border__purple {
+  border-color: #6435A5;
+}

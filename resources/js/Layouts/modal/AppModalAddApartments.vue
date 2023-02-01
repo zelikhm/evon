@@ -10,14 +10,14 @@
       </div>
       <div class="grid grid-cols-2 gap-4 xxl:gap-3 xl:gap-2.5">
 
-        <div class="flex flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
+        <div :class="{'border__purple': isBorder === 1 }" class="flex flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
           <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="number">№</label>
-          <input v-model="flat.id" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="number">
+          <input @click="changeBorder(1)" v-model="flat.id" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="number">
         </div>
 
-        <div class="flex flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
+        <div :class="{'border__purple': isBorder === 2 }" class="flex flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
           <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="coord_object">Площадь (м²)</label>
-          <input v-model="flat.square" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="coord_object">
+          <input @click="changeBorder(2)" v-model="flat.square" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="coord_object">
         </div>
 
         <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectLayout}">
@@ -97,9 +97,9 @@
         </div>
       </div>
 
-      <div class="flex flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
+      <div :class="{'border__purple': isBorder === 3 }" class="flex flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
         <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="cost">Цена (€)</label>
-        <input v-model="flat.price" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="cost">
+        <input @click="changeBorder(3)" v-model="flat.price" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="cost">
       </div>
 
       <div class="grid grid-cols-2 gap-5 xxl:gap-4 xl:gap-3">
@@ -224,9 +224,13 @@ export default {
       imageOne: '',
       imageLoadTwo: false,
       imageTwo: '',
+      isBorder: 0,
     }
   },
   methods: {
+    changeBorder(id) {
+      this.isBorder = id
+    },
     addImageOne(e) {
       this.imageOne = URL.createObjectURL(e.target.files[0])
       if (e.target.files.length === 1) {

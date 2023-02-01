@@ -7,22 +7,24 @@ import {Link} from '@inertiajs/inertia-vue3'
   <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px]">{{ isEdit ? "Добавить объект" : "Редактирование объекта" }}</h2>
   <div class="flex-col flex gap-5 xxl:gap-4 xl:gap-3 pt-5 xxl:pt-4 xl:pt-3">
 
-    <div :class="{ validation: validation.title }"
+    <div :class="{ validation: validation.title, 'border__purple': isBorder === 1 }"
          class="flex flex-col border gap-2 xxl:gap-1.5 border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
       <label :class="{ validationText: validation.title }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="name_object">Название</label>
       <input v-model="object.title"
              @input="checkValidation(2)"
+             @click="changeBorder(1)"
              class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[14px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
              type="text" id="name_object" >
     </div>
 
-    <div :class="{ validation: validation.description }" class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px] h-[140px] xxl:h-[115px] xl:h-[95px]">
+    <div :class="{ validation: validation.description, 'border__purple': isBorder === 2 }" class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px] h-[140px] xxl:h-[115px] xl:h-[95px]">
       <label
         :class="{ validationText: validation.description }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"
         for="description_object">Описание объекта
       </label>
       <textarea v-model="object.description"
                 @input="checkValidation(3)"
+                @click="changeBorder(2)"
                 class="custom__scroll text-[#1E1D2D] h-full resize-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0"
                 type="text" id="description_object"></textarea>
     </div>
@@ -80,11 +82,12 @@ import {Link} from '@inertiajs/inertia-vue3'
       </div>
     </div>
 
-    <div :class="{ validation: validation.coordinates }" class="flex flex-col border border-solid border-[#E5DFEE] gap-2.5 xxl:gap-2 xl:gap-1.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
+    <div :class="{ validation: validation.coordinates, 'border__purple': isBorder === 3 }" class="flex flex-col border border-solid border-[#E5DFEE] gap-2.5 xxl:gap-2 xl:gap-1.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
       <label :class="{ validationText: validation.coordinates }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="coord_object">Введите координаты объекта</label>
       <input v-model="object.coordinates"
              @input="checkValidation(4)"
              @blur="setMarker"
+             @click="changeBorder(3)"
              class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
              type="text" id="coord_object">
     </div>
@@ -235,45 +238,51 @@ import {Link} from '@inertiajs/inertia-vue3'
           Расположение
         </h3>
         <div class="grid grid-cols-2 sm:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4">
-          <div
+          <div :class="{'border__purple': isBorder === 3 }"
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_sea">от моря (м)</label>
             <input v-model="object.toSea"
+                   @click="changeBorder(3)"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                    type="number" id="for_sea">
           </div>
-          <div
+          <div :class="{'border__purple': isBorder === 4 }"
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_school">от школы (м)</label>
             <input v-model="object.toSchool"
+                   @click="changeBorder(4)"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                    type="number" id="for_school">
           </div>
-          <div
+          <div :class="{'border__purple': isBorder === 5 }"
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_shoping">от торгового центра (м)</label>
             <input v-model="object.toShop"
+                   @click="changeBorder(5)"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                    type="number" id="for_shoping">
           </div>
-          <div
+          <div :class="{'border__purple': isBorder === 6 }"
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_park">от парка (м)</label>
             <input v-model="object.toPark"
+                   @click="changeBorder(6)"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                    type="number" id="for_park">
           </div>
-          <div
+          <div :class="{'border__purple': isBorder === 7 }"
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_child">от детского садика (м)</label>
             <input v-model="object.toChildrenSchool"
+                   @click="changeBorder(7)"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                    type="number" id="for_child">
           </div>
-          <div
+          <div :class="{'border__purple': isBorder === 8 }"
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_stop">от остановки (м)</label>
             <input v-model="object.toBus"
+                   @click="changeBorder(8)"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                    type="number" id="for_stop">
           </div>
@@ -285,17 +294,19 @@ import {Link} from '@inertiajs/inertia-vue3'
           Вознаграждение
         </h3>
         <div class="grid grid-cols-2 md:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4">
-          <div :class="{ validation: validation.percent }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+          <div :class="{ validation: validation.percent, 'border__purple': isBorder === 9 }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
             <label :class="{ validationText: validation.percent }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="commission">Комиссия (%)</label>
             <input v-model="object.percent"
                    @input="checkValidation(6)"
+                   @click="changeBorder(9)"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                    type="number" id="commission">
           </div>
-          <div
+          <div :class="{'border__purple': isBorder === 10 }"
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="comment">Комментарий</label>
             <input v-model="object.comment"
+                   @click="changeBorder(10)"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                    type="text" id="comment">
           </div>
@@ -428,10 +439,14 @@ export default {
         floors: false,
         image: false
       },
-      isEdit: false
+      isEdit: false,
+      isBorder: 0,
     }
   },
   methods: {
+    changeBorder(id) {
+      this.isBorder = id
+    },
     setMarker() {
       let coordinates = this.object.coordinates.split(' ')
       this.markers = []
