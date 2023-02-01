@@ -398,7 +398,7 @@ class HouseController extends Controller
         $imageUp = '/storage/flat/' . $imageUp;
       } else {
         $flat = FlatModel::where('id', $request->flat_id)->first();
-        $imageUp = $flat->imageUp;
+        $imageUp = $flat !== null ? $flat->imageUp : null;
       }
 
       if ($request->image_down) {
@@ -407,7 +407,7 @@ class HouseController extends Controller
         $imageDown = '/storage/flat/' . $imageDown;
       } else {
         $flat = FlatModel::where('id', $request->flat_id)->first();
-        $imageDown = $flat->imageDown;
+        $imageDown = $flat !== null ? $flat->imageDown : null;
       }
 
       $flat = FlatModel::create([
