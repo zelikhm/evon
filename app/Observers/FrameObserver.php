@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Builder\Flat\FlatModel;
 use App\Models\Builder\Flat\FrameModel;
+use App\Models\Builder\HouseModel;
 
 class FrameObserver
 {
@@ -15,7 +16,9 @@ class FrameObserver
      */
     public function created(FrameModel $frameModel)
     {
-        //
+        HouseModel::where('id', $frameModel->house_id)->update([
+          'active' => 0,
+        ]);
     }
 
     /**
@@ -26,7 +29,9 @@ class FrameObserver
      */
     public function updated(FrameModel $frameModel)
     {
-        //
+      HouseModel::where('id', $frameModel->house_id)->update([
+        'active' => 0,
+      ]);
     }
 
     /**

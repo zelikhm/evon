@@ -4,6 +4,8 @@ namespace App\Observers;
 
 use App\Models\Builder\Flat\FlatImagesModel;
 use App\Models\Builder\Flat\FlatModel;
+use App\Models\Builder\Flat\FrameModel;
+use App\Models\Builder\HouseModel;
 
 class FlatObserver
 {
@@ -15,7 +17,11 @@ class FlatObserver
      */
     public function created(FlatModel $flatModel)
     {
-        //
+        $frame = FrameModel::where('id', $flatModel->frame_id)->first();
+
+      HouseModel::where('id', $frame->house_id)->update([
+        'active' => 0,
+      ]);
     }
 
     /**
@@ -26,7 +32,11 @@ class FlatObserver
      */
     public function updated(FlatModel $flatModel)
     {
-        //
+      $frame = FrameModel::where('id', $flatModel->frame_id)->first();
+
+      HouseModel::where('id', $frame->house_id)->update([
+        'active' => 0,
+      ]);
     }
 
     /**
