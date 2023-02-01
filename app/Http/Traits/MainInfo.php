@@ -6,6 +6,7 @@ use App\Http\Admin\News\AdminNewsModel;
 use App\Models\Builder\Flat\FlatModel;
 use App\Models\Builder\Flat\FrameModel;
 use App\Models\Builder\HouseCharacteristicsModel;
+use App\Models\Builder\HouseImagesModel;
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\HouseNewsModel;
 use App\Models\Builder\HouseViewsModel;
@@ -162,10 +163,18 @@ trait MainInfo
 
   protected function getHouseOnId($house_id) {
     $house = HouseModel::where('id', $house_id)->with(['info', 'supports', 'files', 'frames', 'images', 'news', 'flats'])->first();
-//dd($house->image);
-    $house->image = $house->images !== null ? $house->images[0]->name : null;
+
+    $house->image = $this->getPhoto($house);
 
     return $house;
+  }
+
+  public function getPhoto($house) {
+
+    $image = HouseImagesModel::where('house_id', $house->id)->orderBy('created_at', 'ASC')->first();
+
+    return $image;
+
   }
 
   /**
