@@ -79,7 +79,7 @@
             </div>
             <div class="flex flex-col">
               <h3 class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">Данные Агенства недвижимости</h3>
-              <div class="p-7 xxl:p-5 xl:p-4 x:p-3 mt-7 xxl:mt-5 xl:mt-4 white__bg">
+              <div class="p-7 xxl:p-5 xl:p-4 x:p-3 mt-7 xxl:mt-5 xl:mt-4 rounded-[10px] white__bg">
                 <div class="flex gap-7 xxl:gap-5 xl:gap-4 x:gap-2.5">
                   <div class="flex w-full flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
                     <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px]" for="company">Компания</label>

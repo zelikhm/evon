@@ -10,13 +10,13 @@ import { Link } from '@inertiajs/inertia-vue3'
   />
   <header class="relative h-[13.4vw]">
     <img v-if="compilation.company === null" class="w-full absolute top-0 left-0 h-full" src="../../assets/bg_links.jpg" alt="">
-    <img v-else class="w-full absolute top-0 left-0 h-full" :src="compilation.company.banner" alt="">
+    <img v-else class="object-cover w-full absolute top-0 left-0 h-full" :src="compilation.company.banner" alt="">
     <div class="_container flex h-full">
       <div class="self-end flex items-center gap-7 xxl:gap-6 xl:gap-5 mb-10 xxl:mb-8 xl:mb-6">
         <div v-if="compilation.company === null" class="flex-shrink-0 bg-black w-20 xxl:w-16 xl:w-12 h-20 xxl:h-16 xl:h-12 rounded-full flex items-center justify-center">
-          <img class="w-10 xxl:w-8 xl:w-6" src="../../assets/svg/city_icon_white.svg" alt="">
+        <img   class="w-10 xxl:w-8 xl:w-6" src="../../assets/svg/city_icon_white.svg" alt="">
         </div>
-        <img class="flex-shrink-0 bg-black w-20 xxl:w-16 xl:w-12 h-20 xxl:h-16 xl:h-12 rounded-full flex items-center justify-center" v-else :src="compilation.company.image" alt="">
+        <img class="flex-shrink-0 bg-black w-20 xxl:w-16 xl:w-12 h-20 xxl:h-16 xl:h-12 rounded-full flex items-center justify-center object-cover" v-else :src="compilation.company.image" alt="">
         <div class="text-white flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
           <span class="text-[15px] xxl:text-[13px] xl:text-[11px] leading-none" v-if="compilation.company !== null">{{ compilation.company.title }}</span>
           <span class="text-[15px] xxl:text-[13px] xl:text-[11px] leading-none">Агенство недвижимости</span>
@@ -37,7 +37,8 @@ import { Link } from '@inertiajs/inertia-vue3'
                 <div class="flex flex-col" v-for="item in i">
                   <Link :href="href + '/' + item.slug">
                     <div class="relative rounded-[5px]">
-                      <img class="h-[15vw] w-full" src="../../assets/immovables_img_two.png" alt="">
+                      <img class="h-[15vw] w-full object-cover" :src="item.image" v-if="item.image" alt="">
+                      <img class="h-[15vw] w-full object-cover" v-else src="../../assets/no-img-houses-zastroy.jpg" alt="">
                       <div class="absolute flex flex-col justify-between top-0 left-0 w-full h-full text-[14px] xxl:text-[12px] xl:text-[10px]">
                         <span class="bg-[#30CB49] uppercase self-end text-white leading-none px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 m-4 xxl:m-3 xl:m-2.5 rounded-[3px]">Сдан</span>
                         <div class="flex items-center text-white gap-2 xxl:gap-1.5 xl:gap-1 p-5 xxl:p-4 xl:p-3">
@@ -58,7 +59,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
           <div class="sticky w-full contact__selling h-fit bg-white rounded-[10px] p-4 xxl:p-3 xl:p-2.5">
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 mb-5 xxl:mb-4 xl:mb-4">
-              <img :src="compilation.user.image" class="w-14 xxl:w-12 xl:w-10 rounded-full h-14 xxl:h-12 xl:h-10" alt="">
+              <img :src="compilation.user.image" class="object-cover w-14 xxl:w-12 xl:w-10 rounded-full h-14 xxl:h-12 xl:h-10" alt="">
               <div class="flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
                 <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none font-medium">{{ compilation.user.first_name + ' ' + compilation.user.last_name }}</span>
                 <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ compilation.user.status }}</span>
@@ -123,7 +124,6 @@ export default {
         item.minPrice = Math.min(...minPrice)
       })
     }
-    console.log(this.compilation.isVisible)
   },
   components: {
     AppFooter,

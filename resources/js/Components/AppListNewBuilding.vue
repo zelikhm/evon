@@ -44,7 +44,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                 <span>{{ selectCity }}</span>
                 <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectCity }" alt="">
               </div>
-              <div v-if="openSelectCity" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
+              <div v-if="openSelectCity" class="max-h-[215px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
                 <div class="relative w-full p-5 xxl:p-4 xl:p-3">
                   <input v-model="searchValue" class="py-3 xxl:py-2.5 xl:py-2 pl-10 xxl:pl-8 xl:pl-6 focus:ring-[#6435A5] focus:border-[#6435A5] w-full text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] rounded-[6px] leading-none border border-solid border-[#E5DFEE]" type="text">
                   <img class="absolute top-1/2 -translate-y-1/2 translate-x-1/2 w-4.5 xxl:w-4 xl:w-3.5" src="../../assets/svg/search_icon_grey.svg" alt="">
@@ -77,16 +77,16 @@ import { Link } from '@inertiajs/inertia-vue3'
             </div>
           </div>
 
-          <div class="ones__select border border-solid border-[#E5DFEE] rounded-[6px] p-5 xx:p-4 xl:p-3">
+          <div :class="{'border__purple': isBorder === 1 }" class="ones__select border border-solid border-[#E5DFEE] rounded-[6px] p-5 xx:p-4 xl:p-3">
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">Цена</span>
             <div class="flex gap-2">
               <div class="flex items-center gap-1">
                 <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="cost_from">от</label>
-                <input v-model="filters.priceMin" class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="cost_from">
+                <input @click="changeBorder(1)" v-model="filters.priceMin" class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="cost_from">
               </div>
               <div class="flex items-center gap-1">
                 <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="cost_before">до</label>
-                <input v-model="filters.priceMax" class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="cost_before">
+                <input @click="changeBorder(1)" v-model="filters.priceMax" class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="cost_before">
               </div>
             </div>
           </div>
@@ -110,16 +110,16 @@ import { Link } from '@inertiajs/inertia-vue3'
             </div>
           </div>
 
-          <div class="ones__select border border-solid border-[#E5DFEE] rounded-[6px] p-5 xx:p-4 xl:p-3">
+          <div :class="{'border__purple': isBorder === 2 }" class="ones__select border border-solid border-[#E5DFEE] rounded-[6px] p-5 xx:p-4 xl:p-3">
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">Площадь</span>
             <div class="flex gap-2">
               <div class="flex items-center gap-1">
                 <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="from">от</label>
-                <input v-model="filters.squareMin" class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="from">
+                <input @click="changeBorder(2)" v-model="filters.squareMin" class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="from">
               </div>
               <div class="flex items-center gap-1">
                 <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="before">до</label>
-                <input v-model="filters.squareMax" class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="before">
+                <input @click="changeBorder(2)" v-model="filters.squareMax" class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="before">
               </div>
             </div>
           </div>
@@ -145,29 +145,29 @@ import { Link } from '@inertiajs/inertia-vue3'
           <div class="my-10 xxl:my-8 xl:my-6">
             <div class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] mb-5 xxl:mb-4 xl:mb-3 leading-none">Расположение</div>
             <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
-              <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+              <div :class="{'border__purple': isBorder === 3 }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_sea">от моря (м)</label>
-                <input v-model="filters.toSea" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_sea">
+                <input @click="changeBorder(3)" v-model="filters.toSea" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_sea">
               </div>
-              <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+              <div :class="{'border__purple': isBorder === 4 }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_school">от школы (м)</label>
-                <input v-model="filters.toSchool" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_school">
+                <input @click="changeBorder(4)" v-model="filters.toSchool" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_school">
               </div>
-              <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+              <div :class="{'border__purple': isBorder === 5 }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_shoping">от торгового центра (м)</label>
-                <input v-model="filters.toShop" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_shoping">
+                <input @click="changeBorder(5)" v-model="filters.toShop" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_shoping">
               </div>
-              <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+              <div :class="{'border__purple': isBorder === 6 }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_park">от парка (м)</label>
-                <input v-model="filters.toPark" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_park">
+                <input @click="changeBorder(6)" v-model="filters.toPark" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_park">
               </div>
-              <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+              <div :class="{'border__purple': isBorder === 7 }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_child">от детского садика (м)</label>
-                <input v-model="filters.toChildrenSchool" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_child">
+                <input @click="changeBorder(7)" v-model="filters.toChildrenSchool" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_child">
               </div>
-              <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+              <div :class="{'border__purple': isBorder === 8 }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_stop">от остановки (м)</label>
-                <input v-model="filters.toBus" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_stop">
+                <input @click="changeBorder(8)" v-model="filters.toBus" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_stop">
               </div>
             </div>
           </div>
@@ -299,15 +299,15 @@ import { Link } from '@inertiajs/inertia-vue3'
               </div>
               <div class="seek flex opacity-0 transition-all flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
                 <button @click="$emit('open-add-selections', item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
-                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none">В подборку</span>
+                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">В подборку</span>
                   <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
                 </button>
                 <button v-if="item.favorite" @click="removeFavorite(item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
-                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none">Убрать</span>
+                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">Убрать</span>
                   <img src="../../assets/svg/heart_icon_fill.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
                 </button>
                 <button v-else @click="addFavorite(item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
-                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none">В избранное</span>
+                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">В избранное</span>
                   <img src="../../assets/svg/heart_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="">
                 </button>
               </div>
@@ -472,9 +472,13 @@ export default {
       ],
       selectDateId: 1,
       readyHouses: [],
+      isBorder: 0,
     }
   },
   methods: {
+    changeBorder(id) {
+      this.isBorder = id
+    },
     addFavorite(item) {
       console.log(this.user.id)
       axios.post('/api/favorite/add', {
@@ -576,9 +580,10 @@ export default {
 
     if (this.city[0] !== null) {
       this.selectDev = this.builders[0].first_name
-      this.selectCity = this.city[0].title
-      this.selectRegion = this.city[0].regions[0].title
-      this.regions = this.city[0].regions
+      this.selectCity = 'Выберите город...'
+      this.selectRegion = 'Выберите район...'
+      // this.selectRegion = this.city[0].regions[0].title
+      // this.regions = this.city[0].regions
 
     }
 
@@ -607,10 +612,10 @@ export default {
       house.minSquare = Math.min(...squareFlats)
       house.maxSquare = Math.max(...squareFlats)
 
-      if (Number.isInteger(house.minPrice)) minPriceForFilter.push(house.minPrice)
-      if (Number.isInteger(house.maxPrice)) maxPriceForFilter.push(house.maxPrice)
-      if (Number.isInteger(house.minSquare)) minSquareForFilter.push(house.minSquare)
-      if (Number.isInteger(house.maxSquare)) maxSquareForFilter.push(house.maxSquare)
+      // if (Number.isInteger(house.minPrice)) minPriceForFilter.push(house.minPrice)
+      // if (Number.isInteger(house.maxPrice)) maxPriceForFilter.push(house.maxPrice)
+      // if (Number.isInteger(house.minSquare)) minSquareForFilter.push(house.minSquare)
+      // if (Number.isInteger(house.maxSquare)) maxSquareForFilter.push(house.maxSquare)
 
 
       house.flats.forEach(item => {
@@ -632,19 +637,15 @@ export default {
   computed: {
     readyHouses() {
 
-      // let filters = []
-      //
-      // filters = this.readyHouses.filter(item => {
-      //
-      //   console.log(item.minPrice <= this.filters.priceMin && Number.isInteger(item.minPrice))
-      //
-      //   if (item.city === this.selectCity &&
-      //       item.info.type === this.selectType &&
-      //       item.area === this.selectRegion) {
-      //     return item
-      //   }
-      // })
+      let filtersType = [],
+          filtersCity = [],
+          filtersArea = [],
+          filtersPriceMin = [],
+          filterPriceMax = []
 
+      filtersType = this.readyHouses.filter(item => item.type === this.selectType)
+
+      // return this.filters
       return this.readyHouses.splice(0, 21)
 
     },

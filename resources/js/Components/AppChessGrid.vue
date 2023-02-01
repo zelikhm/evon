@@ -40,9 +40,7 @@
                   {{ checkFlat(floor - 1, count).count === 'Duplex' ? 'D' : checkFlat(floor - 1, count).count === 'Studia' ? 'S' : checkFlat(floor - 1, count).count }}
                 </div>
               </div>
-
             </div>
-
           </div>
 
 
