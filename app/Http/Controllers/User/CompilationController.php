@@ -226,7 +226,15 @@ class CompilationController extends Controller
         'updated_at' => Carbon::now()->addHour(3),
       ]);
 
-      return response()->json(true, 200);
+      $compilation = CompilationModel::where('id', $request->compilation_id)->with(['values', 'user', 'company'])->first();
+
+      $houses = collect();
+
+      foreach ($compilation->values as $value) {
+        $houses->push($this->getHouseOnId($value->house_id));
+      }
+
+      return response()->json($houses, 200);
     } else {
       return response()->json('not auth', 401);
     }

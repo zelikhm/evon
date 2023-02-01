@@ -163,7 +163,7 @@ trait MainInfo
   protected function getHouseOnId($house_id) {
     $house = HouseModel::where('id', $house_id)->with(['info', 'supports', 'files', 'frames', 'images', 'news', 'flats'])->first();
 
-    $house->image = count($house->images) > 0 ? $house->images[0]->name : null;
+    $house->image = $house->images !== null ? $house->images[0]->name : null;
 
     return $house;
   }
