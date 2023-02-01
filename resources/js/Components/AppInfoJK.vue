@@ -7,11 +7,12 @@ import {Link} from '@inertiajs/inertia-vue3'
   <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px]">{{ isEdit ? "Добавить объект" : "Редактирование объекта" }}</h2>
   <div class="flex-col flex gap-5 xxl:gap-4 xl:gap-3 pt-5 xxl:pt-4 xl:pt-3">
 
-    <div :class="{ validation: validation.title }"
+    <div :class="{ validation: validation.title, 'border---': isBorder === 1 }"
          class="flex flex-col border gap-2 xxl:gap-1.5 border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
       <label :class="{ validationText: validation.title }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="name_object">Название</label>
       <input v-model="object.title"
              @input="checkValidation(2)"
+             @click="changeBorder(1)"
              class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[14px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
              type="text" id="name_object" >
     </div>
@@ -22,7 +23,9 @@ import {Link} from '@inertiajs/inertia-vue3'
         for="description_object">Описание объекта
       </label>
       <textarea v-model="object.description"
+                :class="{ 'border---': isBorder === 2  }"
                 @input="checkValidation(3)"
+                @click="changeBorder(2)"
                 class="custom__scroll text-[#1E1D2D] h-full resize-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0"
                 type="text" id="description_object"></textarea>
     </div>
@@ -336,6 +339,7 @@ export default {
   emits: ['open-add-contact'],
   data() {
     return {
+      isBorder: 0,
       openedMarkerID: null,
       center: {lat: 38.789057678005726, lng: 35.39768557787735},
       markers: [],
@@ -432,6 +436,9 @@ export default {
     }
   },
   methods: {
+    changeBorder(id) {
+      this.isBorder = id
+    },
     setMarker() {
       let coordinates = this.object.coordinates.split(' ')
       this.markers = []

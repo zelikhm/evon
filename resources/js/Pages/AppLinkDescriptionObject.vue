@@ -15,7 +15,7 @@
       </div>
     </div>
   </header>
-  <app-modal-album v-if="album" @close-album="album = false"/>
+  <app-modal-album :image="house.images" v-if="album" @close-album="album = false"/>
   <main>
     <div class="_container flex flex-col">
       <div class="decription__head rounded-[12px] p-5 xxl:p-4 xl:p-3 my-7 xxl:my-5 xl:my-4">

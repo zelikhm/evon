@@ -11,18 +11,34 @@
         </button>
       </div>
       <div class="flex flex-col p-5 xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5 border border-solid border-[#E5DFEE] rounded-[6px]">
-        <label for="email" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Имя</label>
+        <label for="name" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Имя</label>
         <input
           class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
-          type="email"
-          id="email"
+          type="text"
+          id="name"
         >
       </div>
       <div class="flex flex-col p-5 xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5 border border-solid border-[#E5DFEE] rounded-[6px]">
-        <label for="password" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Фамилия</label>
+        <label for="surname" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Фамилия</label>
         <div class="relative">
-          <input class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0" type="text" id="password">
+          <input class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0" type="text" id="surname">
         </div>
+      </div>
+      <div class="flex flex-col p-5 xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5 border border-solid border-[#E5DFEE] rounded-[6px]">
+        <label for="tel" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Телефон</label>
+        <input
+            class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
+            type="tel"
+            id="tel"
+        >
+      </div>
+      <div class="flex flex-col p-5 xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5 border border-solid border-[#E5DFEE] rounded-[6px]">
+        <label for="email" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Почта</label>
+        <input
+            class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
+            type="email"
+            id="email"
+        >
       </div>
       <h3 class="text-center text-[18px] xxl:text-base xl:text-base font-semibold">Выберите место работы:</h3>
       <div class="relative my-4">
