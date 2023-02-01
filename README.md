@@ -468,10 +468,10 @@ path payment \ [post] / поля:
 ## Info 
 
 Получить инфраструктуры /
-path getInfos \ [get] 
+path getInfo \ [get] 
 
 Получить все допы /
-path getDops \ [get]
+path getDop \ [get]
 
 Получить все городы и районы /
-path getCityes \ [get]
+path getCity \ [get]
