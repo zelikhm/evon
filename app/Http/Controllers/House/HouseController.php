@@ -490,6 +490,10 @@ class HouseController extends Controller
           'imageDown' => $imageDown,
         ]);
 
+      HouseModel::where('id', $request->house_id)->update([
+        'active' => 0,
+      ]);
+
       return response()->json($this->getHouse($request->house_id), 200);
     } else {
       return response()->json('not auth', 401);
@@ -533,6 +537,10 @@ class HouseController extends Controller
           'name' => $request->name,
           'updated_at' => Carbon::now()->addHour(3),
         ]);
+
+      HouseModel::where('id', $request->house_id)->update([
+        'active' => 0,
+      ]);
 
       return response()->json(FrameModel::where('house_id', $request->house_id)->with(['flats'])->get(), 200);
     } else {
