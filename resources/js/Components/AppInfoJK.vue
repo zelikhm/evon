@@ -23,6 +23,7 @@ import {Link} from '@inertiajs/inertia-vue3'
         for="description_object">Описание объекта
       </label>
       <textarea v-model="object.description"
+                :class="{ 'border---': isBorder === 2  }"
                 @input="checkValidation(3)"
                 @click="changeBorder(2)"
                 class="custom__scroll text-[#1E1D2D] h-full resize-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0"
@@ -347,6 +348,7 @@ export default {
   emits: ['open-add-contact'],
   data() {
     return {
+      isBorder: 0,
       openedMarkerID: null,
       center: {lat: 38.789057678005726, lng: 35.39768557787735},
       markers: [],

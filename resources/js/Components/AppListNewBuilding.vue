@@ -580,9 +580,10 @@ export default {
 
     if (this.city[0] !== null) {
       this.selectDev = this.builders[0].first_name
-      this.selectCity = this.city[0].title
-      this.selectRegion = this.city[0].regions[0].title
-      this.regions = this.city[0].regions
+      this.selectCity = 'Выберите город...'
+      this.selectRegion = 'Выберите район...'
+      // this.selectRegion = this.city[0].regions[0].title
+      // this.regions = this.city[0].regions
 
     }
 
@@ -611,10 +612,10 @@ export default {
       house.minSquare = Math.min(...squareFlats)
       house.maxSquare = Math.max(...squareFlats)
 
-      if (Number.isInteger(house.minPrice)) minPriceForFilter.push(house.minPrice)
-      if (Number.isInteger(house.maxPrice)) maxPriceForFilter.push(house.maxPrice)
-      if (Number.isInteger(house.minSquare)) minSquareForFilter.push(house.minSquare)
-      if (Number.isInteger(house.maxSquare)) maxSquareForFilter.push(house.maxSquare)
+      // if (Number.isInteger(house.minPrice)) minPriceForFilter.push(house.minPrice)
+      // if (Number.isInteger(house.maxPrice)) maxPriceForFilter.push(house.maxPrice)
+      // if (Number.isInteger(house.minSquare)) minSquareForFilter.push(house.minSquare)
+      // if (Number.isInteger(house.maxSquare)) maxSquareForFilter.push(house.maxSquare)
 
 
       house.flats.forEach(item => {
@@ -636,19 +637,15 @@ export default {
   computed: {
     readyHouses() {
 
-      // let filters = []
-      //
-      // filters = this.readyHouses.filter(item => {
-      //
-      //   console.log(item.minPrice <= this.filters.priceMin && Number.isInteger(item.minPrice))
-      //
-      //   if (item.city === this.selectCity &&
-      //       item.info.type === this.selectType &&
-      //       item.area === this.selectRegion) {
-      //     return item
-      //   }
-      // })
+      let filtersType = [],
+          filtersCity = [],
+          filtersArea = [],
+          filtersPriceMin = [],
+          filterPriceMax = []
 
+      filtersType = this.readyHouses.filter(item => item.type === this.selectType)
+
+      // return this.filters
       return this.readyHouses.splice(0, 21)
 
     },
