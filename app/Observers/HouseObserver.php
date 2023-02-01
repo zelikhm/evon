@@ -10,6 +10,7 @@ use App\Models\Builder\HouseModel;
 use App\Models\Builder\HouseNewsModel;
 use App\Models\Builder\HouseSupportModel;
 use App\Models\Builder\HouseViewsModel;
+use App\Models\User\CompilationInfoModel;
 
 class HouseObserver
 {
@@ -50,6 +51,7 @@ class HouseObserver
     HouseCharacteristicsModel::where('house_id', $houseModel->id)->delete();
     HouseFilesModel::where('house_id', $houseModel->id)->delete();
     FrameModel::where('house_id', $houseModel->id)->delete();
+    CompilationInfoModel::where('house_id', $houseModel->id)->delete();
   }
 
   /**

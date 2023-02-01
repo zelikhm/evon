@@ -234,7 +234,9 @@ class CompilationController extends Controller
         $houses->push($this->getHouseOnId($value->house_id));
       }
 
-      return response()->json($houses, 200);
+      $compilation->houses = $houses;
+
+      return response()->json($compilation, 200);
     } else {
       return response()->json('not auth', 401);
     }
