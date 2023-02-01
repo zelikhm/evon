@@ -162,7 +162,7 @@ trait MainInfo
 
   protected function getHouseOnId($house_id) {
     $house = HouseModel::where('id', $house_id)->with(['info', 'supports', 'files', 'frames', 'images', 'news', 'flats'])->first();
-
+dd($house->image);
     $house->image = $house->images !== null ? $house->images[0]->name : null;
 
     return $house;
