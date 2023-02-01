@@ -22,7 +22,7 @@
               <div v-if="checkFlat(floor - 1, count) !== null">
                 <div v-if="checkFlat(floor - 1, count).status == 4" @click="clickFlat(checkFlat(floor - 1, count).id)" :class="{'text-white': checkFlat(floor - 1, count).active === 1, 'bg-[#6435A5]': checkFlat(floor - 1, count).active === 1}"
                      class="bg-white flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
-                  {{ checkFlat(floor - 1, count).square }}
+                  {{  checkFlat(floor - 1, count).count === 'Duplex' ? 'D' : checkFlat(floor - 1, count).count === 'Studia' ? 'S' : checkFlat(floor - 1, count).count  }}
                 </div>
               </div>
               <div v-if="checkFlat(floor - 1, count) !== null">
@@ -32,12 +32,12 @@
               </div>
               <div v-if="checkFlat(floor - 1, count) !== null">
                 <div v-if="checkFlat(floor - 1, count).status == 0" @click="clickFlat(checkFlat(floor - 1, count).id)" :class="{'text-white': checkFlat(floor - 1, count).active === 1, 'bg-[#6435A5]': checkFlat(floor - 1, count).active === 1}" class="relative flex-shrink-0 flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E84680] cursor-pointer">
-                  {{ checkFlat(floor - 1, count).square }}
+                  {{ checkFlat(floor - 1, count).count === 'Duplex' ? 'D' : checkFlat(floor - 1, count).count === 'Studia' ? 'S' : checkFlat(floor - 1, count).count }}
                 </div>
               </div>
               <div v-if="checkFlat(floor - 1, count) !== null">
                 <div v-if="checkFlat(floor - 1, count).status == 1" @click="clickFlat(checkFlat(floor - 1, count).id)" :class="{'text-white': checkFlat(floor - 1, count).active === 1, 'bg-[#6435A5]': checkFlat(floor - 1, count).active === 1}" class="relative flex-shrink-0 flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#6435A5] cursor-pointer">
-                  {{ checkFlat(floor - 1, count).square }}
+                  {{ checkFlat(floor - 1, count).count === 'Duplex' ? 'D' : checkFlat(floor - 1, count).count === 'Studia' ? 'S' : checkFlat(floor - 1, count).count }}
                 </div>
               </div>
 
@@ -113,7 +113,7 @@ export default {
         object = {
           id: flat[0].id,
           status: flat[0].status,
-          square: flat[0].square,
+          count: flat[0].count,
           active: flat[0].active
         }
       }

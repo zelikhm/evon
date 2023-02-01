@@ -4,30 +4,18 @@
       <div class="flex gap-7 xxl:gap-5 xl:gap-4">
         <div class="w-[100%]">
           <swiper
-            :modules="[Thumbs]"
-            :thumbs="{ swiper: thumbsSwiper }"
+            :modules="modules"
+            :navigation="true"
+            :pagination="{
+              clickable: true,
+            }"
             :loop="true"
             class="mySwiper2 mb-4 xxl:mb-3 xl:mb-2"
           >
-            <swiper-slide>
-              <img class="w-full object-cover" :src="mainImage" />
+            <swiper-slide v-for="item in showImage">
+              <img class="w-full h-full object-cover" :src="item.name" />
             </swiper-slide>
           </swiper>
-          <div class="inner__slider">
-            <swiper
-              :loop="true"
-              :modules="modules"
-              @swiper="setThumbsSwiper"
-              :navigation="true"
-              :spaceBetween="10"
-              :slidesPerView="4"
-              class="mySwiper h-[10vh]"
-            >
-              <swiper-slide class="w-full h-[10vh]" v-for="item in showImage" @click="targetWithPhoto(item)">
-                <img class="w-full object-cover" :src="item.name" />
-              </swiper-slide>
-            </swiper>
-          </div>
         </div>
       </div>
       <div class="absolute top-0 lg:top-full left-[102%] lg:left-1/2 lg:-translate-x-1/2 lg:mt-5 w-[36%] lg:w-fit flex flex-col h-fit gap-4 xxl:gap-3 xl:gap-2">
@@ -52,8 +40,7 @@ import "swiper/css/thumbs"
 
 import { ref } from 'vue'
 
-import {FreeMode,Navigation,Thumbs} from 'swiper'
-
+import { FreeMode, Navigation, Pagination} from "swiper";
 
 export default {
   props: ['image'],
@@ -93,10 +80,7 @@ export default {
       thumbsSwiper.value = swiper;
     };
     return {
-      Thumbs,
-      thumbsSwiper,
-      setThumbsSwiper,
-      modules: [FreeMode,Navigation,Thumbs],
+      modules: [FreeMode, Navigation, Pagination ],
     };
   },
   created() {
