@@ -671,17 +671,19 @@ export default {
       if (this.selectCity !== 'Выберите город...') {
         this.housesFilters = this.checkFilterCity(this.housesFilters)
       }
+      console.log(this.housesFilters)
 
       if (this.selectRegion !== 'Выберите район...') {
         this.housesFilters = this.checkFilterRegion(this.housesFilters)
       }
-
       if (this.filters.priceMin || this.filters.priceMax) {
         this.housesFilters = this.checkFilterPrice(this.housesFilters)
       }
 
       this.housesFilters = this.checkFilterStatus(this.housesFilters)
-      
+
+      console.log(this.housesFilters)
+
       // return this.filters
       return this.housesFilters
 
