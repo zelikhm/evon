@@ -10,7 +10,7 @@ import { Link } from '@inertiajs/inertia-vue3'
     </div>
     <div class="relative z-10 h-[1px] w-full bg-[#E5DFEE]"></div>
     <div class="overflow-hidden">
-      <div class="relative custom__scroll border__bottom-6 overflow-y-auto bg-[#F6F3FA] transition-all duration-500 max-h-[90vh] p-6 xxl:p-4 xl:p-3 leading-none">
+      <div class="relative custom__scroll border__bottom-6 overflow-x-hidden overflow-y-auto bg-[#F6F3FA] transition-all duration-500 max-h-[90vh] p-6 xxl:p-4 xl:p-3 leading-none">
         <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3">
 
           <div v-for="item in news">

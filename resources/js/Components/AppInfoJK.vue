@@ -83,12 +83,12 @@ import {Link} from '@inertiajs/inertia-vue3'
       </div>
     </div>
 
-    <div :class="{ validation: validation.coordinates, 'border__purple': isBorder === 3 }" class="flex flex-col border border-solid border-[#E5DFEE] gap-2.5 xxl:gap-2 xl:gap-1.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
+    <div :class="{ validation: validation.coordinates, 'border__purple': isBorder === 15 }" class="flex flex-col border border-solid border-[#E5DFEE] gap-2.5 xxl:gap-2 xl:gap-1.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
       <label :class="{ validationText: validation.coordinates }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="coord_object">Введите координаты объекта</label>
       <input v-model="object.coordinates"
              @input="checkValidation(4)"
              @blur="setMarker"
-             @click="changeBorder(3)"
+             @click="changeBorder(15)"
              class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
              type="text" id="coord_object">
     </div>
@@ -128,25 +128,28 @@ import {Link} from '@inertiajs/inertia-vue3'
           </div>
         </div>
 
-        <div :class="{ validation: validation.floors }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
+        <div :class="{ validation: validation.floors, 'border__purple': isBorder === 11 }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
           <label :class="{ validationText: validation.floors }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_floors">Количество этажей</label>
           <input v-model="object.floors"
                  @input="checkValidation(5)"
+                 @click="changeBorder(11)"
                  class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                  type="number" id="for_floors">
         </div>
 
-        <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 pt-4 pb-4 xxl:pt-3 xl:pt-2.5">
+        <div :class="{'border__purple': isBorder === 12}" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 pt-4 pb-4 xxl:pt-3 xl:pt-2.5">
           <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_agency_text">Эксклюзив для агентства</label>
           <input v-model="object.text_agency"
+                 @click="changeBorder(12)"
                  class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                  type="text" id="for_agency_text">
         </div>
 
 
-        <div class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">
+        <div :class="{'border__purple': isBorder === 13}" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">
           <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="count_flat">Количество стояков</label>
           <input v-model="object.count_flat"
+                 @click="changeBorder(13)"
                  class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                  type="number" id="count_flat">
         </div>

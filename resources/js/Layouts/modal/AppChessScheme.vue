@@ -1,6 +1,6 @@
 <template>
   <div class="fixed z-[100] w-full h-full flex items-center justify-center">
-    <div class="relative flex flex-col gap-5 xxl:gap-4 xl:gap-3 bg-white rounded-[12px] px-12 xxl:px-10 xl:px-8 py-8 xxl:py-6 xl:py-5 z-50 w-[40%] h-fit">
+    <div class="relative flex flex-col gap-5 xxl:gap-4 xl:gap-3 bg-white rounded-[12px] px-12 xxl:px-10 xl:px-8 py-8 xxl:py-6 xl:py-5 z-50 w-[40%] lg:w-[56%] md:w-[70%] sm:w-[90%] h-fit">
       <div class="relative flex justify-between items-center">
         <button @click="closeChess" class="w-4 h-4 absolute top-[20%] right-0 z-50">
           <div class="absolute h-[1px] w-4 bg-[#8A8996] rotate-45"></div>
@@ -10,14 +10,14 @@
       <div class="py-10 xxl:py-8 xl:py-6">
         <img src="../../../assets/drawing_big.png" alt="">
       </div>
-      <div class="absolute top-0 left-full ml-10 xxl:ml-8 xl:ml-6">
+      <div class="absolute top-0 lg:top-full left-full lg:left-0 ml-10 xxl:ml-8 xl:ml-6 lg:mt-4">
         <div class="flex flex-col text-white">
           <div class="flex gap-4 xxl:gap-3 xl:gap-2.5 items-center pb-3 xxl:pb-2.5 xl:pb-2">
-            <span class="text-base xxl:text-sm xl:text-xs leading-none">№204</span>
-            <span class="text-base xxl:text-sm xl:text-xs leading-none">Перепродажа</span>
+            <span class="text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none">№204</span>
+            <span class="text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none">Перепродажа</span>
           </div>
-          <span class="text-[22px] xxl:text-[18px] xl:text-[15px] font-semibold leading-none pb-4 xxl:pb-3 xl:pb-2.5">7 000 000 €</span>
-          <span class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none pb-5 xxl:pb-4 xl:pb-3">7 000 000 € за м²</span>
+          <span class="text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px] font-semibold leading-none pb-4 xxl:pb-3 xl:pb-2.5">7 000 000 €</span>
+          <span class="text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14x] leading-none pb-5 xxl:pb-4 xl:pb-3">7 000 000 € за м²</span>
           <div class="chess__bg--ruller flex items-center gap-1 w-fit px-2 xl:px-1.5 py-1.5 xl:py-1">
             <svg class="w-4.5 xxl:w-4 xl:w-3.5" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0_150_2046)">
@@ -29,7 +29,7 @@
                 </clipPath>
               </defs>
             </svg>
-            <span class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">200 м²</span>
+            <span class="text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">200 м²</span>
           </div>
         </div>
       </div>

@@ -106,7 +106,7 @@
         <div>
           <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Планировка квартиры:</span>
           <div class="relative w-full h-[10vw] lg:h-[14vw] md:h-[18vw] sm:h-[24vw] rounded-[5px]">
-            <img v-if="imageLoadOne" class="absolute w-full h-full rounded-[5px]" :src="imageOne" alt="">
+            <img v-if="imageLoadOne" class="absolute w-full h-full object-cover rounded-[5px]" :src="imageOne" alt="">
             <button v-if="selectFlat" @click="deleteImageOne" class="absolute rounded-[5px] m-2 bg-[#E84680] z-10 top-0 right-0 h-5 xxl:h-4.5 xl:h-4 w-5 xxl:w-4.5 xl:w-4">
               <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-white h-[1px] w-[60%] rounded-[10px]"></span>
               <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-white h-[1px] w-[60%] rounded-[10px]"></span>
@@ -133,7 +133,7 @@
         <div>
           <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Планировка этажа:</span>
           <div class="relative w-full h-[10vw] lg:h-[14vw] md:h-[18vw] sm:h-[24vw] rounded-[5px]">
-            <img v-if="imageLoadTwo" class="absolute w-full h-full rounded-[5px]" :src="imageTwo" alt="">
+            <img v-if="imageLoadTwo" class="absolute w-full h-full object-cover rounded-[5px]" :src="imageTwo" alt="">
             <button v-if="selectFlat" @click="deleteImageTwo" class="absolute rounded-[5px] m-2 bg-[#E84680] z-10 top-0 right-0  h-5 xxl:h-4.5 xl:h-4 w-5 xxl:w-4.5 xl:w-4">
               <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-white h-[1px] w-[60%] rounded-[10px]"></span>
               <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-white h-[1px] w-[60%] rounded-[10px]"></span>

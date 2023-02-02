@@ -1,7 +1,7 @@
 <template>
   <main class="">
     <div class="_container">
-      <div class="flex justify-between items-center my-4 xxl:my-3 xl:my-2.5">
+      <div class="flex justify-between lg:flex-col items-center my-4 xxl:my-3 xl:my-2.5">
         <div class="block lg:hidden grid grid-cols-5 gap-3 xxl:gap-2.5 xl:gap-2">
           <div v-for="item in house.frames" :class="{ 'border': item.active === 1 }" @click="targetFrame(item)" class="corpus__banner border-solid border-[#6435A5] w-[9.5vw] gap-3.5 xxl:gap-3 xl:gap-2.5 cursor-pointer rounded-[5px] flex flex-col justify-center p-5 xxl:p-3.5 x:p-2.5">
             <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">{{ item.name }}</span>
@@ -13,27 +13,27 @@
         <div class="hidden lg:block relative my-5 xxl:my-4 xl:my-3">
           <div @click="openCorpusList = !openCorpusList" class="flex flex-col cursor-pointer gap-2.5 xxl:gap-2 xl:gap-1.5">
             <div class="flex items-center gap-7 xxl:gap-5 xl:gap-4">
-              <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">{{ activeFrameMobile.name }}</span>
+              <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[17px] leading-none whitespace-nowrap">{{ activeFrameMobile.name }}</span>
               <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2" alt="">
             </div>
-            <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">{{ activeFrameMobile.flats.length }} {{ activeFrameMobile.flats.length === 1 ? "Квартира" : activeFrameMobile.flats.length === 2 || activeFrameMobile.flats.length === 3 || activeFrameMobile.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
+            <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap">{{ activeFrameMobile.flats.length }} {{ activeFrameMobile.flats.length === 1 ? "Квартира" : activeFrameMobile.flats.length === 2 || activeFrameMobile.flats.length === 3 || activeFrameMobile.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
           </div>
           <div v-if="openCorpusList" class="overflow-y-auto custom__scroll-grey max-h-[180px] absolute z-40 top-[120%] bg-white left-0 border border-solid border-[#E5DFEE] rounded-[10px]">
             <div v-for="item in house.frames" @click="targetFrameMobile(item)" class="hover__select flex flex-col cursor-pointer gap-2.5 xxl:gap-2 xl:gap-1.5 px-7 xxl:px-5 xl:px-4 py-5 xxl:py-4 xl:py-3">
               <div class="flex items-center gap-7 xxl:gap-5 xl:gap-4">
-                <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">{{ item.name }}</span>
+                <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[17px] leading-none whitespace-nowrap">{{ item.name }}</span>
               </div>
-              <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">{{ item.flats.length }} {{ item.flats.length === 1 ? "Квартира" : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
+              <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap">{{ item.flats.length }} {{ item.flats.length === 1 ? "Квартира" : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
             </div>
           </div>
         </div>
 
-        <div class="flex items-center gap-7 xxl:gap-5 xl:gap-4 x:gap-2">
+        <div class="flex items-center lg:flex-col gap-7 xxl:gap-5 xl:gap-4 x:gap-2">
           <div class="flex items-center gap-2 xl:gap-1.5">
             <img src="../../assets/svg/calender_purple.svg" class="w-4 xxl:w-3" alt="">
-            <span class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ house.flat_updated.replace(new RegExp('-', 'g'), '.') }}</span>
+            <span class="text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{ house.flat_updated.replace(new RegExp('-', 'g'), '.') }}</span>
           </div>
-          <div class="chess__buttons h-9 xxl:h-8 xl:h-7 flex items-center p-1 xl:p-0.5 rounded-[3px] text-[14px] xxl:text-[12px] xl:text-[10px]">
+          <div class="chess__buttons h-9 xxl:h-8 xl:h-7 flex items-center p-1 xl:p-0.5 rounded-[3px] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px]">
             <div @click="changeChess" :class="{'chess__button--active': activeChess}" class="h-full cursor-pointer flex items-center gap-1 px-2 xl:px-1.5 rounded-[3px]">
               <svg class="w-4.5 xxl:w-4 xl:w-3.5 lg:w-4" width="18px" height="18px" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_134_907)">
@@ -61,7 +61,7 @@
               <span class="whitespace-nowrap">Список</span>
             </div>
           </div>
-          <button @click="$emit('close-chess')" class="bg-[#E84680] h-9 xxl:h-8 xl:h-7 rounded-[3px] px-6 xxl:px-5 xl:px-4 whitespace-nowrap text-base xxl:text-sm xl:text-xs leading-none font-semibold text-white">Информация о ЖК</button>
+          <button @click="$emit('close-chess')" class="bg-[#E84680] h-9 xxl:h-8 xl:h-7 rounded-[3px] px-6 xxl:px-5 xl:px-4 whitespace-nowrap text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none font-semibold text-white">Информация о ЖК</button>
         </div>
       </div>
     </div>
@@ -78,7 +78,7 @@
 <!--              <span-->
 <!--                @click="openCost = false"-->
 <!--                v-for="cost in costs"-->
-<!--                class="hover__select cursor-pointer text-base xxl:text-sm xl:text-xs leading-none px-2 py-2 xxl:py-1.5 xl:py-1 whitespace-nowrap"-->
+<!--                class="hover__select cursor-pointer text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none px-2 py-2 xxl:py-1.5 xl:py-1 whitespace-nowrap"-->
 <!--              >-->
 <!--                {{ cost.cost }}-->
 <!--              </span>-->
@@ -93,7 +93,7 @@
 <!--              <span-->
 <!--                @click="openSquare = false"-->
 <!--                v-for="square in squares"-->
-<!--                class="hover__select cursor-pointer text-base xxl:text-sm xl:text-xs leading-none px-2 py-2 xxl:py-1.5 xl:py-1 whitespace-nowrap"-->
+<!--                class="hover__select cursor-pointer text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none px-2 py-2 xxl:py-1.5 xl:py-1 whitespace-nowrap"-->
 <!--              >-->
 <!--                {{ square.square }}-->
 <!--              </span>-->
@@ -108,7 +108,7 @@
 <!--              <span-->
 <!--                @click="openLayout = false"-->
 <!--                v-for="layout in layouts"-->
-<!--                class="hover__select cursor-pointer text-base xxl:text-sm xl:text-xs leading-none px-2 py-2 xxl:py-1.5 xl:py-1 whitespace-nowrap"-->
+<!--                class="hover__select cursor-pointer text-base xxl:text-sm xl:text-xs lg:text-[15x] leading-none px-2 py-2 xxl:py-1.5 xl:py-1 whitespace-nowrap"-->
 <!--              >-->
 <!--                {{ layout.layout }}-->
 <!--              </span>-->
@@ -130,25 +130,25 @@
         <div class="border__bottom">
           <div class="mr-[6.25vw] lg:mx-auto lg:px-[6.25vw] lg:py-6 flex justify-between lg:justify-start lg:gap-5 p-14 xxl:p-10 xl:p-8">
             <div class="flex flex-col">
-              <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs leading-none pb-3 xxl:pb-2.5 xl:pb-2">№{{ selectFlat.number }}
+              <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[16px] leading-none pb-3 xxl:pb-2.5 xl:pb-2">№{{ selectFlat.number }}
                 <span class="ml-1" :class="{ 'text-[#FF6600]': selectFlat.status == 0,
                             'text-[#8A8996]': selectFlat.status == 2,
                             'text-[#E84680]': selectFlat.status == 3,
                             'text-[#00A478]': selectFlat.status == 4
             }">{{ selectFlat.status == 0 ? "Акция" : selectFlat.status == 1 ? "Перепродажа" : selectFlat.status == 2 ? "Бронь" : selectFlat.status == 3 ? "Продажи закрыты" : "В продаже" }}</span>
               </span>
-              <span class="text-[22px] xxl:text-[18px] xl:text-[15px] font-semibold leading-none pb-4 xxl:pb-3 xl:pb-2.5">{{ selectFlat.price }} €</span>
-              <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none pb-5 xxl:pb-4 xl:pb-3">{{ Math.round(selectFlat.price / selectFlat.square) }} € за м²</span>
+              <span class="text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[21px] font-semibold leading-none pb-4 xxl:pb-3 xl:pb-2.5">{{ selectFlat.price }} €</span>
+              <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none pb-5 xxl:pb-4 xl:pb-3">{{ Math.round(selectFlat.price / selectFlat.square) }} € за м²</span>
               <div class="gray-backg flex items-center gap-1 w-fit px-2 xl:px-1.5 py-1.5 xl:py-1">
                 <img class="w-4 xxl:w-3.5 xl:w-3" src="../../assets/svg/ruller_icon.svg" alt="">
-                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ selectFlat.square }} м²</span>
+                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{ selectFlat.square }} м²</span>
               </div>
             </div>
             <img :src="selectFlat.imageUp" class="w-40 xxl:w-36 xl:w-32" alt="">
           </div>
         </div>
-        <div class="flex items-center justify-center justify-between lg:justify-start lg:my-6 mr-[6.25vw] lg:mx-auto lg:px-[6.25vw]">
-          <img @click="openCheme = true" :src="selectFlat.imageDown" class="pl-14 xxl:pl-10 xl:pl-8 pt-16 xxl:pt-12 xl:pt-10 w-full object-cover cursor-pointer" alt="">
+        <div @click="this.$emit('open-cheme')" class="flex items-center justify-center justify-between lg:justify-start lg:my-6 mr-[6.25vw] lg:mx-auto lg:px-[6.25vw]">
+          <img :src="selectFlat.imageDown" class="pl-14 xxl:pl-10 xl:pl-8 pt-16 xxl:pt-12 xl:pt-10 lg:p-0 w-full object-cover cursor-pointer" alt="">
         </div>
       </div>
     </div>
@@ -156,12 +156,10 @@
 </template>
 
 <script>
-
 import AppChessGrid from "./AppChessGrid.vue"
 import AppChessList from "./AppChessList.vue"
-import AppChessScheme from "../Layouts/modal/AppChessScheme.vue"
-import {computed} from "vue";
-import {usePage} from "@inertiajs/inertia-vue3";
+import {computed} from "vue"
+import {usePage} from "@inertiajs/inertia-vue3"
 
 export default {
   props: ['user', 'house', 'flatUpdated'],
@@ -198,7 +196,6 @@ export default {
         { layout: '5 + 1', id: 4},
         { layout: '5 + 2', id: 5},
       ],
-      openCheme: false,
       openCorpusList: false,
       activeFrameMobile: null
     }
@@ -230,8 +227,6 @@ export default {
           this.openCorpusList = false
         }
       })
-
-
     },
     targetFlat(flat) {
       this.selectFlat = flat
@@ -269,7 +264,6 @@ export default {
   components: {
     AppChessGrid,
     AppChessList,
-    AppChessScheme,
   }
 }
 </script>
