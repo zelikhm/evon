@@ -56,13 +56,7 @@ Route::get('/404', function () {
   return Inertia::render('AppError');
 });
 
-Route::get('test', function () {
-  $sub = User\SubscriptionModel::where('user_id', 3)->first();
-
-  $date = new Carbon($sub->finished_at);
-
-  dd($date->addDay(30));
-});
+Route::get('test', ['App\Http\Controllers\Payment\IndexController', 'index']);
 
 Route::get('/privacy', ['App\Http\Controllers\PrivacyController', 'index']);
 Route::get('/agree', ['App\Http\Controllers\PrivacyController', 'agree']);

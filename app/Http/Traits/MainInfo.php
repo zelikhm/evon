@@ -212,7 +212,7 @@ trait MainInfo
 
   protected function getHouseForUserPagination($id)
   {
-    $houses = HouseModel::where('user_id', $id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->paginate(6);
+    $houses = HouseModel::where('user_id', $id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->paginate(100);
 
     foreach ($houses as $house) {
       $house->image = count($house->images) > 0 ? $house->images[0]->name : null;
