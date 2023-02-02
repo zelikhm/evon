@@ -555,6 +555,7 @@ export default {
       this.openSelectType = false
     },
     checkFilterType(i) {
+      console.log(i)
       return i.filter(item => item.info.type === this.selectType)
     },
     checkFilterCity(i) {
@@ -568,17 +569,17 @@ export default {
     },
     checkFilterPrice(i) {
       return i.filter(item => {
-        if (!this.filters.priceMin && !this.filters.priceMax) {
+        if (!Number.isInteger(this.filters.priceMin) && Number.isInteger(this.filters.priceMax)) {
           return
-        } else if (this.filters.priceMin && !this.filters.priceMax) {
+        } else if (Number.isInteger(this.filters.priceMin) && !Number.isInteger(this.filters.priceMax)) {
           if (item.minPrice >= this.filters.priceMin) {
             return item
           }
-        } else if (this.filters.priceMin && this.filters.priceMax) {
+        } else if (Number.isInteger(this.filters.priceMin) && Number.isInteger(this.filters.priceMax)) {
           if (item.minPrice >= this.filters.priceMin && item.maxPrice <= this.filters.priceMax) {
             return item
           }
-        } else if (!this.filters.priceMin && this.filters.priceMax) {
+        } else if (!Number.isInteger(this.filters.priceMin) && Number.isInteger(this.filters.priceMax)) {
           if (item.maxPrice <= this.filters.priceMax) {
             return item
           }
@@ -639,8 +640,8 @@ export default {
         squareFlats.push(item.square)
       })
 
-      house.minPrice = Math.min(...arr)
-      house.maxPrice = Math.max(...arr)
+      house.minPrice = Number.isInteger(Math.min(...arr)) ? Math.min(...arr) : 0
+      house.maxPrice = Number.isInteger(Math.max(...arr)) ? Math.max(...arr) : 0
       house.minSquare = Math.min(...squareFlats)
       house.maxSquare = Math.max(...squareFlats)
 
@@ -659,18 +660,13 @@ export default {
       })
     })
 
-
-    this.filters.priceMin = Math.min(...minPriceForFilter)
-    this.filters.priceMax = Math.max(...maxPriceForFilter)
-
     this.readyHouses = this.readyHouses.slice(0, this.count)
-
   },
   computed: {
     readyHouses() {
       this.housesFilters = this.readyHouses
 
-      this.housesFilters = this.checkFilterType(this.housesFilters)
+      // this.housesFilters = this.checkFilterType(this.housesFilters)
 
       if (this.selectCity !== 'Выберите город...') {
         this.housesFilters = this.checkFilterCity(this.housesFilters)
@@ -680,10 +676,12 @@ export default {
         this.housesFilters = this.checkFilterRegion(this.housesFilters)
       }
 
-      this.housesFilters = this.checkFilterPrice(this.housesFilters)
+      if (this.filters.priceMin || this.filters.priceMax) {
+        this.housesFilters = this.checkFilterPrice(this.housesFilters)
+      }
+
       this.housesFilters = this.checkFilterStatus(this.housesFilters)
-
-
+      
       // return this.filters
       return this.housesFilters
 
