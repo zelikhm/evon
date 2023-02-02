@@ -191,7 +191,7 @@ trait MainInfo
     $houses = HouseModel::where('user_id', $user_id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->get();
 
     foreach ($houses as $house) {
-      $house->image = count($house->images) > 0 ? $house->images[0]->name : null;
+      $house->image = $this->getPhoto($house->id);
       $house->view = [
         HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addHour(-24))->count(),
         HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-5))->count(),
@@ -215,7 +215,7 @@ trait MainInfo
     $houses = HouseModel::where('user_id', $id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->paginate(100);
 
     foreach ($houses as $house) {
-      $house->image = count($house->images) > 0 ? $house->images[0]->name : null;
+      $house->image = $this->getPhoto($house->id);
       $house->view = [
         HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addHour(-24))->count(),
         HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-5))->count(),
@@ -386,7 +386,7 @@ trait MainInfo
       $frame->flats = FlatModel::where('frame_id', $frame->id)->with(['images'])->get();
     }
 
-    $house->image = count($house->images) > 0 ? $house->images[0]->name : null;
+    $house->image = $this->getPhoto($house->id);
 
     $favorite = FavoritesModel::where('user_id', Auth::id())
       ->where('house_id', $house->id)
