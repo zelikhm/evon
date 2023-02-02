@@ -175,10 +175,12 @@ export default {
   emits: ['login-realtor', 'login-developer', 'open-register'],
   methods: {
     startSearch() {
-      localStorage.setItem('searchData', this.search)
-      window.location.href = '/houses#search'
-      if (window.location.href.split('#').at(-1) === 'search') {
-        location.reload()
+      if (this.search) {
+        localStorage.setItem('searchData', this.search)
+        window.location.href = '/houses#search'
+        if (window.location.href.split('#').at(-1) === 'search') {
+          location.reload()
+        }
       }
     },
     openProfile() {

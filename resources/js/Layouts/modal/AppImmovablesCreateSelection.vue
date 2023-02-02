@@ -69,7 +69,7 @@ export default {
       isShow: false
     }
   },
-  emits: ['close-add-selection', 'close-i-create-selection'],
+  emits: ['close-add-selection', 'close-i-create-selection', 'update-compilation'],
   methods: {
     createSelection() {
 
@@ -88,11 +88,11 @@ export default {
         description: this.commentJK,
         house_id: this.house.id,
         token: this.globalToken
-      }).then(response => console.log(response.data))
-
-      console.log(id)
-
-      this.$emit('close-i-create-selection')
+      }).then(response => {
+        console.log(response.data)
+        this.$emit('update-compilation', response.data)
+        this.$emit('close-i-create-selection')
+      })
 
     }
   },
