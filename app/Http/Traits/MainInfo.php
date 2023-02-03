@@ -177,7 +177,7 @@ trait MainInfo
         ->orderBy('category', 'ASC')
         ->first();
     } else {
-      $image = null;
+      $image = [];
     }
 
     return $image;
