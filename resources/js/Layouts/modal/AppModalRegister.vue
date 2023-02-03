@@ -5,7 +5,7 @@
     <div class="relative bg-white rounded-[12px] p-10 xxl:p-9 xl:p-8 lg:p-5 z-50 w-[30%] lg:w-[48%] md:w-[60%] sm:w-[90%] h-fit">
       <div class="relative mb-10 xxl:mb-8 xl:mb-6">
         <h2 class="text-center text-[22px] xxl:text-lg xl:text-base font-semibold">Регистрация на платформе</h2>
-        <button @click="closeModal" class="w-4 h-4 absolute top-[20%] right-0 z-50">
+        <button @click="closeModal" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
           <div class="absolute h-[1px] w-4 bg-[#8A8996] rotate-45"></div>
           <div class="absolute h-[1px] w-4 bg-[#8A8996] -rotate-45"></div>
         </button>

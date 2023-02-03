@@ -5,7 +5,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 <template>
   <div class="grid__list-new-build">
     <div
-      class="filter__left lg:absolute lg:z-40 lg:top-0 transition-all duration-500 w-full bg-[#F6F3FA] rounded-[6px] h-fit"
+      class="sticky top-[2vw] filter__left lg:absolute lg:z-40 lg:top-0 transition-all duration-500 w-full bg-[#F6F3FA] rounded-[6px] h-fit"
       :class="{'animation__filter': openFilter}"
     >
       <div class="flex justify-between items-center p-7 xxl:p-5 xl:p-4">
@@ -16,7 +16,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         </div>
       </div>
       <div class="h-[1px] w-full bg-[#E5DFEE]"></div>
-      <div class="custom__scroll h-[90vh] relative overflow-y-auto p-7 xxl:p-5 xl:p-4">
+      <div class="custom__scroll h-[84vh] relative overflow-y-auto p-7 xxl:p-5 xl:p-4">
         <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3">
 
           <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectType}">
