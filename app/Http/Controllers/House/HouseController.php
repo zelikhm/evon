@@ -40,7 +40,7 @@ class HouseController extends Controller
 
     $search = collect();
 
-    $houses = HouseModel::where('title', 'LIKE', $request->title . '%')
+    $houses = HouseModel::where('title', 'LIKE', '%' . $request->title . '%')
       ->where('active', 2)
       ->where('visible', 1)
       ->orWhere('description', 'LIKE', $request->title . '%')
