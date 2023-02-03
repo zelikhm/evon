@@ -23,6 +23,11 @@
   <app-chess v-if="chess"
              :house="house"
              @close-chess="closeChess"
+             @open-cheme="openCheme = true"
+  />
+  <app-chess-scheme
+    v-if="openCheme"
+    @closeChess="openCheme = false"
   />
   <main v-if="!chess">
     <div class="_container flex flex-col">
@@ -204,6 +209,7 @@ import AppAllNews from "@/Layouts/modal/AppAllNews.vue"
 import AppAddSelections from "@/Layouts/modal/AppAddSelections.vue"
 import AppImmovablesCreateSelection from "@/Layouts/modal/AppImmovablesCreateSelection.vue"
 import AppChess from "@/Components/AppChess.vue"
+import AppChessScheme from "../Layouts/modal/AppChessScheme.vue"
 
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
@@ -226,7 +232,8 @@ export default {
       flagFavorite: null,
       mainPhotos: [],
       chess: false,
-      isWithClient: false
+      isWithClient: false,
+      openCheme: false,
     }
   },
   methods: {
@@ -361,6 +368,7 @@ export default {
     AppAddSelections,
     AppImmovablesCreateSelection,
     AppChess,
+    AppChessScheme,
   },
   setup() {
     return {

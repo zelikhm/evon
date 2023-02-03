@@ -101,7 +101,7 @@ import { Link } from '@inertiajs/inertia-vue3'
               <div v-if="openSelectDeadline" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
                 <span
                   v-for="(deadline, idx) in deadlines" :key="idx"
-                  @click="changeSelectTypes(deadline)"
+                  @click="changeSelectDeadline(deadline)"
                   class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
                 >
                   {{ deadline.deadline }}
@@ -178,24 +178,24 @@ import { Link } from '@inertiajs/inertia-vue3'
                 <input class="custom__checkbox" name="infrastructure" type="checkbox" :id="'infrastructure' + item.id">
                 <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" :for="'infrastructure' + item.id">{{ item.name }}</label>
               </div>
-              <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectInstallment}">
-                <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Рассрочка</span>
-                <div class="relative" :tabindex="tabindex" @blur="openSelectInstallment = false">
-                  <div @click="openSelectInstallment = !openSelectInstallment" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
-                    <span class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ selectInstallment }}</span>
-                    <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectInstallment }" alt="">
-                  </div>
-                  <div v-if="openSelectInstallment" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
-                    <span
-                      v-for="(installment, idx) in optionsInstallment" :key="idx"
-                      @click="changeSelectInstallment(installment)"
-                      class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
-                    >
-                      {{installment.installment }}
-                    </span>
-                  </div>
-                </div>
-              </div>
+<!--              <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom&#45;&#45;0': openSelectInstallment}">-->
+<!--                <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Рассрочка</span>-->
+<!--                <div class="relative" :tabindex="tabindex" @blur="openSelectInstallment = false">-->
+<!--                  <div @click="openSelectInstallment = !openSelectInstallment" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">-->
+<!--                    <span class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ selectInstallment }}</span>-->
+<!--                    <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectInstallment }" alt="">-->
+<!--                  </div>-->
+<!--                  <div v-if="openSelectInstallment" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">-->
+<!--                    <span-->
+<!--                      v-for="(installment, idx) in optionsInstallment" :key="idx"-->
+<!--                      @click="changeSelectInstallment(installment)"-->
+<!--                      class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"-->
+<!--                    >-->
+<!--                      {{installment.installment }}-->
+<!--                    </span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
             </div>
           </div>
           <div class="mb-10 xxl:mb-8 xl:mb-6">
@@ -410,6 +410,7 @@ export default {
   emits: ['open-filter', 'open-add-selections' ,'close-filter'],
   data() {
     return {
+      housesFilters: [],
       filters: {
         type: null,
         city: null,
@@ -552,6 +553,38 @@ export default {
     changeSelectTypes(type) {
       this.selectType = type.type
       this.openSelectType = false
+    },
+    checkFilterType(i) {
+      console.log(i)
+      return i.filter(item => item.info.type === this.selectType)
+    },
+    checkFilterCity(i) {
+      return i.filter(item => item.city === this.selectCity)
+    },
+    checkFilterRegion(i) {
+      return i.filter(item => item.area === this.selectRegion)
+    },
+    checkFilterStatus(i) {
+      return i.filter(item => item.created === this.selectDeadline)
+    },
+    checkFilterPrice(i) {
+      return i.filter(item => {
+        if (!Number.isInteger(this.filters.priceMin) && Number.isInteger(this.filters.priceMax)) {
+          return
+        } else if (Number.isInteger(this.filters.priceMin) && !Number.isInteger(this.filters.priceMax)) {
+          if (item.minPrice >= this.filters.priceMin) {
+            return item
+          }
+        } else if (Number.isInteger(this.filters.priceMin) && Number.isInteger(this.filters.priceMax)) {
+          if (item.minPrice >= this.filters.priceMin && item.maxPrice <= this.filters.priceMax) {
+            return item
+          }
+        } else if (!Number.isInteger(this.filters.priceMin) && Number.isInteger(this.filters.priceMax)) {
+          if (item.maxPrice <= this.filters.priceMax) {
+            return item
+          }
+        }
+      })
     }
   },
   created() {
@@ -607,8 +640,8 @@ export default {
         squareFlats.push(item.square)
       })
 
-      house.minPrice = Math.min(...arr)
-      house.maxPrice = Math.max(...arr)
+      house.minPrice = Number.isInteger(Math.min(...arr)) ? Math.min(...arr) : 0
+      house.maxPrice = Number.isInteger(Math.max(...arr)) ? Math.max(...arr) : 0
       house.minSquare = Math.min(...squareFlats)
       house.maxSquare = Math.max(...squareFlats)
 
@@ -627,26 +660,32 @@ export default {
       })
     })
 
-
-    this.filters.priceMin = Math.min(...minPriceForFilter)
-    this.filters.priceMax = Math.max(...maxPriceForFilter)
-
     this.readyHouses = this.readyHouses.slice(0, this.count)
-
   },
   computed: {
     readyHouses() {
+      this.housesFilters = this.readyHouses
 
-      let filtersType = [],
-          filtersCity = [],
-          filtersArea = [],
-          filtersPriceMin = [],
-          filterPriceMax = []
+      // this.housesFilters = this.checkFilterType(this.housesFilters)
 
-      filtersType = this.readyHouses.filter(item => item.type === this.selectType)
+      if (this.selectCity !== 'Выберите город...') {
+        this.housesFilters = this.checkFilterCity(this.housesFilters)
+      }
+      console.log(this.housesFilters)
+
+      if (this.selectRegion !== 'Выберите район...') {
+        this.housesFilters = this.checkFilterRegion(this.housesFilters)
+      }
+      if (this.filters.priceMin || this.filters.priceMax) {
+        this.housesFilters = this.checkFilterPrice(this.housesFilters)
+      }
+
+      this.housesFilters = this.checkFilterStatus(this.housesFilters)
+
+      console.log(this.housesFilters)
 
       // return this.filters
-      return this.readyHouses.splice(0, 21)
+      return this.housesFilters
 
     },
     filteredCity() {

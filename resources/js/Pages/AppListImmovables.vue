@@ -8,13 +8,14 @@
                       v-if="openAddSelection"
                       @close-add-selection="openAddSelection = false"
                       :house="house"
-                      :compilation="compilation"
+                      :compilation="readyCompilation"
   />
   <app-immovables-create-selection
       :user="user"
       v-if="openCreateSelection"
       @close-add-selection="openAddSelection = false"
       @close-i-create-selection="closeCreateSel"
+      @update-compilation="updateCompilation"
       :title="titleNewCompilation"
       :house="house"
   />
@@ -85,10 +86,15 @@ export default {
       count: 21,
       house: null,
       titleNewCompilation: '',
-      isWithClient: false
+      isWithClient: false,
+      readyCompilation: null
     }
   },
   methods: {
+    updateCompilation(data) {
+      this.readyCompilation.push(data)
+      console.log(this.readyCompilation)
+    },
     openCreateSel(title) {
       this.openCreateSelection = true
       this.openAddSelection = false
@@ -117,6 +123,7 @@ export default {
     AppImmovablesCreateSelection,
   },
   created() {
+    this.readyCompilation = this.compilation
     this.isWithClient = localStorage.getItem('withClient') === 'true' ? true : false
   },
 }

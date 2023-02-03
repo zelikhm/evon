@@ -24,7 +24,7 @@
         <span v-if="success" style="color: green;">Жилищный комплекс {{ house.title }} успешно добавлен в подборку {{ activeNameCompilation }}!</span>
         <div class="mt-2 main__title-block border border-solid border-[#E5DFEE] rounded-[5px] pl-5 xxl:pl-4 xl:pl-3 py-5 xxl:py-4 xl:py-3 pr-1 text-[16px] xxl:text-[14px] xl:text-[12px]">
           <div class="flex flex-col h-[40vh] overflow-y-auto custom__scroll--chess pr-4 xxl:pr-3 xl:pr-2 gap-2.5 xxl:gap-2 xl:gap-1.5">
-            <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]" v-for="item in compilation">
+            <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]" v-for="item in readyCompilation">
               <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
                 <div class="flex" @click="selectCompilation(item)">
                   <input :id="'name' + item.id" type="radio" name="selections" class="custom__checkbox">
@@ -68,7 +68,8 @@ export default {
       titleNewCompilation: '',
       idCompilation: null,
       success: false,
-      activeNameCompilation: null
+      activeNameCompilation: null,
+      readyCompilation: null
     }
   },
   emits: ['close-add-selection', 'open-create-sel'],
@@ -101,6 +102,9 @@ export default {
       }
     }
   },
+  created() {
+    this.readyCompilation = this.compilation
+  }
 }
 </script>
 

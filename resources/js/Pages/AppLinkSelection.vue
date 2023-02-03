@@ -40,7 +40,8 @@ import { Link } from '@inertiajs/inertia-vue3'
                       <img class="h-[15vw] w-full object-cover" :src="item.image" v-if="item.image" alt="">
                       <img class="h-[15vw] w-full object-cover" v-else src="../../assets/no-img-houses-zastroy.jpg" alt="">
                       <div class="absolute flex flex-col justify-between top-0 left-0 w-full h-full text-[14px] xxl:text-[12px] xl:text-[10px]">
-                        <span class="bg-[#30CB49] uppercase self-end text-white leading-none px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 m-4 xxl:m-3 xl:m-2.5 rounded-[3px]">Сдан</span>
+                        <span class="bg-[#30CB49] uppercase self-end text-white leading-none px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 m-4 xxl:m-3 xl:m-2.5 rounded-[3px]" v-if="item.created && !Number.isInteger(+item.created[0])">{{ item.created }}</span>
+                        <span class="bg-[#E84680] uppercase self-end text-white leading-none px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 m-4 xxl:m-3 xl:m-2.5 rounded-[3px]" v-else-if="item.created">{{ item.created }}</span>
                         <div class="flex items-center text-white gap-2 xxl:gap-1.5 xl:gap-1 p-5 xxl:p-4 xl:p-3">
                           <span class="leading-none">{{ item.area }}</span>
                           <div class="bg-white h-1 w-1 rounded-full "></div>

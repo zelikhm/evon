@@ -148,7 +148,6 @@
                 <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 p-7 xxl:p-5 xl:p-4">
                   <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
                     <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none">{{ item.name }}</span>
-                    <span class="flex items-center justify-center text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">СДАН</span>
                   </div>
                   <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">{{ item.flats.length }} квартир. от {{ Math.round(item.minPrice / item.minSquare) }} € до {{ Math.round(item.maxPrice / item.maxSquare) }} € за м2</span>
                 </div>
@@ -161,7 +160,7 @@
             </div>
           </div>
           <div class="pb-16 xxl:pb-12 xl:pb-10">
-            <div class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none mb-7 xxl:mb-5 xl:mb-4">{{ flats.flats.length }} Квартир</div>
+            <div class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none mb-7 xxl:mb-5 xl:mb-4" v-if="flats.flats">{{ flats.flats.length }} Квартир</div>
             <div class="grid grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3 mb-7 xxl:mb-5 xl:mb-4">
               <div class="border border-solid border-[#E5DFEE] rounded-[6px] px-4 xx:px-3 xl:px-2.5 py-2 xxl:py-1.5 xl:py-1">
                 <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">Цена</span>
@@ -230,7 +229,7 @@
              <div class="flex flex-col sm:w-[500px]">
                <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3" v-for="item in flats.flats">
                  <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                   <img v-if="item.images.length > 0" :src="'/storage/' + item.images[0].name" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
+                   <img v-if="item.image" :src="item.image" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
                    <img v-else src="../../assets/no-img-houses.jpg" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
                    <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
                      <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
@@ -254,7 +253,7 @@
            </div>
 
 <!--    Когда квартир нет-->
-            <div class="border__top py-12 xxl:py-10 xl:py-8" v-if="flats.flats.length === 0">
+            <div class="border__top py-12 xxl:py-10 xl:py-8" v-if="flats.flats && flats.flats.length === 0">
               <div class="flex justify-between md:flex-col items-center rounded-[10px] bg-[#F6F3FA] p-10 xxl:p-8 xl:p-6">
                 <div class="flex flex-col">
                   <span class="text-[20px] xxl:text-[17px] xl:text-[14px] lg:text-[17px] font-medium">Нет доступных квартир</span>
@@ -298,7 +297,7 @@
               </div>
             </div>
           </div>
-          <GMapMap :center="center" :zoom="10" map-type-id="terrain" class="w-full h-[18vw] lg:h-[28vw] sm:h-[36vw] rounded-[10px] mb-10" :draggable="true" @click="handleClick"  ref="myMapRef" :click="true">
+          <GMapMap v-if="house.visible === 1" :center="center" :zoom="10" map-type-id="terrain" class="w-full h-[18vw] lg:h-[28vw] sm:h-[36vw] rounded-[10px] mb-10" :draggable="true" @click="handleClick"  ref="myMapRef" :click="true">
             <GMapMarker :key="index" v-for="(m, index) in markers" :icon="'/images/icon-marker-map.svg'" :position="m.position" :clickable="true" :draggable="true">
             </GMapMarker>
           </GMapMap>

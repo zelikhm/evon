@@ -1498,6 +1498,18 @@ input::placeholder {
   grid-template-columns: 6vw 8.5vw 7vw 9vw 1fr auto;
 }
 
+@media (max-width: 992px) {
+  .grid__chess--list {
+    grid-template-columns: 8vw 12vw 12vw 14vw 1fr auto;
+  }
+}
+
+@media (max-width: 766px) {
+  .grid__chess--list {
+    grid-template-columns: 60px 110px 90px 120px 120px 70px;
+  }
+}
+
 .chess__bg--ruller {
   background: rgba(255, 255, 255, 0.12);
   border-radius: 100px;
