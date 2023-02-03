@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class IndexController extends Controller
 {
@@ -12,12 +14,11 @@ class IndexController extends Controller
   private $merchant_key   = '5B9J78CdGoFtpxJ6';
   private $merchant_salt  = '9qHpXbz7gSRo8m6F';
 
-  private $currency = 'EUR';
+  private $currency = 'TL';
   private $link_type = 'product';
   private $lang = 'tr';
   private $min_count = 1;
   private $max_installment = "12";
-  private $expiry_date = "2020-03-23 17:00:00";
 
   public function index(Request $request) {
 
@@ -41,9 +42,9 @@ class IndexController extends Controller
       'lang'              => $this->lang,
       'min_count'         => "1",
       'email'             => $email,
-      'expiry_date'       => $this->expiry_date,
+      'expiry_date'       => Carbon::now()->addHour(5),
       'max_count'         => "1",
-      'callback_link'     => "/",
+      'callback_link'     => "https://evot-tr.com/success",
       'callback_id'       => "1",
       'debug_on'          => 1,
       'get_qr'            => 1,
@@ -63,8 +64,11 @@ class IndexController extends Controller
 
     $result=json_decode($result,1);
 
-    dd($result);
+//    dd($result);
+
+    return redirect($result['link']);
 
   }
 
 }
+

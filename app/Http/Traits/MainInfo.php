@@ -183,7 +183,7 @@ trait MainInfo
         ->orderBy('category', 'ASC')
         ->first();
 
-      return $image;
+      return $image->name;
   }
 
   /**
@@ -270,7 +270,7 @@ trait MainInfo
       ->get();
 
     foreach ($houses as $house) {
-      $house->image = count($house->images) > 0 ? $house->images[0]->name : null;
+      $house->image = $this->getPhoto($house);
       $house->dop_array = TypesModel::where('id', $house->dop)->get();
       $house->info_array = StructureModel::where('id', $house->info)->get();
 
