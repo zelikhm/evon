@@ -183,7 +183,9 @@ trait MainInfo
         ->orderBy('category', 'ASC')
         ->first();
 
-      return $image->name;
+      if($image !== null) {
+        return $image->name;
+      }
   }
 
   /**
