@@ -175,11 +175,13 @@ trait MainInfo
 
   public function getPhoto($house)
   {
-    dd($house);
-    $image = HouseImagesModel::where('house_id', $house->id)
-      ->orderBy('created_at', 'ASC')
-      ->orderBy('category', 'ASC')
-      ->first();
+
+    if($house !== null) {
+      $image = HouseImagesModel::where('house_id', $house->id)
+        ->orderBy('created_at', 'ASC')
+        ->orderBy('category', 'ASC')
+        ->first();
+    }
 
     return $image;
 
