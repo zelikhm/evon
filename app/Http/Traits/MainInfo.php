@@ -60,11 +60,12 @@ trait MainInfo
    * @return mixed
    */
 
-  protected function getUser() {
+  protected function getUser()
+  {
 
     $user = User::where('id', Auth::id())->with(['company', 'subscriptionInfo'])->first();
 
-    if($user !== null) {
+    if ($user !== null) {
       $user->subscription = $user->subscription();
     } else {
       $user = [];
@@ -80,7 +81,8 @@ trait MainInfo
    * @return mixed
    */
 
-  protected function getNewsForPage() {
+  protected function getNewsForPage()
+  {
     return HouseNewsModel::orderByDesc('created_at')->with(['house'])->limit(30)->get();
   }
 
@@ -89,7 +91,8 @@ trait MainInfo
    * @return mixed
    */
 
-  protected function getAdminNews() {
+  protected function getAdminNews()
+  {
     return \App\Models\News\AdminNewsModel::orderByDesc('created_at')->limit(30)->get();
   }
 
@@ -161,7 +164,8 @@ trait MainInfo
    * @return mixed
    */
 
-  protected function getHouseOnId($house_id) {
+  protected function getHouseOnId($house_id)
+  {
     $house = HouseModel::where('id', $house_id)->with(['info', 'supports', 'files', 'frames', 'images', 'news', 'flats'])->first();
 
     $house->image = $this->getPhoto($house);
@@ -169,16 +173,13 @@ trait MainInfo
     return $house;
   }
 
-  public function getPhoto($house) {
-
-    if($house !== null) {
-      $image = HouseImagesModel::where('house_id', $house->id)
-        ->orderBy('created_at', 'ASC')
-        ->orderBy('category', 'ASC')
-        ->first();
-    } else {
-      $image = [];
-    }
+  public function getPhoto($house)
+  {
+    dd($house);
+    $image = HouseImagesModel::where('house_id', $house->id)
+      ->orderBy('created_at', 'ASC')
+      ->orderBy('category', 'ASC')
+      ->first();
 
     return $image;
 
@@ -276,7 +277,7 @@ trait MainInfo
         ->where('house_id', $house->id)
         ->first();
 
-      if($favorite !== null) {
+      if ($favorite !== null) {
         $house->favorite = true;
       } else {
         $house->favorite = false;
@@ -363,13 +364,13 @@ trait MainInfo
       ->where('slug', $slug)
       ->first();
 
-    if(count($house->flats) > 0) {
+    if (count($house->flats) > 0) {
       $flats = $house->flats;
 
       $flats->sortBy(
         [
-          fn ($a, $b) => $a->updated_at <=> $b->updated_at,
-          fn ($a, $b) => $b->updated_at <=> $a->updated_at,
+          fn($a, $b) => $a->updated_at <=> $b->updated_at,
+          fn($a, $b) => $b->updated_at <=> $a->updated_at,
         ]
       );
 
@@ -380,7 +381,7 @@ trait MainInfo
 
     $frame_updated = FrameModel::where('house_id', $house->id)->orderBy('updated_at', 'DESC')->first();
 
-    if($frame_updated !== null) {
+    if ($frame_updated !== null) {
       $house->frame_updated = $frame_updated->updated_at->format('d-m-Y');
     } else {
       $house->frame_updated = null;
