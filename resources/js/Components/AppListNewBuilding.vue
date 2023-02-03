@@ -289,7 +289,7 @@ import { Link } from '@inertiajs/inertia-vue3'
       <div v-if="!toggle && !map" class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3 mt-5 xxl:mt-4 xl:mt-3">
         <div class="flex flex-col" v-for="(item, idx) in readyHouses" :key="item.id">
           <div class="object__block relative z-10 h-[300px] exl:h-fit exl:h-[16vw] lg:h-[24vw] md:h-[36vw] sm:h-[56vw] rounded-[6px]">
-          <img v-if="item.images.length > 0" :src="item.image" class="object-cover absolute -z-10 w-full h-full rounded-[6px]" alt="">
+          <img v-if="item.images.length > 0" :src="item.image.name" class="object-cover absolute -z-10 w-full h-full rounded-[6px]" alt="">
           <img v-else src="../../assets/no-img-houses.jpg" class="object-cover absolute -z-10 w-full h-full rounded-[6px]" alt="">
           <div class="seek immovables__overlay opacity-0 transition-all h-full w-full absolute -z-10 rounded-[6px]"></div>
             <div class="flex flex-col h-full justify-between p-5 xxl-4 xl:p-3">

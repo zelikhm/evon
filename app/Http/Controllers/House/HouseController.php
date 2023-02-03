@@ -40,7 +40,7 @@ class HouseController extends Controller
 
     $search = collect();
 
-    $houses = HouseModel::where('title', 'LIKE', $request->title . '%')
+    $houses = HouseModel::where('title', 'LIKE', '%' . $request->title . '%')
       ->where('active', 2)
       ->where('visible', 1)
       ->orWhere('description', 'LIKE', $request->title . '%')
@@ -459,22 +459,31 @@ class HouseController extends Controller
   {
     if ($request->token === env('TOKEN')) {
 
-      if ($request->image_up) {
+      if ($request->image_up === 'null') {
+        $imageUp = null;
+      } else if ($request->image_up) {
         $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
         $request->image_up->move(public_path('/storage/flat/'), $imageUp);
         $imageUp = '/storage/flat/' . $imageUp;
       } else {
         $flat = FlatModel::where('id', $request->flat_id)->first();
-        $imageUp = $flat->imageUp;
+        if($flat->imageUp !== null) {
+          $imageUp = $flat->imageUp;
+        }
       }
 
-      if ($request->image_down) {
+      if ($request->image_down === 'null') {
+        $imageDown = null;
+      } else if ($request->image_down) {
         $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
         $request->image_down->move(public_path('/storage/flat/'), $imageDown);
         $imageDown = '/storage/flat/' . $imageDown;
       } else {
         $flat = FlatModel::where('id', $request->flat_id)->first();
-        $imageDown = $flat->imageDown;
+        if($flat->imageDown !== null) {
+          $imageDown = $flat->imageDown;
+        }
+
       }
 
       FlatModel::where('id', $request->flat_id)
