@@ -11,6 +11,7 @@ use App\Models\Builder\HouseNewsModel;
 use App\Models\Builder\HouseSupportModel;
 use App\Models\Builder\HouseViewsModel;
 use App\Models\User\CompilationInfoModel;
+use App\Models\User\FavoritesModel;
 
 class HouseObserver
 {
@@ -52,6 +53,7 @@ class HouseObserver
     HouseFilesModel::where('house_id', $houseModel->id)->delete();
     FrameModel::where('house_id', $houseModel->id)->delete();
     CompilationInfoModel::where('house_id', $houseModel->id)->delete();
+    FavoritesModel::where('house_id', $houseModel->id)->delete();
   }
 
   /**
