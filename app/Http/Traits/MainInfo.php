@@ -168,22 +168,22 @@ trait MainInfo
   {
     $house = HouseModel::where('id', $house_id)->with(['info', 'supports', 'files', 'frames', 'images', 'news', 'flats'])->first();
 
-    $house->image = $this->getPhoto($house);
+    if($house !== null) {
+      $house->image = $this->getPhoto($house);
 
-    return $house;
+      return $house;
+    }
   }
 
   public function getPhoto($house)
   {
 
-    if($house !== null) {
       $image = HouseImagesModel::where('house_id', $house->id)
         ->orderBy('created_at', 'ASC')
         ->orderBy('category', 'ASC')
         ->first();
 
       return $image;
-    }
   }
 
   /**
