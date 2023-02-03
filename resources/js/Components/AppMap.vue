@@ -52,7 +52,7 @@ import { Link } from "@inertiajs/inertia-vue3"
                  </svg>
                </button>
                <button v-if="house.favorite" @click="removeFavorite" class="register__button--white w-full flex items-center justify-between gap-3 xxl:gap-2.5 xl:gap-2 border border-solid border-[#6435A5] rounded-[4px] p-3 xxl:p-2 xl:p-1.5">
-                 <span class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">В избранное</span>
+                 <span class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">В избранном</span>
                  <img src="../../assets/svg/heart_icon_pink.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
                </button>
 

@@ -244,7 +244,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         <div class="flex justify-between md:flex-col md:gap-3 items-center">
           <div class="flex flex-col items-start lg:gap-2">
             <h2 class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] lg:text-[20px] whitespace-nowrap text-center">Объекты</h2>
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center">Найдено {{ readyHouses.length }} новостроек</span>
+            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center">Найдено {{ readyHouses.length }} шт.</span>
           </div>
           <div class="flex items-center md:flex-col gap-8 xxl:gap-6 xl:gap-5 md:gap-3">
             <div v-if="!map" class="relative">
@@ -289,13 +289,13 @@ import { Link } from '@inertiajs/inertia-vue3'
       <div v-if="!toggle && !map" class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3 mt-5 xxl:mt-4 xl:mt-3">
         <div class="flex flex-col" v-for="(item, idx) in readyHouses" :key="item.id">
           <div class="object__block relative z-10 h-[300px] exl:h-fit exl:h-[16vw] lg:h-[24vw] md:h-[36vw] sm:h-[56vw] rounded-[6px]">
-          <img v-if="item.images.length > 0" :src="item.image.name" class="object-cover absolute -z-10 w-full h-full rounded-[6px]" alt="">
+          <img v-if="item.images.length > 0" :src="item.image" class="object-cover absolute -z-10 w-full h-full rounded-[6px]" alt="">
           <img v-else src="../../assets/no-img-houses.jpg" class="object-cover absolute -z-10 w-full h-full rounded-[6px]" alt="">
           <div class="seek immovables__overlay opacity-0 transition-all h-full w-full absolute -z-10 rounded-[6px]"></div>
             <div class="flex flex-col h-full justify-between p-5 xxl-4 xl:p-3">
               <div class="hide transition-all">
-                <span class="uppercase bg-[#30CB49] text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none font-semibold rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1 mr-2" v-if="item.created && !Number.isInteger(+item.created[0])">{{ item.created }}</span>
-                <span class="uppercase bg-[#E84680] text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none font-semibold rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1" v-else-if="item.created">{{ item.created }}</span>
+                <span class="uppercase bg-[#30CB49] text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none font-semibold rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1 mr-2 cursor-default" v-if="item.created && !Number.isInteger(+item.created[0])">{{ item.created }}</span>
+                <span class="uppercase bg-[#E84680] text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none font-semibold rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1 cursor-default" v-else-if="item.created">{{ item.created }}</span>
               </div>
               <div class="seek flex opacity-0 transition-all flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
                 <button @click="$emit('open-add-selections', item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
@@ -660,7 +660,6 @@ export default {
       })
     })
 
-    this.readyHouses = this.readyHouses.slice(0, this.count)
   },
   computed: {
     readyHouses() {
@@ -668,24 +667,24 @@ export default {
 
       // this.housesFilters = this.checkFilterType(this.housesFilters)
 
-      if (this.selectCity !== 'Выберите город...') {
-        this.housesFilters = this.checkFilterCity(this.housesFilters)
-      }
-      console.log(this.housesFilters)
-
-      if (this.selectRegion !== 'Выберите район...') {
-        this.housesFilters = this.checkFilterRegion(this.housesFilters)
-      }
-      if (this.filters.priceMin || this.filters.priceMax) {
-        this.housesFilters = this.checkFilterPrice(this.housesFilters)
-      }
-
-      this.housesFilters = this.checkFilterStatus(this.housesFilters)
-
-      console.log(this.housesFilters)
+      // if (this.selectCity !== 'Выберите город...') {
+      //   this.housesFilters = this.checkFilterCity(this.housesFilters)
+      // }
+      // console.log(this.housesFilters)
+      //
+      // if (this.selectRegion !== 'Выберите район...') {
+      //   this.housesFilters = this.checkFilterRegion(this.housesFilters)
+      // }
+      // if (this.filters.priceMin || this.filters.priceMax) {
+      //   this.housesFilters = this.checkFilterPrice(this.housesFilters)
+      // }
+      //
+      // this.housesFilters = this.checkFilterStatus(this.housesFilters)
+      //
+      // console.log(this.housesFilters)
 
       // return this.filters
-      return this.housesFilters
+      return this.housesFilters.slice(0, this.count)
 
     },
     filteredCity() {
