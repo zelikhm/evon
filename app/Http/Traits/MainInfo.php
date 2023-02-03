@@ -181,10 +181,9 @@ trait MainInfo
         ->orderBy('created_at', 'ASC')
         ->orderBy('category', 'ASC')
         ->first();
+
+      return $image;
     }
-
-    return $image;
-
   }
 
   /**
