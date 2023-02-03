@@ -4,7 +4,16 @@
       <div class="flex justify-between items-center mb-5 xxl:mb-4 xl:mb-3">
         <h2 class="text-[22px] xxl:text-[18px] xl:text-[16px] font-semibold leading-none">Отправить подборку</h2>
         <button @click="$emit('closeSubmitSelection')" class="right-0 z-50">
-          <img src="../../../assets/svg/close_grey.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
+          <svg class="hover__close transition-all cursor-pointer w-6 xxl:w-5 xl:w-4" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_266_4120)">
+              <path d="M11.9997 10.586L16.9497 5.63599L18.3637 7.04999L13.4137 12L18.3637 16.95L16.9497 18.364L11.9997 13.414L7.04974 18.364L5.63574 16.95L10.5857 12L5.63574 7.04999L7.04974 5.63599L11.9997 10.586Z" fill="#8A8996"/>
+            </g>
+            <defs>
+              <clipPath id="clip0_266_4120">
+                <rect width="24" height="24" fill="white"/>
+              </clipPath>
+            </defs>
+          </svg>
         </button>
       </div>
       <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">Отправляйте ссылку на вашу подборку клиентам</span>

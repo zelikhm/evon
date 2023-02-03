@@ -7,7 +7,7 @@
         </div>
         <div class="flex gap-9 xxl:gap-7 xl:gap-6 items-center">
           <h2 class="text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">{{ text }}</h2>
-          <button @click="$emit('close-notification')" class="relative w-4 h-4 z-50">
+          <button @click="$emit('close-notification')" class="hover__close transition-all relative w-4 h-4 z-50">
             <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] rotate-45"></span>
             <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] -rotate-45"></span>
           </button>

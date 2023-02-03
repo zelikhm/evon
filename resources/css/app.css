@@ -326,6 +326,16 @@ input::placeholder {
   transition: all 0.2s;
 }
 
+.hover__close:hover div {
+  background: #EC1B65;
+  transition: all 0.2s;
+}
+
+.hover__close:hover path {
+  fill: #EC1B65;
+  transition: all 0.2s;
+}
+
 /*********/
 
 .login__dropdown {
@@ -732,40 +742,80 @@ input::placeholder {
   background: rgba(100, 53, 165, 0.12);
   display: grid;
   grid-template-columns: 1fr 1fr;
+  transition: all 0.2s;
 }
 
 .button__choices--grid div {
   background: #6435A5;
   opacity: 0.5;
+  transition: all 0.2s;
+}
+
+.button__choices--grid:hover {
+  border: 1px solid #6435A5;
+  background: white;
+  transition: all 0.2s;
+}
+
+.button__choices--grid:hover div {
+  opacity: 1;
+  transition: all 0.2s;
 }
 
 .grid--active {
   background: #6435A5;
+  transition: all 0.2s;
 }
 
 .grid--active div {
   background: #fff;
   opacity: 1;
+  transition: all 0.2s;
+}
+
+.grid--active:hover {
+  background: #6435A5;
+  transition: all 0.2s;
 }
 
 .button__choices--col {
   background: rgba(100, 53, 165, 0.12);
   display: grid;
   grid-template-rows: 1fr 1fr;
+  transition: all 0.2s;
 }
 
 .button__choices--col div {
   background: #6435A5;
   opacity: 0.5;
+  transition: all 0.2s;
+}
+
+.button__choices--col:hover {
+  border: 1px solid #6435A5;
+  background: white;
+  transition: all 0.2s;
+}
+
+.button__choices--col:hover div {
+  opacity: 1;
+  transition: all 0.2s;
 }
 
 .col--active {
   background: #6435A5;
+  transition: all 0.2s;
+}
+
+.col--active:hover {
+  background: #6435A5;
+  transition: all 0.2s;
 }
 
 .col--active div {
   background: #fff;
   opacity: 1;
+  transition: all 0.2s;
 }
 
 .immovables__overlay {

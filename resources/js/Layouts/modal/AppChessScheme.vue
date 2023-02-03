@@ -2,7 +2,7 @@
   <div class="fixed z-[100] w-full h-full flex items-center justify-center">
     <div class="relative flex flex-col gap-5 xxl:gap-4 xl:gap-3 bg-white rounded-[12px] px-12 xxl:px-10 xl:px-8 py-8 xxl:py-6 xl:py-5 z-50 w-[40%] lg:w-[56%] md:w-[70%] sm:w-[90%] h-fit">
       <div class="relative flex justify-between items-center">
-        <button @click="closeChess" class="w-4 h-4 absolute top-[20%] right-0 z-50">
+        <button @click="closeChess" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
           <div class="absolute h-[1px] w-4 bg-[#8A8996] rotate-45"></div>
           <div class="absolute h-[1px] w-4 bg-[#8A8996] -rotate-45"></div>
         </button>
