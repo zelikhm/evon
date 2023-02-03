@@ -7,7 +7,7 @@
         <div class="my-14 xxl:my-10 xl:my-8">
           <h2 class="text-[22px] xxl:text-lg xl:text-[15px] font-semibold pb-7 xxl:pb-5 xl:pb-4">Профиль</h2>
           <div class="relative grid grid-cols-2 sm:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4">
-            <div :class="{'border-[#6435A5]': activeInput.title, 'border-[#E5DFEE]': !activeInput.title}"  class="flex flex-col w-full border border-solid gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
+            <div :class="{'border-[#6435A5]': activeInput.title, 'border-[#E5DFEE]': !activeInput.title}"  class="flex flex-col w-full border border-solid gap-0.5 rounded-[6px] px-7 xxl:px-6 xl:px-5 py-4 xxl:py-3 xl:py-2.5">
               <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="title">Название застройщика</label>
               <div class="flex items-center">
                 <input v-model="userValue.name" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="tel" id="title">

@@ -51,7 +51,7 @@
             class="mySwiper w-full"
           >
             <swiper-slide class="h-full flex justify-center" v-if="house.images.length > 0">
-              <img @click="album = true" class="h-full w-full object-cover" :src="house.image" alt="">
+              <img @click="album = true" class="h-full w-full object-cover cursor-pointer" :src="house.image" alt="">
             </swiper-slide>
             <swiper-slide class="h-full flex justify-center" v-else>
               <img class="h-full w-full object-cover" src="../../assets/no-img-house.jpg" alt="">
@@ -306,7 +306,6 @@
     </div>
     <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
   </main>
-  <app-footer />
 </template>
 
 <script>
