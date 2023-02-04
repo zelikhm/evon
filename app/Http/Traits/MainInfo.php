@@ -431,8 +431,7 @@ trait MainInfo
 
     foreach ($compilations as $compilation) {
       foreach ($compilation->values as $value) {
-        $house = $this->getHouseOnId($value->house_id);
-        $value->house = $house;
+        $value->house = $this->getHouseOnId($value->house_id);
       }
     }
 
