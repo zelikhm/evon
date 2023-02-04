@@ -3,14 +3,14 @@ import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
-  <div class="h-fit" v-if="state === 0">
+  <div class="sticky top-[2vw] h-fit" v-if="state === 0">
     <div class="relative z-20 border__top-6 bg-[#F6F3FA] flex items-center justify-between p-7 xxl:p-5 xl:p-4">
       <span class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[16px] leading-none">Новости застройщиков</span>
       <img @click="state = 1" src="../../assets/svg/reload_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3.5 lg:w-5" alt="">
     </div>
     <div class="relative z-10 h-[1px] w-full bg-[#E5DFEE]"></div>
     <div class="overflow-hidden">
-      <div class="relative custom__scroll border__bottom-6 overflow-x-hidden overflow-y-auto bg-[#F6F3FA] transition-all duration-500 max-h-[90vh] p-6 xxl:p-4 xl:p-3 leading-none">
+      <div class="relative custom__scroll border__bottom-6 overflow-x-hidden overflow-y-auto bg-[#F6F3FA] transition-all duration-500 max-h-[84vh] p-6 xxl:p-4 xl:p-3 leading-none">
         <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3">
 
           <div v-for="item in news">
@@ -22,7 +22,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                     <span class="text-[11px] xxl:text-[9px] xl:text-[8px] lg:text-[11px]">{{ new Date(Date.parse(item.created_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span>
                   </div>
                 </div>
-                <p class="text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" v-html="item.description"></p>
+                <p class="text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" v-html="item.description.slice(0, 70)"></p>
               </div>
               <div class="h-[1px] mt-3 w-full bg-[#E5DFEE]"></div>
             </div>

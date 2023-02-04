@@ -3,7 +3,7 @@
     <div class="relative flex flex-col bg-white rounded-[12px] z-50 w-[43%] lg:w-[56%] md:w-[70%] sm:w-[94%] h-fit">
       <div class="relative border__bottom flex justify-between items-center p-8 xxl:p-6 xl:p-5">
         <h2 class="text-lg xxl:text-[15px] xl:text-[13px] font-semibold leading-none">Добавить в подборку</h2>
-        <button @click="$emit('close-add-selection')" class="relative w-3 h-3 z-50">
+        <button @click="$emit('close-add-selection')" class="hover__close transition-all relative w-3 h-3 z-50">
           <span class="absolute h-[1px] top-1/2 left-0 w-3 bg-[#8A8996] rotate-45"></span>
           <span class="absolute h-[1px] top-1/2 left-0 w-3 bg-[#8A8996] -rotate-45"></span>
         </button>

@@ -93,7 +93,8 @@ import {Link} from '@inertiajs/inertia-vue3'
              type="text" id="coord_object">
     </div>
 
-    <GMapMap :center="center" :zoom="6" map-type-id="terrain" class="w-full h-[300px] rounded-[6px] my-10 xxl:my-8 xl:my-6" :draggable="true" @click="handleClick"  ref="myMapRef" :click="true">
+    <p class="text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] mt-2 text-center">При перетаскивании точки координаты не обновляются. Кликайте по нужному месту карты для обновления координат</p>
+    <GMapMap :center="center" :zoom="6" map-type-id="terrain" class="w-full h-[300px] rounded-[6px] mb-10 xxl:mb-8 xl:mb-6" :draggable="true" @click="handleClick"  ref="myMapRef" :click="true">
       <GMapMarker :key="index" v-for="(m, index) in markers" :icon="'/images/icon-marker-map.svg'" :position="m.position" :clickable="true" :draggable="true"
                   @click="openMarker(m.id)" >
       </GMapMarker>
@@ -146,9 +147,10 @@ import {Link} from '@inertiajs/inertia-vue3'
         </div>
 
 
-        <div :class="{'border__purple': isBorder === 13}" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">
-          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="count_flat">Количество стояков</label>
+        <div :class="{validation: validation.count , 'border__purple': isBorder === 13}" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">
+          <label :class="{ validationText: validation.count }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="count_flat">Количество стояков</label>
           <input v-model="object.count_flat"
+                 @input="checkValidation(6)"
                  @click="changeBorder(13)"
                  class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                  type="number" id="count_flat">
@@ -298,10 +300,9 @@ import {Link} from '@inertiajs/inertia-vue3'
           Вознаграждение
         </h3>
         <div class="grid grid-cols-2 md:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4">
-          <div :class="{ validation: validation.percent, 'border__purple': isBorder === 9 }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label :class="{ validationText: validation.percent }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="commission">Комиссия (%)</label>
+          <div :class="{ 'border__purple': isBorder === 9 }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="commission">Комиссия (%)</label>
             <input v-model="object.percent"
-                   @input="checkValidation(6)"
                    @click="changeBorder(9)"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                    type="number" id="commission">
@@ -351,7 +352,6 @@ export default {
   emits: ['open-add-contact'],
   data() {
     return {
-      isBorder: 0,
       openedMarkerID: null,
       center: {lat: 38.789057678005726, lng: 35.39768557787735},
       markers: [],
@@ -440,12 +440,12 @@ export default {
         description: false,
         coordinates: false,
         latitude: false,
-        percent: false,
+        count: false,
         floors: false,
         image: false
       },
       isEdit: false,
-      isBorder: 0,
+      isBorder: 0
     }
   },
   methods: {
@@ -488,7 +488,7 @@ export default {
       this.checkValidation(1)
 
 
-      if (!this.validation.description && !this.validation.title && !this.validation.coordinates && !this.validation.percent && !this.validation.floors && !this.validation.image) {
+      if (!this.validation.description && !this.validation.title && !this.validation.coordinates && !this.validation.count && !this.validation.floors && !this.validation.image) {
         if (this.isEdit) {
           this.object.info = []
           this.object.dop = []
@@ -640,14 +640,14 @@ export default {
         this.object.title === '' ? this.validation.title = true : this.validation.title = false
         this.object.description === '' ? this.validation.description = true : this.validation.description = false
         this.object.coordinates === '' ? this.validation.coordinates = true : this.validation.coordinates = false
-        this.object.percent === '' ? this.validation.percent = true : this.validation.percent = false
+        this.object.count === false ? this.validation.count = true : this.validation.count = false
         this.object.floors === '' ? this.validation.floors = true : this.validation.floors = false
       } else {
         if (this.validation.title && num === 2) this.validation.title = false
         if (this.validation.description && num === 3) this.validation.description = false
-        if (this.validation.coordinates && num === 4) {this.validation.coordinates = false}
+        if (this.validation.coordinates && num === 4) this.validation.coordinates = false
         if (this.validation.floors && num === 5) this.validation.floors = false
-        if (this.validation.percent && num === 6) this.validation.percent = false
+        if (this.validation.count && num === 6) this.validation.count = false
       }
     },
     changeSelectCity(city, idx) {

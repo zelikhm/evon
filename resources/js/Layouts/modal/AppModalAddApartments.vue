@@ -3,7 +3,7 @@
     <div class="relative flex flex-col gap-5 xxl:gap-4 xl:gap-3 bg-white rounded-[12px] px-12 xxl:px-10 xl:px-8 py-8 xxl:py-6 xl:py-5 z-50 w-[34%] lg:w-[50%] md:w-[64%] sm:w-[90%] h-fit">
       <div class="relative flex justify-between items-center">
         <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold leading-none">{{ selectFlat ? "Редактировать" : "Добавить" }} квартиру</h2>
-        <button @click="$emit('close-add-apartments')" class="relative w-4 h-4 z-50">
+        <button @click="$emit('close-add-apartments')" class="hover__close transition-all relative w-4 h-4 z-50">
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] rotate-45"></span>
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] -rotate-45"></span>
         </button>

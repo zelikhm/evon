@@ -62,10 +62,10 @@ import { Link } from '@inertiajs/inertia-vue3'
                   <img v-if="!house.visible" src="../../assets/svg/hide_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
                   <img v-else src="../../assets/svg/eye_icon_grey.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
                 </button>
-                <Link :href="'/house/' + house.slug" class="immovables__button--card flex items-center justify-between w-[30%] lg:w-[50%]  border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5 sm:py-1">
+                <a target="_blank" :href="'/house/' + house.slug" class="immovables__button--card flex items-center justify-between w-[30%] lg:w-[50%]  border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5 sm:py-1">
                   <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">Посмотреть на сайте</span>
                   <img src="../../assets/svg/planet_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
-                </Link>
+                </a>
                 <Link :href="'/profile/news/create#' + house.id" class="immovables__button--card flex items-center justify-between w-[30%] lg:w-[50%] border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5 sm:py-1">
                   <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">Добавить новость</span>
                   <img src="../../assets/svg/plus_icon.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
