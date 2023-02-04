@@ -217,7 +217,7 @@ class HouseController extends Controller
       $house = HouseModel::create([
         'user_id' => $request->user_id,
         'title' => $request->title,
-        'slug' => Str::slug(mb_substr($request->title, 0, 50), '-'),
+        'slug' => Str::slug(mb_substr($request->title . '_' . $request->user_id, 0, 50), '-'),
         'description' => $request->description,
         'city' => $request->city,
         'area' => $request->area,
