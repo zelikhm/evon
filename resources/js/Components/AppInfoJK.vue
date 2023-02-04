@@ -640,7 +640,7 @@ export default {
         this.object.title === '' ? this.validation.title = true : this.validation.title = false
         this.object.description === '' ? this.validation.description = true : this.validation.description = false
         this.object.coordinates === '' ? this.validation.coordinates = true : this.validation.coordinates = false
-        this.object.count === false ? this.validation.count = true : this.validation.count = false
+        this.object.count_flat === '' ? this.validation.count = true : this.validation.count = false
         this.object.floors === '' ? this.validation.floors = true : this.validation.floors = false
       } else {
         if (this.validation.title && num === 2) this.validation.title = false
