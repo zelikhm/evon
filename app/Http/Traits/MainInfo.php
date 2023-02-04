@@ -83,7 +83,17 @@ trait MainInfo
 
   protected function getNewsForPage()
   {
-    return HouseNewsModel::orderByDesc('created_at')->with(['house'])->limit(30)->get();
+    $news = HouseNewsModel::orderByDesc('created_at')->with(['house'])->get();
+
+    foreach ($news as $key => $item) {
+
+      if($item->house->visible === 0) {
+        $news[$key] = [];
+      }
+
+    }
+
+    return $news;
   }
 
   /**
@@ -422,7 +432,6 @@ trait MainInfo
     foreach ($compilations as $compilation) {
       foreach ($compilation->values as $value) {
         $house = $this->getHouseOnId($value->house_id);
-        $house->image = count($house->images) > 0 ? $house->images[0] : null;
         $value->house = $house;
       }
     }
