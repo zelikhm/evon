@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
 <template>
   <div class="sticky top-[2vw] h-fit" v-if="state === 0">
-    <div class="relative z-20 border__top-6 bg-[#F6F3FA] flex items-center justify-between p-7 xxl:p-5 xl:p-4">
+    <div class="h-[73px] xxl:h-[56px] xl:h-[48px] relative z-20 border__top-6 bg-[#F6F3FA] flex items-center justify-between p-7 xxl:p-5 xl:p-4">
       <span class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[16px] leading-none">Новости застройщиков</span>
       <img @click="state = 1" src="../../assets/svg/reload_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3.5 lg:w-5" alt="">
     </div>
@@ -18,7 +18,7 @@ import { Link } from '@inertiajs/inertia-vue3'
               <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
                 <div class="flex gap-3 xxl:gap-2 xl:gap-1.5">
                   <div class="flex flex-col gap-1 xxl:gap-0.5">
-                    <Link :href="'/house/' + item.house.slug" class="font-semibold text-[13px] xxl:text-[11px] xl:text-[10px] lg:text-[13px]">{{ item.house.title }}</Link>
+                    <Link :href="'/house/' + item.house.slug" class="hover__title-block font-semibold text-[13px] xxl:text-[11px] xl:text-[10px] lg:text-[13px]">{{ item.house.title }}</Link>
                     <span class="text-[11px] xxl:text-[9px] xl:text-[8px] lg:text-[11px]">{{ new Date(Date.parse(item.created_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span>
                   </div>
                 </div>
