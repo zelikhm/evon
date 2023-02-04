@@ -349,7 +349,7 @@ trait MainInfo
       $frame->flats = FlatModel::where('frame_id', $frame->id)->with(['images'])->get();
     }
 
-    $house->image = count($house->images) > 0 ? $house->images[0]->name : null;
+    $house->image = $this->getPhoto($house);
 
     $favorite = FavoritesModel::where('user_id', Auth::id())
       ->where('house_id', $id)
