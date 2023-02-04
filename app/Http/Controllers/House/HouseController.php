@@ -214,78 +214,80 @@ class HouseController extends Controller
   public function create(Request $request)
   {
     if ($request->token === env('TOKEN')) {
-      $house = HouseModel::create([
-        'user_id' => $request->user_id,
-        'title' => $request->title,
-        'slug' => Str::slug(mb_substr($request->title . '_' . $request->user_id, 0, 50), '-'),
-        'description' => $request->description,
-        'city' => $request->city,
-        'area' => $request->area,
-        'created' => $request->created,
-        'longitude' => $request->longitude,
-        'latitude' => $request->latitude,
-        'percent' => $request->percent,
-        'comment' => $request->comment,
-        'active' => 0,
-        'fool_price' => $request->fool_price,
-        'created_at' => Carbon::now()->addHour(3),
-        'updated_at' => Carbon::now()->addHour(3),
-      ]);
+      if($request->floors && $request->count_flat) {
+        $house = HouseModel::create([
+          'user_id' => $request->user_id,
+          'title' => $request->title,
+          'slug' => Str::slug(mb_substr(Str::random(40), 0, 50), '-'),
+          'description' => $request->description,
+          'city' => $request->city,
+          'area' => $request->area,
+          'created' => $request->created,
+          'longitude' => $request->longitude,
+          'latitude' => $request->latitude,
+          'percent' => $request->percent,
+          'comment' => $request->comment,
+          'active' => 0,
+          'fool_price' => $request->fool_price,
+          'created_at' => Carbon::now()->addHour(3),
+          'updated_at' => Carbon::now()->addHour(3),
+        ]);
 
-      if ($request->info !== null) {
-        $info = explode(',', $request->info);
-        $str = '[';
-        $i = 0;
-        foreach ($info as $item) {
-          if ($i !== 0) {
-            $str .= ',"' . $item . '"';
-          } else {
-            $str .= '"' . $item . '"';
+        if ($request->info !== null) {
+          $info = explode(',', $request->info);
+          $str = '[';
+          $i = 0;
+          foreach ($info as $item) {
+            if ($i !== 0) {
+              $str .= ',"' . $item . '"';
+            } else {
+              $str .= '"' . $item . '"';
+            }
+
+            $i++;
           }
-
-          $i++;
+          $str .= ']';
+        } else {
+          $str = null;
         }
-        $str .= ']';
-      } else {
-        $str = null;
-      }
 
-      if ($request->dop !== null) {
-        $dop = explode(',', $request->dop);
+        if ($request->dop !== null) {
+          $dop = explode(',', $request->dop);
 
-        $str1 = '[';
-        $i = 0;
-        foreach ($dop as $item) {
-          if ($i !== 0) {
-            $str1 .= ',"' . $item . '"';
-          } else {
-            $str1 .= '"' . $item . '"';
+          $str1 = '[';
+          $i = 0;
+          foreach ($dop as $item) {
+            if ($i !== 0) {
+              $str1 .= ',"' . $item . '"';
+            } else {
+              $str1 .= '"' . $item . '"';
+            }
+
+            $i++;
           }
-
-          $i++;
+          $str1 .= ']';
+        } else {
+          $str1 = null;
         }
-        $str1 .= ']';
-      } else {
-        $str1 = null;
-      }
 
-      HouseCharacteristicsModel::create([
-        'house_id' => $house->id,
-        'exclusive' => $request->exclusive,
-        'floors' => $request->floors,
-        'type' => $request->type,
-        'dop' => $str1,
-        'info' => $str,
-        'toSea' => (int)$request->toSea === 0 ? null : (int)$request->toSea,
-        'toSchool' => (int)$request->toSchool === 0 ? null : (int)$request->toSchool,
-        'toShop' => (int)$request->toShop === 0 ? null : (int)$request->toShop,
-        'toPark' => (int)$request->toPark === 0 ? null : (int)$request->toPark,
-        'toBus' => (int)$request->toBus === 0 ? null : (int)$request->toBus,
-        'toChildrenSchool' => (int)$request->toChildrenSchool === 0 ? null : (int)$request->toChildrenSchool,
-        'count_flat' => $request->count_flat,
-        'created_at' => Carbon::now()->addHour(3),
-        'updated_at' => Carbon::now()->addHour(3),
-      ]);
+        HouseCharacteristicsModel::create([
+          'house_id' => $house->id,
+          'exclusive' => $request->exclusive,
+          'floors' => $request->floors,
+          'type' => $request->type,
+          'dop' => $str1,
+          'info' => $str,
+          'toSea' => (int)$request->toSea === 0 ? null : (int)$request->toSea,
+          'toSchool' => (int)$request->toSchool === 0 ? null : (int)$request->toSchool,
+          'toShop' => (int)$request->toShop === 0 ? null : (int)$request->toShop,
+          'toPark' => (int)$request->toPark === 0 ? null : (int)$request->toPark,
+          'toBus' => (int)$request->toBus === 0 ? null : (int)$request->toBus,
+          'toChildrenSchool' => (int)$request->toChildrenSchool === 0 ? null : (int)$request->toChildrenSchool,
+          'count_flat' => $request->count_flat,
+          'created_at' => Carbon::now()->addHour(3),
+          'updated_at' => Carbon::now()->addHour(3),
+        ]);
+      }
 
       return response()->json($house, 200);
     } else {
