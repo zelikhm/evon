@@ -8,7 +8,7 @@ import { Link } from '@inertiajs/inertia-vue3'
     <div class="_container">
       <div class="my-14 xxl:my-10 xl:my-8">
         <div class="flex justify-between items-center mb-7 xxl:mb-5 xl:mb-4">
-          <span class="font-semibold ext-[22px] xxl:text-[18px] xl:text-[14px]">Наши объекты</span>
+          <span class="font-semibold text-[22px] xxl:text-[18px] xl:text-[14px]">Наши объекты</span>
           <Link href="/profile/addedHouse" class="text-base xxl:text-sm xl:text-xs text-white bg-[#E84680] leading-none rounded-[3px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5">Добавить объект</Link>
         </div>
         <div v-if="houses.data.length === 0" class="grid grid-cols-2 lg:grid-cols-1 mt-10 xxl:mt-8 xl:mt-6">
@@ -31,7 +31,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         <div v-else class="grid grid-cols-2 md:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4 md:gap-10">
           <div class="flex flex-col" v-for="house in houses.data">
             <div class="object__block relative h-[500px] exl:h-fit exl:h-[26vw] md:h-[52vw]">
-              <img v-if="house.images.length > 0" :src="house.image" class="w-full h-full rounded-[8px]" alt="">
+              <img v-if="house.images.length > 0" :src="house.image" class="w-full h-full object-cover rounded-[8px]" alt="">
               <img v-else src="../../assets/no-img-houses-zastroy.jpg" class="w-full h-full rounded-[8px]" alt="">
               <div class="seek opacity-0 absolute top-0 left-0 immovables__overlay w-full h-full rounded-[8px]"></div>
               <div class="hide absolute flex gap-2 top-0 left-0 p-5 xxl:p-4 xl:p-3">
@@ -56,7 +56,6 @@ import { Link } from '@inertiajs/inertia-vue3'
                     <div @click="deleteConfirm = false" class="hover__select w-full text-center p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[green]">Нет</div>
                   </div>
                 </div>
-
                 <button @click="changeVisible(house)" class="immovables__button--card flex items-center justify-between w-[30%] lg:w-[50%]  border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5 sm:py-1">
                   <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ house.visible ? 'Скрыть' : 'Показать' }}</span>
                   <img v-if="!house.visible" src="../../assets/svg/hide_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">

@@ -881,12 +881,23 @@ input::placeholder {
 
 .grid__add-object {
   display: grid;
-  grid-template-columns: 20vw 1fr 20vw;
+  grid-template-columns: 384px 1fr 384px;
 }
 
 .grid__apartments {
   display: grid;
-  grid-template-columns: 20vw 1fr;
+  grid-template-columns: 384px 1fr;
+}
+
+@media (max-width: 1920px) {
+  .grid__add-object {
+    display: grid;
+    grid-template-columns: 20vw 1fr 20vw;
+  }
+
+  .grid__apartments {
+    grid-template-columns: 20vw 1fr;
+  }
 }
 
 .menu-add-obj {

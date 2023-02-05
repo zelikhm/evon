@@ -248,8 +248,8 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
           <div class="flex items-center md:flex-col gap-8 xxl:gap-6 xl:gap-5 md:gap-3">
             <div v-if="!map" class="relative">
-              <div @click="openDate = !openDate" class="cursor-pointer flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
-                <span class="hover__title-block text-base xxl:text-sm xl:text-xs md:text-[14px] leading-none whitespace-nowrap">
+              <div @click="openDate = !openDate" class=" cursor-pointer flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
+                <span ref="date" class="hover__title-block text-base xxl:text-sm xl:text-xs md:text-[14px] leading-none whitespace-nowrap">
                   По {{ selectDate }}
                 </span>
                 <img :class="{'rotate-180': openDate }" class="transition-all" src="../../assets/svg/arrow_down_black.svg" alt="Стрелочка вниз">
@@ -257,7 +257,7 @@ import { Link } from '@inertiajs/inertia-vue3'
               <div v-if="openDate" class="bg-white overflow-hidden -left-[10%] top-[160%] xxl:top-[140%] rounded-[6px] text-base xxl:text-sm xl:text-xs lg:text-[15px] border border-solid border-[#E5DFEE] absolute flex flex-col z-10">
                 <span
                   v-for="date in dates"
-                  @click="changeDate(date)"
+                  @click.stop="changeDate(date)"
                   class="hover__select cursor-pointer border__bottom--not leading-none whitespace-nowrap p-4 xxl:p-3 xl:p-2.5">
                   {{ date.date }}
                 </span>
@@ -709,6 +709,11 @@ export default {
     },
   },
   mounted() {
+    document.addEventListener('click', (e) => {
+      if (e.target !== this.$refs.date) {
+        this.openDate = false
+      }
+    })
   },
   beforeDestroy() {
     // document.removeEventListener('click', this.selectsHidden)

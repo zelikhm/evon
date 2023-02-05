@@ -12,7 +12,7 @@ import { Link } from "@inertiajs/inertia-vue3"
                        :opened="openedMarkerID === m.id"
                        v-if="state === undefined"
        >
-         <div class="relative decription__head top-0 right-0 bg-white rounded-[10px]">
+         <div class="relative w-[345px] xxl:w-[280px] xl:w-[240px] decription__head top-0 right-0 bg-white rounded-[10px]">
            <div class="p-6 xxl:p-5 xl:p-4 border__bottom">
              <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 mb-7 xxl:mb-5 xl:mb-4">
                <img v-if="house.isImage" :src="house.images[0].name" class="w-14 xxl:w-12 xl:w-8 h-14 xxl:h-12 xl:h-8 rounded-full" alt="">
@@ -37,8 +37,8 @@ import { Link } from "@inertiajs/inertia-vue3"
                <img src="../../assets/svg/ruller_icon.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
                <span class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ house.minSquare }} м² - {{ house.maxSquare }} м²</span>
              </div>
-             <div class="flex gap-5 xxl:gap-4 xl:gap-3 w-full">
-               <button @click="$emit('open-add-selections', house)" class="register__button--white w-full flex items-center justify-between gap-3 xxl:gap-2.5 xl:gap-2  border border-solid border-[#6435A5] rounded-[4px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1">
+             <div class="grid grid-cols-2 gap-5 xxl:gap-4 xl:gap-3 w-full">
+               <button @click="$emit('open-add-selections', house)" class="register__button--white w-full flex items-center justify-center gap-3 xxl:gap-2.5 xl:gap-2  border border-solid border-[#6435A5] rounded-[4px] py-2 xxl:py-1.5 xl:py-1">
                  <span class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">В подборку</span>
                  <svg width="16" height="16" class="w-4.5 xxl:w-4 xl:w-3.5" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                    <g clip-path="url(#clip0_519_1862)">
@@ -51,12 +51,11 @@ import { Link } from "@inertiajs/inertia-vue3"
                    </defs>
                  </svg>
                </button>
-               <button v-if="house.favorite" @click="removeFavorite" class="register__button--white w-full flex items-center justify-between gap-3 xxl:gap-2.5 xl:gap-2 border border-solid border-[#6435A5] rounded-[4px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1">
+               <button v-if="house.favorite" @click="removeFavorite" class="register__button--white w-full flex items-center justify-center gap-3 xxl:gap-2.5 xl:gap-2 border border-solid border-[#6435A5] rounded-[4px] py-2 xxl:py-1.5 xl:py-1">
                  <span class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">В избранном</span>
                  <img src="../../assets/svg/heart_icon_pink.svg" class="w-4 xxl:w-3.5 xl:w-3" alt="">
                </button>
-
-               <button v-else @click="addFavorite" class="register__button--white w-full flex items-center justify-between gap-3 xxl:gap-2.5 xl:gap-2 border border-solid border-[#6435A5] rounded-[4px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1">
+               <button v-else @click="addFavorite" class="register__button--white w-full flex items-center justify-center gap-3 xxl:gap-2.5 xl:gap-2 border border-solid border-[#6435A5] rounded-[4px] py-2 xxl:py-1.5 xl:py-1">
                  <span class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">В избранное</span>
                  <svg width="16" height="16" class="w-4 xxl:w-3.5 xl:w-3" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                    <g clip-path="url(#clip0_158_957)">
