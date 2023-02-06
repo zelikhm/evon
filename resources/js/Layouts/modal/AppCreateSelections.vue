@@ -4,8 +4,8 @@
       <div class="relative mb-10 xxl:mb-8 xl:mb-6">
         <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold">Редактирование подборки</h2>
         <button @click="$emit('close-selection')" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
-          <div class="absolute h-[1px] w-4 bg-[#8A8996] rotate-45"></div>
-          <div class="absolute h-[1px] w-4 bg-[#8A8996] -rotate-45"></div>
+          <div class="absolute h-[1px] w-4 rotate-45"></div>
+          <div class="absolute h-[1px] w-4 -rotate-45"></div>
         </button>
       </div>
       <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 chat__container--flex">
