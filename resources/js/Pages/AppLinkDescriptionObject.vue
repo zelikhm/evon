@@ -207,17 +207,17 @@
                 </div>
               </div>
               <div class="relative h-fit justify-self-end md:justify-self-center md:flex md:items-center md:h-full">
-                <div @click="openDate = !openDate" class="cursor-pointer flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
+                <div @click="openDate = !openDate" class="hover__title-block cursor-pointer flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
                   <span class="text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none">
                     По {{ selectDate }}
                   </span>
-                  <img src="../../assets/svg/arrow_down_black.svg" alt="Стрелочка вниз">
+                  <img :class="{ 'rotate-180': openDate }" src="../../assets/svg/arrow_down_black.svg" alt="Стрелочка вниз">
                 </div>
-                <div v-if="openDate" class="bg-white right-0 top-[120%] md:top-[80%] sm:top-[120%] md:-right-[50px] rounded-[6px] text-base xxl:text-sm xl:text-xs lg:text-[14px] border border-solid border-[#E5DFEE] absolute flex flex-col z-10">
+                <div v-if="openDate" class="bg-white overflow-hidden right-0 top-[120%] md:top-[80%] sm:top-[120%] md:-right-[50px] rounded-[6px] text-base xxl:text-sm xl:text-xs lg:text-[14px] border border-solid border-[#E5DFEE] absolute flex flex-col z-10">
                   <span
                     v-for="date in dates"
                     @click="changeDate(date)"
-                    class="cursor-pointer border__bottom--not leading-none whitespace-nowrap p-4 xxl:p-3 xl:p-2.5">
+                    class="hover__select cursor-pointer border__bottom--not leading-none whitespace-nowrap p-4 xxl:p-3 xl:p-2.5">
                     {{ date.date }}
                   </span>
                 </div>

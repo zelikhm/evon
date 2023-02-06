@@ -6,7 +6,7 @@ import { Link } from '@inertiajs/inertia-vue3'
   <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] mb-5 xxl:mb-4 xl:mb-3">Добавить корпус и квартиры</h2>
   <div class="flex flex-col">
     <div class="grid grid-cols-6 lg:grid-cols-4 sm:grid-cols-3 gap-3 xxl:gap-2.5 xl:gap-2">
-      <div @click="targetFrame(frame, idx)" v-for="(frame, idx) in house.frames" :class="{ border: frame.active === 1 }" class="corpus__banner flex justify-between cursor-pointer rounded-[5px] border-solid border-[#6435A5] px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
+      <div @click="targetFrame(frame, idx)" v-for="(frame, idx) in house.frames" :class="{ 'border-white': frame.active !== 1 }" class="corpus__banner flex justify-between cursor-pointer rounded-[5px] border border-solid border-[#6435A5] px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
         <div class="flex flex-col justify-center gap-3.5 xxl:gap-3 xl:gap-2.5">
           <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none whitespace-nowrap">{{ frame.name }}</span>
           <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap" v-if="frame.flats">{{ frame.flats.length }} квартир</span>
@@ -56,7 +56,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           <div class="leading-none">{{ item.price }}</div>
           <div class="leading-none">{{ item.count }}</div>
           <div class="leading-none">{{ item.floor }}</div>
-          <div class="relative">
+          <div class="relative" :tabindex="tabindex" @blur="item.statusActive = false">
             <div @click="item.statusActive = !item.statusActive" class="flex items-center cursor-pointer gap-5 xxl:gap-4 xl:gap-3">
               <span class="whitespace-nowrap">{{ item.status == 0 ? "Акция" : item.status == 1 ? "Перепродажа" : item.status == 2 ? "Бронь" : item.status == 3 ? "Продажи закрыты" : "В продаже" }}
               </span>
@@ -125,7 +125,12 @@ export default {
       ],
       flats: null,
       frameId: 0,
-      isEdit: false
+      isEdit: false,
+      tabindex: {
+        type: Number,
+        required: false,
+        default: 0,
+      },
     }
   },
   methods: {

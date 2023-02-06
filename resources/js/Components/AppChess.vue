@@ -2,7 +2,7 @@
   <main class="">
     <div class="_container">
       <div class="flex justify-between lg:flex-col items-center my-4 xxl:my-3 xl:my-2.5">
-        <div class="block lg:hidden grid grid-cols-5 gap-3 xxl:gap-2.5 xl:gap-2">
+        <div class="block lg:hidden grid grid-cols-4 exl:grid-cols-5 gap-3 xxl:gap-2.5 xl:gap-2">
           <div v-for="item in house.frames" :class="{ 'border': item.active === 1 }" @click="targetFrame(item)" class="corpus__banner border-solid border-[#6435A5] w-[9.5vw] gap-3.5 xxl:gap-3 xl:gap-2.5 cursor-pointer rounded-[5px] flex flex-col justify-center p-5 xxl:p-3.5 x:p-2.5">
             <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">{{ item.name }}</span>
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ item.flats.length }} {{ item.flats.length === 1 ? "Квартира" : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
@@ -128,14 +128,14 @@
       </div>
       <div>
         <div class="border__bottom">
-          <div class="mr-[6.25vw] lg:mx-auto lg:px-[6.25vw] lg:py-6 flex justify-between lg:justify-start lg:gap-5 p-14 xxl:p-10 xl:p-8">
+          <div class="exl:mr-[6.25vw] lg:mx-auto lg:px-[6.25vw] lg:py-6 flex justify-between lg:justify-start lg:gap-10 p-14 xxl:p-10 xl:p-8 pr-0">
             <div class="flex flex-col">
               <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[16px] leading-none pb-3 xxl:pb-2.5 xl:pb-2">№{{ selectFlat.number }}
                 <span class="ml-1" :class="{ 'text-[#FF6600]': selectFlat.status == 0,
                             'text-[#8A8996]': selectFlat.status == 2,
                             'text-[#E84680]': selectFlat.status == 3,
                             'text-[#00A478]': selectFlat.status == 4
-            }">{{ selectFlat.status == 0 ? "Акция" : selectFlat.status == 1 ? "Перепродажа" : selectFlat.status == 2 ? "Бронь" : selectFlat.status == 3 ? "Продажи закрыты" : "В продаже" }}</span>
+              }">{{ selectFlat.status == 0 ? "Акция" : selectFlat.status == 1 ? "Перепродажа" : selectFlat.status == 2 ? "Бронь" : selectFlat.status == 3 ? "Продажи закрыты" : "В продаже" }}</span>
               </span>
               <span class="text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[21px] font-semibold leading-none pb-4 xxl:pb-3 xl:pb-2.5">{{ selectFlat.price }} €</span>
               <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none pb-5 xxl:pb-4 xl:pb-3">{{ Math.round(selectFlat.price / selectFlat.square) }} € за м²</span>

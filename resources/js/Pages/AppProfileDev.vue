@@ -3,7 +3,7 @@
   <app-header :user="user" />
   <main>
     <div class="_container">
-      <div class="px-[22vw] lg:px-[10vw] md:px-[6vw] sm:px-0 relative mx-auto max-w-[826px] box-content">
+      <div class="px-[422px] exl:px-[22vw] lg:px-[10vw] md:px-[6vw] sm:px-0 relative mx-auto max-w-[826px] box-content">
         <div class="my-14 xxl:my-10 xl:my-8">
           <h2 class="text-[22px] xxl:text-lg xl:text-[15px] font-semibold pb-7 xxl:pb-5 xl:pb-4">Профиль</h2>
           <div class="relative grid grid-cols-2 sm:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4">

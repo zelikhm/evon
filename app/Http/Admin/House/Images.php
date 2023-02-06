@@ -8,6 +8,7 @@ use AdminForm;
 use AdminFormElement;
 use AdminNavigation;
 use AdminDisplayFilter;
+use AdminColumnFilter;
 use App\Models\Builder\HouseModel;
 use App\Models\LandingModel;
 use App\Models\User;
@@ -72,7 +73,9 @@ class Images extends Section implements Initializable
       AdminColumn::text('id', '#')
         ->setWidth('50px')
         ->setHtmlAttribute('class', 'text-center'),
-      AdminColumn::relatedLink('house.title', 'Название ЖК')->setWidth('100px'),
+      AdminColumn::relatedLink('house.title', 'Название ЖК')->setWidth('100px')->setSearchable(true)->setSearchCallback(function ($column, $query, $search) {
+        return $query->orWhere('house_id', $search);
+      }),
       AdminColumn::image('name', 'Изображение')->setWidth('500px'),
       AdminColumn::custom('Категория', function(\Illuminate\Database\Eloquent\Model $model) {
         if($model->category === 0) {
@@ -89,9 +92,9 @@ class Images extends Section implements Initializable
 
     $display = AdminDisplay::datatablesAsync()
       ->paginate(40)
-      ->setFilters(
-        AdminDisplayFilter::field('house.id')->setTitle('House ID [:value]')
-      )
+//      ->setFilters(
+//        AdminDisplayFilter::field('house.id')->setTitle('House ID [:value]'),
+//      )
       ->setColumns($columns)
       ->setDisplaySearch(true, 'поиск')
       ->setHtmlAttribute('class', 'table-primary table-hover');
