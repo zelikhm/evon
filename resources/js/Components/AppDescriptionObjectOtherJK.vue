@@ -10,7 +10,7 @@ import { Link } from "@inertiajs/inertia-vue3";
 
       <Link :href="'/house/' + item.slug" class="flex flex-col" v-for="item in slider">
         <div class="object__block relative h-[300px] exl:h-[15.6vw] xl:h-[19.5vw] lg:h-[25vw] md:h-[38vw] sm:h-[64vw]">
-          <img v-if="item.images" :src="item.images[0].name" class="w-full h-full object-cover rounded-[8px]" alt="">
+          <img v-if="item.image" :src="item.image" class="w-full h-full object-cover rounded-[8px]" alt="">
           <img v-else src="../../assets/no-img-house.jpg" class="w-full h-full object-cover rounded-[8px]" alt="">
           <div class="flex items-center gap-2 absolute bottom-0 left-0 p-5 xxl:p-4 xl:p-3 text-white text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px]">
             <span class="leading-none">{{ item.area }}</span>

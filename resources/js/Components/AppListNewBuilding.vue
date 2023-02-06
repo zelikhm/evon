@@ -17,8 +17,23 @@ import { Link } from '@inertiajs/inertia-vue3'
       </div>
       <div class="h-[1px] w-full bg-[#E5DFEE]"></div>
       <div class="custom__scroll h-[84vh] relative overflow-y-auto p-7 xxl:p-5 xl:p-4">
+        <div class="mb-5 xxl:mb-4 xl:mb-3">
+          <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
+            <div class="flex items-center text-[#1E1D2D]">
+              <input class="custom__checkbox" name="filters" type="checkbox" id="filters_1">
+              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_1">Новинки</label>
+            </div>
+            <div class="flex items-center text-[#1E1D2D]">
+              <input class="custom__checkbox" name="filters" type="checkbox" id="filters_2">
+              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_2">Акции</label>
+            </div>
+            <div class="flex items-center text-[#1E1D2D]">
+              <input class="custom__checkbox" name="filters" type="checkbox" id="filters_3">
+              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_3">Популярные</label>
+            </div>
+          </div>
+        </div>
         <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3">
-
           <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectType}">
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Тип</span>
             <div class="relative" :tabindex="tabindex" @blur="openSelectType = false">
@@ -40,13 +55,13 @@ import { Link } from '@inertiajs/inertia-vue3'
           <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectCity}">
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Город</span>
             <div class="relative">
-              <div @click="openSelectCity = !openSelectCity" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3">
+              <div ref="city" @click.stop="openSelectCity = !openSelectCity" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3">
                 <span>{{ selectCity }}</span>
                 <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectCity }" alt="">
               </div>
               <div v-if="openSelectCity" class="max-h-[215px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
                 <div class="relative w-full p-5 xxl:p-4 xl:p-3">
-                  <input v-model="searchValue" class="py-3 xxl:py-2.5 xl:py-2 pl-10 xxl:pl-8 xl:pl-6 focus:ring-[#6435A5] focus:border-[#6435A5] w-full text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] rounded-[6px] leading-none border border-solid border-[#E5DFEE]" type="text">
+                  <input @click.stop="sea" v-model="searchValue" class="py-3 xxl:py-2.5 xl:py-2 pl-10 xxl:pl-8 xl:pl-6 focus:ring-[#6435A5] focus:border-[#6435A5] w-full text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] rounded-[6px] leading-none border border-solid border-[#E5DFEE]" type="text">
                   <img class="absolute top-1/2 -translate-y-1/2 translate-x-1/2 w-4.5 xxl:w-4 xl:w-3.5" src="../../assets/svg/search_icon_grey.svg" alt="">
                 </div>
                 <span
@@ -171,9 +186,12 @@ import { Link } from '@inertiajs/inertia-vue3'
               </div>
             </div>
           </div>
-          <div class="mb-10 xxl:mb-8 xl:mb-6">
-            <div class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] mb-5 xxl:mb-4 xl:mb-3 leading-none">Инфраструктура</div>
-            <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
+          <div class="relative overflow-hidden mb-10 xxl:mb-8 xl:mb-6">
+            <div @click="openInfrastruktura = !openInfrastruktura" class="relative z-10 cursor-pointer text-[#1E1D2D] flex justify-between items-center text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] mb-5 xxl:mb-4 xl:mb-3 leading-none">
+              <span class="hover__title-block">Инфраструктура</span>
+              <img :class="{'rotate-180': openInfrastruktura}" class=" transition-all w-3 xxl:w-2.5 xl:w-2" src="../../assets/svg/arrow_down_black.svg" alt="">
+            </div>
+            <div v-if="openInfrastruktura" class="transition-all duration-500 h-fit flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
               <div class="flex items-center text-[#1E1D2D]" v-for="item in infos">
                 <input class="custom__checkbox" name="infrastructure" type="checkbox" :id="'infrastructure' + item.id">
                 <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" :for="'infrastructure' + item.id">{{ item.name }}</label>
@@ -199,32 +217,17 @@ import { Link } from '@inertiajs/inertia-vue3'
             </div>
           </div>
           <div class="mb-10 xxl:mb-8 xl:mb-6">
-            <div class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] mb-5 xxl:mb-4 xl:mb-3 leading-none">Дополнительные услуги</div>
-            <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
+            <div @click="openDopServices = !openDopServices" class="cursor-pointer flex justify-between items-center text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] mb-5 xxl:mb-4 xl:mb-3 leading-none">
+              <span class="hover__title-block">Дополнительные услуги</span>
+              <img :class="{'rotate-180': openDopServices}" class=" transition-all w-3 xxl:w-2.5 xl:w-2" src="../../assets/svg/arrow_down_black.svg" alt="">
+            </div>
+            <div v-if="openDopServices" class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
               <div class="flex items-center text-[#1E1D2D]" v-for="item in dops">
                 <input class="custom__checkbox" name="services" type="checkbox" :id="'services' + item.id">
                 <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" :for="'services' + item.id">{{ item.name }}</label>
               </div>
             </div>
           </div>
-          <div class="mb-5 xxl:mb-4 xl:mb-3">
-            <div class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] mb-5 xxl:mb-4 xl:mb-3 leading-none">Фильтры</div>
-            <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
-              <div class="flex items-center text-[#1E1D2D]">
-                <input class="custom__checkbox" name="filters" type="checkbox" id="filters_1">
-                <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_1">Новинки</label>
-              </div>
-              <div class="flex items-center text-[#1E1D2D]">
-                <input class="custom__checkbox" name="filters" type="checkbox" id="filters_2">
-                <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_2">Акции</label>
-              </div>
-              <div class="flex items-center text-[#1E1D2D]">
-                <input class="custom__checkbox" name="filters" type="checkbox" id="filters_3">
-                <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_3">Популярные</label>
-              </div>
-            </div>
-          </div>
-          <button @click="startFilter" class="login__btn--bg text-white text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none bg-[#E84680] rounded-[5px] font-semibold py-5 xxl:py-4 xl:py-3">Фильтрация</button>
         </div>
       </div>
     </div>
@@ -243,7 +246,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         </div>
         <div class="flex justify-between md:flex-col md:gap-3 items-center">
           <div class="flex flex-col items-start lg:gap-2">
-            <h2 class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] lg:text-[20px] whitespace-nowrap text-center">Объекты</h2>
+            <h2 class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] lg:text-[20px] whitespace-nowrap text-center">{{ isSearch }}</h2>
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center">Найдено {{ readyHouses.length }} шт.</span>
           </div>
           <div class="flex items-center md:flex-col gap-8 xxl:gap-6 xl:gap-5 md:gap-3">
@@ -447,6 +450,7 @@ export default {
       openFilter: false,
       borderType: false,
       valueSelectType: null,
+      isSearch: "Объекты",
       types: [
         { type: 'Новостройка', id: 0 },
         { type: 'Виллы', id: 1 }
@@ -483,6 +487,9 @@ export default {
       selectDateId: 1,
       readyHouses: [],
       isBorder: 0,
+      openInfrastruktura: false,
+      openDopServices: false,
+      openFilt: false,
     }
   },
   methods: {
@@ -524,6 +531,9 @@ export default {
       } else if (this.selectDateId === 3) {
         this.readyHouses = this.readyHouses.sort((a, b) => b.minPrice - a.minPrice)
       }
+    },
+    sea() {
+
     },
     changeSelectCity(city, idx) {
       this.selectCity = city.title
@@ -600,6 +610,8 @@ export default {
     let href = window.location.href
     if (href.split('#').at(-1) === 'search') {
 
+      this.isSearch = `Поиск: ${localStorage.getItem('searchData')}`
+
       axios.post('/api/house/search', { title: localStorage.getItem('searchData') })
           .then(response => {
             this.readyHouses = response.data
@@ -668,34 +680,8 @@ export default {
         house.promotion = false
       })
     })
-
   },
   computed: {
-    readyHouses() {
-      this.housesFilters = this.readyHouses
-
-      // this.housesFilters = this.checkFilterType(this.housesFilters)
-
-      // if (this.selectCity !== 'Выберите город...') {
-      //   this.housesFilters = this.checkFilterCity(this.housesFilters)
-      // }
-      // console.log(this.housesFilters)
-      //
-      // if (this.selectRegion !== 'Выберите район...') {
-      //   this.housesFilters = this.checkFilterRegion(this.housesFilters)
-      // }
-      // if (this.filters.priceMin || this.filters.priceMax) {
-      //   this.housesFilters = this.checkFilterPrice(this.housesFilters)
-      // }
-      //
-      // this.housesFilters = this.checkFilterStatus(this.housesFilters)
-      //
-      // console.log(this.housesFilters)
-
-      // return this.filters
-      return this.housesFilters.slice(0, this.count)
-
-    },
     filteredCity() {
       if (this.searchValue !== null) {
         return this.city.filter(item =>
@@ -709,9 +695,13 @@ export default {
     },
   },
   mounted() {
+    console.log(this.readyHouses)
     document.addEventListener('click', (e) => {
       if (e.target !== this.$refs.date) {
         this.openDate = false
+      }
+      if (e.target !== this.$refs.city) {
+        this.openSelectCity = false
       }
     })
   },

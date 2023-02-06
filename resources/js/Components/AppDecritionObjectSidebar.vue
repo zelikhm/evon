@@ -51,11 +51,11 @@
           </div>
         </div>
         <div class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none pb-4 xxl:pb-3 xl:pb-2.5"><span class="text-[#8A8996]">Язык:</span> {{ item.link }}</div>
-        <div class="flex cursor-pointer mb-4 xxl:mb-3 xl:mb-2.5 bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]">
+        <div class="flex cursor-pointer mb-4 xxl:mb-3 xl:mb-2.5 bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]" v-if="item.phone">
           <img src="../../assets/svg/chat_tel_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
           <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ item.phone }}</span>
         </div>
-        <div class="flex cursor-pointer mb-4 xxl:mb-3 xl:mb-2.5 bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]">
+        <div class="flex cursor-pointer mb-4 xxl:mb-3 xl:mb-2.5 bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]" v-if="item.email">
           <img src="../../assets/svg/chat_mail_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
           <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ item.email }}</span>
         </div>

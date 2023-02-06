@@ -23,10 +23,11 @@
   <app-chess v-if="chess"
              :house="house"
              @close-chess="closeChess"
-             @open-cheme="openCheme = true"
+             @open-cheme="openScheme"
   />
   <app-chess-scheme
     v-if="openCheme"
+    :flat="selectFlat"
     @closeChess="openCheme = false"
   />
   <main v-if="!chess">
@@ -243,11 +244,17 @@ export default {
       chess: false,
       isWithClient: false,
       openCheme: false,
+      selectFlat: null
     }
   },
   methods: {
     updateBlockClient(data) {
       this.isWithClient = data
+    },
+    openScheme(data, id) {
+      this.openCheme = true
+      this.selectFlat = data
+      this.selectFlat.isOpen = id
     },
     openCreateSel() {
       this.openCreateSelection = true
@@ -278,6 +285,17 @@ export default {
     }
   },
   mounted() {
+
+    if (this.house.frames.length > 0) {
+      this.house.frames.forEach((item, idx) => {
+        if (idx === this.frameId) {
+          item.flats.forEach((item, idx) => {
+            if (idx === 0) this.selectFlat = item
+          })
+        }
+      })
+    }
+
     this.isWithClient = localStorage.getItem('withClient') === 'true' ? true : false
     this.flagFavorite = this.house.favorite
     this.arrayInfos = []

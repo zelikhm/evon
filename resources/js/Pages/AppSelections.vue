@@ -19,7 +19,7 @@
       <div class="flex justify-between items-center mt-14 xxl:mt-10 xl:mt-8">
         <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5">
           <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px] leading-none">Мои подборки</h2>
-          <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">Найдено {{ compilation.length }} подборки</span>
+          <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">Найдено {{ compilation.length }} шт.</span>
         </div>
 <!--        <button class="login__btn&#45;&#45;bg text-white text-base xxl:text-sm xl:text-xs lg:text-[15px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5 rounded-[3px] leading-none">Создать подборку</button>-->
       </div>
@@ -29,11 +29,12 @@
           <img class="p-2.5 xxl:p-2 xl:p-1.5 w-full h-[140px] exl:h-[8.5vw] lg:h-[17vw] sm:h-full rounded-[4px] object-cover" v-else src="../../assets/no-img-houses.jpg" alt="">
           <div class="flex items-center">
             <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5 w-full py-2.5 xxl:py-2 xl:py-1.5 pl-2.5 xxl:pl-2 xl:pl-1.5 pr-20 xxl:pr-16 xl:pr-12 md:pr-2.5">
-              <span class="text-lg xxl:text-[15px] xl:text-[13px] text-[#1E1D2D] font-medium leading-none">{{ item.title }}</span>
+              <span @click="openSelectionWithProps(item)" class="cursor-pointer text-lg xxl:text-[15px] xl:text-[13px] text-[#1E1D2D] font-medium leading-none">{{ item.title }}</span>
               <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{ item.values.length }} ЖК</span>
               <div :class="{ 'border-[#6435A5]': item.isEdit, 'border-[#E5DFEE]': !item.isEdit }" class="hover__title-block transition-all flex w-full border border-solid rounded-[5px] p-3 xxl:p-2.5 xl:p-2">
                 <input :disabled="!item.isEdit" class="p-0 text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] w-full leading-none focus:ring-0" v-model="item.description" type="text">
-                <button @click="editComment(item)" :class="{ 'text-[#6435A5]': item.isEdit }" class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{ item.isEdit ? "Сохранить" : "Редактировать" }}</button>
+                <button @click="editComment(item)" :class="{ 'text-[#6435A5]': item.isEdit }" class="text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none"
+                >{{ item.isEdit ? "Сохранить" : "Редактировать" }}</button>
               </div>
             </div>
             <div class="relative border__left flex flex-col h-full justify-evenly">
@@ -153,7 +154,11 @@ export default {
     this.compilationReady.forEach(item => {
       item.isEdit = false
       item.deleteConfirm = false
+
+      item.createdAtParse = Date.parse(item.created_at)
     })
+
+    this.compilationReady = this.compilationReady.sort((a, b) => b.createdAtParse - a.createdAtParse)
   },
   components: {
     AppHeader,
