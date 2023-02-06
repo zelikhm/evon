@@ -189,8 +189,8 @@ trait MainInfo
   {
 
       $image = HouseImagesModel::where('house_id', $house->id)
-        ->orderBy('created_at', 'ASC')
         ->orderBy('category', 'ASC')
+        ->orderBy('created_at', 'ASC')
         ->first();
 
       if($image !== null) {
