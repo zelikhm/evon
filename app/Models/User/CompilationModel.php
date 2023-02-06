@@ -18,10 +18,10 @@ class CompilationModel extends Model
       'isVisible',
     ];
 
-    protected $hidden = [
-      'created_at',
-      'updated_at',
-    ];
+//    protected $hidden = [
+//      'created_at',
+//      'updated_at',
+//    ];
 
     public function values() {
       return $this->hasMany(CompilationInfoModel::class, 'compilation_id', 'id');
