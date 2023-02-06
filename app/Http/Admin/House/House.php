@@ -72,7 +72,9 @@ class House extends Section implements Initializable
         ->setWidth('50px')
         ->setHtmlAttribute('class', 'text-center'),
       AdminColumn::relatedLink('user.email', 'Пользователь')->setWidth('350px'),
-      AdminColumn::text('title', 'Название')->setWidth('350px'),
+      AdminColumn::text('title', 'Название')->setWidth('350px')->setSearchCallback(function ($column, $query, $search) {
+        return $query->orWhere('title', 'like', '%' . $search . '%');
+      }),
       AdminColumn::text('city', 'Город')->setWidth('350px'),
       AdminColumn::text('area', 'Район')->setWidth('350px'),
       AdminColumn::custom('Модерация', function(\Illuminate\Database\Eloquent\Model $model) {
@@ -85,6 +87,8 @@ class House extends Section implements Initializable
         }
       })->setWidth('350px'),
     ];
+
+
 
     $display = AdminDisplay::datatablesAsync()
       ->paginate(40)
