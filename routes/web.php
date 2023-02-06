@@ -50,6 +50,7 @@ Route::prefix('/compilation')->group(function () {
 
 Route::middleware('auth', 'session')->group(function () {
   Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'index']);
+  Route::get('/villages', ['App\Http\Controllers\House\HouseController', 'villages']);
   Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
 });
 
