@@ -28,7 +28,7 @@ use SleepingOwl\Admin\Section;
 /**
  * Class Administrators
  *
-// * @property \App\Models\LandingModel $model
+ * @property \App\Models\Builder\HouseCharacteristicsModel $model
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */

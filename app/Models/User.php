@@ -32,7 +32,8 @@ class User extends Authenticatable
     'link',
     'description',
     'image',
-    'company_id'
+    'company_id',
+    'checked',
   ];
 
   /**

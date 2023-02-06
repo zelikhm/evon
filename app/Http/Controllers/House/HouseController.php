@@ -67,7 +67,30 @@ class HouseController extends Controller
   public function index()
   {
 
-    $houses = $this->getAllHouse();
+    $houses = $this->getAllHouse('Новостройка');
+
+    return Inertia::render('AppListImmovables', [
+      'houses' => $houses,
+      'dops' => TypesModel::all(),
+      'infos' => StructureModel::all(),
+      'city' => CityModel::with(['regions'])->get(),
+      'builders' => User::where('role', 1)->get(),
+      'notification' => $this->getNotification(),
+      'compilation' => $this->getCompilation(Auth::id()),
+      'news' => $this->getNewsForPage(),
+      'adminNews' => $this->getAdminNews(),
+      'user' => Auth::user(),
+    ]);
+  }
+
+  /**
+   * get villages
+   * @return \Inertia\Response
+   */
+
+  public function villages() {
+
+    $houses = $this->getAllHouse('Виллы');
 
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
@@ -114,14 +137,26 @@ class HouseController extends Controller
     ]);
   }
 
+  /**
+   * get house api
+   * @param Request $request
+   * @return \Inertia\Response
+   */
+
   public function getHouseApi(Request $request)
   {
     return $this->house($request->slug);
   }
 
+  /**
+   * get houses in api
+   * @param Request $request
+   * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+   */
+
   public function getHousesApi(Request $request)
   {
-    return $this->getAllHouse();
+    return $this->getAllHouse('Новостройка');
   }
 
   /**

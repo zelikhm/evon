@@ -326,8 +326,9 @@ input::placeholder {
   transition: all 0.2s;
 }
 
+.hover__close:hover span,
 .hover__close:hover div {
-  background: #EC1B65;
+  background: #EC1B65 !important;
   transition: all 0.2s;
 }
 
@@ -404,6 +405,7 @@ input::placeholder {
   display: inline-flex;
   align-items: center;
   user-select: none;
+  cursor: pointer;
 }
 
 .custom__checkbox + label::before {
