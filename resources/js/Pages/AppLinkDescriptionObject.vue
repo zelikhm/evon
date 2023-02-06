@@ -297,7 +297,7 @@
               </div>
             </div>
           </div>
-          <GMapMap v-if="house.visible === 1" :center="center" :zoom="10" map-type-id="terrain" class="w-full h-[18vw] lg:h-[28vw] sm:h-[36vw] rounded-[10px] mb-10" :draggable="true" @click="handleClick"  ref="myMapRef" :click="true">
+          <GMapMap v-if="house.visible === 1" :center="center" :zoom="15" map-type-id="terrain" class="w-full h-[18vw] lg:h-[28vw] sm:h-[36vw] rounded-[10px] mb-10" :draggable="true" @click="handleClick"  ref="myMapRef" :click="true">
             <GMapMarker :key="index" v-for="(m, index) in markers" :icon="'/images/icon-marker-map.svg'" :position="m.position" :clickable="true" :draggable="true">
             </GMapMarker>
           </GMapMap>

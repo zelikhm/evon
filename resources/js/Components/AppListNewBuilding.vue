@@ -695,6 +695,7 @@ export default {
     },
   },
   mounted() {
+    console.log(this.readyHouses)
     document.addEventListener('click', (e) => {
       if (e.target !== this.$refs.date) {
         this.openDate = false
