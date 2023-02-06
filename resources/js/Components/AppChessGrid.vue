@@ -8,36 +8,36 @@
             <div v-for="item in house.info.count_flat" class="bg-[#E5DFEE] flex-shrink-0 font-semibold relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE]">{{ item }}</div>
           </div>
           <div class="flex gap-2.5 xl:gap-2" v-for="floor in house.info.floors">
-            <div class="bg-[#E5DFEE] flex-shrink-0 font-semibold relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE]">{{ floor - 1}}</div>
+            <div class="bg-[#E5DFEE] flex-shrink-0 font-semibold relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE]">{{ Math.abs((floor - 1) - (house.info.floors - 1)) }}</div>
             <div v-for="count in house.info.count_flat" class="bg-white flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
-              <div v-if="checkFlat(floor - 1, count) === null" class="bg-white flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
+              <div v-if="checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count) === null" class="bg-white flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
                 <span class="relative z-10"></span>
               </div>
-              <div v-if="checkFlat(floor - 1, count) !== null">
-                <div v-if="checkFlat(floor - 1, count).status == 2" @click="clickFlat(checkFlat(floor - 1, count).id)" :class="{'bg-[#6435A5]': checkFlat(floor - 1, count).active}" class="flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
-                  <span class="relative z-10" :class="{'text-white': checkFlat(floor - 1, count).active === 1}">{{ checkFlat(floor - 1, count).square }}</span>
-                  <img class="absolute w-full h-full top-0 left-0" v-if="checkFlat(floor - 1, count).active !== 1" src="../../assets/svg/chess_fence.svg" alt="">
+              <div v-if="checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count) !== null">
+                <div v-if="checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).status == 2" @click="clickFlat(checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).id)" :class="{'bg-[#6435A5]': checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).active}" class="flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
+                  <span class="relative z-10" :class="{'text-white': checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).active === 1}">{{ checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).square }}</span>
+                  <img class="absolute w-full h-full top-0 left-0" v-if="checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).active !== 1" src="../../assets/svg/chess_fence.svg" alt="">
                 </div>
               </div>
-              <div v-if="checkFlat(floor - 1, count) !== null">
-                <div v-if="checkFlat(floor - 1, count).status == 4" @click="clickFlat(checkFlat(floor - 1, count).id)" :class="{'text-white': checkFlat(floor - 1, count).active === 1, 'bg-[#6435A5]': checkFlat(floor - 1, count).active === 1}"
+              <div v-if="checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count) !== null">
+                <div v-if="checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).status == 4" @click="clickFlat(checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).id)" :class="{'text-white': checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).active === 1, 'bg-[#6435A5]': checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).active === 1}"
                      class="bg-white flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
-                  {{  checkFlat(floor - 1, count).count === 'Duplex' ? 'D' : checkFlat(floor - 1, count).count === 'Studia' ? 'S' : checkFlat(floor - 1, count).count  }}
+                  {{  checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).count === 'Duplex' ? 'D' : checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).count === 'Studia' ? 'S' : checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).count  }}
                 </div>
               </div>
-              <div v-if="checkFlat(floor - 1, count) !== null">
-                <div v-if="checkFlat(floor - 1, count).status == 3" @click="clickFlat(checkFlat(floor - 1, count).id)" :class="{'bg-[#6435A5]': checkFlat(floor - 1, count).active === 1}" class="relative flex-shrink-0 flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
+              <div v-if="checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count) !== null">
+                <div v-if="checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).status == 3" @click="clickFlat(checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).id)" :class="{'bg-[#6435A5]': checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).active === 1}" class="relative flex-shrink-0 flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
                   <img src="../../assets/svg/lock.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
                 </div>
               </div>
-              <div v-if="checkFlat(floor - 1, count) !== null">
-                <div v-if="checkFlat(floor - 1, count).status == 0" @click="clickFlat(checkFlat(floor - 1, count).id)" :class="{'text-white': checkFlat(floor - 1, count).active === 1, 'bg-[#6435A5]': checkFlat(floor - 1, count).active === 1}" class="relative flex-shrink-0 flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E84680] cursor-pointer">
-                  {{ checkFlat(floor - 1, count).count === 'Duplex' ? 'D' : checkFlat(floor - 1, count).count === 'Studia' ? 'S' : checkFlat(floor - 1, count).count }}
+              <div v-if="checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count) !== null">
+                <div v-if="checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).status == 0" @click="clickFlat(checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).id)" :class="{'text-white': checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).active === 1, 'bg-[#6435A5]': checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).active === 1}" class="relative flex-shrink-0 flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E84680] cursor-pointer">
+                  {{ checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).count === 'Duplex' ? 'D' : checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).count === 'Studia' ? 'S' : checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).count }}
                 </div>
               </div>
-              <div v-if="checkFlat(floor - 1, count) !== null">
-                <div v-if="checkFlat(floor - 1, count).status == 1" @click="clickFlat(checkFlat(floor - 1, count).id)" :class="{'text-white': checkFlat(floor - 1, count).active === 1, 'bg-[#6435A5]': checkFlat(floor - 1, count).active === 1}" class="relative flex-shrink-0 flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#6435A5] cursor-pointer">
-                  {{ checkFlat(floor - 1, count).count === 'Duplex' ? 'D' : checkFlat(floor - 1, count).count === 'Studia' ? 'S' : checkFlat(floor - 1, count).count }}
+              <div v-if="checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count) !== null">
+                <div v-if="checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).status == 1" @click="clickFlat(checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).id)" :class="{'text-white': checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).active === 1, 'bg-[#6435A5]': checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).active === 1}" class="relative flex-shrink-0 flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#6435A5] cursor-pointer">
+                  {{ checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).count === 'Duplex' ? 'D' : checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).count === 'Studia' ? 'S' : checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).count }}
                 </div>
               </div>
             </div>

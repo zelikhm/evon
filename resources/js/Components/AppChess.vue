@@ -144,10 +144,10 @@
                 <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{ selectFlat.square }} м²</span>
               </div>
             </div>
-            <img :src="selectFlat.imageUp" class="w-40 xxl:w-36 xl:w-32" alt="">
+            <img :src="selectFlat.imageUp" @click="this.$emit('open-cheme', selectFlat, 0)" class="cursor-pointer w-40 xxl:w-36 xl:w-32" alt="">
           </div>
         </div>
-        <div @click="this.$emit('open-cheme')" class="flex items-center justify-center justify-between lg:justify-start lg:my-6 mr-[6.25vw] lg:mx-auto lg:px-[6.25vw]">
+        <div @click="this.$emit('open-cheme', selectFlat, 1)" class="flex items-center justify-center justify-between lg:justify-start lg:my-6 mr-[6.25vw] lg:mx-auto lg:px-[6.25vw]">
           <img :src="selectFlat.imageDown" class="pl-14 xxl:pl-10 xl:pl-8 pt-16 xxl:pt-12 xl:pt-10 lg:p-0 w-full object-cover cursor-pointer" alt="">
         </div>
       </div>
