@@ -69,12 +69,6 @@ class HouseController extends Controller
 
     $houses = $this->getAllHouse();
 
-    foreach ($houses as $house) {
-      if($house->id === 238) {
-        dd($house);
-      }
-    }
-
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
       'dops' => TypesModel::all(),
