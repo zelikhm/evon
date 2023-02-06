@@ -248,25 +248,34 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
           <div class="flex items-center md:flex-col gap-8 xxl:gap-6 xl:gap-5 md:gap-3">
             <div v-if="!map" class="relative">
-              <div @click="openDate = !openDate" class="cursor-pointer flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
-                <span class="text-base xxl:text-sm xl:text-xs md:text-[14px] leading-none whitespace-nowrap">
+              <div @click="openDate = !openDate" class=" cursor-pointer flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
+                <span ref="date" class="hover__title-block text-base xxl:text-sm xl:text-xs md:text-[14px] leading-none whitespace-nowrap">
                   По {{ selectDate }}
                 </span>
-                <img src="../../assets/svg/arrow_down_black.svg" alt="Стрелочка вниз">
+                <img :class="{'rotate-180': openDate }" class="transition-all" src="../../assets/svg/arrow_down_black.svg" alt="Стрелочка вниз">
               </div>
-              <div v-if="openDate" class="bg-white -left-[10%] top-[120%] rounded-[6px] text-base xxl:text-sm xl:text-xs lg:text-[15px] border border-solid border-[#E5DFEE] absolute flex flex-col z-10">
+              <div v-if="openDate" class="bg-white overflow-hidden -left-[10%] top-[160%] xxl:top-[140%] rounded-[6px] text-base xxl:text-sm xl:text-xs lg:text-[15px] border border-solid border-[#E5DFEE] absolute flex flex-col z-10">
                 <span
                   v-for="date in dates"
-                  @click="changeDate(date)"
-                  class="cursor-pointer border__bottom--not leading-none whitespace-nowrap p-4 xxl:p-3 xl:p-2.5">
+                  @click.stop="changeDate(date)"
+                  class="hover__select cursor-pointer border__bottom--not leading-none whitespace-nowrap p-4 xxl:p-3 xl:p-2.5">
                   {{ date.date }}
                 </span>
               </div>
             </div>
             <div class="flex items-center gap-8 xxl:gap-6 xl:gap-5">
-              <button @click="map = !map" class="button__map flex items-center gap-3 xxl:gap-2 xl:gap-1.5 p-3 xxl:p-2.5 xl:p-2 rounded-[6px]">
-                <img src="../../assets/svg/map_pointer.svg" class="h-6 xxl:h-5 xl:h-4 md:h-5" alt="Метка">
-                <span class="text-[#6435A5] font-medium text-base xxl:text-sm xl:text-xs md:text-[15px] whitespace-nowrap ">{{ map ? "Скрыть карту" : "Искать на карте" }}</span>
+              <button @click="map = !map" class="button__map text-[#6435A5] flex items-center gap-3 xxl:gap-2 xl:gap-1.5 px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 rounded-[6px]">
+                <svg class="w-6 xxl:w-5 xl:w-4 h-6 xxl:h-5 xl:h-4 md:h-5" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_134_1964)">
+                    <path d="M18.364 17.364L12 23.728L5.636 17.364C4.37734 16.1054 3.52019 14.5017 3.17293 12.7559C2.82567 11.0101 3.00391 9.20047 3.6851 7.55595C4.36629 5.91142 5.51984 4.50582 6.99988 3.51689C8.47992 2.52796 10.22 2.00012 12 2.00012C13.78 2.00012 15.5201 2.52796 17.0001 3.51689C18.4802 4.50582 19.6337 5.91142 20.3149 7.55595C20.9961 9.20047 21.1743 11.0101 20.8271 12.7559C20.4798 14.5017 19.6227 16.1054 18.364 17.364ZM12 15C13.0609 15 14.0783 14.5786 14.8284 13.8285C15.5786 13.0783 16 12.0609 16 11C16 9.93918 15.5786 8.92176 14.8284 8.17162C14.0783 7.42147 13.0609 7.00004 12 7.00004C10.9391 7.00004 9.92172 7.42147 9.17158 8.17162C8.42143 8.92176 8 9.93918 8 11C8 12.0609 8.42143 13.0783 9.17158 13.8285C9.92172 14.5786 10.9391 15 12 15ZM12 13C11.4696 13 10.9609 12.7893 10.5858 12.4143C10.2107 12.0392 10 11.5305 10 11C10 10.4696 10.2107 9.9609 10.5858 9.58583C10.9609 9.21076 11.4696 9.00004 12 9.00004C12.5304 9.00004 13.0391 9.21076 13.4142 9.58583C13.7893 9.9609 14 10.4696 14 11C14 11.5305 13.7893 12.0392 13.4142 12.4143C13.0391 12.7893 12.5304 13 12 13Z" fill="#6435A5"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_134_1964">
+                      <rect width="24" height="24" fill="white"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+                <span class="font-medium text-base xxl:text-sm xl:text-xs md:text-[15px] whitespace-nowrap ">{{ map ? "Скрыть карту" : "Искать на карте" }}</span>
               </button>
               <div class="flex gap-3 xxl:gap-2 xl:gap-1.5" v-if="!map">
                 <button @click="toggle = false" :class="{'grid--active': !toggle}" class="button__choices--grid h-9 xxl:h-7 xl:h-6 md:h-7 w-9 xxl:w-7 xl:w-6 md:w-7 gap-1 xxl:gap-0.5 rounded-[6px] p-[8px] xxl:p-[6px] xl:p-[5px]">
@@ -350,7 +359,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                   </button>
                 </div>
               </div>
-              <div class="flex flex-col justify-between px-4 xxl:px-3 xl:px-2.5 md:px-1.5 py-2 xxl:py-1.5 xl:py-1 md:py-3 md:gap-3.5">
+              <div class="flex flex-col justify-between px-7 xxl:px-6 xl:px-5 md:px-1.5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3 md:py-3 md:gap-3.5">
                 <div class="flex justify-between sm:flex-col gap-2">
                   <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
                     <Link :href="'/house/' + item.slug" class="hover__title-block transition-all leading-none font-semibold text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">{{ item.title }}</Link>
@@ -365,14 +374,14 @@ import { Link } from '@inertiajs/inertia-vue3'
               </div>
             </div>
           </div>
-          <div class="flex flex-col justify-between px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2">
+          <div class="flex flex-col justify-between px-7 xxl:px-6 xl:px-5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3">
             <div class="flex justify-between items-center">
               <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] md:text-[13px]">{{ item.flats.length }} {{ item.flats.length === 1 ? "Квартира" : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
               <span class="uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[12px] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1" v-if="item.created && !Number.isInteger(+item.created[0])">{{ item.created }}</span>
               <span class="uppercase border border-solid border-[#E84680] h-fit text-[#E84680] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1" v-else-if="item.created">{{ item.created }}</span>
             </div>
-            <div class="flex flex-col">
-              <span class="font-medium whitespace-nowrap text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">от {{ Number.isInteger(item.minPrice) ? item.minPrice : "-" }} €</span>
+            <div class="flex flex-col gap-2.5 xxl:gap-1.5 xl:gap-1">
+              <span class="font-medium whitespace-nowrap text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] md:text-[17px] leading-none leading-none">от {{ Number.isInteger(item.minPrice) ? item.minPrice : "-" }} €</span>
               <span class="text-[#8A8996] whitespace-nowrap text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px]">{{ isNaN(item.minPrice / item.minSquare) ? "-" : Math.round(item.minPrice / item.minSquare) }} € за м²</span>
             </div>
             <div class="gray-backg flex items-center justify-center w-fit px-3 xxl:px-2.5 xl:px-2 gap-2 xxl:gap-1.5 xl:gap-1">
@@ -700,6 +709,11 @@ export default {
     },
   },
   mounted() {
+    document.addEventListener('click', (e) => {
+      if (e.target !== this.$refs.date) {
+        this.openDate = false
+      }
+    })
   },
   beforeDestroy() {
     // document.removeEventListener('click', this.selectsHidden)

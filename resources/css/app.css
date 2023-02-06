@@ -395,6 +395,7 @@ input::placeholder {
 
 .custom__checkbox {
   position: absolute;
+  cursor: pointer;
   z-index: -1;
   opacity: 0;
 }
@@ -738,6 +739,22 @@ input::placeholder {
   background: rgba(100, 53, 165, 0.12);
 }
 
+.button__map:hover {
+  background: #6435A5;
+  color: #fff;
+  transition: all 0.2s;
+}
+
+.button__map:hover path {
+  fill: #fff;
+  transition: all 0.2s;
+}
+
+.button__map:active {
+  background: #492679;
+  transition: all 0.2s;
+}
+
 .button__choices--grid {
   background: rgba(100, 53, 165, 0.12);
   display: grid;
@@ -864,12 +881,23 @@ input::placeholder {
 
 .grid__add-object {
   display: grid;
-  grid-template-columns: 20vw 1fr 20vw;
+  grid-template-columns: 384px 1fr 384px;
 }
 
 .grid__apartments {
   display: grid;
-  grid-template-columns: 20vw 1fr;
+  grid-template-columns: 384px 1fr;
+}
+
+@media (max-width: 1920px) {
+  .grid__add-object {
+    display: grid;
+    grid-template-columns: 20vw 1fr 20vw;
+  }
+
+  .grid__apartments {
+    grid-template-columns: 20vw 1fr;
+  }
 }
 
 .menu-add-obj {
@@ -970,8 +998,15 @@ input::placeholder {
 
 .grid__news {
   display: grid;
-  grid-template-columns: 20vw 36vw auto;
+  grid-template-columns: 400px 600px auto;
 }
+
+@media (max-width: 1920px) {
+  .grid__news {
+    grid-template-columns: 20vw 36vw auto;
+  }
+}
+
 
 @media (max-width: 992px) {
   .grid__news {
@@ -1183,7 +1218,7 @@ input::placeholder {
   border-radius: 50%;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 80%;
+  background-size: 12px 12px;
   margin-right: 20px;
 }
 
@@ -1192,6 +1227,7 @@ input::placeholder {
     width: 14px;
     height: 14px;
     margin-right: 16px;
+    background-size: 10px 10px;
   }
 }
 
@@ -1200,6 +1236,7 @@ input::placeholder {
     width: 12px;
     height: 12px;
     margin-right: 12px;
+    background-size: 8px 8px;
   }
 }
 
