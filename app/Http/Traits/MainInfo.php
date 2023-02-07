@@ -83,11 +83,12 @@ trait MainInfo
 
   protected function getNewsForPage()
   {
-    $news = HouseNewsModel::orderByDesc('created_at')->with(['house'])->get();
+    $news = HouseNewsModel::orderByDesc('created_at')
+      ->with(['house'])->get();
 
     foreach ($news as $key => $item) {
 
-      if($item->house->visible === 0) {
+      if($item->house->visible === 0 || $item->house->active !== 2) {
         $news[$key] = [];
       }
 
