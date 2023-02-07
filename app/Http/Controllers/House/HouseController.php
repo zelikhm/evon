@@ -69,7 +69,7 @@ class HouseController extends Controller
 
     $houses = $this->getAllHouse('Новостройка');
 
-    dd($houses);
+    dd($houses[0]);
 
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
