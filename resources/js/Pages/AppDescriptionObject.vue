@@ -105,7 +105,7 @@
             <swiper-slide class="h-full flex justify-center" v-if="house.images.length === 0">
               <img class="h-full w-full object-cover" src="../../assets/no-img-house.jpg" alt="">
             </swiper-slide>
-            <swiper-slide class="h-full flex justify-center cursor-pointer" v-for="item in mainPhotos">
+            <swiper-slide class="h-full flex justify-center  cursor-pointer" v-for="item in mainPhotos">
               <img @click="album = true" class="h-full w-full" :src="item.name" alt="">
             </swiper-slide>
           </swiper>
