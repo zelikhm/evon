@@ -169,7 +169,7 @@ class CompilationController extends Controller
         foreach ($compilations as $compilation) {
           if(count($compilation->values) > 0) {
             $house = $this->getHouseOnId($compilation->values[0]->house_id);
-            $compilation->image = count($house->images) > 0 ? $house->images[0] : null;;
+            $compilation->image = $this->getPhoto($house);
           } else {
             $compilation->image = null;
           }
