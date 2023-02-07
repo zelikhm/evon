@@ -170,8 +170,6 @@ class HouseController extends Controller
 
     $house = HouseModel::where('slug', $slug)
       ->where('user_id', Auth::id())
-      ->where('active', 2)
-      ->where('visible', 1)
       ->firstOrFail();
 
     if($house !== null) {
