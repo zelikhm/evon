@@ -83,11 +83,12 @@ trait MainInfo
 
   protected function getNewsForPage()
   {
-    $news = HouseNewsModel::orderByDesc('created_at')->with(['house'])->get();
+    $news = HouseNewsModel::orderByDesc('created_at')
+      ->with(['house'])->get();
 
     foreach ($news as $key => $item) {
 
-      if($item->house->visible === 0) {
+      if($item->house->visible === 0 || $item->house->active !== 2) {
         $news[$key] = [];
       }
 
@@ -279,6 +280,7 @@ trait MainInfo
     $houses = HouseModel::where('visible', 1)
       ->where('active', 2)
       ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
+      ->select('house_models.*')
       ->where('house_characteristics_models.type', $type)
       ->with(['info', 'supports', 'files', 'frames', 'images', 'flats', 'user', 'news'])
       ->get();
