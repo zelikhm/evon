@@ -168,7 +168,7 @@ class HouseController extends Controller
   public function house($slug)
   {
 
-    $house = HouseModel::where('slug', $slug)->firstOrFail();
+    $house = HouseModel::where('slug', $slug)->where('active', 2)->where('visible', 1)->firstOrFail();
 
     HouseViewsModel::create([
       'house_id' => $house->id,
