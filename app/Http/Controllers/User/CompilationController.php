@@ -38,6 +38,8 @@ class CompilationController extends Controller
       }
     }
 
+    dd($compilations);
+
     return Inertia::render('AppSelections', [
 
       'compilation' => $compilations,
