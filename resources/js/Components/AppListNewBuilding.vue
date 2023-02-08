@@ -573,36 +573,36 @@ export default {
       this.selectType = type.type
       this.openSelectType = false
     },
-    checkFilterType(i) {
-      console.log(i)
-      return i.filter(item => item.info.type === this.selectType)
-    },
-    checkFilterCity(i) {
-      return i.filter(item => item.city === this.selectCity)
-    },
-    checkFilterRegion(i) {
-      return i.filter(item => item.area === this.selectRegion)
-    },
-    checkFilterStatus(i) {
-      return i.filter(item => item.created === this.selectDeadline)
-    },
-    checkFilterPrice(i) {
-      return i.filter(item => {
-        if (!Number.isInteger(this.filters.priceMin) && Number.isInteger(this.filters.priceMax)) {
-          return
-        } else if (Number.isInteger(this.filters.priceMin) && !Number.isInteger(this.filters.priceMax)) {
-          if (item.minPrice >= this.filters.priceMin) {
-            return item
+    updateHouses() {
+      this.readyHouses.forEach(house => {
+
+        console.log(house)
+
+        house.time = Date.parse(house.created_at)
+        this.readyHouses = this.readyHouses.sort((a, b) => b.time - a.time)
+
+
+        let arr = [],
+            squareFlats = []
+
+        house.flats.forEach(item => {
+          arr.push(item.price)
+          squareFlats.push(item.square)
+        })
+
+
+        house.minPrice = Number.isInteger(Math.min(...arr)) ? Math.min(...arr) : 0
+        house.maxPrice = Number.isInteger(Math.max(...arr)) ? Math.max(...arr) : 0
+        house.minSquare = Math.min(...squareFlats)
+        house.maxSquare = Math.max(...squareFlats)
+
+        house.flats.forEach(item => {
+          if (item.status == 0) {
+            house.promotion = true
+            return
           }
-        } else if (Number.isInteger(this.filters.priceMin) && Number.isInteger(this.filters.priceMax)) {
-          if (item.minPrice >= this.filters.priceMin && item.maxPrice <= this.filters.priceMax) {
-            return item
-          }
-        } else if (!Number.isInteger(this.filters.priceMin) && Number.isInteger(this.filters.priceMax)) {
-          if (item.maxPrice <= this.filters.priceMax) {
-            return item
-          }
-        }
+          house.promotion = false
+        })
       })
     }
   },
@@ -615,6 +615,7 @@ export default {
       axios.post('/api/house/search', { title: localStorage.getItem('searchData') })
           .then(response => {
             this.readyHouses = response.data
+            this.updateHouses()
           })
           .catch(e => console.log(e))
     } else {
@@ -641,45 +642,7 @@ export default {
 
     }
 
-    let dops = this.dops
-
-    let minPriceForFilter = [],
-        maxPriceForFilter = [],
-        minSquareForFilter = [],
-        maxSquareForFilter = []
-
-    this.readyHouses.forEach(house => {
-      house.time = Date.parse(house.created_at)
-      this.readyHouses = this.readyHouses.sort((a, b) => b.time - a.time)
-
-
-      let arr = [],
-          squareFlats = []
-
-      house.flats.forEach(item => {
-        arr.push(item.price)
-        squareFlats.push(item.square)
-      })
-
-      house.minPrice = Number.isInteger(Math.min(...arr)) ? Math.min(...arr) : 0
-      house.maxPrice = Number.isInteger(Math.max(...arr)) ? Math.max(...arr) : 0
-      house.minSquare = Math.min(...squareFlats)
-      house.maxSquare = Math.max(...squareFlats)
-
-      // if (Number.isInteger(house.minPrice)) minPriceForFilter.push(house.minPrice)
-      // if (Number.isInteger(house.maxPrice)) maxPriceForFilter.push(house.maxPrice)
-      // if (Number.isInteger(house.minSquare)) minSquareForFilter.push(house.minSquare)
-      // if (Number.isInteger(house.maxSquare)) maxSquareForFilter.push(house.maxSquare)
-
-
-      house.flats.forEach(item => {
-        if (item.status == 0) {
-          house.promotion = true
-          return
-        }
-        house.promotion = false
-      })
-    })
+    this.updateHouses()
   },
   computed: {
     filteredCity() {
@@ -695,7 +658,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this.readyHouses)
     document.addEventListener('click', (e) => {
       if (e.target !== this.$refs.date) {
         this.openDate = false
@@ -706,7 +668,6 @@ export default {
     })
   },
   beforeDestroy() {
-    // document.removeEventListener('click', this.selectsHidden)
   },
   components: {
     AppMap,

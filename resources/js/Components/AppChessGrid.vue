@@ -2,7 +2,7 @@
   <div class="bg-[#F6F3FA] border__right">
     <div class="ml-5 exl:ml-[6.25vw] lg:w-[93vw] h-[40vw] py-10 xxl:py-8 xl:py-6 pr-10 xxl:pr-8 xl:pr-6">
       <div class="h-full custom__scroll--chess overflow-scroll">
-        <div class="grid grid__chess--inner gap-2.5 xl:gap-2 text-[#6435A5] text-base xxl:text-sm xl:text-[10px] lg:text-[15px]">
+        <div class="grid grid__chess--inner gap-2.5 xl:gap-2 text-[#6435A5] text-xs xxl:text-xs xl:text-[8px] lg:text-[10px]">
           <div class="flex gap-2.5 xl:gap-2 items-center">
             <div class="bg-[#E5DFEE] flex-shrink-0 font-semibold relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 lg:w-10 lg:h-10 rounded-[5px] border border-solid border-[#E5DFEE]"></div>
             <div v-for="item in house.info.count_flat" class="bg-[#E5DFEE] flex-shrink-0 lg:w-10 lg:h-10 font-semibold relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 lg:w-10 lg:h-10 rounded-[5px] border border-solid border-[#E5DFEE]">{{ item }}</div>
