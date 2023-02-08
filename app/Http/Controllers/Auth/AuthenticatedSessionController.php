@@ -44,7 +44,6 @@ class AuthenticatedSessionController extends Controller
       'password' => ['required'],
     ]);
 
-//    if($request->token === env('TOKEN')) {
       $user = User::where('email', $request->email)
         ->first();
 
@@ -61,14 +60,19 @@ class AuthenticatedSessionController extends Controller
       }
 
       if($user !== null && Hash::check($request->password, $user->password)) {
+
         Auth::logoutOtherDevices(Hash::make($request->password));
 
         $this->checkSession($user->id);
 
         Auth::login($user, $remember = true);
+
         if(Auth::user()->role === 3) {
+
           return redirect()->intended(RouteServiceProvider::ADMIN);
+
         } elseif (Auth::user()->role === 0) {
+
           if(Auth::user()->checked === 1) {
 
             User::where('id', Auth::id())->update([
@@ -76,14 +80,55 @@ class AuthenticatedSessionController extends Controller
             ]);
 
             return redirect()->intended(RouteServiceProvider::HOME);
+
           } else {
+
             return redirect()->intended(RouteServiceProvider::HOUSES);
+
           }
+
         } else {
+
           return redirect()->intended(RouteServiceProvider::HOME);
+
         }
 
       }
+
+  }
+
+  /**
+   * login api
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function loginApi(Request $request) {
+
+    $request->validate([
+      'email' => ['required', 'max:50', 'exists:App\Models\User,email'],
+      'password' => ['required'],
+    ]);
+
+    $user = User::where('email', $request->email)
+      ->first();
+
+    if($user === null) {
+      $user = User::where('phone', $request->phone)
+        ->first();
+    }
+
+    if($user !== null && Hash::check($request->password, $user->password)) {
+
+      $token = $this->checkSession($user->id);
+
+      return response()->json($token, 200);
+
+    } else {
+
+      return response()->json(false, 401);
+
+    }
 
   }
 
@@ -120,6 +165,26 @@ class AuthenticatedSessionController extends Controller
       'created_at' => Carbon::now()->addHour(3),
       'updated_at' => Carbon::now()->addHour(3),
     ]);
+
+    return $this->setToken($id);
+
+  }
+
+  /**
+   * set jwt token for user
+   * @param $id
+   */
+
+  protected function setToken($id) {
+
+    $str = rand();
+    $token = hash("sha256", $str);
+
+    User::where('id', $id)->update([
+      'token' => $token,
+    ]);
+
+    return $token;
 
   }
 

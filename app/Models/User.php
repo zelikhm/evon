@@ -34,6 +34,7 @@ class User extends Authenticatable
     'image',
     'company_id',
     'checked',
+    'token',
   ];
 
   /**
