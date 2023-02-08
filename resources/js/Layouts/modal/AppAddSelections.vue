@@ -104,6 +104,8 @@ export default {
   },
   created() {
     this.readyCompilation = this.compilation
+
+    this.readyCompilation = this.readyCompilation.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at))
   }
 }
 </script>
