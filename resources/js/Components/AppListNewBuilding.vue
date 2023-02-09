@@ -250,9 +250,9 @@ import { Link } from '@inertiajs/inertia-vue3'
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center">Найдено {{ readyHouses.length }} шт.</span>
           </div>
           <div class="flex items-center md:flex-col gap-8 xxl:gap-6 xl:gap-5 md:gap-3">
-            <div v-if="!map" class="relative">
-              <div @click="openDate = !openDate" class=" cursor-pointer flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
-                <span ref="date" class="hover__title-block text-base xxl:text-sm xl:text-xs md:text-[14px] leading-none whitespace-nowrap">
+            <div v-if="!map" :tabindex="tabindex" @blur="openDate = false" class="relative">
+              <div @click="openDate = !openDate" class="cursor-pointer flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
+                <span class="hover__title-block text-base xxl:text-sm xl:text-xs md:text-[14px] leading-none whitespace-nowrap">
                   По {{ selectDate }}
                 </span>
                 <img :class="{'rotate-180': openDate }" class="transition-all" src="../../assets/svg/arrow_down_black.svg" alt="Стрелочка вниз">
@@ -695,15 +695,7 @@ export default {
     },
   },
   mounted() {
-    console.log(this.readyHouses)
-    document.addEventListener('click', (e) => {
-      if (e.target !== this.$refs.date) {
-        this.openDate = false
-      }
-      if (e.target !== this.$refs.city) {
-        this.openSelectCity = false
-      }
-    })
+
   },
   beforeDestroy() {
     // document.removeEventListener('click', this.selectsHidden)
