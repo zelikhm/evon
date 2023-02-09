@@ -99,14 +99,6 @@ export default {
       })
     },
     createCompilation() {
-      console.log({
-        user_id: this.user.id,
-        id: this.itemCompilation.id,
-        title: this.compilation.title,
-        description: this.compilation.description,
-        isVisible: this.compilation.isVisible,
-        token: this.globalToken
-      })
       if (this.compilation.title) {
         axios.post('/api/compilation/edit', {
           user_id: this.user.id,
