@@ -23,14 +23,14 @@
           <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="chekbox">показывать ЖК и его месторасположение</label>
         </div>
         <div class="text-[#1E1D2D] font-medium text-[18px] xxl:text-[15px] xl:text-[13px] mb-4 xxl:mb-3 xl:mb-2.5">ЖК ({{ compilation.JK.length }})</div>
-        <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 mb-8 xxl:mb-6 xl:mb-5 overflow-y-auto max-h-56 xxl:max-h-48 xl:max-h-40 custom__scroll-grey">
+        <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 mb-8 xxl:mb-6 xl:mb-5 overflow-y-auto max-h-64 xxl:max-h-80 xl:max-h-96 custom__scroll-grey">
           <div
             class="contact__selling p-2.5 xxl:p-2 xl:p-1.5 rounded-[10px]"
             v-for="JK in compilation.JK"
           >
             <div class="flex justify-between items-center mb-3 xxl:mb-2.5 xl:mb-2">
               <div class="flex gap-5 xxl:gap-4 xl:gap-3 items-center">
-                <img v-if="JK.house.images.length > 0" :src="JK.house.images[0].name" class="object-cover w-[70px] xxl:w-[60px] xl:w-[50px] h-[70px] xl:h-[60px] xl:h-[50px] rounded-[3px]" alt="">
+                <img v-if="JK.house.image" :src="JK.house.image" class="object-cover w-[70px] xxl:w-[60px] xl:w-[50px] h-[70px] xl:h-[60px] xl:h-[50px] rounded-[3px]" alt="">
                 <img v-else src="../../../assets/no-img-houses.jpg" class="w-[70px] xxl:w-[60px] xl:w-[50px] h-[70px] xl:h-[60px] xl:h-[50px] rounded-[3px]" alt="">
                 <div class="flex flex-col gap-3 xxl:gap-2.5 xl:gap-2">
                   <span class="text-[#1E1D2D] font-medium text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">{{ JK.house.title }}</span>
@@ -99,7 +99,15 @@ export default {
       })
     },
     createCompilation() {
-      if (this.compilation.title && this.compilation.description) {
+      console.log({
+        user_id: this.user.id,
+        id: this.itemCompilation.id,
+        title: this.compilation.title,
+        description: this.compilation.description,
+        isVisible: this.compilation.isVisible,
+        token: this.globalToken
+      })
+      if (this.compilation.title) {
         axios.post('/api/compilation/edit', {
           user_id: this.user.id,
           id: this.itemCompilation.id,
@@ -107,7 +115,10 @@ export default {
           description: this.compilation.description,
           isVisible: this.compilation.isVisible,
           token: this.globalToken
-        }).then(response => this.$emit('close-create-selection', response.data))
+        }).then(response => {
+          let data = response.data.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at))
+          this.$emit('close-create-selection', data)
+        })
       }
 
       this.compilation.title === '' ? this.validation.title = true : this.validation.title = false
