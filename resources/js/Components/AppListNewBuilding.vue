@@ -338,7 +338,7 @@ import { Link } from '@inertiajs/inertia-vue3'
             </div>
           </div>
           <div class="flex flex-col text-[#1E1D2D] p-5 xxl-4 xl:p-3 leading-none">
-            <span v-on:click="openHouse('/house/' + item.slug)"  class="hover__title-block transition-all font-semibold text-xl xxl:text-base xl:text-sm md:text-[17px]" preserve-scroll>{{ item.title }}</span>
+            <Link :href="'/house/' + item.slug"  class="hover__title-block transition-all font-semibold text-xl xxl:text-base xl:text-sm md:text-[17px]">{{ item.title }}</Link>
             <span class="text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">от {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} €</span>
           </div>
         </div>
@@ -661,6 +661,11 @@ export default {
           .catch(e => console.log(e))
     } else {
       this.readyHouses = this.houses
+
+      axios.get('/api/house/getHousesJk').then(res => {
+        this.readyHouses = res.data;
+        this.updateHouses();
+      })
     }
 
     let date = new Date(),
@@ -706,11 +711,6 @@ export default {
         this.openSelectCity = false
       }
     });
-
-    axios.get('/api/house/getHousesJk').then(res => {
-      this.readyHouses = res.data;
-      this.updateHouses();
-    })
   },
   beforeDestroy() {
   },
