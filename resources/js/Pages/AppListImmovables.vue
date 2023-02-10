@@ -62,6 +62,7 @@ import AppNewsDeveloper from "../Components/AppNewsDeveloper.vue"
 import AppModalNotification from "../Layouts/modal/AppModalNotification.vue"
 import AppAddSelections from "@/Layouts/modal/AppAddSelections.vue"
 import AppImmovablesCreateSelection from "@/Layouts/modal/AppImmovablesCreateSelection.vue"
+import { router } from '@inertiajs/vue3'
 import {usePage} from "@inertiajs/inertia-vue3";
 import {computed} from "vue";
 

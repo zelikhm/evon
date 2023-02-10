@@ -224,8 +224,6 @@ class HouseController extends Controller
 
     $house->images_reload = $this->getPhotos($house);
 
-//    dd($house);
-
     if($house->info === null) {
       return redirect(404);
     }

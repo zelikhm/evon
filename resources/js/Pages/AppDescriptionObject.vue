@@ -282,7 +282,7 @@ export default {
         house_id: this.house.id,
         token: this.user.token
       })
-    }
+    },
   },
   mounted() {
 
@@ -309,8 +309,6 @@ export default {
         }
       }
     }
-
-    console.log(this.arrayInfos);
 
     if (this.house.info.dop !== null) {
       let dop = this.house.info.dop.replace(/[^\d]/g, ' '),
