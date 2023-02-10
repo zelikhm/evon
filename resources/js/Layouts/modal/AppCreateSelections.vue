@@ -1,6 +1,6 @@
 <template>
   <div v-if="openSelection" class="fixed flex justify-end z-[100] top-0 ring-0 w-full h-full">
-    <div :class="{'translate__x__0': openSideBar}" class="transition-all ease-linear duration-500 flex flex-col relative z-50 w-[50%] lg:w-[64%] sm:w-full translate-x-full h-full bg-white px-28 xxl:px-24 xl:px-20 lg:px-10 sm:px-5 py-14 xxl:py-10 xl:py-8 lg:py-5">
+    <div :class="{'translate__x__0': openSideBar}" class="transition-all ease-linear duration-500 flex flex-col relative z-50 w-[50%] lg:w-[64%] sm:w-full translate-x-full h-[100vh] bg-white px-28 xxl:px-24 xl:px-20 lg:px-10 sm:px-5 py-14 xxl:py-10 xl:py-8 lg:py-5">
       <div class="relative mb-10 xxl:mb-8 xl:mb-6">
         <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold">Редактирование подборки</h2>
         <button @click="closeModal" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
@@ -8,7 +8,7 @@
           <div class="absolute h-[1px] w-4 -rotate-45"></div>
         </button>
       </div>
-      <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 chat__container--flex">
+      <div class="flex flex-col h-[100vh] gap-5 xxl:gap-4 xl:gap-3 chat__container--flex overflow-y-auto custom__scroll--chess">
         <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none">Данные</h3>
         <div :class="{ 'validation': validation.title }" class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
           <label :class="{ 'validation-text': validation.title }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name">Название</label>
@@ -23,7 +23,7 @@
           <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="chekbox">показывать ЖК и его месторасположение</label>
         </div>
         <div class="text-[#1E1D2D] font-medium text-[18px] xxl:text-[15px] xl:text-[13px] mb-4 xxl:mb-3 xl:mb-2.5">ЖК ({{ JKlist.length }})</div>
-        <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 mb-8 xxl:mb-6 xl:mb-5 overflow-y-auto max-h-64 xxl:max-h-80 xl:max-h-96 custom__scroll-grey">
+        <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 mb-8 xxl:mb-6 xl:mb-5 overflow-y-auto custom__scroll-grey">
           <div
             class="contact__selling p-2.5 xxl:p-2 xl:p-1.5 rounded-[10px]"
             v-for="JK in JKlist"
