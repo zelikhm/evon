@@ -9,6 +9,7 @@
                       @close-add-selection="openAddSelection = false"
                       :house="house"
                       :compilation="readyCompilation"
+                      :user="user"
   />
   <app-immovables-create-selection
       :user="user"
@@ -34,6 +35,7 @@
           :user="user"
           :city="city"
           :builders="builders"
+          :count_houses="count_houses"
         />
         <app-news-developer
             class="block lg:hidden"
@@ -72,7 +74,8 @@ export default {
     builders: [],
     compilation: [],
     adminNews: [],
-    news: []
+    news: [],
+    count_houses: 0,
   },
   data() {
     return {
@@ -89,7 +92,6 @@ export default {
   methods: {
     updateCompilation(data) {
       this.readyCompilation.push(data)
-      console.log(this.readyCompilation)
     },
     openCreateSel(title) {
       this.openCreateSelection = true

@@ -101,7 +101,6 @@ export default {
     AppModalProfile,
   },
   created() {
-    console.log(this.user)
     this.userValue.name = this.user.first_name
     this.userValue.email = this.user.email
     this.userValue.tel = this.user.phone

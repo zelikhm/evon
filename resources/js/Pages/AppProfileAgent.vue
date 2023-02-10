@@ -160,7 +160,6 @@ export default {
     saveEdit() {
 
       let formData = new FormData()
-      console.log(this.$refs.user_avatar.files[0])
 
       formData.append('user_id', this.user.id)
       formData.append('first_name', this.profile.name)
@@ -193,7 +192,7 @@ export default {
       formDataAgency.append('title', this.titleCompany)
       formDataAgency.append('banner', this.banner)
       formDataAgency.append('image', this.user_avatar)
-      formDataAgency.append('token', this.globalToken)
+      formDataAgency.append('token', this.user.token)
 
     }
   },

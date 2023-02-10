@@ -24,7 +24,7 @@
         <div class="flex items-center justify-between sm:flex-col sm:items-start sm:gap-2">
           <div class="flex flex-col sm:gap-3">
             <div class="flex items-center sm:flex-col sm:items-start gap-5 xxl:gap-4 xl:gap-3">
-              <span class="font-semibold text-xl xxl:text-lg xl:text-sm lg:text-[18px]">{{ house.title }}</span>
+              <span class="font-semibold text-xl xxl:text-lg xl:text-sm lg:text-[18px]">{{ compilation.isVisible === 1 ? house.title : `Лот №${house.id + 10000}` }}</span>
               <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px]">
                 <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="house.created && !Number.isInteger(+house.created[0])">{{ house.created }}</span>
                 <span class="flex items-center justify-center uppercase border border-solid border-[#E84680] h-fit text-[#E84680] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-else-if="house.created">{{ house.created }}</span>
@@ -33,7 +33,7 @@
                 <span class="flex items-center justify-center text-white font-semibold bg-[#E84646] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="house.visible >= 50">популярное</span>
               </div>
             </div>
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">{{ house.city }}, {{ house.area }}</span>
+            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]" v-if="compilation.isVisible === 1">{{ house.city }}, {{ house.area }}</span>
           </div>
           <div class="flex items-center gap-1.5 xxl:gap-1 xl:gap-0.5">
             <img src="../../assets/svg/reload_icon.svg" class="h-4 xx:h-3.5 xl:h-3" alt="reload">
@@ -299,7 +299,7 @@
               </div>
             </div>
           </div>
-          <GMapMap v-if="house.visible === 1" :center="center" :zoom="15" map-type-id="terrain" class="w-full h-[18vw] lg:h-[28vw] sm:h-[36vw] rounded-[10px] mb-10" :draggable="true" @click="handleClick"  ref="myMapRef" :click="true">
+          <GMapMap v-if="house.visible === 1 && compilation.isVisible === 1" :center="center" :zoom="15" map-type-id="terrain" class="w-full h-[18vw] lg:h-[28vw] sm:h-[36vw] rounded-[10px] mb-10" :draggable="true" @click="handleClick"  ref="myMapRef" :click="true">
             <GMapMarker :key="index" v-for="(m, index) in markers" :icon="'/images/icon-marker-map.svg'" :position="m.position" :clickable="true" :draggable="true">
             </GMapMarker>
           </GMapMap>

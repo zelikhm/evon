@@ -44,7 +44,8 @@ Route::prefix('house')->group(function () {
   Route::post('delete', ['App\Http\Controllers\House\HouseController', 'delete']);
   //
   Route::post('getHouseApi', ['App\Http\Controllers\House\HouseController', 'getHouseApi']);
-  Route::get('getHousesJk', ['App\Http\Controllers\House\HouseController', 'getHousesApi']);
+  Route::get('getHousesJk', ['App\Http\Controllers\House\HouseController', 'getHousesJk']);
+  Route::get('getHousesVillages', ['App\Http\Controllers\House\HouseController', 'getHousesVillages']);
   //
   Route::post('search', ['App\Http\Controllers\House\HouseController', 'search']);
 });

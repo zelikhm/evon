@@ -24,9 +24,9 @@
         <span v-if="success" style="color: green;">Жилищный комплекс {{ house.title }} успешно добавлен в подборку {{ activeNameCompilation }}!</span>
         <div class="mt-2 main__title-block border border-solid border-[#E5DFEE] rounded-[5px] pl-5 xxl:pl-4 xl:pl-3 py-5 xxl:py-4 xl:py-3 pr-1 text-[16px] xxl:text-[14px] xl:text-[12px]">
           <div class="flex flex-col h-[40vh] overflow-y-auto custom__scroll--chess pr-4 xxl:pr-3 xl:pr-2 gap-2.5 xxl:gap-2 xl:gap-1.5">
-            <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]" v-for="item in readyCompilation">
+            <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]" v-for="(item, index) in readyCompilation">
               <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                <div class="flex" @click="selectCompilation(item)">
+                <div class="flex" @click="selectCompilation(item, index)">
                   <input :id="'name' + item.id" type="radio" name="selections" class="custom__checkbox">
                   <label :for="'name' + item.id"></label>
                 </div>
@@ -59,11 +59,8 @@
 </template>
 
 <script>
-  import { computed } from 'vue'
-  import { usePage } from '@inertiajs/vue3'
-
-export default {
-  props: ['compilation', 'house'],
+  export default {
+  props: ['compilation', 'house', 'user'],
   data() {
     return {
       buttonSelection: true,
@@ -73,7 +70,7 @@ export default {
       success: false,
       activeNameCompilation: null,
       readyCompilation: null,
-      user: computed(() => usePage().props.auth.user),
+      index: 0,
     }
   },
   emits: ['close-add-selection', 'open-create-sel'],
@@ -86,9 +83,10 @@ export default {
       this.createSelection = false
       this.buttonSelection = true
     },
-    selectCompilation(item) {
+    selectCompilation(item, index) {
       this.idCompilation = item.id
       this.activeNameCompilation = item.title
+      this.index = index
     },
     addSelection() {
       if (this.idCompilation === null) {
@@ -101,6 +99,8 @@ export default {
           token: this.user.token
         }).then(response => {
           this.success = true
+
+          this.readyCompilation[this.index].houses = response.data.houses;
         })
       }
     }

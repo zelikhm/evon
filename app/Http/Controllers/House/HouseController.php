@@ -68,7 +68,14 @@ class HouseController extends Controller
 
   public function index(Request $request)
   {
-    $houses = $this->getAllHouse('Новостройка');
+    $houses = $this->getAllHouse('Новостройка', true);
+
+    $count = HouseModel::where('visible', 1)
+      ->where('active', 2)
+      ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
+      ->select('house_models.*')
+      ->where('house_characteristics_models.type', 'Новостройка')
+      ->count();
 
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
@@ -81,6 +88,7 @@ class HouseController extends Controller
       'news' => $this->getNewsForPage(),
       'adminNews' => $this->getAdminNews(),
       'user' => Auth::user(),
+      'count_houses' => $count,
     ]);
   }
 
@@ -91,7 +99,7 @@ class HouseController extends Controller
 
   public function villages() {
 
-    $houses = $this->getAllHouse('Виллы');
+    $houses = $this->getAllHouse('Виллы', false);
 
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
@@ -155,7 +163,7 @@ class HouseController extends Controller
   }
 
   /**
-   * get houses in api
+   * get jk houses in api
    * @param Request $request
    * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
    */
@@ -163,7 +171,23 @@ class HouseController extends Controller
   public function getHousesJk(Request $request)
   {
     if($this->checkToken($request->token)) {
-      return $this->getAllHouse('Новостройка');
+      return $this->getAllHouse('Новостройка', false);
+    } else {
+      return response()->json('not auth', 401);
+    }
+
+  }
+
+  /**
+   * get villages in api
+   * @param Request $request
+   * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+   */
+
+  public function getHousesVillages(Request $request)
+  {
+    if($this->checkToken($request->token)) {
+      return $this->getAllHouse('Виллы', false);
     } else {
       return response()->json('not auth', 401);
     }

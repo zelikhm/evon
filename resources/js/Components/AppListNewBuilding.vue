@@ -3,6 +3,13 @@ import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
+  <app-modal-notification
+    class="left-[2vw] transition-all duration-1000"
+    :class="{'-left__full': !openNotification}"
+    @close-notification="openNotification = false"
+    :text="text"
+  />
+
   <div class="grid__list-new-build">
     <div
       class="sticky top-[2vw] filter__left lg:absolute lg:z-40 lg:top-0 transition-all duration-500 w-full bg-[#F6F3FA] rounded-[6px] h-fit"
@@ -247,7 +254,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         <div class="flex justify-between md:flex-col md:gap-3 items-center">
           <div class="flex flex-col items-start lg:gap-2">
             <h2 class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] lg:text-[20px] whitespace-nowrap text-center">{{ isSearch }}</h2>
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center">Найдено {{ readyHouses.length }} шт.</span>
+            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center">Найдено {{ count_houses }} шт.</span>
           </div>
           <div class="flex items-center md:flex-col gap-8 xxl:gap-6 xl:gap-5 md:gap-3">
             <div v-if="!map" class="relative">
@@ -394,7 +401,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
         </div>
       </div>
-      <div class="w-full flex justify-center mb-14 xxl:mb-10 xl:mb-8" @click="nextShow()" v-if="houses.length > count && !map">
+      <div class="w-full flex justify-center mb-14 xxl:mb-10 xl:mb-8" @click="nextShow()" v-if="readyHouses.length > count && !map">
         <button class="more__button transition-all text-[#E84680] border border-solid border-[#E84680] text-base xxl:text-sm xl:text-xs lg:text-[15px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2.5 xl:py-1.5 rounded-[3px]">Показать еще</button>
       </div>
       <app-map @open-add-selections="openAddSelections" v-if="map" :houses="houses" :user="user"  />
@@ -406,7 +413,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 import AppMap from "@/Components/AppMap.vue"
 
 import Multiselect from '@vueform/multiselect'
-
+import AppModalNotification from "../Layouts/modal/AppModalNotification.vue"
 export default {
   props: {
     houses: [],
@@ -421,6 +428,7 @@ export default {
       required: false,
       default: 0,
     },
+    count_houses: 0,
   },
   emits: ['open-filter', 'open-add-selections' ,'close-filter'],
   data() {
@@ -495,6 +503,8 @@ export default {
       openFilt: false,
       houses_array: [],
       count: 30,
+      text: '',
+      openNotification: false,
     }
   },
   methods: {
@@ -506,6 +516,12 @@ export default {
         user_id: this.user.id,
         house_id: item.id,
         token: this.user.token
+      }).then(res => {
+        this.openNotification = true
+        this.text = 'Обьект добавлен в избранное'
+        setTimeout(() => {
+          this.openNotification = false
+        }, 2000)
       })
       item.favorite = true
     },
@@ -514,6 +530,12 @@ export default {
         user_id: this.user.id,
         house_id: item.id,
         token: this.user.token
+      }).then(res => {
+        this.openNotification = true
+        this.text = 'Обьект удален из избранного'
+        setTimeout(() => {
+          this.openNotification = false
+        }, 2000)
       })
       item.favorite = false
     },
@@ -609,12 +631,12 @@ export default {
       this.splitHouses();
     },
     splitHouses() {
-      this.houses_array = JSON.parse(JSON.stringify(this.readyHouses)).splice(0, this.count);
+      this.houses_array = JSON.parse(JSON.stringify(this.readyHouses.sort((a, b) => b.created_at - a.created_at))).splice(0, this.count);
     },
     nextShow() {
       this.count += 30;
 
-      this.houses_array = JSON.parse(JSON.stringify(this.readyHouses)).splice(0, this.count);
+      this.houses_array = JSON.parse(JSON.stringify(this.readyHouses.sort((a, b) => b.created_at - a.created_at))).splice(0, this.count);
     }
   },
   created() {
@@ -679,12 +701,18 @@ export default {
         this.openSelectCity = false
       }
     });
+
+    axios.get('/api/house/getHousesJk').then(res => {
+      this.readyHouses = res.data;
+      this.updateHouses();
+    })
   },
   beforeDestroy() {
   },
   components: {
     AppMap,
     Multiselect,
+    AppModalNotification,
   }
 }
 </script>

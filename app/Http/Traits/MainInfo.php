@@ -299,15 +299,27 @@ trait MainInfo
    * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
    */
 
-  protected function getAllHouse($type)
+  protected function getAllHouse($type, $limit)
   {
-    $houses = HouseModel::where('visible', 1)
-      ->where('active', 2)
-      ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
-      ->select('house_models.*')
-      ->where('house_characteristics_models.type', $type)
-      ->with(['info', 'supports', 'files', 'frames', 'images', 'flats', 'user', 'news'])
-      ->get();
+    if($limit) {
+      $houses = HouseModel::where('visible', 1)
+        ->where('active', 2)
+        ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
+        ->select('house_models.*')
+        ->where('house_characteristics_models.type', $type)
+        ->with(['info', 'supports', 'files', 'frames', 'images', 'flats', 'user', 'news'])
+        ->orderBy('created_at', 'DESC')
+        ->limit(30)
+        ->get();
+    } else {
+      $houses = HouseModel::where('visible', 1)
+        ->where('active', 2)
+        ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
+        ->select('house_models.*')
+        ->where('house_characteristics_models.type', $type)
+        ->with(['info', 'supports', 'files', 'frames', 'images', 'flats', 'user', 'news'])
+        ->get();
+    }
 
     foreach ($houses as $house) {
       $house->image = $this->getPhoto($house);

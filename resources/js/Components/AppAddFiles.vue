@@ -95,7 +95,7 @@ export default {
           this.files.splice(idx, 1)
           axios.post('/api/house/deletedFile', {
             fileName: input.name,
-            house_id: this.house.id
+            house_id: this.house.id,
             token: this.user.token
           })
         }

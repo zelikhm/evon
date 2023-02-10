@@ -99,14 +99,6 @@ export default {
       })
     },
     createCompilation() {
-      console.log({
-        user_id: this.user.id,
-        id: this.itemCompilation.id,
-        title: this.compilation.title,
-        description: this.compilation.description,
-        isVisible: this.compilation.isVisible,
-        token: this.user.token
-      })
       if (this.compilation.title) {
         axios.post('/api/compilation/edit', {
           user_id: this.user.id,
@@ -124,16 +116,12 @@ export default {
       this.compilation.title === '' ? this.validation.title = true : this.validation.title = false
       this.compilation.description === '' ? this.validation.description = true : this.validation.description = false
 
-      this.compilation.title = ''
-      this.compilation.description = ''
-      this.compilation.isVisible = false
     },
     validationCheck(id) {
       if (id === 0) this.compilation.title.length > 0 ? this.validation.title = false : this.validation.title = true
       else if (id === 1) this.compilation.description.length > 0 ? this.validation.description = false : this.validation.description = true
     },
     fillInput() {
-      console.log(this.compilation)
       if (this.itemCompilation) {
         this.compilation.title = this.itemCompilation.title
         this.compilation.description = this.itemCompilation.description
