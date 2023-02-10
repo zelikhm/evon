@@ -8,7 +8,7 @@ import { Link } from "@inertiajs/inertia-vue3";
     <h2 class="text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none font-semibold pb-7 xxl:pb-5 xl:pb-4">Другие ЖК в районе {{ house.area }}</h2>
     <div class="grid grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3">
 
-      <Link :href="'/house/' + item.slug" class="flex flex-col" v-for="item in slider">
+      <a target="_blank" :href="'/house/' + item.slug" class="flex flex-col" v-for="item in slider">
         <div class="object__block relative h-[300px] exl:h-[15.6vw] xl:h-[19.5vw] lg:h-[25vw] md:h-[38vw] sm:h-[64vw]">
           <img v-if="item.image" :src="item.image" class="w-full h-full object-cover rounded-[8px]" alt="">
           <img v-else src="../../assets/no-img-house.jpg" class="w-full h-full object-cover rounded-[8px]" alt="">
@@ -27,7 +27,7 @@ import { Link } from "@inertiajs/inertia-vue3";
             <span class="leading-none">{{ Number.isInteger(item.minSquare) ? item.minSquare : "-" }} м² - {{ Number.isInteger(item.maxSquare) ? item.maxSquare : "-" }} м²</span>
           </div>
         </div>
-      </Link>
+      </a>
     </div>
   </div>
 </template>

@@ -1,14 +1,14 @@
 <template>
   <div v-if="openSelection" class="fixed flex justify-end z-[100] top-0 ring-0 w-full h-full">
-    <div :class="{'translate__x__0': openSideBar}" class="transition-all ease-linear duration-500 flex flex-col relative z-50 w-[50%] lg:w-[64%] sm:w-full translate-x-full h-full bg-white px-28 xxl:px-24 xl:px-20 lg:px-10 sm:px-5 py-14 xxl:py-10 xl:py-8 lg:py-5">
+    <div :class="{'translate__x__0': openSideBar}" class="transition-all ease-linear duration-500 flex flex-col relative z-50 w-[50%] lg:w-[64%] sm:w-full translate-x-full h-[100vh] bg-white px-28 xxl:px-24 xl:px-20 lg:px-10 sm:px-5 py-14 xxl:py-10 xl:py-8 lg:py-5">
       <div class="relative mb-10 xxl:mb-8 xl:mb-6">
         <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold">Редактирование подборки</h2>
-        <button @click="$emit('close-selection')" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
+        <button @click="closeModal" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
           <div class="absolute h-[1px] w-4 rotate-45"></div>
           <div class="absolute h-[1px] w-4 -rotate-45"></div>
         </button>
       </div>
-      <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 chat__container--flex">
+      <div class="flex flex-col h-[100vh] gap-5 xxl:gap-4 xl:gap-3 chat__container--flex overflow-y-auto custom__scroll--chess">
         <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none">Данные</h3>
         <div :class="{ 'validation': validation.title }" class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
           <label :class="{ 'validation-text': validation.title }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name">Название</label>
@@ -22,11 +22,11 @@
           <input v-model="compilation.isVisible" class="custom__checkbox" type="checkbox" id="chekbox">
           <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="chekbox">показывать ЖК и его месторасположение</label>
         </div>
-        <div class="text-[#1E1D2D] font-medium text-[18px] xxl:text-[15px] xl:text-[13px] mb-4 xxl:mb-3 xl:mb-2.5">ЖК ({{ compilation.JK.length }})</div>
-        <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 mb-8 xxl:mb-6 xl:mb-5 overflow-y-auto max-h-64 xxl:max-h-80 xl:max-h-96 custom__scroll-grey">
+        <div class="text-[#1E1D2D] font-medium text-[18px] xxl:text-[15px] xl:text-[13px] mb-4 xxl:mb-3 xl:mb-2.5">ЖК ({{ JKlist.length }})</div>
+        <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 mb-8 xxl:mb-6 xl:mb-5 overflow-y-auto custom__scroll-grey">
           <div
             class="contact__selling p-2.5 xxl:p-2 xl:p-1.5 rounded-[10px]"
-            v-for="JK in compilation.JK"
+            v-for="JK in JKlist"
           >
             <div class="flex justify-between items-center mb-3 xxl:mb-2.5 xl:mb-2">
               <div class="flex gap-5 xxl:gap-4 xl:gap-3 items-center">
@@ -51,10 +51,10 @@
       </div>
       <div class="grid grid-cols-2 gap-8 xxl:gap-6 xl:gap-5">
         <button @click="createCompilation" class="login__btn--bg text-white text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Сохранить</button>
-        <button @click="$emit('close-selection')" class="bg-litepink text-[#E84680] text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Отменить</button>
+        <button @click="closeModal" class="bg-litepink text-[#E84680] text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Отменить</button>
       </div>
     </div>
-    <div @click="$emit('close-selection')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
+    <div @click="closeModal" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
   </div>
 </template>
 
@@ -74,7 +74,9 @@ export default {
         title: false,
         description: false
       },
-      JK: []
+      JK: [],
+      JKlist: [],
+      arrDelJK: []
     }
   },
   emits: ['close-create-selection', 'close-selection'],
@@ -86,19 +88,26 @@ export default {
       JK.openInput = false
     },
     deleteJK(item) {
-      axios.post('/api/compilation/deleteHouse', {
-        token: this.user.token,
-        compilation_id: this.itemCompilation.id,
-        house_id: item.id
-      })
-
-      this.compilation.JK.forEach((i, idx) => {
+      this.JKlist.forEach((i, idx) => {
         if (i.house.id === item.id) {
-          this.compilation.JK.splice(idx, 1)
+          this.JKlist.splice(idx, 1)
+          this.arrDelJK.push(item.id)
         }
       })
+      console.log(this.JKlist)
+      console.log(this.itemCompilation.values)
     },
     createCompilation() {
+      if (this.arrDelJK.length > 0) {
+        this.arrDelJK.forEach(item => {
+          axios.post('/api/compilation/deleteHouse', {
+            token: this.user.token,
+            compilation_id: this.itemCompilation.id,
+            house_id: item
+          })
+        })
+      }
+
       if (this.compilation.title) {
         axios.post('/api/compilation/edit', {
           user_id: this.user.id,
@@ -116,6 +125,8 @@ export default {
       this.compilation.title === '' ? this.validation.title = true : this.validation.title = false
       this.compilation.description === '' ? this.validation.description = true : this.validation.description = false
 
+      this.arrDelJK = []
+
     },
     validationCheck(id) {
       if (id === 0) this.compilation.title.length > 0 ? this.validation.title = false : this.validation.title = true
@@ -126,12 +137,18 @@ export default {
         this.compilation.title = this.itemCompilation.title
         this.compilation.description = this.itemCompilation.description
         this.compilation.isVisible = this.itemCompilation.isVisible === 1 ? true : false
-        this.compilation.JK = this.itemCompilation.values
       }
+    },
+    closeModal() {
+      this.$emit('close-selection')
+      this.arrDelJK = []
+      this.JKlist = this.itemCompilation.values.slice(0)
     }
   },
   created() {
     this.fillInput()
+
+    this.JKlist = this.itemCompilation.values.slice(0)
   },
 }
 </script>
