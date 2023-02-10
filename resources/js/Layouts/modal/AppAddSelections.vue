@@ -59,6 +59,9 @@
 </template>
 
 <script>
+  import { computed } from 'vue'
+  import { usePage } from '@inertiajs/vue3'
+
 export default {
   props: ['compilation', 'house'],
   data() {
@@ -69,7 +72,8 @@ export default {
       idCompilation: null,
       success: false,
       activeNameCompilation: null,
-      readyCompilation: null
+      readyCompilation: null,
+      user: computed(() => usePage().props.auth.user),
     }
   },
   emits: ['close-add-selection', 'open-create-sel'],
@@ -94,9 +98,8 @@ export default {
           compilation_id: this.idCompilation,
           house_id: this.house.id,
           description: '',
-          token: this.globalToken
+          token: this.user.token
         }).then(response => {
-          console.log(response.data)
           this.success = true
         })
       }

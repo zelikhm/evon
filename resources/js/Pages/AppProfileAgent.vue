@@ -170,7 +170,7 @@ export default {
       formData.append('description', this.profile.description)
       formData.append('image', this.$refs.user_avatar.files[0])
       formData.append('email', this.profile.email)
-      formData.append('token', this.globalToken)
+      formData.append('token', this.user.token)
 
 
       axios({

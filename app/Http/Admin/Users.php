@@ -128,7 +128,14 @@ class Users extends Section implements Initializable
 
       AdminFormElement::select('company_id', 'Компания')->setModelForOptions(CompanyModel::class),
 
-      AdminFormElement::image('image', 'Изображение'),
+      AdminFormElement::image('image', 'Изображение')->setUploadPath(function(\Illuminate\Http\UploadedFile $file) {
+        return '/storage/user';
+      })->setSaveCallback(function ($file, $path, $filename, $settings) use ($id) {
+
+        $file->move(public_path('/storage/user'), $filename);
+
+        return ['path' => '/storage/user/' . $filename, 'value' => '/storage/user/' . $filename];
+      }),
 
 
     ]);

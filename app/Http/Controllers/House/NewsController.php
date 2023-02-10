@@ -4,6 +4,7 @@ namespace App\Http\Controllers\House;
 
 use App\Http\Admin\House\HouseNews;
 use App\Http\Controllers\Controller;
+use App\Http\Traits\AuthCheck;
 use App\Http\Traits\MainInfo;
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\HouseNewsModel;
@@ -14,6 +15,7 @@ use Inertia\Inertia;
 class NewsController extends Controller
 {
   use MainInfo;
+  use AuthCheck;
 
   /**
    * render page
@@ -116,7 +118,7 @@ class NewsController extends Controller
    */
 
   public function add(Request $request) {
-    if($request->token === env('TOKEN')) {
+    if($this->checkToken($request->token)) {
       $news = HouseNewsModel::create([
         'house_id' => $request->house_id,
         'title' => $request->title,
@@ -136,7 +138,7 @@ class NewsController extends Controller
    */
 
   public function edit(Request $request) {
-    if($request->token === env('TOKEN')) {
+    if($this->checkToken($request->token)) {
       $new = HouseNewsModel::where('id', $request->new_id)
         ->update([
           'house_id' => $request->house_id,
@@ -157,7 +159,7 @@ class NewsController extends Controller
    */
 
   public function delete(Request $request) {
-    if($request->token === env('TOKEN')) {
+    if($this->checkToken($request->token)) {
       HouseNewsModel::where('id', $request->new_id)
         ->delete();
 
@@ -174,7 +176,7 @@ class NewsController extends Controller
    */
 
   public function visible(Request $request) {
-    if($request->token === env('TOKEN')) {
+    if($this->checkToken($request->token)) {
       $new = HouseNewsModel::where('id', $request->new_id)
         ->update([
           'visible' => $request->visible

@@ -169,6 +169,9 @@
 </template>
 
 <script>
+  import { computed } from 'vue'
+  import { usePage } from '@inertiajs/vue3'
+
 export default {
   props: ['house', 'activeFrame', 'selectFlat'],
   data() {
@@ -231,6 +234,7 @@ export default {
       imageLoadTwo: false,
       imageTwo: '',
       isBorder: 0,
+      user: computed(() => usePage().props.auth.user)
     }
   },
   methods: {
@@ -245,7 +249,6 @@ export default {
 
       this.flat.image_up = e.target.files[0]
       this.selectFlat.image_up = e.target.files[0]
-      console.log(this.flat.image_up)
     },
     addImageTwo(e) {
       this.imageTwo = URL.createObjectURL(e.target.files[0])
@@ -255,7 +258,6 @@ export default {
 
       this.flat.image_down = e.target.files[0]
       this.selectFlat.image_down = e.target.files[0]
-      console.log(this.flat.image_down)
     },
     deleteImageOne() {
       this.imageOne = ''

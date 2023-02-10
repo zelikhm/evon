@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\AuthCheck;
+use App\Http\Traits\MainInfo;
 use App\Models\Builder\HouseSupportModel;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
 {
+
+  use AuthCheck;
 
   /**
    * get user
@@ -18,9 +22,9 @@ class IndexController extends Controller
 
   public function get(Request $request)
   {
-    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
 
-      return User::where('id', $request->user_id)
+      return User::where('token', $request->token)
         ->with(['company'])
         ->first();
 
@@ -38,7 +42,7 @@ class IndexController extends Controller
 
   public function edit(Request $request)
   {
-    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
 
       if($request->image !== 'undefined') {
         $imageName = time() . '.' . $request->image->getClientOriginalName();
@@ -60,53 +64,11 @@ class IndexController extends Controller
       ]);
 
       return response()->json(User::where('id', $request->user_id)->first(), 200);
+
     } else {
+
       return response()->json('not auth', 401);
-    }
-  }
 
-  /**
-   * added company for user
-   * @param Request $request
-   * @return \Illuminate\Http\JsonResponse
-   */
-
-  public function addedCompany(Request $request)
-  {
-//    if ($request->token === env('TOKEN')) {
-      User\CompanyModel::create([
-        'user_id' => $request->user_id,
-        'title' => $request->title,
-        'image' => $request->image,
-        'banner' => $request->banner
-      ]);
-
-      return response()->json(true, 200);
-//    } else {
-//      return response()->json('not auth', 401);
-//    }
-  }
-
-  /**
-   * edit company for user
-   * @param Request $request
-   * @return \Illuminate\Http\JsonResponse
-   */
-
-  public function editCompany(Request $request)
-  {
-    if ($request->token === env('TOKEN')) {
-      User\CompanyModel::where('user_id', $request->user_id)
-        ->where('id', $request->id)
-        ->update([
-          'title' => $request->title,
-          'image' => $request->image,
-          'banner' => $request->banner,
-        ]);
-
-      return response()->json(true, 200);
-    } else {
-      return response()->json('not auth', 401);
     }
   }
 }

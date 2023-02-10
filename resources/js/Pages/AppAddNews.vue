@@ -110,7 +110,7 @@ export default {
           house_id: this.dataNews.house_id,
           title: this.dataNews.title,
           description: this.dataNews.description,
-          token: this.globalToken
+          token: this.user.token
         }).then(response => window.location.href = '/profile/news/')
       } else {
         console.log(this.new.id)
@@ -119,7 +119,7 @@ export default {
           new_id: this.idNews,
           title: this.dataNews.title,
           description: this.dataNews.description,
-          token: this.globalToken
+          token: this.user.token
         }).then(response => window.location.href = '/profile/news/')
       }
     },
@@ -134,7 +134,6 @@ export default {
     if (Number.isInteger(+link2.at(-1))) {
       this.dataNews.house_id = this.houses.find(item => item.id === this.new.house_id).id
       this.selectJK = this.houses.find(item => item.id === this.new.house_id).title
-      console.log(this.selectJK)
     } else {
       this.isCreate = true
     }
@@ -145,13 +144,12 @@ export default {
       this.dataNews.title = this.itemEdit.title
       this.dataNews.description = this.itemEdit.description
       this.idNews = this.itemEdit.id
-      console.log(this.itemEdit)
     }
 
     this.houses.forEach(item => {
-      if (item.active === 2) {
+      // if (item.active === 2) {
         this.selectHouse.push(item)
-      }
+      // }
     })
 
   },

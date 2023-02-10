@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\House;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\AuthCheck;
 use App\Http\Traits\MainInfo;
 use App\Models\Builder\Flat\FlatImagesModel;
 use App\Models\Builder\Flat\FlatModel;
@@ -29,6 +30,7 @@ use function Symfony\Component\Routing\Loader\Configurator\collection;
 class HouseController extends Controller
 {
   use MainInfo;
+  use AuthCheck;
 
   /**
    * search object for user
@@ -64,9 +66,8 @@ class HouseController extends Controller
    * @return \Inertia\Response
    */
 
-  public function index()
+  public function index(Request $request)
   {
-
     $houses = $this->getAllHouse('Новостройка');
 
     return Inertia::render('AppListImmovables', [
@@ -145,7 +146,12 @@ class HouseController extends Controller
 
   public function getHouseApi(Request $request)
   {
-    return $this->house($request->slug);
+    if($this->checkToken($request->token)) {
+      return $this->house($request->slug);
+    } else {
+      return response()->json('not auth', 401);
+    }
+
   }
 
   /**
@@ -154,9 +160,14 @@ class HouseController extends Controller
    * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
    */
 
-  public function getHousesApi(Request $request)
+  public function getHousesJk(Request $request)
   {
-    return $this->getAllHouse('Новостройка');
+    if($this->checkToken($request->token)) {
+      return $this->getAllHouse('Новостройка');
+    } else {
+      return response()->json('not auth', 401);
+    }
+
   }
 
   /**
@@ -187,12 +198,16 @@ class HouseController extends Controller
 
     $house = $this->getHouseSlug($slug);
 
+    $house->images_reload = $this->getPhotos($house);
+
+//    dd($house);
+
     if($house->info === null) {
       return redirect(404);
     }
 
     return Inertia::render('AppDescriptionObject', [
-      'house' => $this->getHouseSlug($slug),
+      'house' => $house,
       'dops' => $this->getDop(),
       'infos' => $this->getInfo(),
       'city' => $this->getCity(),
@@ -232,7 +247,7 @@ class HouseController extends Controller
 
   public function delete(Request $request)
   {
-    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
       HouseModel::where('id', $request->house_id)->delete();
       HouseViewsModel::where('house_id', $request->house_id)->delete();
       HouseImagesModel::where('house_id', $request->house_id)->delete();
@@ -257,7 +272,7 @@ class HouseController extends Controller
 
   public function create(Request $request)
   {
-    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
       if($request->floors && $request->count_flat) {
         $house = HouseModel::create([
           'user_id' => $request->user_id,
@@ -348,7 +363,7 @@ class HouseController extends Controller
   public function editHouse(Request $request)
   {
 
-    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
 
       $house = HouseModel::where('id', $request->house_id)
         ->update([
@@ -436,7 +451,7 @@ class HouseController extends Controller
 
   public function createFlat(Request $request)
   {
-    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
 
       if ($request->image_up) {
         $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
@@ -485,7 +500,7 @@ class HouseController extends Controller
 
   public function deletedFlat(Request $request)
   {
-    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
 
       FlatModel::where('id', $request->flat_id)->delete();
 
@@ -503,7 +518,7 @@ class HouseController extends Controller
 
   public function editFlat(Request $request)
   {
-    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
 
       if ($request->image_up === 'null') {
         $imageUp = null;
@@ -563,7 +578,7 @@ class HouseController extends Controller
 
   public function createFrame(Request $request)
   {
-    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
       FrameModel::create([
         'house_id' => $request->house_id,
         'name' => $request->name,
@@ -585,7 +600,7 @@ class HouseController extends Controller
 
   public function editFrame(Request $request)
   {
-    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
 
       FrameModel::where('id', $request->frame_id)
         ->update([
@@ -611,7 +626,7 @@ class HouseController extends Controller
 
   public function deleteFrame(Request $request)
   {
-    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
 
       FrameModel::where('id', $request->frame_id)->delete();
 
@@ -629,7 +644,7 @@ class HouseController extends Controller
 
   public function supports(Request $request)
   {
-//    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
 
     if ($request->avatar) {
       $imageName = time() . '.' . $request->avatar->getClientOriginalName();
@@ -651,10 +666,9 @@ class HouseController extends Controller
     ]);
 
     return response()->json(HouseSupportModel::where('house_id', $request->house_id)->get(), 200);
-//      }
-//    } else {
-//      return response()->json('not auth', 401);
-//    }
+    } else {
+      return response()->json('not auth', 401);
+    }
   }
 
   /**
@@ -666,28 +680,32 @@ class HouseController extends Controller
   public function editSupport(Request $request)
   {
 
-    if ($request->avatar !== 'not') {
-      $imageName = time() . '.' . $request->avatar->getClientOriginalName();
-      $request->avatar->move(public_path('/storage/support'), $imageName);
-      $imageName = '/storage/support/' . $imageName;
+    if($this->checkToken($request->token)) {
+      if ($request->avatar !== 'not') {
+        $imageName = time() . '.' . $request->avatar->getClientOriginalName();
+        $request->avatar->move(public_path('/storage/support'), $imageName);
+        $imageName = '/storage/support/' . $imageName;
+      } else {
+        $sup = HouseSupportModel::where('id', $request->id)->first();
+        $imageName = $sup->avatar;
+      }
+
+      HouseSupportModel::where('id', $request->id)
+        ->update([
+          'avatar' => $imageName,
+          'name' => $request->name,
+          'phone' => $request->phone,
+          'email' => $request->email,
+          'status' => $request->status,
+          'link' => $request->link,
+          'created_at' => Carbon::now()->addHour(3),
+          'updated_at' => Carbon::now()->addHour(3),
+        ]);
+
+      return response()->json(HouseSupportModel::where('house_id', $request->house_id)->get(), 200);
     } else {
-      $sup = HouseSupportModel::where('id', $request->id)->first();
-      $imageName = $sup->avatar;
+      return response()->json('not auth', 401);
     }
-
-    HouseSupportModel::where('id', $request->id)
-      ->update([
-        'avatar' => $imageName,
-        'name' => $request->name,
-        'phone' => $request->phone,
-        'email' => $request->email,
-        'status' => $request->status,
-        'link' => $request->link,
-        'created_at' => Carbon::now()->addHour(3),
-        'updated_at' => Carbon::now()->addHour(3),
-      ]);
-
-    return response()->json(HouseSupportModel::where('house_id', $request->house_id)->get(), 200);
 
   }
 
@@ -698,7 +716,17 @@ class HouseController extends Controller
 
   public function deleteSupport(Request $request)
   {
-    HouseSupportModel::where('id', $request->id)->delete();
+    if($this->checkToken($request->token)) {
+
+      HouseSupportModel::where('id', $request->id)->delete();
+      return response()->json(true, 205);
+
+    } else {
+
+      return response()->json('not auth', 401);
+
+    }
+
   }
 
   /**
@@ -708,7 +736,17 @@ class HouseController extends Controller
 
   public function clearSupport(Request $request)
   {
-    HouseSupportModel::where('house_id', $request->house_id)->delete();
+    if($this->checkToken($request->token)) {
+
+      HouseSupportModel::where('house_id', $request->house_id)->delete();
+      return response()->json(true, 205);
+
+    } else {
+
+      return response()->json('not auth', 401);
+
+    }
+
   }
 
   /**
@@ -719,7 +757,7 @@ class HouseController extends Controller
 
   public function get(Request $request)
   {
-    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
       $house = $this->getHouse($request->id);
 
       return response()->json($house, 200);
@@ -736,7 +774,7 @@ class HouseController extends Controller
 
   public function setVisible(Request $request)
   {
-    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
 
       HouseModel::where('id', $request->house_id)
         ->update([
@@ -758,8 +796,7 @@ class HouseController extends Controller
 
   public function addedFiles(Request $request)
   {
-//    if ($request->token === env('TOKEN')) {
-
+    if ($this->checkToken($request->token)) {
 
     $fileName = time() . '.' . $request->file('file')->getClientOriginalName();
     $request->file('file')->move(public_path('/storage/files'), $fileName);
@@ -771,10 +808,11 @@ class HouseController extends Controller
       'updated_at' => Carbon::now()->addHour(3),
     ]);
 
-    return response()->json($file, 200);
-//    } else {
-//      return response()->json('not auth', 401);
-//    }
+      return response()->json($file, 200);
+
+    } else {
+      return response()->json('not auth', 401);
+    }
   }
 
   /**
@@ -785,10 +823,14 @@ class HouseController extends Controller
 
   public function deletedFile(Request $request)
   {
+    if ($this->checkToken($request->token)) {
+      HouseFilesModel::where('name', $request->fileName)->delete();
 
-    HouseFilesModel::where('name', $request->fileName)->delete();
+      return response()->json(HouseFilesModel::where('house_id', $request->house_id)->get(), 200);
 
-    return response()->json(HouseFilesModel::where('house_id', $request->house_id)->get(), 200);
+    } else {
+      return response()->json('not auth', 401);
+    }
 
   }
 
@@ -801,7 +843,7 @@ class HouseController extends Controller
   public function addedImages(Request $request)
   {
 
-//    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
 
     $imageName = time() . '.' . $request->file('image')->getClientOriginalName();
     $request->file('image')->move(public_path('/storage/images'), $imageName);
@@ -814,10 +856,14 @@ class HouseController extends Controller
       'updated_at' => Carbon::now()->addHour(3),
     ]);
 
-    return response()->json($image, 200);
-//    } else {
-//      return response()->json('not auth', 401);
-//    }
+    HouseModel::where('id', $request->house_id)->update([
+      'active' => 0,
+    ]);
+
+      return response()->json($image, 200);
+    } else {
+      return response()->json('not auth', 401);
+    }
   }
 
   /**
@@ -829,14 +875,18 @@ class HouseController extends Controller
   public function deletedImage(Request $request)
   {
 
-//    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
 
-    HouseImagesModel::where('name', $request->image_name)->delete();
+      HouseImagesModel::where('name', $request->image_name)->delete();
 
-    return response()->json(HouseImagesModel::where('house_id', $request->house_id)->get(), 200);
-//    } else {
-//      return response()->json('not auth', 401);
-//    }
+      HouseModel::where('id', $request->house_id)->update([
+        'active' => 0,
+      ]);
+
+      return response()->json(HouseImagesModel::where('house_id', $request->house_id)->get(), 200);
+    } else {
+      return response()->json('not auth', 401);
+    }
 
   }
 

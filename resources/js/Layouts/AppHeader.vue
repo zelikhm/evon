@@ -43,7 +43,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
             <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
             <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
           </div>
-          <Link href="/" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
+          <Link href="/houses" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
             <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="Логотип">
             <span class="lg:hidden uppercase text-white text-lg xxl:text-sm xl:text-xs lg:text-sm font-semibold">Evon</span>
           </Link>
@@ -107,7 +107,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
             <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
             <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
           </div>
-          <Link href="/" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
+          <Link href="/profile/houses" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
             <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4" alt="Логотип">
             <span class="sm:hidden uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon</span>
           </Link>

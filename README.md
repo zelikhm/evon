@@ -42,7 +42,8 @@
 - 3 - Ход строительсва
 
 
-## Api (token - 6f8be2a8db029ec86bd40833acbbd0c5)
+## Api (token - 6f8be2a8db029ec86bd40833acbbd0c5) - старый single (заменен на jwt)
+## jwt token после успешного логина, меняется каждый раз (token) 
 
 Не используется изменение версий, статичный /api (Заголовок апи используется для указания директории после /api/)
 
@@ -51,9 +52,14 @@
 ### House 
 
 Получить все ЖК \ 
-path getHousesApi \ [get] / нет полей:
+path getHousesJk (новостройки) \ [get] / :
 
-- 
+- token
+
+Получить все Виллы \
+path getHousesVillages (виллы) \ [get] / :
+
+- token
 
 Поиск по обьектам \
 path search \ [post] / поля:
@@ -153,6 +159,7 @@ path editSupport \ [post] / поля:
 path deleteSupport \ [post] / поля:
 
 - id - айди саппорта
+- token
 
 Получение ЖК по ид \
 path get \ [post] / поля:
@@ -165,6 +172,7 @@ path createFrame \ [post] / поля:
 
 - house_id - айди жк
 - name - Название
+- token
 
 Редактирование корпуса \
 path editFrame \ [post] / поля:
@@ -222,6 +230,7 @@ path setVisible \ [post] / поля:
 
 - house_id - айди ЖК
 - visible - true\false - отображение\скрытие
+- token
 
 Удаление ЖК и всех связей \ 
 path delete \ [post] / поля:
@@ -235,24 +244,28 @@ path addedImages \ [post] / поля:
 - image - изображение
 - house_id - айди ЖК
 - category - айди категории (всего 4)
+- token
 
 Удаление изображение у ЖК \
 path deletedImage \ [post] / поля:
 
 - image_name - название изображения
 - house_id - айди жк
+- token
 
 Добавление файлов к обьекту ЖК) \
 path addedFiles \ [post] / поля:
 
 - file - файл
 - house_id - айди ЖК
+- token
 
 Удаление файла у обьекта ЖК \
 path deletedFile \ [post] / поля:
 
 - fileName - Название
 - house_id - Айди ЖК
+- token
 
 ### News
 
@@ -402,6 +415,17 @@ path reloadChat \ [post] / поля:
 - id
 
 ### User 
+
+Авторизация пользователя \
+path login \ [post] / поля:
+
+- email - если есть (застройщик)
+- phone - если есть (риелтор)
+- password - пароль (застройщик)
+
+Для риелтора смс-код после token
+Возврат token - 200 or 401 with status error
+
 
 Проверка юзера по емейлу (кроме риелтора)\
 path email \ [post] / поля:

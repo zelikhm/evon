@@ -299,7 +299,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
       <!--  Новостройки в виде таблицы -->
       <div v-if="!toggle && !map" class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3 mt-5 xxl:mt-4 xl:mt-3">
-        <div class="flex flex-col" v-for="(item, idx) in readyHouses" :key="item.id">
+        <div class="flex flex-col" v-for="(item, idx) in houses_array" :key="item.id">
           <div class="object__block relative z-10 h-[300px] exl:h-fit exl:h-[16vw] lg:h-[24vw] md:h-[36vw] sm:h-[56vw] rounded-[6px]">
           <img v-if="item.images.length > 0" :src="item.image" class="object-cover absolute -z-10 w-full h-full rounded-[6px]" alt="">
           <img v-else src="../../assets/no-img-houses.jpg" class="object-cover absolute -z-10 w-full h-full rounded-[6px]" alt="">
@@ -332,7 +332,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
           <div class="flex flex-col text-[#1E1D2D] p-5 xxl-4 xl:p-3 leading-none">
             <Link :href="'/house/' + item.slug" class="hover__title-block transition-all font-semibold text-xl xxl:text-base xl:text-sm md:text-[17px] ">{{ item.title }}</Link>
-            <span class="text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">от {{ Number.isInteger(item.minPrice) ? item.minPrice : "-" }} €</span>
+            <span class="text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">от {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} €</span>
           </div>
         </div>
 
@@ -340,7 +340,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
       <!--  Новостройки в виде списка -->
       <div v-if="toggle && !map" class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 mt-5 xxl:mt-4 xl:mt-3">
-        <div class="grid__75-25 border border-solid border-[#E5DFEE] rounded-[6px]" v-for="item in readyHouses">
+        <div class="grid__75-25 border border-solid border-[#E5DFEE] rounded-[6px]" v-for="item in houses_array">
           <div class="border__right md:border-r-0 md:border-b-[1px] border-solid border-[#E5DFEE]">
             <div class="grid__35-65 p-2.5 xxl:p-2 xl:p-1.5 h-full">
               <div class="relative object__block h-full">
@@ -384,7 +384,7 @@ import { Link } from '@inertiajs/inertia-vue3'
               <span class="uppercase border border-solid border-[#E84680] h-fit text-[#E84680] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1" v-else-if="item.created">{{ item.created }}</span>
             </div>
             <div class="flex flex-col gap-2.5 xxl:gap-1.5 xl:gap-1">
-              <span class="font-medium whitespace-nowrap text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] md:text-[17px] leading-none leading-none">от {{ Number.isInteger(item.minPrice) ? item.minPrice : "-" }} €</span>
+              <span class="font-medium whitespace-nowrap text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] md:text-[17px] leading-none leading-none">от {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} €</span>
               <span class="text-[#8A8996] whitespace-nowrap text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px]">{{ isNaN(item.minPrice / item.minSquare) ? "-" : Math.round(item.minPrice / item.minSquare) }} € за м²</span>
             </div>
             <div class="gray-backg flex items-center justify-center w-fit px-3 xxl:px-2.5 xl:px-2 gap-2 xxl:gap-1.5 xl:gap-1">
@@ -393,6 +393,9 @@ import { Link } from '@inertiajs/inertia-vue3'
             </div>
           </div>
         </div>
+      </div>
+      <div class="w-full flex justify-center mb-14 xxl:mb-10 xl:mb-8" @click="nextShow()" v-if="houses.length > count && !map">
+        <button class="more__button transition-all text-[#E84680] border border-solid border-[#E84680] text-base xxl:text-sm xl:text-xs lg:text-[15px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2.5 xl:py-1.5 rounded-[3px]">Показать еще</button>
       </div>
       <app-map @open-add-selections="openAddSelections" v-if="map" :houses="houses" :user="user"  />
     </div>
@@ -490,6 +493,8 @@ export default {
       openInfrastruktura: false,
       openDopServices: false,
       openFilt: false,
+      houses_array: [],
+      count: 30,
     }
   },
   methods: {
@@ -497,11 +502,10 @@ export default {
       this.isBorder = id
     },
     addFavorite(item) {
-      console.log(this.user.id)
       axios.post('/api/favorite/add', {
         user_id: this.user.id,
         house_id: item.id,
-        token: this.globalToken
+        token: this.user.token
       })
       item.favorite = true
     },
@@ -509,14 +513,13 @@ export default {
       axios.post('/api/favorite/deleted', {
         user_id: this.user.id,
         house_id: item.id,
-        token: this.globalToken
+        token: this.user.token
       })
       item.favorite = false
     },
     startFilter() {
       if (this.filters.toSea) {
         this.readyHouses = this.readyHouses.find(item => item.info.toSea >= this.filters.toSea)
-        console.log(this.readyHouses)
       }
     },
     changeDate(date) {
@@ -576,8 +579,6 @@ export default {
     updateHouses() {
       this.readyHouses.forEach(house => {
 
-        console.log(house)
-
         house.time = Date.parse(house.created_at)
         this.readyHouses = this.readyHouses.sort((a, b) => b.time - a.time)
 
@@ -604,6 +605,16 @@ export default {
           house.promotion = false
         })
       })
+
+      this.splitHouses();
+    },
+    splitHouses() {
+      this.houses_array = JSON.parse(JSON.stringify(this.readyHouses)).splice(0, this.count);
+    },
+    nextShow() {
+      this.count += 30;
+
+      this.houses_array = JSON.parse(JSON.stringify(this.readyHouses)).splice(0, this.count);
     }
   },
   created() {
@@ -612,7 +623,10 @@ export default {
 
       this.isSearch = `Поиск: ${localStorage.getItem('searchData')}`
 
-      axios.post('/api/house/search', { title: localStorage.getItem('searchData') })
+      axios.post('/api/house/search', {
+        title: localStorage.getItem('searchData'),
+        token: this.user.token,
+      })
           .then(response => {
             this.readyHouses = response.data
             this.updateHouses()
@@ -621,7 +635,6 @@ export default {
     } else {
       this.readyHouses = this.houses
     }
-
 
     let date = new Date(),
         fullYear = date.getFullYear(),
@@ -665,7 +678,7 @@ export default {
       if (e.target !== this.$refs.city) {
         this.openSelectCity = false
       }
-    })
+    });
   },
   beforeDestroy() {
   },

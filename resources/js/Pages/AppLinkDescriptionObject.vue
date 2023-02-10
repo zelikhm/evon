@@ -11,7 +11,7 @@
           <img class="flex-shrink-0 bg-black w-20 xxl:w-16 xl:w-12 h-20 xxl:h-16 xl:h-12 rounded-full flex items-center justify-center" :src="compilation.company.image" alt="">
         </div>
         <div class="text-white flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
-          <span class="text-[15px] xxl:text-[13px] xl:text-[11px] leading-none" v-if="compilation.company !== null || compilation.company.title === null">{{ compilation.company.title }}</span>
+          <span class="text-[15px] xxl:text-[13px] xl:text-[11px] leading-none" v-if="compilation.company !== null ">{{ compilation.company.title }}</span>
           <span class="text-[15px] xxl:text-[13px] xl:text-[11px] leading-none">Агенство недвижимости</span>
         </div>
       </div>
@@ -69,12 +69,12 @@
             </div>
             <div class="h-full md:h-[1px] w-[1px] md:w-full bg-[#E5DFEE]"></div>
             <div class="flex flex-col justify-center md:py-2">
-              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">{{ minPriceForM }} €</span>
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">{{ minPriceForM.toLocaleString('ru') }} €</span>
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">Мин за м²</span>
             </div>
             <div class="h-full md:h-[1px] w-[1px] md:w-full bg-[#E5DFEE]"></div>
             <div class="flex flex-col justify-center md:py-2">
-              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">{{ minPriceFlat }} €</span>
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">{{ minPriceFlat.toLocaleString('ru') }} €</span>
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">Мин. цена</span>
             </div>
             <div class="h-full md:h-[1px] w-[1px] md:w-full bg-[#E5DFEE]"></div>
@@ -151,7 +151,7 @@
                   <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
                     <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none">{{ item.name }}</span>
                   </div>
-                  <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">{{ item.flats.length }} квартир. от {{ Math.round(item.minPrice / item.minSquare) }} € до {{ Math.round(item.maxPrice / item.maxSquare) }} € за м2</span>
+                  <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">{{ item.flats.length }} квартир. от {{ (Math.round(item.minPrice / item.minSquare)).toLocaleString('ru') }} € до {{ (Math.round(item.maxPrice / item.maxSquare)).toLocaleString('ru') }} € за м2</span>
                 </div>
                 <div class="absolute top-0 right-0 p-2.5 xxl:p-2 xl:p-1.5">
                   <label class="payd__checkbox" :for="'pay' + item.id">
@@ -248,7 +248,7 @@
                    <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ item.floor }} этаж</span>
                  </div>
                  <div>
-                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ item.price }} €</span>
+                   <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ item.price.toLocaleString('ru') }} €</span>
                  </div>
                </div>
              </div>
@@ -276,26 +276,26 @@
           </div>
         </div>
         <div>
-          <div class="contact__selling h-fit bg-white rounded-[10px] p-4 xxl:p-3 xl:p-2.5 mb-7 xxl:mb-5 xl:mb-4" v-for="item in house.supports">
+          <div class="contact__selling h-fit bg-white rounded-[10px] p-4 xxl:p-3 xl:p-2.5 mb-7 xxl:mb-5 xl:mb-4">
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 mb-5 xxl:mb-4 xl:mb-4">
-              <img class="w-14 xxl:w-12 xl:w-10 h-14 xxl:h-12 xl:h-10 rounded-full" v-if="item.avatar" :src="item.avatar" alt="">
+              <img class="w-14 xxl:w-12 xl:w-10 h-14 xxl:h-12 xl:h-10 rounded-full" v-if="compilation.user.image" :src="compilation.user.image" alt="">
               <div class="flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
-                <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none font-medium">{{ item.name }}</span>
-                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">{{ item.status }}</span>
+                <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none font-medium">{{ compilation.user.first_name + ' ' + compilation.user.last_name }}</span>
+                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">{{ compilation.user.status }}</span>
               </div>
             </div>
             <div class="flex items-center mb-5 xxl:mb-4 xl:mb-4 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">
               <span class="text-[#8A8996] leading-none">Язык:&nbsp;</span>
-              <span class="leading-none">{{ item.link }}</span>
+              <span class="leading-none">{{ compilation.user.link }}</span>
             </div>
             <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
               <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]">
                 <img src="../../assets/svg/chat_tel_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
-                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[14px]">{{ item.phone }}</span>
+                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[14px]">{{ compilation.user.phone }}</span>
               </div>
-              <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]">
+              <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]" v-if="validEmail(compilation.user.email)">
                 <img src="../../assets/svg/chat_mail_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
-                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[14px]">{{ item.email }}</span>
+                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[14px]">{{ compilation.user.email }}</span>
               </div>
             </div>
           </div>
@@ -370,12 +370,14 @@ export default {
       })
     },
     filterPrice() {
-      console.log(this.flats.flats)
       this.flats.flats = this.flats.find(item => item.flats.price > this.priceFrom)
+    },
+    validEmail: function (email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
     }
   },
   created() {
-    console.log(this.compilation.company.image)
     this.frames = this.house.frames
 
     this.center = {lat: +this.house.latitude, lng: +this.house.longitude}

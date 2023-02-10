@@ -87,7 +87,7 @@ export default {
     },
     deleteJK(item) {
       axios.post('/api/compilation/deleteHouse', {
-        token: this.globalToken,
+        token: this.user.token,
         compilation_id: this.itemCompilation.id,
         house_id: item.id
       })
@@ -105,7 +105,7 @@ export default {
         title: this.compilation.title,
         description: this.compilation.description,
         isVisible: this.compilation.isVisible,
-        token: this.globalToken
+        token: this.user.token
       })
       if (this.compilation.title) {
         axios.post('/api/compilation/edit', {
@@ -114,7 +114,7 @@ export default {
           title: this.compilation.title,
           description: this.compilation.description,
           isVisible: this.compilation.isVisible,
-          token: this.globalToken
+          token: this.user.token
         }).then(response => {
           let data = response.data.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at))
           this.$emit('close-create-selection', data)

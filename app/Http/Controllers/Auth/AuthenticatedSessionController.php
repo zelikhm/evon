@@ -105,10 +105,10 @@ class AuthenticatedSessionController extends Controller
 
   public function loginApi(Request $request) {
 
-    $request->validate([
-      'email' => ['required', 'max:50', 'exists:App\Models\User,email'],
-      'password' => ['required'],
-    ]);
+//    $request->validate([
+//      'email' => ['required', 'max:50', 'exists:App\Models\User,email'],
+//      'password' => ['required'],
+//    ]);
 
     $user = User::where('email', $request->email)
       ->first();
@@ -126,7 +126,13 @@ class AuthenticatedSessionController extends Controller
 
     } else {
 
-      return response()->json(false, 401);
+      if($user === null) {
+        return response()->json('Не правильный логин или емеил', 401);
+      }
+
+      if(!Hash::check($request->password, $user->password)) {
+        return response()->json('Не правильный пароль', 401);
+      }
 
     }
 
@@ -144,7 +150,7 @@ class AuthenticatedSessionController extends Controller
       User\SessionModel::where('user_id', $id)->delete();
     }
 
-    $this->setSession($id);
+    return $this->setSession($id);
   }
 
   /**

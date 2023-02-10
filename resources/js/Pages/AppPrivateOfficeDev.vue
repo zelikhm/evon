@@ -184,13 +184,20 @@ export default {
           this.houses.data.splice(idx, 1)
         }
       })
-      axios.post('/api/house/delete', { house_id: house.id, token: this.globalToken }).then(res => console.log(res)).catch(err => console.error(err))
+      axios.post('/api/house/delete', {
+        house_id: house.id,
+        token: this.user.token
+      }).then(res => console.log(res)).catch(err => console.error(err))
 
       this.deleteConfirm = false
     },
     changeVisible(item) {
       item.visible = !item.visible
-      axios.post('/api/house/setVisible', { house_id: item.id, visible: item.visible, token: this.globalToken }).then(res => { console.log(res.data) })
+      axios.post('/api/house/setVisible', {
+        house_id: item.id,
+        visible: item.visible,
+        token: this.user.token
+      }).then(res => { console.log(res.data) })
     }
   },
   created() {

@@ -21,26 +21,34 @@
 </template>
 
 <script>
-export default {
+  import { computed } from 'vue'
+  import { usePage } from '@inertiajs/vue3'
+
+  export default {
   props: ['house', 'isEdit', 'frame'],
   data() {
     return {
       frameName: null,
-      isEditReady: false
+      isEditReady: false,
+      user: computed(() => usePage().props.auth.user)
     }
   },
   methods: {
     addFrame() {
       if (this.isEditReady) {
-        axios.post('/api/house/editFrame', { house_id: this.house.id, frame_id: this.frame.id, name: this.frameName, token: this.globalToken })
+        axios.post('/api/house/editFrame', {
+          house_id: this.house.id,
+          frame_id: this.frame.id,
+          name: this.frameName,
+          token: this.user.token
+        })
              .then(response => {
                this.house.frames = response.data
-               console.log(this.house.frames)
                this.$emit('close-add-frame', this.house)
              })
             .catch(e => console.error(e))
       } else {
-        axios.post('/api/house/createFrame', { house_id: this.house.id, name: this.frameName, token: this.globalToken })
+        axios.post('/api/house/createFrame', { house_id: this.house.id, name: this.frameName, token: this.user.token })
             .then(response => {
               response.data.forEach((item, idx) => {
                 item.active = 0

@@ -2,7 +2,7 @@
   <app-header :user="user" @update-block-client="updateBlockClient" />
   <app-modal-album
     v-if="album"
-    :image="house.images"
+    :image="house.images_reload"
     @close-album="album = false"
   />
   <app-add-selections
@@ -121,12 +121,12 @@
             </div>
             <div class="h-full w-[1px] sm:h-[1px] sm:w-full bg-[#E5DFEE]"></div>
             <div class="flex flex-col justify-center sm:p-2">
-              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-center leading-none">{{  Number.isInteger(minPriceForM) ? minPriceForM : "-"  }} €</span>
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-center leading-none">{{  Number.isInteger(minPriceForM) ? minPriceForM.toLocaleString('ru') : "-"  }} €</span>
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[13px]">Мин за м²</span>
             </div>
             <div class="h-full w-[1px] sm:h-[1px] sm:w-full bg-[#E5DFEE]"></div>
             <div class="flex flex-col justify-center sm:p-2">
-              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-center leading-none">{{ Number.isInteger(minPriceFlat) ? minPriceFlat : "-" }} €</span>
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-center leading-none">{{ Number.isInteger(minPriceFlat) ? minPriceFlat.toLocaleString('ru') : "-" }} €</span>
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[13px]">Мин. цена</span>
             </div>
             <div class="h-full w-[1px] sm:h-[1px] sm:w-full bg-[#E5DFEE]"></div>
@@ -272,7 +272,7 @@ export default {
       axios.post('/api/favorite/add', {
         user_id: this.user.id,
         house_id: this.house.id,
-        token: this.globalToken
+        token: this.user.token
       })
     },
     removeToFavorite() {
@@ -280,7 +280,7 @@ export default {
       axios.post('/api/favorite/deleted', {
         user_id: this.user.id,
         house_id: this.house.id,
-        token: this.globalToken
+        token: this.user.token
       })
     }
   },
@@ -335,7 +335,7 @@ export default {
       this.house.promotion = false
     })
 
-    this.mainPhotos = this.house.images
+    this.mainPhotos = this.house.images_reload
   },
   computed: {
     countFlats() {

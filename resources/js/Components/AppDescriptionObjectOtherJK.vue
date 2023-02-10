@@ -20,7 +20,7 @@ import { Link } from "@inertiajs/inertia-vue3";
         </div>
         <div class="flex flex-col p-5 xxl:p-4 xl:p-3 gap-4 xxl:gap-3 xl:gap-2.5">
           <span class="text-[#1E1D2D] font-semibold text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none">{{ item.title }}</span>
-          <span class="text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none">от {{ Number.isInteger(item.minPrice) ? item.minPrice : "-" }} ₽</span>
+          <span class="text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none">от {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} ₽</span>
           <div class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] flex items-center gap-2">
             <span class="leading-none">{{ isNaN(item.minSquare / item.minPrice) ?  "-" : Math.round(item.minSquare / item.minPrice) }} € за м²</span>
             <span class="bg-[#8A8996] h-1 w-1 rounded-full"></span>

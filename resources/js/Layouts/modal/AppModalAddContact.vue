@@ -60,6 +60,9 @@
 </template>
 
 <script>
+  import { computed } from 'vue'
+  import { usePage } from '@inertiajs/vue3'
+
 export default {
   props: ['contact', 'isEdit', 'house'],
   data() {
@@ -76,7 +79,8 @@ export default {
         link: "",
         token: this.globalToken
       },
-      error: false
+      error: false,
+      user: computed(() => usePage().props.auth.user)
     }
   },
   methods: {
@@ -89,7 +93,7 @@ export default {
       formData.append('email', this.dataSupport.email)
       formData.append('status', this.dataSupport.status)
       formData.append('link', this.dataSupport.link)
-      formData.append('token', this.globalToken)
+      formData.append('token', this.user.token)
 
       axios({
         method: 'post',
@@ -97,7 +101,6 @@ export default {
         headers: {"Content-type": "multipart/form-data"},
         data: formData,
       }).then(res => {
-        console.log(res.data)
         this.$emit('close-add-contact', res.data)
       }).catch(e => {
         this.error = true
@@ -107,7 +110,6 @@ export default {
       let formData = new FormData()
 
       if (this.avatar) {
-        console.log('file')
         formData.append('avatar', this.dataSupport.avatar)
       } else {
         console.log('not')
@@ -121,7 +123,7 @@ export default {
       formData.append('email', this.dataSupport.email)
       formData.append('status', this.dataSupport.status)
       formData.append('link', this.dataSupport.link)
-      formData.append('token', this.globalToken)
+      formData.append('token', this.user.token)
 
       axios({
         method: 'post',
@@ -131,7 +133,6 @@ export default {
       }).then(res => {
         this.$emit('close-edit-contact', res.data)
       }).catch(e => {
-        console.log(e)
         this.error = true
       })
     },

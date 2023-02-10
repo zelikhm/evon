@@ -53,7 +53,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                     </div>
                     <div class="text-[#1E1D2D] flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 p-5 xxl:p-4 xl:p-3">
                       <span class="font-bold text-[20px] xxl:text-[16px] xl:text-[13px] leading-none">{{ compilation.isVisible === 1 ? item.title : `Лот №${item.id + 10000}` }}</span>
-                      <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">от {{ item.minPrice }} €, от {{ Math.round(item.minSquare / item.minPrice) }} € за м2</span>
+                      <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">от {{ item.minPrice.toLocaleString('ru') }} €, от {{ Math.round(item.minSquare / item.minPrice) }} € за м2</span>
                     </div>
                   </Link>
                 </div>

@@ -87,7 +87,6 @@ export default {
   },
   created() {
     this.news = this.house.news.slice(0, 4).sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at))
-    console.log(window.location.protocol + '//' + window.location.host)
   }
 }
 </script>

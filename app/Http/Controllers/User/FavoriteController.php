@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\AuthCheck;
 use App\Http\Traits\MainInfo;
 use App\Models\User\FavoritesModel;
 use Carbon\Carbon;
@@ -14,6 +15,7 @@ class FavoriteController extends Controller
 {
 
   use MainInfo;
+  use AuthCheck;
 
   /**
    * get favorites
@@ -42,7 +44,7 @@ class FavoriteController extends Controller
    */
 
     public function add(Request $request) {
-      if($request->token === env('TOKEN')) {
+      if($this->checkToken($request->token)) {
 
         $favorites = FavoritesModel::create([
           'user_id' => $request->user_id,
@@ -65,7 +67,7 @@ class FavoriteController extends Controller
    */
 
     public function deleted(Request $request) {
-      if($request->token === env('TOKEN')) {
+      if($this->checkToken($request->token)) {
 
         FavoritesModel::where('user_id', $request->user_id)
           ->where('house_id', $request->house_id)

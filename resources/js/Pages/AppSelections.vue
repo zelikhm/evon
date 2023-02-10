@@ -118,7 +118,7 @@ export default {
       this.deleteConfirm = false
       axios.post('/api/compilation/delete', {
         id: item.id,
-        token: this.globalToken
+        token: this.user.token
       })
 
       this.compilationReady.forEach((i, idx) => {
@@ -144,7 +144,7 @@ export default {
         title: item.title,
         description: item.description,
         isVisible: item.isVisible,
-        token: this.globalToken
+        token: this.user.token
       }).then(response => console.log(response))
     }
   },

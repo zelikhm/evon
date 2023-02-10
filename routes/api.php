@@ -44,7 +44,7 @@ Route::prefix('house')->group(function () {
   Route::post('delete', ['App\Http\Controllers\House\HouseController', 'delete']);
   //
   Route::post('getHouseApi', ['App\Http\Controllers\House\HouseController', 'getHouseApi']);
-  Route::get('getHousesApi', ['App\Http\Controllers\House\HouseController', 'getHousesApi']);
+  Route::get('getHousesJk', ['App\Http\Controllers\House\HouseController', 'getHousesApi']);
   //
   Route::post('search', ['App\Http\Controllers\House\HouseController', 'search']);
 });
@@ -86,8 +86,6 @@ Route::prefix('user')->group(function () {
   //
   Route::post('/get', ['App\Http\Controllers\User\IndexController', 'get']);
   Route::post('/edit', ['App\Http\Controllers\User\IndexController', 'edit']);
-  Route::post('/addedCompany', ['App\Http\Controllers\User\IndexController', 'addedCompany']);
-  Route::post('/editCompany', ['App\Http\Controllers\User\IndexController', 'editCompany']);
   //
   Route::post('/payment', ['App\Http\Controllers\User\SubscriptionController', 'payment']);
 });

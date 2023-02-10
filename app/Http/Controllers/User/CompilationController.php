@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\AuthCheck;
 use App\Http\Traits\MainInfo;
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\Info\CityModel;
@@ -19,6 +20,7 @@ class CompilationController extends Controller
 {
 
   use MainInfo;
+  use AuthCheck;
 
   public function index()
   {
@@ -154,7 +156,7 @@ class CompilationController extends Controller
   public function edit(Request $request)
   {
 
-    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
 
        CompilationModel::where('id', $request->id)->update([
         'title' => $request->title,
@@ -192,7 +194,7 @@ class CompilationController extends Controller
 
   public function create(Request $request)
   {
-    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
       $compl = CompilationModel::create([
         'user_id' => $request->user_id,
         'title' => $request->title,
@@ -217,7 +219,7 @@ class CompilationController extends Controller
 
   public function addHouse(Request $request)
   {
-    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
       CompilationInfoModel::create([
         'compilation_id' => $request->compilation_id,
         'house_id' => $request->house_id,
@@ -250,7 +252,7 @@ class CompilationController extends Controller
 
   public function deleteHouse(Request $request) {
 
-    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
 
       CompilationInfoModel::where('compilation_id', $request->compilation_id)
         ->where('house_id', $request->house_id)
@@ -273,7 +275,7 @@ class CompilationController extends Controller
 
   public function delete(Request $request)
   {
-    if ($request->token === env('TOKEN')) {
+    if ($this->checkToken($request->token)) {
       CompilationInfoModel::where('compilation_id', $request->id)
         ->delete();
       CompilationModel::where('id', $request->id)

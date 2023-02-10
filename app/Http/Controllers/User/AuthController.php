@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\AuthCheck;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
+  use AuthCheck;
 
   /**
    * check user email
@@ -16,7 +18,7 @@ class AuthController extends Controller
    */
 
     public function checkUserEmail(Request $request) {
-      if($request->token === env('TOKEN')) {
+      if($this->checkToken($request->token)) {
         $user = User::where('email', $request->email)->where('role', 1)->first();
 
         if($user !== null) {
@@ -36,7 +38,7 @@ class AuthController extends Controller
    */
 
     public function checkUserPhone(Request $request) {
-      if($request->token === env('TOKEN')) {
+      if($this->checkToken($request->token)) {
         $user = User::where('phone', 'LIKE', '%' . $request->phone . '%')->where('role', 0)->first();
 
         if($user !== null) {

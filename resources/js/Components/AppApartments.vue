@@ -197,13 +197,13 @@ export default {
 
       axios.post('/api/house/deleteFrame', {
         frame_id: frame.id,
-        token: this.globalToken
+        token: this.user.token
       }).then(response => console.log(response.data))
     },
     deleteFlat(item) {
       axios.post('/api/house/deletedFlat', {
         flat_id: item.id,
-        token: this.globalToken
+        token: this.user.token
       }).then(response => console.log(response))
 
       this.house.frames.forEach((i, index) => {
@@ -217,9 +217,6 @@ export default {
   },
   created() {
     let link = +window.location.href.split('/').at(-1)
-
-
-    console.log(this.house)
 
     if (Number.isInteger(link)) {
       this.isEdit = true

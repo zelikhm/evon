@@ -383,7 +383,7 @@ export default {
         installment: 0,
         count_flat: "",
         text_agency: "",
-        token: this.globalToken
+        token: this.user.token
       },
       cities: [
         {city: 'Сочи', value: 1},
@@ -531,7 +531,7 @@ export default {
           formData.append('exclusive', this.object.text_agency);
           formData.append('toChildrenSchool',this.object.toChildrenSchool);
           formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
-          formData.append('token', this.globalToken);
+          formData.append('token', this.user.token);
 
           axios({
             method: 'post',
@@ -585,7 +585,7 @@ export default {
           formData.append('exclusive', this.object.text_agency);
           formData.append('toChildrenSchool',this.object.toChildrenSchool);
           formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
-          formData.append('token', this.globalToken);
+          formData.append('token', this.user.token);
 
           axios({
             method: 'post',
@@ -599,7 +599,6 @@ export default {
     addedSupports(res, flag) {
       let idNewJk = res.data.id,
           house = res.data
-      console.log(res)
 
       axios.post('/api/house/clearSupport', {
         house_id: idNewJk
@@ -613,7 +612,7 @@ export default {
           arr.append('status', item.status)
           arr.append('link', item.link)
           arr.append('house_id', idNewJk)
-          arr.append('token', this.globalToken)
+          arr.append('token', this.user.token)
 
           this.saveSupport(arr, flag, house);
         })
@@ -632,6 +631,7 @@ export default {
         url: '/api/house/addedSupport',
         headers: {"Content-type": "multipart/form-data"},
         data: data,
+        token: this.user.token
       }).then(res => {
       })
     },

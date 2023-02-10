@@ -72,7 +72,6 @@ export default {
       this.category = item.id
       this.showImage = []
       this.showImage.push(...this.image.filter(item => item.category === this.category))
-      console.log(this.showImage)
       this.mainImage = this.showImage[0].name
     }
   },

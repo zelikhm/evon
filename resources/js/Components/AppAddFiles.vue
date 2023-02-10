@@ -77,8 +77,6 @@ export default {
       this.house.files.forEach(item => {
         this.files.push(item);
       })
-
-      console.log(this.house.files)
     },
     changeInputFile(e) {
       this.inputFile = Array.from(e.target.files)
@@ -95,7 +93,11 @@ export default {
       this.files.forEach((item, idx) => {
         if (item.name === input.name) {
           this.files.splice(idx, 1)
-          axios.post('/api/house/deletedFile', { fileName: input.name, house_id: this.house.id })
+          axios.post('/api/house/deletedFile', {
+            fileName: input.name,
+            house_id: this.house.id
+            token: this.user.token
+          })
         }
       })
 

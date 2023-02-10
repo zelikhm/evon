@@ -121,7 +121,7 @@ export default {
       axios.post('/api/favorite/deleted', {
         user_id: this.user.id,
         house_id: this.deleteItemId,
-        token: this.globalToken
+        token: this.user.token
       })
 
       item.house.favorite = false
@@ -133,7 +133,7 @@ export default {
       axios.post('/api/favorite/add', {
         user_id: this.user.id,
         house_id: this.deleteItemId,
-        token: this.globalToken
+        token: this.user.token
       })
 
       item.house.favorite = true
@@ -144,7 +144,7 @@ export default {
       axios.post('/api/favorite/add', {
         user_id: this.user.id,
         house_id: this.deleteItemId,
-        token: this.globalToken
+        token: this.user.token
       })
 
       this.state = 0

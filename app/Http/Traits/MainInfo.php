@@ -88,7 +88,7 @@ trait MainInfo
 
     foreach ($news as $key => $item) {
 
-      if($item->house->visible === 0 || $item->house->active !== 2) {
+      if ($item->house->visible === 0 || $item->house->active !== 2) {
         $news[$key] = [];
       }
 
@@ -179,24 +179,48 @@ trait MainInfo
   {
     $house = HouseModel::where('id', $house_id)->with(['info', 'supports', 'files', 'frames', 'images', 'news', 'flats'])->first();
 
-    if($house !== null) {
+    if ($house !== null) {
       $house->image = $this->getPhoto($house);
 
       return $house;
     }
   }
 
-  public function getPhoto($house)
+  /**
+   * get main photo for house
+   * @param $house
+   * @return mixed
+   */
+
+  protected function getPhoto($house)
   {
 
-      $image = HouseImagesModel::where('house_id', $house->id)
-        ->orderBy('category', 'ASC')
-        ->orderBy('created_at', 'ASC')
-        ->first();
+    $image = HouseImagesModel::where('house_id', $house->id)
+      ->orderBy('category', 'ASC')
+      ->orderBy('created_at', 'ASC')
+      ->first();
 
-      if($image !== null) {
-        return $image->name;
+    if ($image !== null) {
+      return $image->name;
+    }
+  }
+
+  protected function getPhotos($house)
+  {
+
+    $array = collect();
+
+    for ($i = 0; $i < 4; $i++) {
+
+      $images = HouseImagesModel::where('house_id', $house->id)->where('category', $i)->limit(5)->get();
+
+      foreach ($images as $image) {
+        $array->push($image);
       }
+    }
+
+    return $array;
+
   }
 
   /**

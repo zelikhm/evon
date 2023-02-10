@@ -90,7 +90,7 @@ export default {
           desciption: null,
           image: '',
           email: this.userValue.email,
-          token: this.globalToken
+          token: this.user.token
         }).then(response => console.log(response))
       }
     }

@@ -150,6 +150,7 @@ export default {
       axios.post('/api/house/deletedImage', {
         house_id: this.house.id,
         image_name: photo.name,
+        token: this.user.token
       })
 
 

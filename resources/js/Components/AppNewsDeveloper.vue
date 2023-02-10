@@ -32,7 +32,7 @@ import { Link } from '@inertiajs/inertia-vue3'
       </div>
     </div>
   </div>
-  <div class="h-fit" v-else>
+  <div class="sticky top-[2vw] h-fit" v-else>
     <div class="relative z-20 border__top-6 bg-[#F6F3FA] flex items-center justify-between p-7 xxl:p-5 xl:p-4">
       <span class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[16px] leading-none">Новости недвижимости</span>
       <img @click="state = 0" src="../../assets/svg/reload_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3.5 lg:w-5" alt="">

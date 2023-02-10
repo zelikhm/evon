@@ -88,7 +88,7 @@ export default {
         title: this.titleCompilation,
         description: this.commentCompilation,
         isVisible: this.isShow,
-        token: this.globalToken
+        token: this.user.token
       }).then(response => this.addHouse(response.data))
     },
     addHouse(id) {
@@ -96,7 +96,7 @@ export default {
         compilation_id: id,
         description: this.commentJK,
         house_id: this.house.id,
-        token: this.globalToken
+        token: this.user.token
       }).then(response => {
         console.log(response.data)
         this.$emit('update-compilation', response.data)

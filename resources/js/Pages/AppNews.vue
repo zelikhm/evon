@@ -90,11 +90,18 @@ export default {
           this.readyNews.splice(idx, 1)
         }
       })
-      axios.post('/api/news/delete', { new_id: news.id, token: this.globalToken })
+      axios.post('/api/news/delete', {
+        new_id: news.id,
+        token: this.user.token
+      })
     },
     changeVisible(item) {
       item.visible = !item.visible
-      axios.post('/api/news/visible', { new_id: item.id, visible: item.visible, token: this.globalToken })
+      axios.post('/api/news/visible', {
+        new_id: item.id,
+        visible: item.visible,
+        token: this.user.token
+      })
     }
   },
   components: {

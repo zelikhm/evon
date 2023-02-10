@@ -46,7 +46,8 @@ export default {
   methods: {
     deleteSupport(item) {
       axios.post('/api/house/deleteSupport', {
-        id: item.id
+        id: item.id,
+        token: this.user.token
       })
 
       this.supports.forEach((support, idx) => {
