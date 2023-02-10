@@ -59,6 +59,7 @@ Route::get('/404', function () {
 });
 
 Route::get('test', ['App\Http\Controllers\Payment\IndexController', 'index']);
+Route::post('mail', ['App\Http\Controllers\User\IndexController', 'sendRegister'])->name('mail');
 
 Route::get('/privacy', ['App\Http\Controllers\PrivacyController', 'index']);
 Route::get('/agree', ['App\Http\Controllers\PrivacyController', 'agree']);

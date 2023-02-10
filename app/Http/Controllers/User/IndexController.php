@@ -7,6 +7,7 @@ use App\Http\Traits\AuthCheck;
 use App\Http\Traits\MainInfo;
 use App\Models\Builder\HouseSupportModel;
 use App\Models\User;
+use App\Rules\Password;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -70,5 +71,53 @@ class IndexController extends Controller
       return response()->json('not auth', 401);
 
     }
+  }
+
+  public function sendRegister(Request $request) {
+
+    $request->validate([
+      'first_name' => ['required'],
+      'last_name' => ['required'],
+      'phone' => ['required'],
+      'email' => ['required'],
+    ]);
+
+    $curl = curl_init();
+
+    $message = "<html><head></head><body><p>
+                Подана заявка на регистрацию<br>
+                Имя: . $request->first_name<br>
+                Фамилия: . $request->last_name<br>
+                Телефон: . $request->phone<br>
+                Email: . $request->email<br>
+                Место работы: . $request->type<br>
+                </p></body></html>";
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => "https://api.smtp.bz/v1/smtp/send",
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "POST",
+      CURLOPT_HTTPHEADER => array(
+        "authorization: AwFGFIPriK4AQad1rFXt9ox1c00PT8LjugQ1"
+      ),
+      CURLOPT_POSTFIELDS => http_build_query(array(
+        'subject' => "Регистрация нового пользователя", // Обязательно
+        'name' => "Evon",
+        'html' => $message, // Обязательно
+        'from' => "info@evon-tr.com", // Обязательно
+        'to' => "boss.zelikov99@gmail.com", // Обязательно
+        'headers' => "[{ 'x-tag': 'my_newsletter_ids' }]",
+        'text' => "Text version message"
+      ))
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+
+
   }
 }

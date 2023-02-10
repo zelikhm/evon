@@ -1,3 +1,32 @@
+<script setup>
+
+  import {useForm} from "@inertiajs/inertia-vue3";
+
+  const form = useForm({
+    email: '',
+    phone: '',
+    first_name: '',
+    last_name: '',
+    type: 'Агентство недвижимости (владелец/директор)',
+    remember: false,
+  });
+
+
+  const submit = () => {
+    form.post(route('mail'), {
+      onSuccess: () => {
+        form.success = true;
+        form.reset('first_name');
+        form.reset('last_name');
+        form.reset('email');
+        form.reset('phone');
+      }
+
+    });
+  };
+
+</script>
+
 <template>
 
 <!-- Вход в приложение как застройщик -->
@@ -5,36 +34,47 @@
     <div class="relative bg-white rounded-[12px] p-10 xxl:p-9 xl:p-8 lg:p-5 z-50 w-[30%] lg:w-[48%] md:w-[60%] sm:w-[90%] h-fit">
       <div class="relative mb-9 xxl:mb-6 xl:mb-5">
         <h2 class="text-center text-[22px] xxl:text-lg xl:text-base font-semibold">Регистрация на платформе</h2>
+        <p v-if="form.success" style="color: green">
+          Заявка отправлена...
+        </p>
         <button @click="closeModal" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
           <div class="absolute h-[1px] w-4 bg-[#8A8996] rotate-45"></div>
           <div class="absolute h-[1px] w-4 bg-[#8A8996] -rotate-45"></div>
         </button>
       </div>
+      <form @submit.prevent="submit">
       <div class="flex flex-col p-3.5 xxl:pb-2 xl:pb-2 mb-6 xxl:mb-4 xl:mb-3 border border-solid border-[#E5DFEE] rounded-[6px]">
-        <label for="name" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Имя</label>
+        <label for="name" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]" :class="{'error': form.errors.first_name}">Имя {{ form.errors.first_name }}</label>
         <input
+          v-model="form.first_name"
           class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
           type="text"
           id="name"
         >
       </div>
       <div class="flex flex-col p-3.5 xxl:pb-2 xl:pb-2 mb-6 xxl:mb-4 xl:mb-3 border border-solid border-[#E5DFEE] rounded-[6px]">
-        <label for="surname" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Фамилия</label>
+        <label for="surname" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]" :class="{'error': form.errors.last_name}">Фамилия {{ form.errors.last_name }}</label>
         <div class="relative">
-          <input class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0" type="text" id="surname">
+          <input
+            v-model="form.last_name"
+            class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
+            type="text"
+            id="surname">
         </div>
       </div>
       <div class="flex flex-col p-3.5 xxl:pb-2 xl:pb-2 mb-6 xxl:mb-4 xl:mb-3 border border-solid border-[#E5DFEE] rounded-[6px]">
-        <label for="tel" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Телефон</label>
+        <label for="tel" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]" :class="{'error': form.errors.phone}">Телефон {{ form.errors.phone }}</label>
         <input
+            v-model="form.phone"
             class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
             type="tel"
             id="tel"
         >
       </div>
       <div class="flex flex-col p-3.5 xxl:pb-2 xl:pb-2 mb-6 xxl:mb-4 xl:mb-3 border border-solid border-[#E5DFEE] rounded-[6px]">
-        <label for="email" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Почта</label>
+        <label for="email" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]" :class="{'error': form.errors.email}">Почта {{ form.errors.email }}</label>
         <input
+            v-model="form.email"
             class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
             type="email"
             id="email"
@@ -49,7 +89,7 @@
         <div v-if="openSelectPlaceWork" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px]">
           <span
               v-for="(type, idx) in types" :key="idx"
-              @click="changeSelectTypes(type)"
+              @click="changeSelectTypes(type), form.type = selectType"
               class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
           >
             {{ type.type }}
@@ -57,8 +97,8 @@
         </div>
       </div>
 
-      <button @click="clickLoginDeveloper" class="mt-2 login__btn--bg text-white w-full text-lg xxl:text-[15px] xl:text-xs mb-5 xxl:mb-4 xl:mb-3 p-5 xxl:p-4 xl:p-3 border border-solid border-[#E5DFEE] rounded-[6px]">Отправить</button>
-
+      <button type="submit" :class="{ 'opacity-25': form.processing }" :disabled="form.processing" class="mt-2 login__btn--bg text-white w-full text-lg xxl:text-[15px] xl:text-xs mb-5 xxl:mb-4 xl:mb-3 p-5 xxl:p-4 xl:p-3 border border-solid border-[#E5DFEE] rounded-[6px]">Отправить</button>
+      </form>
     </div>
     <div @click="closeModal" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
   </div>
@@ -81,7 +121,13 @@ export default {
         { type: 'Агентство недвижимости (владелец/директор)' },
         { type: 'Частный брокер' },
         { type: 'Работаю в агентстве недвижимости' }
-      ]
+      ],
+      user: {
+        first_name: '',
+        last_name: '',
+        phone: '',
+        email: '',
+      }
     }
   },
   emits: [
@@ -90,6 +136,19 @@ export default {
     'open-modal-developer',
   ],
   methods: {
+    // sendReg() {
+    //   const form = useForm({
+    //     first_name: this.user.first_name,
+    //     last_name: this.user.last_name,
+    //     email: this.user.email,
+    //     phone: this.user.phone,
+    //     type: this.selectType,
+    //   });
+    //
+    //   form.post(route('mail'), {
+    //
+    //   });
+    // },
     closeModal() {
       this.$emit('close-modal')
     },
@@ -102,5 +161,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .error {
+    color: red;
+  }
 </style>

@@ -107,3 +107,5 @@ Route::prefix('news')->group(function () {
   Route::post('getAllNewsForUser',['App\Http\Controllers\House\NewsController', 'getAllNewsForUser']);
   Route::post('getNew',['App\Http\Controllers\House\NewsController', 'getNew']);
 });
+
+Route::post('mail', ['App\Http\Controllers\User\IndexController', 'sendRegister'])->name('mail');
