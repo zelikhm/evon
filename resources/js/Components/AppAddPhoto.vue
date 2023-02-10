@@ -60,6 +60,7 @@
 export default {
 
   props: ['house'],
+  inject:['user'],
   data() {
     return {
       photos: [

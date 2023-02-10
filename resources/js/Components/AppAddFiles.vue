@@ -38,6 +38,7 @@
 <script>
 export default {
   props: ['house'],
+  inject:['user'],
   name: "AppAddFiles",
   data() {
     return {
@@ -50,6 +51,7 @@ export default {
 
       formData.append('house_id', this.house.id);
       formData.append('file', file);
+      formData.append('token', this.user.token);
 
       axios.post('/api/house/addedFiles',
           formData,

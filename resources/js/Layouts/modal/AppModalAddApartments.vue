@@ -174,6 +174,7 @@
 
 export default {
   props: ['house', 'activeFrame', 'selectFlat'],
+  inject:['user'],
   data() {
     return {
       flat: {
@@ -234,7 +235,6 @@ export default {
       imageLoadTwo: false,
       imageTwo: '',
       isBorder: 0,
-      user: computed(() => usePage().props.auth.user)
     }
   },
   methods: {
