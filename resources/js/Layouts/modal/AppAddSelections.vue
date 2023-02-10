@@ -22,6 +22,7 @@
       <div class="p-8 xxl:p-6 xl:p-5">
         <span v-if="idCompilation === true" style="color: red;">Выберите подборку, в которую желаете добавить!</span>
         <span v-if="success" style="color: green;">Жилищный комплекс {{ house.title }} успешно добавлен в подборку {{ activeNameCompilation }}!</span>
+        <span v-if="failed" style="color: red;">Жилищный комплекс {{ house.title }} уже добавлен в подборку {{ activeNameCompilation }}!</span>
         <div class="mt-2 main__title-block border border-solid border-[#E5DFEE] rounded-[5px] pl-5 xxl:pl-4 xl:pl-3 py-5 xxl:py-4 xl:py-3 pr-1 text-[16px] xxl:text-[14px] xl:text-[12px]">
           <div class="flex flex-col h-[40vh] overflow-y-auto custom__scroll--chess pr-4 xxl:pr-3 xl:pr-2 gap-2.5 xxl:gap-2 xl:gap-1.5">
             <div class="flex items-center bg-white justify-between w-full p-5 xxl:p-4 xl:p-3.5 rounded-[5px]" v-for="(item, index) in readyCompilation">
@@ -71,6 +72,7 @@
       activeNameCompilation: null,
       readyCompilation: null,
       index: 0,
+      failed: false,
     }
   },
   emits: ['close-add-selection', 'open-create-sel'],
@@ -98,9 +100,13 @@
           description: '',
           token: this.user.token
         }).then(response => {
-          this.success = true
+          if(response.status === 200) {
+            this.success = true
+            this.readyCompilation[this.index].houses = response.data.houses;
+          } else if(response.status === 201) {
+            this.failed = true
+          }
 
-          this.readyCompilation[this.index].houses = response.data.houses;
         })
       }
     }

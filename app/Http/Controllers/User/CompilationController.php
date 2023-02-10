@@ -220,25 +220,37 @@ class CompilationController extends Controller
   public function addHouse(Request $request)
   {
     if ($this->checkToken($request->token)) {
-      CompilationInfoModel::create([
-        'compilation_id' => $request->compilation_id,
-        'house_id' => $request->house_id,
-        'description' => $request->description,
-        'created_at' => Carbon::now()->addHour(3),
-        'updated_at' => Carbon::now()->addHour(3),
-      ]);
 
-      $compilation = CompilationModel::where('id', $request->compilation_id)->with(['values', 'user', 'company'])->first();
+      $status = CompilationInfoModel::where('compilation_id', $request->compilation_id)->where('house_id', $request->house_id)->first();
 
-      $houses = collect();
+      if($status === null) {
+        CompilationInfoModel::create([
+          'compilation_id' => $request->compilation_id,
+          'house_id' => $request->house_id,
+          'description' => $request->description,
+          'created_at' => Carbon::now()->addHour(3),
+          'updated_at' => Carbon::now()->addHour(3),
+        ]);
 
-      foreach ($compilation->values as $value) {
-        $houses->push($this->getHouseOnId($value->house_id));
+        $compilation = CompilationModel::where('id', $request->compilation_id)->with(['values', 'user', 'company'])->first();
+
+        $houses = collect();
+
+        foreach ($compilation->values as $value) {
+          $houses->push($this->getHouseOnId($value->house_id));
+        }
+
+        $compilation->houses = $houses;
+
+        return response()->json($compilation, 200);
+      } else {
+        $compilation = CompilationModel::where('id', $request->compilation_id)->with(['values', 'user', 'company'])->first();
+
+        return response()->json($compilation, 201);
+
       }
 
-      $compilation->houses = $houses;
 
-      return response()->json($compilation, 200);
     } else {
       return response()->json('not auth', 401);
     }
