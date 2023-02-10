@@ -9,11 +9,11 @@ import { Link } from '@inertiajs/inertia-vue3'
     @close-notification="openNotification = false"
   />
   <header class="relative h-[13.4vw]">
-    <img v-if="compilation.company === null || compilation.company.banner === null" class="w-full absolute top-0 left-0 h-full" src="../../assets/bg_links.jpg" alt="">
+    <img v-if="compilation.company === null || compilation.company.banner === null || compilation.company.banner === 'undefined'" class="w-full absolute top-0 left-0 h-full" src="../../assets/bg_links.jpg" alt="">
     <img v-else class="object-cover w-full absolute top-0 left-0 h-full" :src="compilation.company.banner" alt="">
     <div class="_container flex h-full">
       <div class="self-end flex items-center gap-7 xxl:gap-6 xl:gap-5 mb-10 xxl:mb-8 xl:mb-6">
-        <div v-if="compilation.company === null || compilation.company.image === null" class="flex-shrink-0 bg-black w-20 xxl:w-16 xl:w-12 h-20 xxl:h-16 xl:h-12 rounded-full flex items-center justify-center">
+        <div v-if="compilation.company === null || compilation.company.image === null || compilation.company.image === 'undefined'" class="flex-shrink-0 bg-black w-20 xxl:w-16 xl:w-12 h-20 xxl:h-16 xl:h-12 rounded-full flex items-center justify-center">
           <img   class="w-10 xxl:w-8 xl:w-6" src="../../assets/svg/city_icon_white.svg" alt="">
         </div>
         <div v-else>
@@ -62,7 +62,8 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
           <div class="sticky w-full contact__selling h-fit bg-white rounded-[10px] p-4 xxl:p-3 xl:p-2.5">
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 mb-5 xxl:mb-4 xl:mb-4">
-              <img :src="compilation.user.image" class="object-cover w-14 xxl:w-12 xl:w-10 rounded-full h-14 xxl:h-12 xl:h-10" alt="">
+              <img v-if="compilation.user.image" :src="compilation.user.image" class="object-cover w-14 xxl:w-12 xl:w-10 rounded-full h-14 xxl:h-12 xl:h-10" alt="">
+              <img v-else src="../../assets/no-img-houses.jpg" class="object-cover w-14 xxl:w-12 xl:w-10 rounded-full h-14 xxl:h-12 xl:h-10" alt="">
               <div class="flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
                 <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none font-medium">{{ compilation.user.first_name + ' ' + compilation.user.last_name }}</span>
                 <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ compilation.user.status }}</span>
@@ -74,15 +75,15 @@ import { Link } from '@inertiajs/inertia-vue3'
             </div>
             <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 mb-5">
               <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]">
-                <img src="../../assets/svg/chat_tel_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
+                <img src="../../assets/svg/chat_tel_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="" v-if="compilation.user.phone">
                 <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px]">{{ compilation.user.phone }}</span>
               </div>
-              <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]">
+              <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]" v-if="compilation.user.email">
                 <img src="../../assets/svg/chat_mail_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
                 <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px]">{{ compilation.user.email }}</span>
               </div>
             </div>
-            <span class="w-full text-[15px] xxl:text-[13px] xl:text-[11px]">Комментарий подборки: {{ compilation.description }}</span>
+            <span class="w-full text-[15px] xxl:text-[13px] xl:text-[11px]" v-if="compilation.description">Комментарий подборки: {{ compilation.description }}</span>
           </div>
         </div>
       </div>

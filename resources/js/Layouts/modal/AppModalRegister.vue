@@ -3,14 +3,14 @@
 <!-- Вход в приложение как застройщик -->
   <div v-if="oLoginRegister" class="fixed z-[100] w-full h-full flex items-center justify-center">
     <div class="relative bg-white rounded-[12px] p-10 xxl:p-9 xl:p-8 lg:p-5 z-50 w-[30%] lg:w-[48%] md:w-[60%] sm:w-[90%] h-fit">
-      <div class="relative mb-10 xxl:mb-8 xl:mb-6">
+      <div class="relative mb-9 xxl:mb-6 xl:mb-5">
         <h2 class="text-center text-[22px] xxl:text-lg xl:text-base font-semibold">Регистрация на платформе</h2>
         <button @click="closeModal" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
           <div class="absolute h-[1px] w-4 bg-[#8A8996] rotate-45"></div>
           <div class="absolute h-[1px] w-4 bg-[#8A8996] -rotate-45"></div>
         </button>
       </div>
-      <div class="flex flex-col p-5 xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5 border border-solid border-[#E5DFEE] rounded-[6px]">
+      <div class="flex flex-col p-3.5 xxl:pb-2 xl:pb-2 mb-6 xxl:mb-4 xl:mb-3 border border-solid border-[#E5DFEE] rounded-[6px]">
         <label for="name" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Имя</label>
         <input
           class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
@@ -18,13 +18,13 @@
           id="name"
         >
       </div>
-      <div class="flex flex-col p-5 xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5 border border-solid border-[#E5DFEE] rounded-[6px]">
+      <div class="flex flex-col p-3.5 xxl:pb-2 xl:pb-2 mb-6 xxl:mb-4 xl:mb-3 border border-solid border-[#E5DFEE] rounded-[6px]">
         <label for="surname" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Фамилия</label>
         <div class="relative">
           <input class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0" type="text" id="surname">
         </div>
       </div>
-      <div class="flex flex-col p-5 xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5 border border-solid border-[#E5DFEE] rounded-[6px]">
+      <div class="flex flex-col p-3.5 xxl:pb-2 xl:pb-2 mb-6 xxl:mb-4 xl:mb-3 border border-solid border-[#E5DFEE] rounded-[6px]">
         <label for="tel" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Телефон</label>
         <input
             class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
@@ -32,7 +32,7 @@
             id="tel"
         >
       </div>
-      <div class="flex flex-col p-5 xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5 border border-solid border-[#E5DFEE] rounded-[6px]">
+      <div class="flex flex-col p-3.5 xxl:pb-2 xl:pb-2 mb-6 xxl:mb-4 xl:mb-3 border border-solid border-[#E5DFEE] rounded-[6px]">
         <label for="email" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Почта</label>
         <input
             class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
