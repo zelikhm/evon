@@ -137,9 +137,9 @@
           </div>
           <div class="flex flex-col pb-14 xxl:pb-10 xl:pb-8">
             <span class="uppercase font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] pb-5 xxl:pb-4 xl:pb-3 leading-none">О ЖК</span>
-            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="fullDescription">{{ house.description }}</p>
-            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{ house.description.slice(0, 300) + '...' }}</p>
-            <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 items-center w-fit animation__arrow" @click="fullDescription = !fullDescription">
+            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="fullDescription && house.description.length < 1000">{{ house.description }}</p>
+            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{ house.description.slice(0, 1000) + '...' }}</p>
+            <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 items-center w-fit animation__arrow" @click="fullDescription = !fullDescription" v-if="house.description.length > 1000">
               <span class="text-[#6435A5] font-medium text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">{{ fullDescription ? 'Скрыть' : 'Подробнее' }}</span>
               <img src="../../assets/svg/arrow_right_purple.svg" class="transition-all duration-300 w-3.5 xxl:w-3 xl:wp-2.5" alt="Стрелочка в право">
             </button>
@@ -232,7 +232,7 @@ export default {
   props: ['house', 'dops', 'user', 'slider', 'infos', 'compilation'],
   data() {
     return {
-      fullDescription: false,
+      fullDescription: true,
       arrayInfos: [],
       album: false,
       openAllNews: false,
