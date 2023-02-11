@@ -26,11 +26,11 @@
 
   export default {
   props: ['house', 'isEdit', 'frame'],
+    inject:['user'],
   data() {
     return {
       frameName: null,
       isEditReady: false,
-      user: computed(() => usePage().props.auth.user)
     }
   },
   methods: {

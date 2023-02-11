@@ -16,12 +16,16 @@ class ChatModel extends Model
       'visible_id',
     ];
 
-    protected $hidden = [
-      'from_id',
-      'to_id',
-      'visible_id',
-      'created_at',
-      'updated_at',
+//    protected $hidden = [
+//      'from_id',
+//      'to_id',
+//      'visible_id',
+//      'created_at',
+//      'updated_at',
+//    ];
+
+    protected $casts = [
+      'created_at' => 'datetime:Y-m-d H:i:s'
     ];
 
     public $timestamps = true;
@@ -35,6 +39,6 @@ class ChatModel extends Model
     }
 
     public function messages() {
-      return $this->hasMany(MessageModel::class, 'id', 'chat_id');
+      return $this->hasMany(MessageModel::class, 'chat_id', 'id');
     }
 }

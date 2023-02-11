@@ -38,6 +38,7 @@
 <script>
 export default {
   props: ['house', 'supports'],
+  inject:['user'],
   name: "AppAddContacts",
   data() {
     return {

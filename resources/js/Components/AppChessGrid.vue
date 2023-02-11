@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     log(item) {
-      // console.log(item)
+
     },
     checkFlat(floor, count) {
       let object = {};
@@ -90,13 +90,7 @@ export default {
     }
   },
   created() {
-    console.log(this.flats)
 
-    this.flats.forEach(item => {
-      item.active = 0
-    })
-
-    // console.log(this.flats.find(i => i.floor === 1 && i.number_from_stairs === 3))
   }
 }
 </script>

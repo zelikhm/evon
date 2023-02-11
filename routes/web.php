@@ -40,6 +40,8 @@ Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
   Route::get('/favorites', ['App\Http\Controllers\User\FavoriteController', 'index']);
 //
   Route::get('/chat', ['App\Http\Controllers\User\ChatController', 'index']);
+  Route::get('/chats', ['App\Http\Controllers\User\ChatController', 'getChats'])->name('chats');
+  Route::get('/chat/{id}', ['App\Http\Controllers\User\ChatController', 'getChat']);
 
 });
 

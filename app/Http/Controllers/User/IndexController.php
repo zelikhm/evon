@@ -107,7 +107,7 @@ class IndexController extends Controller
         'name' => "Evon",
         'html' => $message, // Обязательно
         'from' => "info@evon-tr.com", // Обязательно
-        'to' => "boss.zelikov99@gmail.com", // Обязательно
+        'to' => "evon.information@gmail.com", // Обязательно
         'headers' => "[{ 'x-tag': 'my_newsletter_ids' }]",
         'text' => "Text version message"
       ))

@@ -17,17 +17,25 @@ import {Link} from '@inertiajs/inertia-vue3'
              type="text" id="name_object" >
     </div>
 
-    <div :class="{ validation: validation.description, 'border__purple': isBorder === 2 }" class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px] h-[140px] xxl:h-[115px] xl:h-[95px]">
+    <div :class="{ validation: validation.description, 'border__purple': isBorder === 2 }" class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px] h-[350px] xxl:h-[115px] xl:h-[95px]">
       <label
         :class="{ validationText: validation.description }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"
         for="description_object">Описание объекта
       </label>
-      <textarea v-model="object.description"
-                :class="{ 'border---': isBorder === 2  }"
-                @input="checkValidation(3)"
-                @click="changeBorder(2)"
-                class="custom__scroll text-[#1E1D2D] h-full resize-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0"
-                type="text" id="description_object"></textarea>
+
+      <QuillEditor
+        :class="{ 'border---': isBorder === 2  }"
+        style="height: 280px!important;"
+        class="custom__scroll text-[#1E1D2D] h-full resize-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0"
+        toolbar="full"
+        v-model:content="object.description"
+        content-type="html"
+        theme="snow"
+      />
+
+<!--      <textarea v-model="object.description"-->
+                <!--                type="text" id="description_object">-->
+<!--      </textarea>-->
     </div>
 
     <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]"
@@ -345,6 +353,8 @@ import {Link} from '@inertiajs/inertia-vue3'
 
 import Multiselect from '@vueform/multiselect'
 import VueMultiselect from 'vue-multiselect'
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 export default {
   props: ['dops', 'infos', 'city', 'supports', 'count', 'house'],
@@ -688,7 +698,7 @@ export default {
     },
   },
   components: {
-    Multiselect, VueMultiselect
+    Multiselect, VueMultiselect, QuillEditor,
   },
   mounted() {
     let link = +window.location.href.split('/').at(-1)

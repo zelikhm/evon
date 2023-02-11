@@ -65,6 +65,7 @@
 
 export default {
   props: ['contact', 'isEdit', 'house'],
+  inject:['user'],
   data() {
     return {
       myPhoto: '',
@@ -80,7 +81,6 @@ export default {
         token: this.globalToken
       },
       error: false,
-      user: computed(() => usePage().props.auth.user)
     }
   },
   methods: {

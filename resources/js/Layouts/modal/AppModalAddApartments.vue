@@ -174,6 +174,7 @@
 
 export default {
   props: ['house', 'activeFrame', 'selectFlat'],
+  inject:['user'],
   data() {
     return {
       flat: {
@@ -234,7 +235,6 @@ export default {
       imageLoadTwo: false,
       imageTwo: '',
       isBorder: 0,
-      user: computed(() => usePage().props.auth.user)
     }
   },
   methods: {
@@ -289,7 +289,7 @@ export default {
       formData.append('status', this.flat.status)
       formData.append('stairs', this.flat.stairs)
       formData.append('price', this.flat.price)
-      formData.append('token', this.globalToken)
+      formData.append('token', this.user.token)
 
 
       console.log(this.selectFlat)
@@ -333,7 +333,7 @@ export default {
       formData.append('price', this.flat.price)
       formData.append('image_up', this.flat.image_up)
       formData.append('image_down', this.flat.image_down)
-      formData.append('token', this.globalToken)
+      formData.append('token', this.user.token)
 
       axios({
         method: 'post',
