@@ -68,53 +68,6 @@
     <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
     <div class="grid grid__chess max-w-[1680px] mx-auto box-content exl:max-w-full">
       <div class="">
-<!--        <div class="flex border__right-bottom">-->
-<!--          <div class="relative z-30 ml-[6.25vw]">-->
-<!--            <div @click="openCost = !openCost" class="cursor-pointer border__right flex items-center gap-10 xxl:gap-8 xl:gap-6 py-3 xxl:py-2.5 xl:py-2 pr-4 xxl:pr-3 xl:pr-2.5">-->
-<!--              <span class="text-base xxl:text-sm xl:text-xs leading-none">Цена</span>-->
-<!--              <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2" alt="">-->
-<!--            </div>-->
-<!--            <div v-if="openCost" class="max-h-[150px] bg-white overflow-y-auto custom__scroll-grey flex flex-col absolute w-full rounded-[5px] top-[120%] left-0 flex border border-solid border-[#E5DFEE]">-->
-<!--              <span-->
-<!--                @click="openCost = false"-->
-<!--                v-for="cost in costs"-->
-<!--                class="hover__select cursor-pointer text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none px-2 py-2 xxl:py-1.5 xl:py-1 whitespace-nowrap"-->
-<!--              >-->
-<!--                {{ cost.cost }}-->
-<!--              </span>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="relative z-30">-->
-<!--            <div @click="openSquare = !openSquare" class="cursor-pointer border__right flex items-center gap-10 xxl:gap-8 xl:gap-6 py-3 xxl:py-2.5 xl:py-2 px-4 xxl:px-3 xl:px-2.5">-->
-<!--              <span class="text-base xxl:text-sm xl:text-xs leading-none">Площадь</span>-->
-<!--              <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2" alt="">-->
-<!--            </div>-->
-<!--            <div v-if="openSquare" class="max-h-[150px] bg-white overflow-y-auto custom__scroll-grey flex flex-col absolute w-full rounded-[5px] top-[120%] left-0 flex border border-solid border-[#E5DFEE]">-->
-<!--              <span-->
-<!--                @click="openSquare = false"-->
-<!--                v-for="square in squares"-->
-<!--                class="hover__select cursor-pointer text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none px-2 py-2 xxl:py-1.5 xl:py-1 whitespace-nowrap"-->
-<!--              >-->
-<!--                {{ square.square }}-->
-<!--              </span>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="relative z-30">-->
-<!--            <div @click="openLayout = !openLayout" class="cursor-pointer border__right flex items-center gap-10 xxl:gap-8 xl:gap-6 py-3 xxl:py-2.5 xl:py-2 px-4 xxl:px-3 xl:px-2.5">-->
-<!--              <span class="text-base xxl:text-sm xl:text-xs leading-none">Планировка</span>-->
-<!--              <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2" alt="">-->
-<!--            </div>-->
-<!--            <div v-if="openLayout" class="max-h-[150px] bg-white overflow-y-auto custom__scroll-grey flex flex-col absolute w-full rounded-[5px] top-[120%] left-0 flex border border-solid border-[#E5DFEE]">-->
-<!--              <span-->
-<!--                @click="openLayout = false"-->
-<!--                v-for="layout in layouts"-->
-<!--                class="hover__select cursor-pointer text-base xxl:text-sm xl:text-xs lg:text-[15x] leading-none px-2 py-2 xxl:py-1.5 xl:py-1 whitespace-nowrap"-->
-<!--              >-->
-<!--                {{ layout.layout }}-->
-<!--              </span>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
         <app-chess-grid v-if="activeChess"
                         :flats="house.frames[frameId].flats"
                         :house="house"
@@ -217,6 +170,13 @@ export default {
         } else {
           frame.active = 0
         }
+
+        frame.flats.forEach(item => {
+          if(item.id !== this.selectFlat.id) {
+            item.active = 0
+          }
+
+        })
       })
     },
     targetFrameMobile(item) {
@@ -235,24 +195,39 @@ export default {
   created() {
     if (this.house.frames.length > 0) {
       this.frameId = 0
+      let p = 0;
       this.house.frames.forEach((item, idx) => {
         if (idx === 0) {
           item.active = 1
           this.activeFrameMobile = item
+          p++;
         }
         else item.active = 0
 
-        if (item.flats.length > 0) {
-          item.flats.forEach((flat, i) => {
-            if (i === 0) flat.active = 1
-            else flat.active = 0
-          })
-        }
+        // if (item.flats.length > 0) {
+        //   item.flats.forEach((flat, i) => {
+        //     if (i === 0 && item.active === 1) {
+        //       flat.active = 1
+        //     } else {
+        //       flat.active = 0
+        //     }
+        //   })
+        // }
 
         if (idx === this.frameId) {
-          item.flats.forEach((item, idx) => {
-            if (idx === 0) this.selectFlat = item
+          item.flats.forEach((flat, idx) => {
+            if (idx === 0) {
+              console.log(item);
+              flat.active = 1;
+              this.selectFlat = flat;
+            } else {
+              flat.active = 0;
+            }
           })
+        } else {
+          item.flats.forEach((flat, idx) => {
+            flat.active = 0;
+          });
         }
       })
 
