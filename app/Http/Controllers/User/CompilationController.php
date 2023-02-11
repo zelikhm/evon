@@ -104,6 +104,8 @@ class CompilationController extends Controller
       $user = [];
     }
 
+//   dd($houses_cities['Алания'][0]->flats);
+
     return Inertia::render('AppLinkSelection', [
       'houses' => $houses_cities,
       'compilation' => $compilation,

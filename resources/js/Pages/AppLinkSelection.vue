@@ -53,7 +53,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                     </div>
                     <div class="text-[#1E1D2D] flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 p-5 xxl:p-4 xl:p-3">
                       <span class="font-bold text-[20px] xxl:text-[16px] xl:text-[13px] leading-none">{{ compilation.isVisible === 1 ? item.title : `Лот №${item.id + 10000}` }}</span>
-                      <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">от {{ item.minPrice.toLocaleString('ru') }} €, от {{ Math.round(item.minSquare / item.minPrice) }} € за м2</span>
+                      <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">от {{ getMinPrice(item) }} €, до {{ getMaxPrice(item) }} € за м2</span>
                     </div>
                   </Link>
                 </div>
@@ -106,14 +106,36 @@ export default {
   data() {
     return {
       openNotification: false,
-      href: null
+      href: null,
+      count: 0,
     }
   },
   methods: {
+    getMinPrice(house) {
+      let object = [];
 
+      house.flats.forEach(item => {
+        object.push((item.price / item.square));
+      })
+
+      object.sort((a, b) => a - b);
+
+      return object.length > 0 ? object[0].toFixed(2) : 0;
+
+    },
+    getMaxPrice(house) {
+      let object = [];
+
+      house.flats.forEach(item => {
+        object.push((item.price / item.square));
+      })
+
+      object.sort((a, b) => b - a);
+
+      return object.length > 0 ? object[0].toFixed(2) : 0;
+    }
   },
   created() {
-    console.log(this.compilation)
     this.href = window.location.href
 
     for (let key in this.houses) {
