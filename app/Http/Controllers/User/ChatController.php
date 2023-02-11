@@ -64,6 +64,26 @@ class ChatController extends Controller
 
     public function getChats() {
 
+      $chats = ChatModel::orWhere('from_id', Auth::id())
+        ->orWhere('to_id', Auth::id())
+        ->orderBy('updated_at', 'DESC')
+        ->with(['from', 'to'])
+        ->get();
+
+      foreach ($chats as $item) {
+
+        $item->message = MessageModel::where('chat_id', $item->id)
+          ->orderBy('created_at', 'DESC')->first();
+
+      }
+
+      return Inertia::render('AppChat', [
+        'user' => Auth::user(),
+        'chats' => $chats,
+        'chat' => null,
+        'notification' => $this->getNotification(),
+      ]);
+
     }
 
     public function getChat($id) {
