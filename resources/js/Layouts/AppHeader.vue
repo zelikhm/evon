@@ -62,7 +62,9 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
           <div class="flex">
             <div class="header__chat cursor-pointer flex items-center justify-center h-[60px] lg:h-12 xxl:h-12 xl:h-10 px-8 xxl:px-6 xl:px-5 lg:px-4">
               <div class="relative">
-                <img src="../../assets/svg/chat_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="Чат">
+                <Link :href="route('chats')">
+                  <img src="../../assets/svg/chat_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="Чат">
+                </Link>
                 <div class="absolute flex items-center justify-center -top-[30%] -right-[50%] rounded-full bg-[#E84680] h-3.5 xxl:h-3 xl:h-2.5 lg:h-3.5 w-3.5 xxl:w-3 xl:w-2.5 lg:w-3.5">
                   <span class="text-white text-[12px] xxl:text-[10px] xl:text-[8px] lg:text-[11px]">3</span>
                 </div>

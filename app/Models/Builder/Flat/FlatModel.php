@@ -23,6 +23,10 @@ class FlatModel extends Model
       'imageDown',
     ];
 
+    protected $casts = [
+      'created_at' => 'datetime:Y-m-d H:i:s'
+    ];
+
 //    protected $hidden = [
 //      'created_at',
 //      'updated_at',

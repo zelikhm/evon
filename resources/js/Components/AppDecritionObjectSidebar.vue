@@ -25,7 +25,7 @@
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px] leading-none" v-if="house.user.status">{{ house.user.status }}</span>
           </div>
         </div>
-        <button class="w-full  bg-[#F6F3FA] text-[#6536A5] text-base xxl:text-sm xl:text-xs lg:text-[15px] rounded-[6px] py-4 xxl:py-3 xl:py-2.5">Написать в чат</button>
+        <button class="w-full  bg-[#F6F3FA] text-[#6536A5] text-base xxl:text-sm xl:text-xs lg:text-[15px] rounded-[6px] py-4 xxl:py-3 xl:py-2.5" v-on:click="openChat(house.user.id)">Написать в чат</button>
       </div>
     </div>
     <div class="pb-10 xxl:pb-8 xl:pb-6" v-if="house.info.exclusive && house.info.exclusive !== 'null'">
@@ -76,6 +76,7 @@
 <script>
 export default {
   emits: ['open-all-news'],
+  inject: ['user'],
   props: {
     house: []
   },
@@ -83,6 +84,11 @@ export default {
     return {
       news: null,
       link: window.location.protocol + '//' + window.location.host
+    }
+  },
+  methods: {
+    openChat(id) {
+      window.location.href = '/profile/chat?to=' + this.user.id + '&from=' + id;
     }
   },
   created() {

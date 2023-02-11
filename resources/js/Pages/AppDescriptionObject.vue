@@ -247,6 +247,11 @@ export default {
       selectFlat: null
     }
   },
+  provide() {
+    return {
+      user: this.user,
+    }
+  },
   methods: {
     updateBlockClient(data) {
       this.isWithClient = data
