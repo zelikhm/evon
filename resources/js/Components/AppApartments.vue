@@ -102,6 +102,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 export default {
   props: ['house'],
   emits: ['open-add-frame'],
+  inject:['user'],
   data() {
     return {
       deleteConfirm: false,
@@ -153,7 +154,7 @@ export default {
         image_up: item.image_up,
         image_down: item.image_down,
         status: item.status,
-        token: this.globalToken
+        token: this.user.token
       }).then(response => console.log(response.data))
     },
     targetFrame(frame, idx) {
