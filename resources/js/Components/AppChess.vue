@@ -100,7 +100,7 @@
             <img :src="selectFlat.imageUp" @click="this.$emit('open-cheme', selectFlat, 0)" class="cursor-pointer w-40 xxl:w-36 xl:w-32" alt="">
           </div>
         </div>
-        <div @click="this.$emit('open-cheme', selectFlat, 1)" class="flex items-center justify-center justify-between lg:justify-start lg:my-6 mr-[6.25vw] lg:mx-auto lg:px-[6.25vw]">
+        <div v-if="selectFlat.imageDown !== null" @click="this.$emit('open-cheme', selectFlat, 1)" class="flex items-center justify-center justify-between lg:justify-start lg:my-6 mr-[6.25vw] lg:mx-auto lg:px-[6.25vw]">
           <img :src="selectFlat.imageDown" class="pl-14 xxl:pl-10 xl:pl-8 pt-16 xxl:pt-12 xl:pt-10 lg:p-0 w-full object-cover cursor-pointer" alt="">
         </div>
       </div>
