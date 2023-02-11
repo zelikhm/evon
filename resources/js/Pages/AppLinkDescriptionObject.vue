@@ -349,7 +349,7 @@
           <div class="contact__selling h-fit bg-white rounded-[10px] p-4 xxl:p-3 xl:p-2.5 mb-7 xxl:mb-5 xl:mb-4">
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 mb-5 xxl:mb-4 xl:mb-4">
               <img class="w-14 xxl:w-12 xl:w-10 h-14 xxl:h-12 xl:h-10 rounded-full" v-if="compilation.user.image"
-                   :src="compilation.user.image" alt="">
+                   :src="'/' + compilation.user.image" alt="">
               <div class="flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
                 <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none font-medium">{{ compilation.user.first_name + ' ' + compilation.user.last_name }}</span>
                 <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">{{ compilation.user.status }}</span>
