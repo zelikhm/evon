@@ -17,13 +17,15 @@ class ChatController extends Controller
 
     public function index(Request $request) {
 
-
-
       if($request->from && $request->to) {
-        $chat = ChatModel::where('from_id', $request->from)->first();
+        $chat = ChatModel::where('from_id', $request->from)
+          ->where('to_id', $request->to)
+          ->first();
 
         if($chat === null) {
-          $chat = ChatModel::where('to_id', $request->to)->first();
+          $chat = ChatModel::where('from_id', $request->to)
+            ->where('to_id', $request->from)
+            ->first();
 
           if($chat === null) {
 
@@ -78,8 +80,16 @@ class ChatController extends Controller
 
       $chats = ChatModel::orWhere('from_id', Auth::id())
         ->orWhere('to_id', Auth::id())
-        ->with(['messages', 'from', 'to'])
+        ->orderBy('updated_at', 'DESC')
+        ->with(['from', 'to'])
         ->get();
+
+      foreach ($chats as $item) {
+
+        $item->message = MessageModel::where('chat_id', $item->id)
+          ->orderBy('created_at', 'DESC')->first();
+
+      }
 
       return Inertia::render('AppChat', [
         'user' => Auth::user(),

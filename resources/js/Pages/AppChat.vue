@@ -21,8 +21,13 @@
         <app-chat-contact-list
           :class="{'left__625': openContactList}"
           :chats="chats"
+          :user="user"
         />
-        <app-chat-message v-if="openChat" :chat="chat_object" :user="user"></app-chat-message>
+        <app-chat-message
+          v-if="openChat"
+          :chat="chat_object"
+          :user="user"
+        ></app-chat-message>
       </div>
     </div>
   </main>
@@ -52,8 +57,6 @@
         this.chat_object = this.chat;
         this.openChat = true;
       }
-
-      console.log(this.chat_object);
     },
     methods: {
 
