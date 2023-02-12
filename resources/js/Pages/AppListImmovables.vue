@@ -1,4 +1,5 @@
 <template>
+  <NewsModal v-if="isNews" @close="isNews = false" :new_object="new_object"></NewsModal>
   <app-modal-notification
     class="left-[2vw] transition-all duration-1000"
     :class="{'-left__full': !openNotification}"
@@ -39,6 +40,7 @@
           :type="type"
         />
         <app-news-developer
+            @open="(item) => openNewModal(item)"
             class="block lg:hidden"
             :news="news"
             :adminNews="adminNews"
@@ -58,6 +60,7 @@
 <script>
 import AppHeader from '../Layouts/AppHeader.vue'
 import AppFooter from "../Layouts/AppFooter.vue"
+import NewsModal from "../Components/NewsComponent/NewsModal.vue";
 import AppListNewBuilding from "../Components/AppListNewBuilding.vue"
 import AppNewsDeveloper from "../Components/AppNewsDeveloper.vue"
 import AppModalNotification from "../Layouts/modal/AppModalNotification.vue"
@@ -68,6 +71,9 @@ import {usePage} from "@inertiajs/inertia-vue3";
 import {computed} from "vue";
 
 export default {
+  emits: {
+
+  },
   props: {
     houses: [],
     dops: [],
@@ -89,10 +95,17 @@ export default {
       house: null,
       titleNewCompilation: '',
       isWithClient: false,
-      readyCompilation: null
+      readyCompilation: null,
+      isNews: true,
+      new_object: [],
     }
   },
   methods: {
+    openNewModal(item) {
+      this.isNews = true;
+      this.new_object = item;
+    },
+
     updateCompilation(data) {
       this.readyCompilation.push(data)
     },
@@ -121,6 +134,7 @@ export default {
     AppModalNotification,
     AppAddSelections,
     AppImmovablesCreateSelection,
+    NewsModal
   },
   created() {
     this.readyCompilation = this.compilation

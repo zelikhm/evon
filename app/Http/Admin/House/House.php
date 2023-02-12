@@ -67,7 +67,10 @@ class House extends Section implements Initializable
    */
   public function onDisplay()
   {
-    $columns = [
+    $display = AdminDisplay::datatablesAsync()->setDatatableAttributes(['bInfo' => false])->setDisplaySearch(true, 'Поиск')->paginate(40);
+
+
+    $display->setColumns([
       AdminColumn::text('id', '#')
         ->setWidth('50px')
         ->setHtmlAttribute('class', 'text-center'),
@@ -86,18 +89,10 @@ class House extends Section implements Initializable
           return'Одобрено';
         }
       })->setWidth('350px'),
-    ];
-
-
-
-    $display = AdminDisplay::datatablesAsync()
-      ->paginate(40)
-      ->setColumns($columns)
-      ->setDisplaySearch(true, 'поиск')
-      ->setHtmlAttribute('class', 'table-primary table-hover');
+    ]);
 
     $display->setApply(function (Builder $query) {
-      $query->OrderBy('id', 'asc');
+      $query->OrderBy('active', 'asc');
     })->setNewEntryButtonText('Создать жилой комлекс');
 
     return $display;

@@ -407,14 +407,18 @@ import { Link } from '@inertiajs/inertia-vue3'
       <div class="w-full flex justify-center mb-14 xxl:mb-10 xl:mb-8" @click="nextShow()" v-if="readyHouses.length > count && !map">
         <button class="more__button transition-all text-[#E84680] border border-solid border-[#E84680] text-base xxl:text-sm xl:text-xs lg:text-[15px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2.5 xl:py-1.5 rounded-[3px]">Показать еще</button>
       </div>
+
       <app-map @open-add-selections="openAddSelections" v-if="map" :houses="houses_array" :user="user"  />
     </div>
   </div>
+
+
 </template>
 
 <script>
 import AppMap from "@/Components/AppMap.vue"
 
+import NewsModal from "../Components/NewsComponent/NewsModal.vue";
 import Multiselect from '@vueform/multiselect'
 import AppModalNotification from "../Layouts/modal/AppModalNotification.vue"
 import { router } from "@inertiajs/vue3";
@@ -512,6 +516,7 @@ export default {
       text: '',
       openNotification: false,
       openLocation: false,
+      isNewModal: false,
     }
   },
   methods: {
@@ -719,6 +724,7 @@ export default {
     AppMap,
     Multiselect,
     AppModalNotification,
+    NewsModal
   }
 }
 </script>
