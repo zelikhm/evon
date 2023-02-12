@@ -89,6 +89,7 @@ class HouseController extends Controller
       'adminNews' => $this->getAdminNews(),
       'user' => Auth::user(),
       'count_houses' => $count,
+      'type' => 0,
     ]);
   }
 
@@ -112,6 +113,7 @@ class HouseController extends Controller
       'news' => $this->getNewsForPage(),
       'adminNews' => $this->getAdminNews(),
       'user' => Auth::user(),
+      'type' => 1,
     ]);
   }
 

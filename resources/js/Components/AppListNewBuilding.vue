@@ -434,6 +434,7 @@ export default {
       default: 0,
     },
     count_houses: 0,
+    type: 0,
   },
   emits: ['open-filter', 'open-add-selections' ,'close-filter'],
   data() {
@@ -666,10 +667,18 @@ export default {
     } else {
       this.readyHouses = this.houses
 
-      axios.get('/api/house/getHousesJk').then(res => {
-        this.readyHouses = res.data;
-        this.updateHouses();
-      })
+      if(this.type === 0) {
+        axios.get('/api/house/getHousesJk').then(res => {
+          this.readyHouses = res.data;
+          this.updateHouses();
+        })
+      } else {
+        axios.get('/api/house/getHousesVillages').then(res => {
+          this.readyHouses = res.data;
+          this.updateHouses();
+        })
+      }
+
     }
 
     let date = new Date(),

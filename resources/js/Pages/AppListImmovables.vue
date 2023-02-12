@@ -36,6 +36,7 @@
           :city="city"
           :builders="builders"
           :count_houses="count_houses"
+          :type="type"
         />
         <app-news-developer
             class="block lg:hidden"
@@ -77,6 +78,7 @@ export default {
     adminNews: [],
     news: [],
     count_houses: 0,
+    type: 0,
   },
   data() {
     return {
@@ -104,7 +106,6 @@ export default {
       this.openAddSelection = true
     },
     openSelection(house) {
-      console.log(house)
       this.openAddSelection = true
       this.house = house
     },
