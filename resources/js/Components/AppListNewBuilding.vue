@@ -165,8 +165,11 @@ import { Link } from '@inertiajs/inertia-vue3'
             </div>
           </div>
           <div class="my-10 xxl:my-8 xl:my-6">
-            <div class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] mb-5 xxl:mb-4 xl:mb-3 leading-none">Расположение</div>
-            <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
+            <div @click="openLocation = !openLocation" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] mb-5 xxl:mb-4 xl:mb-3 leading-none">
+              <span>Расположение</span>
+              <img :class="{'rotate-180': openLocation}" class=" transition-all w-3 xxl:w-2.5 xl:w-2" src="../../assets/svg/arrow_down_black.svg" alt="">
+            </div>
+            <div v-if="openLocation"  class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
               <div :class="{'border__purple': isBorder === 3 }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_sea">от моря (м)</label>
                 <input @click="changeBorder(3)" v-model="filters.toSea" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_sea">
@@ -507,6 +510,7 @@ export default {
       count: 30,
       text: '',
       openNotification: false,
+      openLocation: false,
     }
   },
   methods: {
