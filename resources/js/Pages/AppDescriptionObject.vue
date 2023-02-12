@@ -338,7 +338,7 @@ export default {
       this.house.promotion = false
     })
 
-    this.mainPhotos = this.house.images_reload
+    this.mainPhotos = this.house.images
   },
   computed: {
     countFlats() {

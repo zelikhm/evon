@@ -102,6 +102,13 @@ class HouseController extends Controller
 
     $houses = $this->getAllHouse('Виллы', false);
 
+    $count = HouseModel::where('visible', 1)
+      ->where('active', 2)
+      ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
+      ->select('house_models.*')
+      ->where('house_characteristics_models.type', 'Виллы')
+      ->count();
+
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
       'dops' => TypesModel::all(),
@@ -113,6 +120,7 @@ class HouseController extends Controller
       'news' => $this->getNewsForPage(),
       'adminNews' => $this->getAdminNews(),
       'user' => Auth::user(),
+      'count_houses' => $count,
       'type' => 1,
     ]);
   }
@@ -223,8 +231,6 @@ class HouseController extends Controller
     ]);
 
     $house = $this->getHouseSlug($slug);
-
-    $house->images_reload = $this->getPhotos($house);
 
     if($house->info === null) {
       return redirect(404);
