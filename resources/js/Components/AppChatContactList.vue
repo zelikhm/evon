@@ -35,7 +35,7 @@
     <div v-for="chat in searchChat">
       <Link :href="'/profile/chat/' + chat.id">
         <div class="flex items-center cursor-pointer gap-4 xxl:gap-3 xl:gap-2.5 pt-4 xxl:pt-3 xl:pt-2.5 px-4 xxl:px-3 xl:px-2.5">
-          <img class="w-12 xxl:w-10 xl:w-8 rounded-full self-start" src="../../assets/chat_avatar.png" alt="">
+          <img class="w-12 xxl:w-10 xl:w-8 rounded-full self-start" :src="getPhoto(chat)" alt="">
           <div class="flex flex-col gap-1 xl:gap-0.5 w-full pb-4 xxl:pb-3 xl:pb-2.5 border__bottom--opacity">
             <div class="flex justify-between items-center">
               <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
@@ -48,8 +48,8 @@
               + (chat.from.last_name === null ? '' : chat.from.last_name)
               }}
             </span>
-                <span v-bind:class="{ 'bg-[#6435A5]': chat.from.role > 0 , 'bg-[#E87746]': chat.from.role === 0 }" class="text-white text-[10px] xxl:text-[9px] xl:text-[8px] font-medium leading-none rounded-[3px] px-1.5 py-1 xl:px-1 py-0.5" v-if="chat.from.id !== user.id">{{ getType(chat) }}</span>
-                <span v-bind:class="{ 'bg-[#6435A5]': chat.to.role > 0 , 'bg-[#E87746]': chat.to.role === 0 }" class="bg-[#E87746] text-white text-[10px] xxl:text-[9px] xl:text-[8px] font-medium leading-none rounded-[3px] px-1.5 py-1 xl:px-1 py-0.5" v-if="chat.to.id !== user.id">{{ getType(chat) }}</span>
+                <span v-bind:class="{ 'bg-[#6435A5]': chat.from.role !== 0 , 'bg-[#E87746]': chat.from.role === 0 }" class="text-white text-[10px] xxl:text-[9px] xl:text-[8px] font-medium leading-none rounded-[3px] px-1.5 py-1 xl:px-1 py-0.5" v-if="chat.from.id !== user.id">{{ getType(chat) }}</span>
+                <span v-bind:class="{ 'bg-[#6435A5]': chat.to.role !== 0 , 'bg-[#E87746]': chat.to.role === 0 }" class="text-white text-[10px] xxl:text-[9px] xl:text-[8px] font-medium leading-none rounded-[3px] px-1.5 py-1 xl:px-1 py-0.5" v-if="chat.to.id !== user.id">{{ getType(chat) }}</span>
               </div>
               <div class="flex gap-1">
                 <!--            <img src="../../assets/svg/chat_check_message.svg" class="w-5 xxl:w-4 xl:w-3.5" alt="">-->
@@ -108,6 +108,15 @@ export default {
 
   },
   methods: {
+    getPhoto(chat) {
+
+      if(chat.from.id !== this.user.id) {
+        return chat.from.role === 0 ? chat.from.image : '/images/hom.png';
+      } else if (chat.to.id !== this.user.id) {
+        return chat.to.role === 0 ? chat.to.image : '/images/hom.png';
+      }
+
+    },
     getType(chat) {
 
       if(chat.from.id !== this.user.id) {

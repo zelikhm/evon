@@ -64,8 +64,8 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
             <div class="header__chat cursor-pointer flex items-center justify-center h-[60px] lg:h-12 xxl:h-12 xl:h-10 px-8 xxl:px-6 xl:px-5 lg:px-4">
               <div class="relative">
                   <img src="../../assets/svg/chat_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="Чат">
-                <div class="absolute flex items-center justify-center -top-[30%] -right-[50%] rounded-full bg-[#E84680] h-3.5 xxl:h-3 xl:h-2.5 lg:h-3.5 w-3.5 xxl:w-3 xl:w-2.5 lg:w-3.5">
-                  <span class="text-white text-[12px] xxl:text-[10px] xl:text-[8px] lg:text-[11px]">3</span>
+                <div  v-if="isChat === true" class="absolute flex items-center justify-center -top-[30%] -right-[50%] rounded-full bg-[#E84680] h-3.5 xxl:h-3 xl:h-2.5 lg:h-3.5 w-3.5 xxl:w-3 xl:w-2.5 lg:w-3.5">
+                  <span class="text-white text-[12px] xxl:text-[10px] xl:text-[8px]">{{ chats }}</span>
                 </div>
               </div>
             </div>
@@ -123,8 +123,8 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
             <Link :href="route('chats')" class="cursor-pointer flex items-center justify-center h-[60px] xxl:h-12 xl:h-10 px-8 xxl:px-6 xl:px-5">
               <div class="relative">
                 <img src="../../assets/svg/chat_icon.svg" class="h-6 xxl:h-5 xl:h-4" alt="Чат">
-                <div class="absolute flex items-center justify-center -top-[30%] -right-[50%] rounded-full bg-[#E84680] h-3.5 xxl:h-3 xl:h-2.5 w-3.5 xxl:w-3 xl:w-2.5">
-                  <span class="text-white text-[12px] xxl:text-[10px] xl:text-[8px]">3</span>
+                <div v-if="isChat === true" class="absolute flex items-center justify-center -top-[30%] -right-[50%] rounded-full bg-[#E84680] h-3.5 xxl:h-3 xl:h-2.5 w-3.5 xxl:w-3 xl:w-2.5">
+                  <span class="text-white text-[12px] xxl:text-[10px] xl:text-[8px]">{{ chats }}</span>
                 </div>
               </div>
             </Link>
@@ -172,7 +172,28 @@ export default {
       overlaySelect: false,
       withClient: false,
       search: null,
+      isChat: false,
+      chats: 0,
     }
+  },
+  mounted() {
+
+    setInterval(() => {
+      axios.post('/api/chat/checkChat', {
+        user_id: this.user.id,
+        token: this.user.token,
+      }).then(res => {
+        this.chats = res.data;
+
+        if(this.chats > 0) {
+          this.isChat = true;
+        } else {
+          this.isChat = false;
+        }
+      })
+    }, 5000)
+
+
   },
   emits: ['login-realtor', 'login-developer', 'open-register'],
   methods: {

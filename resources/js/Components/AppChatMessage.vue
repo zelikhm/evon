@@ -4,7 +4,8 @@
          class="absolute transition-all transition-[0.3s] rounded-[10px] p-4 xxl:p-3 xl:p-2.5 w-[380px] xxl:w-[320px] xl:w-[260px] bg-white m-8 xxl:m-6 xl:m-5 lg:m-3 z-10 top-0 right-0">
       <div @click="chatProfile = !chatProfile" class="flex justify-between items-center cursor-pointer">
         <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-          <img class="w-12 xxl:w-10 xl:w-8 rounded-full" src="../../assets/chat_avatar.png" alt="">
+          <img class="w-12 xxl:w-10 xl:w-8 rounded-full self-start" v-if="from_user.role === 0" :src="chat.from.image" alt="">
+          <img class="w-12 xxl:w-10 xl:w-8 rounded-full self-start" v-if="from_user.role !== 0" src="/images/hom.png" alt="">
           <div class="flex flex-col gap-2 xxl:gap-1.5 xl:gap-1" v-if="chat.from.id !== user.id">
             <span class="text-lg xxl:text-[15px] xl:text-[13px] leading-none" >{{ chat.from.first_name + ' ' + (chat.from.last_name === null ? '' : chat.from.last_name) }}</span>
             <span class="text-sm xxl:text-[12px] xl:text-[10px] text-[#8A8996] leading-[1]">{{ chat.from.status }}</span>
@@ -106,6 +107,13 @@
   export default {
     props: ['user', 'chat'],
     mounted() {
+
+      if(this.chat.from.id === this.user.id) {
+        this.from_user = this.chat.to;
+      } else {
+        this.from_user = this.chat.from;
+      }
+
       this.chat_object = this.chat;
 
       setInterval(() => {
@@ -169,6 +177,7 @@
         chat_object: [],
         chatProfile: false,
         error: false,
+        from_user: [],
         month: {
           'ru': {
             0: 'Января',

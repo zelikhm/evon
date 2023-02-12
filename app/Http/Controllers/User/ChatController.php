@@ -39,26 +39,14 @@ class ChatController extends Controller
 
       return redirect()->to('/profile/chat/' . $chat->id);
 
-//      if($request->chat_id) {
-//        $chat = ChatModel::where('id', $request->chat_id)
-//          ->orWhere('from_id', Auth::id())
-//          ->orWhere('to_id', Auth::id())
-//          ->with(['messages', 'from', 'to'])
-//          ->firstOrFail();
-//      } else {
-//        $chat = null;
-//      }
-//
-//      $chats = ChatModel::orWhere('from_id', Auth::id())
-//        ->orWhere('to_id', Auth::id())
-//        ->with(['messages', 'from', 'to'])
-//        ->get();
-//
-//      return Inertia::render('AppChat', [
-//        'chats' => $chats,
-//        'chat' => $chat,
-//        'notification' => $this->getNotification(),
-//      ]);
+    }
+
+    public function checkChat(Request $request) {
+
+      $chats = ChatModel::where('visible_id', $request->user_id)
+        ->count();
+
+      return response()->json($chats, 200);
 
     }
 
