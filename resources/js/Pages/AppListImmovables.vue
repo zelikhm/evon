@@ -96,7 +96,7 @@ export default {
       titleNewCompilation: '',
       isWithClient: false,
       readyCompilation: null,
-      isNews: true,
+      isNews: false,
       new_object: [],
     }
   },
