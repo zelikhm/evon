@@ -2,7 +2,7 @@
   <app-header :user="user" @update-block-client="updateBlockClient" />
   <app-modal-album
     v-if="album"
-    :image="house.images_reload"
+    :image="house.images"
     @close-album="album = false"
   />
   <app-add-selections
