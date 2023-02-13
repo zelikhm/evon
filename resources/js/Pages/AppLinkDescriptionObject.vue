@@ -72,7 +72,7 @@
           >
             <div v-if="house.images.length > 0">
               <swiper-slide class="h-full flex justify-center" v-for="image in house.images">
-                <img @click="album = true" class="h-full w-full object-cover cursor-pointer" :src="image" alt="">
+                <img @click="album = true" class="h-full w-full object-cover cursor-pointer" :src="image.name" alt="">
               </swiper-slide>
             </div>
             <div v-else>
