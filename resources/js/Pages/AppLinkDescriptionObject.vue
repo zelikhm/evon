@@ -76,9 +76,6 @@
             <swiper-slide class="h-full flex justify-center" v-else>
               <img class="h-full w-full object-cover" src="../../assets/no-img-house.jpg" alt="">
             </swiper-slide>
-            <swiper-slide class="h-full w-full flex justify-center">
-              <img @click="album = true" class="w-full h-full" src="../../assets/slider_img.jpg" alt="">
-            </swiper-slide>
           </swiper>
           <div
             class="border border-solid border-[#E5DFEE] h-[100px] xxl:h-[80px] xl:h-[60px] flex md:flex-col md:h-fit items-center justify-evenly rounded-[12px] mt-7 xxl:mt-5 xl:mt-4 mb-16 xxl:mb-12 xl:mb-10">
@@ -375,10 +372,10 @@
             </div>
           </div>
           <GMapMap v-if="house.visible === 1 && compilation.isVisible === 1" :center="center" :zoom="15"
-                   map-type-id="terrain" class="w-full h-[18vw] lg:h-[28vw] sm:h-[36vw] rounded-[10px] mb-10"
-                   :draggable="true" @click="handleClick" ref="myMapRef" :click="true">
+                   map-type-id="roadmap" class="w-full h-[18vw] lg:h-[28vw] sm:h-[36vw] rounded-[10px] mb-10"
+                   :draggable="false" @click="handleClick" ref="myMapRef" :click="true">
             <GMapMarker :key="index" v-for="(m, index) in markers" :icon="'/images/icon-marker-map.svg'"
-                        :position="m.position" :clickable="true" :draggable="true">
+                        :position="m.position" :clickable="true" :draggable="false">
             </GMapMarker>
           </GMapMap>
         </div>
