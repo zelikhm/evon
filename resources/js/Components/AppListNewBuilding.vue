@@ -408,7 +408,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         <button class="more__button transition-all text-[#E84680] border border-solid border-[#E84680] text-base xxl:text-sm xl:text-xs lg:text-[15px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2.5 xl:py-1.5 rounded-[3px]">Показать еще</button>
       </div>
 
-      <app-map @open-add-selections="openAddSelections" v-if="map" :houses="houses_array" :user="user"  />
+      <app-map @open-add-selections="openAddSelections" v-if="map" :houses_array="readyHouses" :type="type" :user="user"  />
     </div>
   </div>
 

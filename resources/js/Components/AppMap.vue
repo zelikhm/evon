@@ -6,6 +6,7 @@ import { Link } from "@inertiajs/inertia-vue3"
  <div class="relative w-full h-[90vh] my-5 xxl:my-4 xl:my-3">
 
    <GMapMap :center="center" :disableDefaultUI="true" :zoom="6" map-type-id="roadmap" class="w-full h-[90vh]">
+<!--     <GMapCluster>-->
      <GMapMarker :key="index" v-for="(m, index) in markers" :icon="'/images/icon-marker-map.svg'" :position="m.position" @click="openMarker(m)">
        <GMapInfoWindow :closeclick="true"
                        @closeclick="openMarker(null)"
@@ -73,13 +74,14 @@ import { Link } from "@inertiajs/inertia-vue3"
          </div>
        </GMapInfoWindow>
      </GMapMarker>
+<!--     </GMapCluster>-->
    </GMapMap>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['houses', 'state', 'user'],
+  props: ['houses_array', 'state', 'user', 'type'],
   data() {
     return {
       openedMarkerID: null,
@@ -91,7 +93,8 @@ export default {
         area: null,
         status: null,
         flats: []
-      }
+      },
+      houses: [],
     }
   },
   methods: {
@@ -138,29 +141,67 @@ export default {
           this.house.maxSquare = Math.max(...square)
         })
       }
-    }
-  },
-  created() {
-    let id = 0;
-    if (this.houses.length > 0) {
-      this.houses.forEach(item => {
-        ++id
+    },
+    updatedMap() {
+      let id = 0;
+
+      if (this.houses.length > 0) {
+        this.houses.forEach(item => {
+          ++id
+          this.markers.push({
+            id,
+            position: {
+              lat: +item.latitude,
+              lng: +item.longitude
+            }
+          })
+        })
+      } else {
         this.markers.push({
-          id,
           position: {
-            lat: +item.latitude,
-            lng: +item.longitude
+            lat: +this.houses.latitude,
+            lng: +this.houses.longitude
           }
         })
+      }
+
+      // let groups = [];
+      //
+      // for (let element of this.houses) {
+      //   let existingGroups = groups.filter(group => group.city == element.city);
+      //   if (existingGroups.length > 0) {
+      //     existingGroups[0].lat.push(element.latitude);
+      //     existingGroups[0].lng.push(element.longitude);
+      //   }
+      //   else {
+      //     let newGroup = {
+      //       city: element.city,
+      //       lat: [element.latitude],
+      //       lng: [element.longitude]
+      //     };
+      //     groups.push(newGroup);
+      //   }
+      // }
+    },
+  },
+  created() {
+    this.houses = this.houses_array;
+
+    this.updatedMap();
+    if(this.type === 0) {
+      axios.get('/api/house/getHousesJk').then(res => {
+        this.houses = [];
+        this.houses = res.data;
+        this.updatedMap();
       })
     } else {
-      this.markers.push({
-        position: {
-          lat: +this.houses.latitude,
-          lng: +this.houses.longitude
-        }
+      axios.get('/api/house/getHousesVillages').then(res => {
+        this.houses = [];
+        this.houses = res.data;
+        this.updatedMap();
       })
     }
+
   },
 }
 </script>
