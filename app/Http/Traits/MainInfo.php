@@ -52,6 +52,10 @@ trait MainInfo
 
     $requestCity->splice(5);
 
+    foreach($requestCity as $item) {
+      $item->image = $this->getPhoto($item);
+    }
+
     return $requestCity;
   }
 

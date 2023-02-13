@@ -565,11 +565,11 @@ export default {
       this.openDate = false
 
       if (this.selectDateId === 1) {
-        this.readyHouses = this.readyHouses.sort((a, b) => b.time - a.time)
+        this.houses_array = this.readyHouses.sort((a, b) => b.time - a.time)
       } else if (this.selectDateId === 2) {
-        this.readyHouses = this.readyHouses.sort((a, b) => a.minPrice - b.minPrice)
+        this.houses_array = this.readyHouses.sort((a, b) => a.minPrice - b.minPrice)
       } else if (this.selectDateId === 3) {
-        this.readyHouses = this.readyHouses.sort((a, b) => b.minPrice - a.minPrice)
+        this.houses_array = this.readyHouses.sort((a, b) => b.minPrice - a.minPrice)
       }
     },
     sea() {
