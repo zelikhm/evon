@@ -70,17 +70,13 @@
             :loop="true"
             class="mySwiper w-full"
           >
-            <div v-if="house.images.length > 0">
-              <swiper-slide class="h-full flex justify-center" v-for="image in house.images">
-                <img @click="album = true" class="h-full w-full object-cover cursor-pointer" :src="image.name" alt="">
-              </swiper-slide>
-            </div>
-            <div v-else>
-              <swiper-slide class="h-full flex justify-center">
-                <img class="h-full w-full object-cover" src="../../assets/no-img-house.jpg" alt="">
-              </swiper-slide>
-            </div>
-
+            <swiper-slide v-if="house.images.length > 0" class="h-full flex justify-center"
+                          v-for="image in house.images">
+              <img @click="album = true" class="h-full w-full object-cover cursor-pointer" :src="image.name" alt="">
+            </swiper-slide>
+            <swiper-slide v-else class="h-full flex justify-center">
+              <img class="h-full w-full object-cover" src="../../assets/no-img-house.jpg" alt="">
+            </swiper-slide>
 
           </swiper>
           <div
@@ -202,7 +198,7 @@
           <div class="pb-16 xxl:pb-12 xl:pb-10">
             <div
               class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none mb-7 xxl:mb-5 xl:mb-4"
-              >{{ flats_array.length }} Квартир
+            >{{ flats_array.length }} Квартир
             </div>
             <div class="grid grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3 mb-7 xxl:mb-5 xl:mb-4">
               <div
