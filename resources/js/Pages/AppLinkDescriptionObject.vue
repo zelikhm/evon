@@ -70,12 +70,18 @@
             :loop="true"
             class="mySwiper w-full"
           >
-            <swiper-slide class="h-full flex justify-center" v-if="house.images.length > 0">
-              <img @click="album = true" class="h-full w-full object-cover cursor-pointer" :src="house.image" alt="">
-            </swiper-slide>
-            <swiper-slide class="h-full flex justify-center" v-else>
-              <img class="h-full w-full object-cover" src="../../assets/no-img-house.jpg" alt="">
-            </swiper-slide>
+            <div v-if="house.images.length > 0">
+              <swiper-slide class="h-full flex justify-center" v-for="image in house.images">
+                <img @click="album = true" class="h-full w-full object-cover cursor-pointer" :src="image" alt="">
+              </swiper-slide>
+            </div>
+            <div v-else>
+              <swiper-slide class="h-full flex justify-center">
+                <img class="h-full w-full object-cover" src="../../assets/no-img-house.jpg" alt="">
+              </swiper-slide>
+            </div>
+
+
           </swiper>
           <div
             class="border border-solid border-[#E5DFEE] h-[100px] xxl:h-[80px] xl:h-[60px] flex md:flex-col md:h-fit items-center justify-evenly rounded-[12px] mt-7 xxl:mt-5 xl:mt-4 mb-16 xxl:mb-12 xl:mb-10">
