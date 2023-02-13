@@ -69,7 +69,7 @@ import AppHeader from '../Layouts/AppHeader.vue'
 import AppFooter from "../Layouts/AppFooter.vue"
 import AppModalNotification from "@/Layouts/modal/AppModalNotification.vue"
 import AppCreateSelections from "@/Layouts/modal/AppCreateSelections.vue"
-import AppSubmitSelection from "@/Layouts/modal/ AppSubmitSelection.vue"
+import AppSubmitSelection from "@/Layouts/modal/AppSubmitSelection.vue"
 import {computed} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
 
