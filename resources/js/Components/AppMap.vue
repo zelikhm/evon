@@ -164,24 +164,6 @@ export default {
           }
         })
       }
-
-      // let groups = [];
-      //
-      // for (let element of this.houses) {
-      //   let existingGroups = groups.filter(group => group.city == element.city);
-      //   if (existingGroups.length > 0) {
-      //     existingGroups[0].lat.push(element.latitude);
-      //     existingGroups[0].lng.push(element.longitude);
-      //   }
-      //   else {
-      //     let newGroup = {
-      //       city: element.city,
-      //       lat: [element.latitude],
-      //       lng: [element.longitude]
-      //     };
-      //     groups.push(newGroup);
-      //   }
-      // }
     },
   },
   created() {
@@ -194,7 +176,7 @@ export default {
         this.houses = res.data;
         this.updatedMap();
       })
-    } else {
+    } else if (this.type === 1) {
       axios.get('/api/house/getHousesVillages').then(res => {
         this.houses = [];
         this.houses = res.data;

@@ -91,7 +91,7 @@
           </div>
         </div>
       </div>
-      <app-map @open-add-selections="openAddSelection = true" v-if="map" :houses="house" :state="false" />
+      <app-map @open-add-selections="openAddSelection = true" v-if="map" :houses_array="house" :type="3" :state="false" />
       <div class="grid__68-30 justify-between" v-if="!map">
         <div class="w-full flex flex-col">
           <swiper
