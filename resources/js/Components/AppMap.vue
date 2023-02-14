@@ -31,7 +31,7 @@ import { Link } from "@inertiajs/inertia-vue3"
            </div>
            <div class="p-6 xxl:p-5 xl:p-4">
              <div class="flex justify-between items-center mb-5 xxl:mb-4 xl:mb-3 text-[18px] xxl:text-[15px] xl:text-[13px]">
-               <span class="text-[#1E1D2D] font-medium leading-none">от {{ house.minPrice.toLocaleString('ru') }} €</span>
+               <span class="text-[#1E1D2D] font-medium leading-none" >от {{ house.minPrice !== undefined ? house.minPrice.toLocaleString('ru') : 0  }} €</span>
                <span class="text-[#8A8996] leading-none">{{ house.flats.length }} {{ house.flats.length === 1 ? "Квартира" : house.flats.length === 2 || house.flats.length === 3 || house.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
              </div>
              <div class="gray-backg flex items-center gap-1 w-fit px-2 xl:px-1.5 py-1.5 xl:py-1 mb-7 xxl:mb-5 xl:mb-4">

@@ -104,10 +104,8 @@
           <div class="flex flex-col pb-14 xxl:pb-10 xl:pb-8">
             <span
               class="uppercase font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] pb-5 xxl:pb-4 xl:pb-3 leading-none">О ЖК</span>
-            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="fullDescription">{{
-              house.description }}</p>
-            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else>{{
-              house.description.slice(0, 300) + '...' }}</p>
+            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="fullDescription" v-html="house.description"></p>
+            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else v-html="house.description.slice(0, 300) + '...'"></p>
             <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 w-fit items-center animation__arrow"
                     @click="fullDescription = !fullDescription">
               <span class="text-[#6435A5] font-medium text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">{{ fullDescription ? 'Скрыть' : 'Подробнее' }}</span>
