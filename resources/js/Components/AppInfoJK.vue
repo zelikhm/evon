@@ -102,7 +102,17 @@ import {Link} from '@inertiajs/inertia-vue3'
     </div>
 
     <p class="text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] mt-2 text-center">При перетаскивании точки координаты не обновляются. Кликайте по нужному месту карты для обновления координат</p>
-    <GMapMap :center="center" :zoom="12" map-type-id="roadmap" class="w-full h-[300px] rounded-[6px] mb-10 xxl:mb-8 xl:mb-6" :draggable="true" @click="handleClick"  ref="myMapRef" :click="true">
+    <GMapMap :center="center" :zoom="12" map-type-id="roadmap" class="w-full h-[300px] rounded-[6px] mb-10 xxl:mb-8 xl:mb-6" :draggable="true" @click="handleClick"  ref="myMapRef" :click="true"
+             :disableDefaultUI="false"
+             :options="{
+                      zoomControl: false,
+                      mapTypeControl: false,
+                      scaleControl: false,
+                      streetViewControl: false,
+                      rotateControl: false,
+                      fullscreenControl: true,
+                }
+    ">
       <GMapMarker :key="index" v-for="(m, index) in markers" :icon="'/images/icon-marker-map.svg'" :position="m.position" :clickable="true" :draggable="true"
                   @click="openMarker(m.id)" >
       </GMapMarker>

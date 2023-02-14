@@ -5,7 +5,16 @@ import { Link } from "@inertiajs/inertia-vue3"
 <template>
  <div class="relative w-full h-[90vh] my-5 xxl:my-4 xl:my-3">
 
-   <GMapMap :center="center" :disableDefaultUI="true" :zoom="6" map-type-id="roadmap" class="w-full h-[90vh]">
+   <GMapMap :center="center" :disableDefaultUI="false" :zoom="6" map-type-id="roadmap" class="w-full h-[90vh]"
+            :options="{
+                      zoomControl: false,
+                      mapTypeControl: false,
+                      scaleControl: false,
+                      streetViewControl: false,
+                      rotateControl: false,
+                      fullscreenControl: true,
+                }
+">
 <!--     <GMapCluster>-->
      <GMapMarker :key="index" v-for="(m, index) in markers" :icon="'/images/icon-marker-map.svg'" :position="m.position" @click="openMarker(m)">
        <GMapInfoWindow :closeclick="true"

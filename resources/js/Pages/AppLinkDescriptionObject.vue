@@ -382,7 +382,18 @@
           </div>
           <GMapMap v-if="house.visible === 1 && compilation.isVisible === 1" :center="center" :zoom="15"
                    map-type-id="roadmap" class="w-full h-[18vw] lg:h-[28vw] sm:h-[36vw] rounded-[10px] mb-10"
-                   :draggable="false" @click="handleClick" ref="myMapRef" :click="true">
+                   :draggable="false" @click="handleClick" ref="myMapRef" :click="true"
+                   :disableDefaultUI="false"
+                   :options="{
+                      zoomControl: false,
+                      mapTypeControl: false,
+                      scaleControl: false,
+                      streetViewControl: false,
+                      rotateControl: false,
+                      fullscreenControl: true,
+                }
+
+          ">
             <GMapMarker :key="index" v-for="(m, index) in markers" :icon="'/images/icon-marker-map.svg'"
                         :position="m.position" :clickable="true" :draggable="false">
             </GMapMarker>
