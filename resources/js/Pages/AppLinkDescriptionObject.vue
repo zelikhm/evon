@@ -1,4 +1,5 @@
 <template>
+  <AppChessScheme v-if="scheme" :flat="selectFlat" @closeChess="scheme = false"></AppChessScheme>
   <header class="relative h-[13.4vw]">
     <img
       v-if="compilation.company === null || compilation.company.banner === null || compilation.company.banner === 'undefined'"
@@ -289,7 +290,7 @@
                 <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3"
                      v-for="item in flats_array">
                   <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                    <img v-if="item.imageUp" :src="item.imageUp" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
+                    <img v-if="item.imageUp" :src="item.imageUp" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="" v-on:click="openScheme(item)">
                     <img v-else src="../../assets/no-img-houses.jpg" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
                     <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
                       <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
@@ -409,6 +410,7 @@
   import AppFooter from '../Layouts/AppFooter.vue'
   import AppModalAlbum from "../Layouts/modal/AppModalAlbum.vue"
 
+  import AppChessScheme from "../Layouts/modal/AppChessScheme.vue";
   import {Swiper, SwiperSlide} from "swiper/vue";
   import "swiper/css";
   import "swiper/css/navigation";
@@ -419,6 +421,8 @@
     props: ['house', 'dops', 'infos', 'user', 'compilation'],
     data() {
       return {
+        selectFlat: [],
+        scheme: false,
         center: null,
         album: false,
         markers: [],
@@ -459,7 +463,11 @@
       }
     },
     methods: {
-
+      openScheme(item) {
+        this.selectFlat = item;
+        this.selectFlat.isOpen = 3
+        this.scheme = true;
+      },
       changeSelectLayout(layout) {
         this.selectLayout = layout.layout
         this.openSelectLayout = false
@@ -687,6 +695,7 @@
       AppModalAlbum,
       Swiper,
       SwiperSlide,
+      AppChessScheme
     },
     setup() {
       return {

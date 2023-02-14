@@ -217,7 +217,6 @@ export default {
         if (idx === this.frameId) {
           item.flats.forEach((flat, idx) => {
             if (idx === 0) {
-              console.log(item);
               flat.active = 1;
               this.selectFlat = flat;
             } else {

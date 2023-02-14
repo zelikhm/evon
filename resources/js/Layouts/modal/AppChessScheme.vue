@@ -7,8 +7,15 @@
           <div class="absolute h-[1px] w-4 bg-[#8A8996] -rotate-45"></div>
         </button>
       </div>
+
       <div class="flex justify-center py-10 xxl:py-8 xl:py-6">
-        <img class="max-h-[82vh]" :src="flat.isOpen === 0 ? flat.imageUp : flat.imageDown" alt="">
+        <div v-if="flat.isOpen !== 3">
+          <img class="max-h-[82vh]" :src="flat.isOpen === 0 ? flat.imageUp : flat.imageDown" alt="">
+        </div>
+        <div v-else>
+          <img class="max-h-[40vh]" :src="flat.imageUp" alt="">
+          <img class="max-h-[40vh]" :src="flat.imageDown" alt="">
+        </div>
       </div>
       <div class="absolute top-0 lg:top-full left-full lg:left-0 ml-10 xxl:ml-8 xl:ml-6 lg:mt-4">
         <div class="flex flex-col text-white">
@@ -16,8 +23,8 @@
             <span class="text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none">№{{ flat.number }}</span>
             <span class="text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none w-max">{{ flat.status == 0 ? "Акция" : flat.status == 1 ? "Перепродажа" : flat.status == 2 ? "Бронь" : flat.status == 3 ? "Продажи закрыты" : "В продаже" }}</span>
           </div>
-          <span class="text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px] font-semibold leading-none pb-4 xxl:pb-3 xl:pb-2.5">{{ flat.price }} €</span>
-          <span class="text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14x] leading-none pb-5 xxl:pb-4 xl:pb-3">{{ Math.round(flat.price / flat.square) }} € за м²</span>
+          <span class="text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px] font-semibold leading-none pb-4 xxl:pb-3 xl:pb-2.5">{{ flat.price.toLocaleString('ru') }} €</span>
+          <span class="text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14x] leading-none pb-5 xxl:pb-4 xl:pb-3">{{ Math.round(flat.price / flat.square).toLocaleString('ru') }} € за м²</span>
           <div class="chess__bg--ruller flex items-center gap-1 w-fit px-2 xl:px-1.5 py-1.5 xl:py-1">
             <svg class="w-4.5 xxl:w-4 xl:w-3.5" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0_150_2046)">
@@ -54,7 +61,7 @@ export default {
     closeChess() {
       this.$emit('close-chess')
     }
-  }
+  },
 }
 </script>
 

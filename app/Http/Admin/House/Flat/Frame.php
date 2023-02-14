@@ -66,7 +66,9 @@ class Frame extends Section implements Initializable
       AdminColumn::text('id', '#')
         ->setWidth('50px')
         ->setHtmlAttribute('class', 'text-center'),
-      AdminColumn::link('house.title', 'ЖК')->setWidth('350px'),
+      AdminColumn::link('house.title', 'ЖК')->setWidth('350px')->setSearchCallback(function ($column, $query, $search) {
+        return $query->orWhere('house_id', $search);
+      }),
       AdminColumn::text('name', 'Название')->setWidth('350px'),
     ];
 

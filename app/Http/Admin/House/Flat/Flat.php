@@ -70,6 +70,9 @@ class Flat extends Section implements Initializable
         ->setHtmlAttribute('class', 'text-center'),
       AdminColumn::relatedLink('house.title', 'ЖК')->setWidth('350px'),
       AdminColumn::relatedLink('frame.name', 'Корпус')->setWidth('350px'),
+      AdminColumn::text('frame_id', 'айди корпуса')->setWidth('350px')->setSearchCallback(function ($column, $query, $search) {
+        return $query->orWhere('frame_id', $search);
+      }),
       AdminColumn::text('number', 'Номер')->setWidth('350px'),
       AdminColumn::text('square', 'Площадь')->setWidth('350px'),
       AdminColumn::text('count', 'Планировка')->setWidth('350px'),
