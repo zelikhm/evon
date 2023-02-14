@@ -294,13 +294,22 @@
                     <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
                       <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
                         <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ item.square }} м</span>
-                        <span
-                          class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
-                          v-if="item.status == 0">акция</span>
+                        <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
+                          v-if="item.status == 0">Акция</span>
+                        <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
+                              v-if="item.status == 1">Перепродажа</span>
+                        <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
+                              v-if="item.status == 2">Бронь</span>
+                        <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
+                              v-if="item.status == 3">Продажи закрыты</span>
+                        <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
+                              v-if="item.status == 4">В продаже</span>
                       </div>
-                      <span
-                        class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ frame }}</span>
+                      <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ frame }}</span>
                     </div>
+                  </div>
+                  <div>
+                    <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ item.number }}</span>
                   </div>
                   <div>
                     <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ item.count }}</span>
