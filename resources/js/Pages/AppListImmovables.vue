@@ -86,6 +86,11 @@ export default {
     count_houses: 0,
     type: 0,
   },
+  provide() {
+    return {
+      'user': this.user,
+    }
+  },
   data() {
     return {
       user: computed(() => usePage().props.value.auth.user),
