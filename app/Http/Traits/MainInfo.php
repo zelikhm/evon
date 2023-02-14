@@ -41,8 +41,7 @@ trait MainInfo
 
     $requestArea = HouseModel::where('area', $house->area)->whereNot('id', $house->id)->with(['flats'])->get();
 
-    if (count($requestCity) > 5) {
-    } else {
+    if (count($requestCity) < 5) {
       $requestCity->merge($requestArea);
     }
 
