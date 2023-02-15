@@ -26,6 +26,7 @@ Route::prefix('house')->group(function () {
   Route::post('deleteSupport', ['App\Http\Controllers\House\HouseController', 'deleteSupport']);
   Route::post('editSupport', ['App\Http\Controllers\House\HouseController', 'editSupport']);
   Route::post('get', ['App\Http\Controllers\House\HouseController', 'get']);
+  Route::post('getHouseForUserApi', ['App\Http\Controllers\House\HouseController', 'getHouseForUserApi']);
   //images
   Route::post('addedImages', ['App\Http\Controllers\House\HouseController', 'addedImages']);
   Route::post('deletedImage', ['App\Http\Controllers\House\HouseController', 'deletedImage']);

@@ -71,6 +71,12 @@ path getHouseApi \ [post] / поля:
 
 - slug - слаг жк 
 
+Получить ЖК пользователя \
+path getHouseForUserApi \ [post] / поля:
+
+- token - токен
+- user_id - айди юзера
+
 Создание ЖК и его характеристики \
 path create \ [post] / поля: 
 

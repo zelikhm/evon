@@ -25,9 +25,9 @@ class IndexController extends Controller
   {
     if ($this->checkToken($request->token)) {
 
-      return User::where('token', $request->token)
+      return response()->json(User::where('token', $request->token)
         ->with(['company'])
-        ->first();
+        ->first(), 200);
 
     } else {
 

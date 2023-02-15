@@ -521,8 +521,6 @@
           }
         })
 
-        console.log(array, this.squareTo, this.squareFrom);
-
         let new_array = [];
 
         array.forEach(item => {

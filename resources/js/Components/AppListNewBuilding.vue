@@ -28,37 +28,19 @@ import { Link } from '@inertiajs/inertia-vue3'
           <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
             <div class="flex items-center text-[#1E1D2D]">
               <input class="custom__checkbox" name="filters" type="checkbox" id="filters_1">
-              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_1">Новинки</label>
+              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_1" v-on:click="setBadge(1)">Новинки</label>
             </div>
             <div class="flex items-center text-[#1E1D2D]">
               <input class="custom__checkbox" name="filters" type="checkbox" id="filters_2">
-              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_2">Акции</label>
+              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_2" v-on:click="setBadge(2)">Акции</label>
             </div>
             <div class="flex items-center text-[#1E1D2D]">
               <input class="custom__checkbox" name="filters" type="checkbox" id="filters_3">
-              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_3">Популярные</label>
+              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_3" v-on:click="setBadge(3)">Популярные</label>
             </div>
           </div>
         </div>
         <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3">
-          <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectType}">
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Тип</span>
-            <div class="relative" :tabindex="tabindex" @blur="openSelectType = false">
-              <div @click="openSelectType = !openSelectType" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
-                <span>{{ selectType }}</span>
-                <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectType }" alt="">
-              </div>
-              <div v-if="openSelectType" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
-                <span
-                    v-for="(type, idx) in types" :key="idx"
-                    @click="changeSelectTypes(type)"
-                    class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
-                >
-                  {{ type.type }}
-                </span>
-              </div>
-            </div>
-          </div>
           <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectCity}">
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Город</span>
             <div class="relative">
@@ -104,11 +86,11 @@ import { Link } from '@inertiajs/inertia-vue3'
             <div class="flex gap-2">
               <div class="flex items-center gap-1">
                 <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="cost_from">от</label>
-                <input @click="changeBorder(1)" v-model="filters.priceMin" class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="cost_from">
+                <input @click="changeBorder(1)" @input="setFilter()" v-model="filters.price.min" class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="cost_from">
               </div>
               <div class="flex items-center gap-1">
                 <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="cost_before">до</label>
-                <input @click="changeBorder(1)" v-model="filters.priceMax" class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="cost_before">
+                <input @click="changeBorder(1)" @input="setFilter()" v-model="filters.price.max" class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="cost_before">
               </div>
             </div>
           </div>
@@ -137,11 +119,11 @@ import { Link } from '@inertiajs/inertia-vue3'
             <div class="flex gap-2">
               <div class="flex items-center gap-1">
                 <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="from">от</label>
-                <input @click="changeBorder(2)" v-model="filters.squareMin" class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="from">
+                <input @click="changeBorder(2)" @input="setFilter()" v-model="filters.square.min" class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="from">
               </div>
               <div class="flex items-center gap-1">
                 <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="before">до</label>
-                <input @click="changeBorder(2)" v-model="filters.squareMax" class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="before">
+                <input @click="changeBorder(2)" @input="setFilter()" v-model="filters.square.max" class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0" type="number" id="before">
               </div>
             </div>
           </div>
@@ -172,27 +154,27 @@ import { Link } from '@inertiajs/inertia-vue3'
             <div v-if="openLocation"  class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
               <div :class="{'border__purple': isBorder === 3 }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_sea">от моря (м)</label>
-                <input @click="changeBorder(3)" v-model="filters.toSea" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_sea">
+                <input @click="changeBorder(3)" @input="setFilter()" v-model="filters.location.toSea" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_sea">
               </div>
               <div :class="{'border__purple': isBorder === 4 }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_school">от школы (м)</label>
-                <input @click="changeBorder(4)" v-model="filters.toSchool" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_school">
+                <input @click="changeBorder(4)" @input="setFilter()" v-model="filters.location.toSchool" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_school">
               </div>
               <div :class="{'border__purple': isBorder === 5 }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_shoping">от торгового центра (м)</label>
-                <input @click="changeBorder(5)" v-model="filters.toShop" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_shoping">
+                <input @click="changeBorder(5)" @input="setFilter()" v-model="filters.location.toShop" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_shoping">
               </div>
               <div :class="{'border__purple': isBorder === 6 }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_park">от парка (м)</label>
-                <input @click="changeBorder(6)" v-model="filters.toPark" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_park">
+                <input @click="changeBorder(6)" @input="setFilter()" v-model="filters.location.toPark" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_park">
               </div>
               <div :class="{'border__purple': isBorder === 7 }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_child">от детского садика (м)</label>
-                <input @click="changeBorder(7)" v-model="filters.toChildrenSchool" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_child">
+                <input @click="changeBorder(7)" @input="setFilter()" v-model="filters.location.toChildrenSchool" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_child">
               </div>
               <div :class="{'border__purple': isBorder === 8 }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_stop">от остановки (м)</label>
-                <input @click="changeBorder(8)" v-model="filters.toBus" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_stop">
+                <input @click="changeBorder(8)" @input="setFilter()" v-model="filters.location.toBus" class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="for_stop">
               </div>
             </div>
           </div>
@@ -202,28 +184,10 @@ import { Link } from '@inertiajs/inertia-vue3'
               <img :class="{'rotate-180': openInfrastruktura}" class=" transition-all w-3 xxl:w-2.5 xl:w-2" src="../../assets/svg/arrow_down_black.svg" alt="">
             </div>
             <div v-if="openInfrastruktura" class="transition-all duration-500 h-fit flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
-              <div class="flex items-center text-[#1E1D2D]" v-for="item in infos">
+              <div class="flex items-center text-[#1E1D2D]" v-for="(item, index) in infos">
                 <input class="custom__checkbox" name="infrastructure" type="checkbox" :id="'infrastructure' + item.id">
-                <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" :for="'infrastructure' + item.id">{{ item.name }}</label>
+                <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" :for="'infrastructure' + item.id" v-on:click="setInfo(item.id, index)">{{ item.name }}</label>
               </div>
-<!--              <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom&#45;&#45;0': openSelectInstallment}">-->
-<!--                <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Рассрочка</span>-->
-<!--                <div class="relative" :tabindex="tabindex" @blur="openSelectInstallment = false">-->
-<!--                  <div @click="openSelectInstallment = !openSelectInstallment" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">-->
-<!--                    <span class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ selectInstallment }}</span>-->
-<!--                    <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectInstallment }" alt="">-->
-<!--                  </div>-->
-<!--                  <div v-if="openSelectInstallment" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">-->
-<!--                    <span-->
-<!--                      v-for="(installment, idx) in optionsInstallment" :key="idx"-->
-<!--                      @click="changeSelectInstallment(installment)"-->
-<!--                      class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"-->
-<!--                    >-->
-<!--                      {{installment.installment }}-->
-<!--                    </span>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
             </div>
           </div>
           <div class="mb-10 xxl:mb-8 xl:mb-6">
@@ -232,9 +196,9 @@ import { Link } from '@inertiajs/inertia-vue3'
               <img :class="{'rotate-180': openDopServices}" class=" transition-all w-3 xxl:w-2.5 xl:w-2" src="../../assets/svg/arrow_down_black.svg" alt="">
             </div>
             <div v-if="openDopServices" class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
-              <div class="flex items-center text-[#1E1D2D]" v-for="item in dops">
+              <div class="flex items-center text-[#1E1D2D]" v-for="(item, index) in dops">
                 <input class="custom__checkbox" name="services" type="checkbox" :id="'services' + item.id">
-                <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" :for="'services' + item.id">{{ item.name }}</label>
+                <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" :for="'services' + item.id" v-on:click="setDop(item.id, index)">{{ item.name }}</label>
               </div>
             </div>
           </div>
@@ -342,7 +306,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
           <div class="flex flex-col text-[#1E1D2D] p-5 xxl-4 xl:p-3 leading-none">
             <Link :href="'/house/' + item.slug"  class="hover__title-block transition-all font-semibold text-xl xxl:text-base xl:text-sm md:text-[17px]">{{ item.title }}</Link>
-            <span class="text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">от {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} €</span>
+            <span class="text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">от {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} € до {{ Number.isInteger(item.maxPrice) ? item.maxPrice.toLocaleString('ru') : "-" }}</span>
           </div>
         </div>
 
@@ -445,27 +409,31 @@ export default {
     return {
       housesFilters: [],
       filters: {
-        type: null,
-        city: null,
-        area: null,
-          priceMin: null,
-        priceMax: null,
-        deadline: null,
-        squareMin: null,
-        squareMax: null,
-        builder: null,
-        toSea: null,
-        toSchool: null,
-        toShop: null,
-        toPark: null,
-        toBus: null,
-        toChildrenSchool: null,
-        infos: [],
-        dops: [],
-        installment: true,
-        newJK: false,
-        promotions: false,
-        popular: false
+        badge: {
+          news: false,
+          sales: false,
+          popular: false,
+        },
+        price: {
+          min: '',
+          max: '',
+        },
+        square: {
+          min: '',
+          max: '',
+        },
+        deadline: 'Не важно',
+        builder: '',
+        location: {
+          toSea: '',
+          toSchool: '',
+          toShop: '',
+          toPark: '',
+          toChildrenSchool: '',
+          toBus: '',
+        },
+        info: {},
+        dop: {},
       },
       map: false,
       openFilter: false,
@@ -481,12 +449,13 @@ export default {
       selectRegion: 'Центральный',
       openSelectRegion: false,
       regions: [],
-      selectDeadline: 'Сдан',
+      selectDeadline: 'Не важно',
       selectType: 'Новостройка',
       openSelectDeadline: false,
       openSelectType: false,
       deadlines: [
-        { deadline: 'Сдан', id: 0 },
+        { deadline: 'Не важно', id: 0 },
+        { deadline: 'Сдан', id: 1 },
       ],
       selectDev: null,
       openSelectDev: false,
@@ -520,6 +489,126 @@ export default {
     }
   },
   methods: {
+    setFilter() {
+
+      let array = this.readyHouses;
+      let object = [];
+
+      if(this.filters.badge.sales) {
+        array.forEach(item => {
+          item.flats.forEach(value => {
+            if(value.status == 0) {
+              object.push(item);
+            }
+          })
+        })
+      } else {
+        object = array;
+      }
+
+      let object1 = [];
+
+      if(this.filters.badge.news) {
+        object.forEach(item => {
+          let date = new Date();
+          let house_create = new Date(item.created_at);
+
+          if(date - house_create < 2592e+9) {
+            object1.push(item);
+          }
+
+        })
+      } else {
+        object1 = object;
+      }
+
+      let object2 = [];
+
+      if(this.filters.badge.popular) {
+        object1.forEach(item => {
+          if(item.popular === true) {
+            object2.push(item);
+          }
+        })
+      } else {
+        object2 = object1;
+      }
+
+      let object3 = [];
+
+      object2.forEach(item => {
+        if(this.filters.price.min !== '' && this.filters.price.max !== '') {
+          if(item.minPrice > this.filters.price.min && item.maxPrice < this.filters.price.max) {
+            object3.push(item);
+          }
+        } else if(this.filters.price.min !== '' && this.filters.price.max === '') {
+          if(item.minPrice > this.filters.price.min) {
+            object3.push(item);
+          }
+        } else if(this.filters.price.max !== '' && this.filters.price.min === '') {
+          if(item.maxPrice < this.filters.price.max) {
+            object3.push(item);
+          }
+        } else {
+          object3 = object2;
+        }
+      })
+
+      let object4 = [];
+
+      if(this.filters.deadline && this.filters.deadline !== 'Не важно') {
+        object3.forEach(item => {
+          if(item.created === this.filters.deadline) {
+            object4.push(item);
+          }
+        })
+      } else {
+        object4 = object3;
+      }
+
+      let object5 = [];
+
+      object4.forEach(item => {
+        if(this.filters.square.min !== '' && this.filters.square.max !== '') {
+          if(item.minSquare > this.filters.square.min && item.maxSquare < this.filters.square.max) {
+            object5.push(item);
+          }
+        } else if(this.filters.square.min !== '' && this.filters.square.max === '') {
+          if(item.minSquare > this.filters.square.min) {
+            object5.push(item);
+          }
+        } else if(this.filters.square.max !== '' && this.filters.square.min === '') {
+          if(item.maxSquare < this.filters.square.max) {
+            object5.push(item);
+          }
+        } else {
+          object5 = object4;
+        }
+      })
+
+      let object6 = [];
+
+      if(this.filters.builder !== '') {
+        object5.forEach(item => {
+          if(item.user !== null) {
+            if(item.user.first_name !== null) {
+              if(item.user.first_name.toLowerCase() === this.filters.builder.toLowerCase()){
+                object6.push(item);
+              }
+            }
+          } else {
+            object6.push(item);
+          }
+
+        })
+      } else {
+        object6 = object5;
+      }
+
+
+      console.log(object6)
+      this.houses_array = object6;
+    },
     openHouse(href) {
       router.get(href, { preserveScroll: true })
     },
@@ -554,10 +643,34 @@ export default {
       })
       item.favorite = false
     },
-    startFilter() {
-      if (this.filters.toSea) {
-        this.readyHouses = this.readyHouses.find(item => item.info.toSea >= this.filters.toSea)
+    setBadge(id) {
+      if(id === 1) {
+        this.filters.badge.news = !this.filters.badge.news;
+      } else if (id === 2) {
+        this.filters.badge.sales = !this.filters.badge.sales;
+      } else if (id === 3) {
+        this.filters.badge.popular = !this.filters.badge.popular;
       }
+
+      this.setFilter();
+    },
+    setInfo(id, index) {
+      if(this.filters.info.hasOwnProperty(index)) {
+        delete this.filters.info[index];
+      } else {
+        this.filters.info[index] = id;
+      }
+
+      this.setFilter();
+    },
+    setDop(id, index) {
+      if(this.filters.dop.hasOwnProperty(index)) {
+        delete this.filters.dop[index];
+      } else {
+        this.filters.dop[index] = id;
+      }
+
+      this.setFilter();
     },
     changeDate(date) {
       this.selectDate = date.date
@@ -572,9 +685,6 @@ export default {
         this.houses_array = this.readyHouses.sort((a, b) => b.minPrice - a.minPrice)
       }
     },
-    sea() {
-
-    },
     changeSelectCity(city, idx) {
       this.selectCity = city.title
       this.openSelectCity = false
@@ -588,11 +698,15 @@ export default {
     },
     changeSelectDeadline(deadline) {
       this.selectDeadline = deadline.deadline
+      this.filters.deadline = deadline.deadline
       this.openSelectDeadline = false
+      this.setFilter();
     },
     changeSelectDev(dev) {
       this.selectDev = dev.first_name
+      this.filters.builder = dev.first_name
       this.openSelectDev = false
+      this.setFilter();
     },
     changeSelectInstallment(installment) {
       this.selectInstallment = installment.installment

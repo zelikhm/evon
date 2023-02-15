@@ -328,6 +328,15 @@ trait MainInfo
       $house->image = $this->getPhoto($house);
       $house->dop_array = TypesModel::where('id', $house->dop)->get();
       $house->info_array = StructureModel::where('id', $house->info)->get();
+      $house->popular = HouseViewsModel::where('house_id', $house->id)->count() > 30;
+
+      $house->maxPrice = $house->flats->max('price');
+      $house->minPrice = $house->flats->min('price');
+
+      $house->maxSquare = $house->flats->max('square');
+      $house->minSquare = $house->flats->min('square');
+
+      $house->builder = $house->user->first_name;
 
       $favorite = FavoritesModel::where('user_id', Auth::id())
         ->where('house_id', $house->id)

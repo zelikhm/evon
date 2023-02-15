@@ -144,6 +144,26 @@ class HouseController extends Controller
   }
 
   /**
+   * get house with help token
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function getHouseForUserApi(Request $request) {
+
+    if($this->checkToken($request->token)) {
+
+      return response()->json($this->getHouseForUserPagination($request->user_id), 200);
+
+    } else {
+
+      return response()->json('not auth', 401);
+
+    }
+
+  }
+
+  /**
    * show all house for user
    * @return \Inertia\Response
    */
