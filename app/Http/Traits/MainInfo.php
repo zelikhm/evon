@@ -37,25 +37,25 @@ trait MainInfo
   protected function getSlider($house)
   {
 
-    $requestCity = HouseModel::where('city', $house->city)->whereNot('id', $house->id)->with(['flats'])->get();
+//    $requestCity = HouseModel::where('city', $house->city)->whereNot('id', $house->id)->with(['flats'])->get();
 
     $requestArea = HouseModel::where('area', $house->area)->whereNot('id', $house->id)->with(['flats'])->get();
 
-    if (count($requestCity) < 5) {
-      $requestCity->merge($requestArea);
-    }
+//    if (count($requestCity) < 5) {
+//      $requestCity->merge($requestArea);
+//    }
 
-    if (count($requestCity) === 0) {
-      $requestCity = HouseModel::limit(5)->whereNot('id', $house->id)->with(['flats'])->get();
-    }
+//    if (count($requestCity) === 0) {
+//      $requestCity = HouseModel::limit(5)->whereNot('id', $house->id)->with(['flats'])->get();
+//    }
 
-    $requestCity->splice(5);
+    $requestArea->splice(5);
 
-    foreach($requestCity as $item) {
+    foreach($requestArea as $item) {
       $item->image = $this->getPhoto($item);
     }
 
-    return $requestCity;
+    return $requestArea;
   }
 
   /**
