@@ -325,9 +325,10 @@ trait MainInfo
     }
 
     foreach ($houses as $house) {
+
       $house->image = $this->getPhoto($house);
-      $house->dop_array = TypesModel::where('id', $house->dop)->get();
-      $house->info_array = StructureModel::where('id', $house->info)->get();
+      $house->dop_array = $this->getDopForHouse($house->info->dop);
+      $house->info_array = $this->getInfoForHouse($house->info->info);
       $house->popular = HouseViewsModel::where('house_id', $house->id)->count() > 30;
 
       $house->maxPrice = $house->flats->max('price');
@@ -347,9 +348,39 @@ trait MainInfo
       } else {
         $house->favorite = false;
       }
+
     }
 
     return $houses;
+  }
+
+  protected function getDopForHouse($dops) {
+
+    if($dops !== null) {
+      $collection = collect();
+      foreach (json_decode($dops) as $item) {
+        $collection->push(TypesModel::where('id', $item)->first());
+      }
+
+      return $collection;
+    } else {
+     return [];
+    }
+
+  }
+
+  protected function getInfoForHouse($infos) {
+
+    if($infos !== null) {
+      $collection = collect();
+      foreach (json_decode($infos) as $item) {
+        $collection->push(StructureModel::where('id', $item)->first());
+      }
+
+    } else {
+      return [];
+    }
+
   }
 
   /**
