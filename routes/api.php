@@ -97,6 +97,7 @@ Route::prefix('chat')->group(function () {
   Route::post('/message', ['App\Http\Controllers\Messages\MessageController', 'message']);
   Route::post('/reloadChats', ['App\Http\Controllers\Messages\MessageController', 'reloadChats']);
   Route::post('/reloadChat', ['App\Http\Controllers\Messages\MessageController', 'reloadChat']);
+  Route::post('/chatOpen', ['App\Http\Controllers\Messages\MessageController', 'chatOpen']);
 });
 
 Route::prefix('news')->group(function () {

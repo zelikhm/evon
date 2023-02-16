@@ -97,6 +97,8 @@ export default {
 
     this.chats_array = this.chats;
 
+
+
     setInterval(() => {
       axios.post('/api/chat/reloadChats', {
         user_id: this.user.id,

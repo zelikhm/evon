@@ -56,6 +56,20 @@
       if(this.chat) {
         this.chat_object = this.chat;
         this.openChat = true;
+
+        axios.post('/api/chat/chatOpen', {
+          'id': this.chat_object.id,
+        }).then(res => {
+          if(res.status === 200) {
+            this.chat_object.visible_id = 0;
+
+            Object.values(this.chats).forEach(item => {
+              if(item.id === this.chat_object.id) {
+                item.visible_id = 0;
+              }
+            })
+          }
+        })
       }
     },
     methods: {

@@ -50,7 +50,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                   <span class="text-[11px] xxl:text-[9px] xl:text-[8px] lg:text-[11px]">{{ new Date(Date.parse(item.created_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span>
                 </div>
               </div>
-              <p class="text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">{{ item.description.slice(0, 40) + '...' }}</p>
+              <p class="text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" v-html="item.description.slice(0, 40) + '...'"></p>
             </div>
             <div class="h-[1px] mt-3 w-full bg-[#E5DFEE]"></div>
           </div>

@@ -96,7 +96,7 @@ class AdminNewsModel extends Section implements Initializable
 
     $form = AdminForm::elements([
       AdminFormElement::text('title', 'Заголовок'),
-      AdminFormElement::textarea('description', 'Описание'),
+      AdminFormElement::wysiwyg('description', 'Описание'),
       AdminFormElement::image('image', 'Изображение'),
 
     ]);

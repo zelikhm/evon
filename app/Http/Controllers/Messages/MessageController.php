@@ -107,6 +107,20 @@ class MessageController extends Controller
   }
 
   /**
+   * open chat
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function chatOpen(Request $request) {
+
+    ChatModel::where('id', $request->id)->update(['visible_id' => 0]);
+
+    return response()->json(true, 200);
+
+  }
+
+  /**
    * save message
    * @param Request $request
    */
