@@ -39,7 +39,11 @@ trait MainInfo
 
 //    $requestCity = HouseModel::where('city', $house->city)->whereNot('id', $house->id)->with(['flats'])->get();
 
-    $requestArea = HouseModel::where('area', $house->area)->whereNot('id', $house->id)->with(['flats'])->get();
+    $requestArea = HouseModel::where('area', $house->area)
+      ->whereNot('id', $house->id)
+      ->where('active', 2)
+      ->where('visible', 1)
+      ->with(['flats'])->get();
 
 //    if (count($requestCity) < 5) {
 //      $requestCity->merge($requestArea);
