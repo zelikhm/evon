@@ -11,6 +11,8 @@ class CityModel extends Model
 
   protected $fillable = [
     'title',
+    'longitude',
+    'latitude',
   ];
 
   protected $hidden = [

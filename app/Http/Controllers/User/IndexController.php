@@ -64,7 +64,7 @@ class IndexController extends Controller
         'image' => $imageName,
       ]);
 
-      return response()->json(User::where('id', $request->user_id)->first(), 200);
+      return response()->json(User::where('id', $request->user_id)->with(['company'])->first(), 200);
 
     } else {
 

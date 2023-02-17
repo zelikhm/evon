@@ -96,6 +96,9 @@ class City extends Section implements Initializable
 
       AdminFormElement::text('title', 'Название города'),
 
+      AdminFormElement::text('longitude', 'Долгота'),
+      AdminFormElement::text('latitude', 'Широта'),
+
       AdminFormElement::hasMany('regions', [
         AdminFormElement::text('title', 'Название района'),
       ]),

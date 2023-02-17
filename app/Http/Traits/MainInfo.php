@@ -381,6 +381,7 @@ trait MainInfo
         $collection->push(StructureModel::where('id', $item)->first());
       }
 
+      return $collection;
     } else {
       return [];
     }

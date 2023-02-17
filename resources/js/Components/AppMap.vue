@@ -4,8 +4,8 @@ import { Link } from "@inertiajs/inertia-vue3"
 
 <template>
  <div class="relative w-full h-[90vh] my-5 xxl:my-4 xl:my-3">
-
-   <GMapMap :center="center" :disableDefaultUI="false" :zoom="6" map-type-id="roadmap" class="w-full h-[90vh]"
+{{city}}
+   <GMapMap :center="city !== null ? city : center" :disableDefaultUI="false" :zoom="city !== null ? 10 : 6" map-type-id="roadmap" class="w-full h-[90vh]"
             :options="{
                       zoomControl: false,
                       mapTypeControl: false,
@@ -90,7 +90,7 @@ import { Link } from "@inertiajs/inertia-vue3"
 
 <script>
 export default {
-  props: ['houses_array', 'state', 'user', 'type'],
+  props: ['houses_array', 'state', 'user', 'type', 'city'],
   data() {
     return {
       openedMarkerID: null,

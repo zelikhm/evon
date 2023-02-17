@@ -1,5 +1,7 @@
 <script setup>
   import {Link} from '@inertiajs/inertia-vue3'
+
+  import Preloader from '@/Components/Preloader/Preloader.vue'
 </script>
 
 <template>
@@ -70,11 +72,12 @@
                   <img class="absolute top-1/2 -translate-y-1/2 translate-x-1/2 w-4.5 xxl:w-4 xl:w-3.5"
                        src="../../assets/svg/search_icon_grey.svg" alt="">
                 </div>
-                <span
-                  v-for="(city, idx) in filteredCity" :key="idx"
-                  @click="changeSelectCity(city, idx)"
-                  class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
-                >{{ city.title }}</span>
+                <div class="flex items-center text-[#1E1D2D] ml-5 mt-2" v-for="(item, index) in filteredCity" :key="idx">
+                  <input class="custom__checkbox" name="infrastructure" type="checkbox" v-bind:checked="checkCity(item.id)">
+                  <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
+                         v-on:click="changeSelectCity(item)">{{ item.title }}
+                  </label>
+                </div>
               </div>
             </div>
           </div>
@@ -92,13 +95,12 @@
               </div>
               <div v-if="openSelectRegion"
                    class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
-                <span
-                  v-for="(region, idx) in regions" :key="idx"
-                  @click="changeSelectRegion(region)"
-                  class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
-                >
-                  {{ region.title }}
-                </span>
+                <div class="flex items-center text-[#1E1D2D] ml-5 mt-2" v-for="(item, index) in regions" :key="idx">
+                  <input class="custom__checkbox" name="infrastructure" type="checkbox" v-bind:checked="checkRegion(item.id)">
+                  <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
+                         v-on:click="changeSelectRegion(item)">{{ item.title }}
+                  </label>
+                </div>
               </div>
             </div>
           </div>
@@ -304,7 +306,7 @@
               class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] lg:text-[20px] whitespace-nowrap text-center">
               {{ isSearch }}</h2>
             <span
-              class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center">Найдено {{ count_houses }} шт.</span>
+              class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center">Найдено {{ count_house }} шт.</span>
           </div>
           <div class="flex items-center md:flex-col gap-8 xxl:gap-6 xl:gap-5 md:gap-3">
             <div v-if="!map" :tabindex="tabindex" @blur="openDate = false" class="relative">
@@ -363,159 +365,164 @@
         </div>
       </div>
 
-      <!--  Новостройки в виде таблицы -->
-      <div v-if="!toggle && !map"
-           class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3 mt-5 xxl:mt-4 xl:mt-3">
-        <div class="flex flex-col" v-for="(item, idx) in houses_array" :key="item.id">
-          <div
-            class="object__block relative z-10 h-[300px] exl:h-fit exl:h-[16vw] lg:h-[24vw] md:h-[36vw] sm:h-[56vw] rounded-[6px]">
-            <img v-if="item.images.length > 0" :src="item.image"
-                 class="object-cover absolute -z-10 w-full h-full rounded-[6px]" alt="">
-            <img v-else src="../../assets/no-img-houses.jpg"
-                 class="object-cover absolute -z-10 w-full h-full rounded-[6px]" alt="">
+      <div v-if="preloader">
+        <Preloader></Preloader>
+      </div>
+      <div v-else>
+        <!--  Новостройки в виде таблицы -->
+        <div v-if="!toggle && !map"
+             class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3 mt-5 xxl:mt-4 xl:mt-3">
+          <div class="flex flex-col" v-for="(item, idx) in houses_array" :key="item.id">
             <div
-              class="seek immovables__overlay opacity-0 transition-all h-full w-full absolute -z-10 rounded-[6px]"></div>
-            <div class="flex flex-col h-full justify-between p-5 xxl-4 xl:p-3">
-              <div class="hide transition-all">
+              class="object__block relative z-10 h-[300px] exl:h-fit exl:h-[16vw] lg:h-[24vw] md:h-[36vw] sm:h-[56vw] rounded-[6px]">
+              <img v-if="item.images.length > 0" :src="item.image"
+                   class="object-cover absolute -z-10 w-full h-full rounded-[6px]" alt="">
+              <img v-else src="../../assets/no-img-houses.jpg"
+                   class="object-cover absolute -z-10 w-full h-full rounded-[6px]" alt="">
+              <div
+                class="seek immovables__overlay opacity-0 transition-all h-full w-full absolute -z-10 rounded-[6px]"></div>
+              <div class="flex flex-col h-full justify-between p-5 xxl-4 xl:p-3">
+                <div class="hide transition-all">
                 <span
                   class="uppercase bg-[#30CB49] text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none font-semibold rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1 mr-2 cursor-default"
                   v-if="item.created && !Number.isInteger(+item.created[0])">{{ item.created }}</span>
-                <span
-                  class="uppercase bg-[#E84680] text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none font-semibold rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1 cursor-default"
-                  v-else-if="item.created">{{ item.created }}</span>
-              </div>
-              <div class="seek flex opacity-0 transition-all flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
-                <button @click="$emit('open-add-selections', item)"
-                        class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
+                  <span
+                    class="uppercase bg-[#E84680] text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none font-semibold rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1 cursor-default"
+                    v-else-if="item.created">{{ item.created }}</span>
+                </div>
+                <div class="seek flex opacity-0 transition-all flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
+                  <button @click="$emit('open-add-selections', item)"
+                          class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
                   <span
                     class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">В подборку</span>
-                  <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
-                </button>
-                <button v-if="item.favorite" @click="removeFavorite(item)"
-                        class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
-                  <span
-                    class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">Убрать</span>
-                  <img src="../../assets/svg/heart_icon_fill.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
-                </button>
-                <button v-else @click="addFavorite(item)"
-                        class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
-                  <span
-                    class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">В избранное</span>
-                  <img src="../../assets/svg/heart_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="">
-                </button>
-              </div>
-              <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1">
-                <span
-                  class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none">{{ item.area }}</span>
-                <div class="h-1 w-1 rounded-full bg-white"></div>
-                <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none">{{ item.flats.length }} {{ item.flats.length === 1 ? "Квартира" : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
-              </div>
-            </div>
-          </div>
-          <div class="flex flex-col text-[#1E1D2D] p-5 xxl-4 xl:p-3 leading-none">
-            <Link :href="'/house/' + item.slug"
-                  class="hover__title-block transition-all font-semibold text-xl xxl:text-base xl:text-sm md:text-[17px]">
-              {{ item.title }}
-            </Link>
-            <span class="text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">от {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} € до {{ Number.isInteger(item.maxPrice) ? item.maxPrice.toLocaleString('ru') : "-" }}</span>
-          </div>
-        </div>
-
-      </div>
-
-      <!--  Новостройки в виде списка -->
-      <div v-if="toggle && !map" class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 mt-5 xxl:mt-4 xl:mt-3">
-        <div class="grid__75-25 border border-solid border-[#E5DFEE] rounded-[6px]" v-for="item in houses_array">
-          <div class="border__right md:border-r-0 md:border-b-[1px] border-solid border-[#E5DFEE]">
-            <div class="grid__35-65 p-2.5 xxl:p-2 xl:p-1.5 h-full">
-              <div class="relative object__block h-full">
-                <div
-                  class="seek opacity-0 transition-all immovables__overlay h-full w-full absolute z-10 rounded-[6px]"></div>
-                <img v-if="item.images.length > 0" :src="item.image"
-                     class="object-cover w-full h-[180px] exl:h-fit exl:h-[9.3vw] x:h-[10vw] lg:h-[14vw] md:h-[32vw] sm:h-[42vw]"
-                     alt="">
-                <img v-else src="../../assets/no-img-houses.jpg"
-                     class="object-cover w-full h-[180px] exl:h-fit exl:h-[9.3vw] x:h-[10vw] lg:h-[14vw] md:h-[32vw] sm:h-[42vw]"
-                     alt="">
-                <div
-                  class="seek opacity-0 transition-all absolute top-1/2 -translate-y-1/2 left-0 z-10 flex flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
-                  <button @click="$emit('open-add-selections', item)"
-                          class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[70%]">
-                    <span
-                      class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">В подборку</span>
                     <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
                   </button>
                   <button v-if="item.favorite" @click="removeFavorite(item)"
-                          class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[70%]">
-                    <span
-                      class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">Убрать</span>
+                          class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
+                  <span
+                    class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">Убрать</span>
                     <img src="../../assets/svg/heart_icon_fill.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
                   </button>
                   <button v-else @click="addFavorite(item)"
-                          class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[70%]">
-                    <span
-                      class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">В избранное</span>
+                          class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
+                  <span
+                    class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">В избранное</span>
                     <img src="../../assets/svg/heart_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="">
                   </button>
                 </div>
+                <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1">
+                <span
+                  class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none">{{ item.area }}</span>
+                  <div class="h-1 w-1 rounded-full bg-white"></div>
+                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none">{{ item.flats.length }} {{ item.flats.length === 1 ? "Квартира" : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
+                </div>
               </div>
-              <div
-                class="flex flex-col justify-between px-7 xxl:px-6 xl:px-5 md:px-1.5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3 md:py-3 md:gap-3.5">
-                <div class="flex justify-between sm:flex-col gap-2">
-                  <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                    <Link :href="'/house/' + item.slug"
-                          class="hover__title-block transition-all leading-none font-semibold text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">
-                      {{ item.title }}
-                    </Link>
-                    <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs md:text-[14px]">{{ item.area }}</span>
+            </div>
+            <div class="flex flex-col text-[#1E1D2D] p-5 xxl-4 xl:p-3 leading-none">
+              <Link :href="'/house/' + item.slug"
+                    class="hover__title-block transition-all font-semibold text-xl xxl:text-base xl:text-sm md:text-[17px]">
+                {{ item.title }}
+              </Link>
+              <span class="text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">от {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} € до {{ Number.isInteger(item.maxPrice) ? item.maxPrice.toLocaleString('ru') : "-" }}</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!--  Новостройки в виде списка -->
+        <div v-if="toggle && !map" class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 mt-5 xxl:mt-4 xl:mt-3">
+          <div class="grid__75-25 border border-solid border-[#E5DFEE] rounded-[6px]" v-for="item in houses_array">
+            <div class="border__right md:border-r-0 md:border-b-[1px] border-solid border-[#E5DFEE]">
+              <div class="grid__35-65 p-2.5 xxl:p-2 xl:p-1.5 h-full">
+                <div class="relative object__block h-full">
+                  <div
+                    class="seek opacity-0 transition-all immovables__overlay h-full w-full absolute z-10 rounded-[6px]"></div>
+                  <img v-if="item.images.length > 0" :src="item.image"
+                       class="object-cover w-full h-[180px] exl:h-fit exl:h-[9.3vw] x:h-[10vw] lg:h-[14vw] md:h-[32vw] sm:h-[42vw]"
+                       alt="">
+                  <img v-else src="../../assets/no-img-houses.jpg"
+                       class="object-cover w-full h-[180px] exl:h-fit exl:h-[9.3vw] x:h-[10vw] lg:h-[14vw] md:h-[32vw] sm:h-[42vw]"
+                       alt="">
+                  <div
+                    class="seek opacity-0 transition-all absolute top-1/2 -translate-y-1/2 left-0 z-10 flex flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
+                    <button @click="$emit('open-add-selections', item)"
+                            class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[70%]">
+                    <span
+                      class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">В подборку</span>
+                      <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
+                    </button>
+                    <button v-if="item.favorite" @click="removeFavorite(item)"
+                            class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[70%]">
+                    <span
+                      class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">Убрать</span>
+                      <img src="../../assets/svg/heart_icon_fill.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+                    </button>
+                    <button v-else @click="addFavorite(item)"
+                            class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[70%]">
+                    <span
+                      class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">В избранное</span>
+                      <img src="../../assets/svg/heart_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="">
+                    </button>
                   </div>
-                  <div class="flex flex-wrap gap-x-1">
+                </div>
+                <div
+                  class="flex flex-col justify-between px-7 xxl:px-6 xl:px-5 md:px-1.5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3 md:py-3 md:gap-3.5">
+                  <div class="flex justify-between sm:flex-col gap-2">
+                    <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
+                      <Link :href="'/house/' + item.slug"
+                            class="hover__title-block transition-all leading-none font-semibold text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">
+                        {{ item.title }}
+                      </Link>
+                      <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs md:text-[14px]">{{ item.area }}</span>
+                    </div>
+                    <div class="flex flex-wrap gap-x-1">
                     <span
                       class="bg-[#E84680] h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] md:text-[11px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1"
                       v-if="Math.ceil(Math.abs(new Date().getTime() - new Date(item.created_at).getTime()) / (1000 * 3600 * 24) ) <= 30">новинки</span>
-                    <span
-                      class="bg-[#FA8D50] h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1"
-                      v-if="item.promotion">акция</span>
-                    <span
-                      class="bg-[#E84646] h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1"
-                      v-if="item.visible >= 50">популярное</span>
+                      <span
+                        class="bg-[#FA8D50] h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1"
+                        v-if="item.promotion">акция</span>
+                      <span
+                        class="bg-[#E84646] h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1"
+                        v-if="item.visible >= 50">популярное</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="flex flex-col justify-between px-7 xxl:px-6 xl:px-5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3">
-            <div class="flex justify-between items-center">
-              <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] md:text-[13px]">{{ item.flats.length }} {{ item.flats.length === 1 ? "Квартира" : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
-              <span
-                class="uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[12px] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1"
-                v-if="item.created && !Number.isInteger(+item.created[0])">{{ item.created }}</span>
-              <span
-                class="uppercase border border-solid border-[#E84680] h-fit text-[#E84680] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1"
-                v-else-if="item.created">{{ item.created }}</span>
-            </div>
-            <div class="flex flex-col gap-2.5 xxl:gap-1.5 xl:gap-1">
+            <div class="flex flex-col justify-between px-7 xxl:px-6 xl:px-5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3">
+              <div class="flex justify-between items-center">
+                <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] md:text-[13px]">{{ item.flats.length }} {{ item.flats.length === 1 ? "Квартира" : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
+                <span
+                  class="uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[12px] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1"
+                  v-if="item.created && !Number.isInteger(+item.created[0])">{{ item.created }}</span>
+                <span
+                  class="uppercase border border-solid border-[#E84680] h-fit text-[#E84680] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1"
+                  v-else-if="item.created">{{ item.created }}</span>
+              </div>
+              <div class="flex flex-col gap-2.5 xxl:gap-1.5 xl:gap-1">
               <span
                 class="font-medium whitespace-nowrap text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] md:text-[17px] leading-none leading-none">от {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} €</span>
-              <span class="text-[#8A8996] whitespace-nowrap text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px]">{{ isNaN(item.minPrice / item.minSquare) ? "-" : Math.round(item.minPrice / item.minSquare) }} € за м²</span>
-            </div>
-            <div
-              class="gray-backg flex items-center justify-center w-fit px-3 xxl:px-2.5 xl:px-2 gap-2 xxl:gap-1.5 xl:gap-1">
-              <img src="../../assets/svg/ruller_icon.svg" class="h-4 xxl:h-3 xl:h-2.5" alt="Линейка">
-              <span class="text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px] whitespace-nowrap">{{ Number.isInteger(item.minSquare) ? item.minSquare : "-" }} м² - {{ Number.isInteger(item.maxSquare) ? item.maxSquare : "-" }} м²</span>
+                <span class="text-[#8A8996] whitespace-nowrap text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px]">{{ isNaN(item.minPrice / item.minSquare) ? "-" : Math.round(item.minPrice / item.minSquare) }} € за м²</span>
+              </div>
+              <div
+                class="gray-backg flex items-center justify-center w-fit px-3 xxl:px-2.5 xl:px-2 gap-2 xxl:gap-1.5 xl:gap-1">
+                <img src="../../assets/svg/ruller_icon.svg" class="h-4 xxl:h-3 xl:h-2.5" alt="Линейка">
+                <span class="text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px] whitespace-nowrap">{{ Number.isInteger(item.minSquare) ? item.minSquare : "-" }} м² - {{ Number.isInteger(item.maxSquare) ? item.maxSquare : "-" }} м²</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="w-full flex justify-center mb-14 xxl:mb-10 xl:mb-8" @click="nextShow()"
-           v-if="readyHouses.length > count && !map">
-        <button
-          class="more__button transition-all text-[#E84680] border border-solid border-[#E84680] text-base xxl:text-sm xl:text-xs lg:text-[15px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2.5 xl:py-1.5 rounded-[3px]">
-          Показать еще
-        </button>
+        <div class="w-full flex justify-center mb-14 xxl:mb-10 xl:mb-8" @click="nextShow()"
+             v-if="count_house > count && !map">
+          <button
+            class="more__button transition-all text-[#E84680] border border-solid border-[#E84680] text-base xxl:text-sm xl:text-xs lg:text-[15px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2.5 xl:py-1.5 rounded-[3px]">
+            Показать еще
+          </button>
+        </div>
       </div>
 
-      <app-map @open-add-selections="openAddSelections" v-if="map" :houses_array="readyHouses" :type="type"
+      <app-map @open-add-selections="openAddSelections" v-if="map" :houses_array="houses_array" :city="city_map" :type="type"
                :user="user"/>
     </div>
   </div>
@@ -551,6 +558,7 @@
     emits: ['open-filter', 'open-add-selections', 'close-filter'],
     data() {
       return {
+        preloader: false,
         housesFilters: [],
         filters: {
           badge: {
@@ -576,6 +584,8 @@
             toChildrenSchool: '',
             toBus: '',
           },
+          cities: [],
+          areas: [],
           info: {},
           dop: {},
         },
@@ -588,9 +598,7 @@
           {type: 'Новостройка', id: 0},
           {type: 'Виллы', id: 1}
         ],
-        selectCity: null,
         openSelectCity: false,
-        selectRegion: 'Центральный',
         openSelectRegion: false,
         regions: [],
         selectDeadline: 'Не важно',
@@ -630,6 +638,8 @@
         openNotification: false,
         openLocation: false,
         isNewModal: false,
+        count_house: 0,
+        city_map: null,
       }
     },
     methods: {
@@ -797,12 +807,19 @@
         if (Object.keys(this.filters.info).length > 0) {
           object7.forEach(item => {
             if (item.info_array !== null) {
-              item.info_array.forEach(value => {
+              let array = [];
 
-                if (this.filters.info.find(value.id)) {
-                  object8.push(item);
-                }
+              item.info_array.forEach(v => {
+
+                array.push(v.id);
+
               })
+
+              const diff = this.include(array, Object.values(this.filters.info));
+
+              if(diff === true) {
+                object8.push(item);
+              }
             }
           })
         } else {
@@ -814,29 +831,66 @@
         if (Object.keys(this.filters.dop).length > 0) {
           object8.forEach(item => {
             if (item.dop_array !== null) {
-              Object.values(this.filters.dop).forEach(val => {
+              let array = [];
 
-                item.dop_array.forEach(value => {
-                  let status = false;
-
-                  if (val === value.id) {
-                    status = true;
-                  }
-
-                  if (status === true) {
-                    object9.push(item);
-                  }
-                })
-
+              item.dop_array.forEach(v => {
+                array.push(v.id);
               })
+
+              const diff = this.include(array, Object.values(this.filters.dop));
+
+              if(diff === true) {
+                object9.push(item);
+              }
+
             }
           })
         } else {
           object9 = object8;
         }
 
-        console.log(object9);
-        this.houses_array = object9;
+        let object10 = [];
+
+        if(Object.keys(this.filters.cities).length > 0) {
+          object9.forEach(item => {
+            if(item.city !== null) {
+
+              let status = this.filters.cities.find(val => val.title === item.city);
+
+              if(status !== undefined) {
+
+                if(Object.keys(this.filters.areas).length > 0) {
+                  let push = this.filters.areas.find(val => val.title === item.area);
+
+                  if(push !== undefined) {
+                    object10.push(item);
+                  }
+
+                } else {
+
+                  object10.push(item);
+                }
+              }
+            }
+          })
+        } else {
+          object10 = object9;
+        }
+
+        this.houses_array = object10;
+        this.count_house = this.houses_array.length;
+      },
+      include(where, what) {
+
+        let status = true;
+
+        what.forEach(item => {
+          if(!where.includes(item)) {
+            status = false;
+          }
+        })
+
+        return status;
       },
       openHouse(href) {
         router.get(href, {preserveScroll: true})
@@ -914,16 +968,58 @@
           this.houses_array = this.readyHouses.sort((a, b) => b.minPrice - a.minPrice)
         }
       },
-      changeSelectCity(city, idx) {
-        this.selectCity = city.title
-        this.openSelectCity = false
+      checkCity(id) {
 
-        this.selectRegion = this.city[idx].regions[0].title
-        this.regions = this.city[idx].regions
+        let arr = this.filters.cities.find(item => id === item.id);
+
+        return arr !== undefined ? true : false;
+
+      },
+      checkRegion(id) {
+
+        let arr = this.filters.areas.find(item => id === item.id);
+
+        return arr !== undefined ? true : false;
+
+      },
+      changeSelectCity(city) {
+
+        let arr = this.filters.cities.findIndex(item => city.id === item.id);
+
+        if(arr !== -1) {
+          this.filters.cities.splice(arr, 1);
+
+          if(this.filters.cities.length > 0) {
+            this.regions = this.filters.cities[this.filters.cities.length - 1].regions;
+            this.city_map = { lat: parseFloat(this.filters.cities[this.filters.cities.length - 1].latitude), lng: parseFloat(this.filters.cities[this.filters.cities.length - 1].longitude) };
+          } else {
+            this.regions = {};
+            this.city_map = null;
+          }
+        } else {
+          this.filters.cities.push({ 'id': city.id, 'title': city.title, 'regions': city.regions });
+          this.regions = city.regions;
+          this.city_map = { lat: parseFloat(city.latitude), lng: parseFloat(city.longitude) };
+        }
+
+        this.setFilter();
+
       },
       changeSelectRegion(region) {
-        this.selectRegion = region.title
-        this.openSelectRegion = false
+
+        let arr = this.filters.areas.findIndex(item => region.id === item.id);
+
+        if(arr !== -1) {
+
+          this.filters.areas.splice(arr, 1);
+
+        } else {
+
+          this.filters.areas.push({ 'id': region.id, 'title': region.title });
+
+        }
+
+        this.setFilter();
       },
       changeSelectDeadline(deadline) {
         this.selectDeadline = deadline.deadline
@@ -998,6 +1094,7 @@
       }
     },
     created() {
+      this.count_house = this.count_houses;
       let href = window.location.href
       if (href.split('#').at(-1) === 'search') {
 
@@ -1008,7 +1105,8 @@
           token: this.user.token,
         })
           .then(response => {
-            this.readyHouses = response.data
+            this.readyHouses = response.data;
+            this.count_house = this.readyHouses.length;
             this.updateHouses()
           })
           .catch(e => console.log(e))
@@ -1018,11 +1116,13 @@
         if (this.type === 0) {
           axios.get('/api/house/getHousesJk').then(res => {
             this.readyHouses = res.data;
+            this.count_house = this.readyHouses.length;
             this.updateHouses();
           })
         } else {
           axios.get('/api/house/getHousesVillages').then(res => {
             this.readyHouses = res.data;
+            this.count_house = this.readyHouses.length;
             this.updateHouses();
           })
         }
