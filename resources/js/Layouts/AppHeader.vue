@@ -178,7 +178,7 @@ export default {
   },
   mounted() {
 
-    if(this.user !== undefined) {
+    if(this.user !== null) {
       setInterval(() => {
         axios.post('/api/chat/checkChat', {
           user_id: this.user.id,
