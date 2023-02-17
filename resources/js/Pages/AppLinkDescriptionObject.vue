@@ -290,7 +290,7 @@
                 <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3"
                      v-for="item in flats_array">
                   <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
-                    <img v-if="item.imageUp" :src="item.imageUp" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="" v-on:click="openScheme(item)">
+                    <img v-if="item.imageUp" :src="item.imageUp" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="" v-on:click="openScheme(item)" style="cursor: pointer">
                     <img v-else src="../../assets/no-img-houses.jpg" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="">
                     <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
                       <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
@@ -331,9 +331,7 @@
                 class="flex justify-between md:flex-col items-center rounded-[10px] bg-[#F6F3FA] p-10 xxl:p-8 xl:p-6">
                 <div class="flex flex-col">
                   <span class="text-[20px] xxl:text-[17px] xl:text-[14px] lg:text-[17px] font-medium">Нет доступных квартир</span>
-                  <p class="w-[70%] md:w-full text-[#8A8996] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[14px]">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. </p>
+                  <p class="w-[70%] md:w-full text-[#8A8996] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[14px]"></p>
                 </div>
                 <svg class="h-full" width="162" height="113" viewBox="0 0 162 113" fill="#6435A5"
                      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

@@ -498,7 +498,6 @@ export default {
         }
       })
       this.object.coordinates = event.latLng.lat() + ' ' + event.latLng.lng()
-      console.log(this.object)
     },
     openMarker(id) {
       this.openedMarkerID = id
@@ -532,7 +531,7 @@ export default {
           formData.append('title', this.object.title);
           formData.append('description', this.object.description);
           formData.append('city', this.selectCity);
-          formData.append('area', this.selectRegion);
+          formData.append('area', this.selectRegion !== 'Не указано' ? this.selectRegion : null);
           formData.append('latitude', +coord[0]);
           formData.append('longitude', +coord[1]);
           formData.append('percent', this.object.percent);
@@ -586,7 +585,7 @@ export default {
           formData.append('title', this.object.title);
           formData.append('description', this.object.description);
           formData.append('city', this.selectCity);
-          formData.append('area', this.selectRegion);
+          formData.append('area', this.selectRegion !== 'Не указано' ? this.selectRegion : null);
           formData.append('latitude', +coord[0]);
           formData.append('longitude', +coord[1]);
           formData.append('percent', this.object.percent);
@@ -674,11 +673,28 @@ export default {
       this.selectCity = this.object.city = city.title
       this.openSelectCity = false
 
-      this.selectRegion = this.city[idx].regions[0].title
       this.regions = this.city[idx].regions
+
+      if(this.regions.length === 0 ){
+        this.regions.push({'id': -1, 'title': 'Не указано'});
+      }
+
+      if(this.regions.find(item => item.id !== -1)) {
+        this.regions.unshift({'id': -1, 'title': 'Не указано'})
+        this.selectRegion = 'Не указано'
+      }
+
+
+
     },
     changeSelectRegion(region) {
-      this.selectRegion = this.object.area = region.title
+      if(region.id === -1) {
+        this.selectRegion = region.title
+        this.object.area = null
+      } else {
+        this.selectRegion = this.object.area = region.title
+      }
+
       this.openSelectRegion = false
     },
     changeSelectDeadline(deadline) {
@@ -731,8 +747,13 @@ export default {
 
     if (this.city[0] !== null) {
       this.selectCity = this.city[0].title
-      this.selectRegion = this.city[0].regions[0].title
       this.regions = this.city[0].regions
+      if(this.regions.length !== 0) {
+        this.regions.unshift({'id': -1, 'title': 'Не указано'})
+      } else {
+        this.regions.push({'id': -1, 'title': 'Не указано'})
+      }
+      this.selectRegion = this.city[0].regions[0].title
     }
 
     for (let key of this.dops) {
