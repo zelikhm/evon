@@ -178,22 +178,22 @@ export default {
   },
   mounted() {
 
-    // if(this.user !== null) {
-    //   setInterval(() => {
-    //     axios.post('/api/chat/checkChat', {
-    //       user_id: this.user.id,
-    //       token: this.user.token,
-    //     }).then(res => {
-    //       this.chats = res.data;
-    //
-    //       if(this.chats > 0) {
-    //         this.isChat = true;
-    //       } else {
-    //         this.isChat = false;
-    //       }
-    //     })
-    //   }, 5000)
-    // }
+    if(this.user !== null) {
+      setInterval(() => {
+        axios.post('/api/chat/checkChat', {
+          user_id: this.user.id,
+          token: this.user.token,
+        }).then(res => {
+          this.chats = res.data;
+
+          if(this.chats > 0) {
+            this.isChat = true;
+          } else {
+            this.isChat = false;
+          }
+        })
+      }, 5000)
+    }
 
   },
   emits: ['login-realtor', 'login-developer', 'open-register'],
