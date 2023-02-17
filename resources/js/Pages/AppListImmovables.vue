@@ -85,6 +85,7 @@ export default {
     news: [],
     count_houses: 0,
     type: 0,
+    user: [],
   },
   provide() {
     return {

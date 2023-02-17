@@ -522,7 +522,7 @@
         </div>
       </div>
 
-      <app-map @open-add-selections="openAddSelections" v-if="map" :houses_array="houses_array" :city="city_map" :type="type"
+      <app-map @open-add-selections="openAddSelections" v-if="map" :houses_array="markers" :houses="map_array" :city="city_map"
                :user="user"/>
     </div>
   </div>
@@ -558,6 +558,7 @@
     emits: ['open-filter', 'open-add-selections', 'close-filter'],
     data() {
       return {
+        markers: [],
         preloader: false,
         housesFilters: [],
         filters: {
@@ -640,6 +641,7 @@
         isNewModal: false,
         count_house: 0,
         city_map: null,
+        map_array: [],
       }
     },
     methods: {
@@ -878,7 +880,9 @@
         }
 
         this.houses_array = object10;
+        this.map_array = object10;
         this.count_house = this.houses_array.length;
+        this.updatedMap();
       },
       include(where, what) {
 
@@ -991,7 +995,11 @@
 
           if(this.filters.cities.length > 0) {
             this.regions = this.filters.cities[this.filters.cities.length - 1].regions;
-            this.city_map = { lat: parseFloat(this.filters.cities[this.filters.cities.length - 1].latitude), lng: parseFloat(this.filters.cities[this.filters.cities.length - 1].longitude) };
+            if(parseFloat(this.filters.cities[this.filters.cities.length - 1].latitude) !== null) {
+              this.city_map = { lat: parseFloat(this.filters.cities[this.filters.cities.length - 1].latitude), lng: parseFloat(this.filters.cities[this.filters.cities.length - 1].longitude) };
+            } else {
+              this.city_map = null;
+            }
           } else {
             this.regions = {};
             this.city_map = null;
@@ -999,7 +1007,12 @@
         } else {
           this.filters.cities.push({ 'id': city.id, 'title': city.title, 'regions': city.regions });
           this.regions = city.regions;
-          this.city_map = { lat: parseFloat(city.latitude), lng: parseFloat(city.longitude) };
+          if(parseFloat(city.latitude) !== null) {
+            this.city_map = { lat: parseFloat(city.latitude), lng: parseFloat(city.longitude) };
+          } else {
+            this.city_map = null;
+          }
+
         }
 
         this.setFilter();
@@ -1091,7 +1104,34 @@
         this.count += 30;
 
         this.houses_array = JSON.parse(JSON.stringify(this.readyHouses.sort((a, b) => b.created_at - a.created_at))).splice(0, this.count);
-      }
+      },
+      updatedMap() {
+        let id = 0;
+
+        this.markers = [];
+
+        if (this.map_array.length > 0) {
+          this.map_array.forEach(item => {
+            ++id
+            this.markers.push({
+              id,
+              position: {
+                lat: +item.latitude,
+                lng: +item.longitude
+              }
+            })
+          })
+        } else {
+          this.markers.push({
+            position: {
+              lat: +this.houses.latitude,
+              lng: +this.houses.longitude
+            }
+          })
+        }
+
+        console.log(this.markers);
+      },
     },
     created() {
       this.count_house = this.count_houses;
@@ -1112,18 +1152,23 @@
           .catch(e => console.log(e))
       } else {
         this.readyHouses = this.houses
+        this.map_array = this.houses;
 
         if (this.type === 0) {
           axios.get('/api/house/getHousesJk').then(res => {
             this.readyHouses = res.data;
             this.count_house = this.readyHouses.length;
+            this.map_array = this.readyHouses;
             this.updateHouses();
+            this.updatedMap();
           })
         } else {
           axios.get('/api/house/getHousesVillages').then(res => {
             this.readyHouses = res.data;
             this.count_house = this.readyHouses.length;
+            this.map_array = this.readyHouses;
             this.updateHouses();
+            this.updatedMap();
           })
         }
 
