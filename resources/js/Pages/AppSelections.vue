@@ -25,11 +25,11 @@
       </div>
       <div class="grid grid-cols-2 lg:grid-cols-1 gap-x-10 gap-y-4 mt-8 xxl:mt-7 xl:mt-6 mb-28 xxl:mb-24 xl:mb-20">
         <div class="contact__selling grid__selection-block rounded-[10px]" v-for="(item, idx) in compilationReady">
-          <img class="p-2.5 xxl:p-2 xl:p-1.5 w-full h-[140px] exl:h-[8.5vw] lg:h-[17vw] sm:h-full rounded-[4px] object-cover" v-if="item.image" :src="item.image" alt="">
-          <img class="p-2.5 xxl:p-2 xl:p-1.5 w-full h-[140px] exl:h-[8.5vw] lg:h-[17vw] sm:h-full rounded-[4px] object-cover" v-else src="../../assets/no-img-houses.jpg" alt="">
-          <div class="flex items-center">
+          <img class="p-2.5 xxl:p-2 xl:p-1.5 w-full h-[140px] exl:h-[8.5vw] lg:h-[17vw] sm:h-[36vw] rounded-[4px] object-cover" v-if="item.image" :src="item.image" alt="">
+          <img class="p-2.5 xxl:p-2 xl:p-1.5 w-full h-[140px] exl:h-[8.5vw] lg:h-[17vw] sm:h-[36vw] rounded-[4px] object-cover" v-else src="../../assets/no-img-houses.jpg" alt="">
+          <div class="flex items-center sm:items-start sm:flex-col">
             <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5 w-full py-2.5 xxl:py-2 xl:py-1.5 pl-2.5 xxl:pl-2 xl:pl-1.5 pr-20 xxl:pr-16 xl:pr-12 md:pr-2.5">
-              <span @click="openSelectionWithProps(item)" class="cursor-pointer text-lg xxl:text-[15px] xl:text-[13px] text-[#1E1D2D] font-medium leading-none">{{ item.title }}</span>
+              <span @click="openSelectionWithProps(item)" class="cursor-pointer text-lg xxl:text-[15px] xl:text-[13px] lg:text-[17px] text-[#1E1D2D] font-medium leading-none">{{ item.title }}</span>
               <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{ item.values.length }} ЖК</span>
               <div :class="{ 'border-[#6435A5]': item.isEdit, 'border-[#E5DFEE]': !item.isEdit }" class="hover__title-block transition-all flex w-full border border-solid rounded-[5px] p-3 xxl:p-2.5 xl:p-2">
                 <input :disabled="!item.isEdit" class="p-0 text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] w-full leading-none focus:ring-0" v-model="item.description" type="text">
@@ -37,17 +37,17 @@
                 >{{ item.isEdit ? "Сохранить" : "Редактировать" }}</button>
               </div>
             </div>
-            <div class="relative border__left flex flex-col h-full justify-evenly">
-              <button @click="openSelectionWithProps(item)" class="px-5 xxl:px-4 xl:px-3 h-full">
-                <img src="../../assets/svg/pen_icon_grey.svg" class="w-6 xxl:w-5.5 xl:w-5 lg:w-6" alt="">
+            <div class="relative border__left sm:border-0 flex flex-col sm:flex-row h-full sm:h-fit sm:w-full justify-evenly sm:py-1">
+              <button @click="openSelectionWithProps(item)" class="px-5 xxl:px-4 xl:px-3 h-full sm:h-fit sm:flex-shrink-0">
+                <img src="../../assets/svg/pen_icon_grey.svg" class="w-6 xxl:w-5.5 xl:w-5 lg:w-6 h-6 xxl:h-5.5 xl:h-5 lg:h-6" alt="">
               </button>
-              <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
-              <button @click="onModalWithLink(item)" class="px-5 xxl:px-4 xl:px-3 h-full">
-                <img src="../../assets/svg/screp_icon_grey.svg" class="w-6 xxl:w-5.5 xl:w-5 lg:w-6" alt="">
+              <div class="w-full sm:w-[1px] h-[1px] sm:h-full bg-[#E5DFEE] flex-shrink-0"></div>
+              <button @click="onModalWithLink(item)" class="px-5 xxl:px-4 xl:px-3 h-full sm:h-fit sm:flex-shrink-0">
+                <img src="../../assets/svg/screp_icon_grey.svg" class="w-6 xxl:w-5.5 xl:w-5 lg:w-6 h-6 xxl:h-5.5 xl:h-5 lg:h-6" alt="">
               </button>
-              <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
-              <button @click="item.deleteConfirm = true" class="px-5 xxl:px-4 xl:px-3 h-full">
-                <img src="../../assets/svg/bucket_icon_red.svg" class="w-6 xxl:w-5.5 xl:w-5 lg:w-6" alt="">
+              <div class="w-full sm:w-[1px] h-[1px] sm:h-full bg-[#E5DFEE]"></div>
+              <button @click="item.deleteConfirm = true" class="px-5 xxl:px-4 xl:px-3 h-full sm:h-fit sm:flex-shrink-0">
+                <img src="../../assets/svg/bucket_icon_red.svg" class="w-6 xxl:w-5.5 xl:w-5 lg:w-6 h-6 xxl:h-5.5 xl:h-5 lg:h-6" alt="">
               </button>
               <div v-if="item.deleteConfirm" class="cursor-auto z-20 text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] absolute top-[110%] bg-white right-0 flex flex-col border border-solid border-[#CEC3DD] rounded-[5px]">
                 <span class="whitespace-nowrap text-center border__bottom p-2.5 xxl:p-2 xl:p-1.5 leading-none">Вы уверены что хотите удалить?</span>
