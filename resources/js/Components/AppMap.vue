@@ -179,19 +179,19 @@ export default {
     this.houses = this.houses_array;
 
     this.updatedMap();
-    if(this.type === 0) {
-      axios.get('/api/house/getHousesJk').then(res => {
-        this.houses = [];
-        this.houses = res.data;
-        this.updatedMap();
-      })
-    } else if (this.type === 1) {
-      axios.get('/api/house/getHousesVillages').then(res => {
-        this.houses = [];
-        this.houses = res.data;
-        this.updatedMap();
-      })
-    }
+    // if(this.type === 0) {
+    //   axios.get('/api/house/getHousesJk').then(res => {
+    //     this.houses = [];
+    //     this.houses = res.data;
+    //     this.updatedMap();
+    //   })
+    // } else if (this.type === 1) {
+    //   axios.get('/api/house/getHousesVillages').then(res => {
+    //     this.houses = [];
+    //     this.houses = res.data;
+    //     this.updatedMap();
+    //   })
+    // }
 
   },
 }
