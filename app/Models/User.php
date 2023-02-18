@@ -57,7 +57,7 @@ class User extends Authenticatable
   ];
 
   public function isAdmin() {
-    if($this->role === 3) {
+    if($this->role === 3 || $this->role === 2) {
       return true;
     } else {
       return false;

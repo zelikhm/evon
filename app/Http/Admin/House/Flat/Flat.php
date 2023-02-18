@@ -12,6 +12,7 @@ use App\Models\Builder\Flat\FrameModel;
 use App\Models\Builder\HouseModel;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use SleepingOwl\Admin\Contracts\Display\DisplayInterface;
 use SleepingOwl\Admin\Contracts\Form\FormInterface;
 use SleepingOwl\Admin\Contracts\Initializable;
@@ -217,7 +218,13 @@ class Flat extends Section implements Initializable
    */
   public function isDeletable(Model $model): bool
   {
-    return true;
+    $user = Auth::user();
+    if($user->role !== 3) {
+      return false;
+    } else {
+      return true;
+    }
+
   }
 
   /**
