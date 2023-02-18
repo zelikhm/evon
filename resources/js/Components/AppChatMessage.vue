@@ -50,7 +50,7 @@
           <div v-for="mes in message">
             <div class="flex flex-col-reverse gap-1" v-if="mes.user_id !== user.id">
               <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                <img src="../../assets/chat_avatar.png" class="w-8 xxl:w-7 xl:w-6" alt="">
+                <img :src="from_user.image !== null ? from_user.image : '/images/hom.png'" class="w-8 xxl:w-7 xl:w-6 linear-gradient" style="border-radius: 50%" alt="">
                 <div
                   class="flex items-baseline bg-white rounded-[100px] gap-2 xxl:gap-1.5 xl:gap-1 py-1.5 xxl:py-1 px-2.5 xxl:px-2 xl:px-1.5">
                   <span class="text-base xxl:text-sm xl:text-xs leading-none">{{ mes.message }}</span>
@@ -62,7 +62,7 @@
 
             <div class="flex flex-col-reverse gap-1" v-else>
               <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                <img src="../../assets/chat_avatar.png" class="w-8 xxl:w-7 xl:w-6" alt="">
+                <img :src="user.image !== null ? user.image : '/images/hom.png'" class="w-8 xxl:w-7 xl:w-6" style="border-radius: 50%" alt="">
                 <div
                   class="relative flex items-baseline bg-[#6435A5] rounded-[100px] text-white gap-2 xxl:gap-1.5 xl:gap-1 py-1.5 xxl:py-1 px-2.5 xxl:px-2 xl:px-1.5">
                   <span class="text-base xxl:text-sm xl:text-xs leading-none">{{ mes.message }}</span>
