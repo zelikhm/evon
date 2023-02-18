@@ -17,26 +17,34 @@ import {Link} from '@inertiajs/inertia-vue3'
              type="text" id="name_object" >
     </div>
 
-    <div :class="{ validation: validation.description, 'border__purple': isBorder === 2 }" class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px] h-[350px] xxl:h-[115px] xl:h-[95px]">
-      <label
-        :class="{ validationText: validation.description }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"
-        for="description_object">Описание объекта
-      </label>
+          <label
+            :class="{ validationText: validation.description }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"
+            for="description_object">Описание объекта
+          </label>
 
-      <QuillEditor
-        :class="{ 'border---': isBorder === 2  }"
-        style="height: 280px!important;"
-        class="custom__scroll text-[#1E1D2D] h-full resize-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0"
-        toolbar="full"
-        v-model:content="object.description"
-        content-type="html"
-        theme="snow"
-      />
+    <QuillEditor
+      id="description_object"
+      :class="{ 'border---': isBorder === 2  }"
+      style="height: 280px!important;"
+      class="custom__scroll text-[#1E1D2D] h-full resize-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0"
+      toolbar="full"
+      v-model:content="object.description"
+      content-type="html"
+      theme="snow"
+    />
 
-<!--      <textarea v-model="object.description"-->
-                <!--                type="text" id="description_object">-->
-<!--      </textarea>-->
-    </div>
+<!--    <div :class="{ validation: validation.description, 'border__purple': isBorder === 2 }" class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px] h-[350px] xxl:h-[115px] xl:h-[95px]">-->
+<!--      <label-->
+<!--        :class="{ validationText: validation.description }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"-->
+<!--        for="description_object">Описание объекта-->
+<!--      </label>-->
+
+
+
+<!--&lt;!&ndash;      <textarea v-model="object.description"&ndash;&gt;-->
+<!--                &lt;!&ndash;                type="text" id="description_object">&ndash;&gt;-->
+<!--&lt;!&ndash;      </textarea>&ndash;&gt;-->
+<!--    </div>-->
 
     <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]"
          :class="{ 'border__bottom--0': openSelectCity}">
@@ -675,16 +683,16 @@ export default {
 
       this.regions = this.city[idx].regions
 
-      if(this.regions.length === 0 ){
-        this.regions.push({'id': -1, 'title': 'Не указано'});
-      }
+      // if(this.regions.length === 0 ){
+      //   this.regions.push({'id': -1, 'title': 'Не указано'});
+      // }
 
-      if(this.regions.find(item => item.id !== -1)) {
+      let status = this.regions.find(item => item.id === -1);
+
+      if(status === undefined) {
         this.regions.unshift({'id': -1, 'title': 'Не указано'})
         this.selectRegion = 'Не указано'
       }
-
-
 
     },
     changeSelectRegion(region) {
@@ -748,11 +756,13 @@ export default {
     if (this.city[0] !== null) {
       this.selectCity = this.city[0].title
       this.regions = this.city[0].regions
+
       if(this.regions.length !== 0) {
         this.regions.unshift({'id': -1, 'title': 'Не указано'})
       } else {
         this.regions.push({'id': -1, 'title': 'Не указано'})
       }
+
       this.selectRegion = this.city[0].regions[0].title
     }
 

@@ -1129,8 +1129,6 @@
             }
           })
         }
-
-        console.log(this.markers);
       },
     },
     created() {
