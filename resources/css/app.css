@@ -96,7 +96,7 @@ input[type="number"]:focus {
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
-input:-webkit-autofill:active  {
+input:-webkit-autofill:active {
   -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
@@ -1478,6 +1478,12 @@ input::placeholder {
 .grid__selection-block {
   display: grid;
   grid-template-columns: 20% 1fr;
+}
+
+@media (max-width: 576px) {
+  .grid__selection-block {
+    grid-template-columns: 1fr;
+  }
 }
 
 .border__left {
