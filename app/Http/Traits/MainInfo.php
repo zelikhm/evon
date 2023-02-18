@@ -461,7 +461,7 @@ trait MainInfo
 
   protected function getHouseSlug($slug)
   {
-    $house = HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'user', 'news', 'flats'])
+    $house = HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'user', 'news', 'flats', 'city_object'])
       ->where('slug', $slug)
       ->first();
 
