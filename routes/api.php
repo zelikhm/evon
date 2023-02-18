@@ -82,6 +82,7 @@ Route::prefix('favorite')->group(function () {
 
 Route::prefix('user')->group(function () {
   Route::post('/login', ['App\Http\Controllers\Auth\AuthenticatedSessionController', 'loginApi']);
+  Route::post('/sendCode', ['App\Http\Controllers\User\AuthController', 'sendCode']);
   //
   Route::post('/phone', ['App\Http\Controllers\User\AuthController', 'checkUserPhone']);
   Route::post('/email', ['App\Http\Controllers\User\AuthController', 'checkUserEmail']);

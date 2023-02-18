@@ -36,17 +36,17 @@
           <div class="absolute h-[1px] w-4 bg-[#8A8996] -rotate-45"></div>
         </button>
       </div>
-      <div class="flex flex-col p-5 xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5 border border-solid border-[#E5DFEE] rounded-[6px]">
+      <div class="flex flex-col p-5 xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5 border border-solid border-[#E5DFEE] rounded-[6px]" v-bind:class="{ 'Error': phone_error }">
         <label for="telephone" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]">Телефон</label>
         <input
+          v-model="phone"
           class="text-[#1E1D2D] border-transparent focus:border-transparent focus:ring-0 text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
           type="tel"
           id="telephone"
           maxlength="18"
-          v-model="valueInputMask"
         >
       </div>
-      <button class="login__btn--bg text-white w-full text-lg xxl:text-[15px] xl:text-xs mb-5 xxl:mb-4 xl:mb-3 p-5 xxl:p-4 xl:p-3 border border-solid border-[#E5DFEE] rounded-[6px]">Войти</button>
+      <button class="login__btn--bg text-white w-full text-lg xxl:text-[15px] xl:text-xs mb-5 xxl:mb-4 xl:mb-3 p-5 xxl:p-4 xl:p-3 border border-solid border-[#E5DFEE] rounded-[6px]" v-on:click="checkPhone">Войти</button>
       <div class="flex items-center justify-center text-base xxl:text-sm xl:text-xs">
         <button @click="openLoginDeveloper" class="text-[#E84680]">Войти как застройщик</button>
       </div>
@@ -64,22 +64,22 @@
           <div class="absolute h-[1px] w-4 bg-[#8A8996] -rotate-45"></div>
         </button>
       </div>
-      <p class="text-[#8A8996] mb-5 xxl:mb-4 xl:mb-3 text-center text-base xxl:text-[13px] xl:text-[11px]">На номер +7 930 245 15 20 был отправлен код</p>
+      <p class="text-[#8A8996] mb-5 xxl:mb-4 xl:mb-3 text-center text-base xxl:text-[13px] xl:text-[11px]">На номер +{{ phone }} был отправлен код</p>
       <div class="modal__telephone-cod gap-5 xxl:gap-4 xl:gap-3 mb-7 xxl:mb-6 xl:mb-5">
-        <input type="number" v-model="valueTelOne" @input="changeValueOne" ref="item1" class="border-transparent focus:border-[#6435A5] focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
-        <input type="number" v-model="valueTelTwo" @input="changeValueTwo" ref="item2" class="border-transparent focus:border-[#6435A5] focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
-        <input type="number" v-model="valueTelThree" @input="changeValueThree" ref="item3" class="border-transparent focus:border-[#6435A5] focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
-        <input type="number" v-model="valueTelFour" @input="changeValueFour" ref="item4" class="border-transparent focus:border-[#6435A5] focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
+        <input type="number" v-bind:class="{ 'Error': valueTelOne_error }" v-model="valueTelOne" @input="changeValueOne" ref="item1" class="border-transparent focus:border-[#6435A5] focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
+        <input type="number" v-bind:class="{ 'Error': valueTelTwo_error }" v-model="valueTelTwo" @input="changeValueTwo" ref="item2" class="border-transparent focus:border-[#6435A5] focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
+        <input type="number" v-bind:class="{ 'Error': valueTelThree_error }" v-model="valueTelThree" @input="changeValueThree" ref="item3" class="border-transparent focus:border-[#6435A5] focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
+        <input type="number" v-bind:class="{ 'Error': valueTelFour_error }" v-model="valueTelFour" @input="changeValueFour" ref="item4" class="border-transparent focus:border-[#6435A5] focus:ring-0 text-center text-[36px] xxl:text-[30px] xl:text-[24px] p-2.5 xxl:p-2 xl:p-1.5">
       </div>
       <div class="flex flex-col items-center mb-10 xxl:mb-8 xl:mb-6 text-base xxl:text-[13px] xl:text-[11px]">
-        <span class="text-[#8A8996]">Отправить код еще раз через <span class="text-[#E84680]"> 1:56 </span></span>
-        <button class="text-[#E84680]">Ввести другой номер</button>
+<!--        <span class="text-[#8A8996]">Отправить код еще раз через <span class="text-[#E84680]"> {{  }} </span></span>-->
+        <button class="text-[#E84680]" v-on:click="oOpenRegister = false">Ввести другой номер</button>
       </div>
       <div class="mb-8 xxl:mb-6 xl:mb-5 flex justify-center">
-        <input class="custom__checkbox" type="checkbox" id="privacy-policy">
+        <input class="custom__checkbox" type="checkbox" id="privacy-policy" checked>
         <label class="text-base xxl:text-[13px] xl:text-[11px]" for="privacy-policy">Политика конфиденциальности</label>
       </div>
-      <button class="login__btn--bg text-white w-full text-lg xxl:text-[15px] xl:text-xs p-5 xxl:p-4 xl:p-3 border border-solid border-[#E5DFEE] rounded-[6px]">Войти</button>
+      <button class="login__btn--bg text-white w-full text-lg xxl:text-[15px] xl:text-xs p-5 xxl:p-4 xl:p-3 border border-solid border-[#E5DFEE] rounded-[6px]" v-on:click="sendLogin()">Войти</button>
     </div>
     <div @click="closeModal" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
   </div>
@@ -130,9 +130,6 @@ export default {
     },
     oLoginDeveloper: {
       type: Boolean
-    },
-    oOpenRegister: {
-      type: Boolean
     }
   },
   data() {
@@ -143,11 +140,21 @@ export default {
       valueTelFour: null,
       loginRealtor: false,
       loginDeveloper: false,
-      valueInputMask: null,
+      oOpenRegister: false,
       developer: {
         email: '',
         password: ''
-      }
+      },
+      phone: '',
+      phone_error: false,
+      phone_error_message: '',
+      code: '',
+      code_error: false,
+
+      valueTelOne_error: false,
+      valueTelTwo_error: false,
+      valueTelThree_error: false,
+      valueTelFour_error: false,
     }
   },
   emits: [
@@ -156,6 +163,72 @@ export default {
     'open-modal-developer',
   ],
   methods: {
+    checkPhone() {
+
+      if(this.phone.length < 11) {
+        this.phone_error = true;
+        this.phone_error = 'Не верная длинна';
+      } else if(this.phone[0] === '+' || this.phone[0] === '') {
+        this.phone_error = true;
+        this.phone_error_message = '+ необходимо убрать / пробелы тоже';
+      } else {
+        this.sendCode();
+        this.phone_error = false;
+        this.phone_error_message = '';
+      }
+    },
+    sendCode() {
+      axios.post('/api/user/sendCode', {
+        phone: this.phone
+      }).then(res => {
+        if(res.data === false) {
+          this.phone_error = true;
+        } else {
+          this.oOpenRegister = true;
+        }
+      })
+    },
+    sendLogin() {
+
+      if(this.valueTelOne === null) {
+        this.valueTelOne_error = true;
+      } else {
+        this.valueTelOne_error = false;
+      }
+
+      if(this.valueTelTwo === null) {
+        this.valueTelTwo_error = true;
+      } else {
+        this.valueTelTwo_error = false;
+      }
+
+      if(this.valueTelThree === null) {
+        this.valueTelThree_error = true;
+      } else {
+        this.valueTelThree_error = false;
+      }
+
+      if(this.valueTelFour === null) {
+        this.valueTelFour_error = true;
+      } else {
+        this.valueTelFour_error = false;
+      }
+
+      if(this.valueTelOne_error !== true && this.valueTelTwo_error !== true && this.valueTelThree_error !== true && this.valueTelFour_error !== true) {
+
+        this.code = this.valueTelOne + '' + this.valueTelTwo + '' + this.valueTelThree + '' + this.valueTelFour;
+
+        const form = useForm({
+          phone: this.phone,
+          code: this.code,
+        });
+
+        form.post(route('loginPhone'), {});
+
+      }
+
+
+    },
     clickLoginDeveloper() {
       const form = useForm({
         email: this.developer.email,
@@ -252,7 +325,11 @@ export default {
 <style scoped>
 
   .error {
-    color: red;
+    color: red!important;
+  }
+  .Error {
+    color: red!important;
+    border-color: red!important;
   }
 
 </style>
