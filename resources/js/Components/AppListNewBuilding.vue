@@ -21,7 +21,8 @@
         <span
           class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[16px] leading-none">Фильтры</span>
         <div class="flex items-center gap-4">
-          <button class="text-[#6435A5] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none cursor-pointer">
+          <button class="text-[#6435A5] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none cursor-pointer"
+                  v-on:click="reloadFilter">
             Сбросить
           </button>
           <button @click="openFilter = false"
@@ -31,7 +32,10 @@
         </div>
       </div>
       <div class="h-[1px] w-full bg-[#E5DFEE]"></div>
-      <div class="custom__scroll h-[84vh] relative overflow-y-auto p-7 xxl:p-5 xl:p-4">
+      <div v-if="preloader === true">
+        <div class="loader"></div>
+      </div>
+      <div class="custom__scroll h-[84vh] relative overflow-y-auto p-7 xxl:p-5 xl:p-4" v-if="preloader === false">
         <div class="mb-5 xxl:mb-4 xl:mb-3">
           <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
             <div class="flex items-center text-[#1E1D2D]">
@@ -45,7 +49,8 @@
                      v-on:click="setBadge(2)">Акции</label>
             </div>
             <div class="flex items-center text-[#1E1D2D]">
-              <input class="custom__checkbox" name="filters" type="checkbox" id="filters_3">
+              <input class="custom__checkbox" name="filters" type="checkbox" id="filters_3"
+                     v-bind:checked="filters.badge.popular !== true">
               <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_3"
                      v-on:click="setBadge(3)">Популярные</label>
             </div>
@@ -72,8 +77,10 @@
                   <img class="absolute top-1/2 -translate-y-1/2 translate-x-1/2 w-4.5 xxl:w-4 xl:w-3.5"
                        src="../../assets/svg/search_icon_grey.svg" alt="">
                 </div>
-                <div class="flex items-center text-[#1E1D2D] ml-5 mt-2" v-for="(item, index) in filteredCity" :key="idx">
-                  <input class="custom__checkbox" name="infrastructure" type="checkbox" v-bind:checked="checkCity(item.id)">
+                <div class="flex items-center text-[#1E1D2D] ml-5 mt-2" v-for="(item, index) in filteredCity"
+                     :key="idx">
+                  <input class="custom__checkbox" name="infrastructure" type="checkbox"
+                         v-bind:checked="checkCity(item.id)">
                   <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
                          v-on:click="changeSelectCity(item)">{{ item.title }}
                   </label>
@@ -96,7 +103,8 @@
               <div v-if="openSelectRegion"
                    class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
                 <div class="flex items-center text-[#1E1D2D] ml-5 mt-2" v-for="(item, index) in regions" :key="idx">
-                  <input class="custom__checkbox" name="infrastructure" type="checkbox" v-bind:checked="checkRegion(item.id)">
+                  <input class="custom__checkbox" name="infrastructure" type="checkbox"
+                         v-bind:checked="checkRegion(item.id)">
                   <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
                          v-on:click="changeSelectRegion(item)">{{ item.title }}
                   </label>
@@ -365,10 +373,7 @@
         </div>
       </div>
 
-      <div v-if="preloader">
-        <Preloader></Preloader>
-      </div>
-      <div v-else>
+      <div>
         <!--  Новостройки в виде таблицы -->
         <div v-if="!toggle && !map"
              class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3 mt-5 xxl:mt-4 xl:mt-3">
@@ -431,7 +436,8 @@
 
         <!--  Новостройки в виде списка -->
         <div v-if="toggle && !map" class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 mt-5 xxl:mt-4 xl:mt-3">
-          <div class="grid__75-25 border border-solid border-[#E5DFEE] rounded-[6px]" v-for="item in houses_array">
+          <div class="grid__75-25 border border-solid border-[#E5DFEE] rounded-[6px]" v-for="item in houses_array"
+               :key="item.id">
             <div class="border__right md:border-r-0 md:border-b-[1px] border-solid border-[#E5DFEE]">
               <div class="grid__35-65 p-2.5 xxl:p-2 xl:p-1.5 h-full">
                 <div class="relative object__block h-full">
@@ -473,7 +479,8 @@
                             class="hover__title-block transition-all leading-none font-semibold text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">
                         {{ item.title }}
                       </Link>
-                      <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs md:text-[14px]">{{ item.area }}</span>
+                      <span
+                        class="text-[#8A8996] text-base xxl:text-sm xl:text-xs md:text-[14px]">{{ item.area }}</span>
                     </div>
                     <div class="flex flex-wrap gap-x-1">
                     <span
@@ -490,7 +497,8 @@
                 </div>
               </div>
             </div>
-            <div class="flex flex-col justify-between px-7 xxl:px-6 xl:px-5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3">
+            <div
+              class="flex flex-col justify-between px-7 xxl:px-6 xl:px-5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3">
               <div class="flex justify-between items-center">
                 <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] md:text-[13px]">{{ item.flats.length }} {{ item.flats.length === 1 ? "Квартира" : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
                 <span
@@ -503,7 +511,8 @@
               <div class="flex flex-col gap-2.5 xxl:gap-1.5 xl:gap-1">
               <span
                 class="font-medium whitespace-nowrap text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] md:text-[17px] leading-none leading-none">от {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} €</span>
-                <span class="text-[#8A8996] whitespace-nowrap text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px]">{{ isNaN(item.minPrice / item.minSquare) ? "-" : Math.round(item.minPrice / item.minSquare) }} € за м²</span>
+                <span
+                  class="text-[#8A8996] whitespace-nowrap text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px]">{{ isNaN(item.minPrice / item.minSquare) ? "-" : Math.round(item.minPrice / item.minSquare) }} € за м²</span>
               </div>
               <div
                 class="gray-backg flex items-center justify-center w-fit px-3 xxl:px-2.5 xl:px-2 gap-2 xxl:gap-1.5 xl:gap-1">
@@ -515,7 +524,7 @@
         </div>
         <div class="w-full flex justify-center mb-14 xxl:mb-10 xl:mb-8" @click="nextShow()"
              v-if="count_house > count && !map"
-             >
+        >
           <button
             class="more__button mt-10 transition-all text-[#E84680] border border-solid border-[#E84680] text-base xxl:text-sm xl:text-xs lg:text-[15px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2.5 xl:py-1.5 rounded-[3px]">
             Показать еще
@@ -523,7 +532,8 @@
         </div>
       </div>
 
-      <app-map @open-add-selections="openAddSelections" v-if="map" :houses_array="markers" :houses="map_array" :city="city_map"
+      <app-map @open-add-selections="openAddSelections" v-if="map" :houses_array="markers" :houses="map_array"
+               :city="city_map"
                :user="user"/>
     </div>
   </div>
@@ -560,7 +570,7 @@
     data() {
       return {
         markers: [],
-        preloader: false,
+        preloader: true,
         housesFilters: [],
         filters: {
           badge: {
@@ -646,6 +656,13 @@
       }
     },
     methods: {
+      reloadFilter() {
+        this.filters.badge.news = false;
+        this.filters.badge.popular = false;
+        this.filters.badge.sales = false;
+
+        this.setFilter();
+      },
       setFilter() {
 
         let array = this.readyHouses;
@@ -795,7 +812,7 @@
             }
           }
 
-          if (this.filters.location.toSchool !== null) {
+          if (this.filters.location.toSchool !== '') {
             if (status !== false) {
               location.info.toSchool !== null ? status = location.info.toSchool < this.filters.location.toSchool : status = true;
             }
@@ -820,7 +837,7 @@
 
               const diff = this.include(array, Object.values(this.filters.info));
 
-              if(diff === true) {
+              if (diff === true) {
                 object8.push(item);
               }
             }
@@ -842,7 +859,7 @@
 
               const diff = this.include(array, Object.values(this.filters.dop));
 
-              if(diff === true) {
+              if (diff === true) {
                 object9.push(item);
               }
 
@@ -854,18 +871,18 @@
 
         let object10 = [];
 
-        if(Object.keys(this.filters.cities).length > 0) {
+        if (Object.keys(this.filters.cities).length > 0) {
           object9.forEach(item => {
-            if(item.city !== null) {
+            if (item.city !== null) {
 
               let status = this.filters.cities.find(val => val.title === item.city);
 
-              if(status !== undefined) {
+              if (status !== undefined) {
 
-                if(Object.keys(this.filters.areas).length > 0) {
+                if (Object.keys(this.filters.areas).length > 0) {
                   let push = this.filters.areas.find(val => val.title === item.area);
 
-                  if(push !== undefined) {
+                  if (push !== undefined) {
                     object10.push(item);
                   }
 
@@ -890,7 +907,7 @@
         let status = true;
 
         what.forEach(item => {
-          if(!where.includes(item)) {
+          if (!where.includes(item)) {
             status = false;
           }
         })
@@ -991,13 +1008,16 @@
 
         let arr = this.filters.cities.findIndex(item => city.id === item.id);
 
-        if(arr !== -1) {
+        if (arr !== -1) {
           this.filters.cities.splice(arr, 1);
 
-          if(this.filters.cities.length > 0) {
+          if (this.filters.cities.length > 0) {
             this.regions = this.filters.cities[this.filters.cities.length - 1].regions;
-            if(parseFloat(this.filters.cities[this.filters.cities.length - 1].latitude) !== null) {
-              this.city_map = { lat: parseFloat(this.filters.cities[this.filters.cities.length - 1].latitude), lng: parseFloat(this.filters.cities[this.filters.cities.length - 1].longitude) };
+            if (parseFloat(this.filters.cities[this.filters.cities.length - 1].latitude) !== null) {
+              this.city_map = {
+                lat: parseFloat(this.filters.cities[this.filters.cities.length - 1].latitude),
+                lng: parseFloat(this.filters.cities[this.filters.cities.length - 1].longitude)
+              };
             } else {
               this.city_map = null;
             }
@@ -1006,10 +1026,10 @@
             this.city_map = null;
           }
         } else {
-          this.filters.cities.push({ 'id': city.id, 'title': city.title, 'regions': city.regions });
+          this.filters.cities.push({'id': city.id, 'title': city.title, 'regions': city.regions});
           this.regions = city.regions;
-          if(parseFloat(city.latitude) !== null) {
-            this.city_map = { lat: parseFloat(city.latitude), lng: parseFloat(city.longitude) };
+          if (parseFloat(city.latitude) !== null) {
+            this.city_map = {lat: parseFloat(city.latitude), lng: parseFloat(city.longitude)};
           } else {
             this.city_map = null;
           }
@@ -1023,13 +1043,13 @@
 
         let arr = this.filters.areas.findIndex(item => region.id === item.id);
 
-        if(arr !== -1) {
+        if (arr !== -1) {
 
           this.filters.areas.splice(arr, 1);
 
         } else {
 
-          this.filters.areas.push({ 'id': region.id, 'title': region.title });
+          this.filters.areas.push({'id': region.id, 'title': region.title});
 
         }
 
@@ -1157,17 +1177,21 @@
           axios.get('/api/house/getHousesJk').then(res => {
             this.readyHouses = res.data;
             this.count_house = this.readyHouses.length;
+            console.log(this.readyHouses, res.data);
             this.map_array = this.readyHouses;
             this.updateHouses();
             this.updatedMap();
+            this.preloader = false;
           })
         } else {
           axios.get('/api/house/getHousesVillages').then(res => {
             this.readyHouses = res.data;
             this.count_house = this.readyHouses.length;
+            console.log(this.readyHouses, res.data);
             this.map_array = this.readyHouses;
             this.updateHouses();
             this.updatedMap();
+            this.preloader = false;
           })
         }
 
@@ -1219,7 +1243,28 @@
 </script>
 
 <style scoped>
+  .loader_block {
 
+  }
+
+  .loader {
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid; /* Blue */
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 2s linear infinite;
+    margin: 37%;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .loader_text {
+    text-align: center;
+  }
 </style>
 
 <style src="@vueform/multiselect/themes/default.css"></style>
