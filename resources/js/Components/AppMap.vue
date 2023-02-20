@@ -4,7 +4,7 @@
 
 <template>
   <div class="relative w-full h-[90vh] my-5 xxl:my-4 xl:my-3">
-    <GMapMap :center="city !== null ? city : center" :disableDefaultUI="false" :zoom="city !== null ? 10 : 6"
+    <GMapMap :center="city.lng !== null ? city : center" :disableDefaultUI="false" :zoom="city !== null ? 10 : 6"
              map-type-id="roadmap" class="w-full h-[90vh]"
              :options="{
                       zoomControl: false,

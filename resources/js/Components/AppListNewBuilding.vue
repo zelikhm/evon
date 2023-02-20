@@ -50,7 +50,7 @@
             </div>
             <div class="flex items-center text-[#1E1D2D]">
               <input class="custom__checkbox" name="filters" type="checkbox" id="filters_3"
-                     v-bind:checked="filters.badge.popular !== true">
+                     :checked="filters.badge.popular">
               <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_3"
                      v-on:click="setBadge(3)">Популярные</label>
             </div>
@@ -661,6 +661,8 @@
         this.filters.badge.popular = false;
         this.filters.badge.sales = false;
 
+        console.log(this.filters.badge);
+
         this.setFilter();
       },
       setFilter() {
@@ -1177,7 +1179,6 @@
           axios.get('/api/house/getHousesJk').then(res => {
             this.readyHouses = res.data;
             this.count_house = this.readyHouses.length;
-            console.log(this.readyHouses, res.data);
             this.map_array = this.readyHouses;
             this.updateHouses();
             this.updatedMap();
@@ -1187,7 +1188,6 @@
           axios.get('/api/house/getHousesVillages').then(res => {
             this.readyHouses = res.data;
             this.count_house = this.readyHouses.length;
-            console.log(this.readyHouses, res.data);
             this.map_array = this.readyHouses;
             this.updateHouses();
             this.updatedMap();
