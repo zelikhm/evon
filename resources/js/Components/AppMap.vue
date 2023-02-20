@@ -180,7 +180,7 @@
     },
     created() {
       // this.houses = this.houses_array;
-
+      console.log(this.city);
     },
   }
 </script>
