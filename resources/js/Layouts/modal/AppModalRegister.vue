@@ -86,7 +86,7 @@
           <span>{{ selectType }}</span>
           <img src="../../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectPlaceWork }" alt="">
         </div>
-        <div v-if="openSelectPlaceWork" class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px]">
+        <div v-if="openSelectPlaceWork" class="xxl:max-h-[120px] xl:max-h-[110px] lg:max-h-[80px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px]">
           <span
               v-for="(type, idx) in types" :key="idx"
               @click="changeSelectTypes(type), form.type = selectType"
