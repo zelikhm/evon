@@ -29,8 +29,8 @@
               + (chat.from.last_name === null ? '' : chat.from.last_name)
               }}
             </span>
-                <span v-bind:class="{ 'bg-[#6435A5]': chat.from.role !== 0 , 'bg-[#E87746]': chat.from.role === 0 }" class="text-white text-[10px] xxl:text-[9px] xl:text-[8px] font-medium leading-none rounded-[3px] px-1.5 py-1 xl:px-1 py-0.5" v-if="chat.from.id !== user.id">{{ getType(chat) }}</span>
-                <span v-bind:class="{ 'bg-[#6435A5]': chat.to.role !== 0 , 'bg-[#E87746]': chat.to.role === 0 }" class="text-white text-[10px] xxl:text-[9px] xl:text-[8px] font-medium leading-none rounded-[3px] px-1.5 py-1 xl:px-1 py-0.5" v-if="chat.to.id !== user.id">{{ getType(chat) }}</span>
+                <span v-bind:class="{ 'bg-[#6435A5]': chat.from.role === 1 , 'bg-[#E87746]': chat.from.role === 0, 'bg-[#E84680]': chat.from.role > 1 }" class="text-white text-[10px] xxl:text-[9px] xl:text-[8px] font-medium leading-none rounded-[3px] px-1.5 py-1 xl:px-1 py-0.5" v-if="chat.from.id !== user.id">{{ getType(chat) }}</span>
+                <span v-bind:class="{ 'bg-[#6435A5]': chat.to.role === 1 , 'bg-[#E87746]': chat.to.role === 0, 'bg-[#E84680]': chat.to.role > 1 }" class="text-white text-[10px] xxl:text-[9px] xl:text-[8px] font-medium leading-none rounded-[3px] px-1.5 py-1 xl:px-1 py-0.5" v-if="chat.to.id !== user.id">{{ getType(chat) }}</span>
               </div>
               <div class="flex gap-1">
                 <!--            <img src="../../assets/svg/chat_check_message.svg" class="w-5 xxl:w-4 xl:w-3.5" alt="">-->

@@ -81,8 +81,11 @@
     <div
       class="bg-white h-[72px] xxl:h-[60px] xxl:h-[50px] flex items-center px-7 xxl:px-5 xl:px-4 py-5 xxl:py-4 xl:py-3">
       <input placeholder="Написать сообщение..." type="text" v-model="message"
-             class="focus:ring-0 w-full text-lg xxl:text-[15px] xl:text-[13px] leading-none">
+             class="focus:ring-0 w-full text-lg xxl:text-[15px] xl:text-[13px] leading-none"
+             v-on:keyup.enter="sendMessage()"
+      >
       <button
+
         v-on:click="sendMessage()"
         class="hover__chat-arrow transition-all rounded-full h-[54px] xxl:h-[42px] x:h-[36px] w-[54px] xxl:w-[42px] x:w-[36px] flex items-center justify-center flex-shrink-0">
         <svg class="w-9 xxl:w-7 xl:w-6" width="36" height="36" viewBox="0 0 36 36" fill="none"
