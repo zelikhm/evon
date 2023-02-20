@@ -1028,7 +1028,7 @@
           this.filters.cities.push({'id': city.id, 'title': city.title, 'regions': city.regions});
           this.regions = city.regions;
           if (parseFloat(city.latitude) !== null) {
-            this.city_map = {lat: parseFloat(city.latitude), lng: parseFloat(city.longitude)};
+            this.city_map = {lat: (city.latitude), lng: (city.longitude)};
           } else {
             this.city_map = null;
           }
