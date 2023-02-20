@@ -1,6 +1,4 @@
 <script setup>
-  import {Link} from '@inertiajs/inertia-vue3'
-
   import Preloader from '@/Components/Preloader/Preloader.vue'
 </script>
 
@@ -424,10 +422,10 @@
               </div>
             </div>
             <div class="flex flex-col text-[#1E1D2D] p-5 xxl-4 xl:p-3 leading-none">
-              <Link :href="'/house/' + item.slug"
+              <a target="_blank" :href="'/house/' + item.slug"
                     class="hover__title-block transition-all font-semibold text-xl xxl:text-base xl:text-sm md:text-[17px]">
                 {{ item.title }}
-              </Link>
+              </a>
               <span class="text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">от {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} € до {{ Number.isInteger(item.maxPrice) ? item.maxPrice.toLocaleString('ru') : "-" }}</span>
             </div>
           </div>
@@ -475,12 +473,11 @@
                   class="flex flex-col justify-between px-7 xxl:px-6 xl:px-5 md:px-1.5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3 md:py-3 md:gap-3.5">
                   <div class="flex justify-between sm:flex-col gap-2">
                     <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                      <Link :href="'/house/' + item.slug"
-                            class="hover__title-block transition-all leading-none font-semibold text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">
+                      <a target="_blank" :href="'/house/' + item.slug"
+                         class="hover__title-block transition-all leading-none font-semibold text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">
                         {{ item.title }}
-                      </Link>
-                      <span
-                        class="text-[#8A8996] text-base xxl:text-sm xl:text-xs md:text-[14px]">{{ item.area }}</span>
+                      </a>
+                      <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs md:text-[14px]">{{ item.area }}</span>
                     </div>
                     <div class="flex flex-wrap gap-x-1">
                     <span
@@ -1094,28 +1091,22 @@
           house.time = Date.parse(house.created_at)
           this.readyHouses = this.readyHouses.sort((a, b) => b.time - a.time)
 
-
           let arr = [],
             squareFlats = []
 
           house.flats.forEach(item => {
             arr.push(item.price)
             squareFlats.push(item.square)
+            if (item.status == 0) {
+              house.promotion = true
+              console.log(house)
+            }
           })
-
 
           house.minPrice = Number.isInteger(Math.min(...arr)) ? Math.min(...arr) : 0
           house.maxPrice = Number.isInteger(Math.max(...arr)) ? Math.max(...arr) : 0
           house.minSquare = Math.min(...squareFlats)
           house.maxSquare = Math.max(...squareFlats)
-
-          house.flats.forEach(item => {
-            if (item.status == 0) {
-              house.promotion = true
-              return
-            }
-            house.promotion = false
-          })
         })
 
         this.splitHouses();
