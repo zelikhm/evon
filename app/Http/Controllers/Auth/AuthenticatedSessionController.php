@@ -40,31 +40,14 @@ class AuthenticatedSessionController extends Controller
    */
   public function store(Request $request)
   {
-    if($request->phone) {
-      $request->validate([
-        'phone' => ['required', 'max:50', 'exists:App\Models\User,phone'],
-      ]);
-    } else {
+
       $request->validate([
         'password' => ['required', new Password()],
         'email' => ['required', 'max:50', 'exists:App\Models\User,email'],
       ]);
-    }
 
       $user = User::where('email', $request->email)
         ->first();
-
-      if($user === null) {
-        $user_phone = User::where('phone', $request->phone)
-          ->first();
-
-        if($user_phone !== null) {
-          Auth::login($user_phone, $remember = true);
-
-          $this->checkSession($user_phone->id);
-
-        }
-      }
 
       if($user !== null && Hash::check($request->password, $user->password)) {
 
@@ -102,6 +85,49 @@ class AuthenticatedSessionController extends Controller
 
       }
 
+  }
+
+  /**
+   * auth with help phone
+   * @param Request $request
+   * @return bool|\Illuminate\Http\RedirectResponse
+   */
+
+  public function storePhone(Request $request) {
+
+    $request->validate([
+      'phone' => 'required', 'max:50', 'exists:App\Models\User,phone',
+    ]);
+
+    $user = User::where('phone', 'LIKE', '%' . $request->phone)
+      ->where('role', 0)
+      ->first();
+
+    if($user !== null && $user->code == $request->code) {
+
+      Auth::logoutOtherDevices(Hash::make($request->password));
+
+      $this->checkSession($user->id);
+
+      Auth::login($user, $remember = true);
+
+      if(Auth::user()->checked === 1) {
+
+        User::where('id', Auth::id())->update([
+          'checked' => 0,
+        ]);
+
+        return redirect()->intended(RouteServiceProvider::HOME);
+
+      } else {
+
+        return redirect()->intended(RouteServiceProvider::HOUSES);
+
+      }
+
+    } else {
+      return false;
+    }
   }
 
   /**

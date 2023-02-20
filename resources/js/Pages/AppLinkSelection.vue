@@ -89,7 +89,6 @@ import { Link } from '@inertiajs/inertia-vue3'
       </div>
     </div>
   </main>
-  <app-footer />
 </template>
 
 <script>

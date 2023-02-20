@@ -12,6 +12,5 @@ class AdminNewsModel extends Model
     protected $fillable = [
       'title',
       'description',
-      'image',
     ];
 }
