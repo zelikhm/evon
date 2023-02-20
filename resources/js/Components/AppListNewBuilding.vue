@@ -1160,6 +1160,7 @@
             this.readyHouses = response.data;
             this.count_house = this.readyHouses.length;
             this.updateHouses()
+            this.preloader = false;
           })
           .catch(e => console.log(e))
       } else {
