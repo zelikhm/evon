@@ -139,7 +139,7 @@ class ChatController extends Controller
 
     $chats = ChatModel::orWhere('from_id', $id)
       ->orWhere('to_id', $id)
-      ->orderBy('type', 'ASC')
+      ->orderBy('type', 'DESC')
       ->orderBy('updated_at', 'DESC')
       ->with(['from', 'to'])
       ->get();
