@@ -84,8 +84,9 @@ export default {
         token: this.user.token,
       }).then(res => {
         this.chats_array = res.data.sort((item) => item.type === 1);
+        console.log(this.chats_array);
       })
-    }, 5000);
+    }, 3000);
 
   },
   methods: {
