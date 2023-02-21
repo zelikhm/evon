@@ -84,7 +84,6 @@ export default {
         token: this.user.token,
       }).then(res => {
         this.chats_array = res.data;
-        console.log(this.chats_array);
       })
     }, 3000);
 
