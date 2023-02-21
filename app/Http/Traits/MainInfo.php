@@ -45,6 +45,8 @@ trait MainInfo
       ->where('visible', 1)
       ->with(['flats'])->get();
 
+
+
 //    if (count($requestCity) < 5) {
 //      $requestCity->merge($requestArea);
 //    }

@@ -5,7 +5,7 @@ import { Link } from "@inertiajs/inertia-vue3";
 
 <template>
   <div class="my-14 xl:my-10 xl:my-8">
-    <h2 class="text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none font-semibold pb-7 xxl:pb-5 xl:pb-4">Другие ЖК в районе {{ house.area }}</h2>
+    <h2 class="text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none font-semibold pb-7 xxl:pb-5 xl:pb-4">Другие обьекты в районе: {{ house.area }}</h2>
     <div class="grid grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3">
 
       <a target="_blank" :href="'/house/' + item.slug" class="flex flex-col" v-for="item in slider">
@@ -22,7 +22,7 @@ import { Link } from "@inertiajs/inertia-vue3";
           <span class="text-[#1E1D2D] font-semibold text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none">{{ item.title }}</span>
           <span class="text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none">от {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} ₽</span>
           <div class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] flex items-center gap-2">
-            <span class="leading-none">{{ isNaN(item.minSquare / item.minPrice) ?  "-" : Math.round(item.minSquare / item.minPrice) }} € за м²</span>
+            <span class="leading-none">{{ isNaN(item.minSquarePrice) ?  "-" : item.minSquarePrice }} € за м²</span>
             <span class="bg-[#8A8996] h-1 w-1 rounded-full"></span>
             <span class="leading-none">{{ Number.isInteger(item.minSquare) ? item.minSquare : "-" }} м² - {{ Number.isInteger(item.maxSquare) ? item.maxSquare : "-" }} м²</span>
           </div>
@@ -56,6 +56,7 @@ export default {
       house.minPrice = Math.min(...arr)
       house.minSquare = Math.min(...squareFlats)
       house.maxSquare = Math.max(...squareFlats)
+      house.minSquarePrice = (Math.min(...arr) / Math.min(...squareFlats)).toFixed(0);
 
     })
   }
