@@ -76,14 +76,14 @@ export default {
   },
   mounted() {
 
-    this.chats_array = this.chats;
+    this.chats_array = Object.values(this.chats).sort((item) => item.type === 1);
 
     setInterval(() => {
       axios.post('/api/chat/reloadChats', {
         user_id: this.user.id,
         token: this.user.token,
       }).then(res => {
-        this.chats_array = res.data;
+        this.chats_array = res.data.sort((item) => item.type === 1);
       })
     }, 5000);
 
