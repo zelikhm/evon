@@ -76,7 +76,7 @@ export default {
   },
   mounted() {
 
-    this.chats_array = Object.values(this.chats).sort((item) => item.type === 1);
+    this.chats_array = this.chats;
 
     setInterval(() => {
       axios.post('/api/chat/reloadChats', {
