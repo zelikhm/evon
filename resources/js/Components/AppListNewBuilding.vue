@@ -711,7 +711,7 @@
 
         object2.forEach(item => {
           if (this.filters.price.min !== '' && this.filters.price.max !== '') {
-            if (item.minPrice > this.filters.price.min && item.maxPrice < this.filters.price.max) {
+            if (item.minPrice > this.filters.price.min && item.minPrice < this.filters.price.max) {
               object3.push(item);
             }
           } else if (this.filters.price.min !== '' && this.filters.price.max === '') {
@@ -719,7 +719,7 @@
               object3.push(item);
             }
           } else if (this.filters.price.max !== '' && this.filters.price.min === '') {
-            if (item.maxPrice < this.filters.price.max) {
+            if (item.minPrice < this.filters.price.max) {
               object3.push(item);
             }
           } else {
