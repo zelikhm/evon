@@ -83,7 +83,7 @@ export default {
         user_id: this.user.id,
         token: this.user.token,
       }).then(res => {
-        this.chats_array = res.data.sort((item) => item.type === 1);
+        this.chats_array = res.data;
         console.log(this.chats_array);
       })
     }, 3000);
