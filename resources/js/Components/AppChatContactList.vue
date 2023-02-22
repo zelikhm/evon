@@ -85,7 +85,7 @@ export default {
       }).then(res => {
         this.chats_array = res.data;
       })
-    }, 5000);
+    }, 3000);
 
   },
   methods: {

@@ -141,7 +141,6 @@ class ChatController extends Controller
       ->orWhere('to_id', $id)
       ->orderBy('type', 'DESC')
       ->orderBy('updated_at', 'DESC')
-      ->orderBy('updated_at', 'DESC')
       ->with(['from', 'to'])
       ->get();
 
