@@ -97,10 +97,14 @@
                 <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{ selectFlat.square }} м²</span>
               </div>
             </div>
-            <img :src="selectFlat.imageUp" @click="this.$emit('open-cheme', selectFlat, 0)" class="cursor-pointer w-40 xxl:w-36 xl:w-32" alt="">
+            <div class="loader" v-if="preloader"></div>
+            <div v-else>
+              <img :src="selectFlat.imageUp" @click="this.$emit('open-cheme', selectFlat, 0)" class="cursor-pointer w-40 xxl:w-36 xl:w-32" alt="">
+            </div>
           </div>
         </div>
-        <div v-if="selectFlat.imageDown !== null" @click="this.$emit('open-cheme', selectFlat, 1)" class="flex items-center justify-center justify-between lg:justify-start lg:my-6 mr-[6.25vw] lg:mx-auto lg:px-[6.25vw]">
+        <div class="loader" v-if="preloader"></div>
+        <div v-if="selectFlat.imageDown !== null && preloader === false" @click="this.$emit('open-cheme', selectFlat, 1)" class="flex items-center justify-center justify-between lg:justify-start lg:my-6 mr-[6.25vw] lg:mx-auto lg:px-[6.25vw]">
           <img :src="selectFlat.imageDown" class="pl-14 xxl:pl-10 xl:pl-8 pt-16 xxl:pt-12 xl:pt-10 lg:p-0 w-full object-cover cursor-pointer" alt="">
         </div>
       </div>
@@ -150,7 +154,8 @@ export default {
         { layout: '5 + 2', id: 5},
       ],
       openCorpusList: false,
-      activeFrameMobile: null
+      activeFrameMobile: null,
+      preloader: false,
     }
   },
   methods: {
@@ -189,7 +194,12 @@ export default {
       })
     },
     targetFlat(flat) {
+      this.preloader = true;
       this.selectFlat = flat
+
+      setInterval(() => {
+        this.preloader = false;
+      }, 1500);
     },
   },
   created() {
@@ -243,5 +253,30 @@ export default {
 </script>
 
 <style scoped>
+  .loader_block {
 
+  }
+
+  .loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+    /*margin: 37%;*/
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    top: 25px
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .loader_text {
+    text-align: center;
+  }
 </style>

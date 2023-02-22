@@ -15,7 +15,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           <div class="flex justify-between sm:flex-col sm:items-center p-7 xxl:p-5 xl:p-4 bg-[#F6F3FA] rounded-[10px]">
             <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
               <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none font-medium">У вас еще не добавлено ни одного объекта</span>
-              <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs leading-none">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+              <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs leading-none"></p>
             </div>
             <svg class="h-full" width="162" height="113" viewBox="0 0 162 113" fill="#6435A5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <rect width="162" height="113" fill="url(#pattern0)"/>

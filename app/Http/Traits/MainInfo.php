@@ -45,6 +45,8 @@ trait MainInfo
       ->where('visible', 1)
       ->with(['flats'])->get();
 
+
+
 //    if (count($requestCity) < 5) {
 //      $requestCity->merge($requestArea);
 //    }
@@ -461,7 +463,7 @@ trait MainInfo
 
   protected function getHouseSlug($slug)
   {
-    $house = HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'user', 'news', 'flats'])
+    $house = HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'user', 'news', 'flats', 'city_object'])
       ->where('slug', $slug)
       ->first();
 

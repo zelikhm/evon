@@ -50,7 +50,7 @@
           <div v-for="mes in message">
             <div class="flex flex-col-reverse gap-1" v-if="mes.user_id !== user.id">
               <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                <img src="../../assets/chat_avatar.png" class="w-8 xxl:w-7 xl:w-6" alt="">
+                <img :src="from_user.image !== null ? from_user.image : '/images/hom.png'" class="w-8 xxl:w-7 xl:w-6 linear-gradient" style="border-radius: 50%" alt="">
                 <div
                   class="flex items-baseline bg-white rounded-[100px] gap-2 xxl:gap-1.5 xl:gap-1 py-1.5 xxl:py-1 px-2.5 xxl:px-2 xl:px-1.5">
                   <span class="text-base xxl:text-sm xl:text-xs leading-none">{{ mes.message }}</span>
@@ -62,7 +62,7 @@
 
             <div class="flex flex-col-reverse gap-1" v-else>
               <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                <img src="../../assets/chat_avatar.png" class="w-8 xxl:w-7 xl:w-6" alt="">
+                <img :src="user.image !== null ? user.image : '/images/hom.png'" class="w-8 xxl:w-7 xl:w-6" style="border-radius: 50%" alt="">
                 <div
                   class="relative flex items-baseline bg-[#6435A5] rounded-[100px] text-white gap-2 xxl:gap-1.5 xl:gap-1 py-1.5 xxl:py-1 px-2.5 xxl:px-2 xl:px-1.5">
                   <span class="text-base xxl:text-sm xl:text-xs leading-none">{{ mes.message }}</span>
@@ -81,8 +81,11 @@
     <div
       class="bg-white h-[72px] xxl:h-[60px] xxl:h-[50px] flex items-center px-7 xxl:px-5 xl:px-4 py-5 xxl:py-4 xl:py-3">
       <input placeholder="Написать сообщение..." type="text" v-model="message"
-             class="focus:ring-0 w-full text-lg xxl:text-[15px] xl:text-[13px] leading-none">
+             class="focus:ring-0 w-full text-lg xxl:text-[15px] xl:text-[13px] leading-none"
+             v-on:keyup.enter="sendMessage()"
+      >
       <button
+
         v-on:click="sendMessage()"
         class="hover__chat-arrow transition-all rounded-full h-[54px] xxl:h-[42px] x:h-[36px] w-[54px] xxl:w-[42px] x:w-[36px] flex items-center justify-center flex-shrink-0">
         <svg class="w-9 xxl:w-7 xl:w-6" width="36" height="36" viewBox="0 0 36 36" fill="none"

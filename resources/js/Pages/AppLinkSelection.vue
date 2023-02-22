@@ -13,15 +13,15 @@ import { Link } from '@inertiajs/inertia-vue3'
     <img v-else class="object-cover w-full absolute top-0 left-0 h-full" :src="compilation.company.banner" alt="">
     <div class="_container flex h-full">
       <div class="self-end flex items-center gap-7 xxl:gap-6 xl:gap-5 mb-10 xxl:mb-8 xl:mb-6">
-        <div v-if="compilation.company === null || compilation.company.image === null || compilation.company.image === 'undefined'" class="flex-shrink-0 bg-black w-20 xxl:w-16 xl:w-12 h-20 xxl:h-16 xl:h-12 rounded-full flex items-center justify-center">
-          <img   class="w-10 xxl:w-8 xl:w-6" src="../../assets/svg/city_icon_white.svg" alt="">
+        <div v-if="compilation.company === null || compilation.company.image === null || compilation.company.image === 'undefined'" class="flex-shrink-0 bg-black w-24 xxl:w-20 xl:w-16 h-24 xxl:h-20 xl:h-16 rounded-full flex items-center justify-center">
+          <img class="w-10 xxl:w-8 xl:w-6" src="../../assets/svg/city_icon_white.svg" alt="">
         </div>
         <div v-else>
-          <img class="flex-shrink-0 bg-black w-20 xxl:w-16 xl:w-12 h-20 xxl:h-16 xl:h-12 rounded-full flex items-center justify-center object-cover" :src="compilation.company.image" alt="">
+          <img class="flex-shrink-0 bg-black w-24 xxl:w-20 xl:w-16 h-24 xxl:h-20 xl:h-16 rounded-full flex items-center justify-center object-cover" :src="compilation.company.image" alt="">
         </div>
         <div class="text-white flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
-          <span class="text-[15px] xxl:text-[13px] xl:text-[11px] leading-none" v-if="compilation.company !== null">{{ compilation.company.title }}</span>
-          <span class="text-[15px] xxl:text-[13px] xl:text-[11px] leading-none">Агенство недвижимости</span>
+          <span class="text-[18px] xxl:text-[16px] xl:text-[14px] leading-none" v-if="compilation.company !== null">{{ compilation.company.title }}</span>
+          <span class="text-[18px] xxl:text-[16px] xl:text-[14px] leading-none" v-else>Агентство недвижимости</span>
         </div>
       </div>
     </div>
@@ -89,7 +89,6 @@ import { Link } from '@inertiajs/inertia-vue3'
       </div>
     </div>
   </main>
-  <app-footer />
 </template>
 
 <script>

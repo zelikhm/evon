@@ -4,6 +4,7 @@ namespace App\Models\Builder;
 
 use App\Models\Builder\Flat\FlatModel;
 use App\Models\Builder\Flat\FrameModel;
+use App\Models\Builder\Info\CityModel;
 use App\Models\Builder\Info\RegionModel;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -61,6 +62,10 @@ class HouseModel extends Model
 
   public function news() {
     return $this->hasMany(HouseNewsModel::class, 'house_id', 'id');
+  }
+
+  public function city_object() {
+    return $this->belongsTo(CityModel::class, 'city', 'title');
   }
 
   public function flats() {

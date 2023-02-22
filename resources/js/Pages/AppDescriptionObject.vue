@@ -91,7 +91,7 @@
           </div>
         </div>
       </div>
-      <app-map @open-add-selections="openAddSelection = true" v-if="map" :houses_array="house" :type="3" :state="false" />
+      <app-map @open-add-selections="openAddSelection = true" v-if="map" :houses_array="markers" :city="city" :houses="house" :type="3" :state="false" />
       <div class="grid__68-30 justify-between" v-if="!map">
         <div class="w-full flex flex-col">
           <swiper
@@ -241,7 +241,9 @@ export default {
       chess: false,
       isWithClient: false,
       openCheme: false,
-      selectFlat: null
+      selectFlat: null,
+      city: null,
+      markers: null,
     }
   },
   provide() {
@@ -285,8 +287,21 @@ export default {
         token: this.user.token
       })
     },
+    updatedMap() {
+      let id = 0;
+
+      this.markers = [];
+
+        this.markers.push({
+          position: {
+            lat: +this.house.latitude,
+            lng: +this.house.longitude
+          }
+        })
+    },
   },
   mounted() {
+    this.updatedMap();
 
     if (this.house.frames.length > 0) {
       this.house.frames.forEach((item, idx) => {
@@ -334,6 +349,14 @@ export default {
 
       this.house.promotion = false
     })
+
+    if(this.house.city_object.latitude !== null) {
+      this.city = { lat: this.house.city_object.latitude, lng: this.house.city_object.longitude }
+    } else {
+      this.city = null
+    }
+
+
 
     this.mainPhotos = this.house.images
   },

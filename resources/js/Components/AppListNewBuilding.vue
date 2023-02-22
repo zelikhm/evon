@@ -1,6 +1,4 @@
 <script setup>
-  import {Link} from '@inertiajs/inertia-vue3'
-
   import Preloader from '@/Components/Preloader/Preloader.vue'
 </script>
 
@@ -21,7 +19,8 @@
         <span
           class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[16px] leading-none">Фильтры</span>
         <div class="flex items-center gap-4">
-          <button class="text-[#6435A5] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none cursor-pointer">
+          <button class="text-[#6435A5] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none cursor-pointer"
+                  v-on:click="reloadFilter">
             Сбросить
           </button>
           <button @click="openFilter = false"
@@ -31,23 +30,26 @@
         </div>
       </div>
       <div class="h-[1px] w-full bg-[#E5DFEE]"></div>
-      <div class="custom__scroll h-[84vh] relative overflow-y-auto p-7 xxl:p-5 xl:p-4">
+      <div v-if="preloader === true">
+        <div class="loader"></div>
+      </div>
+      <div class="custom__scroll h-[84vh] relative overflow-y-auto p-7 xxl:p-5 xl:p-4" v-if="preloader === false">
         <div class="mb-5 xxl:mb-4 xl:mb-3">
           <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
             <div class="flex items-center text-[#1E1D2D]">
-              <input class="custom__checkbox" name="filters" type="checkbox" id="filters_1">
-              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_1"
-                     v-on:click="setBadge(1)">Новинки</label>
+              <input class="custom__checkbox" name="filters" type="checkbox" id="filters_1"
+                     v-model="filters.badge.news">
+              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_1">Новинки</label>
             </div>
             <div class="flex items-center text-[#1E1D2D]">
-              <input class="custom__checkbox" name="filters" type="checkbox" id="filters_2">
-              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_2"
-                     v-on:click="setBadge(2)">Акции</label>
+              <input class="custom__checkbox" name="filters" type="checkbox" id="filters_2"
+                     v-model="filters.badge.sales">
+              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_2">Акции</label>
             </div>
             <div class="flex items-center text-[#1E1D2D]">
-              <input class="custom__checkbox" name="filters" type="checkbox" id="filters_3">
-              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_3"
-                     v-on:click="setBadge(3)">Популярные</label>
+              <input class="custom__checkbox" name="filters" type="checkbox" id="filters_3"
+                     v-model="filters.badge.popular">
+              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_3">Популярные</label>
             </div>
           </div>
         </div>
@@ -72,8 +74,10 @@
                   <img class="absolute top-1/2 -translate-y-1/2 translate-x-1/2 w-4.5 xxl:w-4 xl:w-3.5"
                        src="../../assets/svg/search_icon_grey.svg" alt="">
                 </div>
-                <div class="flex items-center text-[#1E1D2D] ml-5 mt-2" v-for="(item, index) in filteredCity" :key="idx">
-                  <input class="custom__checkbox" name="infrastructure" type="checkbox" v-bind:checked="checkCity(item.id)">
+                <div class="flex items-center text-[#1E1D2D] ml-5 mt-2" v-for="(item, index) in filteredCity"
+                     :key="idx">
+                  <input class="custom__checkbox" name="infrastructure" type="checkbox"
+                         v-bind:checked="checkCity(item.id)">
                   <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
                          v-on:click="changeSelectCity(item)">{{ item.title }}
                   </label>
@@ -96,7 +100,8 @@
               <div v-if="openSelectRegion"
                    class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
                 <div class="flex items-center text-[#1E1D2D] ml-5 mt-2" v-for="(item, index) in regions" :key="idx">
-                  <input class="custom__checkbox" name="infrastructure" type="checkbox" v-bind:checked="checkRegion(item.id)">
+                  <input class="custom__checkbox" name="infrastructure" type="checkbox"
+                         v-bind:checked="checkRegion(item.id)">
                   <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
                          v-on:click="changeSelectRegion(item)">{{ item.title }}
                   </label>
@@ -257,10 +262,9 @@
             </div>
             <div v-if="openInfrastruktura"
                  class="transition-all duration-500 h-fit flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
-              <div class="flex items-center text-[#1E1D2D]" v-for="(item, index) in infos">
-                <input class="custom__checkbox" name="infrastructure" type="checkbox" :id="'infrastructure' + item.id">
-                <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" :for="'infrastructure' + item.id"
-                       v-on:click="setInfo(item.id, index)">{{ item.name }}</label>
+              <div class="flex items-center text-[#1E1D2D]" v-for="(item, index) in infos_array">
+                <input class="custom__checkbox" name="infrastructure" type="checkbox" :id="'infrastructure' + item.id" v-model="item.active">
+                <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" :for="'infrastructure' + item.id">{{ item.name }}</label>
               </div>
             </div>
           </div>
@@ -272,10 +276,9 @@
                    src="../../assets/svg/arrow_down_black.svg" alt="">
             </div>
             <div v-if="openDopServices" class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
-              <div class="flex items-center text-[#1E1D2D]" v-for="(item, index) in dops">
-                <input class="custom__checkbox" name="services" type="checkbox" :id="'services' + item.id">
-                <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" :for="'services' + item.id"
-                       v-on:click="setDop(item.id, index)">{{ item.name }}</label>
+              <div class="flex items-center text-[#1E1D2D]" v-for="(item, index) in dops_array">
+                <input class="custom__checkbox" name="services" type="checkbox" :id="'services' + item.id" v-model="item.active">
+                <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" :for="'services' + item.id">{{ item.name }}</label>
               </div>
             </div>
           </div>
@@ -305,8 +308,8 @@
             <h2
               class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] lg:text-[20px] whitespace-nowrap text-center">
               {{ isSearch }}</h2>
-            <span
-              class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center">Найдено {{ count_house }} шт.</span>
+            <span class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center" v-if="!preloader">Найдено {{ count_house }} шт.</span>
+            <span class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center" v-else>Найдено  <div class="minLoader"></div>  шт.</span>
           </div>
           <div class="flex items-center md:flex-col gap-8 xxl:gap-6 xl:gap-5 md:gap-3">
             <div v-if="!map" :tabindex="tabindex" @blur="openDate = false" class="relative">
@@ -365,14 +368,11 @@
         </div>
       </div>
 
-      <div v-if="preloader">
-        <Preloader></Preloader>
-      </div>
-      <div v-else>
+      <div>
         <!--  Новостройки в виде таблицы -->
         <div v-if="!toggle && !map"
              class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3 mt-5 xxl:mt-4 xl:mt-3">
-          <div class="flex flex-col" v-for="(item, idx) in houses_array" :key="item.id">
+          <div class="flex flex-col" v-for="(item, idx) in filteredObjects" :key="item.id">
             <div
               class="object__block relative z-10 h-[300px] exl:h-fit exl:h-[16vw] lg:h-[24vw] md:h-[36vw] sm:h-[56vw] rounded-[6px]">
               <img v-if="item.images.length > 0" :src="item.image"
@@ -419,10 +419,10 @@
               </div>
             </div>
             <div class="flex flex-col text-[#1E1D2D] p-5 xxl-4 xl:p-3 leading-none">
-              <Link :href="'/house/' + item.slug"
-                    class="hover__title-block transition-all font-semibold text-xl xxl:text-base xl:text-sm md:text-[17px]">
+              <a target="_blank" :href="'/house/' + item.slug"
+                 class="hover__title-block transition-all font-semibold text-xl xxl:text-base xl:text-sm md:text-[17px]">
                 {{ item.title }}
-              </Link>
+              </a>
               <span class="text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">от {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} € до {{ Number.isInteger(item.maxPrice) ? item.maxPrice.toLocaleString('ru') : "-" }}</span>
             </div>
           </div>
@@ -431,7 +431,8 @@
 
         <!--  Новостройки в виде списка -->
         <div v-if="toggle && !map" class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 mt-5 xxl:mt-4 xl:mt-3">
-          <div class="grid__75-25 border border-solid border-[#E5DFEE] rounded-[6px]" v-for="item in houses_array">
+          <div class="grid__75-25 border border-solid border-[#E5DFEE] rounded-[6px]" v-for="item in houses_array"
+               :key="item.id">
             <div class="border__right md:border-r-0 md:border-b-[1px] border-solid border-[#E5DFEE]">
               <div class="grid__35-65 p-2.5 xxl:p-2 xl:p-1.5 h-full">
                 <div class="relative object__block h-full">
@@ -469,11 +470,12 @@
                   class="flex flex-col justify-between px-7 xxl:px-6 xl:px-5 md:px-1.5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3 md:py-3 md:gap-3.5">
                   <div class="flex justify-between sm:flex-col gap-2">
                     <div class="w-full flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
-                      <Link :href="'/house/' + item.slug"
-                            class="hover__title-block transition-all leading-none font-semibold text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">
+                      <a target="_blank" :href="'/house/' + item.slug"
+                         class="hover__title-block transition-all leading-none font-semibold text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">
                         {{ item.title }}
-                      </Link>
-                      <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs md:text-[14px]">{{ item.area }}</span>
+                      </a>
+                      <span
+                        class="text-[#8A8996] text-base xxl:text-sm xl:text-xs md:text-[14px]">{{ item.area }}</span>
                     </div>
                     <div class="justify-self-end justify-end flex h-fit flex-wrap gap-1">
                       <span
@@ -490,7 +492,8 @@
                 </div>
               </div>
             </div>
-            <div class="flex flex-col justify-between px-7 xxl:px-6 xl:px-5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3">
+            <div
+              class="flex flex-col justify-between px-7 xxl:px-6 xl:px-5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3">
               <div class="flex justify-between items-center">
                 <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] md:text-[13px]">{{ item.flats.length }} {{ item.flats.length === 1 ? "Квартира" : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
                 <span
@@ -503,7 +506,8 @@
               <div class="flex flex-col gap-2.5 xxl:gap-1.5 xl:gap-1">
               <span
                 class="font-medium whitespace-nowrap text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] md:text-[17px] leading-none leading-none">от {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} €</span>
-                <span class="text-[#8A8996] whitespace-nowrap text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px]">{{ isNaN(item.minPrice / item.minSquare) ? "-" : Math.round(item.minPrice / item.minSquare) }} € за м²</span>
+                <span
+                  class="text-[#8A8996] whitespace-nowrap text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px]">{{ isNaN(item.minPrice / item.minSquare) ? "-" : Math.round(item.minPrice / item.minSquare) }} € за м²</span>
               </div>
               <div
                 class="gray-backg flex items-center justify-center w-fit px-3 xxl:px-2.5 xl:px-2 gap-2 xxl:gap-1.5 xl:gap-1">
@@ -514,15 +518,17 @@
           </div>
         </div>
         <div class="w-full flex justify-center mb-14 xxl:mb-10 xl:mb-8" @click="nextShow()"
-             v-if="count_house > count && !map">
+             v-if="count_house > count && !map"
+        >
           <button
-            class="more__button transition-all text-[#E84680] border border-solid border-[#E84680] text-base xxl:text-sm xl:text-xs lg:text-[15px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2.5 xl:py-1.5 rounded-[3px]">
+            class="more__button mt-10 transition-all text-[#E84680] border border-solid border-[#E84680] text-base xxl:text-sm xl:text-xs lg:text-[15px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2.5 xl:py-1.5 rounded-[3px]">
             Показать еще
           </button>
         </div>
       </div>
 
-      <app-map @open-add-selections="openAddSelections" v-if="map" :houses_array="markers" :houses="map_array" :city="city_map"
+      <app-map @open-add-selections="openAddSelections" v-if="map" :houses_array="markers" :houses="map_array"
+               :city="city_map"
                :user="user"/>
     </div>
   </div>
@@ -559,7 +565,7 @@
     data() {
       return {
         markers: [],
-        preloader: false,
+        preloader: true,
         housesFilters: [],
         filters: {
           badge: {
@@ -642,11 +648,379 @@
         count_house: 0,
         city_map: null,
         map_array: [],
+        infos_array: [],
+        dops_array: [],
+        select_city_id: '',
       }
     },
     methods: {
-      setFilter() {
+      reloadFilter() {
+        //badge's
+        this.filters.badge.popular = false;
+        this.filters.badge.sales = false;
+        this.filters.badge.news = false;
+        //builder
+        this.selectDev = '';
+        this.filters.builder = '';
+        //deadlines
+        this.selectDeadline = 'Не важно';
+        this.filters.deadline = 'Не важно';
+        //price
+        this.filters.price.max = '';
+        this.filters.price.min = '';
+        //square
+        this.filters.square.min = '';
+        this.filters.square.max = '';
+        //city
+        this.filters.cities = [];
+        //area
+        this.filters.areas = [];
+        //dop
+        this.infos.forEach(item => {
+          item.active = false;
+        })
+        //info
+        this.dops.forEach(item => {
+          item.active = false;
+        })
+        //location
+        this.filters.location = {
+          toSea: '',
+          toSchool: '',
+          toShop: '',
+          toPark: '',
+          toChildrenSchool: '',
+          toBus: '',
+        }
+      },
+      include(where, what) {
 
+        let status = true;
+
+        what.forEach(item => {
+          if (!where.includes(item)) {
+            status = false;
+          }
+        })
+
+        return status;
+      },
+      openHouse(href) {
+        router.get(href, {preserveScroll: true})
+      },
+      changeBorder(id) {
+        this.isBorder = id
+      },
+      addFavorite(item) {
+        axios.post('/api/favorite/add', {
+          user_id: this.user.id,
+          house_id: item.id,
+          token: this.user.token
+        }).then(res => {
+          this.openNotification = true
+          this.text = 'Обьект добавлен в избранное'
+          setTimeout(() => {
+            this.openNotification = false
+          }, 2000)
+        })
+        item.favorite = true
+      },
+      removeFavorite(item) {
+        axios.post('/api/favorite/deleted', {
+          user_id: this.user.id,
+          house_id: item.id,
+          token: this.user.token
+        }).then(res => {
+          this.openNotification = true
+          this.text = 'Обьект удален из избранного'
+          setTimeout(() => {
+            this.openNotification = false
+          }, 2000)
+        })
+        item.favorite = false
+      },
+      setBadge(id) {
+        if (id === 1) {
+          this.filters.badge.news = !this.filters.badge.news;
+        } else if (id === 2) {
+          this.filters.badge.sales = !this.filters.badge.sales;
+        } else if (id === 3) {
+          this.filters.badge.popular = !this.filters.badge.popular;
+        }
+      },
+      setInfo(id, index) {
+        if (this.filters.info.hasOwnProperty(index)) {
+          delete this.filters.info[index];
+        } else {
+          this.filters.info[index] = id;
+        }
+      },
+      setDop(id, index) {
+        if (this.filters.dop.hasOwnProperty(index)) {
+          delete this.filters.dop[index];
+        } else {
+          this.filters.dop[index] = id;
+        }
+      },
+      changeDate(date) {
+        this.selectDate = date.date
+        this.selectDateId = date.id
+        this.openDate = false
+
+        if (this.selectDateId === 1) {
+          this.houses_array = this.readyHouses.sort((a, b) => b.time - a.time)
+        } else if (this.selectDateId === 2) {
+          this.houses_array = this.readyHouses.sort((a, b) => a.minPrice - b.minPrice)
+        } else if (this.selectDateId === 3) {
+          this.houses_array = this.readyHouses.sort((a, b) => b.minPrice - a.minPrice)
+        }
+      },
+      checkCity(id) {
+
+        let arr = this.filters.cities.find(item => id === item.id);
+
+        return arr !== undefined ? true : false;
+
+      },
+      checkRegion(id) {
+
+        let arr = this.filters.areas.find(item => id === item.id);
+
+        return arr !== undefined ? true : false;
+
+      },
+      changeSelectCity(city) {
+
+        let arr = this.filters.cities.findIndex(item => city.id === item.id);
+
+        if (arr !== -1) {
+          this.filters.cities.splice(arr, 1);
+
+          if (this.filters.cities.length > 0) {
+            this.regions = this.filters.cities[this.filters.cities.length - 1].regions;
+            this.select_city_id = this.filters.cities[this.filters.cities.length - 1].id;
+            if (parseFloat(this.filters.cities[this.filters.cities.length - 1].latitude) !== null) {
+              this.city_map = {
+                lat: parseFloat(this.filters.cities[this.filters.cities.length - 1].latitude),
+                lng: parseFloat(this.filters.cities[this.filters.cities.length - 1].longitude)
+              };
+            } else {
+              this.city_map = null;
+            }
+          } else {
+            this.regions = {};
+            this.city_map = null;
+          }
+        } else {
+          this.filters.cities.push({'id': city.id, 'title': city.title, 'regions': city.regions});
+          this.regions = city.regions;
+          this.select_city_id = city.id;
+          if (parseFloat(city.latitude) !== null) {
+            this.city_map = {lat: (city.latitude), lng: (city.longitude)};
+          } else {
+            this.city_map = null;
+          }
+
+        }
+
+      },
+      changeSelectRegion(region) {
+
+        let arr = this.filters.areas.findIndex(item => region.id === item.id);
+
+        if (arr !== -1) {
+
+          this.filters.areas.splice(arr, 1);
+
+        } else {
+
+          this.filters.areas.push({'id': region.id, 'title': region.title, 'city': region.city_id});
+
+        }
+
+      },
+      changeSelectDeadline(deadline) {
+        this.selectDeadline = deadline.deadline
+        this.filters.deadline = deadline.deadline
+        this.openSelectDeadline = false
+
+      },
+      changeSelectDev(dev) {
+        this.selectDev = dev.first_name
+        this.filters.builder = dev.first_name
+        this.openSelectDev = false
+
+      },
+      changeSelectInstallment(installment) {
+        this.selectInstallment = installment.installment
+        this.openSelectInstallment = false
+      },
+      openAddSelections(data) {
+        this.$emit('open-add-selections', data)
+      },
+      selectsHidden() {
+        this.openSelectInstallment = false
+        this.openSelectDev = false
+        this.openSelectDeadline = false
+        this.openSelectRegion = false
+        this.openDate = false
+        this.openSelectType = false
+      },
+      changeSelectTypes(type) {
+        this.selectType = type.type
+        this.openSelectType = false
+      },
+      updateHouses() {
+        this.readyHouses.forEach(house => {
+
+          house.time = Date.parse(house.created_at)
+          this.readyHouses = this.readyHouses.sort((a, b) => b.time - a.time)
+
+          let arr = [],
+            squareFlats = []
+
+          house.flats.forEach(item => {
+            arr.push(item.price)
+            squareFlats.push(item.square)
+            if (item.status == 0) {
+              house.promotion = true
+            }
+          })
+
+          house.minPrice = Number.isInteger(Math.min(...arr)) ? Math.min(...arr) : 0
+          house.maxPrice = Number.isInteger(Math.max(...arr)) ? Math.max(...arr) : 0
+          house.minSquare = Math.min(...squareFlats)
+          house.maxSquare = Math.max(...squareFlats)
+        })
+
+        // this.splitHouses();
+      },
+      // splitHouses() {
+      //   this.houses_array = JSON.parse(JSON.stringify(this.readyHouses.sort((a, b) => b.created_at - a.created_at))).splice(0, this.count);
+      // },
+      nextShow() {
+        this.count += 30;
+
+        // this.houses_array = JSON.parse(JSON.stringify(this.readyHouses.sort((a, b) => b.created_at - a.created_at))).splice(0, this.count);
+      },
+      updatedMap() {
+        let id = 0;
+
+        this.markers = [];
+
+        if (this.map_array.length > 0) {
+          this.map_array.forEach(item => {
+            ++id
+            this.markers.push({
+              id,
+              position: {
+                lat: +item.latitude,
+                lng: +item.longitude
+              }
+            })
+          })
+        } else {
+          this.markers.push({
+            position: {
+              lat: +this.houses.latitude,
+              lng: +this.houses.longitude
+            }
+          })
+        }
+      },
+    },
+    created() {
+
+      this.count_house = this.count_houses;
+      let href = window.location.href
+      if (href.split('#').at(-1) === 'search') {
+
+        this.isSearch = `Поиск: ${localStorage.getItem('searchData')}`
+
+        axios.post('/api/house/search', {
+          title: localStorage.getItem('searchData'),
+          token: this.user.token,
+        })
+          .then(response => {
+            this.readyHouses = response.data;
+            this.count_house = this.readyHouses.length;
+            this.updateHouses()
+            this.preloader = false;
+          })
+          .catch(e => console.log(e))
+      } else {
+        this.readyHouses = this.houses
+        this.map_array = this.houses;
+
+        if (this.type === 0) {
+          axios.get('/api/house/getHousesJk').then(res => {
+            this.readyHouses = res.data;
+            this.count_house = this.readyHouses.length;
+            this.map_array = this.readyHouses;
+            this.updateHouses();
+            this.updatedMap();
+            this.preloader = false;
+          })
+        } else {
+          axios.get('/api/house/getHousesVillages').then(res => {
+            this.readyHouses = res.data;
+            this.count_house = this.readyHouses.length;
+            this.map_array = this.readyHouses;
+            this.updateHouses();
+            this.updatedMap();
+            this.preloader = false;
+          })
+        }
+      }
+
+      this.infos.forEach(item => {
+        item.active = false;
+
+        this.infos_array.push(item);
+      })
+
+      this.dops.forEach(item => {
+        item.active = false;
+
+        this.dops_array.push(item);
+      })
+
+      let date = new Date(),
+        fullYear = date.getFullYear(),
+        fullPlus5 = fullYear + 5
+
+      for (fullYear; fullYear <= fullPlus5; fullYear++) {
+        for (let month = 1; month <= 4; month += 1) {
+          this.deadlines.push({deadline: `${fullYear}/${month}`})
+        }
+      }
+
+      // this.builders.unshift({'id': -1, 'first_name': 'Не важно'});
+
+      if (this.city[0] !== null) {
+        this.selectDev = this.builders[0].first_name
+        this.selectCity = 'Выберите город...'
+        this.selectRegion = 'Выберите район...'
+        // this.selectRegion = this.city[0].regions[0].title
+        // this.regions = this.city[0].regions
+
+      }
+
+      this.updateHouses()
+    },
+    computed: {
+      filteredCity() {
+        if (this.searchValue !== null) {
+          return this.city.filter(item =>
+            item.title.toLowerCase().includes(
+              this.searchValue.toLowerCase()
+            )
+          )
+        } else {
+          return this.city
+        }
+      },
+      filteredObjects() {
         let array = this.readyHouses;
         let object = [];
 
@@ -694,7 +1068,7 @@
 
         object2.forEach(item => {
           if (this.filters.price.min !== '' && this.filters.price.max !== '') {
-            if (item.minPrice > this.filters.price.min && item.maxPrice < this.filters.price.max) {
+            if (item.minPrice > this.filters.price.min && item.minPrice < this.filters.price.max) {
               object3.push(item);
             }
           } else if (this.filters.price.min !== '' && this.filters.price.max === '') {
@@ -702,7 +1076,7 @@
               object3.push(item);
             }
           } else if (this.filters.price.max !== '' && this.filters.price.min === '') {
-            if (item.maxPrice < this.filters.price.max) {
+            if (item.minPrice < this.filters.price.max) {
               object3.push(item);
             }
           } else {
@@ -794,7 +1168,7 @@
             }
           }
 
-          if (this.filters.location.toSchool !== null) {
+          if (this.filters.location.toSchool !== '') {
             if (status !== false) {
               location.info.toSchool !== null ? status = location.info.toSchool < this.filters.location.toSchool : status = true;
             }
@@ -806,7 +1180,7 @@
 
         let object8 = [];
 
-        if (Object.keys(this.filters.info).length > 0) {
+        if (this.infos_array.find((item) => item.active === true) !== undefined) {
           object7.forEach(item => {
             if (item.info_array !== null) {
               let array = [];
@@ -817,9 +1191,17 @@
 
               })
 
-              const diff = this.include(array, Object.values(this.filters.info));
+              let array_info = [];
 
-              if(diff === true) {
+              Object.values(this.infos_array).forEach(item => {
+                if(item.active === true) {
+                  array_info.push(item.id);
+                }
+              })
+
+              const diff = this.include(array, array_info);
+
+              if (diff === true) {
                 object8.push(item);
               }
             }
@@ -830,7 +1212,7 @@
 
         let object9 = [];
 
-        if (Object.keys(this.filters.dop).length > 0) {
+        if (this.dops_array.find((item) => item.active === true) !== undefined) {
           object8.forEach(item => {
             if (item.dop_array !== null) {
               let array = [];
@@ -839,9 +1221,17 @@
                 array.push(v.id);
               })
 
-              const diff = this.include(array, Object.values(this.filters.dop));
+              let array_dops = [];
 
-              if(diff === true) {
+              Object.values(this.dops_array).forEach(item => {
+                if(item.active === true) {
+                  array_dops.push(item.id);
+                }
+              })
+
+              const diff = this.include(array, array_dops);
+
+              if (diff === true) {
                 object9.push(item);
               }
 
@@ -853,18 +1243,18 @@
 
         let object10 = [];
 
-        if(Object.keys(this.filters.cities).length > 0) {
+        if (Object.keys(this.filters.cities).length > 0) {
           object9.forEach(item => {
-            if(item.city !== null) {
+            if (item.city !== null) {
 
               let status = this.filters.cities.find(val => val.title === item.city);
 
-              if(status !== undefined) {
+              if (status !== undefined) {
 
-                if(Object.keys(this.filters.areas).length > 0) {
+                if (Object.keys(this.filters.areas).length > 0) {
                   let push = this.filters.areas.find(val => val.title === item.area);
 
-                  if(push !== undefined) {
+                  if (push !== undefined) {
                     object10.push(item);
                   }
 
@@ -883,332 +1273,9 @@
         this.map_array = object10;
         this.count_house = this.houses_array.length;
         this.updatedMap();
-      },
-      include(where, what) {
 
-        let status = true;
-
-        what.forEach(item => {
-          if(!where.includes(item)) {
-            status = false;
-          }
-        })
-
-        return status;
-      },
-      openHouse(href) {
-        router.get(href, {preserveScroll: true})
-      },
-      changeBorder(id) {
-        this.isBorder = id
-      },
-      addFavorite(item) {
-        axios.post('/api/favorite/add', {
-          user_id: this.user.id,
-          house_id: item.id,
-          token: this.user.token
-        }).then(res => {
-          this.openNotification = true
-          this.text = 'Обьект добавлен в избранное'
-          setTimeout(() => {
-            this.openNotification = false
-          }, 2000)
-        })
-        item.favorite = true
-      },
-      removeFavorite(item) {
-        axios.post('/api/favorite/deleted', {
-          user_id: this.user.id,
-          house_id: item.id,
-          token: this.user.token
-        }).then(res => {
-          this.openNotification = true
-          this.text = 'Обьект удален из избранного'
-          setTimeout(() => {
-            this.openNotification = false
-          }, 2000)
-        })
-        item.favorite = false
-      },
-      setBadge(id) {
-        if (id === 1) {
-          this.filters.badge.news = !this.filters.badge.news;
-        } else if (id === 2) {
-          this.filters.badge.sales = !this.filters.badge.sales;
-        } else if (id === 3) {
-          this.filters.badge.popular = !this.filters.badge.popular;
-        }
-
-        this.setFilter();
-      },
-      setInfo(id, index) {
-        if (this.filters.info.hasOwnProperty(index)) {
-          delete this.filters.info[index];
-        } else {
-          this.filters.info[index] = id;
-        }
-
-        this.setFilter();
-      },
-      setDop(id, index) {
-        if (this.filters.dop.hasOwnProperty(index)) {
-          delete this.filters.dop[index];
-        } else {
-          this.filters.dop[index] = id;
-        }
-
-        this.setFilter();
-      },
-      changeDate(date) {
-        this.selectDate = date.date
-        this.selectDateId = date.id
-        this.openDate = false
-
-        if (this.selectDateId === 1) {
-          this.houses_array = this.readyHouses.sort((a, b) => b.time - a.time)
-        } else if (this.selectDateId === 2) {
-          this.houses_array = this.readyHouses.sort((a, b) => a.minPrice - b.minPrice)
-        } else if (this.selectDateId === 3) {
-          this.houses_array = this.readyHouses.sort((a, b) => b.minPrice - a.minPrice)
-        }
-      },
-      checkCity(id) {
-
-        let arr = this.filters.cities.find(item => id === item.id);
-
-        return arr !== undefined ? true : false;
-
-      },
-      checkRegion(id) {
-
-        let arr = this.filters.areas.find(item => id === item.id);
-
-        return arr !== undefined ? true : false;
-
-      },
-      changeSelectCity(city) {
-
-        let arr = this.filters.cities.findIndex(item => city.id === item.id);
-
-        if(arr !== -1) {
-          this.filters.cities.splice(arr, 1);
-
-          if(this.filters.cities.length > 0) {
-            this.regions = this.filters.cities[this.filters.cities.length - 1].regions;
-            if(parseFloat(this.filters.cities[this.filters.cities.length - 1].latitude) !== null) {
-              this.city_map = { lat: parseFloat(this.filters.cities[this.filters.cities.length - 1].latitude), lng: parseFloat(this.filters.cities[this.filters.cities.length - 1].longitude) };
-            } else {
-              this.city_map = null;
-            }
-          } else {
-            this.regions = {};
-            this.city_map = null;
-          }
-        } else {
-          this.filters.cities.push({ 'id': city.id, 'title': city.title, 'regions': city.regions });
-          this.regions = city.regions;
-          if(parseFloat(city.latitude) !== null) {
-            this.city_map = { lat: parseFloat(city.latitude), lng: parseFloat(city.longitude) };
-          } else {
-            this.city_map = null;
-          }
-
-        }
-
-        this.setFilter();
-
-      },
-      changeSelectRegion(region) {
-
-        let arr = this.filters.areas.findIndex(item => region.id === item.id);
-
-        if(arr !== -1) {
-
-          this.filters.areas.splice(arr, 1);
-
-        } else {
-
-          this.filters.areas.push({ 'id': region.id, 'title': region.title });
-
-        }
-
-        this.setFilter();
-      },
-      changeSelectDeadline(deadline) {
-        this.selectDeadline = deadline.deadline
-        this.filters.deadline = deadline.deadline
-        this.openSelectDeadline = false
-        this.setFilter();
-      },
-      changeSelectDev(dev) {
-        this.selectDev = dev.first_name
-        this.filters.builder = dev.first_name
-        this.openSelectDev = false
-        this.setFilter();
-      },
-      changeSelectInstallment(installment) {
-        this.selectInstallment = installment.installment
-        this.openSelectInstallment = false
-      },
-      openAddSelections(data) {
-        this.$emit('open-add-selections', data)
-      },
-      selectsHidden() {
-        this.openSelectInstallment = false
-        this.openSelectDev = false
-        this.openSelectDeadline = false
-        this.openSelectRegion = false
-        this.openDate = false
-        this.openSelectType = false
-      },
-      changeSelectTypes(type) {
-        this.selectType = type.type
-        this.openSelectType = false
-      },
-      updateHouses() {
-        this.readyHouses.forEach(house => {
-
-          house.time = Date.parse(house.created_at)
-          this.readyHouses = this.readyHouses.sort((a, b) => b.time - a.time)
-
-
-          let arr = [],
-            squareFlats = []
-
-          house.flats.forEach(item => {
-            arr.push(item.price)
-            squareFlats.push(item.square)
-          })
-
-
-          house.minPrice = Number.isInteger(Math.min(...arr)) ? Math.min(...arr) : 0
-          house.maxPrice = Number.isInteger(Math.max(...arr)) ? Math.max(...arr) : 0
-          house.minSquare = Math.min(...squareFlats)
-          house.maxSquare = Math.max(...squareFlats)
-
-          house.flats.forEach(item => {
-            if (item.status == 0) {
-              house.promotion = true
-              return
-            }
-            house.promotion = false
-          })
-        })
-
-        this.splitHouses();
-      },
-      splitHouses() {
-        this.houses_array = JSON.parse(JSON.stringify(this.readyHouses.sort((a, b) => b.created_at - a.created_at))).splice(0, this.count);
-      },
-      nextShow() {
-        this.count += 30;
-
-        this.houses_array = JSON.parse(JSON.stringify(this.readyHouses.sort((a, b) => b.created_at - a.created_at))).splice(0, this.count);
-      },
-      updatedMap() {
-        let id = 0;
-
-        this.markers = [];
-
-        if (this.map_array.length > 0) {
-          this.map_array.forEach(item => {
-            ++id
-            this.markers.push({
-              id,
-              position: {
-                lat: +item.latitude,
-                lng: +item.longitude
-              }
-            })
-          })
-        } else {
-          this.markers.push({
-            position: {
-              lat: +this.houses.latitude,
-              lng: +this.houses.longitude
-            }
-          })
-        }
-
-        console.log(this.markers);
-      },
-    },
-    created() {
-      this.count_house = this.count_houses;
-      let href = window.location.href
-      if (href.split('#').at(-1) === 'search') {
-
-        this.isSearch = `Поиск: ${localStorage.getItem('searchData')}`
-
-        axios.post('/api/house/search', {
-          title: localStorage.getItem('searchData'),
-          token: this.user.token,
-        })
-          .then(response => {
-            this.readyHouses = response.data;
-            this.count_house = this.readyHouses.length;
-            this.updateHouses()
-          })
-          .catch(e => console.log(e))
-      } else {
-        this.readyHouses = this.houses
-        this.map_array = this.houses;
-
-        if (this.type === 0) {
-          axios.get('/api/house/getHousesJk').then(res => {
-            this.readyHouses = res.data;
-            this.count_house = this.readyHouses.length;
-            this.map_array = this.readyHouses;
-            this.updateHouses();
-            this.updatedMap();
-          })
-        } else {
-          axios.get('/api/house/getHousesVillages').then(res => {
-            this.readyHouses = res.data;
-            this.count_house = this.readyHouses.length;
-            this.map_array = this.readyHouses;
-            this.updateHouses();
-            this.updatedMap();
-          })
-        }
-
+        return this.houses_array.splice(0, this.count);
       }
-
-      let date = new Date(),
-        fullYear = date.getFullYear(),
-        fullPlus5 = fullYear + 5
-
-      for (fullYear; fullYear <= fullPlus5; fullYear++) {
-        for (let month = 1; month <= 4; month += 1) {
-          this.deadlines.push({deadline: `${fullYear}/${month}`})
-        }
-      }
-
-      // this.builders.unshift({'id': -1, 'first_name': 'Не важно'});
-
-      if (this.city[0] !== null) {
-        this.selectDev = this.builders[0].first_name
-        this.selectCity = 'Выберите город...'
-        this.selectRegion = 'Выберите район...'
-        // this.selectRegion = this.city[0].regions[0].title
-        // this.regions = this.city[0].regions
-
-      }
-
-      this.updateHouses()
-    },
-    computed: {
-      filteredCity() {
-        if (this.searchValue !== null) {
-          return this.city.filter(item =>
-            item.title.toLowerCase().includes(
-              this.searchValue.toLowerCase()
-            )
-          )
-        } else {
-          return this.city
-        }
-      },
     },
     components: {
       AppMap,
@@ -1220,7 +1287,43 @@
 </script>
 
 <style scoped>
+  .loader_block {
 
+  }
+
+  .loader {
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid; /* Blue */
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 2s linear infinite;
+    margin: 37%;
+  }
+
+  .minLoader {
+    border: 5px solid #f3f3f3; /* Light grey */
+    border-top: 5px solid; /* Blue */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 2s linear infinite;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .loader_text {
+    text-align: center;
+  }
 </style>
 
 <style src="@vueform/multiselect/themes/default.css"></style>

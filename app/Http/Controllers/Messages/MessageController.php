@@ -66,11 +66,8 @@ class MessageController extends Controller
   {
     if ($this->checkToken($request->token)) {
 
-      $chats = ChatModel::orWhere('from_id', $request->user_id)
-        ->orWhere('to_id', $request->user_id)
-        ->orderBy('updated_at', 'DESC')
-        ->with(['from', 'to'])
-        ->get();
+      $chats = new ChatController();
+      $chats = $chats->getChatsInfo($request->user_id);
 
       foreach ($chats as $item) {
 

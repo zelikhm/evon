@@ -110,6 +110,7 @@
       selectCompilation(item, index) {
         this.idCompilation = item.id
         this.activeNameCompilation = item.title
+        this.success = false
         this.index = index
       },
       addSelection() {
@@ -124,9 +125,11 @@
           }).then(response => {
             if (response.status === 200) {
               this.success = true
+              this.failed = false
               this.readyCompilation[this.index].houses = response.data.houses;
             } else if (response.status === 201) {
               this.failed = true
+              this.success = false
             }
 
           })
