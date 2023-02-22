@@ -468,22 +468,22 @@
                 <div
                   class="flex flex-col justify-between px-7 xxl:px-6 xl:px-5 md:px-1.5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3 md:py-3 md:gap-3.5">
                   <div class="flex justify-between sm:flex-col gap-2">
-                    <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
+                    <div class="w-full flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
                       <Link :href="'/house/' + item.slug"
                             class="hover__title-block transition-all leading-none font-semibold text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">
                         {{ item.title }}
                       </Link>
                       <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs md:text-[14px]">{{ item.area }}</span>
                     </div>
-                    <div class="flex flex-wrap gap-x-1">
-                    <span
-                      class="bg-[#E84680] h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] md:text-[11px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1"
-                      v-if="Math.ceil(Math.abs(new Date().getTime() - new Date(item.created_at).getTime()) / (1000 * 3600 * 24) ) <= 30">новинки</span>
+                    <div class="justify-self-end justify-end flex h-fit flex-wrap gap-1">
                       <span
-                        class="bg-[#FA8D50] h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1"
+                        class="bg-[#E84680] self-start h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] md:text-[11px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1"
+                        v-if="Math.ceil(Math.abs(new Date().getTime() - new Date(item.created_at).getTime()) / (1000 * 3600 * 24) ) <= 30">новинки</span>
+                      <span
+                        class="bg-[#FA8D50] self-start h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1"
                         v-if="item.promotion">акция</span>
                       <span
-                        class="bg-[#E84646] h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1"
+                        class="bg-[#E84646] self-start h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1"
                         v-if="item.visible >= 50">популярное</span>
                     </div>
                   </div>
