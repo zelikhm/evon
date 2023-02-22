@@ -19,7 +19,7 @@
         </div>
         <div class="text-white flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
           <span class="text-[18px] xxl:text-[16px] xl:text-[14px] leading-none" v-if="compilation.company !== null">{{ compilation.company.title }}</span>
-          <span class="text-[18px] xxl:text-[16px] xl:text-[14px] leading-none">Агенство недвижимости</span>
+          <span class="text-[18px] xxl:text-[16px] xl:text-[14px] leading-none" v-else>Агентство недвижимости</span>
         </div>
       </div>
     </div>
