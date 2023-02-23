@@ -116,13 +116,13 @@
             <div class="flex gap-2">
               <div class="flex items-center gap-1">
                 <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="cost_from">от</label>
-                <input @click="changeBorder(1)" @input="setFilter()" v-model="filters.price.min"
+                <input @click="changeBorder(1)" v-model="filters.price.min"
                        class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0"
                        type="number" id="cost_from">
               </div>
               <div class="flex items-center gap-1">
                 <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="cost_before">до</label>
-                <input @click="changeBorder(1)" @input="setFilter()" v-model="filters.price.max"
+                <input @click="changeBorder(1)" v-model="filters.price.max"
                        class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0"
                        type="number" id="cost_before">
               </div>
@@ -159,13 +159,13 @@
             <div class="flex gap-2">
               <div class="flex items-center gap-1">
                 <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="from">от</label>
-                <input @click="changeBorder(2)" @input="setFilter()" v-model="filters.square.min"
+                <input @click="changeBorder(2)" v-model="filters.square.min"
                        class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0"
                        type="number" id="from">
               </div>
               <div class="flex items-center gap-1">
                 <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="before">до</label>
-                <input @click="changeBorder(2)" @input="setFilter()" v-model="filters.square.max"
+                <input @click="changeBorder(2)" v-model="filters.square.max"
                        class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0"
                        type="number" id="before">
               </div>
@@ -207,7 +207,7 @@
                    class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_sea">от моря
                   (м)</label>
-                <input @click="changeBorder(3)" @input="setFilter()" v-model="filters.location.toSea"
+                <input @click="changeBorder(3)" v-model="filters.location.toSea"
                        class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                        type="number" id="for_sea">
               </div>
@@ -215,7 +215,7 @@
                    class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_school">от
                   школы (м)</label>
-                <input @click="changeBorder(4)" @input="setFilter()" v-model="filters.location.toSchool"
+                <input @click="changeBorder(4)" v-model="filters.location.toSchool"
                        class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                        type="number" id="for_school">
               </div>
@@ -223,7 +223,7 @@
                    class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_shoping">от
                   торгового центра (м)</label>
-                <input @click="changeBorder(5)" @input="setFilter()" v-model="filters.location.toShop"
+                <input @click="changeBorder(5)" v-model="filters.location.toShop"
                        class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                        type="number" id="for_shoping">
               </div>
@@ -231,7 +231,7 @@
                    class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_park">от парка
                   (м)</label>
-                <input @click="changeBorder(6)" @input="setFilter()" v-model="filters.location.toPark"
+                <input @click="changeBorder(6)" v-model="filters.location.toPark"
                        class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                        type="number" id="for_park">
               </div>
@@ -239,7 +239,7 @@
                    class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_child">от
                   детского садика (м)</label>
-                <input @click="changeBorder(7)" @input="setFilter()" v-model="filters.location.toChildrenSchool"
+                <input @click="changeBorder(7)" v-model="filters.location.toChildrenSchool"
                        class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                        type="number" id="for_child">
               </div>
@@ -247,7 +247,7 @@
                    class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
                 <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_stop">от
                   остановки (м)</label>
-                <input @click="changeBorder(8)" @input="setFilter()" v-model="filters.location.toBus"
+                <input @click="changeBorder(8)" v-model="filters.location.toBus"
                        class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                        type="number" id="for_stop">
               </div>
@@ -431,7 +431,7 @@
 
         <!--  Новостройки в виде списка -->
         <div v-if="toggle && !map" class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 mt-5 xxl:mt-4 xl:mt-3">
-          <div class="grid__75-25 border border-solid border-[#E5DFEE] rounded-[6px]" v-for="item in houses_array"
+          <div class="grid__75-25 border border-solid border-[#E5DFEE] rounded-[6px]" v-for="item in filteredObjects"
                :key="item.id">
             <div class="border__right md:border-r-0 md:border-b-[1px] border-solid border-[#E5DFEE]">
               <div class="grid__35-65 p-2.5 xxl:p-2 xl:p-1.5 h-full">
@@ -527,7 +527,7 @@
         </div>
       </div>
 
-      <app-map @open-add-selections="openAddSelections" v-if="map" :houses_array="markers" :houses="map_array"
+      <app-map @open-add-selections="openAddSelections" v-if="map" :houses_array="markers" :houses="filteredObjects"
                :city="city_map"
                :user="user"/>
     </div>
@@ -1026,10 +1026,13 @@
 
         if (this.filters.badge.sales) {
           array.forEach(item => {
-            item.flats.forEach(value => {
+            item.flats.every(value => {
               if (value.status == 0) {
                 object.push(item);
+                return false;
               }
+
+              return true;
             })
           })
         } else {
@@ -1273,6 +1276,8 @@
         this.map_array = object10;
         this.count_house = this.houses_array.length;
         this.updatedMap();
+
+        console.log(1);
 
         return this.houses_array.splice(0, this.count);
       }
