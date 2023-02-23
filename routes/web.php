@@ -19,6 +19,7 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+//  dd(\Illuminate\Support\Facades\Auth::user());
     return Inertia::render('AppMain');
 });
 

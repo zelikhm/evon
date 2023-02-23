@@ -23,7 +23,7 @@
         <div class="_container--inter">
           <div class="main__title-block--grid lg:flex lg:flex-col items-center gap-1 pt-10 xxl:pt-7 lg:pt-5 pb-0.5 lg:mx-3">
             <div class="flex flex-col gap-7 xxl:gap-5 xl:gap-3 lg:w-[60%] sm:w-full">
-              <h2 class="text-[22px] lg:text-center xxl:text-[18px] xl:text-[15px] lg:text-[19px] font-semibold leading-[125%]">Evon - универсальная площадка для агентств недвижимости, частных риэлторов и строительных компаний.</h2>
+              <h2 class="text-[22px] lg:text-center xxl:text-[18px] xl:text-[15px] lg:text-[19px] font-semibold leading-[125%]"></h2>
               <p class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996] lg:text-[12px] lg:text-center">Мы предлагаем удобный инструмент для эффективной и быстрой коммуникации с Застройщиками/отделами продаж на территории Турецкой республики.</p>
             </div>
             <div class="lg:hidden">
@@ -128,6 +128,9 @@ export default {
     return {
       error: this.error,
     }
+  },
+  mounted() {
+    // console.log(getRuLocalisation());
   },
   data() {
     return {

@@ -63,11 +63,11 @@ class AuthController extends Controller
   {
     $rand = rand(1000, 9999);
 
-//    Http::withBasicAuth('Evon903', 'Evon904')->get(
-//      'http://api.smsfeedback.ru/messages/v2/send/?phone=' . $reguest->phone
-//      . '&text=' . $rand
-//      . '&sender=EVON'
-//    );
+    Http::withBasicAuth('Evon903', 'Evon904')->get(
+      'http://api.smsfeedback.ru/messages/v2/send/?phone=' . $request->phone
+      . '&text=' . 'Проверочный код: ' . $rand
+      . '&sender=EVON'
+    );
 
     $user = User::where('phone', 'LIKE', '%' . $request->phone)
       ->where('role', 0)

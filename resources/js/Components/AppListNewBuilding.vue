@@ -53,6 +53,7 @@
             </div>
           </div>
         </div>
+
         <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3">
           <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]"
                :class="{ 'border__bottom--0': openSelectCity}">
@@ -100,6 +101,30 @@
               <div v-if="openSelectRegion"
                    class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
                 <div class="flex items-center text-[#1E1D2D] ml-5 mt-2" v-for="(item, index) in regions" :key="idx">
+                  <input class="custom__checkbox" name="infrastructure" type="checkbox"
+                         v-bind:checked="checkRegion(item.id)">
+                  <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
+                         v-on:click="changeSelectRegion(item)">{{ item.title }}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]" v-if="filters.areas.length > 0"
+               :class="{ 'border__bottom--0': openSelectRegionOpen}">
+            <span
+              class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-5 xxl:pt-4 xl:pt-3">Выбранные районы: </span>
+            <div class="relative" :tabindex="tabindex" @blur="openSelectRegionOpen = false">
+              <div @click="openSelectRegionOpen = !openSelectRegionOpen"
+                   class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
+                <span>{{ selectRegion }}</span>
+                <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all"
+                     :class="{ 'rotate-180': openSelectRegionOpen }" alt="">
+              </div>
+              <div v-if="openSelectRegionOpen"
+                   class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
+                <div class="flex items-center text-[#1E1D2D] ml-5 mt-2" v-for="(item, index) in filters.areas" :key="idx">
                   <input class="custom__checkbox" name="infrastructure" type="checkbox"
                          v-bind:checked="checkRegion(item.id)">
                   <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
@@ -651,6 +676,7 @@
         infos_array: [],
         dops_array: [],
         select_city_id: '',
+        openSelectRegionOpen: false,
       }
     },
     methods: {
@@ -834,7 +860,13 @@
 
         } else {
 
-          this.filters.areas.push({'id': region.id, 'title': region.title, 'city': region.city_id});
+          this.filters.areas.push(region);
+
+        }
+
+        if(this.filters.areas.length === 0) {
+
+          this.openSelectRegionOpen = false;
 
         }
 

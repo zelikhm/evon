@@ -122,7 +122,8 @@
             <div v-else-if="selectFlat" class="border border-solid border-[#E5DFEE] bg__uploud-photo w-full h-full rounded-[5px]">
               <div class="absolute rounded-[5px] w-full h-full top-0 left-0">
                 <label for="image_1" :class="{'-z-10': imageLoadOne}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-[5px]">
-                  <img :src="selectFlat.imageUp" class="object-cover border border-solid border-[#E5DFEE] bg__uploud-photo w-full h-full rounded-[5px]" alt="">
+                  <img v-if="selectFlat.imageUp !== null" :src="selectFlat.imageUp" class="object-cover border border-solid border-[#E5DFEE] bg__uploud-photo w-full h-full rounded-[5px]" alt="">
+                  <img v-else src="../../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
                 </label>
                 <input @change="addImageOne" class="w-full h-full rounded-[5px] opacity-0 absolute top-0 left-0 pointer-events-none" id="image_1" type="file" ref="image_up">
               </div>
@@ -149,7 +150,8 @@
             <div v-else-if="selectFlat" class="border border-solid border-[#E5DFEE] bg__uploud-photo w-full h-full rounded-[5px]">
               <div class="absolute rounded-[5px] w-full h-full top-0 left-0">
                 <label for="image_2" :class="{'-z-10': imageTwo}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-[5px]">
-                  <img :src="selectFlat.imageDown" class="object-cover border border-solid border-[#E5DFEE] bg__uploud-photo w-full h-full rounded-[5px]" alt="">
+                  <img v-if="selectFlat.imageDown !== null" :src="selectFlat.imageDown" class="object-cover border border-solid border-[#E5DFEE] bg__uploud-photo w-full h-full rounded-[5px]" alt="">
+                  <img v-else src="../../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">
                 </label>
                 <input @change="addImageTwo" class="w-full h-full rounded-[5px] opacity-0 absolute top-0 left-0 pointer-events-none" id="image_2" type="file" ref="image_up">
               </div>

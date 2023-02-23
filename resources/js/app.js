@@ -1,6 +1,7 @@
 import './bootstrap';
 import '../css/app.css';
-import './yatranslate.js'
+import './yatranslate.js';
+import ru from './Language/tsconfig.json';
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/inertia-vue3';
@@ -18,6 +19,8 @@ createInertiaApp({
         const VueApp = createApp({ render: () => h(app, props) })
 
         VueApp.config.globalProperties.globalToken = '6f8be2a8db029ec86bd40833acbbd0c5'
+
+        // VueApp.config.globalProperties.$token = globalVar;
 
         VueApp.use(plugin)
               .use(VueGoogleMaps, {
