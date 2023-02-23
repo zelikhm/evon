@@ -100,7 +100,7 @@ class IndexController extends Controller
 
     $expiry_date        = Carbon::now();
     $max_count          = "1";
-    $callback_link      = "https://evon-tr.com/success";
+    $callback_link      = "https://evon-tr.com/api/payment/success";
     $callback_id        = "1";
     $debug_on           = 1;
 
