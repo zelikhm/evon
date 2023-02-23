@@ -1704,3 +1704,7 @@ input:checked + .slider:before {
 .border__purple {
   border-color: #6435A5;
 }
+
+.grid__apart-have {
+  grid-template-columns: 40% 15% 15% 15% 15%;
+}

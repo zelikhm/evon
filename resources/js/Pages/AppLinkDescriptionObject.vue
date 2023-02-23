@@ -19,7 +19,7 @@
         </div>
         <div class="text-white flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
           <span class="text-[18px] xxl:text-[16px] xl:text-[14px] leading-none" v-if="compilation.company !== null">{{ compilation.company.title }}</span>
-          <span class="text-[18px] xxl:text-[16px] xl:text-[14px] leading-none">Агенство недвижимости</span>
+          <span class="text-[18px] xxl:text-[16px] xl:text-[14px] leading-none" v-else>Агентство недвижимости</span>
         </div>
       </div>
     </div>
@@ -287,7 +287,7 @@
             <!--    Когда квартиры есть    -->
             <div class="sm:overflow-auto sm:custom__scroll-grey">
               <div class="flex flex-col sm:w-[500px]">
-                <div class="border__top flex justify-between items-center py-5 xxl:py-4 xl:py-3"
+                <div class="border__top grid grid__apart-have items-center py-5 xxl:py-4 xl:py-3"
                      v-for="item in flats_array">
                   <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
                     <img v-if="item.imageUp" :src="item.imageUp" class="w-[100px] xxl:w-[80px] xl:w-[60px]" alt="" v-on:click="openScheme(item)" style="cursor: pointer">
@@ -295,15 +295,15 @@
                     <div class="flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
                       <div class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
                         <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ item.square }} м</span>
-                        <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
+                        <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] whitespace-nowrap leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
                           v-if="item.status == 0">Акция</span>
-                        <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
+                        <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] whitespace-nowrap leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
                               v-if="item.status == 1">Перепродажа</span>
-                        <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
+                        <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] whitespace-nowrap leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
                               v-if="item.status == 2">Бронь</span>
-                        <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
+                        <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] whitespace-nowrap leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
                               v-if="item.status == 3">Продажи закрыты</span>
-                        <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
+                        <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] whitespace-nowrap leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
                               v-if="item.status == 4">В продаже</span>
                       </div>
                       <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ frame }}</span>
@@ -318,8 +318,8 @@
                   <div>
                     <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ item.floor }} этаж</span>
                   </div>
-                  <div>
-                    <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ item.price.toLocaleString('ru') }} €</span>
+                  <div class="text-right">
+                    <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none text-right">{{ item.price.toLocaleString('ru') }} €</span>
                   </div>
                 </div>
               </div>
@@ -350,7 +350,7 @@
 
           </div>
         </div>
-        <div>
+        <div class="sticky top-[40px] h-fit">
           <div class="contact__selling h-fit bg-white rounded-[10px] p-4 xxl:p-3 xl:p-2.5 mb-7 xxl:mb-5 xl:mb-4">
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 mb-5 xxl:mb-4 xl:mb-4">
               <img class="w-14 xxl:w-12 xl:w-10 h-14 xxl:h-12 xl:h-10 rounded-full" v-if="compilation.user.image"

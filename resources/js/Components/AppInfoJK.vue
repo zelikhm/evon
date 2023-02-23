@@ -174,7 +174,7 @@ import {Link} from '@inertiajs/inertia-vue3'
 
 
         <div :class="{validation: validation.count , 'border__purple': isBorder === 13}" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">
-          <label :class="{ validationText: validation.count }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="count_flat">Количество стояков</label>
+          <label :class="{ validationText: validation.count }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="count_flat">Количество квартир на этаже (max.)</label>
           <input v-model="object.count_flat"
                  @input="checkValidation(6)"
                  @click="changeBorder(13)"

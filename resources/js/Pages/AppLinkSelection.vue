@@ -21,7 +21,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         </div>
         <div class="text-white flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
           <span class="text-[18px] xxl:text-[16px] xl:text-[14px] leading-none" v-if="compilation.company !== null">{{ compilation.company.title }}</span>
-          <span class="text-[18px] xxl:text-[16px] xl:text-[14px] leading-none">Агенство недвижимости</span>
+          <span class="text-[18px] xxl:text-[16px] xl:text-[14px] leading-none" v-else>Агентство недвижимости</span>
         </div>
       </div>
     </div>
@@ -60,7 +60,7 @@ import { Link } from '@inertiajs/inertia-vue3'
               </div>
             </div>
           </div>
-          <div class="sticky w-full contact__selling h-fit bg-white rounded-[10px] p-4 xxl:p-3 xl:p-2.5">
+          <div class="sticky top-[40px] w-full contact__selling h-fit bg-white rounded-[10px] p-4 xxl:p-3 xl:p-2.5">
             <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 mb-5 xxl:mb-4 xl:mb-4">
               <img v-if="compilation.user.image" :src="compilation.user.image" class="object-cover w-14 xxl:w-12 xl:w-10 rounded-full h-14 xxl:h-12 xl:h-10" alt="">
               <img v-else src="../../assets/no-img-houses.jpg" class="object-cover w-14 xxl:w-12 xl:w-10 rounded-full h-14 xxl:h-12 xl:h-10" alt="">

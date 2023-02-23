@@ -46,7 +46,6 @@
               @change="addPhotos"
             >
           </div>
-
         </div>
       </div>
     </div>
