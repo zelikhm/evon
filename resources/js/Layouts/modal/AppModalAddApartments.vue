@@ -2,7 +2,7 @@
   <div class="fixed z-[100] w-full h-full flex items-center justify-center">
     <div class="relative flex flex-col gap-5 xxl:gap-4 xl:gap-3 bg-white rounded-[12px] px-12 xxl:px-10 xl:px-8 py-8 xxl:py-6 xl:py-5 z-50 w-[34%] lg:w-[50%] md:w-[64%] sm:w-[90%] h-fit">
       <div class="relative flex justify-between items-center">
-        <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold leading-none">{{ selectFlat ? "Редактировать" : "Добавить" }} квартиру</h2>
+        <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold leading-none">{{ selectFlat ? language.dob_kv_1[14] : language.dob_ob_1[0] }}</h2>
         <button @click="$emit('close-add-apartments')" class="hover__close transition-all relative w-4 h-4 z-50">
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] rotate-45"></span>
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] -rotate-45"></span>
@@ -16,12 +16,12 @@
         </div>
 
         <div :class="{'border__purple': isBorder === 2 }" class="flex flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="coord_object">Площадь (м²)</label>
+          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="coord_object">{{ language.dob_kv_1[4] }} (м²)</label>
           <input @click="changeBorder(2)" v-model="flat.square" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="coord_object">
         </div>
 
         <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectLayout}">
-          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Планировка</span>
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">{{ language.dob_kv_1[6] }}</span>
           <div class="relative">
             <div @click="openSelectLayout = !openSelectLayout" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
               <span>{{ selectLayout }}</span>
@@ -40,7 +40,7 @@
         </div>
 
         <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openFloors}">
-          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Этаж</span>
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">{{ language.dob_kv_1[7] }}</span>
           <div class="relative">
             <div @click="openFloors = !openFloors" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
               <span>{{ selectFloors }}</span>
@@ -59,7 +59,7 @@
         </div>
 
         <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openStatus}">
-          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Статус</span>
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">{{ language.dob_kv_1[8] }}</span>
           <div class="relative">
             <div @click="openStatus = !openStatus" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
               <span>{{ selectStatus === 0 ? "Акция" : selectStatus === 1 ? "Перепродажа" : selectStatus === 2 ? "Бронь" : selectStatus === 3 ? "Продажи закрыты" : "В продаже" }}</span>
@@ -98,13 +98,13 @@
       </div>
 
       <div :class="{'border__purple': isBorder === 3 }" class="flex flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-        <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="cost">Цена (€)</label>
+        <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="cost">{{ language.dob_kv_1[5] }} (€)</label>
         <input @click="changeBorder(3)" v-model="flat.price" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="cost">
       </div>
 
       <div class="grid grid-cols-2 gap-5 xxl:gap-4 xl:gap-3">
         <div>
-          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Планировка квартиры:</span>
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">{{ language.dob_kv_1[6] + ' ' + language.dob_kv_1[16] }}:</span>
           <div class="relative w-full h-[10vw] lg:h-[14vw] md:h-[18vw] sm:h-[24vw] rounded-[5px]">
             <img v-if="imageLoadOne" class="absolute w-full h-full object-cover rounded-[5px]" :src="imageOne" alt="">
             <button v-if="selectFlat" @click="deleteImageOne" class="absolute rounded-[5px] m-2 bg-[#E84680] z-10 top-0 right-0 h-5 xxl:h-4.5 xl:h-4 w-5 xxl:w-4.5 xl:w-4">
@@ -132,7 +132,7 @@
         </div>
 
         <div>
-          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">Планировка этажа:</span>
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]">{{ language.dob_kv_1[6] + ' ' + language.dob_kv_1[7] }}:</span>
           <div class="relative w-full h-[10vw] lg:h-[14vw] md:h-[18vw] sm:h-[24vw] rounded-[5px]">
             <img v-if="imageLoadTwo" class="absolute w-full h-full object-cover rounded-[5px]" :src="imageTwo" alt="">
             <button v-if="selectFlat" @click="deleteImageTwo" class="absolute rounded-[5px] m-2 bg-[#E84680] z-10 top-0 right-0  h-5 xxl:h-4.5 xl:h-4 w-5 xxl:w-4.5 xl:w-4">
@@ -160,10 +160,10 @@
         </div>
       </div>
       <button @click="addFlat" class="login__btn--bg bg-[#E84680] rounded-[5px] w-full py-5 xxl:py-4 xl:py-3" v-if="!selectFlat">
-        <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">Добавить</span>
+        <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">{{ language.dob_kv_1[3] }}</span>
       </button>
       <button @click="editFlat" class="login__btn--bg bg-[#E84680] rounded-[5px] w-full py-5 xxl:py-4 xl:py-3" v-else>
-        <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">Редактировать</span>
+        <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">{{ language.menu_zastr_1[9] }}</span>
       </button>
     </div>
     <div @click="$emit('close-add-apartments')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
@@ -175,7 +175,7 @@
   import { usePage } from '@inertiajs/vue3'
 
 export default {
-  props: ['house', 'activeFrame', 'selectFlat'],
+  props: ['house', 'activeFrame', 'selectFlat', 'language', 'statuses'],
   inject:['user'],
   data() {
     return {
@@ -217,13 +217,6 @@ export default {
       ],
       selectStatus: 0,
       openStatus: false,
-      statuses: [
-        { status: 'Акция', id: 0 },
-        { status: 'Перепродажа', id: 1 },
-        { status: 'Бронь', id: 2 },
-        { status: 'Продажи закрыты', id: 3 },
-        { status: 'В продаже', id: 4 },
-      ],
       selectStairs: '1',
       openStairs: false,
       stairses: [

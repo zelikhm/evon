@@ -90,7 +90,9 @@ Route::prefix('user')->group(function () {
   Route::post('/get', ['App\Http\Controllers\User\IndexController', 'get']);
   Route::post('/edit', ['App\Http\Controllers\User\IndexController', 'edit']);
   //
-  Route::post('/payment', ['App\Http\Controllers\User\SubscriptionController', 'payment']);
+  Route::post('/payment/success', ['App\Http\Controllers\User\SubscriptionController', 'payment']);
+  //
+  Route::post('/lang', ['App\Http\Controllers\User\IndexController', 'lang']);
 });
 
 Route::prefix('chat')->group(function () {

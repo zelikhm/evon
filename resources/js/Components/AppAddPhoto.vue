@@ -1,5 +1,5 @@
 <template>
-  <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px] mb-5 xxl:mb-4 xl:mb-3">Добавить фото</h2>
+  <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px] mb-5 xxl:mb-4 xl:mb-3">{{ language.dob_kv_1[24] }}</h2>
   <div class="grid grid-cols-4 sm:grid-cols-2 gap-3 xxl:gap-2.5 xl:gap-2">
     <div @click="targetBlockPhoto(item)" v-for="item in photos" :class="{ 'border-white': item.active !== 1 }" class="corpus__banner cursor-pointer gap-3.5 xxl:gap-3 xl:gap-2.5 rounded-[5px] border border-solid border-[#6435A5] flex flex-col justify-center px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3 ">
       <span class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] leading-none">{{ item.name }}</span>
@@ -37,7 +37,7 @@
           <div class="absolute rounded-[5px] w-full h-full top-0 left-0">
             <label for="image" class="bg__uploud-photo transition-all relative cursor-pointer flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5 items-center justify-center w-full h-full rounded-[5px]">
               <img src="../../assets/svg/upload_photo.svg" class="w-7 xxl:w-6 xl:w-5" alt="">
-              <span class="text-[#6435A5] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">Загрузить фото</span>
+              <span class="text-[#6435A5] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{ language.dob_kv_1[24] }}</span>
             </label>
             <input
               ref="photos"
@@ -58,16 +58,10 @@
 
 export default {
 
-  props: ['house'],
+  props: ['house', 'photos', 'language'],
   inject:['user'],
   data() {
     return {
-      photos: [
-        { name: '3D Рендеры', id: 0, count: 0 },
-        { name: 'Инфраструктура', id: 1, count: 0 },
-        { name: 'Дизайн', id: 2, count: 0 },
-        { name: 'Ход строительства', id: 3, count: 0 },
-      ],
       myPhotos: [],
       avatar: false,
       files: [],

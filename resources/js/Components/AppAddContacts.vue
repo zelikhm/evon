@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-between items-center">
-    <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px]">Контакты отдела продаж</h2>
+    <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px]">{{ language.form_dob_ob[1] }}</h2>
     <button
         @click="$emit('open-add-contact')"
         class="flex items-center register__button--white text-[#6435A5] border border-solid border-[#6435A5] rounded-[5px] py-3 xxl:py-2.5 xl:py-2 px-4 xxl:px-3 xl:px-2.5">
@@ -14,7 +14,7 @@
           </clipPath>
         </defs>
       </svg>
-      <span class="font-medium text-base xxl:text-sm xl:text-xs lg:text-[14px] leading-none">Добавить</span>
+      <span class="font-medium text-base xxl:text-sm xl:text-xs lg:text-[14px] leading-none">{{ language.dob_ob_2[1] }}</span>
     </button>
   </div>
   <div v-for="item in supports"
@@ -37,7 +37,7 @@
 
 <script>
 export default {
-  props: ['house', 'supports'],
+  props: ['house', 'supports', 'language'],
   inject:['user'],
   name: "AppAddContacts",
   data() {

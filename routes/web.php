@@ -3,6 +3,7 @@
 use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -62,6 +63,7 @@ Route::get('/404', function () {
 });
 
 Route::get('test', ['App\Http\Controllers\Payment\IndexController', 'index']);
+Route::get('testSMS', ['App\Http\Controllers\User\AuthController', 'test']);
 Route::post('mail', ['App\Http\Controllers\User\IndexController', 'sendRegister'])->name('mail');
 
 Route::get('/privacy', ['App\Http\Controllers\PrivacyController', 'index']);

@@ -35,6 +35,7 @@ class User extends Authenticatable
     'company_id',
     'checked',
     'token',
+    'lang',
   ];
 
   /**

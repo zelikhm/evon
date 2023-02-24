@@ -3,14 +3,14 @@ import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
-  <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] mb-5 xxl:mb-4 xl:mb-3">Добавить корпус и квартиры</h2>
+  <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] mb-5 xxl:mb-4 xl:mb-3">{{ language.dob_kv_1[0] }}</h2>
   <div class="flex flex-col">
     <div class="grid grid-cols-6 lg:grid-cols-4 sm:grid-cols-3 gap-3 xxl:gap-2.5 xl:gap-2">
       <div @click="targetFrame(frame, idx)" v-for="(frame, idx) in house.frames" :class="{ 'border-white': frame.active !== 1 }" class="corpus__banner flex justify-between cursor-pointer rounded-[5px] border border-solid border-[#6435A5] px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
         <div class="flex flex-col justify-center gap-3.5 xxl:gap-3 xl:gap-2.5">
           <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none whitespace-nowrap">{{ frame.name }}</span>
-          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap" v-if="frame.flats">{{ frame.flats.length }} {{ frame.flats.length === 1 ? "Квартира" : frame.flats.length === 2 || frame.flats.length === 3 || frame.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
-          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap" v-else>0 квартир</span>
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap" v-if="frame.flats">{{ frame.flats.length }} {{ frame.flats.length === 1 ? language.dob_kv_1[15] : frame.flats.length === 2 || frame.flats.length === 3 || frame.flats.length === 4 ? language.dob_kv_1[16] : language.dob_kv_1[17] }}</span>
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap" v-else>0 {{language.dob_kv_1[17]}}</span>
         </div>
         <div class="relative flex flex-col items-center justify-between gap-3.5 xxl:gap-3 xl:gap-2.5">
           <button @click="$emit('open-add-frame', frame)">
@@ -58,7 +58,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           <div class="leading-none">{{ item.floor }}</div>
           <div class="relative" :tabindex="tabindex" @blur="item.statusActive = false">
             <div @click="item.statusActive = !item.statusActive" class="flex items-center cursor-pointer gap-5 xxl:gap-4 xl:gap-3">
-              <span class="whitespace-nowrap">{{ item.status == 0 ? "Акция" : item.status == 1 ? "Перепродажа" : item.status == 2 ? "Бронь" : item.status == 3 ? "Продажи закрыты" : "В продаже" }}
+              <span class="whitespace-nowrap">{{ item.status == 0 ? language.dob_kv_1[10] : item.status == 1 ? language.dob_kv_1[11] : item.status == 2 ? language.dob_kv_1[12] : item.status == 3 ? language.dob_kv_1[13] : language.dob_kv_1[9] }}
               </span>
               <svg class="w-2.5 xl:w-2" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5.00005 3.879L8.71255 0.166504L9.77305 1.227L5.00005 6L0.227051 1.227L1.28755 0.166504L5.00005 3.879Z" fill="#8A8996"/>
@@ -100,30 +100,15 @@ import { Link } from '@inertiajs/inertia-vue3'
 <script>
 
 export default {
-  props: ['house'],
+  props: ['house', 'language', 'statuses', 'titleTable'],
   emits: ['open-add-frame'],
   inject:['user'],
   data() {
     return {
       deleteConfirm: false,
-      titleTable: [
-        { name: 'id', title: '№', active: 0, filter: true },
-        { name: 'square', title: 'Площадь', active: 0, filter: true },
-        { name: 'price', title: 'Цена', active: 0, filter: true },
-        { name: 'plan', title: 'Планировка', active: 0, filter: false },
-        { name: 'floor', title: 'Этаж', active: 0, filter: true },
-        { name: 'status', title: 'Статус', active: 0, filter: false }
-      ],
       selectStatus: 0,
       id: null,
       openStatus: false,
-      statuses: [
-        { status: 'Акция', id: 0 },
-        { status: 'Перепродажа', id: 1 },
-        { status: 'Бронь', id: 2 },
-        { status: 'Продажи закрыты', id: 3 },
-        { status: 'В продаже', id: 4 },
-      ],
       flats: null,
       frameId: 0,
       isEdit: false,

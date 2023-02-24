@@ -14,16 +14,16 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
           <span class="sm:hidden uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon</span>
         </Link>
         <div class="flex items-center gap-7 xxl:gap-5 lg:gap-2 text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[14px]">
-          <change-language />
+          <change-language @selectLanguage="selectLanguage" :selectLang="selectLang" />
           <div class="flex gap-3 xxl:gap-2 font-medium">
             <div class="relative text-[#3B3A45] z-50">
-              <button @click="loginOpens" class="login login__btn--bg text-white px-5 xxl:px-4 xl:px-3 py-2.5 xxl:py-2 xl:py-1 rounded-[3px]">Вход</button>
+              <button @click="loginOpens" class="login login__btn--bg text-white px-5 xxl:px-4 xl:px-3 py-2.5 xxl:py-2 xl:py-1 rounded-[3px]">{{ language.main[18] }}</button>
               <div v-if="loginOpen" class="login__dropdown absolute overflow-hidden top-[120%] flex flex-col items-start bg-white rounded-[6px]">
-                <button @click="loginDeveloper" class="hover__select whitespace-nowrap leading-none px-3.5 py-2.5 w-full">Я застройщик</button>
-                <button @click="loginRealtor" class="hover__select whitespace-nowrap leading-none text-left px-3.5 py-2.5 w-full">Я риэлтор</button>
+                <button @click="loginDeveloper" class="hover__select whitespace-nowrap leading-none px-3.5 py-2.5 w-full">{{ language.main[13] }}</button>
+                <button @click="loginRealtor" class="hover__select whitespace-nowrap leading-none text-left px-3.5 py-2.5 w-full">{{ language.main[4] }}</button>
               </div>
             </div>
-            <button @click="$emit('open-register')" class="register__button--bg text-white px-5 xxl:px-4 xl:px-3 py-2.5 xxl:py-2 xl:py-1 rounded-[3px]">Регистрация</button>
+            <button @click="$emit('open-register')" class="register__button--bg text-white px-5 xxl:px-4 xl:px-3 py-2.5 xxl:py-2 xl:py-1 rounded-[3px]">{{ language.main[19] }}</button>
           </div>
         </div>
       </div>
@@ -48,10 +48,14 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
             <span class="lg:hidden uppercase text-white text-lg xxl:text-sm xl:text-xs lg:text-sm font-semibold">Evon</span>
           </Link>
           <div class="lg:hidden text-white text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[15px] flex gap-20 xxl:gap-16 xl:gap-12 x:gap-10">
-            <Link href="/houses" :class="{ 'opacity-60': $page.url !== '/houses' }" class="whitespace-nowrap">Новостройки</Link>
-            <Link href="/villages" :class="{ 'opacity-60': $page.url !== '/villages' }" class="whitespace-nowrap">Виллы</Link>
-            <Link href="/profile/compilation" :class="{ 'opacity-60': $page.url !== '/profile/compilation' }" class="whitespace-nowrap">Подборки</Link>
-            <Link href="/profile/favorites" :class="{ 'opacity-60': $page.url !== '/profile/favorites' }" class="whitespace-nowrap">Избранное</Link>
+            <Link href="/houses" :class="{ 'opacity-60': $page.url !== '/houses' }" class="whitespace-nowrap">
+              {{ language.rielt_1[0] }}</Link>
+            <Link href="/villages" :class="{ 'opacity-60': $page.url !== '/villages' }" class="whitespace-nowrap">
+              {{ language.rielt_1[1] }}</Link>
+            <Link href="/profile/compilation" :class="{ 'opacity-60': $page.url !== '/profile/compilation' }" class="whitespace-nowrap">
+              {{ language.rielt_1[2] }}</Link>
+            <Link href="/profile/favorites" :class="{ 'opacity-60': $page.url !== '/profile/favorites' }" class="whitespace-nowrap">
+              {{ language.rielt_1[3] }}</Link>
           </div>
         </div>
         <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[15px]">
@@ -70,7 +74,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
               </div>
             </div>
             </Link>
-            <change-language />
+            <change-language @selectLanguage="selectLanguage" :selectLang="selectLang" />
             <div class="lg:hidden flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
               <button @click="openProfile" class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
                 <span class="text-white text-lg xxl:text-sm xl:text-xs leading-none whitespace-nowrap">{{ user.first_name + ' ' + user.last_name }}</span>
@@ -88,8 +92,8 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
                     <span class="slider round"></span>
                   </label>
                 </div>
-                <Link href="/profile" class="hover__select border__bottom--not whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">Профиль</Link>
-                <div @click="logout" class="hover:bg-[#F6F3FA] border__bottom--not text-[#E84680] whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">Выйти</div>
+                <Link href="/profile" class="hover__select border__bottom--not whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">{{ language.prof_zastr[0] }}</Link>
+                <div @click="logout" class="hover:bg-[#F6F3FA] border__bottom--not text-[#E84680] whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">{{ language.menu_zastr_1[2] }}</div>
               </div>
             </div>
           </div>
@@ -114,8 +118,8 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
             <span class="sm:hidden uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon</span>
           </Link>
           <div class="text-white text-[16px] xxl:text-[13px] xl:text-[11px] flex gap-20 xxl:gap-16 xl:gap-12 x:gap-10">
-            <Link href="/profile/houses" :class="{ 'opacity-60': $page.url !== '/profile/houses' }">Объекты</Link>
-            <Link href="/profile/news" :class="{ 'opacity-60': $page.url !== '/profile/news' }">Новости</Link>
+            <Link href="/profile/houses" :class="{ 'opacity-60': $page.url !== '/profile/houses' }">{{ language.menu_zastr[0] }}</Link>
+            <Link href="/profile/news" :class="{ 'opacity-60': $page.url !== '/profile/news' }">{{ language.menu_zastr[1] }}</Link>
           </div>
         </div>
         <div class="flex items-center gap-7 xxl:gap-5 text-[16px] xxl:text-[13px] xl:text-[11px]">
@@ -128,7 +132,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
                 </div>
               </div>
             </Link>
-            <change-language />
+            <change-language @selectLanguage="selectLanguage" :selectLang="selectLang" />
             <div class="relative flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
               <button @click="openProfile" class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
                 <span class="text-white text-lg xxl:text-sm xl:text-xs leading-none">{{ user.first_name === 'null' ? '-' : user.first_name }} {{ user.last_name === 'null' ? '-' : user.last_name }}</span>
@@ -139,8 +143,8 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
                   <span class="leading-none whitespace-nowrap cursor-default">Подписка PRO</span>
                   <span class="leading-none whitespace-nowrap cursor-default">6 дней</span>
                 </div>
-                <Link href="/profile" class="hover__select border__bottom--not whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">Профиль</Link>
-                <div @click="logout" class="hover:bg-[#F6F3FA] border__bottom--not text-[#E84680] whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">Выйти</div>
+                <Link href="/profile" class="hover__select border__bottom--not whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">{{ language.prof_zastr[0] }}</Link>
+                <div @click="logout" class="hover:bg-[#F6F3FA] border__bottom--not text-[#E84680] whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">{{ language.menu_zastr_1[2] }}</div>
               </div>
             </div>
           </div>
@@ -163,6 +167,7 @@ export default {
       required: false,
       default: 0,
     },
+    language: {},
   },
   data() {
     return {
@@ -174,6 +179,7 @@ export default {
       search: null,
       isChat: false,
       chats: 0,
+      selectLang: 0
     }
   },
   mounted() {
@@ -198,6 +204,19 @@ export default {
   },
   emits: ['login-realtor', 'login-developer', 'open-register'],
   methods: {
+    selectLanguage(n) {
+      this.$emit('selectLanguage', n);
+
+      if(this.user !== null) {
+
+        axios.post('/api/user/lang', {
+          token: this.user.token,
+          id: this.user.id,
+          lang: n,
+        })
+
+      }
+    },
     startSearch() {
       if (this.search) {
         localStorage.setItem('searchData', this.search)
@@ -226,8 +245,8 @@ export default {
       form.post('/logout');
     },
     selectOption(language) {
-      this.langSelected =  language
-      localStorage.setItem('language', language)
+      // this.langSelected =  language
+      // localStorage.setItem('language', language)
       this.overlaySelect = false
     },
     loginRealtor() {
@@ -247,6 +266,10 @@ export default {
   },
   created() {
     this.withClient = localStorage.getItem('withClient') === 'true' ? true : false
+
+    if(this.user !== null) {
+      this.selectLang = this.user.lang
+    }
   },
   components: {
     AppBurgerAgent

@@ -4,6 +4,7 @@
                          v-if="modalAddContact"
                          :contact="contact"
                          :house="house"
+                         :language="language"
   />
   <app-modal-add-apartments @close-add-apartments="closeAddApartments"
                             v-if="modalAddApatments"
@@ -11,15 +12,17 @@
                             :activeFrame="activeFrame"
                             :selectFlat="selectFlat"
                             @call-notification="callNotification"
+                            :language="language"
+                            :statuses="statuses"
   />
-  <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="closeAddFrame" :house="house" :isEdit="isEdit" :frame="frame" />
+  <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="closeAddFrame" :house="house" :isEdit="isEdit" :frame="frame" :language="language" />
   <app-modal-notification
     class="left-[2vw] transition-all duration-1000"
     :class="{'-left__full': !openNotification}"
     @close-notification="openNotification = false"
     :text="text"
   />
-  <app-header :user="user" />
+  <app-header :user="user" :language="language" @selectLanguage="choseLanguage" />
   <main>
     <div class="_container">
       <div :class="{'grid__apartments': page === 1}" class="grid__add-object my-14 xxl:my-10 xl:my-8 gap-7 xxl:gap-5 xl:gap-4">
@@ -27,11 +30,16 @@
           <div class="sticky lg:relative top-10 lg:top-0 z-50 lg:w-full">
             <div class="bg-[#F6F3FA] h-fit p-7 xxl:p-5 xl:p-4 rounded-[6px]">
               <div class="flex flex-col gap-3 xxl:gap-2.5 xl:gap-2">
-                <div @click="openPage(0)" :class="{ 'menu-add-obj': page === 0}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">Информация о ЖК</div>
-                <div @click="openPage(4)" :class="{ 'menu-add-obj': page === 4}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">Контакты отдела продаж</div>
-                <div @click="openPage(1)" :class="{ 'menu-add-obj': page === 1}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">Корпуса и квартиры</div>
-                <div @click="openPage(2)" :class="{ 'menu-add-obj': page === 2}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">Фото</div>
-                <div @click="openPage(3)" :class="{ 'menu-add-obj': page === 3}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">Файлы</div>
+                <div @click="openPage(0)" :class="{ 'menu-add-obj': page === 0}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">
+                  {{ language.form_dob_ob[0] }}</div>
+                <div @click="openPage(4)" :class="{ 'menu-add-obj': page === 4}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">
+                  {{ language.form_dob_ob[1] }}</div>
+                <div @click="openPage(1)" :class="{ 'menu-add-obj': page === 1}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">
+                  {{ language.form_dob_ob[2] }}</div>
+                <div @click="openPage(2)" :class="{ 'menu-add-obj': page === 2}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">
+                  {{ language.form_dob_ob[3] }}</div>
+                <div @click="openPage(3)" :class="{ 'menu-add-obj': page === 3}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">
+                  {{ language.form_dob_ob[4] }}</div>
               </div>
             </div>
             <div :class="{'hidden': page !== 1}" class="flex justify-center mt-12 xxl:mt-10 xl:mt-8">
@@ -46,7 +54,7 @@
                     </clipPath>
                   </defs>
                 </svg>
-                <span class="leading-none text-base xxl:text-sm xl:text-xs lg:text-[15px] font-medium">Добавить квартиру</span>
+                <span class="leading-none text-base xxl:text-sm xl:text-xs lg:text-[15px] font-medium">{{ language.dob_kv_1[14] }}</span>
               </button>
             </div>
           </div>
@@ -62,6 +70,7 @@
                         :supports="supports"
                         @addAndContinue="addAndContinue"
                         @call-notification="callNotification"
+                        :language="language"
           />
         </div>
 
@@ -71,18 +80,24 @@
                           :house="readyHouse"
                           @change-frame="changeFrame"
                           @edit-flat="editFlat"
+                          :language="language"
+                          :statuses="statuses"
+                          :titleTable="titleTable"
           />
         </div>
 
 <!--  Фото  -->
         <div v-if="page === 2">
           <app-add-photo :house="readyHouse"
+                         :language="language"
+                         :photos="photos"
           />
         </div>
 
         <div v-if="page === 3">
           <app-add-files
               :house="readyHouse"
+              :language="language"
           />
         </div>
 
@@ -92,6 +107,7 @@
               :supports="supports"
               @open-add-contact="openAddContact"
               @open-edit-contact="openEditContact"
+              :language="language"
           />
         </div>
 
@@ -99,7 +115,7 @@
     </div>
 
   </main>
-  <app-footer />
+  <app-footer :language="language" />
 </template>
 
 <script>
@@ -149,10 +165,44 @@ export default {
       frame: null,
       selectFlat: null,
       contact: null,
-      text: null
+      text: null,
+      selectLanguage: 0,
+      language: {},
+      statuses: [],
+      titleTable: [],
+      photos: [],
     }
   },
   methods: {
+    choseLanguage(language) {
+      this.selectLanguage = language;
+
+      if(this.selectLanguage === 0) {
+        this.language = this.$ru;
+      } else if (this.selectLanguage === 1) {
+        this.language = this.$en;
+      } else if (this.selectLanguage === 2) {
+        this.language = this.$tur;
+      }
+
+      this.statuses = [
+        { status: this.language.dob_kv_1[10], id: 0 },
+        { status: this.language.dob_kv_1[11], id: 1 },
+        { status: this.language.dob_kv_1[12], id: 2 },
+        { status: this.language.dob_kv_1[13], id: 3 },
+        { status: this.language.dob_kv_1[9], id: 4 },
+      ];
+
+      this.titleTable = [
+        { name: 'id', title: '№', active: 0, filter: true },
+        { name: 'square', title: this.language.dob_kv_1[4], active: 0, filter: true },
+        { name: 'price', title: this.language.dob_kv_1[5], active: 0, filter: true },
+        { name: 'plan', title: this.language.dob_kv_1[6], active: 0, filter: false },
+        { name: 'floor', title: this.language.dob_kv_1[7], active: 0, filter: true },
+        { name: 'status', title: this.language.dob_kv_1[8], active: 0, filter: false }
+      ];
+
+    },
     addFlatModal() {
       this.selectFlat = null
       this.modalAddApatments = !this.modalAddApatments
@@ -234,6 +284,38 @@ export default {
     }
   },
   created() {
+    if(this.user.lang === 0) {
+      this.language = this.$ru;
+    } else if (this.user.lang === 1) {
+      this.language = this.$en;
+    } else if (this.user.lang === 2) {
+      this.language = this.$tur;
+    }
+
+    this.statuses = [
+      { status: this.language.dob_kv_1[10], id: 0 },
+      { status: this.language.dob_kv_1[11], id: 1 },
+      { status: this.language.dob_kv_1[12], id: 2 },
+      { status: this.language.dob_kv_1[13], id: 3 },
+      { status: this.language.dob_kv_1[9], id: 4 },
+    ];
+
+    this.titleTable = [
+      { name: 'id', title: '№', active: 0, filter: true },
+      { name: 'square', title: this.language.dob_kv_1[4], active: 0, filter: true },
+      { name: 'price', title: this.language.dob_kv_1[5], active: 0, filter: true },
+      { name: 'plan', title: this.language.dob_kv_1[6], active: 0, filter: false },
+      { name: 'floor', title: this.language.dob_kv_1[7], active: 0, filter: true },
+      { name: 'status', title: this.language.dob_kv_1[8], active: 0, filter: false }
+    ];
+
+    this.photos = [
+      { name: this.language.alb[0], id: 0, count: 0 },
+      { name: this.language.alb[1], id: 1, count: 0 },
+      { name: this.language.alb[2], id: 2, count: 0 },
+      { name: this.language.alb[3], id: 3, count: 0 },
+    ];
+
     this.readyHouse = this.house
     let lastItemLink = window.location.href.split('/').at(-1)
     lastItemLink === 'addedHouse' ? this.isMainPage = true : this.isMainPage = false

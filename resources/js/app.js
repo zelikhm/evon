@@ -1,7 +1,9 @@
 import './bootstrap';
 import '../css/app.css';
 import './yatranslate.js';
-import ru from './Language/tsconfig.json';
+import ru from './Language/ru.json';
+import tur from './Language/tur.json';
+import en from './Language/en.json';
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/inertia-vue3';
@@ -12,6 +14,8 @@ import VueGoogleMaps from '@fawmi/vue-google-maps'
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
+console.log(ru);
+
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue')),
@@ -20,7 +24,9 @@ createInertiaApp({
 
         VueApp.config.globalProperties.globalToken = '6f8be2a8db029ec86bd40833acbbd0c5'
 
-        // VueApp.config.globalProperties.$token = globalVar;
+        VueApp.config.globalProperties.$ru = ru;
+        VueApp.config.globalProperties.$en = en;
+        VueApp.config.globalProperties.$tur = tur;
 
         VueApp.use(plugin)
               .use(VueGoogleMaps, {

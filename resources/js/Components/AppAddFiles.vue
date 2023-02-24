@@ -1,7 +1,7 @@
 <template>
   <div >
     <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">
-      Приложите файлы для наполнения</h3>
+      {{ language.dob_kv_1[25] }}</h3>
     <div class="relative my-3 xxl:my-2.5 xl:my-2">
       <input multiple @change="changeInputFile" type="file" ref="documents" id="input_file" class="opacity-0 absolute invisible">
       <label
@@ -37,7 +37,7 @@
 
 <script>
 export default {
-  props: ['house'],
+  props: ['house', 'language'],
   inject:['user'],
   name: "AppAddFiles",
   data() {

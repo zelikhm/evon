@@ -36,6 +36,19 @@ class IndexController extends Controller
     }
   }
 
+  public function lang(Request $request) {
+
+    if ($this->checkToken($request->token)) {
+
+      User::where('id', $request->id)->update(['lang' => $request->lang]);
+
+      return response()->json($request->lang, 200);
+    } else {
+      return response()->json('not auth', 401);
+    }
+
+  }
+
   /**
    * edit user
    * @param Request $request
@@ -67,9 +80,7 @@ class IndexController extends Controller
       return response()->json(User::where('id', $request->user_id)->with(['company'])->first(), 200);
 
     } else {
-
       return response()->json('not auth', 401);
-
     }
   }
 

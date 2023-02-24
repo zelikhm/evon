@@ -3,18 +3,18 @@ import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
-  <app-header :user="user" />
+  <app-header :user="user" :language="language" @selectLanguage="choseLanguage" />
   <main>
     <div class="_container">
       <div class="my-14 xxl:my-10 xl:my-8">
         <div class="flex justify-between items-center mb-7 xxl:mb-5 xl:mb-4">
-          <span class="font-semibold text-[22px] xxl:text-[18px] xl:text-[14px]">Наши объекты</span>
-          <Link href="/profile/addedHouse" class="text-base xxl:text-sm xl:text-xs text-white bg-[#E84680] leading-none rounded-[3px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5">Добавить объект</Link>
+          <span class="font-semibold text-[22px] xxl:text-[18px] xl:text-[14px]">{{ language.menu_zastr[3] }}</span>
+          <Link href="/profile/addedHouse" class="text-base xxl:text-sm xl:text-xs text-white bg-[#E84680] leading-none rounded-[3px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5">{{ language.menu_zastr[2] }}</Link>
         </div>
         <div v-if="houses.data.length === 0" class="grid grid-cols-2 lg:grid-cols-1 mt-10 xxl:mt-8 xl:mt-6">
           <div class="flex justify-between sm:flex-col sm:items-center p-7 xxl:p-5 xl:p-4 bg-[#F6F3FA] rounded-[10px]">
             <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
-              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none font-medium">У вас еще не добавлено ни одного объекта</span>
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none font-medium">{{ language.menu_zastr[4] }}</span>
               <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs leading-none"></p>
             </div>
             <svg class="h-full" width="162" height="113" viewBox="0 0 162 113" fill="#6435A5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -41,32 +41,33 @@ import { Link } from '@inertiajs/inertia-vue3'
               </div>
               <div class="seek opacity-0 transition-all absolute z-10 top-1/2 w-full flex flex-col gap-3 xxl:gap-2 xl:gap-1.5 sm:gap-1 items-center -translate-x-1/2 -translate-y-1/2 left-1/2">
                 <Link :href="'/profile/edit/' + house.slug + '#edit'" class="immovables__button--card flex items-center justify-between w-[30%] lg:w-[50%] border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5 sm:py-1">
-                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">Редактировать</span>
+                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ language.menu_zastr_1[9] }}</span>
                   <img src="../../assets/svg/pen_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
                 </Link>
 
                 <button @click="deleteConfirm = true" class="immovables__button--card flex items-center justify-between w-[30%] lg:w-[50%]  border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5 sm:py-1">
-                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">Удалить</span>
+                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ language.menu_zastr_1[10] }}</span>
                   <img src="../../assets/svg/bucket_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
                 </button>
                 <div v-if="deleteConfirm" class="cursor-auto z-20 text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] absolute top-[40%] bg-white left-1/2 -translate-x-1/2 flex flex-col border border-solid border-[#CEC3DD] rounded-[5px]">
                   <span class="whitespace-nowrap text-center border__bottom p-2.5 xxl:p-2 xl:p-1.5 leading-none">Вы уверены что хотите удалить?</span>
                   <div class="cursor-pointer flex">
-                    <div @click="deleteHouse(house)" class="hover__select w-full text-center border__right p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[red]">Да</div>
-                    <div @click="deleteConfirm = false" class="hover__select w-full text-center p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[green]">Нет</div>
+                    <div @click="deleteHouse(house)" class="hover__select w-full text-center border__right p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[red]">{{ language.default[0] }}</div>
+                    <div @click="deleteConfirm = false" class="hover__select w-full text-center p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[green]">
+                      {{ language.default[1] }}</div>
                   </div>
                 </div>
                 <button @click="changeVisible(house)" class="immovables__button--card flex items-center justify-between w-[30%] lg:w-[50%]  border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5 sm:py-1">
-                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ house.visible ? 'Скрыть' : 'Показать' }}</span>
+                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ house.visible ? language.menu_zastr_1[11] : language.menu_zastr_1[14] }}</span>
                   <img v-if="!house.visible" src="../../assets/svg/hide_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
                   <img v-else src="../../assets/svg/eye_icon_grey.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
                 </button>
                 <a target="_blank" :href="'/house/' + house.slug" class="immovables__button--card flex items-center justify-between w-[30%] lg:w-[50%]  border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5 sm:py-1">
-                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">Посмотреть на сайте</span>
+                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ language.menu_zastr_1[12] }}</span>
                   <img src="../../assets/svg/planet_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
                 </a>
                 <Link :href="'/profile/news/create#' + house.id" class="immovables__button--card flex items-center justify-between w-[30%] lg:w-[50%] border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5 sm:py-1">
-                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">Добавить новость</span>
+                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ language.menu_zastr_1[13] }}</span>
                   <img src="../../assets/svg/plus_icon.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
                 </Link>
               </div>
@@ -137,7 +138,7 @@ import { Link } from '@inertiajs/inertia-vue3'
       </div>
     </div>
   </main>
-  <app-footer />
+  <app-footer :language="language" />
 </template>
 
 <script>
@@ -170,9 +171,36 @@ export default {
       page: 0,
       nextPage: 0,
       deleteConfirm: false,
+      selectLanguage: 0,
+      language: {},
     }
   },
   methods: {
+    choseLanguage(language) {
+      this.selectLanguage = language;
+
+      if(this.selectLanguage === 0) {
+        this.language = this.$ru;
+      } else if (this.selectLanguage === 1) {
+        this.language = this.$en;
+      } else if (this.selectLanguage === 2) {
+        this.language = this.$tur;
+      }
+
+      this.houses.data.forEach(item => {
+        item.selectTime = null
+
+        item.watchTime = []
+        item.watchTime.push(
+          { id: 0, time: this.language.menu_zastr_1[3] },
+          { id: 1, time: this.language.menu_zastr_1[4] },
+          { id: 2, time: this.language.menu_zastr_1[5] },
+          { id: 3, time: this.language.menu_zastr_1[6] },
+          { id: 4, time: this.language.menu_zastr_1[7] },
+        )
+      })
+
+    },
     changeSelectTime(time, object) {
       object.selectTime = time.time
       object.openWatchTime = !object.openWatchTime
@@ -201,6 +229,15 @@ export default {
     }
   },
   created() {
+
+    if(this.user.lang === 0) {
+      this.language = this.$ru;
+    } else if (this.user.lang === 1) {
+      this.language = this.$en;
+    } else if (this.user.lang === 2) {
+      this.language = this.$tur;
+    }
+
     this.houses.data.forEach(item => {
       item.openWatchTime = false
       item.views = null
@@ -208,11 +245,11 @@ export default {
 
       item.watchTime = []
       item.watchTime.push(
-        { id: 0, time: 'за день' },
-        { id: 1, time: 'за 5 дней' },
-        { id: 2, time: 'за неделю' },
-        { id: 3, time: 'за месяц' },
-        { id: 4, time: 'за год' },
+        { id: 0, time: this.language.menu_zastr_1[3] },
+        { id: 1, time: this.language.menu_zastr_1[4] },
+        { id: 2, time: this.language.menu_zastr_1[5] },
+        { id: 3, time: this.language.menu_zastr_1[6] },
+        { id: 4, time: this.language.menu_zastr_1[7] },
       )
     })
   },

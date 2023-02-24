@@ -3,11 +3,11 @@ import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
-  <app-header :user="user" />
+  <app-header :user="user" :language="language" @selectLanguage="choseLanguage" />
   <main>
     <div class="_container">
       <div class="flex items-center justify-between mt-14 xxl:mt-10 xl:mt-8">
-        <h2 class="text-[22px] xxl:text-lg xl:text-[15px] lg:text-[20px] font-semibold">Новости</h2>
+        <h2 class="text-[22px] xxl:text-lg xl:text-[15px] lg:text-[20px] font-semibold">{{ language.menu_zastr[1] }}</h2>
         <Link href="/profile/news/create" class="register__button--white flex justify-center items-center gap-2 xl:gap-1.5 border border-solid rounded-[5px] border-[#6435A5] px-4 xxl:px-3 xl:px-2.5 py-2.5 xxl:py-2 xl:py-1.5">
           <svg width="16" height="16" class="w-4 xxl:w-3.5 xl:w-3 lg:w-4" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_519_1862)">
@@ -19,14 +19,14 @@ import { Link } from '@inertiajs/inertia-vue3'
               </clipPath>
             </defs>
           </svg>
-          <span class="leading-none text-base xxl:text-sm xl:text-xs lg:text-[14px] font-medium">Добавить новость</span>
+          <span class="leading-none text-base xxl:text-sm xl:text-xs lg:text-[14px] font-medium">{{ language.lk_zastr_news[3] }}</span>
         </Link>
       </div>
       <div class="flex flex-col overflow-x-auto custom__scroll--chess p-2 gap-5 xxl:gap-4 xl:gap-3 my-7 xxl:my-5 xl:my-4">
         <div class="grid__news text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[15px]">
-          <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap">ЖК</span>
-          <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap">Заголовок</span>
-          <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap">Дата публикации</span>
+          <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap">{{ language.lk_zastr_news[0] }}</span>
+          <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap">{{ language.lk_zastr_news[1] }}</span>
+          <span class="p-5 xxl:p-4 xl:p-3 whitespace-nowrap">{{ language.lk_zastr_news[2] }}</span>
         </div>
         <div class="news__line flex justify-between items-center rounded-[12px]" v-for="item in readyNews">
           <div class="grid__news text-base xxl:text-sm xl:text-xs lg:text-[15px]">
@@ -48,7 +48,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
         </div>
         <div class="news__line flex justify-between items-center rounded-[10px]" v-if="news.length === 0">
-          <h1 class="text-center">Новостей нет</h1>
+          <h1 class="text-center">{{ language.menu_zastr[1] + ' ' + language.default[1] }}</h1>
         </div>
       </div>
       <div class="w-full flex justify-center gap-7 xxl:gap-5 xl:gap-4 my-14 xxl:my-10 xl:my-8 text-[22px] xxl:text-lg xl:text-[15px] lg:text-[20px]">
@@ -66,7 +66,7 @@ import { Link } from '@inertiajs/inertia-vue3'
       </div>
     </div>
   </main>
-  <app-footer />
+  <app-footer :language="language" />
 </template>
 
 <script>
@@ -80,7 +80,9 @@ export default {
   },
   data() {
     return {
-      readyNews: []
+      readyNews: [],
+      language: {},
+      selectLanguage: 0,
     }
   },
   methods: {
@@ -102,13 +104,33 @@ export default {
         visible: item.visible,
         token: this.user.token
       })
-    }
+    },
+    choseLanguage(language) {
+      this.selectLanguage = language;
+
+      if(this.selectLanguage === 0) {
+        this.language = this.$ru;
+      } else if (this.selectLanguage === 1) {
+        this.language = this.$en;
+      } else if (this.selectLanguage === 2) {
+        this.language = this.$tur;
+      }
+
+    },
   },
   components: {
     AppHeader,
     AppFooter,
   },
   created() {
+    if(this.user.lang === 0) {
+      this.language = this.$ru;
+    } else if (this.user.lang === 1) {
+      this.language = this.$en;
+    } else if (this.user.lang === 2) {
+      this.language = this.$tur;
+    }
+
     this.readyNews = this.news.sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at))
     // console.log(this.user)
   }

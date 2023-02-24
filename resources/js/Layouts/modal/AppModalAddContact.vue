@@ -2,7 +2,7 @@
   <div class="fixed z-[100] w-full h-full flex items-center justify-center">
     <div class="relative flex flex-col gap-5 xxl:gap-4 xl:gap-3 bg-white rounded-[12px] px-12 xxl:px-10 xl:px-8 py-8 xxl:py-6 xl:py-5 z-50 w-[32%] lg:w-[50%] md:w-[64%] sm:w-[90%] h-fit">
       <div class="relative flex justify-between items-center">
-        <h2 class=" text-[22px] xxl:text-lg xl:text-base font-semibold">{{ contact ? 'Редактировать' : 'Добавить' }} контакт</h2>
+        <h2 class=" text-[22px] xxl:text-lg xl:text-base font-semibold">{{ contact ? language.menu_zastr_1[9] : language.dob_ob_2[1] }} контакт</h2>
         <button @click="$emit('close-add-contact')" class="hover__close transition-all relative w-4 h-4 z-50">
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] rotate-45"></span>
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] -rotate-45"></span>
@@ -27,24 +27,24 @@
           </div>
         </div>
         <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name_contact">Имя</label>
+          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name_contact">{{ language.dob_ob_2[3] }}</label>
           <input v-model="dataSupport.name" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="name_contact">
         </div>
       </div>
       <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-        <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">Должность</label>
+        <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">{{ language.dob_ob_2[4] }}</label>
         <input v-model="dataSupport.status" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="post_contact">
       </div>
       <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-        <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="tel_contact">Телефон</label>
+        <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="tel_contact">{{ language.dob_ob_2[5] }}</label>
         <input v-model="dataSupport.phone" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="number" id="tel_contact">
       </div>
       <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-        <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="email_contact">Почта</label>
+        <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="email_contact">{{ language.dob_ob_2[6] }}</label>
         <input v-model="dataSupport.email" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="email_contact">
       </div>
       <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-        <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="soc_contact">Языки</label>
+        <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="soc_contact">{{ language.dob_ob_2[7] }}</label>
         <input v-model="dataSupport.link" class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="soc_contact">
       </div>
       <span class="text-[red] text-center text-lg xxl:text-[15px] xl:text-[13px] leading-none" v-if="error">Не вся информация о контакте заполнена!</span>
@@ -52,7 +52,7 @@
         <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">Добавить</span>
       </button>
       <button class="login__btn--bg rounded-[5px] w-full py-5 xxl:py-4 xl:py-3" @click="editSupport" v-else>
-        <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">Редактировать</span>
+        <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">{{ language.menu_zastr_1[9] }}</span>
       </button>
     </div>
     <div @click="$emit('close-add-contact')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
@@ -64,7 +64,7 @@
   import { usePage } from '@inertiajs/vue3'
 
 export default {
-  props: ['contact', 'isEdit', 'house'],
+  props: ['contact', 'isEdit', 'house', 'language'],
   inject:['user'],
   data() {
     return {

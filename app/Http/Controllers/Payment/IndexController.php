@@ -98,7 +98,7 @@ class IndexController extends Controller
       $required     .= 'boss.Zelikov99@gmail.com';
     }
 
-    $expiry_date        = Carbon::now();
+    $expiry_date        = Carbon::now()->addHours(3);
     $max_count          = "1";
     $callback_link      = "https://evon-tr.com/api/payment/success";
     $callback_id        = "1";
@@ -108,7 +108,7 @@ class IndexController extends Controller
     $post_vals=array(
       'merchant_id'       => $merchant_id,
       'name'              => $name,
-      'price'             => $price,
+      'price'             => $request->price,
       'currency'          => $currency,
       'max_installment'   => $max_installment,
       'link_type'         => $link_type,
@@ -141,15 +141,8 @@ class IndexController extends Controller
     curl_close($ch);
 
     $result=json_decode($result,1);
-dd($result);
-    return redirect($result['link']);
 
-    if($result['status']=='error')
-      die($result['err_msg']);
-    elseif($result['status']=='failed')
-      print_r($result);
-    else
-      print_r($result);
+    return redirect($result['link']);
   }
 
 }

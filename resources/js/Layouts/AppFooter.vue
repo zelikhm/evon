@@ -17,13 +17,13 @@ import { Link } from '@inertiajs/inertia-vue3'
       <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 text-[#3B3A45] opacity-50 pb-14 xxl:pb-10 xl:pb-8 pt-10 xxl:pt-8 xl:pt-6">
         <div class="flex justify-between">
           <div>
-            <a target="_blank" href="/privacy" class="underline mr-5">Gizlilik Politikası</a>
+            <a target="_blank" href="/privacy" class="underline mr-5">{{ language.po_v_r[7] }}</a>
             <a target="_blank" href="/agree" class="underline">Kullanıcı Sözleşmesi</a>
           </div>
-          <span>{{ new Date().getFullYear() }}. Tüm Hakları Saklıdır</span>
+          <span>{{ new Date().getFullYear() }}. {{ language.footer[3] }}</span>
         </div>
         <div class="grid grid-cols-3 lg:flex lg:flex-col items-center lg:gap-2">
-          <div>Halka açık bir teklif değil</div>
+          <div>{{ language.footer[2] }}</div>
           <div class="flex justify-center lg:flex-col gap-12 xxl:gap-10 xl:gap-8 lg:gap-2 text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">
             <span class="whitespace-nowrap">VERGİ NO 3830916930</span>
           </div>
@@ -36,6 +36,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 <script>
 
 export default {
+  props:['language'],
   data() {
     return {
       isMain: false

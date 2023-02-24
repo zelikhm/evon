@@ -4,12 +4,12 @@ import {Link} from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
-  <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px]">{{ isEdit ? "Добавить объект" : "Редактирование объекта" }}</h2>
+  <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px]">{{ isEdit ? language.menu_zastr[2] : language.dob_ob_1[1] }}</h2>
   <div class="flex-col flex gap-5 xxl:gap-4 xl:gap-3 pt-5 xxl:pt-4 xl:pt-3">
 
     <div :class="{ validation: validation.title, 'border__purple': isBorder === 1 }"
          class="flex flex-col border gap-2 xxl:gap-1.5 border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-      <label :class="{ validationText: validation.title }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="name_object">Название</label>
+      <label :class="{ validationText: validation.title }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="name_object">{{ language.dob_ob_1[1] }}</label>
       <input v-model="object.title"
              @input="checkValidation(2)"
              @click="changeBorder(1)"
@@ -19,7 +19,7 @@ import {Link} from '@inertiajs/inertia-vue3'
 
           <label
             :class="{ validationText: validation.description }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"
-            for="description_object">Описание объекта
+            for="description_object">{{language.dob_ob_1[2]}}
           </label>
 
     <QuillEditor
@@ -48,7 +48,7 @@ import {Link} from '@inertiajs/inertia-vue3'
 
     <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]"
          :class="{ 'border__bottom--0': openSelectCity}">
-      <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Город</span>
+      <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">{{ language.dob_ob_1[3] }}</span>
       <div class="relative">
         <div @click="openSelectCity = !openSelectCity"
              class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3">
@@ -78,7 +78,7 @@ import {Link} from '@inertiajs/inertia-vue3'
     <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]"
          :class="{ 'border__bottom--0': openSelectRegion}">
       <span
-          class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-5 xxl:pt-4 xl:pt-3">Район</span>
+          class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-5 xxl:pt-4 xl:pt-3">{{ language.dob_ob_1[4] }}</span>
       <div class="relative">
         <div @click="openSelectRegion = !openSelectRegion"
              class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
@@ -100,7 +100,7 @@ import {Link} from '@inertiajs/inertia-vue3'
     </div>
 
     <div :class="{ validation: validation.coordinates, 'border__purple': isBorder === 15 }" class="flex flex-col border border-solid border-[#E5DFEE] gap-2.5 xxl:gap-2 xl:gap-1.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-      <label :class="{ validationText: validation.coordinates }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="coord_object">Введите координаты объекта</label>
+      <label :class="{ validationText: validation.coordinates }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="coord_object">{{ language.dob_ob_1[5] }}</label>
       <input v-model="object.coordinates"
              @input="checkValidation(4)"
              @blur="setMarker"
@@ -134,7 +134,7 @@ import {Link} from '@inertiajs/inertia-vue3'
 
         <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]"
              :class="{ 'border__bottom--0': openSelectDeadline}">
-          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Срок сдачи</span>
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">{{ language.dob_ob_1[6] }}</span>
           <div class="relative">
             <div @click="openSelectDeadline = !openSelectDeadline"
                  class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
@@ -156,7 +156,7 @@ import {Link} from '@inertiajs/inertia-vue3'
         </div>
 
         <div :class="{ validation: validation.floors, 'border__purple': isBorder === 11 }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-          <label :class="{ validationText: validation.floors }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_floors">Количество этажей</label>
+          <label :class="{ validationText: validation.floors }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_floors">{{ language.dob_ob_1[7] }}</label>
           <input v-model="object.floors"
                  @input="checkValidation(5)"
                  @click="changeBorder(11)"
@@ -165,7 +165,7 @@ import {Link} from '@inertiajs/inertia-vue3'
         </div>
 
         <div :class="{'border__purple': isBorder === 12}" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] px-5 xxl:px-4 xl:px-3 pt-4 pb-4 xxl:pt-3 xl:pt-2.5">
-          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_agency_text">Эксклюзив для агентства</label>
+          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="for_agency_text">{{ language.dob_ob_1[8] }}</label>
           <input v-model="object.text_agency"
                  @click="changeBorder(12)"
                  class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
@@ -184,7 +184,7 @@ import {Link} from '@inertiajs/inertia-vue3'
 
         <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]"
              :class="{ 'border__bottom--0': openSelectType}">
-          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Тип</span>
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">{{ language.dob_ob_1[10] }}</span>
           <div class="relative">
             <div @click="openSelectType = !openSelectType"
                  class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
@@ -207,7 +207,7 @@ import {Link} from '@inertiajs/inertia-vue3'
 
         <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]"
              :class="{ 'border__bottom--0': openInstallment}">
-          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Рассрочка</span>
+          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">{{ language.dob_ob_1[11] }}</span>
           <div class="relative">
             <div @click="openInstallment = !openInstallment"
                  class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 pb-4 xxl:pb-3 xl:pb-2.5">
@@ -233,7 +233,7 @@ import {Link} from '@inertiajs/inertia-vue3'
           class="multi__select flex flex-col gap-2 xxl:gap-1.5 h-fit border border-solid border-[#E5DFEE] rounded-[6px]"
         >
           <div class="px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5 text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">
-            Дополнительные услуги
+            {{ language.dob_ob_1[12] }}
           </div>
           <Multiselect
               @click="borderServices = !borderServices"
@@ -250,7 +250,7 @@ import {Link} from '@inertiajs/inertia-vue3'
         <div :class="{'border__bottom--0': borderInfrastructure}"
              class="multi__select flex flex-col gap-2 xxl:gap-1.5 h-fit border border-solid border-[#E5DFEE] rounded-[6px]">
           <div class="px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5 text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">
-            Инфраструктура
+            {{ language.dob_ob_1[13] }}
           </div>
           <Multiselect
               @click="borderInfrastructure = !borderInfrastructure"
@@ -267,12 +267,12 @@ import {Link} from '@inertiajs/inertia-vue3'
       </div>
       <div class="my-10 xxl:my-8 xl:my-6">
         <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">
-          Расположение
+          {{ language.dob_ob_1[14] }}
         </h3>
         <div class="grid grid-cols-2 sm:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4">
           <div :class="{'border__purple': isBorder === 3 }"
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_sea">от моря (м)</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_sea">{{ language.dob_ob_1[15] }}</label>
             <input v-model="object.toSea"
                    @click="changeBorder(3)"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
@@ -280,7 +280,7 @@ import {Link} from '@inertiajs/inertia-vue3'
           </div>
           <div :class="{'border__purple': isBorder === 4 }"
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_school">от школы (м)</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_school">{{ language.dob_ob_1[16] }}</label>
             <input v-model="object.toSchool"
                    @click="changeBorder(4)"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
@@ -288,7 +288,7 @@ import {Link} from '@inertiajs/inertia-vue3'
           </div>
           <div :class="{'border__purple': isBorder === 5 }"
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_shoping">от торгового центра (м)</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_shoping">{{ language.dob_ob_1[17] }}</label>
             <input v-model="object.toShop"
                    @click="changeBorder(5)"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
@@ -296,7 +296,7 @@ import {Link} from '@inertiajs/inertia-vue3'
           </div>
           <div :class="{'border__purple': isBorder === 6 }"
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_park">от парка (м)</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_park">{{ language.dob_ob_1[18] }}</label>
             <input v-model="object.toPark"
                    @click="changeBorder(6)"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
@@ -304,7 +304,7 @@ import {Link} from '@inertiajs/inertia-vue3'
           </div>
           <div :class="{'border__purple': isBorder === 7 }"
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_child">от детского садика (м)</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_child">{{ language.dob_ob_1[19] }}</label>
             <input v-model="object.toChildrenSchool"
                    @click="changeBorder(7)"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
@@ -312,7 +312,7 @@ import {Link} from '@inertiajs/inertia-vue3'
           </div>
           <div :class="{'border__purple': isBorder === 8 }"
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_stop">от остановки (м)</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_stop">{{ language.dob_ob_1[20] }}</label>
             <input v-model="object.toBus"
                    @click="changeBorder(8)"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
@@ -323,11 +323,11 @@ import {Link} from '@inertiajs/inertia-vue3'
 
       <div class="my-10 xxl:my-8 xl:my-6">
         <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] font-medium leading-none mb-5 xxl:mb-4 xl:mb-3">
-          Вознаграждение
+          {{ language.dob_ob_1[21] }}
         </h3>
         <div class="grid grid-cols-2 md:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4">
           <div :class="{ 'border__purple': isBorder === 9 }" class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="commission">Комиссия (%)</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="commission">{{ language.dob_ob_1[22] }}</label>
             <input v-model="object.percent"
                    @click="changeBorder(9)"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
@@ -335,7 +335,7 @@ import {Link} from '@inertiajs/inertia-vue3'
           </div>
           <div :class="{'border__purple': isBorder === 10 }"
               class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="comment">Комментарий</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="comment">{{ language.dob_ob_1[23] }}</label>
             <input v-model="object.comment"
                    @click="changeBorder(10)"
                    class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
@@ -346,13 +346,13 @@ import {Link} from '@inertiajs/inertia-vue3'
       <div class="grid grid-cols-2 sm:grid-cols-1 gap-10 xxl:gap-8 xl:gap-6 lg:gap-5 my-10 xxl:my-8 xl:my-6 w-full" v-if="isEdit">
         <button @click="addAndContinue"
               class="login__btn--bg w-full text-center mr-4 font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-white bg-[#E84680] rounded-[6px]">
-          Добавить
+          {{ language.dob_ob_2[1] }}
         </button>
         <button
           @click="addAndContinue(1)"
           class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-white bg-[#E84680] rounded-[6px]"
         >
-          Добавить и продолжить
+          {{ language.dob_ob_2[1] }}
         </button>
       </div>
       <div class="grid gap-10 xxl:gap-8 xl:gap-6 my-10 xxl:my-8 xl:my-6 w-full" v-else>
@@ -360,7 +360,7 @@ import {Link} from '@inertiajs/inertia-vue3'
           @click="addAndContinue()"
           class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-white bg-[#E84680] rounded-[6px]"
         >
-          Сохранить
+          {{ language.dob_ob_1[24] }}
         </button>
       </div>
     </div>
@@ -375,7 +375,7 @@ import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 export default {
-  props: ['dops', 'infos', 'city', 'supports', 'count', 'house'],
+  props: ['dops', 'infos', 'city', 'supports', 'count', 'house', 'language'],
   inject: ['user'],
   emits: ['open-add-contact'],
   data() {
