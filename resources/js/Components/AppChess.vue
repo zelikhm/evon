@@ -5,7 +5,7 @@
         <div class="block lg:hidden grid grid-cols-4 exl:grid-cols-5 gap-3 xxl:gap-2.5 xl:gap-2">
           <div v-for="item in house.frames" :class="{ 'border': item.active === 1 }" @click="targetFrame(item)" class="corpus__banner border-solid border-[#6435A5] w-[9.5vw] gap-3.5 xxl:gap-3 xl:gap-2.5 cursor-pointer rounded-[5px] flex flex-col justify-center p-5 xxl:p-3.5 x:p-2.5">
             <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none whitespace-nowrap">{{ item.name }}</span>
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ item.flats.length }} {{ item.flats.length === 1 ? "Квартира" : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
+            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ item.flats.length }} {{ item.flats.length === 1 ? language.dob_kv_1[15] : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? language.dob_kv_1[16] : language.dob_kv_1[17] }}</span>
           </div>
         </div>
 
@@ -16,14 +16,14 @@
               <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[17px] leading-none whitespace-nowrap">{{ activeFrameMobile.name }}</span>
               <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2" alt="">
             </div>
-            <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap">{{ activeFrameMobile.flats.length }} {{ activeFrameMobile.flats.length === 1 ? "Квартира" : activeFrameMobile.flats.length === 2 || activeFrameMobile.flats.length === 3 || activeFrameMobile.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
+            <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap">{{ activeFrameMobile.flats.length }} {{ activeFrameMobile.flats.length === 1 ? language.dob_kv_1[15] : activeFrameMobile.flats.length === 2 || activeFrameMobile.flats.length === 3 || activeFrameMobile.flats.length === 4 ? language.dob_kv_1[16] : language.dob_kv_1[17] }}</span>
           </div>
           <div v-if="openCorpusList" class="overflow-y-auto custom__scroll-grey max-h-[180px] absolute z-40 top-[120%] bg-white left-0 border border-solid border-[#E5DFEE] rounded-[10px]">
             <div v-for="item in house.frames" @click="targetFrameMobile(item)" class="hover__select flex flex-col cursor-pointer gap-2.5 xxl:gap-2 xl:gap-1.5 px-7 xxl:px-5 xl:px-4 py-5 xxl:py-4 xl:py-3">
               <div class="flex items-center gap-7 xxl:gap-5 xl:gap-4">
                 <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[17px] leading-none whitespace-nowrap">{{ item.name }}</span>
               </div>
-              <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap">{{ item.flats.length }} {{ item.flats.length === 1 ? "Квартира" : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
+              <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap">{{ item.flats.length }} {{ item.flats.length === 1 ? language.dob_kv_1[15] : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? language.dob_kv_1[16] : language.dob_kv_1[17] }}</span>
             </div>
           </div>
         </div>
@@ -45,7 +45,7 @@
                   </clipPath>
                 </defs>
               </svg>
-              <span class="whitespace-nowrap">Прайс-листы</span>
+              <span class="whitespace-nowrap">{{ language.shahm[0] }}</span>
             </div>
             <div @click="changeList" :class="{'chess__button--active': activeList}" class="h-full cursor-pointer flex items-center gap-1 px-2 xl:px-1.5 rounded-[3px]">
               <svg class="w-4.5 xxl:w-4 xl:w-3.5 lg:w-4" width="18px" height="18px" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -58,10 +58,11 @@
                   </clipPath>
                 </defs>
               </svg>
-              <span class="whitespace-nowrap">Список</span>
+              <span class="whitespace-nowrap">{{ language.shahm[1] }}</span>
             </div>
           </div>
-          <button @click="$emit('close-chess')" class="bg-[#E84680] h-9 xxl:h-8 xl:h-7 rounded-[3px] px-6 xxl:px-5 xl:px-4 whitespace-nowrap text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none font-semibold text-white">Информация о ЖК</button>
+          <button @click="$emit('close-chess')" class="bg-[#E84680] h-9 xxl:h-8 xl:h-7 rounded-[3px] px-6 xxl:px-5 xl:px-4 whitespace-nowrap text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none font-semibold text-white">
+            {{ language.form_dob_ob[0] }}</button>
         </div>
       </div>
     </div>
@@ -77,6 +78,7 @@
                         :flats="house.frames[frameId].flats"
                         :house="house"
                         @target-flat="targetFlat"
+                        :language="language"
         />
       </div>
       <div>
@@ -88,7 +90,7 @@
                             'text-[#8A8996]': selectFlat.status == 2,
                             'text-[#E84680]': selectFlat.status == 3,
                             'text-[#00A478]': selectFlat.status == 4
-              }">{{ selectFlat.status == 0 ? "Акция" : selectFlat.status == 1 ? "Перепродажа" : selectFlat.status == 2 ? "Бронь" : selectFlat.status == 3 ? "Продажи закрыты" : "В продаже" }}</span>
+              }">{{ selectFlat.status == 0 ? language.dob_kv_1[10] : selectFlat.status == 1 ? language.dob_kv_1[11] : selectFlat.status == 2 ? language.dob_kv_1[12] : selectFlat.status == 3 ? language.dob_kv_1[13] : language.dob_kv_1[9] }}</span>
               </span>
               <span class="text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[21px] font-semibold leading-none pb-4 xxl:pb-3 xl:pb-2.5">{{ selectFlat.price }} €</span>
               <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none pb-5 xxl:pb-4 xl:pb-3">{{ Math.round(selectFlat.price / selectFlat.square) }} € за м²</span>
@@ -119,7 +121,7 @@ import {computed} from "vue"
 import {usePage} from "@inertiajs/inertia-vue3"
 
 export default {
-  props: ['user', 'house', 'flatUpdated'],
+  props: ['user', 'house', 'flatUpdated', 'language'],
   data() {
     return {
       user: computed(() => usePage().props.value.auth.user),

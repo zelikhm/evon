@@ -2,7 +2,7 @@
   <div class="fixed z-[100] w-full h-full flex items-center justify-center">
     <div class="relative flex flex-col bg-white rounded-[12px] z-50 w-[43%] lg:w-[56%] md:w-[70%] sm:w-[94%] h-fit">
       <div class="relative border__bottom flex justify-between items-center p-8 xxl:p-6 xl:p-5">
-        <h2 class="text-lg xxl:text-[15px] xl:text-[13px] font-semibold leading-none">Создание подборки</h2>
+        <h2 class="text-lg xxl:text-[15px] xl:text-[13px] font-semibold leading-none">{{ language.rielt_3[0] }}</h2>
         <svg @click="$emit('close-i-create-selection')"  class="hover__close transition-all cursor-pointer w-6 xxl:w-5 xl:w-4" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g clip-path="url(#clip0_266_4120)">
             <path d="M11.9997 10.586L16.9497 5.63599L18.3637 7.04999L13.4137 12L18.3637 16.95L16.9497 18.364L11.9997 13.414L7.04974 18.364L5.63574 16.95L10.5857 12L5.63574 7.04999L7.04974 5.63599L11.9997 10.586Z" fill="#8A8996"/>
@@ -15,20 +15,20 @@
         </svg>
       </div>
       <div class="relative p-8 xxl:p-6 xl:p-5">
-        <div class="text-lg xxl:text-[15px] xl:text-[13px] font-semibold pb-4 xxl:pb-3 xl:pb-2.5 leading-none">Данные</div>
+        <div class="text-lg xxl:text-[15px] xl:text-[13px] font-semibold pb-4 xxl:pb-3 xl:pb-2.5 leading-none">{{ language.rielt_3[1] }}</div>
         <div class="flex items-center gap-4 xxl:gap-3 xl:gap-2.5 mb-8 xxl:mb-6 xl:mb-5">
           <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name">Название</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="name">{{ language.rielt_3[2] }}</label>
             <input v-model="titleCompilation" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="name" placeholder="Название">
           </div>
           <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="comment">Комментарий</label>
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="comment">{{ language.rielt_3[3] }}</label>
             <input v-model="commentCompilation" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="comment">
           </div>
         </div>
         <div class="mb-8 xxl:mb-6 xl:mb-5">
           <input v-model="isShow" class="custom__checkbox" type="checkbox" id="chekbox">
-          <label class="text-[#1E1D2D] font-medium text-lg xxl:text-[15px] xl:text-[13px] leading-none" for="chekbox">показывать ЖК и его месторасположение</label>
+          <label class="text-[#1E1D2D] font-medium text-lg xxl:text-[15px] xl:text-[13px] leading-none" for="chekbox">{{ language.rielt_3[4] }}</label>
         </div>
 
         <div class="text-[#1E1D2D] font-medium text-[18px] xxl:text-[15px] xl:text-[13px] mb-4 xxl:mb-3 xl:mb-2.5">ЖК</div>
@@ -57,8 +57,9 @@
           </div>
         </div>
         <div class="grid grid-cols-2 gap-8 xxl:gap-6 xl:gap-5">
-          <button @click="createSelection" class="login__btn--bg text-white text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Создать</button>
-          <button @click="$emit('close-i-create-selection')" class="bg-litepink text-[#E84680] text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">Отменить</button>
+          <button @click="createSelection" class="login__btn--bg text-white text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">{{ language.rielt_3[6] }}</button>
+          <button @click="$emit('close-i-create-selection')" class="bg-litepink text-[#E84680] text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">
+            {{ language.izbr_1[4] }}</button>
         </div>
       </div>
     </div>
@@ -68,7 +69,7 @@
 
 <script>
 export default {
-  props: ['house', 'title', 'user'],
+  props: ['house', 'title', 'user', 'language'],
   data() {
     return {
       titleCompilation: '',

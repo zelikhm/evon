@@ -37,7 +37,7 @@
 
 
               }" class="leading-none p-5 xxl:p-4 xl:p-3">
-                {{ item.status == 0 ? "Акция" : item.status == 1 ? "Перепродажа" : item.status == 2 ? "Бронь" : item.status == 3 ? "Продажи закрыты" : "В продаже" }}</span>
+                {{ item.status == 0 ? language.dob_kv_1[10] : item.status == 1 ? language.dob_kv_1[11] : item.status == 2 ? language.dob_kv_1[12] : item.status == 3 ? language.dob_kv_1[13] : language.dob_kv_1[9] }}</span>
             </div>
           </div>
         </div>
@@ -50,7 +50,7 @@
 <script>
 
 export default {
-  props: ['flats'],
+  props: ['flats', 'language'],
   data() {
     return {
       titleTable: [
@@ -60,6 +60,14 @@ export default {
         { name: 'plan', title: 'Планировка', active: 0, filter: false },
         { name: 'floor', title: 'Этаж', active: 0, filter: true },
       ],
+    }
+  },
+  watch: {
+    language(newItem) {
+        this.titleTable[1].title = newItem.dob_kv_1[4];
+        this.titleTable[2].title = newItem.dob_kv_1[5];
+        this.titleTable[3].title = newItem.dob_kv_1[6];
+        this.titleTable[4].title = newItem.dob_kv_1[7];
     }
   },
   methods: {
@@ -94,6 +102,10 @@ export default {
     }
   },
   created() {
+    this.titleTable[1].title = this.language.dob_kv_1[4];
+    this.titleTable[2].title = this.language.dob_kv_1[5];
+    this.titleTable[3].title = this.language.dob_kv_1[6];
+    this.titleTable[4].title = this.language.dob_kv_1[7];
   }
 }
 

@@ -17,11 +17,11 @@
     >
       <div class="flex justify-between items-center p-7 xxl:p-5 xl:p-4">
         <span
-          class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[16px] leading-none">Фильтры</span>
+          class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[16px] leading-none">{{ language.rielt_1[4] }}</span>
         <div class="flex items-center gap-4">
           <button class="text-[#6435A5] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none cursor-pointer"
                   v-on:click="reloadFilter">
-            Сбросить
+            {{ language.rielt_1[8] }}
           </button>
           <button @click="openFilter = false"
                   class="hidden lg:block text-[#6435A5] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none cursor-pointer">
@@ -39,17 +39,17 @@
             <div class="flex items-center text-[#1E1D2D]">
               <input class="custom__checkbox" name="filters" type="checkbox" id="filters_1"
                      v-model="filters.badge.news">
-              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_1">Новинки</label>
+              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_1">{{ language.rielt_1[51] }}</label>
             </div>
             <div class="flex items-center text-[#1E1D2D]">
               <input class="custom__checkbox" name="filters" type="checkbox" id="filters_2"
                      v-model="filters.badge.sales">
-              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_2">Акции</label>
+              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_2">{{ language.rielt_1[52] }}</label>
             </div>
             <div class="flex items-center text-[#1E1D2D]">
               <input class="custom__checkbox" name="filters" type="checkbox" id="filters_3"
                      v-model="filters.badge.popular">
-              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_3">Популярные</label>
+              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_3">{{ language.rielt_1[53] }}</label>
             </div>
           </div>
         </div>
@@ -58,7 +58,7 @@
           <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]"
                :class="{ 'border__bottom--0': openSelectCity}">
             <span
-              class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Город</span>
+              class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">{{ language.rielt_1[15] }}</span>
             <div class="relative">
               <div ref="city" @click.stop="openSelectCity = !openSelectCity"
                    class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3">
@@ -90,7 +90,7 @@
           <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]"
                :class="{ 'border__bottom--0': openSelectRegion}">
             <span
-              class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-5 xxl:pt-4 xl:pt-3">Район</span>
+              class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-5 xxl:pt-4 xl:pt-3">{{ language.rielt_1[17] }}</span>
             <div class="relative" :tabindex="tabindex" @blur="openSelectRegion = false">
               <div @click="openSelectRegion = !openSelectRegion"
                    class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
@@ -137,16 +137,16 @@
 
           <div :class="{'border__purple': isBorder === 1 }"
                class="ones__select border border-solid border-[#E5DFEE] rounded-[6px] p-5 xx:p-4 xl:p-3">
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">Цена</span>
+            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">{{ language.rielt_1[18] }}</span>
             <div class="flex gap-2">
               <div class="flex items-center gap-1">
-                <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="cost_from">от</label>
+                <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="cost_from">{{ language.rielt_1[19] }}</label>
                 <input @click="changeBorder(1)" v-model="filters.price.min"
                        class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0"
                        type="number" id="cost_from">
               </div>
               <div class="flex items-center gap-1">
-                <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="cost_before">до</label>
+                <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="cost_before">{{ language.rielt_1[20] }}</label>
                 <input @click="changeBorder(1)" v-model="filters.price.max"
                        class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0"
                        type="number" id="cost_before">
@@ -157,7 +157,7 @@
           <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]"
                :class="{ 'border__bottom--0': openSelectDeadline}">
             <span
-              class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Срок сдачи</span>
+              class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">{{ language.rielt_1[21] }}</span>
             <div class="relative" :tabindex="tabindex" @blur="openSelectDeadline = false">
               <div @click="openSelectDeadline = !openSelectDeadline"
                    class="flex items-center justify-between cursor-pointer text-[#1E1D2D]  text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
@@ -180,16 +180,16 @@
 
           <div :class="{'border__purple': isBorder === 2 }"
                class="ones__select border border-solid border-[#E5DFEE] rounded-[6px] p-5 xx:p-4 xl:p-3">
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">Площадь</span>
+            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">{{ language.rielt_1[22] }}</span>
             <div class="flex gap-2">
               <div class="flex items-center gap-1">
-                <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="from">от</label>
+                <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="from">{{ language.rielt_1[19] }}</label>
                 <input @click="changeBorder(2)" v-model="filters.square.min"
                        class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0"
                        type="number" id="from">
               </div>
               <div class="flex items-center gap-1">
-                <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="before">до</label>
+                <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="before">{{ language.rielt_1[20] }}</label>
                 <input @click="changeBorder(2)" v-model="filters.square.max"
                        class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0"
                        type="number" id="before">
@@ -200,7 +200,7 @@
           <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]"
                :class="{ 'border__bottom--0': openSelectDev}">
             <span
-              class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Застройщик</span>
+              class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">{{ language.rielt_1[23] }}</span>
             <div class="relative" :tabindex="tabindex" @blur="openSelectDev = false">
               <div @click="openSelectDev = !openSelectDev"
                    class="flex items-center justify-between cursor-pointer text-[#1E1D2D] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
@@ -223,14 +223,14 @@
           <div class="my-10 xxl:my-8 xl:my-6">
             <div @click="openLocation = !openLocation"
                  class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] mb-5 xxl:mb-4 xl:mb-3 leading-none">
-              <span>Расположение</span>
+              <span>{{ language.rielt_1[24] }}</span>
               <img :class="{'rotate-180': openLocation}" class=" transition-all w-3 xxl:w-2.5 xl:w-2"
                    src="../../assets/svg/arrow_down_black.svg" alt="">
             </div>
             <div v-if="openLocation" class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
               <div :class="{'border__purple': isBorder === 3 }"
                    class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_sea">от моря
+                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_sea">{{ language.rielt_1[26] }}
                   (м)</label>
                 <input @click="changeBorder(3)" v-model="filters.location.toSea"
                        class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
@@ -238,23 +238,21 @@
               </div>
               <div :class="{'border__purple': isBorder === 4 }"
                    class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_school">от
-                  школы (м)</label>
+                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_school">{{ language.rielt_1[30] }} (м)</label>
                 <input @click="changeBorder(4)" v-model="filters.location.toSchool"
                        class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                        type="number" id="for_school">
               </div>
               <div :class="{'border__purple': isBorder === 5 }"
                    class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_shoping">от
-                  торгового центра (м)</label>
+                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_shoping">{{ language.rielt_1[28] }} (м)</label>
                 <input @click="changeBorder(5)" v-model="filters.location.toShop"
                        class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                        type="number" id="for_shoping">
               </div>
               <div :class="{'border__purple': isBorder === 6 }"
                    class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_park">от парка
+                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_park">{{ language.rielt_1[33] }}
                   (м)</label>
                 <input @click="changeBorder(6)" v-model="filters.location.toPark"
                        class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
@@ -262,16 +260,14 @@
               </div>
               <div :class="{'border__purple': isBorder === 7 }"
                    class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_child">от
-                  детского садика (м)</label>
+                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_child">{{ language.rielt_1[29] }} (м)</label>
                 <input @click="changeBorder(7)" v-model="filters.location.toChildrenSchool"
                        class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                        type="number" id="for_child">
               </div>
               <div :class="{'border__purple': isBorder === 8 }"
                    class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_stop">от
-                  остановки (м)</label>
+                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_stop">{{ language.rielt_1[34] }} (м)</label>
                 <input @click="changeBorder(8)" v-model="filters.location.toBus"
                        class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                        type="number" id="for_stop">
@@ -281,7 +277,7 @@
           <div class="relative overflow-hidden mb-10 xxl:mb-8 xl:mb-6">
             <div @click="openInfrastruktura = !openInfrastruktura"
                  class="relative z-10 cursor-pointer text-[#1E1D2D] flex justify-between items-center text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] mb-5 xxl:mb-4 xl:mb-3 leading-none">
-              <span class="hover__title-block">Инфраструктура</span>
+              <span class="hover__title-block">{{ language.rielt_1[35] }}</span>
               <img :class="{'rotate-180': openInfrastruktura}" class=" transition-all w-3 xxl:w-2.5 xl:w-2"
                    src="../../assets/svg/arrow_down_black.svg" alt="">
             </div>
@@ -296,7 +292,7 @@
           <div class="mb-10 xxl:mb-8 xl:mb-6">
             <div @click="openDopServices = !openDopServices"
                  class="cursor-pointer flex justify-between items-center text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] mb-5 xxl:mb-4 xl:mb-3 leading-none">
-              <span class="hover__title-block">Дополнительные услуги</span>
+              <span class="hover__title-block">{{ language.rielt_1[45] }}</span>
               <img :class="{'rotate-180': openDopServices}" class=" transition-all w-3 xxl:w-2.5 xl:w-2"
                    src="../../assets/svg/arrow_down_black.svg" alt="">
             </div>
@@ -321,11 +317,11 @@
               <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
               <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
             </div>
-            <span>Фильтры</span>
+            <span>{{ language.rielt_1[4] }}</span>
           </div>
           <button
             class="text-[#6435A5] text-[16px] xxl:text-[14px] xl:text-[12px] md:text-[14px] lg:text-[15px] cursor-pointer leading-none">
-            Сбросить
+            {{ language.rielt_1[8] }}
           </button>
         </div>
         <div class="flex justify-between md:flex-col md:gap-3 items-center">
@@ -333,15 +329,15 @@
             <h2
               class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] lg:text-[20px] whitespace-nowrap text-center">
               {{ isSearch }}</h2>
-            <span class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center" v-if="!preloader">Найдено {{ count_house }} шт.</span>
-            <span class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center" v-else>Найдено  <div class="minLoader"></div>  шт.</span>
+            <span class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center" v-if="!preloader"> {{ count_house }} {{ language.rielt_1[9] }}</span>
+            <span class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center" v-else>  <div class="minLoader"></div>  {{ language.rielt_1[9] }}</span>
           </div>
           <div class="flex items-center md:flex-col gap-8 xxl:gap-6 xl:gap-5 md:gap-3">
             <div v-if="!map" :tabindex="tabindex" @blur="openDate = false" class="relative">
               <div @click="openDate = !openDate" class=" cursor-pointer flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
                 <span
                   class="hover__title-block text-base xxl:text-sm xl:text-xs md:text-[14px] leading-none whitespace-nowrap">
-                  По {{ selectDate }}
+                  {{ selectDate }}
                 </span>
                 <img :class="{'rotate-180': openDate }" class="transition-all"
                      src="../../assets/svg/arrow_down_black.svg" alt="Стрелочка вниз">
@@ -372,7 +368,7 @@
                     </clipPath>
                   </defs>
                 </svg>
-                <span class="font-medium text-base xxl:text-sm xl:text-xs md:text-[15px] whitespace-nowrap ">{{ map ? "Скрыть карту" : "Искать на карте" }}</span>
+                <span class="font-medium text-base xxl:text-sm xl:text-xs md:text-[15px] whitespace-nowrap ">{{ map ? language.menu_zastr_1[11] : language.rielt_1[6] }}</span>
               </button>
               <div class="flex gap-3 xxl:gap-2 xl:gap-1.5" v-if="!map">
                 <button @click="toggle = false" :class="{'grid--active': !toggle}"
@@ -419,19 +415,19 @@
                   <button @click="$emit('open-add-selections', item)"
                           class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
                   <span
-                    class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">В подборку</span>
+                    class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">{{ language.rielt_1[14] }}</span>
                     <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
                   </button>
                   <button v-if="item.favorite" @click="removeFavorite(item)"
                           class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
                   <span
-                    class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">Убрать</span>
+                    class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">{{ language.rielt_1[8] }}</span>
                     <img src="../../assets/svg/heart_icon_fill.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
                   </button>
                   <button v-else @click="addFavorite(item)"
                           class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
                   <span
-                    class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">В избранное</span>
+                    class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">{{ language.rielt_1[16] }}</span>
                     <img src="../../assets/svg/heart_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="">
                   </button>
                 </div>
@@ -439,7 +435,7 @@
                 <span
                   class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none">{{ item.area }}</span>
                   <div class="h-1 w-1 rounded-full bg-white"></div>
-                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none">{{ item.flats.length }} {{ item.flats.length === 1 ? "Квартира" : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
+                  <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none">{{ item.flats.length }} {{ item.flats.length === 1 ? language.dob_kv_1[15] : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? language.dob_kv_1[16] : language.dob_kv_1[17] }}</span>
                 </div>
               </div>
             </div>
@@ -474,19 +470,19 @@
                     <button @click="$emit('open-add-selections', item)"
                             class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[70%]">
                     <span
-                      class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">В подборку</span>
+                      class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">{{ language.rielt_1[14] }}</span>
                       <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="Плюс">
                     </button>
                     <button v-if="item.favorite" @click="removeFavorite(item)"
                             class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[70%]">
                     <span
-                      class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">Убрать</span>
+                      class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">{{ language.rielt_1[8] }}</span>
                       <img src="../../assets/svg/heart_icon_fill.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
                     </button>
                     <button v-else @click="addFavorite(item)"
                             class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[70%]">
                     <span
-                      class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">В избранное</span>
+                      class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none whitespace-nowrap">{{ language.rielt_1[16] }}</span>
                       <img src="../../assets/svg/heart_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3" alt="">
                     </button>
                   </div>
@@ -505,13 +501,13 @@
                     <div class="justify-self-end justify-end flex h-fit flex-wrap gap-1">
                       <span
                         class="bg-[#E84680] self-start h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] md:text-[11px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1"
-                        v-if="Math.ceil(Math.abs(new Date().getTime() - new Date(item.created_at).getTime()) / (1000 * 3600 * 24) ) <= 30">новинки</span>
+                        v-if="Math.ceil(Math.abs(new Date().getTime() - new Date(item.created_at).getTime()) / (1000 * 3600 * 24) ) <= 30">{{ language.rielt_1[51] }}</span>
                       <span
                         class="bg-[#FA8D50] self-start h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1"
-                        v-if="item.promotion">акция</span>
+                        v-if="item.promotion">{{ language.rielt_1[52] }}</span>
                       <span
                         class="bg-[#E84646] self-start h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1"
-                        v-if="item.visible >= 50">популярное</span>
+                        v-if="item.visible >= 50">{{ language.rielt_1[53] }}</span>
                     </div>
                   </div>
                 </div>
@@ -520,7 +516,7 @@
             <div
               class="flex flex-col justify-between px-7 xxl:px-6 xl:px-5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3">
               <div class="flex justify-between items-center">
-                <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] md:text-[13px]">{{ item.flats.length }} {{ item.flats.length === 1 ? "Квартира" : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
+                <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] md:text-[13px]">{{ item.flats.length }} {{ item.flats.length === 1 ? language.dob_kv_1[15] : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? language.dob_kv_1[16] : language.dob_kv_1[17] }}</span>
                 <span
                   class="uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[12px] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1"
                   v-if="item.created && !Number.isInteger(+item.created[0])">{{ item.created }}</span>
@@ -532,7 +528,7 @@
               <span
                 class="font-medium whitespace-nowrap text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] md:text-[17px] leading-none leading-none">от {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} €</span>
                 <span
-                  class="text-[#8A8996] whitespace-nowrap text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px]">{{ isNaN(item.minPrice / item.minSquare) ? "-" : Math.round(item.minPrice / item.minSquare) }} € за м²</span>
+                  class="text-[#8A8996] whitespace-nowrap text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px]">{{ isNaN(item.minPrice / item.minSquare) ? "-" : Math.round(item.minPrice / item.minSquare) }} € м²</span>
               </div>
               <div
                 class="gray-backg flex items-center justify-center w-fit px-3 xxl:px-2.5 xl:px-2 gap-2 xxl:gap-1.5 xl:gap-1">
@@ -547,7 +543,7 @@
         >
           <button
             class="more__button mt-10 transition-all text-[#E84680] border border-solid border-[#E84680] text-base xxl:text-sm xl:text-xs lg:text-[15px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2.5 xl:py-1.5 rounded-[3px]">
-            Показать еще
+            {{ language.rielt_1[27] }}
           </button>
         </div>
       </div>
@@ -585,8 +581,15 @@
       },
       count_houses: 0,
       type: 0,
+      language: {},
+      dates: [],
     },
     emits: ['open-filter', 'open-add-selections', 'close-filter'],
+    watch: {
+      dates(newItem, oldItem) {
+        this.selectDate = newItem[0].date;
+      }
+    },
     data() {
       return {
         markers: [],
@@ -653,11 +656,6 @@
         toggle: false,
         selectDate: 'дате',
         openDate: false,
-        dates: [
-          {date: 'дате', id: 1},
-          {date: 'увеличению цены', id: 2},
-          {date: 'уменьшению цены', id: 3},
-        ],
         selectDateId: 1,
         readyHouses: [],
         isBorder: 0,
@@ -962,7 +960,7 @@
       },
     },
     created() {
-
+      this.selectDate = this.dates[0].date;
       this.count_house = this.count_houses;
       let href = window.location.href
       if (href.split('#').at(-1) === 'search') {

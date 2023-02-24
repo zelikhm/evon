@@ -11,6 +11,7 @@
                       :house="house"
                       :compilation="readyCompilation"
                       :user="user"
+                      :language="language"
   />
   <app-immovables-create-selection
       :user="user"
@@ -20,9 +21,12 @@
       @update-compilation="updateCompilation"
       :title="titleNewCompilation"
       :house="house"
+      :language="language"
   />
   <app-header :user="user"
               @update-block-client="updateBlockClient"
+              :language="language"
+              @selectLanguage="choseLanguage"
   />
   <main>
     <div class="_container">
@@ -38,6 +42,8 @@
           :builders="builders"
           :count_houses="count_houses"
           :type="type"
+          :language="language"
+          :dates="dates"
         />
         <app-news-developer
             @open="(item) => openNewModal(item)"
@@ -45,16 +51,18 @@
             :news="news"
             :adminNews="adminNews"
             v-if="!isWithClient"
+            :language="language"
         />
       </div>
       <app-news-developer class="hidden lg:block mb-14 xxl:mb-10 xl:mb-8"
                           :news="news"
                           :adminNews="adminNews"
                           v-if="!isWithClient"
+                          :language="language"
       />
     </div>
   </main>
-  <app-footer />
+  <app-footer :language="language" />
 </template>
 
 <script>
@@ -104,9 +112,29 @@ export default {
       readyCompilation: null,
       isNews: false,
       new_object: [],
+      language: {},
+      selectLanguage: 0,
+      dates: [],
     }
   },
   methods: {
+    choseLanguage(language) {
+      this.selectLanguage = language;
+
+      if(this.selectLanguage === 0) {
+        this.language = this.$ru;
+      } else if (this.selectLanguage === 1) {
+        this.language = this.$en;
+      } else if (this.selectLanguage === 2) {
+        this.language = this.$tur;
+      }
+
+      this.dates = [
+        {date: this.language.rielt_1[5], id: 1},
+        {date: this.language.rielt_1[54], id: 2},
+        {date: this.language.rielt_1[55], id: 3},
+      ];
+    },
     openNewModal(item) {
       this.isNews = true;
       this.new_object = item;
@@ -143,6 +171,20 @@ export default {
     NewsModal
   },
   created() {
+    if(this.user.lang === 0) {
+      this.language = this.$ru;
+    } else if (this.user.lang === 1) {
+      this.language = this.$en;
+    } else if (this.user.lang === 2) {
+      this.language = this.$tur;
+    }
+
+    this.dates = [
+      {date: this.language.rielt_1[5], id: 1},
+      {date: this.language.rielt_1[54], id: 2},
+      {date: this.language.rielt_1[55], id: 3},
+    ];
+
     this.readyCompilation = this.compilation
     this.isWithClient = localStorage.getItem('withClient') === 'true' ? true : false
   },

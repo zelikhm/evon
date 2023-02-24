@@ -183,7 +183,7 @@
     "6": "Search on the map",
     "7": "Developer news",
     "8": "Reset",
-    "9": "Found 1512 new buildings",
+    "9": "Found new buildings",
     "10": "Finished-Done",
     "11": "Today",
     "12": "Type",
@@ -227,7 +227,11 @@
     "50": "After-sales service",
     "51": "New",
     "52": "Discounts",
-    "53": "Popular"
+    "53": "Popular",
+    "54": "По увелечению цены",
+    "55": "По уменьшению цены",
+    "56": "мин за",
+    "57": "мин. цена"
   },
   "rielt_2": {
     "0": "My selections",
@@ -241,7 +245,8 @@
     "4": "Show project name and location",
     "5": "Project",
     "6": "Create",
-    "7": "Send to client"
+    "7": "Send to client",
+    "8": "Введите название подборки"
   },
   "podbor_1": {
     "0": "Send a link to your selection to clients",

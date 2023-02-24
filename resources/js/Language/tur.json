@@ -183,7 +183,7 @@
     "6": "haritada ara",
     "7": "Geliştirici haberleri",
     "8": "Sıfırla",
-    "9": "1512 yeni bina bulundu",
+    "9": "yeni bina bulundu",
     "10": "Başarılı",
     "11": "Bugün",
     "12": "Türü",
@@ -227,7 +227,11 @@
     "50": "Satış sonrası servis",
     "51": "Yeniler",
     "52": "Promasyon",
-    "53": "Popüler olanlar"
+    "53": "Popüler olanlar",
+    "54": "По увелечению цены",
+    "55": "По уменьшению цены",
+    "56": "мин за",
+    "57": "мин. цена"
   },
   "rielt_2": {
     "0": "seçimlerim",
@@ -241,7 +245,8 @@
     "4": "Konut kompleksini ve konumunu göster",
     "5": "Konut kompleksi",
     "6": "Oluştur",
-    "7": "Gönder"
+    "7": "Gönder",
+    "8": "Введите название подборки"
   },
   "podbor_1": {
     "0": "Müşterilere seçiminizin bağlantısını gönderin",
