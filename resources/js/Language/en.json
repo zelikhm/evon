@@ -245,14 +245,17 @@
   },
   "podbor_1": {
     "0": "Send a link to your selection to clients",
-    "1": "Submit a selection"
+    "1": "Submit a selection",
+    "2": "Data"
   },
   "izbr_1": {
-    "0": "Euro Avsallar Residence removed from favorites",
+    "0": "removed from favorites",
     "1": "Favorites",
-    "2": "Found 6 projects",
-    "3": "Cancel",
-    "4": "You don't have anything in your favorites yet"
+    "2": "Found",
+    "3": "projects",
+    "4": "Cancel",
+    "5": "You don't have anything in your favorites yet",
+    "6": "added"
   },
   "shahm": {
     "0": "Price list",

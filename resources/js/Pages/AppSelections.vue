@@ -11,14 +11,15 @@
                          v-if="openCreateSelection"
                          :openSelection="openCreateSelection"
                          :itemCompilation="itemCompilation"
+                         :language="language"
   />
-  <app-submit-selection v-if="submitSelection" @closeSubmitSelection="submitSelection = false" :link="link" />
-  <app-header :user="user" />
+  <app-submit-selection v-if="submitSelection" @closeSubmitSelection="submitSelection = false" :link="link" :language="language" />
+  <app-header :user="user" :language="language" @selectLanguage="choseLanguage" />
   <main>
     <div class="_container">
       <div class="flex justify-between items-center mt-14 xxl:mt-10 xl:mt-8">
         <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5">
-          <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px] leading-none">Мои подборки</h2>
+          <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px] leading-none">{{ language.rielt_2[0] }}</h2>
           <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">Найдено {{ compilation.length }} шт.</span>
         </div>
 <!--        <button class="login__btn&#45;&#45;bg text-white text-base xxl:text-sm xl:text-xs lg:text-[15px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5 rounded-[3px] leading-none">Создать подборку</button>-->
@@ -34,7 +35,7 @@
               <div :class="{ 'border-[#6435A5]': item.isEdit, 'border-[#E5DFEE]': !item.isEdit }" class="hover__title-block transition-all flex w-full border border-solid rounded-[5px] p-3 xxl:p-2.5 xl:p-2">
                 <input :disabled="!item.isEdit" class="p-0 text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] w-full leading-none focus:ring-0" v-model="item.description" type="text">
                 <button @click="editComment(item)" :class="{ 'text-[#6435A5]': item.isEdit }" class="text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none"
-                >{{ item.isEdit ? "Сохранить" : "Редактировать" }}</button>
+                >{{ item.isEdit ? language.dob_ob_1[24] : language.menu_zastr_1[9] }}</button>
               </div>
             </div>
             <div class="relative border__left sm:border-0 flex flex-col sm:flex-row h-full sm:h-fit sm:w-full justify-evenly sm:py-1">
@@ -52,8 +53,10 @@
               <div v-if="item.deleteConfirm" class="cursor-auto z-20 text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] absolute top-[110%] bg-white right-0 flex flex-col border border-solid border-[#CEC3DD] rounded-[5px]">
                 <span class="whitespace-nowrap text-center border__bottom p-2.5 xxl:p-2 xl:p-1.5 leading-none">Вы уверены что хотите удалить?</span>
                 <div class="cursor-pointer flex">
-                  <div class="hover__select w-full text-center border__right p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[red]" @click="deleteCompilation(item)">Да</div>
-                  <div @click="item.deleteConfirm = false" class="hover__select w-full text-center p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[green]">Нет</div>
+                  <div class="hover__select w-full text-center border__right p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[red]" @click="deleteCompilation(item)">
+                    {{ language.default[0] }}</div>
+                  <div @click="item.deleteConfirm = false" class="hover__select w-full text-center p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[green]">
+                    {{ language.default[1] }}</div>
                 </div>
               </div>
             </div>
@@ -62,7 +65,7 @@
       </div>
     </div>
   </main>
-  <app-footer/>
+  <app-footer :language="language" />
 </template>
 <script>
 import AppHeader from '../Layouts/AppHeader.vue'
@@ -86,10 +89,24 @@ export default {
       link: null,
       isOpenCreateSelections: false,
       itemCompilation: null,
-      compilationReady: []
+      compilationReady: [],
+      language: {},
+      selectLanguage: 0,
     }
   },
   methods: {
+    choseLanguage(language) {
+      this.selectLanguage = language;
+
+      if(this.selectLanguage === 0) {
+        this.language = this.$ru;
+      } else if (this.selectLanguage === 1) {
+        this.language = this.$en;
+      } else if (this.selectLanguage === 2) {
+        this.language = this.$tur;
+      }
+
+    },
     openSelection() {
       this.openCreateSelection = true
       setTimeout(() => {
@@ -149,6 +166,14 @@ export default {
     }
   },
   created() {
+    if(this.user.lang === 0) {
+      this.language = this.$ru;
+    } else if (this.user.lang === 1) {
+      this.language = this.$en;
+    } else if (this.user.lang === 2) {
+      this.language = this.$tur;
+    }
+
     this.compilationReady = this.compilation
 
     this.compilationReady.forEach(item => {

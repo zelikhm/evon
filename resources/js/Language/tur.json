@@ -245,14 +245,17 @@
   },
   "podbor_1": {
     "0": "Müşterilere seçiminizin bağlantısını gönderin",
-    "1": "Seçim gönder"
+    "1": "Seçim gönder",
+    "2": "Veri"
   },
   "izbr_1": {
-    "0": "Euro Avsallar Residence favorilerden kaldırıldı",
+    "0": "favorilerden kaldırıldı",
     "1": "Favoriler",
-    "2": "6 tesis bulundu",
-    "3": "İptal etmek",
-    "4": "Favorilerinizde henüz bir şey yok"
+    "2": "tesis",
+    "3": "bulundu",
+    "4": "İptal etmek",
+    "5": "Favorilerinizde henüz bir şey yok",
+    "6": "katma"
   },
   "shahm": {
     "0": "Fiyat listesi",

@@ -5,27 +5,27 @@ import { Link } from '@inertiajs/inertia-vue3'
 <template>
   <app-add-selections v-if="openAddSelection" @close-add-selection="openAddSelection = false"/>
   <app-create-selection v-if="openCreateSelection" @close-create-selection="openCreateSelection = false" />
-  <app-header :user="user" />
+  <app-header :user="user" @selectLanguage="choseLanguage" :language="language" />
   <main class="relative">
 
     <div v-if="state === 0" class="absolute w-full text-center favorites__banner py-3 xxl:py-2.5 xl:py-2 text-[#30CB6E] text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none">
-      {{ notificationTitle }} добавлен в избранное
+      {{ notificationTitle + ' ' + language.izbr_1[6] }}
     </div>
     <div v-if="state === 1" class="absolute w-full text-center bg-[#E84780] py-3 xxl:py-2.5 xl:py-2 text-white text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none">
-      {{ notificationTitle }} удален из избранного
-      <button @click="cancelDeleted" class="bg-white text-[#E84780] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none px-2 xxl:py-1.5 xl:p-1 py-1.5 rounded-[3px]">Отменить</button>
+      {{ notificationTitle + ' ' + language.izbr_1[0] }}
+      <button @click="cancelDeleted" class="bg-white text-[#E84780] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none px-2 xxl:py-1.5 xl:p-1 py-1.5 rounded-[3px]">{{ language.izbr_1[4] }}</button>
     </div>
 
     <div class="_container">
       <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5 mt-16 xxl:mt-12 xl:mt-10">
-        <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px] leading-none">Избранное</h2>
-        <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">Найдено {{ favorites.length }} объектов</span>
+        <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px] leading-none">{{ language.izbr_1[1] }}</h2>
+        <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{ language.izbr_1[2] }} {{ favorites.length }} {{ language.izbr_1[3] }}</span>
       </div>
 
       <div v-if="favorites.length === 0" class="grid grid-cols-2 lg:grid-cols-1 mt-10 xxl:mt-8 xl:mt-6">
         <div class="flex justify-between sm:flex-col sm:items-center p-7 xxl:p-5 xl:p-4 bg-[#F6F3FA] rounded-[10px]">
           <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
-            <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none font-medium">У вас в избранном еще ничего нет</span>
+            <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none font-medium">{{ language.izbr_1[5] }}</span>
             <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none"></p>
           </div>
           <svg class="h-full" width="162" height="113" viewBox="0 0 162 113" fill="#6435A5" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -53,7 +53,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                 <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-5" alt="Плюс">
               </button>
               <button v-if="item.house.favorite" @click="removeFavorite(item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
-                <span class="text-white text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap">Убрать</span>
+                <span class="text-white text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap">{{ language.izbr_1[4] }}</span>
                 <img src="../../assets/svg/heart_icon_fill.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-4" alt="">
               </button>
               <button v-else @click="addFavorite(item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
@@ -84,7 +84,7 @@ import { Link } from '@inertiajs/inertia-vue3'
       </div>
     </div>
   </main>
-  <app-footer />
+  <app-footer :language="language"/>
 </template>
 
 <script>
@@ -111,10 +111,33 @@ export default {
       openCreateSelection: false,
       state: null,
       notificationTitle: null,
-      deleteItemId: null
+      deleteItemId: null,
+      language: {},
+      selectLanguage: 0,
+    }
+  },
+  created() {
+    if(this.user.lang === 0) {
+      this.language = this.$ru;
+    } else if (this.user.lang === 1) {
+      this.language = this.$en;
+    } else if (this.user.lang === 2) {
+      this.language = this.$tur;
     }
   },
   methods: {
+    choseLanguage(language) {
+      this.selectLanguage = language;
+
+      if(this.selectLanguage === 0) {
+        this.language = this.$ru;
+      } else if (this.selectLanguage === 1) {
+        this.language = this.$en;
+      } else if (this.selectLanguage === 2) {
+        this.language = this.$tur;
+      }
+
+    },
     removeFavorite(item) {
       this.deleteItemId = item.house.id
 

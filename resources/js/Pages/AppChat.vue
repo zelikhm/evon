@@ -8,6 +8,8 @@
     @login-realtor="openLoginRealtor = !openLoginRealtor"
     @open-register="openRegister = !openRegister"
     :user="user"
+    @selectLanguage="choseLanguage"
+    :language="language"
   />
   <main class="bg-[#F6F3FA]">
     <div class="_container">
@@ -31,7 +33,7 @@
       </div>
     </div>
   </main>
-  <app-footer/>
+  <app-footer  :language="language" />
 </template>
 
 <script>
@@ -50,6 +52,8 @@
         openContactList: false,
         openChat: false,
         chat_object: [],
+        language: {},
+        selectLanguage: 0,
       }
     },
     mounted() {
@@ -72,8 +76,28 @@
         })
       }
     },
+    created() {
+      if(this.user.lang === 0) {
+        this.language = this.$ru;
+      } else if (this.user.lang === 1) {
+        this.language = this.$en;
+      } else if (this.user.lang === 2) {
+        this.language = this.$tur;
+      }
+    },
     methods: {
+      choseLanguage(language) {
+        this.selectLanguage = language;
 
+        if(this.selectLanguage === 0) {
+          this.language = this.$ru;
+        } else if (this.selectLanguage === 1) {
+          this.language = this.$en;
+        } else if (this.selectLanguage === 2) {
+          this.language = this.$tur;
+        }
+
+      },
     },
     components: {
       AppHeader,
