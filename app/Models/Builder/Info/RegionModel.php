@@ -11,6 +11,8 @@ class RegionModel extends Model
 
     protected $fillable = [
       'title',
+      'title_tr',
+      'title_en',
       'city_id'
     ];
 

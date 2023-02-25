@@ -45,14 +45,14 @@
             <div class="flex items-center md:justify-center gap-5 xxl:gap-4 xl:gap-3">
               <span class="font-semibold text-xl xxl:text-lg xl:text-sm lg:text-[19px]">{{ house.title }}</span>
               <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px]">
-                <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="house.created && !Number.isInteger(+house.created[0])">{{ house.created }}</span>
-                <span class="flex items-center justify-center uppercase border border-solid border-[#E84680] h-fit text-[#E84680] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-else-if="house.created">{{ house.created }}</span>
+                <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="house.created && !Number.isInteger(+house.created[0])">{{ language.rielt_1[10] }}</span>
+                <span class="flex items-center justify-center uppercase border border-solid border-[#E84680] h-fit text-[#E84680] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-else-if="house.created">{{ language.rielt_1[10] }}</span>
                 <span class="flex items-center justify-center text-white font-semibold bg-[#FA8D50] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="house.promotion">{{ language.rielt_1[52] }}</span>
                 <span class="flex items-center justify-center text-white font-semibold bg-[#E84680] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="Math.ceil(Math.abs(new Date().getTime() - new Date(house.created_at).getTime()) / (1000 * 3600 * 24) ) <= 30">{{ language.rielt_1[51] }}</span>
                 <span class="flex items-center justify-center text-white font-semibold bg-[#E84646] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="house.visible >= 50">{{ language.rielt_1[53] }}</span>
               </div>
             </div>
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">{{ house.city }}, {{ house.area }}</span>
+            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">{{ selectLanguage === 0 ? city_name.title : selectLanguage === 1 ? city_name.title_en : city_name.title_tr }}, {{ selectLanguage === 0 ? area_name.title : selectLanguage === 1 ? area_name.title_en : area_name.title_tr }}</span>
           </div>
 
           <div class="flex md:flex-col md:items-center h-20 xxl:h-16 xl:h-12 md:h-fit">
@@ -144,8 +144,8 @@
           </div>
           <div class="flex flex-col pb-14 xxl:pb-10 xl:pb-8">
             <span class="uppercase font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] pb-5 xxl:pb-4 xl:pb-3 leading-none">{{ language.form_dob_ob[0] }}</span>
-            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="fullDescription" v-html="house.description"></p>
-            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else v-html="house.description.slice(0, 300) + '...'"></p>
+            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="fullDescription || house.description.length < 300" v-html="selectLanguage === 0 ? house.description : selectLanguage === 1 ? house.description_en : house.description_tr"></p>
+            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else v-html="selectLanguage === 0 ? house.description.slice(0, 300) : selectLanguage === 1 ? house.description_en.slice(0, 300) : house.description_tr.slice(0, 300) + '...'"></p>
             <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 items-center w-fit animation__arrow" @click="fullDescription = !fullDescription" v-if="house.description.length > 300">
               <span class="text-[#6435A5] font-medium text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">{{ fullDescription ? language.menu_zastr_1[11] : language.menu_zastr_1[14] }}</span>
               <img src="../../assets/svg/arrow_right_purple.svg" class="transition-all duration-300 w-3.5 xxl:w-3 xl:wp-2.5" alt="Стрелочка в право">
@@ -156,7 +156,7 @@
             <div class="flex flex-wrap gap-3 xxl:gap-2.5 xl:gap-2m pt-4 xxl:pt-3 xl:pt-2.5">
               <span class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5"
                     v-for="item in arrayInfos"
-              >{{ item.name }}</span>
+              >{{ selectLanguage === 0 ? item.name : selectLanguage === 1 ? item.name_en : item.name_tr }}</span>
             </div>
           </div>
           <div class="grid grid-cols-2 md:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4 pb-14 xxl:pb-10 xl:pb-8">
@@ -164,7 +164,7 @@
               <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px]">{{ language.rielt_1[45] }}</span>
               <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 pt-6 xxl:pt-5 xl:pt-4">
                 <div class="flex justify-between items-center" v-for="dop in dops">
-                  <span :class="{ disableColor: dop.active !== 1 }" class="text-base xxl:text-sm xl:text-xs lg:text-[15px]">{{ dop.name }}</span>
+                  <span :class="{ disableColor: dop.active !== 1 }" class="text-base xxl:text-sm xl:text-xs lg:text-[15px]">{{ selectLanguage === 0 ? dop.name : selectLanguage === 1 ? dop.name_en : dop.name_tr }}</span>
                   <div v-if="dop.active === 1" class="bg-[#30CB49] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 lg:w-4 lg:h-4 rounded-full flex items-center justify-center">
                     <img src="../../assets/svg/check_icon.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-4" alt="">
                   </div>
@@ -210,7 +210,7 @@
     </div>
     <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
     <div class="_container">
-      <app-description-object-other-j-k :house="house" :slider="slider" :language="language" />
+      <app-description-object-other-j-k :house="house" :slider="slider" :language="language" :selectLanguage="selectLanguage" :city_name="city_array" :area_name="area_array" />
     </div>
   </main>
   <app-footer :language="language" />
@@ -236,7 +236,7 @@ import { Navigation, Pagination} from "swiper";
 import AppMap from "@/Components/AppMap.vue";
 
 export default {
-  props: ['house', 'dops', 'user', 'slider', 'infos', 'compilation'],
+  props: ['house', 'dops', 'user', 'slider', 'infos', 'compilation', 'city_array', 'area_array'],
   data() {
     return {
       fullDescription: false,
@@ -256,6 +256,8 @@ export default {
       markers: null,
       language: {},
       selectLanguage: 0,
+      city_name: {},
+      area_name: {},
     }
   },
   provide() {
@@ -266,11 +268,17 @@ export default {
   created() {
     if(this.user.lang === 0) {
       this.language = this.$ru;
+      this.selectLanguage = 0;
     } else if (this.user.lang === 1) {
       this.language = this.$en;
+      this.selectLanguage = 1;
     } else if (this.user.lang === 2) {
       this.language = this.$tur;
+      this.selectLanguage = 2;
     }
+
+    this.city_name = this.city_array.find(item => item.title === this.house.city);
+    this.area_name = this.area_array.find(item => item.title === this.house.area);
   },
   methods: {
     choseLanguage(language) {

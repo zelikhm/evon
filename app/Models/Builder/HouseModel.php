@@ -18,6 +18,8 @@ class HouseModel extends Model
     'user_id',
     'title',
     'description',
+    'description_tr',
+    'description_en',
     'city',
     'area',
     'longitude',

@@ -11,6 +11,7 @@ use App\Models\Builder\HouseModel;
 use App\Models\Builder\HouseNewsModel;
 use App\Models\Builder\HouseViewsModel;
 use App\Models\Builder\Info\CityModel;
+use App\Models\Builder\Info\RegionModel;
 use App\Models\Builder\Info\StructureModel;
 use App\Models\Builder\Info\TypesModel;
 use App\Models\Messages\ChatModel;
@@ -558,6 +559,15 @@ trait MainInfo
   protected function getCity()
   {
     return CityModel::with(['regions'])->get();
+  }
+
+  /**
+   * get areas
+   * @return \Illuminate\Database\Eloquent\Collection
+   */
+
+  protected function getRegions() {
+    return RegionModel::all();
   }
 
   /**

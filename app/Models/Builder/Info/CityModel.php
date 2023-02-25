@@ -11,6 +11,8 @@ class CityModel extends Model
 
   protected $fillable = [
     'title',
+    'title_tr',
+    'title_en',
     'longitude',
     'latitude',
   ];

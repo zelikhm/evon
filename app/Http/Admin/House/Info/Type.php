@@ -68,6 +68,8 @@ class Type extends Section implements Initializable
         ->setWidth('50px')
         ->setHtmlAttribute('class', 'text-center'),
       AdminColumn::text('name', 'Название')->setWidth('350px'),
+      AdminColumn::text('name_tr', 'Название (tr)')->setWidth('350px'),
+      AdminColumn::text('name_en', 'Название (en)')->setWidth('350px'),
     ];
 
     $display = AdminDisplay::datatablesAsync()
@@ -95,6 +97,8 @@ class Type extends Section implements Initializable
     $form = AdminForm::elements([
 
       AdminFormElement::text('name', 'Название'),
+      AdminFormElement::text('name_tr', 'Название (tr)'),
+      AdminFormElement::text('name_en', 'Название (en)'),
     ]);
 
     $card->getButtons()->setButtons([

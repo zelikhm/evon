@@ -13,7 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('city_models', function (Blueprint $table) {
+          $table->string('title_tr')->nullable();
+          $table->string('title_en')->nullable();
+        });
     }
 
     /**

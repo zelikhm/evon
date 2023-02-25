@@ -33,9 +33,9 @@
   <div v-if="oLoginRegister" class="fixed z-[100] w-full h-full flex items-center justify-center">
     <div class="relative bg-white rounded-[12px] p-10 xxl:p-9 xl:p-8 lg:p-5 z-50 w-[30%] lg:w-[48%] md:w-[60%] sm:w-[90%] h-fit">
       <div class="relative mb-9 xxl:mb-6 xl:mb-5">
-        <h2 class="text-center text-[22px] xxl:text-lg xl:text-base font-semibold">Регистрация на платформе</h2>
+        <h2 class="text-center text-[22px] xxl:text-lg xl:text-base font-semibold">{{ language.reg[0] }}</h2>
         <p v-if="form.success" class="mt-10 text-center">
-          Ваша заявка успешно отправлена!
+          {{ language.reg[10] }}
         </p>
         <button @click="closeModal" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
           <div class="absolute h-[1px] w-4 bg-[#8A8996] rotate-45"></div>
@@ -44,7 +44,7 @@
       </div>
       <form v-if="!form.success" @submit.prevent="submit">
       <div class="flex flex-col p-3.5 xxl:pb-2 xl:pb-2 mb-6 xxl:mb-4 xl:mb-3 border border-solid border-[#E5DFEE] rounded-[6px]">
-        <label for="name" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]" :class="{'error': form.errors.first_name}">Имя {{ form.errors.first_name }}</label>
+        <label for="name" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]" :class="{'error': form.errors.first_name}">{{ language.reg[1] }} {{ form.errors.first_name }}</label>
         <input
           v-model="form.first_name"
           class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
@@ -53,7 +53,7 @@
         >
       </div>
       <div class="flex flex-col p-3.5 xxl:pb-2 xl:pb-2 mb-6 xxl:mb-4 xl:mb-3 border border-solid border-[#E5DFEE] rounded-[6px]">
-        <label for="surname" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]" :class="{'error': form.errors.last_name}">Фамилия {{ form.errors.last_name }}</label>
+        <label for="surname" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]" :class="{'error': form.errors.last_name}">{{ language.reg[2] }} {{ form.errors.last_name }}</label>
         <div class="relative">
           <input
             v-model="form.last_name"
@@ -63,7 +63,7 @@
         </div>
       </div>
       <div class="flex flex-col p-3.5 xxl:pb-2 xl:pb-2 mb-6 xxl:mb-4 xl:mb-3 border border-solid border-[#E5DFEE] rounded-[6px]">
-        <label for="tel" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]" :class="{'error': form.errors.phone}">Телефон {{ form.errors.phone }}</label>
+        <label for="tel" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]" :class="{'error': form.errors.phone}">{{ language.reg[3] }} {{ form.errors.phone }}</label>
         <input
             v-model="form.phone"
             class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
@@ -72,7 +72,7 @@
         >
       </div>
       <div class="flex flex-col p-3.5 xxl:pb-2 xl:pb-2 mb-6 xxl:mb-4 xl:mb-3 border border-solid border-[#E5DFEE] rounded-[6px]">
-        <label for="email" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]" :class="{'error': form.errors.email}">Почта {{ form.errors.email }}</label>
+        <label for="email" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]" :class="{'error': form.errors.email}">{{ language.reg[4] }} {{ form.errors.email }}</label>
         <input
             v-model="form.email"
             class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
@@ -80,7 +80,7 @@
             id="email"
         >
       </div>
-      <h3 class="text-center text-[18px] xxl:text-base xl:text-base font-semibold">Выберите место работы:</h3>
+      <h3 class="text-center text-[18px] xxl:text-base xl:text-base font-semibold">{{ language.reg[5] }}</h3>
       <div class="relative my-4">
         <div @click="openSelectPlaceWork = !openSelectPlaceWork" class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5 py-3" style="border: 2px solid #E5DFEE;">
           <span>{{ selectType }}</span>
@@ -112,16 +112,18 @@ export default {
     oLoginRegister: {
       type: Boolean
     },
+    selectLanguage: 0,
+    language: {}
   },
   data() {
     return {
-      selectType: 'Агентство недвижимости (владелец/директор)',
+      selectType: this.language.reg[6],
       openSelectPlaceWork: false,
       types: [
-        { type: 'Агентство недвижимости (владелец/директор)' },
-        { type: 'Частный брокер' },
-        { type: 'Работаю в агентстве недвижимости' },
-        { type: 'Строительная компания' },
+        { type: this.language.reg[6] },
+        { type: this.language.reg[7] },
+        { type: this.language.reg[8] },
+        { type: this.language.reg[9] },
       ],
       user: {
         first_name: '',

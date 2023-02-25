@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('region_models', function (Blueprint $table) {
-          $table->string('title_tr')->nullable();
-          $table->string('title_en')->nullable();
-        });
+      Schema::table('types_models', function (Blueprint $table) {
+        $table->string('name_tr')->nullable();
+        $table->string('name_en')->nullable();
+      });
     }
 
     /**

@@ -80,7 +80,7 @@
                   <input class="custom__checkbox" name="infrastructure" type="checkbox"
                          v-bind:checked="checkCity(item.id)">
                   <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
-                         v-on:click="changeSelectCity(item)">{{ item.title }}
+                         v-on:click="changeSelectCity(item)">{{ selectLanguage === 0 ? item.title : selectLanguage === 1 ? item.title_en : item.title_tr }}
                   </label>
                 </div>
               </div>
@@ -104,7 +104,7 @@
                   <input class="custom__checkbox" name="infrastructure" type="checkbox"
                          v-bind:checked="checkRegion(item.id)">
                   <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
-                         v-on:click="changeSelectRegion(item)">{{ item.title }}
+                         v-on:click="changeSelectRegion(item)">{{ selectLanguage === 0 ? item.title : selectLanguage === 1 ? item.title_en : item.title_tr }}
                   </label>
                 </div>
               </div>
@@ -114,7 +114,7 @@
           <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]" v-if="filters.areas.length > 0"
                :class="{ 'border__bottom--0': openSelectRegionOpen}">
             <span
-              class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-5 xxl:pt-4 xl:pt-3">Выбранные районы: </span>
+              class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-5 xxl:pt-4 xl:pt-3">{{ language.ob[17] }} </span>
             <div class="relative" :tabindex="tabindex" @blur="openSelectRegionOpen = false">
               <div @click="openSelectRegionOpen = !openSelectRegionOpen"
                    class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
@@ -128,7 +128,7 @@
                   <input class="custom__checkbox" name="infrastructure" type="checkbox"
                          v-bind:checked="checkRegion(item.id)">
                   <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
-                         v-on:click="changeSelectRegion(item)">{{ item.title }}
+                         v-on:click="changeSelectRegion(item)">{{ selectLanguage === 0 ? item.title : selectLanguage === 1 ? item.title_en : item.title_tr }}
                   </label>
                 </div>
               </div>
@@ -285,7 +285,7 @@
                  class="transition-all duration-500 h-fit flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
               <div class="flex items-center text-[#1E1D2D]" v-for="(item, index) in infos_array">
                 <input class="custom__checkbox" name="infrastructure" type="checkbox" :id="'infrastructure' + item.id" v-model="item.active">
-                <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" :for="'infrastructure' + item.id">{{ item.name }}</label>
+                <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" :for="'infrastructure' + item.id">{{  selectLanguage === 0 ? item.name : selectLanguage === 1 ? item.name_en : item.name_tr }}</label>
               </div>
             </div>
           </div>
@@ -299,7 +299,7 @@
             <div v-if="openDopServices" class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
               <div class="flex items-center text-[#1E1D2D]" v-for="(item, index) in dops_array">
                 <input class="custom__checkbox" name="services" type="checkbox" :id="'services' + item.id" v-model="item.active">
-                <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" :for="'services' + item.id">{{ item.name }}</label>
+                <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" :for="'services' + item.id">{{ selectLanguage === 0 ? item.name : selectLanguage === 1 ? item.name_en : item.name_tr }}</label>
               </div>
             </div>
           </div>
@@ -582,6 +582,7 @@
       count_houses: 0,
       type: 0,
       language: {},
+      selectLanguage: 0,
       dates: [],
     },
     emits: ['open-filter', 'open-add-selections', 'close-filter'],
@@ -1029,8 +1030,8 @@
 
       if (this.city[0] !== null) {
         this.selectDev = this.builders[0].first_name
-        this.selectCity = 'Выберите город...'
-        this.selectRegion = 'Выберите район...'
+        this.selectCity = this.language.ob[15]
+        this.selectRegion = this.language.ob[16]
         // this.selectRegion = this.city[0].regions[0].title
         // this.regions = this.city[0].regions
 

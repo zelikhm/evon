@@ -5,6 +5,8 @@
     @close-modal="closeModal"
     @open-modal-realtor="openModalRealtor"
     @open-modal-developer="openModalDeveloper"
+    :language="language"
+    :selectLanguage="selectLanguage"
   />
   <app-header
     @login-developer="openLoginDeveloper = !openLoginDeveloper"
@@ -18,6 +20,8 @@
   <app-modal-register
       :oLoginRegister="openRegister"
       @close-modal="closeModalRegister"
+      :language="language"
+      :selectLanguage="selectLanguage"
   />
   <main>
     <div class="_container">

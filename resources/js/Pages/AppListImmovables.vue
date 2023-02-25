@@ -44,6 +44,7 @@
           :type="type"
           :language="language"
           :dates="dates"
+          :selectLanguage="selectLanguage"
         />
         <app-news-developer
             @open="(item) => openNewModal(item)"
@@ -173,10 +174,13 @@ export default {
   created() {
     if(this.user.lang === 0) {
       this.language = this.$ru;
+      this.selectLanguage = 0;
     } else if (this.user.lang === 1) {
       this.language = this.$en;
+      this.selectLanguage = 1;
     } else if (this.user.lang === 2) {
       this.language = this.$tur;
+      this.selectLanguage = 2;
     }
 
     this.dates = [

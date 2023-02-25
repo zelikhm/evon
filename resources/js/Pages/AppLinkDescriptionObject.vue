@@ -458,6 +458,7 @@
         squareFrom: '',
         squareTo: '',
         frame: [],
+        selectLanguage: 0,
       }
     },
     methods: {

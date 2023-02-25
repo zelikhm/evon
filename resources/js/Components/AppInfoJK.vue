@@ -52,7 +52,7 @@ import {Link} from '@inertiajs/inertia-vue3'
       <div class="relative">
         <div @click="openSelectCity = !openSelectCity"
              class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3">
-          <span>{{ selectCity }}</span>
+          <span v-if="selectCity !== undefined">{{ selectLanguage === 0 ? selectCity.title : selectLanguage === 1 ? selectCity.title_en : selectCity.title_tr }}</span>
           <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all"
                :class="{ 'rotate-180': openSelectCity }" alt="">
         </div>
@@ -69,12 +69,11 @@ import {Link} from '@inertiajs/inertia-vue3'
               v-for="(city, idx) in filteredCity" :key="idx"
               @click="changeSelectCity(city, idx)"
               class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
-          >{{ city.title }}
+          >{{ selectLanguage === 0 ? city.title : selectLanguage === 1 ? city.title_en : city.title_tr }}
           </span>
         </div>
       </div>
     </div>
-
     <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]"
          :class="{ 'border__bottom--0': openSelectRegion}">
       <span
@@ -82,7 +81,7 @@ import {Link} from '@inertiajs/inertia-vue3'
       <div class="relative">
         <div @click="openSelectRegion = !openSelectRegion"
              class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
-          <span>{{ selectRegion }}</span>
+          <span v-if="selectRegion !== null && selectRegion !== undefined">{{ selectLanguage === 0 ? selectRegion.title : selectLanguage === 1 ? selectRegion.title_en : selectRegion.title_tr }}</span>
           <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all"
                :class="{ 'rotate-180': openSelectRegion }" alt="">
         </div>
@@ -93,7 +92,7 @@ import {Link} from '@inertiajs/inertia-vue3'
               @click="changeSelectRegion(region)"
               class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
           >
-            {{ region.title }}
+            {{ selectLanguage === 0 ? region.title : selectLanguage === 1 ? region.title_en : region.title_tr }}
           </span>
         </div>
       </div>
@@ -377,7 +376,7 @@ import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 export default {
-  props: ['dops', 'infos', 'city', 'supports', 'count', 'house', 'language'],
+  props: ['dops', 'infos', 'city', 'supports', 'count', 'house', 'language', 'selectLanguage'],
   inject: ['user'],
   emits: ['open-add-contact'],
   data() {
@@ -594,8 +593,8 @@ export default {
           formData.append('house_id', this.house.id);
           formData.append('title', this.object.title);
           formData.append('description', this.object.description);
-          formData.append('city', this.selectCity);
-          formData.append('area', this.selectRegion !== 'Не указано' ? this.selectRegion : null);
+          formData.append('city', this.selectCity.title);
+          formData.append('area', this.selectRegion !== 'Не указано' ? this.selectRegion.title : null);
           formData.append('latitude', +coord[0]);
           formData.append('longitude', +coord[1]);
           formData.append('percent', this.object.percent);
@@ -680,7 +679,8 @@ export default {
       }
     },
     changeSelectCity(city, idx) {
-      this.selectCity = this.object.city = city.title
+      this.selectCity = city
+      this.object.city = city.title
       this.openSelectCity = false
 
       this.regions = this.city[idx].regions
@@ -699,10 +699,11 @@ export default {
     },
     changeSelectRegion(region) {
       if(region.id === -1) {
-        this.selectRegion = region.title
+        this.selectRegion = region
         this.object.area = null
       } else {
-        this.selectRegion = this.object.area = region.title
+        this.selectRegion = region
+        this.object.area = region.title
       }
 
       this.openSelectRegion = false
@@ -779,10 +780,14 @@ export default {
     this.supportsReady = this.supports
 
     if (this.house !== undefined) {
+
+      let city = this.city.find(item => item.title === this.house.city);
+      let area = this.regions.find(item => item.title === this.house.area);
+
       this.object.title = this.house.title
       this.object.description = this.house.description
-      this.selectCity = this.house.city
-      this.selectRegion = this.house.area
+      this.selectCity = city
+      this.selectRegion = area
       this.object.coordinates = this.house.latitude + ' ' + this.house.longitude
       this.selectType = this.house.info.type
       this.selectDeadline = this.house.created

@@ -61,27 +61,49 @@ class AuthController extends Controller
 
   public function sendCode(Request $request)
   {
-    $rand = rand(1000, 9999);
 
-    Http::withBasicAuth('Evon903', 'Evon904')->get(
-      'http://api.smsfeedback.ru/messages/v2/send/?phone=' . $request->phone
-      . '&text=' . 'Проверочный код: ' . $rand
-      . '&sender=EVON'
-    );
+    $user = User::where('email', $request->email)->first();
 
-    $user = User::where('phone', 'LIKE', '%' . $request->phone)
-      ->where('role', 0)
-      ->first();
-
-    if($user !== null) {
-      User::where('phone', $request->phone)
-        ->update(['code' => $rand]);
-
-      return response()->json($rand, 200);
-    } else {
-      return response()->json(false, 400);
+    if($user === null) {
+      return response()->json(['status' => false, 'code' => 0], 200);
     }
 
+    $rand = rand(100000, 999999);
+
+    User::where('email', $request->email)->update(['code' => $rand]);
+
+    $curl = curl_init();
+
+    $message = "<html><head></head><body><p>
+                Код доступа к приложению: $rand<br>
+                </p></body></html>";
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => "https://api.smtp.bz/v1/smtp/send",
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_TIMEOUT => 30,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => "POST",
+      CURLOPT_HTTPHEADER => array(
+        "authorization: AwFGFIPriK4AQad1rFXt9ox1c00PT8LjugQ1"
+      ),
+      CURLOPT_POSTFIELDS => http_build_query(array(
+        'subject' => "Проверочный код", // Обязательно
+        'name' => "Evon",
+        'html' => $message, // Обязательно
+        'from' => "info@evon-tr.com", // Обязательно
+        'to' => $request->email, // Обязательно
+        'headers' => "[{ 'x-tag': 'my_newsletter_ids' }]",
+        'text' => "Text version message"
+      ))
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+
+    curl_close($curl);
+
+    return response()->json(['status' => true, 'code' => $rand], 200);
 
   }
 

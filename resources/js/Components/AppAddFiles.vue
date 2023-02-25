@@ -18,7 +18,7 @@
             </clipPath>
           </defs>
         </svg>
-        <span class="font-medium text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none">Загрузить файл</span>
+        <span class="font-medium text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none">{{ language.dob_kv_1[26] }}</span>
       </label>
     </div>
     <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">

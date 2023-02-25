@@ -153,6 +153,8 @@ class House extends Section implements Initializable
           ]),
 
         AdminFormElement::textarea('description', 'Описание'),
+        AdminFormElement::textarea('description_tr', 'Описание (tr)'),
+        AdminFormElement::textarea('description_en', 'Описание (en)'),
       ]);
 
     } else {
@@ -180,6 +182,8 @@ class House extends Section implements Initializable
           ]),
 
         AdminFormElement::textarea('description', 'Описание'),
+        AdminFormElement::textarea('description_tr', 'Описание (tr)'),
+        AdminFormElement::textarea('description_en', 'Описание (en)'),
       ]);
 
     }

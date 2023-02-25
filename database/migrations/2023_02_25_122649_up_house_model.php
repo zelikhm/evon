@@ -13,7 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        Schema::table('house_models', function (Blueprint $table) {
+          $table->longText('description_tr')->nullable();
+          $table->longText('description_en')->nullable();
+        });
     }
 
     /**

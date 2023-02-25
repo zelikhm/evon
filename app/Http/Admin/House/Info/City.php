@@ -95,12 +95,16 @@ class City extends Section implements Initializable
     $form = AdminForm::elements([
 
       AdminFormElement::text('title', 'Название города'),
+      AdminFormElement::text('title_tr', 'Название города (tr)'),
+      AdminFormElement::text('title_en', 'Название города (en)'),
 
       AdminFormElement::text('longitude', 'Долгота'),
       AdminFormElement::text('latitude', 'Широта'),
 
       AdminFormElement::hasMany('regions', [
         AdminFormElement::text('title', 'Название района'),
+        AdminFormElement::text('title_tr', 'Название района (tr)'),
+        AdminFormElement::text('title_en', 'Название района (en)'),
       ]),
     ]);
 

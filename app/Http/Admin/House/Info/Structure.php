@@ -95,6 +95,8 @@ class Structure extends Section implements Initializable
     $form = AdminForm::elements([
 
       AdminFormElement::text('name', 'Название'),
+      AdminFormElement::text('name_tr', 'Название (tr)'),
+      AdminFormElement::text('name_en', 'Название (en)'),
     ]);
 
     $card->getButtons()->setButtons([

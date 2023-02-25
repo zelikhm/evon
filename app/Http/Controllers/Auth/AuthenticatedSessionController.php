@@ -96,10 +96,10 @@ class AuthenticatedSessionController extends Controller
   public function storePhone(Request $request) {
 
     $request->validate([
-      'phone' => 'required', 'max:50', 'exists:App\Models\User,phone',
+      'email' => ['required', 'max:50', 'exists:App\Models\User,email'],
     ]);
 
-    $user = User::where('phone', 'LIKE', '%' . $request->phone)
+    $user = User::where('email', $request->email)
       ->where('role', 0)
       ->first();
 

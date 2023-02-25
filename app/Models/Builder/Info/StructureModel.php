@@ -10,7 +10,9 @@ class StructureModel extends Model
     use HasFactory;
 
     protected $fillable = [
-      'name'
+      'name',
+      'name_tr',
+      'name_en',
     ];
 
     protected $hidden = [
