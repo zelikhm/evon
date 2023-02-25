@@ -175,7 +175,7 @@
               </div>
             </div>
             <div class="border border-solid border-[#E5DFEE] p-7 xxl:p-5 xl:p-4 rounded-[12px]">
-              <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px]">{{ language.rielt_1[25] }}</span>
+              <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px]">{{ language.rielt_1[24] }}</span>
               <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 pt-6 xxl:pt-5 xl:pt-4">
                 <div class="flex justify-between items-center" v-if="house.info.toSea !== null">
                   <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs xl:text-xs lg:text-[15px]">{{ language.rielt_1[26] }}</span>

@@ -143,12 +143,14 @@ export default {
     }
   },
   created() {
-    if(this.selectLanguage === 0) {
-      this.language = this.$ru;
-    } else if (this.selectLanguage === 1) {
-      this.language = this.$en;
-    } else if (this.selectLanguage === 2) {
-      this.language = this.$tur;
+    if(this.user !== null) {
+      if(this.user.lang === 0) {
+        this.language = this.$ru;
+      } else if (this.user.lang === 1) {
+        this.language = this.$en;
+      } else if (this.user.lang === 2) {
+        this.language = this.$tur;
+      }
     }
   },
   methods: {
