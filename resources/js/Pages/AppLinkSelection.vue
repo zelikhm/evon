@@ -8,8 +8,8 @@ import { Link } from '@inertiajs/inertia-vue3'
     :class="{'-left__full': !openNotification}"
     @close-notification="openNotification = false"
   />
-  <header class="relative h-[13.4vw]">
-    <img v-if="compilation.company === null || compilation.company.banner === null || compilation.company.banner === 'undefined'" class="w-full absolute top-0 left-0 h-full" src="../../assets/bg_links.jpg" alt="">
+  <header class="relative h-[13.4vw] lg:h-[130px]">
+    <img v-if="compilation.company === null || compilation.company.banner === null || compilation.company.banner === 'undefined'" class="w-full object-cover absolute top-0 left-0 h-full" src="../../assets/bg_links.jpg" alt="">
     <img v-else class="object-cover w-full absolute top-0 left-0 h-full" :src="compilation.company.banner" alt="">
     <div class="_container flex h-full">
       <div class="self-end flex items-center gap-7 xxl:gap-6 xl:gap-5 mb-10 xxl:mb-8 xl:mb-6">
@@ -20,8 +20,8 @@ import { Link } from '@inertiajs/inertia-vue3'
           <img class="flex-shrink-0 bg-black w-24 xxl:w-20 xl:w-16 h-24 xxl:h-20 xl:h-16 rounded-full flex items-center justify-center object-cover" :src="compilation.company.image" alt="">
         </div>
         <div class="text-white flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
-          <span class="text-[18px] xxl:text-[16px] xl:text-[14px] leading-none" v-if="compilation.company !== null">{{ compilation.company.title }}</span>
-          <span class="text-[18px] xxl:text-[16px] xl:text-[14px] leading-none" v-else>Агентство недвижимости</span>
+          <span class="text-[18px] xxl:text-[16px] xl:text-[14px] lg:text-[16px] leading-none" v-if="compilation.company !== null">{{ compilation.company.title }}</span>
+          <span class="text-[18px] xxl:text-[16px] xl:text-[14px] lg:text-[16px] leading-none" v-else>Агентство недвижимости</span>
         </div>
       </div>
     </div>
@@ -34,14 +34,14 @@ import { Link } from '@inertiajs/inertia-vue3'
         <div class="grid__75-25 gap-7 xxl:gap-5 xl:gap-4">
           <div class="flex flex-col gap-y-14 xxl:gap-y-10 xl:gap-y-8">
             <div v-for="i in houses">
-              <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] mb-5 xxl:mb-4 xl:mb-3">{{ i[0].city }}</h2>
-              <div class="grid grid-cols-3 gap-x-7 xxl:gap-x-5 xl:gap-x-4 gap-y-14 xxl:gap-y-10 xl:gap-y-8">
+              <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px] mb-5 xxl:mb-4 xl:mb-3">{{ i[0].city }}</h2>
+              <div class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-x-7 xxl:gap-x-5 xl:gap-x-4 gap-y-14 xxl:gap-y-10 xl:gap-y-8">
                 <div class="flex flex-col" v-for="item in i">
                   <Link :href="href + '/' + item.slug">
                     <div class="relative rounded-[5px]">
-                      <img class="h-[15vw] w-full object-cover" :src="item.image" v-if="item.image" alt="">
-                      <img class="h-[15vw] w-full object-cover" v-else src="../../assets/no-img-houses-zastroy.jpg" alt="">
-                      <div class="absolute flex flex-col justify-between top-0 left-0 w-full h-full text-[14px] xxl:text-[12px] xl:text-[10px]">
+                      <img class="h-[15vw] md:h-[28vw] sm:h-[43vw] w-full object-cover" :src="item.image" v-if="item.image" alt="">
+                      <img class="h-[15vw] md:h-[28vw] sm:h-[43vw w-full object-cover" v-else src="../../assets/no-img-houses-zastroy.jpg" alt="">
+                      <div class="absolute flex flex-col justify-between top-0 left-0 w-full h-full text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px]">
                         <span class="bg-[#30CB49] uppercase self-end text-white leading-none px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 m-4 xxl:m-3 xl:m-2.5 rounded-[3px]" v-if="item.created && !Number.isInteger(+item.created[0])">{{ item.created }}</span>
                         <span class="bg-[#E84680] uppercase self-end text-white leading-none px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 m-4 xxl:m-3 xl:m-2.5 rounded-[3px]" v-else-if="item.created">{{ item.created }}</span>
                         <div class="flex items-center text-white gap-2 xxl:gap-1.5 xl:gap-1 p-5 xxl:p-4 xl:p-3">
@@ -52,7 +52,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                       </div>
                     </div>
                     <div class="text-[#1E1D2D] flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 p-5 xxl:p-4 xl:p-3">
-                      <span class="font-bold text-[20px] xxl:text-[16px] xl:text-[13px] leading-none">{{ compilation.isVisible === 1 ? item.title : `Лот №${item.id + 10000}` }}</span>
+                      <span class="font-bold text-[20px] xxl:text-[16px] xl:text-[13px] lg:text-[18px] leading-none">{{ compilation.isVisible === 1 ? item.title : `Лот №${item.id + 10000}` }}</span>
                       <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">от {{ getMinPrice(item) }} €, до {{ getMaxPrice(item) }} € за м2</span>
                     </div>
                   </Link>
@@ -65,25 +65,25 @@ import { Link } from '@inertiajs/inertia-vue3'
               <img v-if="compilation.user.image" :src="compilation.user.image" class="object-cover w-14 xxl:w-12 xl:w-10 rounded-full h-14 xxl:h-12 xl:h-10" alt="">
               <img v-else src="../../assets/no-img-houses.jpg" class="object-cover w-14 xxl:w-12 xl:w-10 rounded-full h-14 xxl:h-12 xl:h-10" alt="">
               <div class="flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
-                <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none font-medium">{{ compilation.user.first_name + ' ' + compilation.user.last_name }}</span>
-                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ compilation.user.status }}</span>
+                <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none font-medium">{{ compilation.user.first_name + ' ' + compilation.user.last_name }}</span>
+                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none">{{ compilation.user.status }}</span>
               </div>
             </div>
-            <div class="flex items-center mb-5 xxl:mb-4 xl:mb-4 text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">
+            <div class="flex items-center mb-5 xxl:mb-4 xl:mb-4 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none">
               <span class="text-[#8A8996] leading-none">Языки:&nbsp;</span>
               <span class="leading-none">{{ compilation.user.link }}</span>
             </div>
             <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 mb-5">
               <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]">
-                <img src="../../assets/svg/chat_tel_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="" v-if="compilation.user.phone">
-                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px]">{{ compilation.user.phone }}</span>
+                <img src="../../assets/svg/chat_tel_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5 lg:w-[4.5]" alt="" v-if="compilation.user.phone">
+                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ compilation.user.phone }}</span>
               </div>
               <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]" v-if="compilation.user.email">
-                <img src="../../assets/svg/chat_mail_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
-                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px]">{{ compilation.user.email }}</span>
+                <img src="../../assets/svg/chat_mail_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5 lg:w-[4.5]" alt="">
+                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ compilation.user.email }}</span>
               </div>
             </div>
-            <span class="w-full text-[15px] xxl:text-[13px] xl:text-[11px]" v-if="compilation.description">Комментарий подборки: {{ compilation.description }}</span>
+            <span class="w-full text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px]" v-if="compilation.description">Комментарий подборки: {{ compilation.description }}</span>
           </div>
         </div>
       </div>

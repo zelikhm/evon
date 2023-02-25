@@ -1,6 +1,6 @@
 <template>
   <div class="fixed z-[100] w-full h-full flex items-center lg:items-start">
-    <div class="relative z-50 left-[10vw] w-[1142px] exl:w-[59.5%] lg:w-full lg:left-0 lg:px-5 lg:mt-10">
+    <div class="relative z-50 left-[10vw] w-[1142px] exl:w-[59.5%] lg:w-full lg:left-0 lg:px-2 lg:mt-10 sm:mt-[20vh]">
       <div class="flex gap-7 xxl:gap-5 xl:gap-4">
         <div class="w-[100%]">
           <swiper
