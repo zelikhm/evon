@@ -10,7 +10,7 @@
 
       <div class="flex justify-center py-10 xxl:py-8 xl:py-6">
         <div v-if="flat.isOpen !== 3">
-          <img class="max-h-[82vh]" :src="flat.isOpen === 0 ? flat.imageUp : flat.imageDown" alt="">
+          <img class="max-h-[80vh]" :src="flat.isOpen === 0 ? flat.imageUp : flat.imageDown" alt="">
         </div>
         <div v-else>
           <img class="max-h-[40vh]" :src="flat.imageDown" alt="">
