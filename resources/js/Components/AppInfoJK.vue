@@ -233,7 +233,8 @@ import {Link} from '@inertiajs/inertia-vue3'
           class="multi__select flex flex-col gap-2 xxl:gap-1.5 h-fit border border-solid border-[#E5DFEE] rounded-[6px]"
         >
           <div class="px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5 text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">
-            {{ language.dob_ob_1[12] }}
+            {{ 12 }}
+<!--            language.dob_ob_1[12]-->
           </div>
           <Multiselect
               @click="borderServices = !borderServices"
@@ -250,7 +251,8 @@ import {Link} from '@inertiajs/inertia-vue3'
         <div :class="{'border__bottom--0': borderInfrastructure}"
              class="multi__select flex flex-col gap-2 xxl:gap-1.5 h-fit border border-solid border-[#E5DFEE] rounded-[6px]">
           <div class="px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5 text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">
-            {{ language.dob_ob_1[13] }}
+            {{ 13 }}
+<!--            language.dob_ob_1[13]-->
           </div>
           <Multiselect
               @click="borderInfrastructure = !borderInfrastructure"
