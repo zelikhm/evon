@@ -53,7 +53,7 @@ export default {
             window.location.href = res.data;
             this.preloader = false;
           } else {
-            console.log(res.data);
+            console.log(res);
             this.preloader = false;
           }
 
