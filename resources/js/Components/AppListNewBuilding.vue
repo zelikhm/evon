@@ -80,7 +80,7 @@
                   <input class="custom__checkbox" name="infrastructure" type="checkbox"
                          v-bind:checked="checkCity(item.id)">
                   <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
-                         v-on:click="changeSelectCity(item)">{{ selectLanguage === 0 ? item.title : selectLanguage === 1 ? item.title_en : item.title_tr }}
+                         v-on:click="changeSelectCity(item)">{{ selectLanguage === 0 ? item.title : selectLanguage === 1 ? item.title_en !== undefined ? item.title_en : '' : item.title_tr !== undefined ? item.title_tr : '' }}
                   </label>
                 </div>
               </div>
@@ -104,7 +104,7 @@
                   <input class="custom__checkbox" name="infrastructure" type="checkbox"
                          v-bind:checked="checkRegion(item.id)">
                   <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
-                         v-on:click="changeSelectRegion(item)">{{ selectLanguage === 0 ? item.title : selectLanguage === 1 ? item.title_en : item.title_tr }}
+                         v-on:click="changeSelectRegion(item)">{{ selectLanguage === 0 ? item.title : selectLanguage === 1 ? item.title_en !== undefined ? item.title_en : '' : item.title_tr !== undefined ? item.title_tr : '' }}
                   </label>
                 </div>
               </div>
