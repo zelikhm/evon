@@ -15,8 +15,11 @@
         </label>
         <span class="text-[18px] xxl:text-[15px] xl:text-[13px]">{{ item.price }} €</span>
       </div>
-      <button class="login__btn--bg  rounded-[5px] w-full py-5 xxl:py-4 xl:py-3" v-on:click="payment()">
+      <button class="login__btn--bg  rounded-[5px] w-full py-5 xxl:py-4 xl:py-3" v-on:click="payment()" v-if="preloader">
         <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">{{ language.prof_zastr[7] }}</span>
+      </button>
+      <button class="login__btn--bg  rounded-[5px] w-full py-5 xxl:py-4 xl:py-3" v-else>
+        <div class="loader"></div>
       </button>
     </div>
     <div @click="$emit('close-pay-profile')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
@@ -31,11 +34,14 @@ export default {
     return {
       amount: 0,
       type: 0,
+      preloader: false,
     }
   },
   methods: {
 
     payment() {
+      this.preloader = true;
+
       if(this.amount !== 0) {
 
         axios.post(route('pair'), {
@@ -46,7 +52,10 @@ export default {
           window.location.href = res.data;
         })
 
+        console.log(1);
+
       }
+      this.preloader = false;
     },
     setDate(item) {
 
