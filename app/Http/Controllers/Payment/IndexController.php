@@ -41,6 +41,7 @@ class IndexController extends Controller
     $debug_on           = 1;
 
     $paytr_token=base64_encode(hash_hmac('sha256', $required.$merchant_salt, $merchant_key, true));
+
     $post_vals=array(
       'merchant_id'       => $merchant_id,
       'name'              => $name,
@@ -70,7 +71,7 @@ class IndexController extends Controller
     curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
     curl_setopt($ch, CURLOPT_TIMEOUT, 20);
     $result = @curl_exec($ch);
-
+    return response()->json($result, 201);
     if(curl_errno($ch))
       die("PAYTR LINK CREATE API request timeout. err:".curl_error($ch));
 
@@ -79,7 +80,7 @@ class IndexController extends Controller
 //    $result = json_decode($result,1);
 
 //    if($result === null) {
-      return response()->json($result, 204);
+      return response()->json($result, 200);
 //    }
 
     return response()->json($result['link'], 200);
