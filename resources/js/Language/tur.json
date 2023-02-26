@@ -174,7 +174,7 @@
     "11": "tarihine kadar aktif",
     "12": "bize kendinizden bahsedin",
     "13": "Öde",
-    "14": "Языки"
+    "14": "diller"
   },
   "rielt_1": {
     "0": "Yeni binalar",
@@ -231,10 +231,10 @@
     "51": "Yeniler",
     "52": "Promasyon",
     "53": "Popüler olanlar",
-    "54": "По увелечению цены",
-    "55": "По уменьшению цены",
-    "56": "мин за",
-    "57": "мин. цена"
+    "54": "En yüksek fiyat",
+    "55": "En düşük fiyat",
+    "56": "min",
+    "57": "min fiyat"
   },
   "rielt_2": {
     "0": "seçimlerim",
@@ -249,7 +249,7 @@
     "5": "Konut kompleksi",
     "6": "Oluştur",
     "7": "Gönder",
-    "8": "Введите название подборки"
+    "8": "seçimlerim ismini girin"
   },
   "podbor_1": {
     "0": "Müşterilere seçiminizin bağlantısını gönderin",
@@ -285,32 +285,34 @@
     "10": "Daha fazla",
     "11": "altyapı",
     "12": "Bölgedeki diğer KK (Konut kompleksleri): ",
-    "13": "Читать далее...",
-    "14": "Смотреть все новости",
-    "15": "Выберите город...",
-    "16": "Выберите район...",
-    "17": "Выбранные районы...",
+    "13": "Devamını oku...",
+    "14": "Tüm haberleri gör",
+    "15": "Şehir seçin...",
+    "16": "İlçe seçin...",
+    "17": "Seçilen ilçeler...",
     "18": "Emlakçı",
     "19": "arka",
     "20": "pay",
     "21": "Daire yok",
-    "22": "Belirtilmemiş"
+    "22": "Belirtilmemiş",
+    "23": "nesneler",
+    "24": "Hayir"
   },
   "reg": {
-    "0": "Регистрация на платформе",
-    "1": "Имя",
-    "2": "Фамилия",
-    "3": "Телефон",
-    "4": "Почта",
-    "5": "Выберите место работы:",
-    "6": "Агентство недвижимости (владелец/директор)",
-    "7": "Частный брокер",
-    "8": "Работаю в агентстве недвижимости",
-    "9": "Строительная компания",
-    "10": "Ваша заявка успешно отправлена!",
-    "11": "Такой емейл не зарегистрировано!",
-    "12": "Код отправлен на указанный емеил",
-    "13": "Проверьте код"
+    "0": "Hemen kaydol",
+    "1": "Ad",
+    "2": "Soyad",
+    "3": "Telefon numarası",
+    "4": "E-posta adresi",
+    "5": "İşyeri seçin:",
+    "6": "Emlak Ofisi (sahibi/yöneticisi)",
+    "7": "Bağımsız emlakçı",
+    "8": "Emlak şirketinde çalışıyorum",
+    "9": "İnşaat şirketi",
+    "10": "Başvurunuz başarıyla gönderildi!",
+    "11": "Bu e-posta kayıtlı değil!",
+    "12": "Kod belirtilen e-postaya gönderildi",
+    "13": "Kodu kontrol edin"
   },
   "alb": {
     "0": "3D render",

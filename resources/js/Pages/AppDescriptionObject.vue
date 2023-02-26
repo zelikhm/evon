@@ -118,7 +118,7 @@
           </swiper>
           <div class="border border-solid border-[#E5DFEE] h-[100px] xxl:h-[80px] xl:h-[60px] sm:h-fit flex items-center sm:flex-col justify-evenly rounded-[12px] mt-7 xxl:mt-5 xl:mt-4 mb-16 xxl:mb-12 xl:mb-10">
             <div class="flex flex-col justify-center sm:p-2">
-              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-center leading-none">{{ house.info.type }}</span>
+              <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-center leading-none">{{ house.info.type === 'Новостройка' ? language.rielt_1[0] : language.rielt_1[1]   }}</span>
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[13px]">{{ language.rielt_1[12] }}</span>
             </div>
             <div class="h-full w-[1px] sm:h-[1px] sm:w-full bg-[#E5DFEE]"></div>

@@ -1,5 +1,5 @@
 <template>
-  <NewsModal v-if="isNews" @close="isNews = false" :new_object="new_object"></NewsModal>
+  <NewsModal v-if="isNews" @close="isNews = false" :new_object="new_object" :language="language" ></NewsModal>
   <app-modal-notification
     class="left-[2vw] transition-all duration-1000"
     :class="{'-left__full': !openNotification}"

@@ -328,7 +328,7 @@
           <div class="flex flex-col items-start lg:gap-2">
             <h2
               class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] lg:text-[20px] whitespace-nowrap text-center">
-              {{ isSearch }}</h2>
+              {{ language.ob[23] }}</h2>
             <span class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center" v-if="!preloader"> {{ count_house }} {{ language.rielt_1[9] }}</span>
             <span class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center" v-else>  <div class="minLoader"></div>  {{ language.rielt_1[9] }}</span>
           </div>
@@ -592,6 +592,29 @@
     watch: {
       dates(newItem, oldItem) {
         this.selectDate = newItem[0].date;
+      },
+      language(item) {
+
+        this.deadline = this.language.ob[24];
+        this.selectDeadline = this.language.ob[24];
+
+        this.deadlines = [
+          {deadline: this.language.ob[24], id: 0},
+          {deadline: this.language.rielt_1[10], id: 1},
+        ]
+
+        this.selectCity = this.language.ob[15]
+        this.selectRegion = this.language.ob[16]
+
+        let date = new Date(),
+          fullYear = date.getFullYear(),
+          fullPlus5 = fullYear + 5
+
+        for (fullYear; fullYear <= fullPlus5; fullYear++) {
+          for (let month = 1; month <= 4; month += 1) {
+            this.deadlines.push({deadline: `${fullYear}/${month}`})
+          }
+        }
       }
     },
     data() {
@@ -640,13 +663,13 @@
         openSelectCity: false,
         openSelectRegion: false,
         regions: [],
-        selectDeadline: 'Не важно',
+        selectDeadline: this.language.ob[24],
         selectType: 'Новостройка',
         openSelectDeadline: false,
         openSelectType: false,
         deadlines: [
-          {deadline: 'Не важно', id: 0},
-          {deadline: 'Сдан', id: 1},
+          {deadline: this.language.ob[24], id: 0},
+          {deadline: this.language.rielt_1[10], id: 1},
         ],
         selectDev: null,
         openSelectDev: false,
@@ -706,8 +729,8 @@
         this.selectDev = '';
         this.filters.builder = '';
         //deadlines
-        this.selectDeadline = 'Не важно';
-        this.filters.deadline = 'Не важно';
+        this.selectDeadline = this.language.ob[24];
+        this.filters.deadline = 'СДАН';
         //price
         this.filters.price.max = '';
         this.filters.price.min = '';
@@ -1139,11 +1162,23 @@
         let object4 = [];
 
         if (this.filters.deadline && this.filters.deadline !== 'Не важно') {
-          object3.forEach(item => {
-            if (item.created === this.filters.deadline) {
-              object4.push(item);
+          if(this.filters.deadline !== this.language.ob[24] && this.filters.deadline !== 'Не важно') {
+
+            if(this.filters.deadline === 'Başarılı' || this.filters.deadline === 'Finished-Done') {
+              this.filters.deadline = 'Сдан';
             }
-          })
+
+            console.log(this.filters.deadline);
+
+            object3.forEach(item => {
+              if (item.created === this.filters.deadline) {
+                object4.push(item);
+              }
+            })
+          } else {
+            object4 = object3;
+          }
+
         } else {
           object4 = object3;
         }
