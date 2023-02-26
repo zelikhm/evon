@@ -4,7 +4,7 @@
 
 <template>
   <div class="relative w-full h-[90vh] my-5 xxl:my-4 xl:my-3">
-    <GMapMap :center="center" :disableDefaultUI="false" :zoom="city !== null ? 10 : 6"
+    <GMapMap :center="city !== null ? city : center" :disableDefaultUI="false" :zoom="city !== null ? 10 : 6"
              map-type-id="roadmap" class="w-full h-[90vh]"
              :options="{
                       zoomControl: false,
@@ -131,6 +131,17 @@
         },
       }
     },
+    watch: {
+      city(item) {
+        if(this.city !== null) {
+          console.log(this.city);
+          this.center = {
+            lat: (this.city.lat),
+            lng: (this.city.lng)
+          }
+        }
+      }
+    },
     methods: {
       addFavorite() {
         axios.post('/api/favorite/add', {
@@ -188,7 +199,6 @@
         }
       }
 
-      console.log(this.center);
     },
   }
 </script>

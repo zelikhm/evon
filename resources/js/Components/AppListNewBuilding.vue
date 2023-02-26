@@ -859,7 +859,7 @@
           this.regions = city.regions;
           this.select_city_id = city.id;
           if (parseFloat(city.latitude) !== null) {
-            this.city_map = {lat: (city.latitude), lng: (city.longitude)};
+            this.city_map = {lat: parseFloat(city.latitude), lng: parseFloat(city.longitude)};
           } else {
             this.city_map = null;
           }
@@ -1325,9 +1325,6 @@
         this.map_array = object10;
         this.count_house = this.houses_array.length;
         this.updatedMap();
-
-        console.log(1);
-
         return this.houses_array.splice(0, this.count);
       }
     },
