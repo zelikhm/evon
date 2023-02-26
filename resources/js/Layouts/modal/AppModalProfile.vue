@@ -49,8 +49,15 @@ export default {
             price: this.amount,
             type: this.type,
         }).then(res => {
-          window.location.href = res.data;
-          this.preloader = false;
+          if(res.status === 200) {
+            window.location.href = res.data;
+            this.preloader = false;
+          } else {
+
+          }
+
+        }).catch(e => {
+          console.log(e);
         })
 
         console.log(1);
