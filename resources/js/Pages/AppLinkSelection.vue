@@ -173,10 +173,13 @@ export default {
     if(this.user !== undefined) {
       if(this.user.lang === 0) {
         this.language = this.$ru;
+        this.selectLanguage === 0
       } else if (this.user.lang === 1) {
         this.language = this.$en;
+        this.selectLanguage === 1
       } else if (this.user.lang === 2) {
         this.language = this.$tur;
+        this.selectLanguage === 2
       }
     } else {
       this.language = this.$ru;
