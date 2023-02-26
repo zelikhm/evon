@@ -10,12 +10,6 @@ use Illuminate\Support\Facades\Http;
 class IndexController extends Controller
 {
 
-  private $currency = 'TL';
-  private $link_type = 'product';
-  private $lang = 'tr';
-  private $min_count = 1;
-  private $max_installment = "12";
-
   public function index(Request $request) {
     $merchant_id    = '332444';
     $merchant_key   = '5B9J78CdGoFtpxJ6';
@@ -82,11 +76,11 @@ class IndexController extends Controller
 
     curl_close($ch);
 
-    $result = json_decode($result,1);
+//    $result = json_decode($result,1);
 
-    if($result === null) {
+//    if($result === null) {
       return response()->json($result, 204);
-    }
+//    }
 
     return response()->json($result['link'], 200);
   }
