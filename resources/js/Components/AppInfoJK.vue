@@ -17,10 +17,11 @@ import {Link} from '@inertiajs/inertia-vue3'
              type="text" id="name_object" >
     </div>
 
-          <label
-            :class="{ validationText: validation.description }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"
-            for="description_object">{{language.dob_ob_1[2]}}
-          </label>
+    <label
+      :class="{ validationText: validation.description }"
+      class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"
+      for="description_object">{{ language.dob_ob_1[2] }} (RU)
+    </label>
 
     <QuillEditor
       id="description_object"
@@ -29,6 +30,40 @@ import {Link} from '@inertiajs/inertia-vue3'
       class="custom__scroll text-[#1E1D2D] h-full resize-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0"
       toolbar="full"
       v-model:content="object.description"
+      content-type="html"
+      theme="snow"
+    />
+
+    <label
+      :class="{ validationText: validation.description }"
+      class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"
+      for="description_object1">{{ language.dob_ob_1[2] }} (EN)
+    </label>
+
+    <QuillEditor
+      id="description_object1"
+      :class="{ 'border---': isBorder === 2  }"
+      style="height: 280px!important;"
+      class="custom__scroll text-[#1E1D2D] h-full resize-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0"
+      toolbar="full"
+      v-model:content="object.description_en"
+      content-type="html"
+      theme="snow"
+    />
+
+    <label
+      :class="{ validationText: validation.description }"
+      class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"
+      for="description_object2">{{ language.dob_ob_1[2] }} (TR)
+    </label>
+
+    <QuillEditor
+      id="description_object2"
+      :class="{ 'border---': isBorder === 2  }"
+      style="height: 280px!important;"
+      class="custom__scroll text-[#1E1D2D] h-full resize-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3 leading-none border-transparent focus:border-transparent focus:ring-0"
+      toolbar="full"
+      v-model:content="object.description_tr"
       content-type="html"
       theme="snow"
     />
@@ -393,6 +428,8 @@ export default {
       object: {
         title: "",
         description: "",
+        description_en: "",
+        description_tr: "",
         city: "",
         area: "",
         coordinates: "",
@@ -539,6 +576,8 @@ export default {
           formData.append('user_id', this.user.id);
           formData.append('title', this.object.title);
           formData.append('description', this.object.description);
+          formData.append('description_en', this.object.description_en);
+          formData.append('description_tr', this.object.description_tr);
           formData.append('city', this.selectCity);
           formData.append('area', this.selectRegion !== 'Не указано' ? this.selectRegion : null);
           formData.append('latitude', +coord[0]);
@@ -593,6 +632,8 @@ export default {
           formData.append('house_id', this.house.id);
           formData.append('title', this.object.title);
           formData.append('description', this.object.description);
+          formData.append('description_en', this.object.description_en);
+          formData.append('description_tr', this.object.description_tr);
           formData.append('city', this.selectCity.title);
           formData.append('area', this.selectRegion !== 'Не указано' ? this.selectRegion.title : null);
           formData.append('latitude', +coord[0]);
@@ -786,6 +827,8 @@ export default {
 
       this.object.title = this.house.title
       this.object.description = this.house.description
+      this.object.description_en = this.house.description_en
+      this.object.description_tr = this.house.description_tr
       this.selectCity = city
       this.selectRegion = area
       this.object.coordinates = this.house.latitude + ' ' + this.house.longitude

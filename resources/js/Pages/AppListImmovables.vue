@@ -45,6 +45,7 @@
           :language="language"
           :dates="dates"
           :selectLanguage="selectLanguage"
+          :areas="areas"
         />
         <app-news-developer
             @open="(item) => openNewModal(item)"
@@ -95,6 +96,7 @@ export default {
     count_houses: 0,
     type: 0,
     user: [],
+    areas: {},
   },
   provide() {
     return {

@@ -433,7 +433,7 @@
                 </div>
                 <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1">
                 <span
-                  class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none">{{ item.area }}</span>
+                  class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none">{{ getArea(item.area) }}</span>
                   <div class="h-1 w-1 rounded-full bg-white"></div>
                   <span class="text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none">{{ item.flats.length }} {{ item.flats.length === 1 ? language.dob_kv_1[15] : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? language.dob_kv_1[16] : language.dob_kv_1[17] }}</span>
                 </div>
@@ -496,7 +496,7 @@
                         {{ item.title }}
                       </a>
                       <span
-                        class="text-[#8A8996] text-base xxl:text-sm xl:text-xs md:text-[14px]">{{ item.area }}</span>
+                        class="text-[#8A8996] text-base xxl:text-sm xl:text-xs md:text-[14px]">{{ getArea(item.area) }}</span>
                     </div>
                     <div class="justify-self-end justify-end flex h-fit flex-wrap gap-1">
                       <span
@@ -579,6 +579,7 @@
         required: false,
         default: 0,
       },
+      areas: {},
       count_houses: 0,
       type: 0,
       language: {},
@@ -679,6 +680,19 @@
       }
     },
     methods: {
+      getArea(area) {
+
+        let name = this.areas.find(item => item.title === area);
+
+        if(this.selectLanguage === 0) {
+          return name.title;
+        } else if(this.selectLanguage === 1) {
+          return name.title_en;
+        } else if(this.selectLanguage === 2) {
+          return name.title_tr;
+        }
+
+      },
       reloadFilter() {
         //badge's
         this.filters.badge.popular = false;

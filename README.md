@@ -88,7 +88,9 @@ path create \ [post] / поля:
 
 - user_id - айди пользователя
 - title - Название ЖК
-- description - Описание ЖК
+- description - Описание ЖК (RU)
+- description_en - Описание ЖК (EN)
+- description_tr - Описание ЖК (TR)
 - city - Город
 - area - Район
 - longitude - Долгота
@@ -118,7 +120,9 @@ path editHouse \ [post] / поля:
 
 - house_id - айди ЖК
 - title - Название ЖК
-- description - Описание ЖК
+- description - Описание ЖК (RU)
+- description_en - Описание ЖК (EN)
+- description_tr - Описание ЖК (TR)
 - city - Город
 - area - Район
 - longitude - Долгота
