@@ -15,10 +15,10 @@
         </label>
         <span class="text-[18px] xxl:text-[15px] xl:text-[13px]">{{ item.price }} €</span>
       </div>
-      <button class="login__btn--bg  rounded-[5px] w-full py-5 xxl:py-4 xl:py-3" v-on:click="payment()" v-if="preloader">
+      <button class="login__btn--bg  rounded-[5px] w-full py-5 xxl:py-4 xl:py-3" v-on:click="payment()" v-if="preloader === false">
         <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">{{ language.prof_zastr[7] }}</span>
       </button>
-      <button class="login__btn--bg  rounded-[5px] w-full py-5 xxl:py-4 xl:py-3" v-else>
+      <button class="login__btn--bg  rounded-[5px] w-full py-5 xxl:py-4 xl:py-3" v-else-if="preloader === true">
         <div class="loader"></div>
       </button>
     </div>
@@ -50,12 +50,13 @@ export default {
             type: this.type,
         }).then(res => {
           window.location.href = res.data;
+          this.preloader = false;
         })
 
         console.log(1);
 
       }
-      this.preloader = false;
+
     },
     setDate(item) {
 
@@ -69,5 +70,44 @@ export default {
 </script>
 
 <style scoped>
+
+  .loader_block {
+
+  }
+
+  .loader {
+    border: 3px solid black; /* Light grey */
+    border-top: 3px solid; /* Blue */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 2s linear infinite;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .minLoader {
+    border: 3px solid #f3f3f3; /* Light grey */
+    border-top: 3px solid; /* Blue */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 2s linear infinite;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .loader_text {
+    text-align: center;
+  }
 
 </style>
