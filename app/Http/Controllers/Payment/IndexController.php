@@ -84,7 +84,11 @@ class IndexController extends Controller
 
     $result = json_decode($result,1);
 
-    return $result['link'];
+    if($result === null) {
+      return response()->json(false, 204);
+    }
+
+    return response()->json($result['link'], 200);
   }
 
 }
