@@ -71,17 +71,17 @@ class IndexController extends Controller
     curl_setopt($ch, CURLOPT_FRESH_CONNECT, true);
     curl_setopt($ch, CURLOPT_TIMEOUT, 20);
     $result = @curl_exec($ch);
-    return response()->json($result, 201);
+//    return response()->json($result, 201);
     if(curl_errno($ch))
       die("PAYTR LINK CREATE API request timeout. err:".curl_error($ch));
 
     curl_close($ch);
 
-//    $result = json_decode($result,1);
+    $result = json_decode($result,1);
 
-//    if($result === null) {
+    if($result === null) {
       return response()->json($result, 200);
-//    }
+    }
 
     return response()->json($result['link'], 200);
   }
