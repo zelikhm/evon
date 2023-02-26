@@ -548,7 +548,9 @@
         </div>
       </div>
 
-      <app-map @open-add-selections="openAddSelections" v-if="map" :houses_array="markers" :houses="filteredObjects"
+      <app-map @open-add-selections="openAddSelections" v-if="map" :houses_array="markers"
+               :allHouse="readyHouses"
+               :houses="filteredObjects"
                :city="city_map"
                :user="user"/>
     </div>

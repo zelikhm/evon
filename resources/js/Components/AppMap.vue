@@ -114,7 +114,7 @@
 
 <script>
   export default {
-    props: ['houses_array', 'houses', 'state', 'user', 'city'],
+    props: ['houses_array', 'houses', 'state', 'user', 'city', 'allHouse'],
     data() {
       return {
         openedMarkerID: null,
@@ -149,13 +149,14 @@
         this.house.favorite = false
       },
       openMarker(marker) {
+
         if (marker === null) {
           this.openedMarkerID = null
           return
         }
 
         this.openedMarkerID = marker.id
-        this.house = this.houses.find(item => +item.latitude === marker.position.lat && +item.longitude === marker.position.lng)
+        this.house = this.allHouse.find(item => +item.latitude === marker.position.lat && +item.longitude === marker.position.lng)
 
         if (this.house) {
           let minPrice = [],
