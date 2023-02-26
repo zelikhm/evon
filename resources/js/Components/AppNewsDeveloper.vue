@@ -5,7 +5,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 <template>
   <div class="sticky top-[2vw] h-fit" v-if="state === 0">
     <div class="h-[73px] xxl:h-[56px] xl:h-[48px] relative z-20 border__top-6 bg-[#F6F3FA] flex items-center justify-between p-7 xxl:p-5 xl:p-4">
-      <span class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[16px] leading-none">Новости застройщиков</span>
+      <span class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[16px] leading-none">{{ language.rielt_1[7] }}</span>
       <img @click="state = 1" src="../../assets/svg/reload_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3.5 lg:w-5" alt="">
     </div>
     <div class="relative z-10 h-[1px] w-full bg-[#E5DFEE]"></div>
@@ -34,7 +34,7 @@ import { Link } from '@inertiajs/inertia-vue3'
   </div>
   <div class="sticky top-[2vw] h-fit" v-else>
     <div class="relative z-20 border__top-6 bg-[#F6F3FA] flex items-center justify-between p-7 xxl:p-5 xl:p-4">
-      <span class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[16px] leading-none">Новости недвижимости</span>
+      <span class="text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[16px] leading-none">{{ language.rielt_1[25] }}</span>
       <img @click="state = 0" src="../../assets/svg/reload_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3.5 lg:w-5" alt="">
     </div>
     <div class="relative z-10 h-[1px] w-full bg-[#E5DFEE]"></div>
@@ -63,7 +63,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
 <script>
 export default {
-  props: ['adminNews', 'news'],
+  props: ['adminNews', 'news', 'language'],
   data() {
     return {
       state: 0

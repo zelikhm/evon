@@ -19,11 +19,16 @@
         </div>
         <div class="text-white flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
           <span class="text-[18px] xxl:text-[16px] xl:text-[14px] lg:text-[16px] leading-none" v-if="compilation.company !== null">{{ compilation.company.title }}</span>
-          <span class="text-[18px] xxl:text-[16px] xl:text-[14px] lg:text-[16px] leading-none" v-else>Агентство недвижимости</span>
+          <span class="text-[18px] xxl:text-[16px] xl:text-[14px] lg:text-[16px] leading-none" v-else>{{ language.ob[18] }}</span>
         </div>
       </div>
     </div>
   </header>
+  <select name="select">
+    <option :selected="selectLanguage === 0" v-on:click="choseLanguage(0)">RU</option>
+    <option :selected="selectLanguage === 1" v-on:click="choseLanguage(1), choseLanguage">EN</option>
+    <option :selected="selectLanguage === 2" v-on:click="choseLanguage(2)">TR</option>
+  </select>
   <app-modal-album :image="house.images" v-if="album" @close-album="album = false"/>
   <main>
     <div class="_container flex flex-col">
@@ -31,28 +36,28 @@
         <div class="flex items-center justify-between sm:flex-col sm:items-start sm:gap-2">
           <div class="flex flex-col sm:gap-3">
             <div class="flex items-center sm:flex-col sm:items-start gap-5 xxl:gap-4 xl:gap-3">
-              <span class="font-semibold text-xl xxl:text-lg xl:text-sm lg:text-[18px]">{{ compilation.isVisible === 1 ? house.title : `Лот №${house.id + 10000}` }}</span>
+              <span class="font-semibold text-xl xxl:text-lg xl:text-sm lg:text-[18px]">{{ compilation.isVisible === 1 ? house.title : language.ob[20] + ` №${house.id + 10000}` }}</span>
               <div
                 class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px]">
                 <span
                   class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]"
-                  v-if="house.created && !Number.isInteger(+house.created[0])">{{ house.created }}</span>
+                  v-if="house.created && !Number.isInteger(+house.created[0])">{{ language.rielt_1[10] }}</span>
                 <span
                   class="flex items-center justify-center uppercase border border-solid border-[#E84680] h-fit text-[#E84680] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]"
-                  v-else-if="house.created">{{ house.created }}</span>
+                  v-else-if="house.created">{{ language.rielt_1[10] }}</span>
                 <span
                   class="flex items-center justify-center text-white font-semibold bg-[#FA8D50] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]"
-                  v-if="house.promotion">акция</span>
+                  v-if="house.promotion">{{ language.rielt_1[52] }}</span>
                 <span
                   class="flex items-center justify-center text-white font-semibold bg-[#E84680] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]"
-                  v-if="Math.ceil(Math.abs(new Date().getTime() - new Date(house.created_at).getTime()) / (1000 * 3600 * 24) ) <= 30">новинки</span>
+                  v-if="Math.ceil(Math.abs(new Date().getTime() - new Date(house.created_at).getTime()) / (1000 * 3600 * 24) ) <= 30">{{ language.rielt_1[51] }}</span>
                 <span
                   class="flex items-center justify-center text-white font-semibold bg-[#E84646] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]"
-                  v-if="house.visible >= 50">популярное</span>
+                  v-if="house.visible >= 50">{{ language.rielt_1[53] }}</span>
               </div>
             </div>
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]"
-                  v-if="compilation.isVisible === 1">{{ house.city }}, {{ house.area }}</span>
+                  v-if="compilation.isVisible === 1">{{ getCity(house.city) }}, {{ getArea(house.area) }}</span>
           </div>
           <div class="flex items-center gap-1.5 xxl:gap-1 xl:gap-0.5">
             <img src="../../assets/svg/reload_icon.svg" class="h-4 xx:h-3.5 xl:h-3" alt="reload">
@@ -84,52 +89,52 @@
             class="border border-solid border-[#E5DFEE] h-[100px] xxl:h-[80px] xl:h-[60px] flex md:flex-col md:h-fit items-center justify-evenly rounded-[12px] mt-7 xxl:mt-5 xl:mt-4 mb-16 xxl:mb-12 xl:mb-10">
             <div class="flex flex-col justify-center md:py-2">
               <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">{{ house.flats.length }}</span>
-              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">{{ house.flats.length === 1 ? "Квартира" : house.flats.length === 2 || house.flats.length === 3 || house.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
+              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">{{ house.flats.length === 1 ? language.dob_kv_1[15] : house.flats.length === 2 || house.flats.length === 3 || house.flats.length === 4 ? language.dob_kv_1[16] : language.dob_kv_1[17] }}</span>
             </div>
             <div class="h-full md:h-[1px] w-[1px] md:w-full bg-[#E5DFEE]"></div>
             <div class="flex flex-col justify-center md:py-2">
               <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">{{ minPriceForM.toLocaleString('ru') }} €</span>
-              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">Мин за м²</span>
+              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">{{language.rielt_1[56]}} м²</span>
             </div>
             <div class="h-full md:h-[1px] w-[1px] md:w-full bg-[#E5DFEE]"></div>
             <div class="flex flex-col justify-center md:py-2">
               <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">{{ minPriceFlat.toLocaleString('ru') }} €</span>
-              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">Мин. цена</span>
+              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">{{language.rielt_1[57]}}</span>
             </div>
             <div class="h-full md:h-[1px] w-[1px] md:w-full bg-[#E5DFEE]"></div>
             <div class="flex flex-col justify-center md:py-2">
               <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">{{ minSquareFlat }} - {{ maxSquareFlat }}</span>
-              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">Площади, м²</span>
+              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">{{language.rielt_1[22]}}, м²</span>
             </div>
           </div>
           <div class="flex flex-col pb-14 xxl:pb-10 xl:pb-8">
             <span
-              class="uppercase font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] pb-5 xxl:pb-4 xl:pb-3 leading-none">О ЖК</span>
-            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="fullDescription" v-html="house.description"></p>
-            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else v-html="house.description.slice(0, 300) + '...'"></p>
+              class="uppercase font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] pb-5 xxl:pb-4 xl:pb-3 leading-none">{{ language.ob[6] }}</span>
+            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="fullDescription" v-html=" selectLanguage === 0 ? house.description : selectLanguage === 1 ? house.description_en : house.description_tr "></p>
+            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else v-html="selectLanguage === 0 ? house.description.slice(0, 300) : selectLanguage === 1 ? house.description_en : house.description_tr + '...'"></p>
             <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 w-fit items-center animation__arrow"
                     @click="fullDescription = !fullDescription">
-              <span class="text-[#6435A5] font-medium text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">{{ fullDescription ? 'Скрыть' : 'Подробнее' }}</span>
+              <span class="text-[#6435A5] font-medium text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">{{ fullDescription ? language.menu_zastr_1[11] : language.menu_zastr_1[14] }}</span>
               <img src="../../assets/svg/arrow_right_purple.svg"
                    class="transition-all duration-300 w-3.5 xxl:w-3 xl:wp-2.5" alt="Стрелочка в право">
             </button>
           </div>
           <div class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] pb-14 xxl:pb-10 xl:pb-8"
                v-if="arrayInfos.length > 0">
-            <span class="font-medium">Инфраструктура</span>
+            <span class="font-medium">{{ language.dob_ob_1[13] }}</span>
             <div class="flex flex-wrap gap-3 xxl:gap-2.5 xl:gap-2m pt-4 xxl:pt-3 xl:pt-2.5">
               <span
                 class="infrostruct__banner text-[#E84680] rounded-[12px] xl:rounded-[8px] leading-none px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2 xl:py-1.5"
-                v-for="item in arrayInfos">{{ item.name }}</span>
+                v-for="item in arrayInfos">{{ selectLanguage === 0 ? item.name : selectLanguage === 1 ? item.name_en : item.name_tr }}</span>
             </div>
           </div>
           <div class="grid grid-cols-2 md:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4 pb-16 xxl:pb-12 xl:pb-10">
             <div class="border border-solid border-[#E5DFEE] p-7 xxl:p-5 xl:p-4 rounded-[12px]">
               <span
-                class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px]">Дополнительные услуги</span>
+                class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px]">{{ language.dob_ob_1[12] }}</span>
               <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 pt-6 xxl:pt-5 xl:pt-4">
                 <div class="flex justify-between items-center" v-for="dop in dops">
-                  <span :class="{ disableColor: dop.active !== 1 }" class="text-base xxl:text-sm xl:text-xs">{{ dop.name }}</span>
+                  <span :class="{ disableColor: dop.active !== 1 }" class="text-base xxl:text-sm xl:text-xs">{{ selectLanguage === 0 ? dop.name : selectLanguage === 1 ? dop.name_en : dop.name_tr }}</span>
                   <div v-if="dop.active === 1"
                        class="bg-[#30CB49] h-5 w-5 xxl:h-4 xxl:w-4 xl:h-3 xl:w-3 rounded-full flex items-center justify-center">
                     <img src="../../assets/svg/check_icon.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
@@ -142,30 +147,30 @@
               </div>
             </div>
             <div class="border border-solid border-[#E5DFEE] p-7 xxl:p-5 xl:p-4 rounded-[12px]">
-              <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px ]lg:text-[15px]">Расположение</span>
+              <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px ]lg:text-[15px]">{{ language.dob_ob_1[14] }}</span>
               <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 pt-6 xxl:pt-5 xl:pt-4">
                 <div class="flex justify-between items-center" v-if="house.info.toSea !== null">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от моря</span>
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">{{ language.dob_ob_1[15] }}</span>
                   <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toSea }} м</span>
                 </div>
                 <div class="flex justify-between items-center" v-if="house.info.toShop !== null">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от торгового центра</span>
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">{{ language.dob_ob_1[16] }}</span>
                   <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toShop }} м</span>
                 </div>
                 <div class="flex justify-between items-center" v-if="house.info.toChildrenSchool !== null">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от детского садика</span>
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">{{ language.dob_ob_1[17] }}</span>
                   <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toChildrenSchool }} м</span>
                 </div>
                 <div class="flex justify-between items-center" v-if="house.info.toPark !== null">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от парка</span>
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">{{ language.dob_ob_1[18] }}</span>
                   <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toPark }} м</span>
                 </div>
                 <div class="flex justify-between items-center" v-if="house.info.toBus !== null">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от остановки</span>
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">{{ language.dob_ob_1[19] }}</span>
                   <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toBus }} м</span>
                 </div>
                 <div class="flex justify-between items-center" v-if="house.info.toSchool !== null">
-                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">от школы</span>
+                  <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs">{{ language.dob_ob_1[20] }}</span>
                   <span class="text-base xxl:text-sm xl:text-xs">{{ house.info.toSchool }} м</span>
                 </div>
               </div>
@@ -183,7 +188,7 @@
                   <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
                     <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none">{{ item.name }}</span>
                   </div>
-                  <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">{{ item.flats.length }} квартир. от {{ (Math.round(item.minPrice / item.minSquare)).toLocaleString('ru') }} € до {{ (Math.round(item.maxPrice / item.maxSquare)).toLocaleString('ru') }} € за м2</span>
+                  <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">{{ item.flats.length }} {{ language.dob_kv_1[17] }}. {{ language.rielt_1[19] }} {{ (Math.round(item.minPrice / item.minSquare)).toLocaleString('ru') }} € {{ language.rielt_1[20] }} {{ (Math.round(item.maxPrice / item.maxSquare)).toLocaleString('ru') }} € {{ language.ob[19] }} м2</span>
                 </div>
                 <div class="absolute top-0 right-0 p-2.5 xxl:p-2 xl:p-1.5">
                   <label class="payd__checkbox" :for="'pay' + item.id">
@@ -197,24 +202,24 @@
           <div class="pb-16 xxl:pb-12 xl:pb-10">
             <div
               class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none mb-7 xxl:mb-5 xl:mb-4"
-            >{{ flats_array.length }} Квартир
+            >{{ flats_array.length }} {{ language.dob_kv_1[17] }}
             </div>
             <div class="grid grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3 mb-7 xxl:mb-5 xl:mb-4">
               <div
                 class="border border-solid border-[#E5DFEE] rounded-[6px] px-4 xx:px-3 xl:px-2.5 py-2 xxl:py-1.5 xl:py-1">
                 <span
-                  class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">Цена</span>
+                  class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">{{ language.dob_kv_1[5] }}</span>
                 <div class="flex gap-2">
                   <div class="flex items-center gap-1">
                     <label class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none"
-                           for="cost_from">от</label>
+                           for="cost_from">{{ language.rielt_1[19] }}</label>
                     <input v-model="priceFrom" @input="filter()"
                            class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] border__bottom leading-none p-0 w-full border-transparent focus:ring-0"
                            type="number" id="cost_from">
                   </div>
                   <div class="flex items-center gap-1">
                     <label class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none"
-                           for="cost_before">до</label>
+                           for="cost_before">{{ language.rielt_1[20] }}</label>
                     <input v-model="priceTo" @input="filter()"
                            class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] border__bottom leading-none p-0 w-full border-transparent focus:ring-0"
                            type="number" id="cost_before">
@@ -223,17 +228,17 @@
               </div>
               <div
                 class="border border-solid border-[#E5DFEE] rounded-[6px] px-4 xx:px-3 xl:px-2.5 py-2 xxl:py-1.5 xl:py-1">
-                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">Площадь м²</span>
+                <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">{{ language.dob_kv_1[4] }} м²</span>
                 <div class="flex gap-2">
                   <div class="flex items-center gap-1">
                     <label class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none"
-                           for="from">от</label>
+                           for="from">{{ language.rielt_1[19] }}</label>
                     <input v-model="squareFrom" @input="filter()"
                            class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] border__bottom leading-none p-0 w-full border-transparent focus:ring-0"
                            type="number" id="from">
                   </div>
                   <div class="flex items-center gap-1">
-                    <label class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none" for="before">до</label>
+                    <label class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none" for="before">{{ language.rielt_1[20] }}</label>
                     <input v-model="squareTo" @input="filter()"
                            class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] border__bottom leading-none p-0 w-full border-transparent focus:ring-0"
                            type="number" id="before">
@@ -243,7 +248,7 @@
               <div class="flex flex-col w-full h-fit border border-solid border-[#E5DFEE] rounded-[6px]"
                    :class="{ 'border__bottom--0': openSelectLayout}">
                 <span
-                  class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[12px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">Планировка</span>
+                  class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[12px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">{{ language.dob_kv_1[6] }}</span>
                 <div class="relative">
                   <div @click="openSelectLayout = !openSelectLayout"
                        class="flex items-center justify-between cursor-pointer text-[#1E1D2D] border-[] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
@@ -267,7 +272,7 @@
                 <div @click="openDate = !openDate"
                      class="hover__title-block cursor-pointer flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
                   <span class="text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none">
-                    По {{ selectDate }}
+                    {{ selectDate }}
                   </span>
                   <img :class="{ 'rotate-180': openDate }" src="../../assets/svg/arrow_down_black.svg"
                        alt="Стрелочка вниз">
@@ -296,15 +301,15 @@
                       <div class="flex sm:flex-col items-center sm:items-start gap-2.5 xxl:gap-2 xl:gap-1.5">
                         <span class="text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ item.square }} м</span>
                         <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] whitespace-nowrap leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
-                          v-if="item.status == 0">Акция</span>
+                          v-if="item.status == 0">{{ language.dob_kv_1[10] }}</span>
                         <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] whitespace-nowrap leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
-                              v-if="item.status == 1">Перепродажа</span>
+                              v-if="item.status == 1">{{ language.dob_kv_1[11] }}</span>
                         <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] whitespace-nowrap leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
-                              v-if="item.status == 2">Бронь</span>
+                              v-if="item.status == 2">{{ language.dob_kv_1[12] }}</span>
                         <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] whitespace-nowrap leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
-                              v-if="item.status == 3">Продажи закрыты</span>
+                              v-if="item.status == 3">{{ language.dob_kv_1[13] }}</span>
                         <span class="text-white bg-[#E87746] text-[12px] xxl:text-[10px] xl:tex-[8px] whitespace-nowrap leading-none px-1.5 xl:px-1 py-1 xl:py-0.5 rounded-[3px]"
-                              v-if="item.status == 4">В продаже</span>
+                              v-if="item.status == 4">{{ language.dob_kv_1[9] }}</span>
                       </div>
                       <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ frame }}</span>
                     </div>
@@ -316,7 +321,7 @@
                     <span class="text-[16px] xxl:text-[14px] xl:text-[12px] whitespace-nowrap leading-none">{{ item.count }}</span>
                   </div>
                   <div>
-                    <span class="text-[16px] xxl:text-[14px] xl:text-[12px] whitespace-nowrap leading-none">{{ item.floor }} этаж</span>
+                    <span class="text-[16px] xxl:text-[14px] xl:text-[12px] whitespace-nowrap leading-none">{{ item.floor }} {{ language.dob_kv_1[7] }} </span>
                   </div>
                   <div class="text-right">
                     <span class="text-[16px] xxl:text-[14px] xl:text-[12px] whitespace-nowrap leading-none text-right">{{ item.price.toLocaleString('ru') }} €</span>
@@ -330,7 +335,7 @@
               <div
                 class="flex justify-between md:flex-col items-center rounded-[10px] bg-[#F6F3FA] p-10 xxl:p-8 xl:p-6">
                 <div class="flex flex-col">
-                  <span class="text-[20px] xxl:text-[17px] xl:text-[14px] lg:text-[17px] font-medium">Нет доступных квартир</span>
+                  <span class="text-[20px] xxl:text-[17px] xl:text-[14px] lg:text-[17px] font-medium">{{ language.ob[21] }}</span>
                   <p class="w-[70%] md:w-full text-[#8A8996] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[14px]"></p>
                 </div>
                 <svg class="h-full" width="162" height="113" viewBox="0 0 162 113" fill="#6435A5"
@@ -362,7 +367,7 @@
             </div>
             <div
               class="flex items-center mb-5 xxl:mb-4 xl:mb-4 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px] leading-none">
-              <span class="text-[#8A8996] leading-none">Язык:&nbsp;</span>
+              <span class="text-[#8A8996] leading-none">{{ language.dob_ob_2[7] }}:&nbsp;</span>
               <span class="leading-none">{{ compilation.user.link }}</span>
             </div>
             <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
@@ -416,7 +421,7 @@
   import {Navigation, Pagination} from "swiper";
 
   export default {
-    props: ['house', 'dops', 'infos', 'user', 'compilation'],
+    props: ['house', 'dops', 'infos', 'user', 'compilation', 'city_array', 'area_array'],
     data() {
       return {
         selectFlat: [],
@@ -424,10 +429,65 @@
         center: null,
         album: false,
         markers: [],
-        selectLayout: 'не указано',
+        selectLayout: 'Не указано',
         openSelectLayout: false,
-        layouts: [
-          {layout: 'не указано', value: 0},
+        layouts: [],
+        selectDate: 'по дате',
+        arrayInfos: [],
+        openDate: false,
+        dates: [],
+        fullDescription: false,
+        frames: [],
+        flats: [],
+        flats_array: [],
+        priceFrom: '',
+        priceTo: '',
+        squareFrom: '',
+        squareTo: '',
+        frame: [],
+        selectLanguage: 0,
+        language: {},
+      }
+    },
+    methods: {
+      getCity(city) {
+        let name = this.city_array.find(item => item.title === city);
+
+        if (this.selectLanguage === 0) {
+          return name.title;
+        } else if (this.selectLanguage === 1) {
+          return name.title_en;
+        } else if (this.selectLanguage === 2) {
+          return name.title_tr;
+        }
+      },
+      getArea(area) {
+        let name = this.area_array.find(item => item.title === area);
+
+        if (this.selectLanguage === 0) {
+          return name.title;
+        } else if (this.selectLanguage === 1) {
+          return name.title_en;
+        } else if (this.selectLanguage === 2) {
+          return name.title_tr;
+        }
+      },
+      choseLanguage(n) {
+        this.selectLanguage = n;
+
+        if(this.selectLanguage === 0) {
+          this.language = this.$ru;
+        } else if (this.selectLanguage === 1) {
+          this.language = this.$en;
+        } else if (this.selectLanguage === 2) {
+          this.language = this.$tur;
+        }
+
+        this.selectLayout = this.language.ob[22];
+        this.selectDate = this.language.rielt_1[5];
+
+        this.layouts = [
+          {layout: this.language.ob[22], value: 0},
           {layout: '1 + 1', value: 1},
           {layout: '1 + 1(D)', value: 2},
           {layout: '2 + 1', value: 3},
@@ -440,28 +500,14 @@
           {layout: '5 + 1(D)', value: 10},
           {layout: 'Duplex', value: 11},
           {layout: 'Studia', value: 11},
-        ],
-        selectDate: 'дате',
-        arrayInfos: [],
-        openDate: false,
-        dates: [
-          {date: 'дате', id: 1},
-          {date: 'увеличению цены', id: 2},
-          {date: 'уменьшению цены', id: 3},
-        ],
-        fullDescription: false,
-        frames: [],
-        flats: [],
-        flats_array: [],
-        priceFrom: '',
-        priceTo: '',
-        squareFrom: '',
-        squareTo: '',
-        frame: [],
-        selectLanguage: 0,
-      }
-    },
-    methods: {
+        ];
+
+        this.dates = [
+          {date: this.language.rielt_1[5], id: 1},
+          {date: this.language.rielt_1[54], id: 2},
+          {date: this.language.rielt_1[55], id: 3},
+        ];
+      },
       openScheme(item) {
         this.selectFlat = item;
         this.selectFlat.isOpen = 3
@@ -543,7 +589,7 @@
         let new_array1 = [];
 
         new_array.forEach(item => {
-          if (this.selectLayout !== 'не указано') {
+          if (this.selectLayout !== this.language.ob[22]) {
             if (item.count === this.selectLayout) {
               new_array1.push(item);
             }
@@ -565,6 +611,46 @@
       }
     },
     created() {
+      if(this.user !== undefined) {
+        if(this.user.lang === 0) {
+          this.language = this.$ru;
+          this.selectLanguage = 0;
+        } else if (this.user.lang === 1) {
+          this.language = this.$en;
+          this.selectLanguage = 1;
+        } else if (this.user.lang === 2) {
+          this.language = this.$tur;
+          this.selectLanguage = 2;
+        }
+      } else {
+        this.language = this.$ru;
+      }
+
+      this.selectLayout = this.language.ob[22];
+      this.selectDate = this.language.rielt_1[5];
+
+      this.layouts = [
+        {layout: this.language.ob[22], value: 0},
+        {layout: '1 + 1', value: 1},
+        {layout: '1 + 1(D)', value: 2},
+        {layout: '2 + 1', value: 3},
+        {layout: '2 + 1(D)', value: 4},
+        {layout: '3 + 1', value: 5},
+        {layout: '3 + 1(D)', value: 6},
+        {layout: '4 + 1', value: 7},
+        {layout: '4 + 1(D)', value: 8},
+        {layout: '5 + 1', value: 9},
+        {layout: '5 + 1(D)', value: 10},
+        {layout: 'Duplex', value: 11},
+        {layout: 'Studia', value: 11},
+      ];
+
+      this.dates = [
+        {date: this.language.rielt_1[5], id: 1},
+        {date: this.language.rielt_1[54], id: 2},
+        {date: this.language.rielt_1[55], id: 3},
+      ];
+
       this.frames = this.house.frames
 
       this.center = {lat: +this.house.latitude, lng: +this.house.longitude}

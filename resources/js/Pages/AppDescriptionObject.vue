@@ -145,7 +145,7 @@
           <div class="flex flex-col pb-14 xxl:pb-10 xl:pb-8">
             <span class="uppercase font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] pb-5 xxl:pb-4 xl:pb-3 leading-none">{{ language.form_dob_ob[0] }}</span>
             <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="fullDescription || house.description.length < 300" v-html="selectLanguage === 0 ? house.description : selectLanguage === 1 ? house.description_en : house.description_tr"></p>
-            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else v-html="selectLanguage === 0 ? house.description.slice(0, 300) : selectLanguage === 1 ? house.description_en.slice(0, 300) : house.description_tr.slice(0, 300) + '...'"></p>
+            <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else v-html="selectLanguage === 0 ? house.description !== null ? house.description.slice(0, 300) : house.description : selectLanguage === 1 ? house.description_en !== null ? house.description_en.slice(0, 300) : house.description_en : house.description_tr !== null ? house.description_tr.slice(0, 300) : house.description_tr + '...'"></p>
             <button class="flex gap-2 xxl:gap-1.5 xl:gap-1 items-center w-fit animation__arrow" @click="fullDescription = !fullDescription" v-if="house.description.length > 300">
               <span class="text-[#6435A5] font-medium text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">{{ fullDescription ? language.menu_zastr_1[11] : language.menu_zastr_1[14] }}</span>
               <img src="../../assets/svg/arrow_right_purple.svg" class="transition-all duration-300 w-3.5 xxl:w-3 xl:wp-2.5" alt="Стрелочка в право">

@@ -1,5 +1,6 @@
 <script setup>
 import { Link } from '@inertiajs/inertia-vue3'
+
 </script>
 
 <template>
@@ -21,11 +22,17 @@ import { Link } from '@inertiajs/inertia-vue3'
         </div>
         <div class="text-white flex flex-col gap-2 xxl:gap-1.5 xl:gap-1">
           <span class="text-[18px] xxl:text-[16px] xl:text-[14px] lg:text-[16px] leading-none" v-if="compilation.company !== null">{{ compilation.company.title }}</span>
-          <span class="text-[18px] xxl:text-[16px] xl:text-[14px] lg:text-[16px] leading-none" v-else>Агентство недвижимости</span>
+          <span class="text-[18px] xxl:text-[16px] xl:text-[14px] lg:text-[16px] leading-none" v-else>{{ language.ob[18] }}</span>
         </div>
       </div>
     </div>
+    <select name="select">
+      <option :selected="selectLanguage === 0" v-on:click="choseLanguage(0)">RU</option>
+      <option :selected="selectLanguage === 1" v-on:click="choseLanguage(1), choseLanguage">EN</option>
+      <option :selected="selectLanguage === 2" v-on:click="choseLanguage(2)">TR</option>
+    </select>
   </header>
+
   <main>
     <div class="_container">
       <div class="my-10 xxl:my-8 xl:my-6">
@@ -34,7 +41,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         <div class="grid__75-25 gap-7 xxl:gap-5 xl:gap-4">
           <div class="flex flex-col gap-y-14 xxl:gap-y-10 xl:gap-y-8">
             <div v-for="i in houses">
-              <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px] mb-5 xxl:mb-4 xl:mb-3">{{ i[0].city }}</h2>
+              <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px] mb-5 xxl:mb-4 xl:mb-3">{{ getCity(i[0].city) }}</h2>
               <div class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-x-7 xxl:gap-x-5 xl:gap-x-4 gap-y-14 xxl:gap-y-10 xl:gap-y-8">
                 <div class="flex flex-col" v-for="item in i">
                   <Link :href="href + '/' + item.slug">
@@ -47,13 +54,13 @@ import { Link } from '@inertiajs/inertia-vue3'
                         <div class="flex items-center text-white gap-2 xxl:gap-1.5 xl:gap-1 p-5 xxl:p-4 xl:p-3">
                           <span class="leading-none">{{ item.area }}</span>
                           <div class="bg-white h-1 w-1 rounded-full "></div>
-                          <span class="leading-none">{{ item.flats.length }} Квартир</span>
+                          <span class="leading-none">{{ item.flats.length }} {{ language.dob_kv_1[17] }}</span>
                         </div>
                       </div>
                     </div>
                     <div class="text-[#1E1D2D] flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 p-5 xxl:p-4 xl:p-3">
-                      <span class="font-bold text-[20px] xxl:text-[16px] xl:text-[13px] lg:text-[18px] leading-none">{{ compilation.isVisible === 1 ? item.title : `Лот №${item.id + 10000}` }}</span>
-                      <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">от {{ getMinPrice(item) }} €, до {{ getMaxPrice(item) }} € за м2</span>
+                      <span class="font-bold text-[20px] xxl:text-[16px] xl:text-[13px] lg:text-[18px] leading-none">{{ compilation.isVisible === 1 ? item.title : language.ob[20] + ` №${item.id + 10000}` }}</span>
+                      <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">{{ language.rielt_1[19] }} {{ getMinPrice(item) }} €, {{ language.rielt_1[20] }} {{ getMaxPrice(item) }} € {{ language.ob[19] }} м2</span>
                     </div>
                   </Link>
                 </div>
@@ -70,7 +77,7 @@ import { Link } from '@inertiajs/inertia-vue3'
               </div>
             </div>
             <div class="flex items-center mb-5 xxl:mb-4 xl:mb-4 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none">
-              <span class="text-[#8A8996] leading-none">Языки:&nbsp;</span>
+              <span class="text-[#8A8996] leading-none">{{ language.dob_ob_2[7] }}:&nbsp;</span>
               <span class="leading-none">{{ compilation.user.link }}</span>
             </div>
             <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 mb-5">
@@ -83,7 +90,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                 <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ compilation.user.email }}</span>
               </div>
             </div>
-            <span class="w-full text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px]" v-if="compilation.description">Комментарий подборки: {{ compilation.description }}</span>
+            <span class="w-full text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px]" v-if="compilation.description">{{ language.rielt_3[3] }}: {{ compilation.description }}</span>
           </div>
         </div>
       </div>
@@ -100,16 +107,30 @@ export default {
   props: {
     houses: [],
     compilation: [],
-    user: {}
+    user: {},
+    city: {},
   },
   data() {
     return {
       openNotification: false,
       href: null,
       count: 0,
+      selectLanguage: 0,
+      language: {},
     }
   },
   methods: {
+    getCity(city) {
+      let name = this.city.find(item => item.title === city);
+
+      if (this.selectLanguage === 0) {
+        return name.title;
+      } else if (this.selectLanguage === 1) {
+        return name.title_en;
+      } else if (this.selectLanguage === 2) {
+        return name.title_tr;
+      }
+      },
     getMinPrice(house) {
       let object = [];
 
@@ -132,10 +153,34 @@ export default {
       object.sort((a, b) => b - a);
 
       return object.length > 0 ? object[0].toFixed(2) : 0;
-    }
+    },
+    choseLanguage(n) {
+      this.selectLanguage = n;
+
+      if(this.selectLanguage === 0) {
+        this.language = this.$ru;
+      } else if (this.selectLanguage === 1) {
+        this.language = this.$en;
+      } else if (this.selectLanguage === 2) {
+        this.language = this.$tur;
+      }
+      console.log(this.language);
+    },
   },
   created() {
     this.href = window.location.href
+
+    if(this.user !== undefined) {
+      if(this.user.lang === 0) {
+        this.language = this.$ru;
+      } else if (this.user.lang === 1) {
+        this.language = this.$en;
+      } else if (this.user.lang === 2) {
+        this.language = this.$tur;
+      }
+    } else {
+      this.language = this.$ru;
+    }
 
     for (let key in this.houses) {
       this.houses[key].forEach(item => {

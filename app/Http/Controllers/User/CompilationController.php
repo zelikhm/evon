@@ -104,11 +104,10 @@ class CompilationController extends Controller
       $user = [];
     }
 
-//   dd($houses_cities['Алания'][0]->flats);
-
     return Inertia::render('AppLinkSelection', [
       'houses' => $houses_cities,
       'compilation' => $compilation,
+      'city' => $this->getCity(),
       'user' => $user,
     ]);
 
@@ -142,6 +141,8 @@ class CompilationController extends Controller
     return Inertia::render('AppLinkDescriptionObject', [
       'house' => $house,
       'compilation' => $compilation,
+      'city_array' => $this->getCity(),
+      'area_array' => $this->getRegions(),
       'user' => $user,
       'dops' => $this->getDop(),
       'infos' => $this->getInfo(),

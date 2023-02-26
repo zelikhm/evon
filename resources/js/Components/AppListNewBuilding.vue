@@ -406,7 +406,7 @@
                 <div class="hide transition-all">
                 <span
                   class="uppercase bg-[#30CB49] text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none font-semibold rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1 mr-2 cursor-default"
-                  v-if="item.created && !Number.isInteger(+item.created[0])">{{ item.created }}</span>
+                  v-if="item.created && !Number.isInteger(+item.created[0])">{{ language.rielt_1[10] }}</span>
                   <span
                     class="uppercase bg-[#E84680] text-white text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none font-semibold rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1 cursor-default"
                     v-else-if="item.created">{{ item.created }}</span>
@@ -519,14 +519,14 @@
                 <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] md:text-[13px]">{{ item.flats.length }} {{ item.flats.length === 1 ? language.dob_kv_1[15] : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? language.dob_kv_1[16] : language.dob_kv_1[17] }}</span>
                 <span
                   class="uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[12px] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1"
-                  v-if="item.created && !Number.isInteger(+item.created[0])">{{ item.created }}</span>
+                  v-if="item.created && !Number.isInteger(+item.created[0])">{{ language.rielt_1[10] }}</span>
                 <span
                   class="uppercase border border-solid border-[#E84680] h-fit text-[#E84680] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1"
                   v-else-if="item.created">{{ item.created }}</span>
               </div>
               <div class="flex flex-col gap-2.5 xxl:gap-1.5 xl:gap-1">
               <span
-                class="font-medium whitespace-nowrap text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] md:text-[17px] leading-none leading-none">от {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} €</span>
+                class="font-medium whitespace-nowrap text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] md:text-[17px] leading-none leading-none">{{ language.rielt_1[19] }} {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} €</span>
                 <span
                   class="text-[#8A8996] whitespace-nowrap text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px]">{{ isNaN(item.minPrice / item.minSquare) ? "-" : Math.round(item.minPrice / item.minSquare) }} € м²</span>
               </div>
