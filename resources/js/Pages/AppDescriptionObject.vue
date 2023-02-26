@@ -52,7 +52,7 @@
                 <span class="flex items-center justify-center text-white font-semibold bg-[#E84646] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="house.visible >= 50">{{ language.rielt_1[53] }}</span>
               </div>
             </div>
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">{{ selectLanguage === 0 ? city_name.title : selectLanguage === 1 ? city_name.title_en : city_name.title_tr }}, {{ selectLanguage === 0 ? area_name.title : selectLanguage === 1 ? area_name.title_en : area_name.title_tr }}</span>
+            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">{{ selectLanguage === 0 ? city_name.title : selectLanguage === 1 ? city_name.title_en : city_name.title_tr }}, {{ area_name !== undefined ? selectLanguage === 0 ? area_name.title : selectLanguage === 1 ? area_name.title_en : area_name.title_tr : '' }}</span>
           </div>
 
           <div class="flex md:flex-col md:items-center h-20 xxl:h-16 xl:h-12 md:h-fit">
