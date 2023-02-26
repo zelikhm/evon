@@ -1,5 +1,5 @@
 <template>
-  <app-modal-profile v-if="openPayProfile" @close-pay-profile="openPayProfile = false" :tarifs="tarifs" />
+  <app-modal-profile v-if="openPayProfile" @close-pay-profile="openPayProfile = false" :tarifs="tarifs" :language="language" :user="user" />
   <app-header :user="userHeader" :language="language" @selectLanguage="choseLanguage" />
   <app-modal-notification
     class="left-[2vw] transition-all duration-1000"

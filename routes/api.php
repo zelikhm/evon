@@ -103,6 +103,11 @@ Route::prefix('chat')->group(function () {
   Route::post('/chatOpen', ['App\Http\Controllers\Messages\MessageController', 'chatOpen']);
 });
 
+Route::prefix('/payment')->group(function () {
+  Route::post('/', ['App\Http\Controllers\Payment\IndexController', 'index'])->name('pair');
+  Route::post('/success', ['App\Http\Controllers\User\SubscriptionController', 'payment']);
+});
+
 Route::prefix('news')->group(function () {
   Route::post('add', ['App\Http\Controllers\House\NewsController', 'add']);
   Route::post('edit', ['App\Http\Controllers\House\NewsController', 'edit']);

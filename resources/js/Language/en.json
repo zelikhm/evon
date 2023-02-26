@@ -55,7 +55,9 @@
     "3": "Login / e-mail",
     "4": "Password",
     "5": "Subscription Management",
-    "6": "Pay"
+    "6": "Pay",
+    "7": "Payment",
+    "8": "Subscription payment"
   },
   "menu_zastr_1": {
     "0": "6 дней",
