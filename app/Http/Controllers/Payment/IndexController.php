@@ -34,7 +34,7 @@ class IndexController extends Controller
       $required     .= $request->email;
     }
 
-    $expiry_date        = Carbon::now()->addHours(3);
+    $expiry_date        = Carbon::now()->addHours(12);
     $max_count          = "1";
     $callback_link      = "https://evon-tr.com/profile";
     $callback_id        = $request->type;
