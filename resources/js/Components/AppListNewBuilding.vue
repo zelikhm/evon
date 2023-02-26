@@ -689,9 +689,9 @@
         if(this.selectLanguage === 0) {
           return name.title;
         } else if(this.selectLanguage === 1) {
-          return name.title_en;
+          return name.title_en !== undefined ? name.title_en : '';
         } else if(this.selectLanguage === 2) {
-          return name.title_tr;
+          return name.title_tr !== undefined ? name.title_tr : '';
         }
 
       },
