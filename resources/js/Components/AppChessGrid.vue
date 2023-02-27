@@ -14,7 +14,7 @@
                 <span class="relative z-10"></span>
               </div>
               <div v-if="checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count) !== null">
-                <div v-if="checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).status == 2" @click="clickFlat(checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).id)" :class="{'bg-[#6435A5]': checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).active}" class="lg:w-10 lg:h-10 flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
+                <div v-if="checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).status == 2" @click="clickFlat(checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).id)" :class="{'bg-[#6435A5]': checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).active === 1}" class="lg:w-10 lg:h-10 flex-shrink-0 relative flex items-center justify-center w-12 xxl:w-10 xl:w-8 h-12 xxl:h-10 xl:h-8 rounded-[5px] border border-solid border-[#E5DFEE] cursor-pointer">
                   <span class="relative z-10" :class="{'text-white': checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).active === 1}">{{ checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).square }}</span>
                   <img class="absolute w-full h-full top-0 left-0" v-if="checkFlat(Math.abs((floor - 1) - (house.info.floors - 1)), count).active !== 1" src="../../assets/svg/chess_fence.svg" alt="">
                 </div>
@@ -82,10 +82,15 @@ export default {
       let flat = this.flats.find(item => item.id === id)
 
       this.flats.forEach(item => {
-        item.active = 0
+        if(item.id === id) {
+          item.active = 1
+        } else {
+          item.active = 0
+        }
       })
 
-      flat.active = 1
+      console.log(this.flats);
+
       this.$emit('targetFlat', flat)
     }
   },

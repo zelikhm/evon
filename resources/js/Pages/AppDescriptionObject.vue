@@ -392,7 +392,7 @@ export default {
     })
 
     if(this.house.city_object.latitude !== null) {
-      this.city = { lat: this.house.city_object.latitude, lng: this.house.city_object.longitude }
+      this.city = { lat: parseFloat(this.house.city_object.latitude), lng: parseFloat(this.house.city_object.longitude) }
     } else {
       this.city = null
     }
