@@ -74,9 +74,9 @@ export default {
         tel: null,
         password: null,
         email: null,
-        language: {},
-        selectLanguage: 0,
-      }
+      },
+      language: {},
+      selectLanguage: 0,
     }
   },
   methods: {

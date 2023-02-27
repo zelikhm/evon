@@ -295,8 +295,15 @@
     "20": "pay",
     "21": "Daire yok",
     "22": "Belirtilmemiş",
-    "23": "nesneler",
-    "24": "Hayir"
+    "23": "Tesisler",
+    "24": "Hayir",
+    "25": "Kattaki daire sayısı(maks.)",
+    "26": "Katta bulunduğu sıra",
+    "27": "Yayında, satışta",
+    "28": "Raptiye’yi bir yere bıraktığınız zaman, haritada herhangi bir değişiklik olmayacak. Koordinatların yenilenmesi için gerekli konuma tuşlama yapabilirsiniz.",
+    "29": "Değiştir",
+    "30": "Şifreyi giriniz",
+    "31": "Hizmetleri seçin"
   },
   "reg": {
     "0": "Hemen kaydol",

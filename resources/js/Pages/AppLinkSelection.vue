@@ -169,7 +169,7 @@ export default {
   created() {
     this.href = window.location.href
 
-    if(this.user !== undefined) {
+    if(this.user.length !== 0) {
       if(this.user.lang === 0) {
         this.language = this.$ru;
         this.selectLanguage = 0;
