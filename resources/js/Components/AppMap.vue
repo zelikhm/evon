@@ -32,10 +32,10 @@
                 <img v-else src="../../assets/no-img-houses.jpg"
                      class="w-14 xxl:w-12 xl:w-8 h-14 xxl:h-12 xl:h-8 rounded-full" alt="">
                 <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5">
-                  <Link :href="'/house/' + house.slug"
+                  <a target="_blank" :href="'/house/' + house.slug"
                         class="text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] font-medium leading-none">{{
                     house.title }}
-                  </Link>
+                  </a>
                   <span class="text-[#8A8996] text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ house.city }}, {{ house.area }}</span>
                 </div>
               </div>

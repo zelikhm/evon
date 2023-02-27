@@ -69,9 +69,6 @@
         <div class="flex flex-col">
           <swiper
             :navigation="true"
-            :pagination="{
-              clickable: true,
-            }"
             :modules="modules"
             :loop="true"
             class="mySwiper w-full"
