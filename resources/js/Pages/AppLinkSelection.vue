@@ -135,7 +135,7 @@ export default {
       let object = [];
 
       house.flats.forEach(item => {
-        object.push((item.price);
+        object.push(item.price);
       })
 
       object.sort((a, b) => a - b);
