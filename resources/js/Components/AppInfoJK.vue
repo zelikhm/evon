@@ -579,7 +579,7 @@ export default {
           formData.append('description_en', this.object.description_en);
           formData.append('description_tr', this.object.description_tr);
           formData.append('city', this.selectCity);
-          formData.append('area', this.selectRegion !== 'Не указано' ? this.selectRegion : null);
+          formData.append('area', this.selectRegion !== 'Не указано' ? this.selectRegion  : null);
           formData.append('latitude', +coord[0]);
           formData.append('longitude', +coord[1]);
           formData.append('percent', this.object.percent);
@@ -635,7 +635,7 @@ export default {
           formData.append('description_en', this.object.description_en);
           formData.append('description_tr', this.object.description_tr);
           formData.append('city', this.selectCity.title);
-          formData.append('area', this.selectRegion !== 'Не указано' ? this.selectRegion.title : null);
+          formData.append('area', this.selectRegion !== 'Не указано' ? this.selectRegion : null);
           formData.append('latitude', +coord[0]);
           formData.append('longitude', +coord[1]);
           formData.append('percent', this.object.percent);
