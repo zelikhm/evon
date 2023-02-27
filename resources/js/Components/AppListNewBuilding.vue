@@ -487,18 +487,16 @@
                     </button>
                   </div>
                 </div>
-                <div
-                  class="flex flex-col justify-between px-7 xxl:px-6 xl:px-5 md:px-1.5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3 md:py-3 md:gap-3.5">
+                <div class="flex flex-col justify-between px-7 xxl:px-6 xl:px-5 md:px-1.5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3 md:py-3 md:gap-3.5">
                   <div class="flex justify-between sm:flex-col gap-2">
                     <div class="w-full flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
                       <a target="_blank" :href="'/house/' + item.slug"
                          class="hover__title-block transition-all leading-none font-semibold text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">
                         {{ item.title }}
                       </a>
-                      <span
-                        class="text-[#8A8996] text-base xxl:text-sm xl:text-xs md:text-[14px]">{{ getArea(item.area) }}</span>
+                      <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs md:text-[14px]">{{ getArea(item.area) }}</span>
                     </div>
-                    <div class="justify-self-end justify-end flex h-fit flex-wrap gap-1">
+                    <div class="justify-self-end justify-end sm:justify-start flex h-fit flex-wrap gap-1">
                       <span
                         class="bg-[#E84680] self-start h-fit text-white text-[13px] xxl:text-[11px] xl:text-[9px] md:text-[11px] leading-none font-semibold rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-1"
                         v-if="Math.ceil(Math.abs(new Date().getTime() - new Date(item.created_at).getTime()) / (1000 * 3600 * 24) ) <= 30">{{ language.rielt_1[51] }}</span>
@@ -513,10 +511,9 @@
                 </div>
               </div>
             </div>
-            <div
-              class="flex flex-col justify-between px-7 xxl:px-6 xl:px-5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3">
-              <div class="flex justify-between items-center">
-                <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] md:text-[13px]">{{ item.flats.length }} {{ item.flats.length === 1 ? language.dob_kv_1[15] : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? language.dob_kv_1[16] : language.dob_kv_1[17] }}</span>
+            <div class="flex flex-col justify-between gap-1.5 px-7 xxl:px-6 xl:px-5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3">
+              <div class="flex justify-between items-center gap-1">
+                <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] md:text-[13px] whitespace-nowrap">{{ item.flats.length }} {{ item.flats.length === 1 ? language.dob_kv_1[15] : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? language.dob_kv_1[16] : language.dob_kv_1[17] }}</span>
                 <span
                   class="uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[12px] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-2 xxl:py-1.5 xl:py-1"
                   v-if="item.created && !Number.isInteger(+item.created[0])">{{ language.rielt_1[10] }}</span>
@@ -525,13 +522,10 @@
                   v-else-if="item.created">{{ item.created }}</span>
               </div>
               <div class="flex flex-col gap-2.5 xxl:gap-1.5 xl:gap-1">
-              <span
-                class="font-medium whitespace-nowrap text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] md:text-[17px] leading-none leading-none">{{ language.rielt_1[19] }} {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} €</span>
-                <span
-                  class="text-[#8A8996] whitespace-nowrap text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px]">{{ isNaN(item.minPrice / item.minSquare) ? "-" : Math.round(item.minPrice / item.minSquare) }} € м²</span>
+              <span class="font-medium whitespace-nowrap text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] md:text-[17px] leading-none leading-none">{{ language.rielt_1[19] }} {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} €</span>
+                <span class="text-[#8A8996] whitespace-nowrap text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px]">{{ isNaN(item.minPrice / item.minSquare) ? "-" : Math.round(item.minPrice / item.minSquare) }} € м²</span>
               </div>
-              <div
-                class="gray-backg flex items-center justify-center w-fit px-3 xxl:px-2.5 xl:px-2 gap-2 xxl:gap-1.5 xl:gap-1">
+              <div class="gray-backg flex items-center justify-center w-fit px-3 xxl:px-2.5 xl:px-2 gap-2 xxl:gap-1.5 xl:gap-1">
                 <img src="../../assets/svg/ruller_icon.svg" class="h-4 xxl:h-3 xl:h-2.5" alt="Линейка">
                 <span class="text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px] whitespace-nowrap">{{ Number.isInteger(item.minSquare) ? item.minSquare : "-" }} м² - {{ Number.isInteger(item.maxSquare) ? item.maxSquare : "-" }} м²</span>
               </div>
