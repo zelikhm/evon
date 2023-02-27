@@ -1,11 +1,27 @@
+<script setup>
+import { Link } from '@inertiajs/inertia-vue3'
+import ChangeLanguage from "@/Components/ChangeLanguage.vue";
+</script>
+
 <template>
   <AppChessScheme v-if="scheme" :flat="selectFlat" @closeChess="scheme = false"></AppChessScheme>
-  <header class="relative h-[13.4vw] lg:h-[130px]">
+  <header class="relative">
+    <div class="bg-[#6435A5] h-[60px] xxl:h-12 xl:h-10 lg:h-12">
+      <div class="_container h-full text-[16px] xxl:text-[13px] xl:text-[11px]">
+        <div class="flex items-center justify-between h-full">
+          <Link href="/houses" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
+            <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="Логотип">
+          </Link>
+          <change-language @selectLanguage="selectLanguage" :selectLang="selectLang" />
+        </div>
+      </div>
+    </div>
+
     <img
       v-if="compilation.company === null || compilation.company.banner === null || compilation.company.banner === 'undefined'"
-      class="w-full absolute top-0 left-0 h-full 1" src="../../assets/bg_links.jpg" alt="">
-    <img v-else class="w-full absolute top-0 left-0 h-full" :src="compilation.company.banner" alt="">
-    <div class="_container flex h-full">
+      class=" h-[13.4vw] lg:h-[130px] w-full absolute top-[60px] xxl:top-12 xl:top-10 lg:top-12 left-0 h-full 1" src="../../assets/bg_links.jpg" alt="">
+    <img v-else class=" h-[13.4vw] lg:h-[130px] w-full absolute top-[60px] xxl:top-12 xl:top-10 lg:top-12 left-0 h-full" :src="compilation.company.banner" alt="">
+    <div class="_container flex h-[13.4vw] lg:h-[130px]">
       <div class="self-end flex items-center gap-7 xxl:gap-6 xl:gap-5 mb-10 xxl:mb-8 xl:mb-6">
         <div
           v-if="compilation.company === null || compilation.company.image === null || compilation.company.image === 'undefined'"
@@ -24,11 +40,6 @@
       </div>
     </div>
   </header>
-  <select name="select">
-    <option :selected="selectLanguage === 0" v-on:click="choseLanguage(0)">RU</option>
-    <option :selected="selectLanguage === 1" v-on:click="choseLanguage(1), choseLanguage">EN</option>
-    <option :selected="selectLanguage === 2" v-on:click="choseLanguage(2)">TR</option>
-  </select>
   <app-modal-album :image="house.images" v-if="album" @close-album="album = false"/>
   <main>
     <div class="_container flex flex-col">
@@ -245,7 +256,7 @@
                   </div>
                 </div>
               </div>
-              <div class="flex flex-col w-full h-fit border border-solid border-[#E5DFEE] rounded-[6px]"
+              <div :tabindex="tabindex" @blur="openSelectLayout = false" class="flex flex-col w-full h-fit border border-solid border-[#E5DFEE] rounded-[6px]"
                    :class="{ 'border__bottom--0': openSelectLayout}">
                 <span
                   class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[12px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">{{ language.dob_kv_1[6] }}</span>
@@ -268,7 +279,7 @@
                   </div>
                 </div>
               </div>
-              <div class="relative h-fit justify-self-end md:justify-self-center md:flex md:items-center md:h-full">
+              <div :tabindex="tabindex" @blur="openDate = false" class="relative h-fit justify-self-end md:justify-self-center md:flex md:items-center md:h-full">
                 <div @click="openDate = !openDate"
                      class="hover__title-block cursor-pointer flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
                   <span class="text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none">
@@ -421,7 +432,20 @@
   import {Navigation, Pagination} from "swiper";
 
   export default {
-    props: ['house', 'dops', 'infos', 'user', 'compilation', 'city_array', 'area_array'],
+    props: {
+      house: [],
+      user: {},
+      dops: [],
+      infos: [],
+      compilation: [],
+      tabindex: {
+        type: Number,
+        required: false,
+        default: 0,
+      },
+      city_array: [],
+      area_array: [],
+    },
     data() {
       return {
         selectFlat: [],
@@ -447,6 +471,7 @@
         frame: [],
         selectLanguage: 0,
         language: {},
+        selectLang: 0
       }
     },
     methods: {

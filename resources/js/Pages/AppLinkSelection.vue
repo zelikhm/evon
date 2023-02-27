@@ -1,6 +1,6 @@
 <script setup>
 import { Link } from '@inertiajs/inertia-vue3'
-
+import ChangeLanguage from "@/Components/ChangeLanguage.vue";
 </script>
 
 <template>
@@ -9,10 +9,21 @@ import { Link } from '@inertiajs/inertia-vue3'
     :class="{'-left__full': !openNotification}"
     @close-notification="openNotification = false"
   />
-  <header class="relative h-[13.4vw] lg:h-[130px]">
-    <img v-if="compilation.company === null || compilation.company.banner === null || compilation.company.banner === 'undefined'" class="w-full object-cover absolute top-0 left-0 h-full" src="../../assets/bg_links.jpg" alt="">
-    <img v-else class="object-cover w-full absolute top-0 left-0 h-full" :src="compilation.company.banner" alt="">
-    <div class="_container flex h-full">
+  <header class="relative">
+    <div class="bg-[#6435A5] h-[60px] xxl:h-12 xl:h-10 lg:h-12">
+      <div class="_container h-full text-[16px] xxl:text-[13px] xl:text-[11px]">
+        <div class="flex items-center justify-between h-full">
+          <Link href="/houses" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
+            <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="Логотип">
+          </Link>
+          <change-language @selectLanguage="selectLanguage" :selectLang="selectLang" />
+        </div>
+      </div>
+    </div>
+
+    <img v-if="compilation.company === null || compilation.company.banner === null || compilation.company.banner === 'undefined'" class="h-[13.4vw] lg:h-[130px] w-full object-cover absolute top-[60px] xxl:top-12 xl:top-10 lg:top-12 left-0 h-full" src="../../assets/bg_links.jpg" alt="">
+    <img v-else class="h-[13.4vw] lg:h-[130px] object-cover w-full absolute top-[60px] xxl:top-12 xl:top-10 lg:top-12 left-0 h-full" :src="compilation.company.banner" alt="">
+    <div class="_container flex h-[13.4vw] lg:h-[130px] ">
       <div class="self-end flex items-center gap-7 xxl:gap-6 xl:gap-5 mb-10 xxl:mb-8 xl:mb-6">
         <div v-if="compilation.company === null || compilation.company.image === null || compilation.company.image === 'undefined'" class="flex-shrink-0 bg-black w-24 xxl:w-20 xl:w-16 h-24 xxl:h-20 xl:h-16 rounded-full flex items-center justify-center">
           <img class="w-10 xxl:w-8 xl:w-6" src="../../assets/svg/city_icon_white.svg" alt="">
@@ -26,11 +37,6 @@ import { Link } from '@inertiajs/inertia-vue3'
         </div>
       </div>
     </div>
-    <select name="select">
-      <option :selected="selectLanguage === 0" v-on:click="choseLanguage(0)">RU</option>
-      <option :selected="selectLanguage === 1" v-on:click="choseLanguage(1), choseLanguage">EN</option>
-      <option :selected="selectLanguage === 2" v-on:click="choseLanguage(2)">TR</option>
-    </select>
   </header>
 
   <main>
@@ -46,8 +52,8 @@ import { Link } from '@inertiajs/inertia-vue3'
                 <div class="flex flex-col" v-for="item in i">
                   <Link :href="href + '/' + item.slug">
                     <div class="relative rounded-[5px]">
-                      <img class="h-[15vw] md:h-[28vw] sm:h-[43vw] w-full object-cover" :src="item.image" v-if="item.image" alt="">
-                      <img class="h-[15vw] md:h-[28vw] sm:h-[43vw w-full object-cover" v-else src="../../assets/no-img-houses-zastroy.jpg" alt="">
+                      <img class="h-[295px] exl:h-[15vw] md:h-[28vw] sm:h-[43vw] w-full object-cover" :src="item.image" v-if="item.image" alt="">
+                      <img class="exl:h-[15vw] md:h-[28vw] sm:h-[43vw w-full object-cover" v-else src="../../assets/no-img-houses-zastroy.jpg" alt="">
                       <div class="absolute flex flex-col justify-between top-0 left-0 w-full h-full text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px]">
                         <span class="bg-[#30CB49] uppercase self-end text-white leading-none px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 m-4 xxl:m-3 xl:m-2.5 rounded-[3px]" v-if="item.created && !Number.isInteger(+item.created[0])">{{ item.created }}</span>
                         <span class="bg-[#E84680] uppercase self-end text-white leading-none px-2 xxl:px-1.5 xl:px-1 py-1.5 xl:py-1 m-4 xxl:m-3 xl:m-2.5 rounded-[3px]" v-else-if="item.created">{{ item.created }}</span>
@@ -117,6 +123,7 @@ export default {
       count: 0,
       selectLanguage: 0,
       language: {},
+      selectLang: 0
     }
   },
   methods: {
