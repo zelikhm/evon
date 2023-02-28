@@ -617,6 +617,8 @@
             this.object.city = this.selectCity
             this.object.area = this.selectRegion
 
+            console.log(this.selectRegion, this.object.area);
+
             let formData = new FormData();
 
             let coord = this.object.coordinates.split(' ')
@@ -626,7 +628,7 @@
             formData.append('description', this.object.description);
             formData.append('description_en', this.object.description_en);
             formData.append('description_tr', this.object.description_tr);
-            formData.append('city', this.selectCity);
+            formData.append('city', this.selectCity.title);
             formData.append('area', this.selectRegion !== 'Не указано' ? this.selectRegion.title : null);
             formData.append('latitude', +coord[0]);
             formData.append('longitude', +coord[1]);
@@ -684,6 +686,11 @@
                 this.object.info.push(this.infos.find(item => item.name_tr === value).id)
               }
             })
+
+            this.object.city = this.selectCity
+            this.object.area = this.selectRegion
+
+            console.log(this.selectRegion);
 
             let formData = new FormData();
 
@@ -940,7 +947,14 @@
       if (this.house !== undefined) {
 
         let city = this.city.find(item => item.title === this.house.city);
-        let area = this.regions.find(item => item.title === this.house.area);
+        let area = city.regions.find(item => item.title === this.house.area);
+
+        this.regions = city.regions;
+        if (this.regions.length !== 0) {
+          this.regions.unshift({'id': -1, 'title': 'Не указано'})
+        } else {
+          this.regions.push({'id': -1, 'title': 'Не указано'})
+        }
 
         this.object.title = this.house.title
         this.object.description = this.house.description
