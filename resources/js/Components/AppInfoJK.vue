@@ -440,7 +440,7 @@
   import Multiselect from '@vueform/multiselect'
   // import Multiselect from 'vue-multiselect'
   import {QuillEditor} from '@vueup/vue-quill'
-  import '@vueup/vue-quill/dist/vue-quill.snow.css';
+  import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
   export default {
     components: {
