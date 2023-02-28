@@ -1203,7 +1203,7 @@
 
         let object6 = [];
 
-        if (this.filters.builder !== '' && this.filters.builder !== 'Не важно') {
+        if (this.filters.builder !== '' && this.filters.builder !== 'Не важно' && this.filters.builder !== null) {
           object5.forEach(item => {
             if (item.user !== null) {
               if (item.user.first_name !== null) {
