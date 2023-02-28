@@ -328,7 +328,7 @@
           <div class="flex flex-col items-start lg:gap-2">
             <h2
               class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] lg:text-[20px] whitespace-nowrap text-center">
-              {{ language.ob[23] }}</h2>
+              {{ language.ob[23] }} {{ isSearch !== '' ? '-' + isSearch : '' }}</h2>
             <span class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center" v-if="!preloader"> {{ count_house }} {{ language.rielt_1[9] }}</span>
             <span class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center" v-else>  <div class="minLoader"></div>  {{ language.rielt_1[9] }}</span>
           </div>
@@ -653,7 +653,7 @@
         openFilter: false,
         borderType: false,
         valueSelectType: null,
-        isSearch: "Объекты",
+        isSearch: '',
         types: [
           {type: 'Новостройка', id: 0},
           {type: 'Виллы', id: 1}
@@ -1005,7 +1005,7 @@
       let href = window.location.href
       if (href.split('#').at(-1) === 'search') {
 
-        this.isSearch = `Поиск: ${localStorage.getItem('searchData')}`
+        this.isSearch = `${localStorage.getItem('searchData')}`
 
         axios.post('/api/house/search', {
           title: localStorage.getItem('searchData'),
