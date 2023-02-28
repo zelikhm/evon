@@ -50,7 +50,7 @@
 
 <script>
 export default {
-  props:['chats', 'user'],
+  props:['chats', 'user', 'language', 'selectLanguage'],
   data() {
     return {
       chatProfile: false,
@@ -75,6 +75,21 @@ export default {
     }
   },
   mounted() {
+
+    this.month.ru = {
+      0: this.language.month[0],
+      1: this.language.month[1],
+      2: this.language.month[2],
+      3: this.language.month[3],
+      4: this.language.month[4],
+      5: this.language.month[5],
+      6: this.language.month[6],
+      7: this.language.month[7],
+      8: this.language.month[8],
+      9: this.language.month[9],
+      10: this.language.month[10],
+      11: this.language.month[11],
+    }
 
     this.chats_array = this.chats;
 
@@ -102,19 +117,19 @@ export default {
 
       if(chat.from.id !== this.user.id) {
         if(chat.from.role === 0) {
-          return 'риелтор'
+          return this.language.ob[45]
         } else if (chat.from.role === 1) {
-          return 'застройщик'
+          return this.language.ob[46]
         } else {
-          return 'Модератор'
+          return this.language.ob[43]
         }
       } else {
         if(chat.to.role === 0) {
-          return 'риелтор'
+          return this.language.ob[45]
         } else if (chat.to.role === 1) {
-          return 'застройщик'
+          return this.language.ob[46]
         } else {
-          return 'Модератор'
+          return this.language.ob[43]
         }
       }
 
@@ -137,6 +152,24 @@ export default {
 
     },
 
+  },
+  watch: {
+    language(newItem) {
+      this.month.ru = {
+        0: this.language.month[0],
+        1: this.language.month[1],
+        2: this.language.month[2],
+        3: this.language.month[3],
+        4: this.language.month[4],
+        5: this.language.month[5],
+        6: this.language.month[6],
+        7: this.language.month[7],
+        8: this.language.month[8],
+        9: this.language.month[9],
+        10: this.language.month[10],
+        11: this.language.month[11],
+      }
+    }
   },
   computed: {
     searchChat() {

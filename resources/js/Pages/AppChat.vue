@@ -24,11 +24,14 @@
           :class="{'left__625': openContactList}"
           :chats="chats"
           :user="user"
+          :language="language"
+          :selectLanguage="selectLanguage"
         />
         <app-chat-message
           v-if="openChat"
           :chat="chat_object"
           :user="user"
+          :language="language"
         ></app-chat-message>
       </div>
     </div>

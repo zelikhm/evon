@@ -13,7 +13,7 @@
           <input type="radio" value="1" id="pay_1" name="payd" >
           <span class="text-[18px] xxl:text-[15px] xl:text-[13px]" for="pay_1">{{ item.days }} {{ item.title }}</span>
         </label>
-        <span class="text-[18px] xxl:text-[15px] xl:text-[13px]">{{ item.price }} €</span>
+        <span class="text-[18px] xxl:text-[15px] xl:text-[13px]">{{ item.price }} TL</span>
       </div>
       <button class="login__btn--bg  rounded-[5px] w-full py-5 xxl:py-4 xl:py-3" v-on:click="payment()" v-if="preloader === false">
         <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">{{ language.prof_zastr[7] }}</span>

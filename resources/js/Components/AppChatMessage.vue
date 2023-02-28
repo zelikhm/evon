@@ -80,7 +80,7 @@
     </div>
     <div
       class="bg-white h-[72px] xxl:h-[60px] xxl:h-[50px] flex items-center px-7 xxl:px-5 xl:px-4 py-5 xxl:py-4 xl:py-3">
-      <input placeholder="Написать сообщение..." type="text" v-model="message"
+      <input :placeholder="language.ob[44]" type="text" v-model="message"
              class="focus:ring-0 w-full text-lg xxl:text-[15px] xl:text-[13px] leading-none"
              v-on:keyup.enter="sendMessage()"
       >
@@ -108,8 +108,23 @@
 
 <script>
   export default {
-    props: ['user', 'chat'],
+    props: ['user', 'chat', 'language'],
     mounted() {
+
+      this.month.ru = {
+        0: this.language.month[0],
+        1: this.language.month[1],
+        2: this.language.month[2],
+        3: this.language.month[3],
+        4: this.language.month[4],
+        5: this.language.month[5],
+        6: this.language.month[6],
+        7: this.language.month[7],
+        8: this.language.month[8],
+        9: this.language.month[9],
+        10: this.language.month[10],
+        11: this.language.month[11],
+      }
 
       if(this.chat.from.id === this.user.id) {
         this.from_user = this.chat.to;
@@ -171,6 +186,24 @@
         data.setHours(data.getHours() + 3);
 
         return (data.getHours() < 10 ? '0' + data.getHours() : data.getHours()) + ':' + (data.getMinutes() < 10 ? '0' + data.getMinutes() : data.getMinutes())
+      }
+    },
+    watch: {
+      language(newItem) {
+        this.month.ru = {
+          0: this.language.month[0],
+          1: this.language.month[1],
+          2: this.language.month[2],
+          3: this.language.month[3],
+          4: this.language.month[4],
+          5: this.language.month[5],
+          6: this.language.month[6],
+          7: this.language.month[7],
+          8: this.language.month[8],
+          9: this.language.month[9],
+          10: this.language.month[10],
+          11: this.language.month[11],
+        }
       }
     },
     data() {

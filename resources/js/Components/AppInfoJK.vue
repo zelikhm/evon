@@ -437,7 +437,7 @@
 
 <script>
 
-  import Multiselect from '@vueform/multiselect'
+  // import Multiselect from '@vueform/multiselect'
   import VueMultiselect from 'vue-multiselect'
   import {QuillEditor} from '@vueup/vue-quill'
   import '@vueup/vue-quill/dist/vue-quill.snow.css';
@@ -899,7 +899,7 @@
       },
     },
     components: {
-      Multiselect, VueMultiselect, QuillEditor,
+      VueMultiselect, QuillEditor,
     },
     mounted() {
       let link = +window.location.href.split('/').at(-1)
