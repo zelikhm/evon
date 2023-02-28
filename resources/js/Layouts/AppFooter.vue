@@ -8,7 +8,6 @@ import { Link } from '@inertiajs/inertia-vue3'
       <div class="footer__border-b flex justify-between pt-14 xxl:pt-10 xl:pt-8 pb-10 xxl:pb-8 xl:pb-6">
         <Link href="/" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
           <img src="../../assets/svg/fotter_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="Логотип">
-          <span class="sm:hidden uppercase text-[#6435A5] font-semibold">Evon</span>
         </Link>
         <div class="flex gap-12 xxl:gap-10 xl:gap-8 text-[#3B3A45]">
           <a href="mailto:evon.information@gmail.com">evon.information@gmail.com</a>

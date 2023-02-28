@@ -142,7 +142,7 @@
               <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[13px]">{{ language.rielt_1[22] }}, м²</span>
             </div>
           </div>
-          <div class="flex flex-col pb-14 xxl:pb-10 xl:pb-8">
+          <div class="flex flex-col pb-14 xxl:pb-10 xl:pb-8" v-if="house.description">
             <span class="uppercase font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] pb-5 xxl:pb-4 xl:pb-3 leading-none">{{ language.form_dob_ob[0] }}</span>
             <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-if="fullDescription || house.description.length < 300" v-html="selectLanguage === 0 ? house.description : selectLanguage === 1 ? house.description_en : house.description_tr"></p>
             <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4" v-else v-html="selectLanguage === 0 ? house.description !== null ? house.description.slice(0, 300) : house.description : selectLanguage === 1 ? house.description_en !== null ? house.description_en.slice(0, 300) : house.description_en : house.description_tr !== null ? house.description_tr.slice(0, 300) : house.description_tr + '...'"></p>

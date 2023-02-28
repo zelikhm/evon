@@ -11,7 +11,6 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
       <div class="flex items-center justify-between h-full ">
         <Link href="/" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
           <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="Логотип">
-          <span class="sm:hidden uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon</span>
         </Link>
         <div class="flex items-center gap-7 xxl:gap-5 lg:gap-2 text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[14px]">
           <change-language @selectLanguage="selectLanguage" :selectLang="selectLang" />
@@ -37,7 +36,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
 
     <div class="_container h-[60px] xxl:h-12 xl:h-10 lg:h-12">
       <div class="flex items-center justify-between h-full ">
-        <div class="flex gap-20 xxl:gap-16 xl:gap-12 lg:gap-2 items-center">
+        <div class="flex gap-20 xxl:gap-16 xl:gap-12 lg:gap-2 items-baseline">
           <div @click="openBurgerAgent = !openBurgerAgent" class="hidden lg:flex relative flex-col justify-evenly py-0.5 items-center cursor-pointer h-8 w-8 rounded-[5px] bg-[#6435A5]">
             <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
             <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
@@ -45,7 +44,6 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
           </div>
           <Link href="/houses" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
             <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="Логотип">
-            <span class="lg:hidden uppercase text-white text-lg xxl:text-sm xl:text-xs lg:text-sm font-semibold">Evon</span>
           </Link>
           <div class="lg:hidden text-white text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[15px] flex gap-20 xxl:gap-16 xl:gap-12 x:gap-10">
             <Link href="/houses" :class="{ 'opacity-60': $page.url !== '/houses' }" class="whitespace-nowrap">
@@ -75,12 +73,12 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
             </div>
             </Link>
             <change-language @selectLanguage="selectLanguage" :selectLang="selectLang" />
-            <div class="lg:hidden flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
+            <div class="lg:hidden relative flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
               <button @click="openProfile" class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
                 <span class="text-white text-lg xxl:text-sm xl:text-xs leading-none whitespace-nowrap">{{ user.first_name + ' ' + user.last_name }}</span>
                 <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелка вниз">
               </button>
-              <div v-if="openProfileMenu" class="overflow-hidden border border-solid border-[#E5DFEE] absolute z-50 top-[90%] flex flex-col bg-white rounded-[5px]">
+              <div v-if="openProfileMenu" class="overflow-hidden border border-solid border-[#E5DFEE] absolute z-50 top-[90%] right-0 flex flex-col bg-white rounded-[5px]">
                 <div class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
                   <span class="leading-none whitespace-nowrap cursor-default">Подписка PRO</span>
                   <span class="leading-none whitespace-nowrap cursor-default">6 дней</span>
@@ -107,7 +105,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
   <header v-if="user !== null && user.role === 1 || user !== null && user.role === 2 || user !== null && user.role === 3" class="relative bg-[#6435A5] leading-[100%]">
     <div class="_container h-[60px] xxl:h-12 xl:h-10">
       <div class="flex items-center justify-between h-full ">
-        <div class="flex gap-20 xxl:gap-16 xl:gap-12 lg:gap-2 items-center">
+        <div class="flex gap-20 xxl:gap-16 xl:gap-12 lg:gap-2 items-baseline">
           <div class="hidden lg:flex relative flex-col justify-evenly py-0.5 items-center cursor-pointer h-6 w-6 rounded-[5px] bg-[#6435A5]">
             <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
             <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
@@ -115,7 +113,6 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
           </div>
           <Link href="/profile/houses" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
             <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4" alt="Логотип">
-            <span class="sm:hidden uppercase text-white text-lg xxl:text-sm xl:text-xs font-semibold">Evon</span>
           </Link>
           <div class="text-white text-[16px] xxl:text-[13px] xl:text-[11px] flex gap-20 xxl:gap-16 xl:gap-12 x:gap-10">
             <Link href="/profile/houses" :class="{ 'opacity-60': $page.url !== '/profile/houses' }">{{ language.menu_zastr[0] }}</Link>
