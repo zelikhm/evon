@@ -21,8 +21,8 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
       </div>
     </div>
 
-    <img v-if="compilation.company === null || compilation.company.banner === null || compilation.company.banner === 'undefined'" class="h-[13.4vw] lg:h-[130px] w-full object-cover absolute top-[60px] xxl:top-12 xl:top-10 lg:top-12 left-0 h-full" src="../../assets/bg_links.jpg" alt="">
-    <img v-else class="h-[13.4vw] lg:h-[130px] object-cover w-full absolute top-[60px] xxl:top-12 xl:top-10 lg:top-12 left-0 h-full" :src="compilation.company.banner" alt="">
+    <img v-if="compilation.company === null || compilation.company.banner === null || compilation.company.banner === 'undefined'" class="h-[13.4vw] lg:h-[130px] w-full object-cover absolute top-[60px] xxl:top-12 xl:top-10 lg:top-12 left-0" src="../../assets/bg_links.jpg" alt="">
+    <img v-else class="h-[13.4vw] lg:h-[130px] object-cover w-full absolute top-[60px] xxl:top-12 xl:top-10 lg:top-12 left-0" :src="compilation.company.banner" alt="">
     <div class="_container flex h-[13.4vw] lg:h-[130px] ">
       <div class="self-end flex items-center gap-7 xxl:gap-6 xl:gap-5 mb-10 xxl:mb-8 xl:mb-6">
         <div v-if="compilation.company === null || compilation.company.image === null || compilation.company.image === 'undefined'" class="flex-shrink-0 bg-black w-24 xxl:w-20 xl:w-16 h-24 xxl:h-20 xl:h-16 rounded-full flex items-center justify-center">
