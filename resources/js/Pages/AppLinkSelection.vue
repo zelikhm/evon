@@ -16,7 +16,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
           <Link href="/houses" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
             <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="Логотип">
           </Link>
-          <change-language @selectLanguage="selectLanguage" :selectLang="selectLang" />
+          <change-language @selectLanguage="choseLanguage" :selectLang="selectLanguage" />
         </div>
       </div>
     </div>
@@ -66,7 +66,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
                     </div>
                     <div class="text-[#1E1D2D] flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 p-5 xxl:p-4 xl:p-3">
                       <span class="font-bold text-[20px] xxl:text-[16px] xl:text-[13px] lg:text-[18px] leading-none">{{ compilation.isVisible === 1 ? item.title : language.ob[20] + `№${item.id + 10000}` }}</span>
-                      <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">{{ language.rielt_1[19] }} {{ getMinPrice(item).toFixed(0) }} €</span>
+                      <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">{{ language.rielt_1[19] }} {{ getMinPrice(item) }} €</span>
                     </div>
                   </Link>
                 </div>
@@ -147,7 +147,7 @@ export default {
 
       object.sort((a, b) => a - b);
 
-      return object.length > 0 ? object[0].toFixed(2) : 0;
+      return object.length > 0 ? object[0].toFixed(0) : 0;
 
     },
     getMaxPrice(house) {
@@ -163,7 +163,7 @@ export default {
     },
     choseLanguage(n) {
       this.selectLanguage = n;
-
+console.log(n);
       if(this.selectLanguage === 0) {
         this.language = this.$ru;
       } else if (this.selectLanguage === 1) {

@@ -35,9 +35,9 @@ import { Link } from '@inertiajs/inertia-vue3'
               <img v-else src="../../assets/no-img-houses-zastroy.jpg" class="w-full h-full rounded-[8px]" alt="">
               <div class="seek opacity-0 absolute top-0 left-0 immovables__overlay w-full h-full rounded-[8px]"></div>
               <div class="hide absolute flex gap-2 top-0 left-0 p-5 xxl:p-4 xl:p-3">
-                <span class="bg-[#E84680] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5 text-white text-sm xxl:text-xs xl:text-[10px] leading-none" v-if="house.active === 0">на модерации</span>
+                <span class="bg-[#E84680] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5 text-white text-sm xxl:text-xs xl:text-[10px] leading-none" v-if="house.active === 0">{{ language.ob[39] }}</span>
                 <span class="bg-[#E84680] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5 text-white text-sm xxl:text-xs xl:text-[10px] leading-none" v-if="house.active === 1">не прошло модерацию</span>
-                <span class="bg-[#30CB49] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5 text-white text-sm xxl:text-xs xl:text-[10px] leading-none" v-if="house.active === 2">опубликованно</span>
+                <span class="bg-[#30CB49] rounded-[3px] px-2 xxl:px-1.5 xl:px-1 py-1.5 xxl:py-1 xl:py-0.5 text-white text-sm xxl:text-xs xl:text-[10px] leading-none" v-if="house.active === 2">{{ language.menu_zastr_1[8] }}</span>
               </div>
               <div class="seek opacity-0 transition-all absolute z-10 top-1/2 w-full flex flex-col gap-3 xxl:gap-2 xl:gap-1.5 sm:gap-1 items-center -translate-x-1/2 -translate-y-1/2 left-1/2">
                 <Link :href="'/profile/edit/' + house.slug + '#edit'" class="immovables__button--card flex items-center justify-between w-[30%] lg:w-[50%] border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5 sm:py-1">

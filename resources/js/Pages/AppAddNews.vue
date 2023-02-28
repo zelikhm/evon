@@ -146,6 +146,8 @@
         this.language = this.$tur;
       }
 
+      this.selectJK = this.language.ob[40];
+
       let link = window.location.href.split('#')
       let link2 = window.location.href.split('/')
       if (link[1] !== undefined) {

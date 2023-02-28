@@ -72,6 +72,7 @@
         <app-chess-grid v-if="activeChess"
                         :flats="house.frames[frameId].flats"
                         :house="house"
+                        :language="language"
                         @target-flat="targetFlat"
         />
         <app-chess-list v-if="activeList"

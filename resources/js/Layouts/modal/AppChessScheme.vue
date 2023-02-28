@@ -20,10 +20,10 @@
         <div class="flex flex-col text-white">
           <div class="flex gap-4 xxl:gap-3 xl:gap-2.5 items-center pb-3 xxl:pb-2.5 xl:pb-2">
             <span class="text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none">№{{ flat.number }}</span>
-            <span class="text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none w-max">{{ flat.status == 0 ? "Акция" : flat.status == 1 ? "Перепродажа" : flat.status == 2 ? "Бронь" : flat.status == 3 ? "Продажи закрыты" : "В продаже" }}</span>
+            <span class="text-base xxl:text-sm xl:text-xs lg:text-[15px] leading-none w-max">{{ flat.status == 0 ? language.dob_kv_1[10] : flat.status == 1 ? language.dob_kv_1[11] : flat.status == 2 ? language.dob_kv_1[12] : flat.status == 3 ? language.dob_kv_1[13] : language.dob_kv_1[14] }}</span>
           </div>
           <span class="text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px] font-semibold leading-none pb-4 xxl:pb-3 xl:pb-2.5">{{ flat.price.toLocaleString('ru') }} €</span>
-          <span class="text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14x] leading-none pb-5 xxl:pb-4 xl:pb-3">{{ Math.round(flat.price / flat.square).toLocaleString('ru') }} € за м²</span>
+          <span class="text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14x] leading-none pb-5 xxl:pb-4 xl:pb-3">{{ Math.round(flat.price / flat.square).toLocaleString('ru') }} € м²</span>
           <div class="chess__bg--ruller flex items-center gap-1 w-fit px-2 xl:px-1.5 py-1.5 xl:py-1">
             <svg class="w-4.5 xxl:w-4 xl:w-3.5" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0_150_2046)">
@@ -48,7 +48,8 @@
 
 export default {
   props: {
-    flat: []
+    flat: [],
+    language: {}
   },
   data() {
     return {

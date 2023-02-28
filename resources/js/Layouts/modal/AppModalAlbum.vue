@@ -21,8 +21,8 @@
       <div class="absolute top-0 lg:top-full left-[102%] lg:left-1/2 lg:-translate-x-1/2 lg:mt-5 w-[36%] lg:w-fit flex flex-col h-fit gap-4 xxl:gap-3 xl:gap-2">
         <button v-for="item in categories" @click="changeCategory(item)">
           <div class="bg-white flex justify-between gap-5 xxl:gap-4 xl:gap-3 items-center p-7 xxl:p-5 xl:p-4 lg:p-3 rounded-[10px] news__line" v-if="item.count > 0">
-            <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none whitespace-nowrap">{{ item.title }}</span>
-            <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] whitespace-nowrap">{{ item.count }} фото</span>
+            <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none whitespace-nowrap">{{ item.id === 0 ? language.alb[0] : item.id === 1 ? language.alb[1] : item.id === 2 ? language.alb[2] : language.alb[3] }}</span>
+            <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] whitespace-nowrap">{{ item.count }} {{ language.ob[37] }}</span>
           </div>
         </button>
       </div>
@@ -45,7 +45,7 @@ import { ref } from 'vue'
 import { FreeMode, Navigation, Pagination} from "swiper";
 
 export default {
-  props: ['image'],
+  props: ['image', 'language'],
   components: {
     Swiper,
     SwiperSlide,

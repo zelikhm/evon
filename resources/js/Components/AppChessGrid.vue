@@ -42,7 +42,7 @@
               </div>
             </div>
           </div>
-          <span class="text-[#8A8996] text-[12px] xxl:text-[10px] xl:text-[8px] lg:text-[11px] leading-none ml-1">Этажи</span>
+          <span class="text-[#8A8996] text-[12px] xxl:text-[10px] xl:text-[8px] lg:text-[11px] leading-none ml-1">{{ language.ob[38] }}</span>
         </div>
       </div>
     </div>
@@ -51,7 +51,7 @@
 
 <script>
 export default {
-  props: ['flats', 'house'],
+  props: ['flats', 'house', 'language'],
   data() {
     return {
     }

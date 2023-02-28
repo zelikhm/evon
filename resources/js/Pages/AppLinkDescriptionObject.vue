@@ -12,7 +12,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
           <Link href="/houses" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
             <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="Логотип">
           </Link>
-          <change-language @selectLanguage="selectLanguage" :selectLang="selectLang" />
+          <change-language @selectLanguage="choseLanguage" :selectLang="selectLanguage" />
         </div>
       </div>
     </div>
@@ -40,7 +40,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
       </div>
     </div>
   </header>
-  <app-modal-album :image="house.images" v-if="album" @close-album="album = false"/>
+  <app-modal-album :image="house.images" v-if="album" @close-album="album = false" :language="language" />
   <main>
     <div class="_container flex flex-col">
       <div class="decription__head rounded-[12px] p-5 xxl:p-4 xl:p-3 my-7 xxl:my-5 xl:my-4">
@@ -187,7 +187,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
           <div class="pb-16 xxl:pb-12 xl:pb-10">
             <div
               class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none mb-7 xxl:mb-5 xl:mb-4">
-              Корпуса ({{ frames.length }})
+              {{ language.ob[41] }} ({{ frames.length }})
             </div>
             <div class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3">
               <div :class="{'decription__head': item.active === 1}" @click="targetFrame(item)"

@@ -309,7 +309,11 @@
     "34": "Done",
     "35": "Project",
     "36": "Enter password",
-    "37": "Photo"
+    "37": "Photo",
+    "38": "Floors",
+    "39": "on moderation",
+    "40": "choose a project",
+    "41": "Blok"
   },
   "reg": {
     "0": "Registration on the platform",
