@@ -439,7 +439,7 @@
 
   // import Multiselect from 'vue-multiselect'
   import {QuillEditor} from '@vueup/vue-quill'
-  // import '@vueup/vue-quill/dist/vue-quill.snow.css'
+  import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
   import Multiselect from '@vueform/multiselect'
 
@@ -1043,3 +1043,5 @@
     color: red;
   }
 </style>
+
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
