@@ -45,7 +45,7 @@
         <input
           v-model="email"
           class="text-[#1E1D2D] border-transparent focus:border-transparent focus:ring-0 text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
-          type="tel"
+          type="email"
           id="telephone"
           maxlength="100"
         >

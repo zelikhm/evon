@@ -552,6 +552,10 @@
                :allHouse="readyHouses"
                :houses="filteredObjects"
                :city="city_map"
+               :language="language"
+               :cityes="city"
+               :areas="areas"
+               :selectLanguage="selectLanguage"
                :user="user"/>
     </div>
   </div>

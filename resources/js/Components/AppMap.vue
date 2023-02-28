@@ -36,7 +36,7 @@
                         class="text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] font-medium leading-none">{{
                     house.title }}
                   </Link>
-                  <span class="text-[#8A8996] text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ house.city }}, {{ house.area }}</span>
+                  <span class="text-[#8A8996] text-[16px] xxl:text-[14px] xl:text-[12px] leading-none">{{ getCity(house.city) }}, {{ getArea(house.area) }}</span>
                 </div>
               </div>
               <div class="flex gap-2.5 xxl:gap-2 xl:gap-1.5">
@@ -53,7 +53,7 @@
               <div
                 class="flex justify-between items-center mb-5 xxl:mb-4 xl:mb-3 text-[18px] xxl:text-[15px] xl:text-[13px]">
                 <span class="text-[#1E1D2D] font-medium leading-none">от {{ house.minPrice !== undefined ? house.minPrice.toLocaleString('ru') : 0  }} €</span>
-                <span class="text-[#8A8996] leading-none">{{ house.flats.length }} {{ house.flats.length === 1 ? "Квартира" : house.flats.length === 2 || house.flats.length === 3 || house.flats.length === 4 ? "Квартиры" : "Квартир" }}</span>
+                <span class="text-[#8A8996] leading-none">{{ house.flats.length }} {{ house.flats.length === 1 ? language.dob_kv_1[15] : house.flats.length === 2 || house.flats.length === 3 || house.flats.length === 4 ? language.dob_kv_1[16] : language.dob_kv_1[17] }}</span>
               </div>
               <div class="gray-backg flex items-center gap-1 w-fit px-2 xl:px-1.5 py-1.5 xl:py-1 mb-7 xxl:mb-5 xl:mb-4">
                 <img src="../../assets/svg/ruller_icon.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
@@ -63,7 +63,7 @@
                 <button @click="$emit('open-add-selections', house)"
                         class="register__button--white w-full flex items-center justify-center gap-3 xxl:gap-2.5 xl:gap-2  border border-solid border-[#6435A5] rounded-[4px] py-2 xxl:py-1.5 xl:py-1">
                   <span
-                    class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">В подборку</span>
+                    class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">{{ language.rielt_1[14] }}</span>
                   <svg width="16" height="16" class="w-4.5 xxl:w-4 xl:w-3.5" viewBox="0 0 16 16" fill="none"
                        xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_519_1862)">
@@ -81,13 +81,13 @@
                 <button v-if="house.favorite" @click="removeFavorite"
                         class="register__button--white w-full flex items-center justify-center gap-3 xxl:gap-2.5 xl:gap-2 border border-solid border-[#6435A5] rounded-[4px] py-2 xxl:py-1.5 xl:py-1">
                   <span
-                    class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">В избранном</span>
+                    class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">{{ language.rielt_1[16] }}</span>
                   <img src="../../assets/svg/heart_icon_pink.svg" class="w-4 xxl:w-3.5 xl:w-3" alt="">
                 </button>
                 <button v-else @click="addFavorite"
                         class="register__button--white w-full flex items-center justify-center gap-3 xxl:gap-2.5 xl:gap-2 border border-solid border-[#6435A5] rounded-[4px] py-2 xxl:py-1.5 xl:py-1">
                   <span
-                    class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">В избранное</span>
+                    class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none whitespace-nowrap">{{ language.rielt_1[16] }}</span>
                   <svg width="16" height="16" class="w-4 xxl:w-3.5 xl:w-3" viewBox="0 0 16 16" fill="none"
                        xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_158_957)">
@@ -114,7 +114,7 @@
 
 <script>
   export default {
-    props: ['houses_array', 'houses', 'state', 'user', 'city', 'allHouse'],
+    props: ['houses_array', 'houses', 'state', 'user', 'city', 'allHouse', 'language', 'selectLanguage', 'cityes', 'areas'],
     data() {
       return {
         openedMarkerID: null,
@@ -143,6 +143,32 @@
       }
     },
     methods: {
+      getCity(city) {
+        let name = this.cityes.find(item => item.title === city);
+
+        if(name !== undefined) {
+          if(this.selectLanguage === 0) {
+            return name.title;
+          } else if(this.selectLanguage === 1) {
+            return name.title_en !== undefined ? name.title_en : '';
+          } else if(this.selectLanguage === 2) {
+            return name.title_tr !== undefined ? name.title_tr : '';
+          }
+        }
+      },
+      getArea(area) {
+        let name = this.areas.find(item => item.title === area);
+
+        if(name !== undefined) {
+          if(this.selectLanguage === 0) {
+            return name.title;
+          } else if(this.selectLanguage === 1) {
+            return name.title_en !== undefined ? name.title_en : '';
+          } else if(this.selectLanguage === 2) {
+            return name.title_tr !== undefined ? name.title_tr : '';
+          }
+        }
+      },
       addFavorite() {
         axios.post('/api/favorite/add', {
           user_id: this.user.id,

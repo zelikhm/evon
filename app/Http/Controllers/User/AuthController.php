@@ -75,7 +75,7 @@ class AuthController extends Controller
     $curl = curl_init();
 
     $message = "<html><head></head><body><p>
-                Код доступа к приложению: $rand<br>
+                Code: $rand<br>
                 </p></body></html>";
 
     curl_setopt_array($curl, array(

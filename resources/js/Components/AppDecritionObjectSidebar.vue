@@ -47,10 +47,10 @@
           <img class="w-14 xxl:w-12 xl:w-10 h-14 xxl:h-12 xl:h-10 rounded-full object-cover" v-else src="../../assets/no-img-houses.jpg" alt="">
           <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5">
             <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">{{ item.name }}</span>
-            <span class="text-[14px] xxl:text-[12px] xl:text-[10px] text-[#8A8996] leading-none" v-if="item.status !== 'null'">{{ item.status }}</span>
+            <span class="text-[14px] xxl:text-[12px] xl:text-[10px] text-[#8A8996] leading-none" v-if="item.status !== 'null' && item.status !== null">{{ item.status }}</span>
           </div>
         </div>
-        <div class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none pb-4 xxl:pb-3 xl:pb-2.5"><span class="text-[#8A8996]">{{ language.dob_ob_2[14] }}:</span> {{ item.link }}</div>
+        <div class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none pb-4 xxl:pb-3 xl:pb-2.5"><span class="text-[#8A8996]" v-if="item.link !== 'null' && item.link !== null">{{ language.dob_ob_2[14] }}:</span> {{ item.link }}</div>
         <div class="flex cursor-pointer mb-4 xxl:mb-3 xl:mb-2.5 bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]" v-if="item.phone">
           <img src="../../assets/svg/chat_tel_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
           <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ item.phone }}</span>
