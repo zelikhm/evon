@@ -69,7 +69,7 @@
               <div v-if="openSelectCity"
                    class="max-h-[215px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
                 <div class="relative w-full p-5 xxl:p-4 xl:p-3">
-                  <input @click.stop="sea" v-model="searchValue"
+                  <input @click.stop="noDelete" v-model="searchValue"
                          class="py-3 xxl:py-2.5 xl:py-2 pl-10 xxl:pl-8 xl:pl-6 focus:ring-[#6435A5] focus:border-[#6435A5] w-full text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] rounded-[6px] leading-none border border-solid border-[#E5DFEE]"
                          type="text">
                   <img class="absolute top-1/2 -translate-y-1/2 translate-x-1/2 w-4.5 xxl:w-4 xl:w-3.5"
@@ -703,6 +703,9 @@
       }
     },
     methods: {
+      noDelete() {
+      //  noDelete
+      },
       getArea(area) {
 
         let name = this.areas.find(item => item.title === area);
@@ -1078,6 +1081,12 @@
 
       this.updateHouses()
     },
+    mounted() {
+      // NO DELETE
+      document.addEventListener('click', (e) => {
+        this.openSelectCity = false
+      })
+    },
     computed: {
       filteredCity() {
         if (this.searchValue !== null) {
@@ -1358,6 +1367,7 @@
         this.map_array = object10;
         this.count_house = this.houses_array.length;
         this.updatedMap();
+        return this.houses_array.splice(0, this.count);
         return this.houses_array.splice(0, this.count);
       }
     },

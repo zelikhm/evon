@@ -19,8 +19,8 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
 
     <img
       v-if="compilation.company === null || compilation.company.banner === null || compilation.company.banner === 'undefined'"
-      class=" h-[13.4vw] lg:h-[130px] w-full absolute top-[60px] xxl:top-12 xl:top-10 lg:top-12 left-0 h-full 1" src="../../assets/bg_links.jpg" alt="">
-    <img v-else class=" h-[13.4vw] lg:h-[130px] w-full absolute top-[60px] xxl:top-12 xl:top-10 lg:top-12 left-0 h-full" :src="compilation.company.banner" alt="">
+      class=" h-[13.4vw] lg:h-[130px] w-full absolute top-[60px] xxl:top-12 xl:top-10 lg:top-12 left-0" src="../../assets/bg_links.jpg" alt="">
+    <img v-else class=" h-[13.4vw] lg:h-[130px] w-full absolute top-[60px] xxl:top-12 xl:top-10 lg:top-12 left-0" :src="compilation.company.banner" alt="">
     <div class="_container flex h-[13.4vw] lg:h-[130px]">
       <div class="self-end flex items-center gap-7 xxl:gap-6 xl:gap-5 mb-10 xxl:mb-8 xl:mb-6">
         <div

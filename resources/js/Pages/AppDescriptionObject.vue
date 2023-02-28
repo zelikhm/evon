@@ -40,11 +40,11 @@
   />
   <main v-if="!chess">
     <div class="_container flex flex-col">
-      <div class="decription__head h-20 xxl:h-16 xl:h-12 md:h-fit rounded-[12px] my-7 xxl:my-5 xl:my-4">
-        <div class="flex md:flex-col items-center justify-between">
+      <div class="decription__head h-20 xxl:h-16 xl:h-12 lg:h-fit rounded-[12px] my-7 xxl:my-5 xl:my-4">
+        <div class="flex lg::flex-col items-center justify-between">
 
           <div class="flex flex-col p-4 xxl:p-3 xl:p-2">
-            <div class="flex items-center md:justify-center gap-5 xxl:gap-4 xl:gap-3">
+            <div class="flex items-center lg::justify-center gap-5 xxl:gap-4 xl:gap-3">
               <span class="font-semibold text-xl xxl:text-lg xl:text-sm lg:text-[19px]">{{ house.title }}</span>
               <div class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px]">
                 <span class="flex items-center justify-center uppercase border border-solid border-[#30CB49] h-fit text-[#30CB49] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]" v-if="house.created && !Number.isInteger(+house.created[0])">{{ language.rielt_1[10] }}</span>
@@ -57,8 +57,8 @@
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">{{ selectLanguage === 0 ? city_name.title : selectLanguage === 1 ? city_name.title_en : city_name.title_tr }}, {{ area_name !== undefined ? selectLanguage === 0 ? area_name.title : selectLanguage === 1 ? area_name.title_en : area_name.title_tr : '' }}</span>
           </div>
 
-          <div class="flex md:flex-col md:items-center h-20 xxl:h-16 xl:h-12 md:h-fit">
-            <div class="border__right md:border-0 flex items-center md:flex-col gap-5 xxl:gap-4 xl:gap-3 p-4 xxl:p-3 xl:p-2">
+          <div class="flex lg::flex-col lg::items-center h-20 xxl:h-16 xl:h-12 lg::h-fit">
+            <div class="border__right lg::border-0 flex items-center lg:flex-col gap-5 xxl:gap-4 xl:gap-3 p-4 xxl:p-3 xl:p-2">
               <div class="flex items-center gap-1.5 xxl:gap-1 xl:gap-0.5">
                 <img src="../../assets/svg/reload_icon.svg" class="h-4 xx:h-3.5 xl:h-3 lg:h-4" alt="reload">
                 <span class="text-sm xxl:text-xs xl:text-[10px] lg:text-[15px]">{{ new Date(Date.parse(house.updated_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1')  }}</span>
@@ -78,7 +78,7 @@
               </div>
             </div>
 
-            <div v-if="user.role === 0" class="border__right md:border-0 flex items-center gap-3 xxl:gap-2 xl:gap-1.5 p-4 xxl:p-3 xl:p-2">
+            <div v-if="user.role === 0" class="border__right lg::border-0 flex items-center gap-3 xxl:gap-2 xl:gap-1.5 p-4 xxl:p-3 xl:p-2">
               <button @click="openAddSelection = true" class="relative plus__hover flex items-center justify-center h-10 xxl:h-8 xl:h-6 lg:h-8 w-10 xxl:w-8 xl:w-6 lg:w-8 bg-[#F6F3FA] rounded-[3px]">
                 <img src="../../assets/svg/plus_icon_grey.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="plus">
                 <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">
@@ -112,7 +112,7 @@
             :loop="true"
             class="mySwiper w-full">
             <swiper-slide class="h-full flex justify-center" v-if="house.images.length === 0">
-              <img class="h-full w-full object-cover" src="../../assets/no-img-house.jpg" alt="">
+              <img @click="album = true" class="h-full w-full object-cover" src="../../assets/no-img-house.jpg" alt="">
             </swiper-slide>
             <swiper-slide class="h-full flex justify-center  cursor-pointer" v-for="item in mainPhotos">
               <img @click="album = true" class="h-full w-full" :src="item.name" alt="">
@@ -161,7 +161,7 @@
               >{{ selectLanguage === 0 ? item.name : selectLanguage === 1 ? item.name_en : item.name_tr }}</span>
             </div>
           </div>
-          <div class="grid grid-cols-2 md:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4 pb-14 xxl:pb-10 xl:pb-8">
+          <div class="grid grid-cols-2 lg::grid-cols-1 gap-7 xxl:gap-5 xl:gap-4 pb-14 xxl:pb-10 xl:pb-8">
             <div class="border border-solid border-[#E5DFEE] p-7 xxl:p-5 xl:p-4 rounded-[12px]">
               <span class="font-medium text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px]">{{ language.rielt_1[45] }}</span>
               <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 pt-6 xxl:pt-5 xl:pt-4">
