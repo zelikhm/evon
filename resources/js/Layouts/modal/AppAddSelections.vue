@@ -21,7 +21,7 @@
               class="border uppercase border-solid border-[#E84680] text-[#E84680] text-[14px] xxl:text-[12px] xl:text-[10px] px-2 xl:px-1.5 py-1.5 xl:py-1 rounded-[3px] leading-none"
               v-else-if="house.created">{{ house.created }}</span>
           </div>
-          <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none mt-2">{{ house.city }}, {{ house.area }}</span>
+          <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none mt-2">{{ getCity(house.city) }}, {{ getArea(house.area) }}</span>
         </div>
       </div>
       <div class="p-8 xxl:p-6 xl:p-5">
@@ -41,7 +41,7 @@
                 </div>
                 <span class="leading-none">{{ item.title }}</span>
               </div>
-              <span class="leading-none">{{ item.houses.length }} ЖК</span>
+              <span class="leading-none">{{ item.houses.length }} {{ language.ob[35] }}</span>
             </div>
           </div>
         </div>
@@ -55,7 +55,7 @@
           </button>
           <button @click="addSelection"
                   class="login__btn--bg w-full text-white leading-none font-semibold rounded-[5px] p-5 xxl:p-4 xl:p-3">
-            Готово
+            {{ language.ob[34] }}
           </button>
         </div>
         <div v-if="createSelection"
@@ -82,7 +82,7 @@
 
 <script>
   export default {
-    props: ['compilation', 'house', 'language'],
+    props: ['compilation', 'house', 'language', 'city_array', 'area_array'],
     inject: ['user'],
     data() {
       return {
@@ -99,6 +99,28 @@
     },
     emits: ['close-add-selection', 'open-create-sel'],
     methods: {
+      getCity(city) {
+        let name = this.city_array.find(item => item.title === city);
+
+        if (this.selectLanguage === 0) {
+          return name.title;
+        } else if (this.selectLanguage === 1) {
+          return name.title_en;
+        } else if (this.selectLanguage === 2) {
+          return name.title_tr;
+        }
+      },
+      getArea(area) {
+        let name = this.area_array.find(item => item.title === area);
+
+        if (this.selectLanguage === 0) {
+          return name.title;
+        } else if (this.selectLanguage === 1) {
+          return name.title_en;
+        } else if (this.selectLanguage === 2) {
+          return name.title_tr;
+        }
+      },
       openCreate() {
         this.createSelection = true
         this.buttonSelection = false

@@ -2,7 +2,7 @@
   <div class="fixed z-[100] w-full h-full flex items-center justify-center">
     <div class="relative flex flex-col gap-5 xxl:gap-4 xl:gap-3 bg-white rounded-[12px] px-12 xxl:px-10 xl:px-8 py-8 xxl:py-6 xl:py-5 z-50 w-[32%] lg:w-[50%] md:w-[64%] sm:w-[90%] h-fit">
       <div class="relative flex justify-between items-center">
-        <h2 class=" text-[22px] xxl:text-lg xl:text-base font-semibold">{{ contact ? language.menu_zastr_1[9] : language.dob_ob_2[1] }} контакт</h2>
+        <h2 class=" text-[22px] xxl:text-lg xl:text-base font-semibold">{{ contact ? language.menu_zastr_1[9] : language.dob_ob_2[1] }} {{ language.ob[4] }}</h2>
         <button @click="$emit('close-add-contact')" class="hover__close transition-all relative w-4 h-4 z-50">
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] rotate-45"></span>
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] -rotate-45"></span>
@@ -11,12 +11,12 @@
       <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3">
         <div>
           <div class="relative w-20 xxl:w-16 xl:w-14 h-20 xxl:h-16 xl:h-14 rounded-full">
-            <img v-if="myPhoto" class="absolute object-cover w-full h-full rounded-full" :src="myPhoto" alt="">
-            <button v-if="myPhoto" @click="deletePhoto" class="absolute rounded-full bg-[#E84680] z-10 top-0 left-0 h-5 xxl:h-4.5 xl:h-4 w-5 xxl:w-4.5 xl:w-4">
+            <img v-if="myPhoto && myPhoto !== '/storage/support/'" class="absolute object-cover w-full h-full rounded-full" :src="myPhoto" alt="">
+            <button v-if="myPhoto && myPhoto !== '/storage/support/'" @click="deletePhoto" class="absolute rounded-full bg-[#E84680] z-10 top-0 left-0 h-5 xxl:h-4.5 xl:h-4 w-5 xxl:w-4.5 xl:w-4">
               <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-white h-[1px] w-[60%]"></span>
               <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-white h-[1px] w-[60%]"></span>
             </button>
-            <div v-if="!myPhoto" class="avatar__contact w-full h-full rounded-full">
+            <div v-if="!myPhoto || myPhoto === '/storage/support/'" class="avatar__contact w-full h-full rounded-full">
               <div class="absolute rounded-full w-full h-full top-0 left-0">
                 <label for="avatar" :class="{'-z-10': myPhoto}" class="relative cursor-pointer flex items-center justify-center w-full h-full rounded-full">
                   <img src="../../../assets/svg/upload_photo.svg" class="w-6 xxl:w-5 xl:w-4" alt="">

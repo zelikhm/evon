@@ -2,7 +2,7 @@
   <div class="fixed z-[100] w-full h-full flex items-center justify-center">
     <div class="relative flex flex-col gap-7 xxl:gap-6 xl:gap-5 bg-white rounded-[12px] px-12 xxl:px-10 xl:px-8 py-8 xxl:py-6 xl:py-5 z-50 w-[50%] lg:w-[64%] md:w-[80%] sm:w-[90%] h-fit">
       <div class="relative flex justify-between items-center">
-        <h2 class="text-[22px] xxl:text-lg xl:text-base lg:text-[20px] font-semibold leading-none">Новости</h2>
+        <h2 class="text-[22px] xxl:text-lg xl:text-base lg:text-[20px] font-semibold leading-none">{{ language.ob[0] }}</h2>
         <button @click="$emit('close-all-news')" class="hover__close transition-all relative w-4 h-4 z-50">
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] rotate-45"></span>
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] -rotate-45"></span>
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  emits: ['close-all-news'],
+  emits: ['close-all-news', 'language'],
   props: ['house'],
   data() {
     return {

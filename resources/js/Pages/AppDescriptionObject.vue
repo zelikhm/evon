@@ -11,6 +11,8 @@
     @open-i-create-selections="openCreateSel"
     @close-add-selection="openAddSelection = false"
     :compilation="compilation"
+    :city_array="city_array"
+    :area_array="area_array"
     :house="house"
     :language="language"
   />

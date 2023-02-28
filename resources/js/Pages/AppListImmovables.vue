@@ -11,6 +11,8 @@
                       :house="house"
                       :compilation="readyCompilation"
                       :user="user"
+                      :city_array="city"
+                      :area_array="areas"
                       :language="language"
   />
   <app-immovables-create-selection

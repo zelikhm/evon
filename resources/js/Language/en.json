@@ -303,7 +303,13 @@
     "28": "When dragging a point, the coordinates are not updated. Click on the desired location on the map to update the coordinates",
     "29": "Edit",
     "30": "enter password",
-    "31": "Select services"
+    "31": "Select services",
+    "32": "With a client",
+    "33": "Add and continue",
+    "34": "Done",
+    "35": "Project",
+    "36": "Enter password",
+    "37": "Photo"
   },
   "reg": {
     "0": "Registration on the platform",

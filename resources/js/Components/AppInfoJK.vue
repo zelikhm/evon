@@ -420,7 +420,7 @@
           @click="addAndContinue(1)"
           class="login__btn--bg w-full font-semibold leading-none p-5 xxl:p-4 xl:p-3 text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-white bg-[#E84680] rounded-[6px]"
         >
-          {{ language.dob_ob_2[1] }}
+          {{ language.ob[33] }}
         </button>
       </div>
       <div class="grid gap-10 xxl:gap-8 xl:gap-6 my-10 xxl:my-8 xl:my-6 w-full" v-else>

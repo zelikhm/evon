@@ -84,7 +84,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
                   <span class="leading-none whitespace-nowrap cursor-default">6 дней</span>
                 </div>
                 <div v-if="user.role === 0" class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
-                  <span class="leading-none whitespace-nowrap cursor-default">Я с клиентом</span>
+                  <span class="leading-none whitespace-nowrap cursor-default">{{ language.ob[32] }}</span>
                   <label class="relative cursor-pointer inline-block w-[42px] xxl:w-[36px] xl:w-[30px] h-[24px] xxl:h-[20px] xl:h-[18px]">
                     <input v-model="withClient" @change="targetWithClient" class="hidden" type="checkbox">
                     <span class="slider round"></span>

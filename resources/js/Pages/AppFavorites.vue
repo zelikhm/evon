@@ -49,7 +49,7 @@ import { Link } from '@inertiajs/inertia-vue3'
             <div class="seek opacity-0 transition-all immovables__overlay top-0 h-full w-full absolute z-10 rounded-[5px]"></div>
             <div class="seek opacity-0 transition-all absolute top-1/2 -translate-y-1/2 left-0 z-10 flex flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
               <button @click="openAddSelection = true" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
-                <span class="text-white text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap">В подборку</span>
+                <span class="text-white text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap">{{ language.rielt_1[14] }}</span>
                 <img src="../../assets/svg/plus_icon.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-5" alt="Плюс">
               </button>
               <button v-if="item.house.favorite" @click="removeFavorite(item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
@@ -57,7 +57,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                 <img src="../../assets/svg/heart_icon_fill.svg" class="w-5 xxl:w-4 xl:w-3 lg:w-4" alt="">
               </button>
               <button v-else @click="addFavorite(item)" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
-                <span class="text-white text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none">В избранное</span>
+                <span class="text-white text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none">{{ language.rielt_1[16] }}</span>
                 <img src="../../assets/svg/heart_icon.svg" class="cursor-pointer w-5 xxl:w-4 xl:w-3 lg:w-4" alt="">
               </button>
             </div>

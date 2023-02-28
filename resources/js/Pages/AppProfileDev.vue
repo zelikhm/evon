@@ -11,21 +11,21 @@
               <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="title">{{ language.prof_zastr[1] }}</label>
               <div class="flex items-center">
                 <input v-model="userValue.name" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="tel" id="title">
-                <button class="text__purple text-[#6435A5] text-base xxl:text-sm xl:text-xs leading-none" @click="editProfile('title')">{{ activeInput.title ? "Сохранить" : "Изменить"  }}</button>
+                <button class="text__purple text-[#6435A5] text-base xxl:text-sm xl:text-xs leading-none" @click="editProfile('title')">{{ activeInput.title ? language.dob_ob_1[24] : language.ob[29]  }}</button>
               </div>
             </div>
             <div :class="{'border-[#6435A5]': activeInput.tel, 'border-[#E5DFEE]': !activeInput.tel}"  class="flex flex-col w-full border border-solid gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
               <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="tel_dev">{{ language.prof_zastr[2] }}</label>
               <div class="flex items-center">
                 <input v-model="userValue.tel" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="tel" id="tel_dev" placeholder="+7 930 245 15 20">
-                <button class="text__purple text-[#6435A5] text-base xxl:text-sm xl:text-xs leading-none" @click="editProfile('tel')">{{ activeInput.tel ? "Сохранить" : "Изменить"  }}</button>
+                <button class="text__purple text-[#6435A5] text-base xxl:text-sm xl:text-xs leading-none" @click="editProfile('tel')">{{ activeInput.tel ? language.dob_ob_1[24] : language.ob[29]  }}</button>
               </div>
             </div>
             <div :class="{'border-[#6435A5]': activeInput.password, 'border-[#E5DFEE]': !activeInput.password}"  class="flex flex-col w-full border border-solid gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
               <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="password_dev">{{ language.prof_zastr[4] }}</label>
               <div class="flex items-center">
-                <input v-model="userValue.password" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="password" id="password_dev" placeholder="Введите пароль">
-                <button class="text__purple text-[#6435A5] text-base xxl:text-sm xl:text-xs leading-none" @click="editProfile('password')">{{ activeInput.password ? "Сохранить" : "Изменить"  }}</button>
+                <input v-model="userValue.password" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="password" id="password_dev" :placeholder="language.ob[36]">
+                <button class="text__purple text-[#6435A5] text-base xxl:text-sm xl:text-xs leading-none" @click="editProfile('password')">{{ activeInput.password ? language.dob_ob_1[24] : language.ob[29]  }}</button>
               </div>
             </div>
             <div :class="{'border-[#6435A5]': activeInput.email, 'border-[#E5DFEE]': !activeInput.email}"  class="flex flex-col w-full border border-solid gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
