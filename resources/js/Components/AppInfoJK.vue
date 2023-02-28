@@ -297,7 +297,7 @@
             :options="optionsSelectServices"
             mode="tags"
             :placeholder="language.ob[31]"
-            :close-on-select="true"
+            :close-on-select="false"
             track-by="id"
           />
         </div>
@@ -315,7 +315,7 @@
             :options="optionsSelectInfrastructure"
             mode="tags"
             :placeholder="language.ob[31]"
-            :close-on-select="true"
+            :close-on-select="false"
             track-by="id"
           />
         </div>
@@ -439,7 +439,7 @@
 
   // import Multiselect from 'vue-multiselect'
   import {QuillEditor} from '@vueup/vue-quill'
-  import '@vueup/vue-quill/dist/vue-quill.snow.css'
+  // import '@vueup/vue-quill/dist/vue-quill.snow.css'
 
   import Multiselect from '@vueform/multiselect'
 
