@@ -437,12 +437,15 @@
 
 <script>
 
-  // import Multiselect from '@vueform/multiselect'
-  import VueMultiselect from 'vue-multiselect'
+  import Multiselect from '@vueform/multiselect'
+  // import Multiselect from 'vue-multiselect'
   import {QuillEditor} from '@vueup/vue-quill'
   import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
   export default {
+    components: {
+      Multiselect, QuillEditor
+    },
     props: ['dops', 'infos', 'city', 'supports', 'count', 'house', 'language', 'selectLanguage'],
     inject: ['user'],
     emits: ['open-add-contact'],
@@ -897,9 +900,6 @@
           }
         }
       },
-    },
-    components: {
-      VueMultiselect, QuillEditor,
     },
     mounted() {
       let link = +window.location.href.split('/').at(-1)
