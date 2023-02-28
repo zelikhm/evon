@@ -859,14 +859,16 @@
           }
         }
 
+
+
         if (this.house !== undefined) {
 
           if (this.house.info.info !== null) {
             let info = this.house.info.info.replace(/[^\d]/g, ' '),
               arrayInfo = info.split(' ')
+            this.valueSelectInfrastructure = [];
             for (let key of arrayInfo) {
               if (key !== '') {
-                this.valueSelectInfrastructure = [];
                 this.object.info.push(this.infos.find(item => item.id === +key))
                 if (this.selectLanguage === 0) {
                   this.valueSelectInfrastructure.push(this.infos.find(item => item.id === +key).name)
@@ -883,9 +885,9 @@
           if (this.house.info.dop !== null) {
             let dop = this.house.info.dop.replace(/[^\d]/g, ' '),
               arrayDop = dop.split(' ')
+            this.valueSelectServices = [];
             for (let key of arrayDop) {
               if (key !== '') {
-                this.valueSelectServices = [];
                 this.object.dop.push(this.dops.find(item => item.id === +key))
                 if (this.selectLanguage === 0) {
                   this.valueSelectServices.push(this.dops.find(item => item.id === +key).name)
@@ -895,10 +897,9 @@
                   this.valueSelectServices.push(this.dops.find(item => item.id === +key).name_tr)
                 }
               }
-
-              console.log(this.valueSelectServices);
             }
           }
+          console.log(this.valueSelectServices)
         }
       },
     },
