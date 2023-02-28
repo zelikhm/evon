@@ -171,7 +171,7 @@
         </div>
         <button :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
                 class="login__btn--bg text-white w-full text-lg xxl:text-[15px] xl:text-xs mb-5 xxl:mb-4 xl:mb-3 p-5 xxl:p-4 xl:p-3 border border-solid border-[#E5DFEE] rounded-[6px]">
-          Войти
+          {{ language.po_v_r[8] }}
         </button>
       </form>
       <div class="flex items-center justify-center text-base xxl:text-sm xl:text-xs">

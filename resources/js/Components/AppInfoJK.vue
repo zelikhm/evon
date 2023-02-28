@@ -591,11 +591,23 @@
             this.object.dop = []
 
             this.valueSelectServices.forEach(value => {
-              this.object.dop.push(this.dops.find(item => item.name === value).id)
+              if(this.selectLanguage === 0) {
+                this.object.dop.push(this.dops.find(item => item.name === value).id)
+              } else if (this.selectLanguage === 1) {
+                this.object.dop.push(this.dops.find(item => item.name_en === value).id)
+              } else if (this.selectLanguage === 2) {
+                this.object.dop.push(this.dops.find(item => item.name_tr === value).id)
+              }
             })
 
             this.valueSelectInfrastructure.forEach(value => {
-              this.object.info.push(this.infos.find(item => item.name === value).id)
+              if(this.selectLanguage === 0) {
+                this.object.info.push(this.infos.find(item => item.name === value).id)
+              } else if (this.selectLanguage === 1) {
+                this.object.info.push(this.infos.find(item => item.name_en === value).id)
+              } else if (this.selectLanguage === 2) {
+                this.object.info.push(this.infos.find(item => item.name_tr === value).id)
+              }
             })
 
             this.object.city = this.selectCity
@@ -611,7 +623,7 @@
             formData.append('description_en', this.object.description_en);
             formData.append('description_tr', this.object.description_tr);
             formData.append('city', this.selectCity);
-            formData.append('area', this.selectRegion !== 'Не указано' ? this.selectRegion : null);
+            formData.append('area', this.selectRegion !== 'Не указано' ? this.selectRegion.title : null);
             formData.append('latitude', +coord[0]);
             formData.append('longitude', +coord[1]);
             formData.append('percent', this.object.percent);
@@ -650,11 +662,23 @@
             this.object.dop = []
 
             this.valueSelectServices.forEach(value => {
-              this.object.dop.push(this.dops.find(item => item.name === value).id)
+              if(this.selectLanguage === 0) {
+                this.object.dop.push(this.dops.find(item => item.name === value).id)
+              } else if (this.selectLanguage === 1) {
+                this.object.dop.push(this.dops.find(item => item.name_en === value).id)
+              } else if (this.selectLanguage === 2) {
+                this.object.dop.push(this.dops.find(item => item.name_tr === value).id)
+              }
             })
 
             this.valueSelectInfrastructure.forEach(value => {
-              this.object.info.push(this.infos.find(item => item.name === value).id)
+              if(this.selectLanguage === 0) {
+                this.object.info.push(this.infos.find(item => item.name === value).id)
+              } else if (this.selectLanguage === 1) {
+                this.object.info.push(this.infos.find(item => item.name_en === value).id)
+              } else if (this.selectLanguage === 2) {
+                this.object.info.push(this.infos.find(item => item.name_tr === value).id)
+              }
             })
 
             let formData = new FormData();
@@ -667,7 +691,7 @@
             formData.append('description_en', this.object.description_en);
             formData.append('description_tr', this.object.description_tr);
             formData.append('city', this.selectCity.title);
-            formData.append('area', this.selectRegion !== 'Не указано' ? this.selectRegion : null);
+            formData.append('area', this.selectRegion !== 'Не указано' ? this.selectRegion.title : null);
             formData.append('latitude', +coord[0]);
             formData.append('longitude', +coord[1]);
             formData.append('percent', this.object.percent);
@@ -808,6 +832,9 @@
       },
       generationDop() {
 
+        this.optionsSelectInfrastructure = [];
+        this.optionsSelectServices = [];
+
         for (let key of this.dops) {
           if (this.selectLanguage === 0) {
             this.optionsSelectServices.push(key.name)
@@ -835,6 +862,7 @@
               arrayInfo = info.split(' ')
             for (let key of arrayInfo) {
               if (key !== '') {
+                this.valueSelectInfrastructure = [];
                 this.object.info.push(this.infos.find(item => item.id === +key))
                 if (this.selectLanguage === 0) {
                   this.valueSelectInfrastructure.push(this.infos.find(item => item.id === +key).name)
@@ -853,15 +881,18 @@
               arrayDop = dop.split(' ')
             for (let key of arrayDop) {
               if (key !== '') {
+                this.valueSelectServices = [];
                 this.object.dop.push(this.dops.find(item => item.id === +key))
                 if (this.selectLanguage === 0) {
                   this.valueSelectServices.push(this.dops.find(item => item.id === +key).name)
                 } else if (this.selectLanguage === 1) {
-                  this.valueSelectServices.push(this.dops.find(item => item.id === +key).name)
+                  this.valueSelectServices.push(this.dops.find(item => item.id === +key).name_en)
                 } else if (this.selectLanguage === 2) {
-                  this.valueSelectServices.push(this.dops.find(item => item.id === +key).name)
+                  this.valueSelectServices.push(this.dops.find(item => item.id === +key).name_tr)
                 }
               }
+
+              console.log(this.valueSelectServices);
             }
           }
         }
