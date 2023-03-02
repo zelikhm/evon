@@ -40,7 +40,7 @@
             <div>
               <QuillEditor
                 toolbar="full"
-                v-model:content="dataNews.description"
+                v-model="dataNews.description"
                 content-type="html"
                 theme="snow"
               />
