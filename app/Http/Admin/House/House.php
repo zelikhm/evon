@@ -7,6 +7,7 @@ use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
 use AdminNavigation;
+use AdminColumnEditable;
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\Info\CityModel;
 use App\Models\Builder\Info\RegionModel;
@@ -81,6 +82,7 @@ class House extends Section implements Initializable
       }),
       AdminColumn::text('city', 'Город')->setWidth('350px'),
       AdminColumn::text('area', 'Район')->setWidth('350px'),
+      AdminColumnEditable::checkbox('visible','Скрыто', 'Опубликовано')->setLabel('Отображение'),
       AdminColumn::custom('Модерация', function(\Illuminate\Database\Eloquent\Model $model) {
         if($model->active === 0) {
           return 'На модерации';
@@ -180,6 +182,8 @@ class House extends Section implements Initializable
             ]),
             AdminFormElement::select('created', 'Срок сдачи')->setEnum($this->getCreated()),
           ]),
+
+        AdminFormElement::radio('visible', 'Скрытые'),
 
         AdminFormElement::textarea('description', 'Описание'),
         AdminFormElement::textarea('description_tr', 'Описание (tr)'),
