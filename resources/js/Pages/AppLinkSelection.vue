@@ -14,7 +14,6 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
       <div class="_container h-full text-[16px] xxl:text-[13px] xl:text-[11px]">
         <div class="flex items-center justify-between h-full">
           <Link href="/houses" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
-            <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="Логотип">
           </Link>
           <change-language @selectLanguage="choseLanguage" :selectLang="selectLanguage" />
         </div>

@@ -1,5 +1,6 @@
 <template>
   <app-modal-add-contact @close-add-contact="closeModalContact"
+                         @close-modal-add-contact="closeModalAddContact"
                          @close-edit-contact="closeModalBeforeEdit"
                          v-if="modalAddContact"
                          :contact="contact"
@@ -15,7 +16,14 @@
                             :language="language"
                             :statuses="statuses"
   />
-  <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="closeAddFrame" :house="house" :isEdit="isEdit" :frame="frame" :language="language" />
+  <app-modal-add-frame v-if="modalAddFrame"
+                       @close-add-frame="closeAddFrame"
+                       @close-modal-add-frame="closeModalAddFrame"
+                       :house="house"
+                       :isEdit="isEdit"
+                       :frame="frame"
+                       :language="language"
+  />
   <app-modal-notification
     class="left-[2vw] transition-all duration-1000"
     :class="{'-left__full': !openNotification}"
@@ -233,6 +241,9 @@ export default {
         this.page = id
       }
     },
+    closeModalAddContact() {
+      this.modalAddContact = false
+    },
     closeModalContact(data) {
       this.modalAddContact = false
       this.supports = []
@@ -245,6 +256,9 @@ export default {
     addAndContinue(house) {
       this.page = 4
       this.createHouse = house
+    },
+    closeModalAddFrame() {
+      this.modalAddFrame = false
     },
     closeAddFrame(data) {
       this.modalAddFrame = false
