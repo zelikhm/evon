@@ -40,7 +40,7 @@
             <div>
               <QuillEditor
                 toolbar="full"
-                v-model="dataNews.description"
+                v-model:content="dataNews.description"
                 content-type="html"
                 theme="snow"
               />
@@ -86,7 +86,7 @@
         dataNews: {
           house_id: null,
           title: null,
-          description: null
+          description: ''
         },
         validate: {
           JK: true,
