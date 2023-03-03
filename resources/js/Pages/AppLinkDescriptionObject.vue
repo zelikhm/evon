@@ -421,7 +421,7 @@ import ChangeLanguage from "../Components/ChangeLanguage.vue";
   import AppModalAlbum from "../Layouts/modal/AppModalAlbum.vue";
 
   import AppChessScheme from "../Layouts/modal/AppChessScheme.vue";
-  // import {Swiper, SwiperSlide} from "swiper/vue";
+  import {Swiper, SwiperSlide} from "swiper/vue";
   import "swiper/css";
   import "swiper/css/navigation";
   import "swiper/css/pagination";
