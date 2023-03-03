@@ -36,7 +36,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
 
     <div class="_container h-[60px] xxl:h-12 xl:h-10 lg:h-12">
       <div class="flex items-center justify-between h-full ">
-        <div class="flex gap-20 xxl:gap-16 xl:gap-12 lg:gap-2 items-baseline">
+        <div class="flex gap-20 xxl:gap-16 xl:gap-12 lg:gap-2 items-baseline lg:items-center">
           <div @click="openBurgerAgent = !openBurgerAgent" class="hidden lg:flex relative flex-col justify-evenly py-0.5 items-center cursor-pointer h-8 w-8 rounded-[5px] bg-[#6435A5]">
             <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
             <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
@@ -105,7 +105,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
   <header v-if="user !== null && user.role === 1 || user !== null && user.role === 2 || user !== null && user.role === 3" class="relative bg-[#6435A5] leading-[100%]">
     <div class="_container h-[60px] xxl:h-12 xl:h-10">
       <div class="flex items-center justify-between h-full ">
-        <div class="flex gap-20 xxl:gap-16 xl:gap-12 lg:gap-2 items-baseline">
+        <div class="flex gap-20 xxl:gap-16 xl:gap-12 lg:gap-2 items-baseline lg:items-center">
           <div class="hidden lg:flex relative flex-col justify-evenly py-0.5 items-center cursor-pointer h-6 w-6 rounded-[5px] bg-[#6435A5]">
             <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
             <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
