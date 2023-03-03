@@ -132,6 +132,7 @@ class House extends Section implements Initializable
 
     if($id === null) {
       $form = AdminForm::elements([
+        AdminFormElement::checkbox('visible', 'Опубликовано?'),
         AdminFormElement::select('user_id', 'Пользователь')
           ->setModelForOptions(User::class, 'email')
           ->setUsageKey('id'),
@@ -161,6 +162,7 @@ class House extends Section implements Initializable
 
     } else {
       $form = AdminForm::elements([
+        AdminFormElement::checkbox('visible', 'Опубликовано?'),
         AdminFormElement::select('user_id', 'Пользователь')
           ->setModelForOptions(User::class, 'email')
           ->setUsageKey('id'),
@@ -182,8 +184,6 @@ class House extends Section implements Initializable
             ]),
             AdminFormElement::select('created', 'Срок сдачи')->setEnum($this->getCreated()),
           ]),
-
-        AdminFormElement::radio('visible', 'Скрытые'),
 
         AdminFormElement::textarea('description', 'Описание'),
         AdminFormElement::textarea('description_tr', 'Описание (tr)'),
