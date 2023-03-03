@@ -1,6 +1,6 @@
 <script setup>
 import { Link } from '@inertiajs/inertia-vue3'
-import ChangeLanguage from "@/Components/ChangeLanguage.vue";
+import ChangeLanguage from "../Components/ChangeLanguage.vue";
 </script>
 
 <template>
@@ -417,11 +417,11 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
 </template>
 
 <script>
-  import AppFooter from '../Layouts/AppFooter.vue'
-  import AppModalAlbum from "../Layouts/modal/AppModalAlbum.vue"
+  import AppFooter from '../Layouts/AppFooter.vue';
+  import AppModalAlbum from "../Layouts/modal/AppModalAlbum.vue";
 
   import AppChessScheme from "../Layouts/modal/AppChessScheme.vue";
-  import {Swiper, SwiperSlide} from "swiper/vue";
+  // import {Swiper, SwiperSlide} from "swiper/vue";
   import "swiper/css";
   import "swiper/css/navigation";
   import "swiper/css/pagination";
