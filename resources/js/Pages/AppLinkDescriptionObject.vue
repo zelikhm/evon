@@ -423,7 +423,7 @@ import ChangeLanguage from "../Components/ChangeLanguage.vue";
 
   import { Swiper, SwiperSlide } from 'swiper/vue'
   import 'swiper/css'
-  import "swiper/css/navigation"
+  // import "swiper/css/navigation"
   // import "swiper/css/pagination";
   import { FreeMode, Navigation, Pagination} from "swiper";
 
