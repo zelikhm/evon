@@ -4,7 +4,7 @@ import ChangeLanguage from "../Components/ChangeLanguage.vue";
 </script>
 
 <template>
-  <AppChessScheme v-if="true" :flat="selectFlat" @closeChess="scheme = false"></AppChessScheme>
+  <AppChessScheme v-if="scheme" :flat="selectFlat" @closeChess="scheme = false" :language="language"></AppChessScheme>
   <header class="relative">
     <div class="bg-[#6435A5] h-[60px] xxl:h-12 xl:h-10 lg:h-12">
       <div class="_container h-full text-[16px] xxl:text-[13px] xl:text-[11px]">
