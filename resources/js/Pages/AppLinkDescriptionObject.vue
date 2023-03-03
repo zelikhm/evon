@@ -419,13 +419,13 @@ import ChangeLanguage from "../Components/ChangeLanguage.vue";
 <script>
   import AppFooter from '../Layouts/AppFooter.vue';
   import AppModalAlbum from "../Layouts/modal/AppModalAlbum.vue";
-
   import AppChessScheme from "../Layouts/modal/AppChessScheme.vue";
-  import {Swiper, SwiperSlide} from "swiper/vue";
-  import "swiper/css";
-  import "swiper/css/navigation";
-  import "swiper/css/pagination";
-  import {Navigation, Pagination} from "swiper";
+
+  import { Swiper, SwiperSlide } from 'swiper/vue'
+  import 'swiper/css'
+  import "swiper/css/navigation"
+  // import "swiper/css/pagination";
+  import { FreeMode, Navigation, Pagination} from "swiper";
 
   export default {
     props: {
