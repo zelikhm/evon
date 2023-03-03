@@ -326,11 +326,10 @@
         </div>
         <div class="flex justify-between md:flex-col md:gap-3 items-center">
           <div class="flex flex-col items-start lg:gap-2">
-            <h2
-              class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] lg:text-[20px] whitespace-nowrap text-center">
-              {{ language.ob[23] }} {{ isSearch !== '' ? '-' + isSearch : '' }}</h2>
-            <span class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center" v-if="!preloader"> {{ count_house }} {{ language.rielt_1[9] }}</span>
-            <span class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center" v-else>  <div class="minLoader"></div>  {{ language.rielt_1[9] }}</span>
+            <h2 class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] lg:text-[20px] whitespace-nowrap text-center" v-if="isSeatch === ''">{{ language.ob[23] }}</h2>
+            <h2 class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] lg:text-[20px] whitespace-nowrap text-center" v-else>{{ language.ob[47] + ': ' + isSearch }}</h2>
+            <span class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center" v-if="!preloader">{{ language.izbr_1[3] + ': ' + count_house }}</span>
+            <span class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center" v-else>  <div class="minLoader"></div>  {{ language.izbr_1[3] + ': ' }}</span>
           </div>
           <div class="flex items-center md:flex-col gap-8 xxl:gap-6 xl:gap-5 md:gap-3">
             <div v-if="!map" :tabindex="tabindex" @blur="openDate = false" class="relative">
