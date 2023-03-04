@@ -15,18 +15,18 @@ class SubscriptionController extends Controller
 
       info(1);
 
-      User::where('id', 3)->update(['description' => $request->status]);
-
       if($request->status === 'success') {
 
         $type = TarifModel::where('id', $request->callback_id)->first();
 
-        $sub = SubscriptionModel::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->first();
+
+        $sub = SubscriptionModel::where('user_id', $user->id)->first();
 
         if($sub !== null) {
           if($sub->finished_at < Carbon::now()->addHour(3)) {
 
-            $sub = SubscriptionModel::where('email', $request->email)->update([
+            $sub = SubscriptionModel::where('user_id', $user->id)->update([
               'finished_at' => Carbon::now()->addHour(3)->addDay($type->days),
             ]);
 
@@ -34,7 +34,7 @@ class SubscriptionController extends Controller
 
             $date = new Carbon($sub->finished_at);
 
-            $sub = SubscriptionModel::where('email', $request->email)->update([
+            $sub = SubscriptionModel::where('user_id', $user->id)->update([
               'finished_at' => $date->addDay($type->days),
             ]);
           }
@@ -43,7 +43,7 @@ class SubscriptionController extends Controller
         } else {
 
           $sub = SubscriptionModel::create([
-            'email' => $request->email,
+            'user_id' => $user->id,
             'active' => true,
             'finished_at' => Carbon::now()->addHour(3)->addDay($type->days),
             'created_at' => Carbon::now()->addHour(3),
