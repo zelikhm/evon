@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
+use App\Models\PaymentModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -15,7 +16,14 @@ class IndexController extends Controller
     $merchant_key   = '5B9J78CdGoFtpxJ6';
     $merchant_salt  = '9qHpXbz7gSRo8m6F';
 
-    $name            = "подписка: " . $request->type;
+    PaymentModel::create([
+      'email' => $request->email,
+      'type' => $request->type,
+    ]);
+
+    $count = PaymentModel::count();
+
+    $name            = "подписка: " . $request->email;
     $price           = $request->price;
     $currency        = "TL";
     $max_installment = "12";
@@ -37,7 +45,7 @@ class IndexController extends Controller
     $expiry_date        = Carbon::now()->addDay();
     $max_count          = "1";
     $callback_link      = "https://evon-tr.com/api/payment/success";
-    $callback_id        = $request->email . '/' . $request->type;
+    $callback_id        = $count;
     $debug_on           = 1;
 
     $paytr_token=base64_encode(hash_hmac('sha256', $required.$merchant_salt, $merchant_key, true));

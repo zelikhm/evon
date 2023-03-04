@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\PaymentModel;
 use App\Models\TarifModel;
 use App\Models\User;
 use App\Models\User\SubscriptionModel;
@@ -16,13 +17,13 @@ class SubscriptionController extends Controller
       info(1);
       info($request->callback_id);
 
-      $call = explode('/', $request->callback_id);
+      $payment = PaymentModel::where('id', $request->callback_id)->first();
 
       if($request->status === 'success') {
 
-        $type = TarifModel::where('id', $call[1])->first();
+        $type = TarifModel::where('id', $payment->type)->first();
 
-        $user = User::where('email', $call[1])->first();
+        $user = User::where('email', $payment->email)->first();
 
         $sub = SubscriptionModel::where('user_id', $user->id)->first();
 
