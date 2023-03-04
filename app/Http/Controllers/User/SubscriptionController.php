@@ -14,7 +14,6 @@ class SubscriptionController extends Controller
     public function payment(Request $request) {
 
       info(1);
-      log($request->status);
 
       User::where('id', 3)->update(['description' => $request->status]);
 
