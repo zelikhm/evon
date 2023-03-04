@@ -37,7 +37,7 @@ class IndexController extends Controller
     $expiry_date        = Carbon::now()->addDay();
     $max_count          = "1";
     $callback_link      = "https://evon-tr.com/api/payment/success";
-    $callback_id        = ['type' => $request->type, 'email' => $request->email];
+    $callback_id        = $request->email . '/' . $request->type;
     $debug_on           = 1;
 
     $paytr_token=base64_encode(hash_hmac('sha256', $required.$merchant_salt, $merchant_key, true));

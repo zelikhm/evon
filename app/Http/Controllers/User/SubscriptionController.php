@@ -16,13 +16,13 @@ class SubscriptionController extends Controller
       info(1);
       info($request->callback_id);
 
-      $call = json_decode($request->callback_id);
+      $call = explode('/', $request->callback_id);
 
       if($request->status === 'success') {
 
-        $type = TarifModel::where('id', $call['type'])->first();
+        $type = TarifModel::where('id', $call[1])->first();
 
-        $user = User::where('email', $call['email'])->first();
+        $user = User::where('email', $call[1])->first();
 
         $sub = SubscriptionModel::where('user_id', $user->id)->first();
 
