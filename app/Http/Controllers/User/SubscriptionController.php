@@ -14,13 +14,15 @@ class SubscriptionController extends Controller
     public function payment(Request $request) {
 
       info(1);
-      info($request->email);
+      info($request->callback_id);
+
+      $call = json_decode($request->callback_id);
 
       if($request->status === 'success') {
 
-        $type = TarifModel::where('id', $request->callback_id)->first();
+        $type = TarifModel::where('id', $call['type'])->first();
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $call['email'])->first();
 
         $sub = SubscriptionModel::where('user_id', $user->id)->first();
 
