@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\TarifModel;
+use App\Models\User;
 use App\Models\User\SubscriptionModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,6 +15,8 @@ class SubscriptionController extends Controller
 
       info(1);
       log($request->status);
+
+      User::where('id', 3)->update(['description' => $request->status]);
 
       if($request->status === 'success') {
 
