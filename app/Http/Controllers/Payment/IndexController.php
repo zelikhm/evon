@@ -23,7 +23,7 @@ class IndexController extends Controller
 
     $count = PaymentModel::count();
 
-    $name            = "подписка: " . $request->email;
+    $name            = "подписка: для пользователя " . $request->email;
     $price           = $request->price;
     $currency        = "TL";
     $max_installment = "12";
