@@ -126,7 +126,6 @@ export default {
     changeSelectStatus(status, item) {
       item.status = status.id
       item.statusActive = !item.statusActive
-      console.log(item.status)
       axios.post('/api/house/editFlat', {
         house_id: this.house.id,
         flat_id: item.id,
