@@ -13,6 +13,7 @@ class SubscriptionController extends Controller
     public function payment(Request $request) {
 
       info(1);
+      log($request->status);
 
       if($request->status === 'success') {
 
