@@ -12,6 +12,8 @@ class SubscriptionController extends Controller
 {
     public function payment(Request $request) {
 
+      info(1);
+
       if($request->status === 'success') {
 
         $type = TarifModel::where('id', $request->callback_id)->first();

@@ -801,11 +801,11 @@ import ChangeLanguage from "../Components/ChangeLanguage.vue";
       SwiperSlide,
       AppChessScheme
     },
-    // setup() {
-    //   return {
-    //     modules: [Navigation, Pagination],
-    //   };
-    // },
+    setup() {
+      return {
+        modules: [Navigation, Pagination],
+      };
+    },
   }
 </script>
 
