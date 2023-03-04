@@ -36,7 +36,7 @@ class IndexController extends Controller
 
     $expiry_date        = Carbon::now()->addDay();
     $max_count          = "1";
-    $callback_link      = "https://evon-tr.com/profile";
+    $callback_link      = "https://evot-tr.com/api/payment/success";
     $callback_id        = $request->type;
     $debug_on           = 1;
 
