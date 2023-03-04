@@ -17,7 +17,12 @@ class SubscriptionController extends Controller
       info(1);
       info($request->callback_id);
 
-      $payment = PaymentModel::where('id', $request->callback_id)->first();
+      $payment = PaymentModel::where('id', $request->callback_id)
+        ->where('status', 0)
+        ->first();
+
+      PaymentModel::where('id', $request->callback_id)
+        ->update(['status' => 1]);
 
       if($request->status === 'success') {
 
