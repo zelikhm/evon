@@ -53,7 +53,7 @@
                   {{ language.form_dob_ob[4] }}</div>
               </div>
             </div>
-            <div :class="{'hidden': page !== 1}" class="flex justify-center mt-12 xxl:mt-10 xl:mt-8" v-if="readyHouse.frames.length > 0">
+            <div :class="{'hidden': page !== 1}" class="flex justify-center mt-12 xxl:mt-10 xl:mt-8" v-if="readyHouse !== undefined && readyHouse.frames.length > 0">
               <button @click="addFlatModal" class="register__button--white text-[#6435A5] flex justify-center items-center gap-2 xl:gap-1.5 border border-solid rounded-[5px] border-[#6435A5] px-4 xxl:px-3 xl:px-2.5 py-2.5 xxl:py-2 xl:py-1.5">
                 <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0_519_1862)">

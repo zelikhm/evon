@@ -12,7 +12,7 @@
         <div v-if="flat.isOpen !== 3">
           <img class="max-h-[80vh]" :src="flat.isOpen === 0 ? flat.imageUp : flat.imageDown" alt="">
         </div>
-        <div>
+        <div v-else>
           <img class="max-h-[40vh]" :src="flat.imageUp" alt="">
           <img class="max-h-[40vh]" :src="flat.imageDown" alt="">
         </div>
