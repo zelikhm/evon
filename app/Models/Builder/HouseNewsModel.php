@@ -16,9 +16,13 @@ class HouseNewsModel extends Model
     'visible',
   ];
 
+  protected $casts = [
+    'updated_at' => 'datetime: d-m-Y'
+  ];
+
   protected $hidden = [
 //    'created_at',
-    'updated_at',
+//    'updated_at',
   ];
 
   public function house() {

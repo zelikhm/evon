@@ -19,10 +19,10 @@ import { Link } from '@inertiajs/inertia-vue3'
                 <div class="flex gap-3 xxl:gap-2 xl:gap-1.5">
                   <div class="flex flex-col gap-1 xxl:gap-0.5">
                     <Link :href="'/house/' + item.house.slug" class="hover__title-block font-semibold text-[13px] xxl:text-[11px] xl:text-[10px] lg:text-[13px]">{{ item.house.title }}</Link>
-                    <span class="text-[11px] xxl:text-[9px] xl:text-[8px] lg:text-[11px]">{{ new Date(Date.parse(item.created_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span>
+                    <span class="text-[11px] xxl:text-[9px] xl:text-[8px] lg:text-[11px]">{{ item.updated_at }}</span>
                   </div>
                 </div>
-                <p class="text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" v-html="item.description.slice(0, 70)"></p>
+                <p class="text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" v-html="item.description.slice(0, 400)"></p>
               </div>
               <div class="h-[1px] mt-3 w-full bg-[#E5DFEE] my-3"></div>
             </div>
@@ -50,7 +50,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                   <span class="text-[11px] xxl:text-[9px] xl:text-[8px] lg:text-[11px]">{{ new Date(Date.parse(item.created_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span>
                 </div>
               </div>
-              <p class="text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" v-html="item.description.slice(0, 40) + '...'"></p>
+              <p class="text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" v-html="item.description.slice(0, 100) + '...'"></p>
             </div>
             <div class="h-[1px] mt-3 w-full bg-[#E5DFEE]"></div>
           </div>
@@ -68,6 +68,9 @@ export default {
     return {
       state: 0
     }
+  },
+  created() {
+    console.log(this.news);
   }
 }
 </script>

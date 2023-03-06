@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Builder\HouseImagesModel;
 use App\Models\Builder\HouseModel;
+use Carbon\Carbon;
 
 class ImageObserver
 {
@@ -30,6 +31,7 @@ class ImageObserver
     {
       HouseModel::where('id', $houseImagesModel->house_id)->update([
         'active' => 0,
+        'updated_at' => Carbon::now(),
       ]);
     }
 
