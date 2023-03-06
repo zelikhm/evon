@@ -235,6 +235,14 @@ path editFlat \ [post] / поля:
 - image_down - нижнее изображение (category = 1)
 - token
 
+Редактирование статуса квартиры \ 
+path editStatusFlat \ [post] / поля:
+
+- flat_id - айди кв
+- house_id - айди дома
+- status - статус
+- token 
+
 Удаление квартиры (+ изображения) \
 path deletedFlat \ [post] / поля:
 
