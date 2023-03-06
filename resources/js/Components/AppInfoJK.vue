@@ -797,7 +797,7 @@
         //   this.regions.push({'id': -1, 'title': 'Не указано'});
         // }
 
-        let status = this.regions.find(item => item.id === -1);
+        let status = this.regions.find(item => item.title === 'Не указано');
 
         if (status === undefined) {
           this.regions.unshift({'id': -1, 'title': 'Не указано'})
