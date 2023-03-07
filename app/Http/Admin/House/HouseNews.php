@@ -142,7 +142,12 @@ class HouseNews extends Section implements Initializable
    */
   public function isCreatable(): bool
   {
-    return true;
+    $user = Auth::user();
+    if($user->role !== 3) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   /**
