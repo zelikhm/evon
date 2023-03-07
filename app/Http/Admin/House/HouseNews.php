@@ -142,7 +142,7 @@ class HouseNews extends Section implements Initializable
    */
   public function isCreatable(): bool
   {
-   return true;
+    return true;
   }
 
   /**
