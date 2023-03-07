@@ -318,7 +318,7 @@ trait MainInfo
         ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
         ->select('house_models.*')
         ->where('house_characteristics_models.type', $type)
-        ->with(['info', 'files', 'frames', 'flats', 'user', 'news'])
+        ->with(['info', 'files', 'frames', 'flats', 'user', 'news', 'images'])
         ->orderBy('created_at', 'DESC')
         ->limit(30)
         ->get();
@@ -328,7 +328,7 @@ trait MainInfo
         ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
         ->select('house_models.*')
         ->where('house_characteristics_models.type', $type)
-        ->with(['info', 'files', 'frames', 'flats', 'user', 'news'])
+        ->with(['info', 'files', 'frames', 'flats', 'user', 'news', 'images'])
         ->get();
     }
 
