@@ -203,7 +203,7 @@ class HouseController extends Controller
   public function getHousesJk(Request $request)
   {
     if($this->checkToken($request->token)) {
-      return $this->getAllHouse('Новостройка', false);
+      return $this->getAllHouse('Новостройка', $request->limit);
     } else {
       return response()->json('not auth', 401);
     }
@@ -219,7 +219,7 @@ class HouseController extends Controller
   public function getHousesVillages(Request $request)
   {
     if($this->checkToken($request->token)) {
-      return $this->getAllHouse('Виллы', false);
+      return $this->getAllHouse('Виллы', $request->limit);
     } else {
       return response()->json('not auth', 401);
     }

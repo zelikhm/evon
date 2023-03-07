@@ -60,11 +60,13 @@
 Получить все ЖК \ 
 path getHousesJk (новостройки) \ [get] / :
 
+- limit (true\false) - для получения 30 обьектов
 - token
 
 Получить все Виллы \
 path getHousesVillages (виллы) \ [get] / :
 
+- limit (true\false) - для получения 30 обьектов
 - token
 
 Поиск по обьектам \

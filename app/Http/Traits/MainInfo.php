@@ -269,6 +269,7 @@ trait MainInfo
 
     foreach ($houses as $house) {
       $house->image = $this->getPhoto($house);
+
       $house->view = [
         HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addHour(-24))->count(),
         HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-5))->count(),
@@ -334,8 +335,8 @@ trait MainInfo
     foreach ($houses as $house) {
 
       $house->image = $this->getPhoto($house);
-      $house->dop_array = $this->getDopForHouse($house->info->dop);
-      $house->info_array = $this->getInfoForHouse($house->info->info);
+//      $house->dop_array = $this->getDopForHouse($house->info->dop);
+//      $house->info_array = $this->getInfoForHouse($house->info->info);
       $house->popular = HouseViewsModel::where('house_id', $house->id)->count() > 30;
 
       $house->maxPrice = $house->flats->max('price');
