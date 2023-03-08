@@ -363,6 +363,8 @@ trait MainInfo
 
     }
 
+    dd(count($houses));
+
     return $houses;
   }
 
