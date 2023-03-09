@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Builder\HouseModel;
 use App\Models\User;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Carbon;
@@ -21,7 +22,7 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
 //  dd(\Illuminate\Support\Facades\Auth::user());
-    return Inertia::render('AppMain');
+  return Inertia::render('AppMain');
 });
 
 
@@ -62,11 +63,10 @@ Route::get('/404', function () {
   return Inertia::render('AppError');
 });
 
-Route::get('test', ['App\Http\Controllers\Payment\IndexController', 'index']);
 Route::get('testSMS', ['App\Http\Controllers\User\AuthController', 'test']);
 Route::post('mail', ['App\Http\Controllers\User\IndexController', 'sendRegister'])->name('mail');
 
 Route::get('/privacy', ['App\Http\Controllers\PrivacyController', 'index']);
 Route::get('/agree', ['App\Http\Controllers\PrivacyController', 'agree']);
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

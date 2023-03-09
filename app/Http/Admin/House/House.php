@@ -8,6 +8,7 @@ use AdminForm;
 use AdminFormElement;
 use AdminNavigation;
 use AdminColumnEditable;
+use App\Models\Builder\HouseCharacteristicsModel;
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\Info\CityModel;
 use App\Models\Builder\Info\RegionModel;
@@ -71,7 +72,6 @@ class House extends Section implements Initializable
   {
     $display = AdminDisplay::datatablesAsync()->setDatatableAttributes(['bInfo' => false])->setDisplaySearch(true, 'Поиск')->paginate(40);
 
-
     $display->setColumns([
       AdminColumn::text('id', '#')
         ->setWidth('50px')
@@ -82,6 +82,18 @@ class House extends Section implements Initializable
       }),
       AdminColumn::text('city', 'Город')->setWidth('350px'),
       AdminColumn::text('area', 'Район')->setWidth('350px'),
+
+      AdminColumn::custom('ХАРАКТЕРИСТИКИ', function(\Illuminate\Database\Eloquent\Model $model) {
+
+        $chara = HouseCharacteristicsModel::where('house_id', $model->id)->first();
+
+        if($chara !== null) {
+          return 'Заполнена ' . $chara->id;
+        } else {
+          return '<p style="color:red">Не заполнено</p>';
+        }
+
+      }),
       AdminColumnEditable::checkbox('visible','Скрыто', 'Опубликовано')->setLabel('Отображение'),
       AdminColumn::custom('Модерация', function(\Illuminate\Database\Eloquent\Model $model) {
         if($model->active === 0) {
