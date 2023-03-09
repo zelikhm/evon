@@ -65,14 +65,9 @@ Route::get('/404', function () {
 
 Route::get('test', function () {
 
-  $count = HouseModel::where('visible', 1)
-    ->where('active', 2)
-    ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
-    ->select('house_models.*')
-    ->where('house_characteristics_models.type', 'Новостройка')
-    ->count();
+  $houses = $this->getAllHouse('Новостройка', true);
 
-  dd($count);
+  dd($houses);
 });
 
 Route::get('testSMS', ['App\Http\Controllers\User\AuthController', 'test']);
