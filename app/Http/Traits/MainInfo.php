@@ -310,7 +310,7 @@ trait MainInfo
    * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
    */
 
-  protected function getAllHouse($type, $limit)
+  public function getAllHouse($type, $limit)
   {
     if($limit) {
       $houses = HouseModel::where('visible', 1)

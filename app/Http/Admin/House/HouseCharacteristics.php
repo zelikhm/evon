@@ -108,8 +108,8 @@ class HouseCharacteristics extends Section implements Initializable
         AdminFormElement::columns()
           ->addColumn([
             AdminFormElement::select('type', 'Тип здания', [
-              'Виллы' => 'Виллы',
-              'Новостройки' => 'Новостройки',
+              'Вилла' => 'Вилла',
+              'Новостройка' => 'Новостройка',
             ])->required(),
           ], 6)->addColumn([
             AdminFormElement::number('floors', 'Этажи'),

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use App\Http\Traits\MainInfo;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -65,9 +65,18 @@ Route::get('/404', function () {
 
 Route::get('test', function () {
 
-  $houses = $this->getAllHouse('Новостройка', true);
+  $char = \App\Models\Builder\HouseCharacteristicsModel::all();
 
-  dd($houses);
+  foreach ($char as $item) {
+
+    if($item->type === 'Новостройки'){
+      \App\Models\Builder\HouseCharacteristicsModel::where('id', $item->id)->update(['type' => 'Новостройка']);
+    } elseif ($item->type === 'Виллы') {
+      \App\Models\Builder\HouseCharacteristicsModel::where('id', $item->id)->update(['type' => 'Вилла']);
+    }
+
+  }
+
 });
 
 Route::get('testSMS', ['App\Http\Controllers\User\AuthController', 'test']);
