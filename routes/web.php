@@ -63,6 +63,27 @@ Route::get('/404', function () {
   return Inertia::render('AppError');
 });
 
+Route::get('test', function () {
+
+  $houses = HouseModel::where('visible', 1)
+    ->where('active', 2)
+    ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
+    ->select('house_models.*')
+    ->where('house_characteristics_models.type', 'Новостройка')
+    ->with(['info', 'files', 'frames', 'flats', 'user', 'news', 'images'])
+    ->get();
+
+  foreach ($houses as $house) {
+
+    if($house->info === null) {
+      dd($house);
+    }
+
+  }
+
+  dd($houses);
+});
+
 Route::get('testSMS', ['App\Http\Controllers\User\AuthController', 'test']);
 Route::post('mail', ['App\Http\Controllers\User\IndexController', 'sendRegister'])->name('mail');
 

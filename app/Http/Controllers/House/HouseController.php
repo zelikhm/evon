@@ -77,8 +77,6 @@ class HouseController extends Controller
       ->where('house_characteristics_models.type', 'Новостройка')
       ->count();
 
-    dd($houses);
-
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
       'dops' => TypesModel::all(),
