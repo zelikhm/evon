@@ -79,7 +79,6 @@ import ChangeLanguage from "../Components/ChangeLanguage.vue";
         <div class="flex flex-col">
           <swiper
             :navigation="true"
-            :modules="modules"
             :loop="true"
             class="mySwiper w-full"
           >
