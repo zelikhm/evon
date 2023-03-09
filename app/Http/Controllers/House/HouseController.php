@@ -68,7 +68,7 @@ class HouseController extends Controller
 
   public function index(Request $request)
   {
-    $houses = $this->getAllHouse('Новостройка', true);
+    $houses = $this->getAllHouse('Новостройка', false);
 
     $count = HouseModel::where('visible', 1)
       ->where('active', 2)
@@ -76,6 +76,8 @@ class HouseController extends Controller
       ->select('house_models.*')
       ->where('house_characteristics_models.type', 'Новостройка')
       ->count();
+
+    dd($houses);
 
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
