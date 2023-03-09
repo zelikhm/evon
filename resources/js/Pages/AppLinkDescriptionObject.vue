@@ -71,7 +71,7 @@ import ChangeLanguage from "../Components/ChangeLanguage.vue";
           </div>
           <div class="flex items-center gap-1.5 xxl:gap-1 xl:gap-0.5">
             <img src="../../assets/svg/reload_icon.svg" class="h-4 xx:h-3.5 xl:h-3" alt="reload">
-            <span class="text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">{{ new Date(Date.parse(house.updated_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span>
+            <span class="text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">{{ house.updated_at }}</span>
           </div>
         </div>
       </div>
