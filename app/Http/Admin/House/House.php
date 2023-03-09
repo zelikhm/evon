@@ -88,7 +88,7 @@ class House extends Section implements Initializable
         $chara = HouseCharacteristicsModel::where('house_id', $model->id)->first();
 
         if($chara !== null) {
-          return 'Заполнена ' . "https://evon-tr.com/admin/house_characteristics_models/" . $chara->id . '/edit';
+          return 'Заполнена ' . "<a href=https://evon-tr.com/admin/house_characteristics_models/$chara->id/edit>клик</a>";
         } else {
           return '<p style="color:red">Не заполнено</p>';
         }
