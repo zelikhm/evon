@@ -63,22 +63,6 @@ Route::get('/404', function () {
   return Inertia::render('AppError');
 });
 
-Route::get('test', function () {
-
-  $char = \App\Models\Builder\HouseCharacteristicsModel::all();
-
-  foreach ($char as $item) {
-
-    if($item->type === 'Новостройки'){
-      \App\Models\Builder\HouseCharacteristicsModel::where('id', $item->id)->update(['type' => 'Новостройка']);
-    } elseif ($item->type === 'Виллы') {
-      \App\Models\Builder\HouseCharacteristicsModel::where('id', $item->id)->update(['type' => 'Вилла']);
-    }
-
-  }
-
-});
-
 Route::get('testSMS', ['App\Http\Controllers\User\AuthController', 'test']);
 Route::post('mail', ['App\Http\Controllers\User\IndexController', 'sendRegister'])->name('mail');
 

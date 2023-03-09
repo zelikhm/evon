@@ -101,13 +101,13 @@ class HouseController extends Controller
 
   public function villages() {
 
-    $houses = $this->getAllHouse('Виллы', false);
+    $houses = $this->getAllHouse('Вилла', false);
 
     $count = HouseModel::where('visible', 1)
       ->where('active', 2)
       ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
       ->select('house_models.*')
-      ->where('house_characteristics_models.type', 'Виллы')
+      ->where('house_characteristics_models.type', 'Вилла')
       ->count();
 
     return Inertia::render('AppListImmovables', [
