@@ -68,7 +68,7 @@ class HouseController extends Controller
 
   public function index(Request $request)
   {
-    $houses = $this->getAllHouse('Новостройка', false);
+    $houses = $this->getAllHouse('Новостройка', true);
 
     $count = HouseModel::where('visible', 1)
       ->where('active', 2)
@@ -101,7 +101,7 @@ class HouseController extends Controller
 
   public function villages() {
 
-    $houses = $this->getAllHouse('Вилла', false);
+    $houses = $this->getAllHouse('Вилла', true);
 
     $count = HouseModel::where('visible', 1)
       ->where('active', 2)
@@ -219,7 +219,7 @@ class HouseController extends Controller
   public function getHousesVillages(Request $request)
   {
     if($this->checkToken($request->token)) {
-      return $this->getAllHouse('Виллы', $request->limit);
+      return $this->getAllHouse('Вилла', $request->limit);
     } else {
       return response()->json('not auth', 401);
     }
