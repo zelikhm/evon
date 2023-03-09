@@ -86,7 +86,7 @@
         dataNews: {
           house_id: null,
           title: null,
-          description: null
+          description: ''
         },
         validate: {
           JK: true,

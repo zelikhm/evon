@@ -19,7 +19,8 @@
     "16": "Chat with a partner / realtor is implemented on the platform",
     "17": "Register",
     "18": "login",
-    "19": "Registration"
+    "19": "Registration",
+    "20": "Sign Up for Free"
   },
   "footer": {
     "0": "ИНН 215125125125125",
@@ -318,7 +319,8 @@
     "43": "moderator",
     "44": "text a message",
     "45": "Realtor",
-    "46": "Developer"
+    "46": "Developer",
+    "47": "Search"
   },
   "reg": {
     "0": "Registration on the platform",

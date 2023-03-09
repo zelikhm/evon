@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\Builder\Flat\FlatModel;
 use App\Models\Builder\Flat\FrameModel;
 use App\Models\Builder\HouseModel;
+use Carbon\Carbon;
 
 class FrameObserver
 {
@@ -31,6 +32,7 @@ class FrameObserver
     {
       HouseModel::where('id', $frameModel->house_id)->update([
         'active' => 0,
+        'updated_at' => Carbon::now(),
       ]);
     }
 

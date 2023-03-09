@@ -1,10 +1,10 @@
 <script setup>
 import { Link } from '@inertiajs/inertia-vue3'
-import ChangeLanguage from "@/Components/ChangeLanguage.vue";
+import ChangeLanguage from "../Components/ChangeLanguage.vue";
 </script>
 
 <template>
-  <AppChessScheme v-if="scheme" :flat="selectFlat" @closeChess="scheme = false"></AppChessScheme>
+  <AppChessScheme v-if="scheme" :flat="selectFlat" @closeChess="scheme = false" :language="language"></AppChessScheme>
   <header class="relative">
     <div class="bg-[#6435A5] h-[60px] xxl:h-12 xl:h-10 lg:h-12">
       <div class="_container h-full text-[16px] xxl:text-[13px] xl:text-[11px]">
@@ -417,15 +417,15 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
 </template>
 
 <script>
-  import AppFooter from '../Layouts/AppFooter.vue'
-  import AppModalAlbum from "../Layouts/modal/AppModalAlbum.vue"
-
+  import AppFooter from '../Layouts/AppFooter.vue';
+  import AppModalAlbum from "../Layouts/modal/AppModalAlbum.vue";
   import AppChessScheme from "../Layouts/modal/AppChessScheme.vue";
-  import {Swiper, SwiperSlide} from "swiper/vue";
-  import "swiper/css";
-  import "swiper/css/navigation";
-  import "swiper/css/pagination";
-  import {Navigation, Pagination} from "swiper";
+
+  import { Swiper, SwiperSlide } from 'swiper/vue'
+  import 'swiper/css'
+  // import "swiper/css/navigation"
+  // import "swiper/css/pagination";
+  import { FreeMode, Navigation, Pagination} from "swiper";
 
   export default {
     props: {

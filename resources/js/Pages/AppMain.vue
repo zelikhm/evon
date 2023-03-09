@@ -41,7 +41,7 @@
                 <div class="lg:hidden h-[30px] w-[2px] xl:w-[1px] rounded-[3px] bg-[#784FB0]"></div>
                 <p class="lg:text-center w-full text-sm xxl:text-xs xl:text-[10px] lg:text-[12px] text-[#8A8996]" v-html="language.main[2]"></p>
               </div>
-              <button @click="openRegister = true" class="lg:self-center register__button--white w-fit border border-solid border-[#6435A5] leading-none rounded-[3px] text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] text-[#6435A5] px-5 xxl:px-4 xl:px-3 py-2.5 xxl:py-2 xl:py-1.5">{{ language.main[3] }}</button>
+              <button @click="openRegister = true" class="lg:self-center register__button--white w-fit border border-solid border-[#6435A5] leading-none rounded-[3px] text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] text-[#6435A5] px-5 xxl:px-4 xl:px-3 py-2.5 xxl:py-2 xl:py-1.5">{{ language.main[20] }}</button>
             </div>
           </div>
         </div>

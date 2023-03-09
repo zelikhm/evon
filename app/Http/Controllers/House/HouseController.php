@@ -203,7 +203,7 @@ class HouseController extends Controller
   public function getHousesJk(Request $request)
   {
     if($this->checkToken($request->token)) {
-      return $this->getAllHouse('Новостройка', false);
+      return $this->getAllHouse('Новостройка', $request->limit);
     } else {
       return response()->json('not auth', 401);
     }
@@ -219,7 +219,7 @@ class HouseController extends Controller
   public function getHousesVillages(Request $request)
   {
     if($this->checkToken($request->token)) {
-      return $this->getAllHouse('Виллы', false);
+      return $this->getAllHouse('Виллы', $request->limit);
     } else {
       return response()->json('not auth', 401);
     }
@@ -577,7 +577,7 @@ class HouseController extends Controller
   {
     if ($this->checkToken($request->token)) {
 
-      if ($request->image_up === 'null') {
+      if ($request->image_up === 'null' || $request->image_up) {
         $imageUp = null;
       } else if ($request->image_up) {
         $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
@@ -590,7 +590,7 @@ class HouseController extends Controller
         }
       }
 
-      if ($request->image_down === 'null') {
+      if ($request->image_down === 'null' || $request->image_down) {
         $imageDown = null;
       } else if ($request->image_down) {
         $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
@@ -625,6 +625,31 @@ class HouseController extends Controller
     } else {
       return response()->json('not auth', 401);
     }
+  }
+
+  /**
+   * edit status for flat
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function editStatusFlat(Request $request) {
+
+    if ($this->checkToken($request->token)) {
+
+      FlatModel::where('id', $request->flat_id)->update([
+        'status' => $request->status,
+      ]);
+
+      HouseModel::where('id', $request->house_id)->update([
+        'active' => 0,
+      ]);
+
+      return response()->json($this->getHouse($request->house_id), 200);
+    } else {
+      return response()->json('not auth', 401);
+    }
+
   }
 
   /**

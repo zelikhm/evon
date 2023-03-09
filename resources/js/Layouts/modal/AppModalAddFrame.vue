@@ -57,6 +57,7 @@
                 }
               })
               this.house.frames = response.data
+
               this.$emit('close-add-frame', this.house)
             })
             .catch(e => console.error(e))

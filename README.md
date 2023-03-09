@@ -60,11 +60,13 @@
 Получить все ЖК \ 
 path getHousesJk (новостройки) \ [get] / :
 
+- limit (true\false) - для получения 30 обьектов
 - token
 
 Получить все Виллы \
 path getHousesVillages (виллы) \ [get] / :
 
+- limit (true\false) - для получения 30 обьектов
 - token
 
 Поиск по обьектам \
@@ -234,6 +236,14 @@ path editFlat \ [post] / поля:
 - image_up - верхнее изображение (category = 0)
 - image_down - нижнее изображение (category = 1)
 - token
+
+Редактирование статуса квартиры \ 
+path editStatusFlat \ [post] / поля:
+
+- flat_id - айди кв
+- house_id - айди дома
+- status - статус
+- token 
 
 Удаление квартиры (+ изображения) \
 path deletedFlat \ [post] / поля:

@@ -150,7 +150,7 @@
     </div>
 
     <p class="text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] mt-2 text-center">{{ language.dob_ob_1[28] }}</p>
-    <GMapMap :center="center" :zoom="12" map-type-id="roadmap"
+    <GMapMap :center="center" :zoom="6" map-type-id="roadmap"
              class="w-full h-[300px] rounded-[6px] mb-10 xxl:mb-8 xl:mb-6" :draggable="true" @click="handleClick"
              ref="myMapRef" :click="true"
              :disableDefaultUI="false"
@@ -797,7 +797,7 @@
         //   this.regions.push({'id': -1, 'title': 'Не указано'});
         // }
 
-        let status = this.regions.find(item => item.id === -1);
+        let status = this.regions.find(item => item.title === 'Не указано');
 
         if (status === undefined) {
           this.regions.unshift({'id': -1, 'title': 'Не указано'})
