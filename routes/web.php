@@ -63,6 +63,16 @@ Route::get('/404', function () {
   return Inertia::render('AppError');
 });
 
+Route::get('test', function () {
+
+  $house = HouseModel::where('active', 2)
+    ->where('visible', 1)
+    ->with(['info'])
+    ->get();
+
+  dd($house);
+});
+
 Route::get('testSMS', ['App\Http\Controllers\User\AuthController', 'test']);
 Route::post('mail', ['App\Http\Controllers\User\IndexController', 'sendRegister'])->name('mail');
 
