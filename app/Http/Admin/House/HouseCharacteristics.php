@@ -139,8 +139,8 @@ class HouseCharacteristics extends Section implements Initializable
             AdminFormElement::multiselect('dop', 'Доп.Услуги')->SetDisplay('name')->setUsageKey('id')
               ->setOptions($this->types()),
             AdminFormElement::select('type', 'Тип здания', [
-              'Виллы' => 'Виллы',
-              'Новостройки' => 'Новостройки',
+              'Вилла' => 'Вилла',
+              'Новостройка' => 'Новостройка',
             ])->required(),
           ], 6)->addColumn([
             AdminFormElement::multiselect('info', 'Инфаструктура')->SetDisplay('name')->setUsageKey('id')
