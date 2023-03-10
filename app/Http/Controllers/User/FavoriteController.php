@@ -34,6 +34,7 @@ class FavoriteController extends Controller
 
     return Inertia::render('AppFavorites', [
       'favorites' => $favorite,
+      'user' => $this->getUser()
     ]);
   }
 

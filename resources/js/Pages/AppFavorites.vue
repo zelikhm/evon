@@ -97,7 +97,7 @@ import { computed } from 'vue'
 import { usePage } from '@inertiajs/inertia-vue3'
 
 export default {
-  props: ['favorites'],
+  props: ['favorites', 'user'],
   components: {
     AppHeader,
     AppFooter,
@@ -106,7 +106,6 @@ export default {
   },
   data() {
     return {
-      user: computed(() => usePage().props.value.auth.user),
       openAddSelection: false,
       openCreateSelection: false,
       state: null,

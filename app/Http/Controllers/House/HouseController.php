@@ -88,7 +88,7 @@ class HouseController extends Controller
       'compilation' => $this->getCompilation(Auth::id()),
       'news' => $this->getNewsForPage(),
       'adminNews' => $this->getAdminNews(),
-      'user' => Auth::user(),
+      'user' => $this->getUser(),
       'count_houses' => $count,
       'type' => 0,
     ]);
@@ -121,7 +121,7 @@ class HouseController extends Controller
       'compilation' => $this->getCompilation(Auth::id()),
       'news' => $this->getNewsForPage(),
       'adminNews' => $this->getAdminNews(),
-      'user' => Auth::user(),
+      'user' => $this->getUser(),
       'count_houses' => $count,
       'type' => 1,
     ]);
@@ -140,7 +140,7 @@ class HouseController extends Controller
       'city' => $this->getCity(),
       'notification' => $this->getNotification(),
       'count' => HouseModel::count(),
-      'user' => Auth::user(),
+      'user' => $this->getUser(),
     ]);
 
   }
@@ -174,7 +174,7 @@ class HouseController extends Controller
   {
     return Inertia::render('AppPrivateOfficeDev', [
       'houses' => $this->getHouseForUserPagination(Auth::id()),
-      'user' => Auth::user(),
+      'user' => $this->getUser(),
     ]);
   }
 
@@ -265,7 +265,7 @@ class HouseController extends Controller
       'city_array' => $this->getCity(),
       'area_array' => $this->getRegions(),
       'notification' => $this->getNotification(),
-      'user' => Auth::user(),
+      'user' => $this->getUser(),
       'compilation' => $this->getCompilation(Auth::id()),
       'slider' => $this->getSlider($this->getHouseSlug($slug)),
     ]);
@@ -288,7 +288,7 @@ class HouseController extends Controller
       'infos' => $this->getInfo(),
       'city' => $this->getCity(),
       'notification' => $this->getNotification(),
-      'user' => Auth::user(),
+      'user' => $this->getUser(),
     ]);
   }
 

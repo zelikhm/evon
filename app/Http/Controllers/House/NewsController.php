@@ -27,7 +27,7 @@ class NewsController extends Controller
     return Inertia::render('AppNews', [
       'houses' => $this->getHouseForUser(Auth::id()),
       'news' => $this->getNews(Auth::id()),
-      'user' => Auth::user(),
+      'user' => $this->getUser(),
       'notification' => $this->getNotification(),
     ]);
 
@@ -90,7 +90,7 @@ class NewsController extends Controller
     return Inertia::render('AppAddNews', [
       'houses' => $this->getHouseForUser(Auth::id()),
       'new' => $new,
-      'user' => Auth::user(),
+      'user' => $this->getUser(),
       'notification' => $this->getNotification(),
     ]);
 
@@ -105,7 +105,7 @@ class NewsController extends Controller
 
     return Inertia::render('AppAddNews', [
       'houses' => $this->getHouseForUser(Auth::id()),
-      'user' => Auth::user(),
+      'user' => $this->getUser(),
       'notification' => $this->getNotification(),
     ]);
 

@@ -66,7 +66,7 @@ class ChatController extends Controller
     }
 
     return Inertia::render('AppChat', [
-      'user' => Auth::user(),
+      'user' => $this->getUser(),
       'chats' => $chats,
       'chat' => null,
       'notification' => $this->getNotification(),
@@ -97,7 +97,7 @@ class ChatController extends Controller
     }
 
     return Inertia::render('AppChat', [
-      'user' => Auth::user(),
+      'user' => $this->getUser(),
       'chats' => $chats,
       'chat' => $chat,
       'notification' => $this->getNotification(),
