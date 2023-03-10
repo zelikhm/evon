@@ -29,23 +29,24 @@ Route::get('/', function () {
 Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
   Route::get('/', ['App\Http\Controllers\User\ProfileController', 'index']);
 
-  Route::middleware('CheckRealtor')->group(function () {
-    Route::get('/addedHouse', ['App\Http\Controllers\House\HouseController', 'createHouse']);
-    Route::get('/edit/{house}', ['App\Http\Controllers\House\HouseController', 'edit']);
-    Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'showHouse']);
-    Route::get('/news', ['App\Http\Controllers\House\NewsController', 'index']);
-    Route::get('/news/create', ['App\Http\Controllers\House\NewsController', 'createNews']);
-    Route::get('/news/edit/{id}', ['App\Http\Controllers\House\NewsController', 'editNews']);
-  });
+  Route::middleware('CheckSubscription')->group(function () {
+    Route::middleware('CheckRealtor')->group(function () {
+      Route::get('/addedHouse', ['App\Http\Controllers\House\HouseController', 'createHouse']);
+      Route::get('/edit/{house}', ['App\Http\Controllers\House\HouseController', 'edit']);
+      Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'showHouse']);
+      Route::get('/news', ['App\Http\Controllers\House\NewsController', 'index']);
+      Route::get('/news/create', ['App\Http\Controllers\House\NewsController', 'createNews']);
+      Route::get('/news/edit/{id}', ['App\Http\Controllers\House\NewsController', 'editNews']);
+    });
 
-  Route::get('/compilation', ['App\Http\Controllers\User\CompilationController', 'index']);
+    Route::get('/compilation', ['App\Http\Controllers\User\CompilationController', 'index']);
 
-  Route::get('/favorites', ['App\Http\Controllers\User\FavoriteController', 'index']);
+    Route::get('/favorites', ['App\Http\Controllers\User\FavoriteController', 'index']);
 //
-  Route::get('/chat', ['App\Http\Controllers\User\ChatController', 'index']);
-  Route::get('/chats', ['App\Http\Controllers\User\ChatController', 'getChats'])->name('chats');
-  Route::get('/chat/{id}', ['App\Http\Controllers\User\ChatController', 'getChat']);
-
+    Route::get('/chat', ['App\Http\Controllers\User\ChatController', 'index']);
+    Route::get('/chats', ['App\Http\Controllers\User\ChatController', 'getChats'])->name('chats');
+    Route::get('/chat/{id}', ['App\Http\Controllers\User\ChatController', 'getChat']);
+  });
 });
 
 Route::prefix('/compilation')->group(function () {
@@ -53,7 +54,7 @@ Route::prefix('/compilation')->group(function () {
   Route::get('/{id}/{house}', ['App\Http\Controllers\User\CompilationController', 'house']);
 });
 
-Route::middleware('auth', 'session')->group(function () {
+Route::middleware('auth', 'session', 'CheckSubscription')->group(function () {
   Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'index']);
   Route::get('/villages', ['App\Http\Controllers\House\HouseController', 'villages']);
   Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
@@ -61,27 +62,6 @@ Route::middleware('auth', 'session')->group(function () {
 
 Route::get('/404', function () {
   return Inertia::render('AppError');
-});
-
-Route::get('test', function () {
-
-  $houses = HouseModel::where('visible', 1)
-    ->where('active', 2)
-    ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
-    ->select('house_models.*')
-    ->where('house_characteristics_models.type', 'Новостройка')
-    ->with(['info', 'files', 'frames', 'flats', 'user', 'news', 'images'])
-    ->get();
-
-  foreach ($houses as $house) {
-
-    if($house->info === null) {
-      dd($house);
-    }
-
-  }
-
-  dd($houses);
 });
 
 Route::get('testSMS', ['App\Http\Controllers\User\AuthController', 'test']);

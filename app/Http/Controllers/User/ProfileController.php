@@ -18,9 +18,8 @@ class ProfileController extends Controller
   use MainInfo;
 
     public function index() {
-
+//dd($this->getUser());
       if(Auth::user()->role !== 0) {
-
         return Inertia::render('AppProfileDev', [
           'user' => $this->getUser(),
           'tarifs' => TarifModel::all(),

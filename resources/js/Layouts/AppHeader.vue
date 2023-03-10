@@ -144,8 +144,8 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
               </button>
               <div v-if="openProfileMenu" class="overflow-hidden lg:text-[13px] border border-solid border-[#E5DFEE] absolute z-50 top-[90%] right-0 flex flex-col bg-white rounded-[5px]">
                 <div class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
-                  <span class="leading-none whitespace-nowrap cursor-default">Подписка PRO</span>
-                  <span class="leading-none whitespace-nowrap cursor-default">6 дней</span>
+                  <span class="leading-none whitespace-nowrap cursor-default">{{ language.ob[42] }}</span>
+                  <span class="leading-none whitespace-nowrap cursor-default" v-if="user !== null && user.subscription_info !== null">{{getDate(user.subscription_info.finished_at)}}</span>
                 </div>
                 <Link href="/profile" class="hover__select border__bottom--not whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">{{ language.prof_zastr[0] }}</Link>
                 <div @click="logout" class="hover:bg-[#F6F3FA] border__bottom--not text-[#E84680] whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">{{ language.menu_zastr_1[2] }}</div>
@@ -186,6 +186,7 @@ export default {
       selectLang: 0
     }
   },
+
   mounted() {
 
     if(this.user !== null) {
@@ -208,6 +209,24 @@ export default {
   },
   emits: ['login-realtor', 'login-developer', 'open-register'],
   methods: {
+    getDate(d) {
+
+      let date = new Date();
+      let finish = new Date(d);
+
+      if(finish - date > 0) {
+        let day = Math.floor((finish - date) / (1000 * 60 * 60 * 24) % 30)
+
+        if(day <= 1) {
+          return day + ' ' + this.language.default[2];
+        } else if (day > 1 && day < 5) {
+          return day + ' ' + this.language.default[4];
+        } else {
+          return day + ' ' + this.language.default[3];
+        }
+      }
+
+    },
     selectLanguage(n) {
       this.$emit('selectLanguage', n);
 
