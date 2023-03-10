@@ -123,6 +123,7 @@ export default {
         { type: newItem.reg[8] },
         { type: newItem.reg[9] },
       ];
+      this.selectType = newItem.reg[6];
     }
   },
   data() {
