@@ -38,7 +38,7 @@
                  </span>
                </div>
                 <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
-                <button @click="openPayProfile = true" class="hover__button--purple transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">Оплатить</button>
+                <button @click="openPayProfile = true" class="hover__button--purple transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">{{ language.prof_rielt[13] }}</button>
               </div>
             </div>
             <div>

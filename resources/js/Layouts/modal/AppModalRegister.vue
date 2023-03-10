@@ -115,6 +115,16 @@ export default {
     selectLanguage: 0,
     language: {}
   },
+  watch: {
+    language(newItem) {
+      this.types = [
+        { type: newItem.reg[6] },
+        { type: newItem.reg[7] },
+        { type: newItem.reg[8] },
+        { type: newItem.reg[9] },
+      ];
+    }
+  },
   data() {
     return {
       selectType: this.language.reg[6],

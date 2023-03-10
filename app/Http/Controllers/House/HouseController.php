@@ -431,7 +431,7 @@ class HouseController extends Controller
           'created' => $request->created,
           'longitude' => $request->longitude,
           'latitude' => $request->latitude,
-          'percent' => $request->percent,
+          'percent' => $request->percent === 'null' ? null : $request->percent,
           'comment' => $request->comment,
           'active' => 0,
           'fool_price' => $request->fool_price,
