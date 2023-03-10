@@ -32,7 +32,14 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
 <!-- Меню агента -->
   <header v-if="user !== null && user.role === 0" class="relative bg-[#6435A5] leading-[100%]">
 
-    <app-burger-agent :tabindex="tabindex" @blur="openBurgerAgent = false" :class="{'left__0': openBurgerAgent }" />
+    <app-burger-agent
+        :tabindex="tabindex"
+        @blur="openBurgerAgent = false"
+        :class="{'left__0': openBurgerAgent }"
+        :user="user"
+        :language="language"
+        @logout="logout"
+    />
 
     <div class="_container h-[60px] xxl:h-12 xl:h-10 lg:h-12">
       <div class="flex items-center justify-between h-full ">
