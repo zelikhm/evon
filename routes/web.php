@@ -20,11 +20,7 @@ use App\Http\Traits\MainInfo;
 |
 */
 
-Route::get('/', function () {
-//  dd(\Illuminate\Support\Facades\Auth::user());
-  return Inertia::render('AppMain');
-});
-
+Route::get('/', ['App\Http\Controllers\Controller', 'main']);
 
 Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
   Route::get('/', ['App\Http\Controllers\User\ProfileController', 'index']);

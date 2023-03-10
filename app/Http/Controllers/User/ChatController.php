@@ -43,7 +43,7 @@ class ChatController extends Controller
 
   }
 
-  public function checkChat(Request $request)
+  public function checkChatApi(Request $request)
   {
 
     $chats = ChatModel::where('visible_id', $request->user_id)

@@ -130,7 +130,7 @@ import {usePage} from "@inertiajs/inertia-vue3";
 import AppModalRegister from "@/Layouts/modal/AppModalRegister.vue";
 
 export default {
-  props:['error'],
+  props:['error', 'userInfo'],
   provide() {
     return {
       error: this.error,
@@ -138,15 +138,22 @@ export default {
   },
   data() {
     return {
-      user: computed(() => usePage().props.value.auth.user),
       openLoginRealtor: false,
       openLoginDeveloper: false,
       openRegister: false,
       language: {},
       selectLanguage: 0,
+      user: [],
     }
   },
   created() {
+    if(this.userInfo.length === 0) {
+      this.user = null;
+    } else {
+      this.user = this.userInfo;
+    }
+
+    console.log(this.user);
     if(this.user !== null) {
       if(this.user.lang === 0) {
         this.language = this.$ru;
