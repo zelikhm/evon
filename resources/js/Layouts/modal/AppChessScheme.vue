@@ -1,6 +1,6 @@
 <template>
   <div class="fixed z-[100] w-full h-full flex items-center justify-center lg:items-start">
-    <div class="max-h-[90vh] lg:max-h-[74vh] relative flex flex-col  gap-5 xxl:gap-4 xl:gap-3 bg-white lg:mt-4 rounded-[12px] px-12 xxl:px-10 xl:px-8 py-8 xxl:py-6 xl:py-5 z-50 w-[40%] lg:w-[56%] md:w-[70%] sm:w-[90%] h-fit">
+    <div class="max-h-[90vh] lg:max-h-[74vh] relative flex flex-col gap-5 xxl:gap-4 xl:gap-3 bg-white lg:mt-4 rounded-[12px] px-12 xxl:px-10 xl:px-8 py-8 xxl:py-6 xl:py-5 z-50 w-[40%] lg:w-[56%] md:w-[70%] sm:w-[90%] h-fit">
       <div class="relative flex justify-between items-center">
         <button @click="closeChess" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
           <div class="absolute h-[1px] w-4 bg-[#8A8996] rotate-45"></div>
@@ -12,7 +12,7 @@
         <div v-if="flat.isOpen !== 3">
           <img class="max-h-[80vh]" :src="flat.isOpen === 0 ? flat.imageUp : flat.imageDown" alt="">
         </div>
-        <div>
+        <div v-else>
           <img class="max-h-[40vh]" :src="flat.imageUp" alt="">
           <img class="max-h-[40vh]" :src="flat.imageDown" alt="">
         </div>
