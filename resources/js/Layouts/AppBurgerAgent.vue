@@ -16,9 +16,9 @@ import { Link } from '@inertiajs/inertia-vue3'
             <span class="leading-none whitespace-nowrap">6 дней</span>
           </div>
           <div class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
-            <span class="leading-none whitespace-nowrap">Я с клиентом</span>
+            <span class="leading-none whitespace-nowrap">{{ language.ob[32] }}</span>
             <label class="relative cursor-pointer inline-block w-[42px] xxl:w-[36px] xl:w-[30px] h-[24px] xxl:h-[20px] xl:h-[18px]">
-              <input class="hidden" type="checkbox">
+              <input @change="$emit('target-with-client')" class="hidden" type="checkbox">
               <span class="slider round"></span>
             </label>
           </div>

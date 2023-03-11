@@ -38,6 +38,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
         :class="{'left__0': openBurgerAgent }"
         :user="user"
         :language="language"
+        @target-with-client="targetWithClient"
         @logout="logout"
     />
 
@@ -112,8 +113,11 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
   <header v-if="user !== null && user.role === 1 || user !== null && user.role === 2 || user !== null && user.role === 3" class="relative bg-[#6435A5] leading-[100%]">
 
     <app-burger-dev
+      :user="user"
+      :language="language"
       :class="{'left__0': openBurgerDev }"
       @logout="logout"
+      @target-with-client="targetWithClient"
     />
 
     <div class="_container h-[60px] xxl:h-12 xl:h-10 lg:h-12 sm:px-1">

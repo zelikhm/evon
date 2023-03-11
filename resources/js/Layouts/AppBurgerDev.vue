@@ -5,28 +5,36 @@ import { Link } from '@inertiajs/inertia-vue3'
 <template>
   <div class="absolute top-full -left-full transition-all duration-300 z-[80]">
     <div class="border__top-white bg-[#6435A5] py-6 h-[100vh] text-white text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[16px] flex flex-col gap-6 px-[6.25vw]">
-      <div class="lg:hidden relative flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
+      <div class="relative text-[#3B3A45] flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5">
         <button @click="openProfileMenu = !openProfileMenu" class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-          <span class="text-white text-lg xxl:text-sm xl:text-xs leading-none">Имя фамилия</span>
+          <span class="text-white text-lg xxl:text-sm xl:text-xs lg:text-[16px] leading-none whitespace-nowrap">{{ user.first_name + ' ' + user.last_name }}</span>
           <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелка вниз">
         </button>
-        <div v-if="openProfileMenu" class="overflow-hidden lg:text-[13px] border border-solid border-[#E5DFEE] absolute z-50 top-[90%] right-0 flex flex-col bg-white rounded-[5px]">
+        <div v-if="openProfileMenu" class="border border-solid border-[#E5DFEE] lg:text-[15px] overflow-hidden z-20 absolute top-[90%] flex flex-col bg-white rounded-[5px]">
           <div class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
-            <span class="leading-none whitespace-nowrap cursor-default">ффф</span>
-            <span class="leading-none whitespace-nowrap cursor-default">ыыы</span>
+            <span class="leading-none whitespace-nowrap">{{ language.ob[42] }} PRO</span>
+            <span class="leading-none whitespace-nowrap">6 дней</span>
           </div>
-          <Link href="/profile" class="hover__select border__bottom--not whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">111</Link>
-          <div  @click="logout" class="hover:bg-[#F6F3FA] border__bottom--not text-[#E84680] whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">ййй</div>
+          <div class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
+            <span class="leading-none whitespace-nowrap">{{ language.ob[32] }}</span>
+            <label class="relative cursor-pointer inline-block w-[42px] xxl:w-[36px] xl:w-[30px] h-[24px] xxl:h-[20px] xl:h-[18px]">
+              <input @change="$emit('target-with-client')" class="hidden" type="checkbox">
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <Link href="/profile" class="hover__select border__bottom--not whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">{{ language.prof_zastr[0] }}</Link>
+          <div @click="$emit('logout')" class="hover:bg-[#F6F3FA] border__bottom--not text-[#E84680] whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">{{ language.menu_zastr_1[2] }}</div>
         </div>
       </div>
-      <Link href="/profile/houses" :class="{ 'opacity-60': $page.url !== '/profile/houses' }">Новостройки</Link>
-      <Link href="/profile/news" :class="{ 'opacity-60': $page.url !== '/profile/news' }">Новости</Link>
+      <Link href="/profile/houses" :class="{ 'opacity-60': $page.url !== '/profile/houses' }">{{ language.menu_zastr[0] }}</Link>
+      <Link href="/profile/news" :class="{ 'opacity-60': $page.url !== '/profile/news' }">{{ language.menu_zastr[1] }}</Link>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: ['user', 'language'],
   data() {
     return {
       openProfileMenu: false,
