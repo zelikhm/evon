@@ -43,7 +43,7 @@ class ChatController extends Controller
 
   }
 
-  public function checkChat(Request $request)
+  public function checkChatApi(Request $request)
   {
 
     $chats = ChatModel::where('visible_id', $request->user_id)
@@ -66,7 +66,7 @@ class ChatController extends Controller
     }
 
     return Inertia::render('AppChat', [
-      'user' => Auth::user(),
+      'user' => $this->getUser(),
       'chats' => $chats,
       'chat' => null,
       'notification' => $this->getNotification(),
@@ -97,7 +97,7 @@ class ChatController extends Controller
     }
 
     return Inertia::render('AppChat', [
-      'user' => Auth::user(),
+      'user' => $this->getUser(),
       'chats' => $chats,
       'chat' => $chat,
       'notification' => $this->getNotification(),

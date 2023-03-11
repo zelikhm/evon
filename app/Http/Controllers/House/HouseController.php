@@ -88,7 +88,7 @@ class HouseController extends Controller
       'compilation' => $this->getCompilation(Auth::id()),
       'news' => $this->getNewsForPage(),
       'adminNews' => $this->getAdminNews(),
-      'user' => Auth::user(),
+      'user' => $this->getUser(),
       'count_houses' => $count,
       'type' => 0,
     ]);
@@ -101,13 +101,13 @@ class HouseController extends Controller
 
   public function villages() {
 
-    $houses = $this->getAllHouse('Виллы', false);
+    $houses = $this->getAllHouse('Вилла', true);
 
     $count = HouseModel::where('visible', 1)
       ->where('active', 2)
       ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
       ->select('house_models.*')
-      ->where('house_characteristics_models.type', 'Виллы')
+      ->where('house_characteristics_models.type', 'Вилла')
       ->count();
 
     return Inertia::render('AppListImmovables', [
@@ -121,7 +121,7 @@ class HouseController extends Controller
       'compilation' => $this->getCompilation(Auth::id()),
       'news' => $this->getNewsForPage(),
       'adminNews' => $this->getAdminNews(),
-      'user' => Auth::user(),
+      'user' => $this->getUser(),
       'count_houses' => $count,
       'type' => 1,
     ]);
@@ -140,7 +140,7 @@ class HouseController extends Controller
       'city' => $this->getCity(),
       'notification' => $this->getNotification(),
       'count' => HouseModel::count(),
-      'user' => Auth::user(),
+      'user' => $this->getUser(),
     ]);
 
   }
@@ -174,7 +174,7 @@ class HouseController extends Controller
   {
     return Inertia::render('AppPrivateOfficeDev', [
       'houses' => $this->getHouseForUserPagination(Auth::id()),
-      'user' => Auth::user(),
+      'user' => $this->getUser(),
     ]);
   }
 
@@ -203,7 +203,7 @@ class HouseController extends Controller
   public function getHousesJk(Request $request)
   {
     if($this->checkToken($request->token)) {
-      return $this->getAllHouse('Новостройка', false);
+      return $this->getAllHouse('Новостройка', $request->limit);
     } else {
       return response()->json('not auth', 401);
     }
@@ -219,7 +219,7 @@ class HouseController extends Controller
   public function getHousesVillages(Request $request)
   {
     if($this->checkToken($request->token)) {
-      return $this->getAllHouse('Виллы', false);
+      return $this->getAllHouse('Вилла', $request->limit);
     } else {
       return response()->json('not auth', 401);
     }
@@ -265,7 +265,7 @@ class HouseController extends Controller
       'city_array' => $this->getCity(),
       'area_array' => $this->getRegions(),
       'notification' => $this->getNotification(),
-      'user' => Auth::user(),
+      'user' => $this->getUser(),
       'compilation' => $this->getCompilation(Auth::id()),
       'slider' => $this->getSlider($this->getHouseSlug($slug)),
     ]);
@@ -288,7 +288,7 @@ class HouseController extends Controller
       'infos' => $this->getInfo(),
       'city' => $this->getCity(),
       'notification' => $this->getNotification(),
-      'user' => Auth::user(),
+      'user' => $this->getUser(),
     ]);
   }
 
@@ -431,7 +431,7 @@ class HouseController extends Controller
           'created' => $request->created,
           'longitude' => $request->longitude,
           'latitude' => $request->latitude,
-          'percent' => $request->percent,
+          'percent' => $request->percent === 'null' ? null : $request->percent,
           'comment' => $request->comment,
           'active' => 0,
           'fool_price' => $request->fool_price,
@@ -577,7 +577,7 @@ class HouseController extends Controller
   {
     if ($this->checkToken($request->token)) {
 
-      if ($request->image_up === 'null') {
+      if ($request->image_up === 'null' || $request->image_up) {
         $imageUp = null;
       } else if ($request->image_up) {
         $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
@@ -590,7 +590,7 @@ class HouseController extends Controller
         }
       }
 
-      if ($request->image_down === 'null') {
+      if ($request->image_down === 'null' || $request->image_down) {
         $imageDown = null;
       } else if ($request->image_down) {
         $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
@@ -625,6 +625,31 @@ class HouseController extends Controller
     } else {
       return response()->json('not auth', 401);
     }
+  }
+
+  /**
+   * edit status for flat
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function editStatusFlat(Request $request) {
+
+    if ($this->checkToken($request->token)) {
+
+      FlatModel::where('id', $request->flat_id)->update([
+        'status' => $request->status,
+      ]);
+
+      HouseModel::where('id', $request->house_id)->update([
+        'active' => 0,
+      ]);
+
+      return response()->json($this->getHouse($request->house_id), 200);
+    } else {
+      return response()->json('not auth', 401);
+    }
+
   }
 
   /**

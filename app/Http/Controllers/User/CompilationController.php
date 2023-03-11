@@ -43,7 +43,7 @@ class CompilationController extends Controller
     return Inertia::render('AppSelections', [
 
       'compilation' => $compilations,
-      'user' => Auth::user(),
+      'user' => $this->getUser(),
       'notification' => $this->getNotification(),
 
     ]);
@@ -99,7 +99,7 @@ class CompilationController extends Controller
     }
 
     if(Auth::check()) {
-      $user = User::where('id', Auth::id())->with(['company'])->first();
+      $user = $this->getUser();
     } else {
       $user = [];
     }
@@ -131,7 +131,7 @@ class CompilationController extends Controller
       ->firstOrFail();
 
     if(Auth::check()) {
-      $user = User::where('id', Auth::id())->with(['company'])->first();
+      $user = $this->getUser();
     } else {
       $user = [];
     }

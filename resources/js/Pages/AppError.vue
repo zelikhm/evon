@@ -3,7 +3,11 @@ import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
-  <app-header :user="user" />
+  <app-header
+    :user="user"
+    @selectLanguage="choseLanguage"
+    :language="language"
+  />
   <main>
     <div class="_container">
       <div class="flex flex-col items-center gap-7 xxl:gap-5 xl:gap-4 my-40 xxl:my-32 xl:my-28">
@@ -15,7 +19,7 @@ import { Link } from '@inertiajs/inertia-vue3'
       </div>
     </div>
   </main>
-  <app-footer />
+  <app-footer :language="language" />
 </template>
 
 <script>
@@ -28,6 +32,20 @@ export default {
   data() {
     return {
       user: computed(() => usePage().props.value.auth.user),
+      language: {},
+    }
+  },
+  created() {
+    if(this.user !== null) {
+      if(this.user.lang === 0) {
+        this.language = this.$ru;
+      } else if (this.user.lang === 1) {
+        this.language = this.$en;
+      } else if (this.user.lang === 2) {
+        this.language = this.$tur;
+      }
+    } else {
+      this.language = this.$ru;
     }
   },
   components: {

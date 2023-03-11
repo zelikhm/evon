@@ -134,12 +134,7 @@ class AdminNewsModel extends Section implements Initializable
    */
   public function isCreatable(): bool
   {
-    $user = Auth::user();
-    if($user->role !== 3) {
-      return false;
-    } else {
-      return true;
-    }
+    return true;
   }
 
   /**

@@ -71,11 +71,7 @@ class User extends Authenticatable
 
     if($sub !== null) {
       if($sub->finished_at > Carbon::now()->addHour(3)) {
-        if($sub->active === 1) {
           return true;
-        } else {
-          return false;
-        }
       } else {
         return false;
       }

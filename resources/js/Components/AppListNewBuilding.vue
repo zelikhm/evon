@@ -730,7 +730,7 @@
         this.filters.builder = '';
         //deadlines
         this.selectDeadline = this.language.ob[24];
-        this.filters.deadline = 'СДАН';
+        this.filters.deadline = this.language.ob[24];
         //price
         this.filters.price.max = '';
         this.filters.price.min = '';
@@ -758,6 +758,13 @@
           toChildrenSchool: '',
           toBus: '',
         }
+
+        this.houses_array = this.readyHouses;
+        this.map_array = this.readyHouses;
+        this.count_house = this.houses_array.length;
+        this.updatedMap();
+
+        console.log(this.houses_array);
       },
       include(where, what) {
 
@@ -1366,7 +1373,6 @@
         this.map_array = object10;
         this.count_house = this.houses_array.length;
         this.updatedMap();
-        return this.houses_array.splice(0, this.count);
         return this.houses_array.splice(0, this.count);
       }
     },

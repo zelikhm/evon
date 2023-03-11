@@ -40,6 +40,7 @@ Route::prefix('house')->group(function () {
   Route::post('createFlat', ['App\Http\Controllers\House\HouseController', 'createFlat']);
   Route::post('deletedFlat', ['App\Http\Controllers\House\HouseController', 'deletedFlat']);
   Route::post('editFlat', ['App\Http\Controllers\House\HouseController', 'editFlat']);
+  Route::post('editStatusFlat', ['App\Http\Controllers\House\HouseController', 'editStatusFlat']);
   //
   Route::post('setVisible', ['App\Http\Controllers\House\HouseController', 'setVisible']);
   Route::post('delete', ['App\Http\Controllers\House\HouseController', 'delete']);
@@ -96,7 +97,7 @@ Route::prefix('user')->group(function () {
 });
 
 Route::prefix('chat')->group(function () {
-  Route::post('/checkChat', ['App\Http\Controllers\User\ChatController', 'checkChat']);
+  Route::post('/checkChat', ['App\Http\Controllers\User\ChatController', 'checkChatApi']);
   Route::post('/message', ['App\Http\Controllers\Messages\MessageController', 'message']);
   Route::post('/reloadChats', ['App\Http\Controllers\Messages\MessageController', 'reloadChats']);
   Route::post('/reloadChat', ['App\Http\Controllers\Messages\MessageController', 'reloadChat']);

@@ -4,7 +4,7 @@ import ChangeLanguage from "../Components/ChangeLanguage.vue";
 </script>
 
 <template>
-  <AppChessScheme v-if="true" :flat="selectFlat" @closeChess="scheme = false"></AppChessScheme>
+  <AppChessScheme v-if="scheme" :flat="selectFlat" @closeChess="scheme = false" :language="language"></AppChessScheme>
   <header class="relative">
     <div class="bg-[#6435A5] h-[60px] xxl:h-12 xl:h-10 lg:h-12">
       <div class="_container h-full text-[16px] xxl:text-[13px] xl:text-[11px]">
@@ -71,7 +71,7 @@ import ChangeLanguage from "../Components/ChangeLanguage.vue";
           </div>
           <div class="flex items-center gap-1.5 xxl:gap-1 xl:gap-0.5">
             <img src="../../assets/svg/reload_icon.svg" class="h-4 xx:h-3.5 xl:h-3" alt="reload">
-            <span class="text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">{{ new Date(Date.parse(house.updated_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span>
+            <span class="text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">{{ house.updated_at }}</span>
           </div>
         </div>
       </div>
@@ -79,7 +79,6 @@ import ChangeLanguage from "../Components/ChangeLanguage.vue";
         <div class="flex flex-col">
           <swiper
             :navigation="true"
-            :modules="modules"
             :loop="true"
             class="mySwiper w-full"
           >
@@ -421,11 +420,11 @@ import ChangeLanguage from "../Components/ChangeLanguage.vue";
   import AppModalAlbum from "../Layouts/modal/AppModalAlbum.vue";
   import AppChessScheme from "../Layouts/modal/AppChessScheme.vue";
 
-  import { Swiper, SwiperSlide } from 'swiper/vue'
-  import 'swiper/css'
-  import "swiper/css/navigation"
-  // import "swiper/css/pagination";
-  import { FreeMode, Navigation, Pagination} from "swiper";
+  import { Swiper, SwiperSlide } from "swiper/vue";
+  import "swiper/css";
+  import "swiper/css/navigation";
+  import "swiper/css/pagination";
+  import { Navigation, Pagination} from "swiper";
 
   export default {
     props: {

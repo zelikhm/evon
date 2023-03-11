@@ -23,8 +23,8 @@
 
 <script>
 export default {
-  emits: ['close-all-news', 'language'],
-  props: ['house'],
+  emits: ['close-all-news'],
+  props: ['house', 'language'],
   data() {
     return {
 

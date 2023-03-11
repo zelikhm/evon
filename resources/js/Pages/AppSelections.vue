@@ -77,10 +77,9 @@ import {computed} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
 
 export default {
-  props: ['compilation', 'houses', 'house'],
+  props: ['compilation', 'houses', 'house', 'user'],
   data() {
     return {
-      user: computed(() => usePage().props.value.auth.user),
       openNotification: false,
       openCreateSelection: false,
       openSideBar: false,

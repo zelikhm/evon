@@ -32,11 +32,10 @@ class HouseModel extends Model
     'visible',
     'created'
   ];
-//
-//  protected $hidden = [
-//    'created_at',
-//    'updated_at',
-//  ];
+
+  protected $casts = [
+    'updated_at' => 'datetime: d-m-Y'
+  ];
 
   public function user() {
     return $this->belongsTo(User::class, 'user_id', 'id');

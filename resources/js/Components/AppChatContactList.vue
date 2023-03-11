@@ -38,7 +38,7 @@
               </div>
             </div>
             <div class="flex justify-between items-center text-sm xxl:text-xs xl:text-[10px]">
-              <span class="text-[#8A8996] leading-none" v-if="chat.message !== null">{{ chat.message.message }}</span>
+              <span class="text-[#8A8996] leading-none" v-if="chat.message !== null">{{ chat.message.message.length > 30 ? chat.message.message.slice(0, 30) + '...' : chat.message.message }}</span>
               <span class="bg-[#6435A5] text-white rounded-[100px] leading-none px-1.5 xl:px-1 py-0.5" v-if="chat.visible_id === user.id">{{  }}</span>
             </div>
           </div>

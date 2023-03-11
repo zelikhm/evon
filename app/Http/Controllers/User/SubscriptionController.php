@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\PaymentModel;
 use App\Models\TarifModel;
+use App\Models\User;
 use App\Models\User\SubscriptionModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -12,16 +14,28 @@ class SubscriptionController extends Controller
 {
     public function payment(Request $request) {
 
+      info(1);
+      info($request->callback_id);
+
+      $payment = PaymentModel::where('id', $request->callback_id)
+        ->where('status', 0)
+        ->first();
+
+      PaymentModel::where('id', $request->callback_id)
+        ->update(['status' => 1]);
+
       if($request->status === 'success') {
 
-        $type = TarifModel::where('id', $request->callback_id)->first();
+        $type = TarifModel::where('id', $payment->type)->first();
 
-        $sub = SubscriptionModel::where('email', $request->email)->first();
+        $user = User::where('email', $payment->email)->first();
+
+        $sub = SubscriptionModel::where('user_id', $user->id)->first();
 
         if($sub !== null) {
           if($sub->finished_at < Carbon::now()->addHour(3)) {
 
-            $sub = SubscriptionModel::where('email', $request->email)->update([
+            $sub = SubscriptionModel::where('user_id', $user->id)->update([
               'finished_at' => Carbon::now()->addHour(3)->addDay($type->days),
             ]);
 
@@ -29,7 +43,7 @@ class SubscriptionController extends Controller
 
             $date = new Carbon($sub->finished_at);
 
-            $sub = SubscriptionModel::where('email', $request->email)->update([
+            $sub = SubscriptionModel::where('user_id', $user->id)->update([
               'finished_at' => $date->addDay($type->days),
             ]);
           }
@@ -38,7 +52,7 @@ class SubscriptionController extends Controller
         } else {
 
           $sub = SubscriptionModel::create([
-            'email' => $request->email,
+            'user_id' => $user->id,
             'active' => true,
             'finished_at' => Carbon::now()->addHour(3)->addDay($type->days),
             'created_at' => Carbon::now()->addHour(3),

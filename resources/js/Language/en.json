@@ -19,7 +19,8 @@
     "16": "Chat with a partner / realtor is implemented on the platform",
     "17": "Register",
     "18": "login",
-    "19": "Registration"
+    "19": "Registration",
+    "20": "Sign Up for Free"
   },
   "footer": {
     "0": "ИНН 215125125125125",
@@ -159,7 +160,7 @@
     "5": "Edit",
     "6": "Add"
   },
-  "prof_rielt ": {
+  "prof_rielt": {
     "0": "Edit profile",
     "1": "About real estate agencies",
     "2": "Company",
@@ -345,7 +346,10 @@
   },
   "default": {
     "0": "Yep",
-    "1": "No"
+    "1": "No",
+    "2": "day",
+    "3": "Days",
+    "4": "day"
   },
   "month": {
     "0": "January",

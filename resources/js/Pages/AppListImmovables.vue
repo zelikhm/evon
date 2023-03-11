@@ -107,7 +107,6 @@ export default {
   },
   data() {
     return {
-      user: computed(() => usePage().props.value.auth.user),
       openNotification: false,
       openAddSelection: false,
       openCreateSelection: false,
