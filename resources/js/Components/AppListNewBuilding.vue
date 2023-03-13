@@ -1032,7 +1032,7 @@
         this.map_array = this.houses;
 
         if (this.type === 0) {
-          axios.get('/api/house/getHousesJk').then(res => {
+          axios.get('/api/house/getHousesJk?dop=true').then(res => {
             this.readyHouses = res.data;
             this.count_house = this.readyHouses.length;
             this.map_array = this.readyHouses;
@@ -1041,7 +1041,7 @@
             this.preloader = false;
           })
         } else {
-          axios.get('/api/house/getHousesVillages').then(res => {
+          axios.get('/api/house/getHousesVillages?dop=true').then(res => {
             this.readyHouses = res.data;
             this.count_house = this.readyHouses.length;
             this.map_array = this.readyHouses;
@@ -1092,6 +1092,7 @@
       document.addEventListener('click', (e) => {
         this.openSelectCity = false
       })
+
     },
     computed: {
       filteredCity() {
