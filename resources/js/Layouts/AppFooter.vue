@@ -5,7 +5,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 <template>
   <footer class="footer">
     <div class="_container text-lg xxl:text-[15px] xl:text-xs lg:text-[15px]">
-      <div class="footer__border-b flex justify-between pt-14 xxl:pt-10 xl:pt-8 pb-10 xxl:pb-8 xl:pb-6">
+      <div class="footer__border-b flex justify-between sm:flex-col sm:gap-5 pt-14 xxl:pt-10 xl:pt-8 pb-10 xxl:pb-8 xl:pb-6">
         <Link href="/" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
           <img src="../../assets/svg/fotter_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="Логотип">
         </Link>
@@ -14,8 +14,8 @@ import { Link } from '@inertiajs/inertia-vue3'
         </div>
       </div>
       <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 text-[#3B3A45] opacity-50 pb-14 xxl:pb-10 xl:pb-8 pt-10 xxl:pt-8 xl:pt-6">
-        <div class="flex justify-between">
-          <div>
+        <div class="flex justify-between sm:flex-col sm:gap-2.5 sm:items-center">
+          <div class="sm:flex sm:flex-col sm:gap-2.5 sm:items-center">
             <a target="_blank" href="/privacy" class="underline mr-5">{{ language.po_v_r[7] }}</a>
             <a target="_blank" href="/agree" class="underline">Kullanıcı Sözleşmesi</a>
           </div>

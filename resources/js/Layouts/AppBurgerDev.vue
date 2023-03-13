@@ -8,7 +8,7 @@ import { Link } from '@inertiajs/inertia-vue3'
       <div class="relative text-[#3B3A45] flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5">
         <button @click="openProfileMenu = !openProfileMenu" class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
           <span class="text-white text-lg xxl:text-sm xl:text-xs lg:text-[16px] leading-none whitespace-nowrap">{{ user.first_name + ' ' + user.last_name }}</span>
-          <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px] lg:w-2.5" alt="Стрелка вниз">
+          <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелка вниз">
         </button>
         <div v-if="openProfileMenu" class="border border-solid border-[#E5DFEE] lg:text-[15px] overflow-hidden z-20 absolute top-[90%] flex flex-col bg-white rounded-[5px]">
           <div class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
@@ -26,10 +26,8 @@ import { Link } from '@inertiajs/inertia-vue3'
           <div @click="$emit('logout')" class="hover:bg-[#F6F3FA] border__bottom--not text-[#E84680] whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">{{ language.menu_zastr_1[2] }}</div>
         </div>
       </div>
-      <Link href="/houses" :class="{ 'opacity-60': $page.url !== '/houses' }" class="whitespace-nowrap leading-none">{{ language.rielt_1[0] }}</Link>
-      <Link href="/villages" :class="{ 'opacity-60': $page.url !== '/villages' }" class="whitespace-nowrap leading-none">{{ language.rielt_1[1] }}</Link>
-      <Link href="/profile/compilation" :class="{ 'opacity-60': $page.url !== '/profile/compilation' }" class="whitespace-nowrap leading-none">{{ language.rielt_1[2] }}</Link>
-      <Link href="/profile/favorites" :class="{ 'opacity-60': $page.url !== '/profile/favorites' }" class="whitespace-nowrap leading-none">{{ language.rielt_1[3] }}</Link>
+      <Link href="/profile/houses" :class="{ 'opacity-60': $page.url !== '/profile/houses' }">{{ language.menu_zastr[0] }}</Link>
+      <Link href="/profile/news" :class="{ 'opacity-60': $page.url !== '/profile/news' }">{{ language.menu_zastr[1] }}</Link>
     </div>
   </div>
 </template>

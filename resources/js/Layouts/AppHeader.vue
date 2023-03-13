@@ -7,10 +7,10 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
   <div v-if="overlaySelect" @click="closeOverlaySelect" class="absolute h-full w-full z-40"></div>
 <!--  Меню до входа-->
   <header v-if="user === null" class="relative bg-[#6435A5] leading-[100%]">
-    <div class="_container h-[60px] xxl:h-12 xl:h-10">
+    <div class="_container h-[60px] xxl:h-12 xl:h-10 sm:px-1">
       <div class="flex items-center justify-between h-full ">
         <Link href="/" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
-          <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="Логотип">
+          <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5 sm:h-4" alt="Логотип">
         </Link>
         <div class="flex items-center gap-7 xxl:gap-5 lg:gap-2 text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[14px]">
           <change-language @selectLanguage="selectLanguage" :selectLang="selectLang" />
@@ -38,19 +38,20 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
         :class="{'left__0': openBurgerAgent }"
         :user="user"
         :language="language"
+        @target-with-client="targetWithClient"
         @logout="logout"
     />
 
-    <div class="_container h-[60px] xxl:h-12 xl:h-10 lg:h-12">
+    <div class="_container h-[60px] xxl:h-12 xl:h-10 lg:h-12 sm:px-1">
       <div class="flex items-center justify-between h-full ">
-        <div class="flex gap-20 xxl:gap-16 xl:gap-12 lg:gap-2 items-baseline lg:items-center">
+        <div class="flex gap-20 xxl:gap-16 xl:gap-12 lg:gap-2 sm:gap-1.5 items-baseline lg:items-center">
           <div @click="openBurgerAgent = !openBurgerAgent" class="hidden lg:flex relative flex-col justify-evenly py-0.5 items-center cursor-pointer h-8 w-8 rounded-[5px] bg-[#6435A5]">
             <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
             <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
             <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
           </div>
           <Link href="/houses" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
-            <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="Логотип">
+            <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5 sm:h-4" alt="Логотип">
           </Link>
           <div class="lg:hidden text-white text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[15px] flex gap-20 xxl:gap-16 xl:gap-12 x:gap-10">
             <Link href="/houses" :class="{ 'opacity-60': $page.url !== '/houses' }" class="whitespace-nowrap">
@@ -69,15 +70,15 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
             <img @click="startSearch" src="../../assets/svg/search_icon.svg" class="cursor-pointer absolute top-1/2 -translate-y-1/2 right-3 exl:right-[1vw] h-6 xxl:h-5 xl:h-4" alt="Поиск">
           </div>
           <div class="flex">
-            <Link :href="route('chats')">
-            <div class="header__chat cursor-pointer flex items-center justify-center h-[60px] lg:h-12 xxl:h-12 xl:h-10 px-8 xxl:px-6 xl:px-5 lg:px-4">
-              <div class="relative">
-                  <img src="../../assets/svg/chat_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="Чат">
-                <div  v-if="isChat === true" class="absolute flex items-center justify-center -top-[30%] -right-[50%] rounded-full bg-[#E84680] h-3.5 xxl:h-3 xl:h-2.5 lg:h-3.5 w-3.5 xxl:w-3 xl:w-2.5 lg:w-3.5">
-                  <span class="text-white text-[12px] xxl:text-[10px] xl:text-[8px]">{{ chats }}</span>
+            <Link class="flex-shrink-0" :href="route('chats')">
+              <div class="header__chat cursor-pointer flex items-center justify-center h-[60px] lg:h-12 xxl:h-12 xl:h-10 px-8 xxl:px-6 xl:px-5 lg:px-4 sm:px-3.5">
+                <div class="relative">
+                    <img src="../../assets/svg/chat_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="Чат">
+                  <div  v-if="isChat === true" class="absolute flex items-center justify-center -top-[30%] -right-[50%] rounded-full bg-[#E84680] h-3.5 xxl:h-3 xl:h-2.5 lg:h-3.5 w-3.5 xxl:w-3 xl:w-2.5 lg:w-3.5">
+                    <span class="text-white text-[12px] xxl:text-[10px] xl:text-[8px]">{{ chats }}</span>
+                  </div>
                 </div>
               </div>
-            </div>
             </Link>
             <change-language @selectLanguage="selectLanguage" :selectLang="selectLang" />
             <div class="lg:hidden relative flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
@@ -110,25 +111,34 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
   <!-- Меню Застройщик-->
 <!--  v-if="user.role === 1" -->
   <header v-if="user !== null && user.role === 1 || user !== null && user.role === 2 || user !== null && user.role === 3" class="relative bg-[#6435A5] leading-[100%]">
-    <div class="_container h-[60px] xxl:h-12 xl:h-10">
+
+    <app-burger-dev
+      :user="user"
+      :language="language"
+      :class="{'left__0': openBurgerDev }"
+      @logout="logout"
+      @target-with-client="targetWithClient"
+    />
+
+    <div class="_container h-[60px] xxl:h-12 xl:h-10 lg:h-12 sm:px-1">
       <div class="flex items-center justify-between h-full ">
         <div class="flex gap-20 xxl:gap-16 xl:gap-12 lg:gap-2 items-baseline lg:items-center">
-          <div class="hidden lg:flex relative flex-col justify-evenly py-0.5 items-center cursor-pointer h-6 w-6 rounded-[5px] bg-[#6435A5]">
+          <div @click="openBurgerDev = !openBurgerDev" class="hidden lg:flex relative flex-col justify-evenly py-0.5 items-center cursor-pointer h-6 w-6 rounded-[5px] bg-[#6435A5]">
             <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
             <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
             <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
           </div>
           <Link href="/profile/houses" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
-            <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4" alt="Логотип">
+            <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4 sm:h-4" alt="Логотип">
           </Link>
-          <div class="text-white text-[16px] xxl:text-[13px] xl:text-[11px] flex gap-20 xxl:gap-16 xl:gap-12 x:gap-10">
+          <div class="lg:hidden text-white text-[16px] xxl:text-[13px] xl:text-[11px] flex gap-20 xxl:gap-16 xl:gap-12 x:gap-10">
             <Link href="/profile/houses" :class="{ 'opacity-60': $page.url !== '/profile/houses' }">{{ language.menu_zastr[0] }}</Link>
             <Link href="/profile/news" :class="{ 'opacity-60': $page.url !== '/profile/news' }">{{ language.menu_zastr[1] }}</Link>
           </div>
         </div>
         <div class="flex items-center gap-7 xxl:gap-5 text-[16px] xxl:text-[13px] xl:text-[11px]">
           <div class="flex">
-            <Link :href="route('chats')" class="cursor-pointer flex items-center justify-center h-[60px] xxl:h-12 xl:h-10 px-8 xxl:px-6 xl:px-5">
+            <Link :href="route('chats')" class="cursor-pointer flex-shrink-0 flex items-center justify-center h-[60px] xxl:h-12 xl:h-10 lg:h-12 px-8 xxl:px-6 xl:px-5 lg:px-3.5">
               <div class="relative">
                 <img src="../../assets/svg/chat_icon.svg" class="h-6 xxl:h-5 xl:h-4" alt="Чат">
                 <div v-if="isChat === true" class="absolute flex items-center justify-center -top-[30%] -right-[50%] rounded-full bg-[#E84680] h-3.5 xxl:h-3 xl:h-2.5 w-3.5 xxl:w-3 xl:w-2.5">
@@ -137,7 +147,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
               </div>
             </Link>
             <change-language @selectLanguage="selectLanguage" :selectLang="selectLang" />
-            <div class="relative flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
+            <div class="lg:hidden relative flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
               <button @click="openProfile" class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
                 <span class="text-white text-lg xxl:text-sm xl:text-xs leading-none">{{ user.first_name === 'null' ? '-' : user.first_name }} {{ user.last_name === 'null' ? '-' : user.last_name }}</span>
                 <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелка вниз">
@@ -160,6 +170,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
 
 <script>
 import AppBurgerAgent from "@/Layouts/AppBurgerAgent.vue"
+import AppBurgerDev from "@/Layouts/AppBurgerDev.vue"
 import { useForm } from '@inertiajs/inertia-vue3'
 
 export default {
@@ -178,6 +189,7 @@ export default {
       loginOpen: false,
       openProfileMenu: false,
       openBurgerAgent: false,
+      openBurgerDev: false,
       overlaySelect: false,
       withClient: false,
       search: null,
@@ -295,7 +307,8 @@ export default {
     }
   },
   components: {
-    AppBurgerAgent
+    AppBurgerAgent,
+    AppBurgerDev,
   }
 }
 </script>
