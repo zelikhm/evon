@@ -39,7 +39,7 @@ class NewsController extends Controller
    */
 
   public function getAllNews() {
-    return HouseNewsModel::orderBy('ASC', 'created_at')->get();
+    return HouseNewsModel::orderBy('created_at', 'ASC')->get();
   }
 
   /**
