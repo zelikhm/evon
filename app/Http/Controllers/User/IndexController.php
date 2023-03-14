@@ -187,10 +187,10 @@ class IndexController extends Controller
                   Adınıza <b>evon-tr.com</b>'a kayıt başvurusu tarafımıza ulaşmıştır.
                   <br>Web sitesindeki verilerin sadece emlakçılar ve inşaat şirketleri için olduğunu lütfen unutmayın.
                   <br>Erişim sağlamak için, aşağıdakilerden birini evon.information@gmail.com adresine göndererek işinizi onaylama prosedüründen geçmelisiniz:
-
-                  ➢ Faaliyetlerinizi gösteren sosyal medya/web sitesi profillerinize bir bağlantı gönderiniz.<br>
-                  ➢ Faaliyetlerinizi teyit edebilecek iki Emlak Danışmanının ve / veya yöneticinizin iletişim bilgilerini paylaşınız.<br>
-                  ➢ Sahada faaliyet gösterebilmek için bir lisans gönderiniz.<br>
+                  <br>
+                  - Faaliyetlerinizi gösteren sosyal medya/web sitesi profillerinize bir bağlantı gönderiniz.<br>
+                  - Faaliyetlerinizi teyit edebilecek iki Emlak Danışmanının ve / veya yöneticinizin iletişim bilgilerini paylaşınız.<br>
+                  - Sahada faaliyet gösterebilmek için bir lisans gönderiniz.<br>
                   <br>
                   Lütfen bilgilerinizi <b>evon.information@gmail.com</b> adresine gönderin.<br>
                   Doğrulama aşamasından sonra platformumuza erişiminizi sağlayacağız ve e-posta ile sizi bilgilendireceğiz.<br>
