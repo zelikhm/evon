@@ -7,12 +7,14 @@
     phone: '',
     first_name: '',
     last_name: '',
+    language: 0,
     type: 'Агентство недвижимости (владелец/директор)',
     remember: false,
   });
 
-
   const submit = () => {
+    form.language = document.getElementById("language").value;
+
     form.post(route('mail'), {
       onSuccess: () => {
         form.success = true;
@@ -43,6 +45,7 @@
         </button>
       </div>
       <form v-if="!form.success" @submit.prevent="submit">
+        <input id="language" hidden type="number" :value="selectLanguage">
       <div class="flex flex-col p-3.5 xxl:pb-2 xl:pb-2 mb-6 xxl:mb-4 xl:mb-3 border border-solid border-[#E5DFEE] rounded-[6px]">
         <label for="name" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]" :class="{'error': form.errors.first_name}">{{ language.reg[1] }} {{ form.errors.first_name }}</label>
         <input
@@ -106,6 +109,7 @@
 
 <script>
 import {useForm} from "@inertiajs/inertia-vue3";
+import {onRenderTriggered} from "@vue/runtime-core";
 
 export default {
   props: {
@@ -124,6 +128,7 @@ export default {
         { type: newItem.reg[9] },
       ];
       this.selectType = newItem.reg[6];
+      // this.setup();
     }
   },
   data() {
@@ -149,6 +154,13 @@ export default {
     'open-modal-realtor',
     'open-modal-developer',
   ],
+  setup() {
+    this.form.language = this.selectLanguage;
+
+    onMounted(() => {
+      console.log('Компонент примонтирован!')
+    })
+  },
   methods: {
     // sendReg() {
     //   const form = useForm({
