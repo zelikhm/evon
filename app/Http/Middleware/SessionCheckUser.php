@@ -22,7 +22,9 @@ class SessionCheckUser
     $hasSession = SessionModel::where('user_id', Auth::id())->where('session', $request->cookie('session_key'))->first();
 
     if ($hasSession === null) {
-//      Auth::logout();
+      if(Auth::user()->role === 0) {
+        Auth::logout();
+      }
       return \redirect('/');
     }
 
