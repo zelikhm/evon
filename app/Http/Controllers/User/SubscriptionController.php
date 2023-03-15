@@ -62,7 +62,7 @@ class SubscriptionController extends Controller
 
         }
       } else {
-        return false;
+        return response()->json(false, 200);
       }
     }
 }
