@@ -14,7 +14,6 @@ class SubscriptionController extends Controller
 {
     public function payment(Request $request) {
 
-      info(1);
       info($request->callback_id);
 
       $payment = PaymentModel::where('id', $request->callback_id)
@@ -24,7 +23,7 @@ class SubscriptionController extends Controller
       PaymentModel::where('id', $request->callback_id)
         ->update(['status' => 1]);
 
-      if($request->status === 'success') {
+      if($request->status === 'success' && $payment !== null) {
 
         $type = TarifModel::where('id', $payment->type)->first();
 
