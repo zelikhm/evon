@@ -226,15 +226,18 @@ export default {
       let date = new Date();
       let finish = new Date(d);
 
-      if(finish - date > 0) {
-        let day = Math.floor((finish - date) / (1000 * 60 * 60 * 24) % 30)
 
-        if(day <= 1) {
-          return day + ' ' + this.language.default[2];
-        } else if (day > 1 && day < 5) {
-          return day + ' ' + this.language.default[4];
+
+      if(finish - date > 0) {
+        var timeDiff = Math.abs(finish.getTime() - date.getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+        if(diffDays <= 1) {
+          return diffDays + ' ' + this.language.default[2];
+        } else if (diffDays > 1 && diffDays < 5) {
+          return diffDays + ' ' + this.language.default[4];
         } else {
-          return day + ' ' + this.language.default[3];
+          return diffDays + ' ' + this.language.default[3];
         }
       }
 
