@@ -81,6 +81,12 @@ class User extends Authenticatable
 
   }
 
+  public function scopeLatest($query)
+  {
+    dd($query);
+    return $query->orderBy('created_at', 'desc');
+  }
+
   public function subscriptionInfo() {
     return $this->belongsTo(SubscriptionModel::class, 'id', 'user_id');
   }

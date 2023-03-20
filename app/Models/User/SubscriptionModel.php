@@ -19,4 +19,15 @@ class SubscriptionModel extends Model
     public function user() {
       return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function company() {
+      return $this->hasOneThrough(
+        CompanyModel::class,
+        User::class,
+        'id',
+        'id',
+        'user_id',
+        'company_id'
+      );
+    }
 }

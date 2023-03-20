@@ -239,6 +239,8 @@ export default {
         } else {
           return diffDays + ' ' + this.language.default[3];
         }
+      } else {
+        return '0' + this.language.default[2];
       }
 
     },

@@ -39,7 +39,7 @@
             <div class="flex sm:flex-col justify-between items-center p-5 xxl:p-4 xl:p-3">
               <div class="flex flex-col ml-2 xl:ml-1.5 sm:mb-3">
                 <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] leading-none mb-3">{{ language.prof_zastr[5] }}</span>
-                <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs leading-none" v-if="user.subscription">Активна до: <span class="text-[#E84680]">{{ new Date(Date.parse(user.subscription_info.finished_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span></span>
+                <span class="text-[#8A8996] text-base xxl:text-sm xl:text-xs leading-none" v-if="user.subscription_info">Активна до: <span class="text-[#E84680]">{{getDate(user.subscription_info.finished_at)}}</span></span>
               </div>
 <!--              <button @click="openPayProfile = !openPayProfile"  class="bg-[#6435A5] h-fit rounded-[6px] px-12 xxl:px-10 xl:px-8 py-3.5 xxl:py-2.5 xl:py-2">-->
 <!--                <span class="text-white text-base xxl:text-sm xl:text-xs leading-none">{{ language.prof_zastr[6] }}</span>-->
@@ -80,6 +80,29 @@ export default {
     }
   },
   methods: {
+    getDate(d) {
+
+      let date = new Date();
+      let finish = new Date(d);
+
+
+
+      if(finish - date > 0) {
+        var timeDiff = Math.abs(finish.getTime() - date.getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+        if(diffDays <= 1) {
+          return diffDays + ' ' + this.language.default[2];
+        } else if (diffDays > 1 && diffDays < 5) {
+          return diffDays + ' ' + this.language.default[4];
+        } else {
+          return diffDays + ' ' + this.language.default[3];
+        }
+      } else {
+        return '0' + this.language.default[2];
+      }
+
+    },
     editProfile(item) {
       this.activeInput[item] = !this.activeInput[item]
       if (!this.activeInput[item]) {

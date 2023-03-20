@@ -8,6 +8,7 @@ use AdminForm;
 use AdminFormElement;
 use AdminNavigation;
 use AdminColumnEditable;
+use AdminColumnFilter;
 use App\Models\LandingModel;
 use App\Models\User;
 use App\Models\User\CompanyModel;
@@ -70,8 +71,10 @@ class Subscription extends Section implements Initializable
       AdminColumn::text('id', '#')
         ->setWidth('50px')
         ->setHtmlAttribute('class', 'text-center'),
-      AdminColumn::relatedLink('user.first_name', 'Пользователь')->setWidth('350px'),
-      AdminColumnEditable::checkbox('active', true, false)->setLabel('Активная'),
+      AdminColumn::relatedLink('user.email', 'email/login')->setWidth('350px')->setSearchCallback(function ($column, $query, $search) {
+        return $query->where('user_id', $search);
+      }),
+      AdminColumn::relatedLink('company.title', 'Название компании')->setWidth('350px'),
       AdminColumn::datetime('finished_at', 'Дата окончания')->setFormat('d.m.Y')->setWidth('150px'),
     ];
 
@@ -81,9 +84,26 @@ class Subscription extends Section implements Initializable
       ->setDisplaySearch(true, 'поиск')
       ->setHtmlAttribute('class', 'table-primary table-hover');
 
+    $display->with('company', 'user');
+
+    $display->setColumnFilters([
+      null, // Не ищем по первому столбцу
+
+      // Поиск текста
+      AdminColumnFilter::text()->setPlaceholder('email'),
+
+      AdminColumnFilter::select(new CompanyModel, 'company_id')->setDisplay('title')->setPlaceholder('Выберите компанию')->setColumnName('company.id'),
+
+      AdminColumnFilter::range()->setColumnName('finished_at')->setFrom(
+        AdminColumnFilter::date()->setColumnName('finished_at')->setPlaceholder('From Date')->setFormat('Y-m-d')
+      )->setTo(
+        AdminColumnFilter::date()->setColumnName('finished_at')->setPlaceholder('To Date')->setFormat('Y-m-d')
+      ),
+    ]);
+
     $display->setApply(function (Builder $query) {
       $query->OrderBy('id', 'asc');
-    })->setNewEntryButtonText('Добавить тариф');
+    })->setNewEntryButtonText('Добавить подписку');
 
     return $display;
   }
@@ -102,7 +122,6 @@ class Subscription extends Section implements Initializable
       AdminFormElement::select('user_id', 'Пользователь')
         ->setModelForOptions(User::class, 'email')
         ->setUsageKey('id'),
-      AdminFormElement::checkbox('active', 'Активная'),
       AdminFormElement::datetime('finished_at', 'Время окончания'),
 
     ]);
