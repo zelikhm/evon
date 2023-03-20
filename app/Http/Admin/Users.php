@@ -100,7 +100,7 @@ class Users extends Section implements Initializable
         $subscription = User\SubscriptionModel::where('user_id', $model->id)->first();
 
         if ($subscription !== null) {
-          $link = 'http://evon/admin/subscription_models/' . $subscription->id . '/edit';
+          $link = '/admin/subscription_models/' . $subscription->id . '/edit';
           return '<a href='. $link .' style="color: green">Оформлена</a>';
         } else {
           return '<b style="color: red">Не оформлена</b>';
