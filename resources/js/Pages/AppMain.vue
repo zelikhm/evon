@@ -24,6 +24,8 @@
       :selectLanguage="selectLanguage"
   />
   <main>
+
+     <!--Evon - универсальная площадка -->
     <div class="_container">
       <div class="main__title-block mt-[30px] xxl:mt-6 mb-[100px] xxl:mb-20 rounded-[6px]">
         <div class="_container--inter">
@@ -45,7 +47,40 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> 
+    </div>
+
+
+     <!--Кол-во проектов,Кол-во квартир,Кол-во РИелторов -->
+     <div class="main__title-block mb-[50px] count-blocks">
+        <div class="_container">
+          <div class="_container--inter">
+            <div class="py-[60px] xl:py-20">
+              <div class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5">
+                <div class="flex flex-col gap-3 justify-between items-start sm:items-center bg-white h-[200px] exl:h-fit exl:min-h-[5vw] rounded-xl p-7 xxl:p-5 xl:p-4">
+                  <h4> {{ count_house }}</h4> 
+                  <!-- <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Кол-во проектов</span> -->
+                  <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Объектов на платформе</span> 
+                  
+                </div>
+                <div class="flex flex-col gap-3 justify-between items-start sm:items-center bg-white h-[200px] exl:h-fit exl:min-h-[5vw] rounded-xl p-7 xxl:p-5 xl:p-4">
+              
+                  <h4>{{ count_flats }}</h4> 
+                  <!-- <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Кол-во квартир</span> -->
+                  <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Актуальных квартир</span>
+                </div>
+                <div class="flex flex-col gap-3 justify-between items-start sm:items-center bg-white h-[200px] exl:h-fit exl:min-h-[5vw] rounded-xl p-7 xxl:p-5 xl:p-4">
+                  <h4>{{ count_people }}</h4> 
+                  <!-- <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Кол-во риелторов </span> -->
+                  <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Агентов пользуются  нашим сервисом</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+     </div>
+    <!--Для риэлтора -->
+    <div class="_container"> 
       <div class="_container--inter">
         <h3 class="text-lg xxl:text-base xl:text-sm lg:text-[17px] font-semibold pb-8 xl:pb-5">{{ language.main[4] }}</h3>
         <div class="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 xl:gap-3 mb-[100px] xxl:mb-10">
@@ -84,6 +119,7 @@
         </div>
       </div>
     </div>
+
     <!--Для застройщика-->
     <div class="main__title-block">
       <div class="_container">
@@ -131,7 +167,7 @@ import {usePage} from "@inertiajs/inertia-vue3";
 import AppModalRegister from "@/Layouts/modal/AppModalRegister.vue";
 
 export default {
-  props:['error', 'userInfo'],
+  props:['error', 'userInfo','count_flats' ,'count_house','count_people'],
   provide() {
     return {
       error: this.error,
@@ -213,5 +249,18 @@ export default {
 </script>
 
 <style scoped>
-
+.count-blocks h4{
+  font-weight: 600;
+  font-size: 25px;
+  text-align: center;
+  display: block; 
+  width: 100%;
+}
+.count-blocks span{
+  text-align: center;
+  width: 100%;
+  display: block;
+  font-weight: 400;
+  font-size: 14px;
+}
 </style>
