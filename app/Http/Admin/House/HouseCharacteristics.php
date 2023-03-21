@@ -9,6 +9,7 @@ use AdminFormElement;
 use AdminNavigation;
 use App\Http\Admin\House\Info\Structure;
 use App\Http\Admin\House\Info\Type;
+use App\Models\Builder\HouseCharacteristicsModel;
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\Info\StructureModel;
 use App\Models\Builder\Info\TypesModel;

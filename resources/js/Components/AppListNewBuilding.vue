@@ -1129,10 +1129,10 @@
 
         if (this.filters.badge.news) {
           object.forEach(item => {
-            let date = new Date();
             let house_create = new Date(item.created_at);
+            let now = new Date();
 
-            if (date - house_create < 2592e+9) {
+            if (now - house_create < 2592000000) {
               object1.push(item);
             }
 
