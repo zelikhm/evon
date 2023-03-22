@@ -83,6 +83,7 @@ Route::prefix('favorite')->group(function () {
 
 Route::prefix('user')->group(function () {
   Route::post('/login', ['App\Http\Controllers\Auth\AuthenticatedSessionController', 'loginApi']);
+  Route::post('/loginSms', ['App\Http\Controllers\Auth\AuthenticatedSessionController', 'loginApiSms']);
   Route::post('/sendCode', ['App\Http\Controllers\User\AuthController', 'sendCode']);
   //
   Route::post('/phone', ['App\Http\Controllers\User\AuthController', 'checkUserPhone']);
@@ -102,6 +103,8 @@ Route::prefix('chat')->group(function () {
   Route::post('/reloadChats', ['App\Http\Controllers\Messages\MessageController', 'reloadChats']);
   Route::post('/reloadChat', ['App\Http\Controllers\Messages\MessageController', 'reloadChat']);
   Route::post('/chatOpen', ['App\Http\Controllers\Messages\MessageController', 'chatOpen']);
+  Route::post('/getChats', ['App\Http\Controllers\User\ChatController', 'getChatsApi']);
+  Route::post('/getChat', ['App\Http\Controllers\User\ChatController', 'getChatApi']);
 });
 
 Route::prefix('/payment')->group(function () {
@@ -116,6 +119,7 @@ Route::prefix('news')->group(function () {
   Route::post('visible', ['App\Http\Controllers\House\NewsController', 'visible']);
   //
   Route::get('getAllNews',['App\Http\Controllers\House\NewsController', 'getAllNews']);
+  Route::get('getAllNewsAdmin',['App\Http\Controllers\House\NewsController', 'getAllNewsAdmin']);
   Route::post('getAllNewsForUser',['App\Http\Controllers\House\NewsController', 'getAllNewsForUser']);
   Route::post('getNew',['App\Http\Controllers\House\NewsController', 'getNew']);
 });

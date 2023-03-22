@@ -107,17 +107,6 @@ class AuthController extends Controller
 
   }
 
-  public function test(Request $request) {
-//
-//    $response = Http::withBasicAuth('Evon903', 'Evon904')->get('http://api.smsfeedback.ru/messages/v2/status/?id=6252550514');
-//    dd($response);
-//
-
-    dd($this->send("api.smsfeedback.ru", 443, "Evon903", "Evon904",
-      "79086761887", "От этого апи пахнет гавной", "TEST-SMS"));
-
-  }
-
   public function send($host, $port, $login, $password, $phone, $text, $sender = false, $wapurl = false )
   {
     $fp = fsockopen('ssl://'.$host, $port, $errno, $errstr);

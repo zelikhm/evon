@@ -16,6 +16,12 @@ class ChatController extends Controller
 {
   use MainInfo;
 
+  /**
+   * index method for load or create chat
+   * @param Request $request
+   * @return \Illuminate\Http\RedirectResponse
+   */
+
   public function index(Request $request)
   {
 
@@ -43,6 +49,12 @@ class ChatController extends Controller
 
   }
 
+  /**
+   * check chat
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
   public function checkChatApi(Request $request)
   {
 
@@ -52,6 +64,11 @@ class ChatController extends Controller
     return response()->json($chats, 200);
 
   }
+
+  /**
+   * get chats
+   * @return \Inertia\Response|mixed
+   */
 
   public function getChats()
   {
@@ -73,6 +90,38 @@ class ChatController extends Controller
     ]);
 
   }
+
+  /**
+   * get chats for api
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function getChatsApi(Request $request) {
+
+    if($this->checkToken($request->token)) {
+      $chats = $this->getChatsInfo($request->user_id);
+
+      foreach ($chats as $item) {
+
+        $item->message = MessageModel::where('chat_id', $item->id)
+          ->orderBy('created_at', 'DESC')->first();
+
+      }
+
+      return response()->json($chats, 200);
+    } else {
+      return response()->json('not auth', 401);
+    }
+
+
+  }
+
+  /**
+   * get chat
+   * @param $id
+   * @return \Illuminate\Http\RedirectResponse|\Inertia\Response
+   */
 
   public function getChat($id)
   {
@@ -102,6 +151,37 @@ class ChatController extends Controller
       'chat' => $chat,
       'notification' => $this->getNotification(),
     ]);
+
+  }
+
+  /**
+   * get chat for api
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function getChatApi(Request $request) {
+
+    if($this->checkToken($request->token)) {
+      $chat = ChatModel::where('id', $request->chat_id)
+        ->with(['from', 'to'])
+        ->firstOrFail();
+
+      $chat->message = $this->loadMessages($chat);
+
+//    $chats = $this->getChatsInfo($request->user_id);
+//
+//    foreach ($chats as $item) {
+//
+//      $item->message = MessageModel::where('chat_id', $item->id)
+//        ->orderBy('created_at', 'DESC')->first();
+//
+//    }
+
+      return response()->json($chat, 200);
+    } else {
+      return response()->json('not auth', 401);
+    }
 
   }
 
@@ -146,6 +226,12 @@ class ChatController extends Controller
 
     return $chats;
   }
+
+  /**
+   * load message for chats
+   * @param $chat
+   * @return array
+   */
 
   public function loadMessages($chat)
   {

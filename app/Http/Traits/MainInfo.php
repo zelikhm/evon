@@ -30,6 +30,22 @@ trait MainInfo
 {
 
   /**
+   * check token
+   * @param $token
+   * @return bool
+   */
+
+  protected function checkToken($token) {
+
+    if((User::where('token', $token)->first()) !== null) {
+      return true;
+    } else {
+      return false;
+    }
+
+  }
+
+  /**
    * get houses for slider in the page house
    * @param $house
    * @return mixed

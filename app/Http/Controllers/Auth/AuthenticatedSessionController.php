@@ -138,18 +138,13 @@ class AuthenticatedSessionController extends Controller
 
   public function loginApi(Request $request) {
 
-//    $request->validate([
-//      'email' => ['required', 'max:50', 'exists:App\Models\User,email'],
-//      'password' => ['required'],
-//    ]);
+    $request->validate([
+      'email' => ['required', 'max:50', 'exists:App\Models\User,email'],
+      'password' => ['required'],
+    ]);
 
     $user = User::where('email', $request->email)
       ->first();
-
-    if($user === null) {
-      $user = User::where('phone', $request->phone)
-        ->first();
-    }
 
     if($user !== null && Hash::check($request->password, $user->password)) {
 
@@ -167,6 +162,30 @@ class AuthenticatedSessionController extends Controller
         return response()->json('Не правильный пароль', 401);
       }
 
+    }
+
+  }
+
+  /**
+   * login rieltor with help api
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function loginApiSms(Request $request) {
+
+    $user = User::where('phone', $request->phone)
+      ->where('code', $request->code)
+      ->first();
+
+    if($user !== null) {
+
+      $token = $this->checkSession($user->id);
+
+      return response()->json($token, 200);
+
+    } else {
+      return response()->json(false, 401);
     }
 
   }

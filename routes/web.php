@@ -60,7 +60,6 @@ Route::get('/404', function () {
   return Inertia::render('AppError');
 });
 
-Route::get('testSMS', ['App\Http\Controllers\User\AuthController', 'test']);
 Route::post('mail', ['App\Http\Controllers\User\IndexController', 'sendRegister'])->name('mail');
 
 Route::get('/privacy', ['App\Http\Controllers\PrivacyController', 'index']);

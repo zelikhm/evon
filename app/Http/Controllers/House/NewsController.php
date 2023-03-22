@@ -8,6 +8,7 @@ use App\Http\Traits\AuthCheck;
 use App\Http\Traits\MainInfo;
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\HouseNewsModel;
+use App\Models\News\AdminNewsModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -42,6 +43,17 @@ class NewsController extends Controller
     return HouseNewsModel::orderBy('created_at', 'ASC')->with([
       'house'
     ])->get();
+  }
+
+  /**
+   * get all news for admin
+   * @return \Illuminate\Database\Eloquent\Collection
+   */
+
+  public function getAllNewsAdmin() {
+
+    return AdminNewsModel::all();
+
   }
 
   /**
