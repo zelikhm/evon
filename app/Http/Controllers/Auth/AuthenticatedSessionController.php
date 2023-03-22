@@ -174,7 +174,7 @@ class AuthenticatedSessionController extends Controller
 
   public function loginApiSms(Request $request) {
 
-    $user = User::where('phone', $request->phone)
+    $user = User::where('email', $request->email)
       ->where('code', $request->code)
       ->first();
 
