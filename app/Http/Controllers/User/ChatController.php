@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\AuthCheck;
 use App\Http\Traits\MainInfo;
 use App\Models\Messages\ChatModel;
 use App\Models\Messages\MessageModel;
@@ -14,7 +15,7 @@ use Inertia\Inertia;
 
 class ChatController extends Controller
 {
-  use MainInfo;
+  use MainInfo, AuthCheck;
 
   /**
    * index method for load or create chat
