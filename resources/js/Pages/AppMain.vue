@@ -57,19 +57,19 @@
           <div class="_container--inter">
             <div class="py-[60px] xl:py-20">
               <div class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5">
-                <div class="flex flex-col gap-3 justify-between items-start sm:items-center bg-white h-[200px] exl:h-fit exl:min-h-[5vw] rounded-xl p-7 xxl:p-5 xl:p-4">
+                <div class="block-count flex flex-col gap-3 justify-between items-start sm:items-center bg-white exl:h-fit  rounded-xl p-7 xxl:p-5 xl:p-4">
                   <h4> {{ count_house }}</h4> 
                   <!-- <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Кол-во проектов</span> -->
                   <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Объектов на платформе</span> 
                   
                 </div>
-                <div class="flex flex-col gap-3 justify-between items-start sm:items-center bg-white h-[200px] exl:h-fit exl:min-h-[5vw] rounded-xl p-7 xxl:p-5 xl:p-4">
+                <div class="block-count flex flex-col gap-3 justify-between items-start sm:items-center bg-white  exl:h-fit  rounded-xl p-7 xxl:p-5 xl:p-4">
               
                   <h4>{{ count_flats }}</h4> 
                   <!-- <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Кол-во квартир</span> -->
                   <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Актуальных квартир</span>
                 </div>
-                <div class="flex flex-col gap-3 justify-between items-start sm:items-center bg-white h-[200px] exl:h-fit exl:min-h-[5vw] rounded-xl p-7 xxl:p-5 xl:p-4">
+                <div class="block-count flex flex-col gap-3 justify-between items-start sm:items-center bg-white  exl:h-fit  rounded-xl p-7 xxl:p-5 xl:p-4">
                   <h4>{{ count_people }}</h4> 
                   <!-- <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Кол-во риелторов </span> -->
                   <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Агентов пользуются  нашим сервисом</span>
@@ -262,5 +262,8 @@ export default {
   display: block;
   font-weight: 400;
   font-size: 14px;
+}
+.block-count{
+  height: 100%;
 }
 </style>
