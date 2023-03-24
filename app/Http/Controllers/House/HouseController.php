@@ -24,6 +24,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Intervention\Image\Facades\Image;
 use function League\Flysystem\type;
 use function Symfony\Component\Routing\Loader\Configurator\collection;
 
@@ -516,7 +517,7 @@ class HouseController extends Controller
       if ($request->image_up) {
         $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
         $request->image_up->move(public_path('/storage/buffer'), $imageUp);
-        $this->waterMark($imageUp, 'storage/flat/');
+        $this->waterMark($imageUp, 'storage/flat/', false);
         $imageUp = '/storage/flat/' . $imageUp;
       } else {
         $flat = FlatModel::where('id', $request->flat_id)->first();
@@ -526,7 +527,7 @@ class HouseController extends Controller
       if ($request->image_down) {
         $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
         $request->image_down->move(public_path('/storage/buffer'), $imageDown);
-        $this->waterMark($imageDown, 'storage/flat/');
+        $this->waterMark($imageDown, 'storage/flat/', false);
         $imageDown = '/storage/flat/' . $imageDown;
       } else {
         $flat = FlatModel::where('id', $request->flat_id)->first();
@@ -586,7 +587,7 @@ class HouseController extends Controller
       } else if ($request->image_up) {
         $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
         $request->image_up->move(public_path('/storage/buffer'), $imageUp);
-        $this->waterMark($imageUp, 'storage/flat/');
+        $this->waterMark($imageUp, 'storage/flat/', false);
         $imageUp = '/storage/flat/' . $imageUp;
       } else {
         $flat = FlatModel::where('id', $request->flat_id)->first();
@@ -600,7 +601,7 @@ class HouseController extends Controller
       } else if ($request->image_down) {
         $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
         $request->image_down->move(public_path('/storage/buffer'), $imageDown);
-        $this->waterMark($imageDown, 'storage/flat/');
+        $this->waterMark($imageDown, 'storage/flat/', false);
         $imageDown = '/storage/flat/' . $imageDown;
       } else {
         $flat = FlatModel::where('id', $request->flat_id)->first();
@@ -936,11 +937,11 @@ class HouseController extends Controller
 
       $imageName = time() . '.' . $request->file('image')->getClientOriginalName();
       $request->file('image')->move(public_path('/storage/buffer'), $imageName);
-      $this->waterMark($imageName, 'storage/images/');
+      $this->waterMark($imageName, 'storage/images/', true);
 
       $image = HouseImagesModel::create([
         'house_id' => $request->house_id,
-        'name' => '/storage/images/' . $imageName,
+        'name' => "/storage/images/" . $imageName,
         'category' => $request->category_id,
         'created_at' => Carbon::now()->addHour(3),
         'updated_at' => Carbon::now()->addHour(3),
@@ -958,41 +959,82 @@ class HouseController extends Controller
 
   /**
    * added watermark on the photo
-   * @param $image
+   * @param $image_buffer
    * @param $path
    */
 
-  public function waterMark($image, $path)
+  public function waterMark($image_buffer, $path, $blur)
   {
+//    $this->compress_image('storage/buffer/' . $image, 'storage/buffer/' . $image, 75);
+//
+//    $image_info = getimagesize('storage/buffer/' . $image);
+//    $watermark_info = getimagesize('images/watermark.png');
+//
+//    // определяем MIME-тип изображения, для выбора соответствующей функции
+//    $format = strtolower(substr($image_info['mime'],
+//      strpos($image_info['mime'], '/') + 1));
+//
+//    // определяем названия функция для создания и сохранения картинки
+//    $im_cr_func = "imagecreatefrom" . $format;
+//    $im_save_func = "image" . $format;
+//
+//    // загружаем изображение в php
+//    $img = $im_cr_func('storage/buffer/' . $image);
+//
+//    // загружаем в php наш водяной знак
+//    $watermark = imagecreatefrompng('images/watermark.png');
+//
+//    // определяем координаты левого верхнего угла водяного знака
+//    $pos_x = ($image_info[0] - $watermark_info[0]) / 2;
+//    $pos_y = ($image_info[1] - $watermark_info[1]) / 2;
+//
+//    $image_p = imagecreatetruecolor(800, 420);
+//    $image4 = imagecreatefromjpeg('storage/buffer/' . $image);
+//    imagecopyresampled($image_p, $image4, 0, 0, 0, 0, 800, 420, 800, 420);
 
-    $image_info = getimagesize('storage/buffer/' . $image);
-    $watermark_info = getimagesize('images/watermark.png');
+//    // помещаем водяной знак на изображение
+//    imagecopy($img, $watermark, $pos_x, $pos_y, 0, 0, $watermark_info[0], $watermark_info[1]);
+//
+//    // сохраняем изображение с уникальным именем
+//    $im_save_func($img, $path . $image);
 
-    // определяем MIME-тип изображения, для выбора соответствующей функции
-    $format = strtolower(substr($image_info['mime'],
-      strpos($image_info['mime'], '/') + 1));
+    $image = Image::make('storage/buffer/' . $image_buffer);
+    $image->insert('images/watermark.png');
+    $image->resize(600, 420);
 
-    // определяем названия функция для создания и сохранения картинки
-    $im_cr_func = "imagecreatefrom" . $format;
-    $im_save_func = "image" . $format;
+    if($blur) {
+      $image1 = Image::make('storage/buffer/' . $image_buffer);
+      $image1->resize(800, 420);
+      $image1->blur(25);
+      $image1->insert($image, 'center');
 
-    // загружаем изображение в php
-    $img = $im_cr_func('storage/buffer/' . $image);
+      $image1->save($path . $image_buffer);
+    } else {
+      $image->save($path . $image_buffer);
+    }
 
-    // загружаем в php наш водяной знак
-    $watermark = imagecreatefrompng('images/watermark.png');
 
-    // определяем координаты левого верхнего угла водяного знака
-    $pos_x = ($image_info[0] - $watermark_info[0]) / 2;
-    $pos_y = ($image_info[1] - $watermark_info[1]) / 2;
 
-    // помещаем водяной знак на изображение
-    imagecopy($img, $watermark, $pos_x, $pos_y, 0, 0, $watermark_info[0],
-      $watermark_info[1]);
 
-    // сохраняем изображение с уникальным именем
-    $im_save_func($img, $path . $image);
-    unlink('storage/buffer/'. $image);
+    unlink('storage/buffer/'. $image_buffer);
+  }
+
+  function compress_image($source_url, $destination_url, $quality) {
+
+    $info = getimagesize($source_url);
+
+    if ($info['mime'] == 'image/jpeg')
+      $image = imagecreatefromjpeg($source_url);
+
+    elseif ($info['mime'] == 'image/gif')
+      $image = imagecreatefromgif($source_url);
+
+    elseif ($info['mime'] == 'image/png')
+      $image = imagecreatefrompng($source_url);
+
+    imagejpeg($image, $destination_url, $quality);
+
+    return $destination_url;
   }
 
   /**
