@@ -841,12 +841,13 @@
         this.openDate = false
 
         if (this.selectDateId === 1) {
-          this.houses_array = this.readyHouses.sort((a, b) => b.time - a.time)
+          this.houses_array = this.readyHouses.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
         } else if (this.selectDateId === 2) {
           this.houses_array = this.readyHouses.sort((a, b) => a.minPrice - b.minPrice)
         } else if (this.selectDateId === 3) {
           this.houses_array = this.readyHouses.sort((a, b) => b.minPrice - a.minPrice)
         }
+        console.log(this.houses_array)
       },
       checkCity(id) {
 
@@ -952,7 +953,7 @@
       updateHouses() {
         this.readyHouses.forEach(house => {
 
-          house.time = Date.parse(house.created_at)
+          house.time = Date.parse(house.updated_at)
           this.readyHouses = this.readyHouses.sort((a, b) => b.time - a.time)
 
           let arr = [],

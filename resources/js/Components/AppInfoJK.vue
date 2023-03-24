@@ -588,6 +588,9 @@
 
         this.checkValidation(1)
 
+        console.log(this.selectType, this.language.rielt_1[0])
+
+        console.log(this.selectType === this.language.rielt_1[0] ? 'Новостройка' : 'Вилла');
 
         if (!this.validation.description && !this.validation.title && !this.validation.coordinates && !this.validation.count && !this.validation.floors && !this.validation.image) {
           if (this.isEdit) {
@@ -616,8 +619,6 @@
 
             this.object.city = this.selectCity
             this.object.area = this.selectRegion
-
-            console.log(this.selectRegion, this.object.area);
 
             let formData = new FormData();
 
@@ -689,8 +690,6 @@
 
             this.object.city = this.selectCity
             this.object.area = this.selectRegion
-
-            console.log(this.selectRegion);
 
             let formData = new FormData();
 

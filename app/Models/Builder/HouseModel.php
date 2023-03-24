@@ -33,9 +33,9 @@ class HouseModel extends Model
     'created'
   ];
 
-  protected $casts = [
-    'updated_at' => 'datetime: d-m-Y'
-  ];
+//  protected $casts = [
+//    'updated_at' => 'datetime:d-m-Y'
+//  ];
 
   public function user() {
     return $this->belongsTo(User::class, 'user_id', 'id');

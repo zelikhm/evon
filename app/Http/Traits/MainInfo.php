@@ -314,16 +314,17 @@ trait MainInfo
   {
     if($limit) {
       $houses = HouseModel::where('visible', 1)
+        ->orderBy('updated_at', 'DESC')
         ->where('active', 2)
         ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
         ->select('house_models.*')
         ->where('house_characteristics_models.type', $type)
         ->with(['info', 'files', 'frames', 'flats', 'user', 'news', 'images'])
-        ->orderBy('created_at', 'DESC')
         ->limit(30)
         ->get();
     } else {
       $houses = HouseModel::where('visible', 1)
+        ->orderBy('updated_at', 'DESC')
         ->where('active', 2)
         ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
         ->select('house_models.*')

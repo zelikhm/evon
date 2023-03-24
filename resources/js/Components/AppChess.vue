@@ -31,7 +31,7 @@
         <div class="flex items-center lg:flex-col gap-7 xxl:gap-5 xl:gap-4 x:gap-2">
           <div class="flex items-center gap-2 xl:gap-1.5">
             <img src="../../assets/svg/calender_purple.svg" class="w-4 xxl:w-3" alt="">
-            <span class="text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{ house.updated_at }}</span>
+            <span class="text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{ getDate(house.updated_at) }}</span>
           </div>
           <div class="chess__buttons h-9 xxl:h-8 xl:h-7 flex items-center p-1 xl:p-0.5 rounded-[3px] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px]">
             <div @click="changeChess" :class="{'chess__button--active': activeChess}" class="h-full cursor-pointer flex items-center gap-1 px-2 xl:px-1.5 rounded-[3px]">
@@ -162,6 +162,14 @@ export default {
     }
   },
   methods: {
+    getDate(date) {
+
+      const data = new Date(date);
+
+      const month = data.getMonth() + 1;
+
+      return (data.getDate() < 10 ? '0' + data.getDate() : data.getDate()) + '-' + (month < 10 ? '0' + month : month) + '-' + data.getFullYear();
+    },
     changeChess() {
       this.activeChess = true
       this.activeList = false

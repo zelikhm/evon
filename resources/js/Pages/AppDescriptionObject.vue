@@ -61,7 +61,7 @@
             <div class="border__right lg:border-0 flex items-center lg:flex-col gap-5 xxl:gap-4 xl:gap-3 p-4 xxl:p-3 xl:p-2">
               <div class="flex items-center gap-1.5 xxl:gap-1 xl:gap-0.5">
                 <img src="../../assets/svg/reload_icon.svg" class="h-4 xx:h-3.5 xl:h-3 lg:h-4" alt="reload">
-                <span class="text-sm xxl:text-xs xl:text-[10px] lg:text-[15px]">{{ house.updated_at  }}</span>
+                <span class="text-sm xxl:text-xs xl:text-[10px] lg:text-[15px]">{{ getDate(house.updated_at) }}</span>
               </div>
               <div @click="map = !map" class="button__map text-[#6435A5]  flex items-center justify-center cursor-pointer bg-[#F6F3FA] gap-2 xxl:gap-1.5 xl:gap-1 h-10 xxl:h-8 xl:h-6 lg:h-8 px-4 xxl:px-3 xl:px-2.5 rounded-[4px]">
                 <svg width="24" height="24" class="h-6 xxl:h-5 xl:h-4 lg:h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -283,6 +283,15 @@ export default {
     this.area_name = this.area_array.find(item => item.title === this.house.area);
   },
   methods: {
+    getDate(date) {
+
+      const data = new Date(date);
+
+      const month = data.getMonth() + 1;
+
+      return (data.getDate() < 10 ? '0' + data.getDate() : data.getDate()) + '-' + (month < 10 ? '0' + month : month) + '-' + data.getFullYear();
+
+    },
     choseLanguage(language) {
       this.selectLanguage = language;
 
