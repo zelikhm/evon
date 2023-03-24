@@ -106,6 +106,31 @@ class House extends Section implements Initializable
       })->setWidth('350px'),
     ]);
 
+    $control = $display->getColumns()->getControlColumn();
+
+    $button = new \SleepingOwl\Admin\Display\ControlLink(function (\Illuminate\Database\Eloquent\Model $model) {
+
+      HouseModel::where('id', $model->getKey())->update(['active' => 2]);
+
+      return ;
+    }, 'Прошел модерацию', 100);
+
+    $button->setIcon('fa fa-thumbs-up');
+    $button->setHtmlAttribute('class', 'btn-success btn-delete');
+    $button->hideText();
+
+    $control->addButton($button);
+
+    $button->setCondition(function(\Illuminate\Database\Eloquent\Model $model) {
+      $house = HouseModel::where('id', $model->getKey())->first();
+
+      if($house->active === 2) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+
     $display->setApply(function (Builder $query) {
       $query->OrderBy('active', 'asc');
     })->setNewEntryButtonText('Создать жилой комлекс');
