@@ -50,11 +50,18 @@ Route::prefix('/compilation')->group(function () {
   Route::get('/{id}/{house}', ['App\Http\Controllers\User\CompilationController', 'house']);
 });
 
+Route::prefix('/house')->group(function () {
+  Route::get('/success', ['App\Http\Controllers\AdminController', 'success']);
+  Route::get('/failed', ['App\Http\Controllers\AdminController', 'failed']);
+});
+
 Route::middleware('auth', 'session', 'CheckSubscription')->group(function () {
   Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'index']);
   Route::get('/villages', ['App\Http\Controllers\House\HouseController', 'villages']);
   Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
 });
+
+Route::get('test', ['App\Http\Controllers\House\HouseController', 'waterMark']);
 
 Route::get('/404', function () {
   return Inertia::render('AppError');

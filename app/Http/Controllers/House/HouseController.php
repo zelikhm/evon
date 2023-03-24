@@ -38,7 +38,8 @@ class HouseController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function search(Request $request){
+  public function search(Request $request)
+  {
 
     $search = collect();
 
@@ -99,7 +100,8 @@ class HouseController extends Controller
    * @return \Inertia\Response
    */
 
-  public function villages() {
+  public function villages()
+  {
 
     $houses = $this->getAllHouse('Вилла', true, true);
 
@@ -151,9 +153,10 @@ class HouseController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function getHouseForUserApi(Request $request) {
+  public function getHouseForUserApi(Request $request)
+  {
 
-    if($this->checkToken($request->token)) {
+    if ($this->checkToken($request->token)) {
 
       return response()->json($this->getHouseForUserPagination($request->user_id), 200);
 
@@ -186,7 +189,7 @@ class HouseController extends Controller
 
   public function getHouseApi(Request $request)
   {
-    if($this->checkToken($request->token)) {
+    if ($this->checkToken($request->token)) {
       return $this->house($request->slug);
     } else {
       return response()->json('not auth', 401);
@@ -202,7 +205,7 @@ class HouseController extends Controller
 
   public function getHousesJk(Request $request)
   {
-    if($this->checkToken($request->token)) {
+    if ($this->checkToken($request->token)) {
       return $this->getAllHouse('Новостройка', $request->limit, $request->dop);
     } else {
       return response()->json('not auth', 401);
@@ -218,7 +221,7 @@ class HouseController extends Controller
 
   public function getHousesVillages(Request $request)
   {
-    if($this->checkToken($request->token)) {
+    if ($this->checkToken($request->token)) {
       return $this->getAllHouse('Вилла', $request->limit, $request->dop);
     } else {
       return response()->json('not auth', 401);
@@ -239,7 +242,7 @@ class HouseController extends Controller
       ->where('user_id', Auth::id())
       ->first();
 
-    if($house === null) {
+    if ($house === null) {
       $house = HouseModel::where('slug', $slug)
         ->where('active', 2)
         ->where('visible', 1)
@@ -254,7 +257,7 @@ class HouseController extends Controller
 
     $house = $this->getHouseSlug($slug);
 
-    if($house->info === null) {
+    if ($house->info === null) {
       return redirect(404);
     }
 
@@ -326,7 +329,7 @@ class HouseController extends Controller
   public function create(Request $request)
   {
     if ($this->checkToken($request->token)) {
-      if($request->floors && $request->count_flat) {
+      if ($request->floors && $request->count_flat) {
         $house = HouseModel::create([
           'user_id' => $request->user_id,
           'title' => $request->title,
@@ -512,7 +515,8 @@ class HouseController extends Controller
 
       if ($request->image_up) {
         $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
-        $request->image_up->move(public_path('/storage/flat/'), $imageUp);
+        $request->image_up->move(public_path('/storage/buffer'), $imageUp);
+        $this->waterMark($imageUp, 'storage/flat/');
         $imageUp = '/storage/flat/' . $imageUp;
       } else {
         $flat = FlatModel::where('id', $request->flat_id)->first();
@@ -521,7 +525,8 @@ class HouseController extends Controller
 
       if ($request->image_down) {
         $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
-        $request->image_down->move(public_path('/storage/flat/'), $imageDown);
+        $request->image_down->move(public_path('/storage/buffer'), $imageDown);
+        $this->waterMark($imageDown, 'storage/flat/');
         $imageDown = '/storage/flat/' . $imageDown;
       } else {
         $flat = FlatModel::where('id', $request->flat_id)->first();
@@ -576,29 +581,30 @@ class HouseController extends Controller
   public function editFlat(Request $request)
   {
     if ($this->checkToken($request->token)) {
-
-      if ($request->image_up === 'null' || $request->image_up) {
+      if ($request->image_up === 'null' ) {
         $imageUp = null;
       } else if ($request->image_up) {
         $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
-        $request->image_up->move(public_path('/storage/flat/'), $imageUp);
+        $request->image_up->move(public_path('/storage/buffer'), $imageUp);
+        $this->waterMark($imageUp, 'storage/flat/');
         $imageUp = '/storage/flat/' . $imageUp;
       } else {
         $flat = FlatModel::where('id', $request->flat_id)->first();
-        if($flat->imageUp !== null) {
+        if ($flat->imageUp !== null) {
           $imageUp = $flat->imageUp;
         }
       }
 
-      if ($request->image_down === 'null' || $request->image_down) {
+      if ($request->image_down === 'null') {
         $imageDown = null;
       } else if ($request->image_down) {
         $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
-        $request->image_down->move(public_path('/storage/flat/'), $imageDown);
+        $request->image_down->move(public_path('/storage/buffer'), $imageDown);
+        $this->waterMark($imageDown, 'storage/flat/');
         $imageDown = '/storage/flat/' . $imageDown;
       } else {
         $flat = FlatModel::where('id', $request->flat_id)->first();
-        if($flat->imageDown !== null) {
+        if ($flat->imageDown !== null) {
           $imageDown = $flat->imageDown;
         }
 
@@ -633,7 +639,8 @@ class HouseController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function editStatusFlat(Request $request) {
+  public function editStatusFlat(Request $request)
+  {
 
     if ($this->checkToken($request->token)) {
 
@@ -728,26 +735,26 @@ class HouseController extends Controller
   {
     if ($this->checkToken($request->token)) {
 
-    if ($request->avatar) {
-      $imageName = time() . '.' . $request->avatar->getClientOriginalName();
-      $request->avatar->move(public_path('/storage/support'), $imageName);
-    } else {
-      $imageName = null;
-    }
+      if ($request->avatar) {
+        $imageName = time() . '.' . $request->avatar->getClientOriginalName();
+        $request->avatar->move(public_path('/storage/support'), $imageName);
+      } else {
+        $imageName = null;
+      }
 
-    HouseSupportModel::create([
-      'house_id' => $request->house_id,
-      'avatar' => '/storage/support/' . $imageName,
-      'name' => $request->name,
-      'phone' => $request->phone,
-      'email' => $request->email,
-      'status' => $request->status,
-      'link' => $request->link,
-      'created_at' => Carbon::now()->addHour(3),
-      'updated_at' => Carbon::now()->addHour(3),
-    ]);
+      HouseSupportModel::create([
+        'house_id' => $request->house_id,
+        'avatar' => '/storage/support/' . $imageName,
+        'name' => $request->name,
+        'phone' => $request->phone,
+        'email' => $request->email,
+        'status' => $request->status,
+        'link' => $request->link,
+        'created_at' => Carbon::now()->addHour(3),
+        'updated_at' => Carbon::now()->addHour(3),
+      ]);
 
-    return response()->json(HouseSupportModel::where('house_id', $request->house_id)->get(), 200);
+      return response()->json(HouseSupportModel::where('house_id', $request->house_id)->get(), 200);
     } else {
       return response()->json('not auth', 401);
     }
@@ -762,7 +769,7 @@ class HouseController extends Controller
   public function editSupport(Request $request)
   {
 
-    if($this->checkToken($request->token)) {
+    if ($this->checkToken($request->token)) {
       if ($request->avatar !== 'not') {
         $imageName = time() . '.' . $request->avatar->getClientOriginalName();
         $request->avatar->move(public_path('/storage/support'), $imageName);
@@ -798,7 +805,7 @@ class HouseController extends Controller
 
   public function deleteSupport(Request $request)
   {
-    if($this->checkToken($request->token)) {
+    if ($this->checkToken($request->token)) {
 
       HouseSupportModel::where('id', $request->id)->delete();
       return response()->json(true, 205);
@@ -818,7 +825,7 @@ class HouseController extends Controller
 
   public function clearSupport(Request $request)
   {
-    if($this->checkToken($request->token)) {
+    if ($this->checkToken($request->token)) {
 
       HouseSupportModel::where('house_id', $request->house_id)->delete();
       return response()->json(true, 205);
@@ -880,15 +887,15 @@ class HouseController extends Controller
   {
     if ($this->checkToken($request->token)) {
 
-    $fileName = time() . '.' . $request->file('file')->getClientOriginalName();
-    $request->file('file')->move(public_path('/storage/files'), $fileName);
+      $fileName = time() . '.' . $request->file('file')->getClientOriginalName();
+      $request->file('file')->move(public_path('/storage/files'), $fileName);
 
-    $file = HouseFilesModel::create([
-      'house_id' => $request->house_id,
-      'name' => '/storage/files/' . $fileName,
-      'created_at' => Carbon::now()->addHour(3),
-      'updated_at' => Carbon::now()->addHour(3),
-    ]);
+      $file = HouseFilesModel::create([
+        'house_id' => $request->house_id,
+        'name' => '/storage/files/' . $fileName,
+        'created_at' => Carbon::now()->addHour(3),
+        'updated_at' => Carbon::now()->addHour(3),
+      ]);
 
       return response()->json($file, 200);
 
@@ -927,25 +934,65 @@ class HouseController extends Controller
 
     if ($this->checkToken($request->token)) {
 
-    $imageName = time() . '.' . $request->file('image')->getClientOriginalName();
-    $request->file('image')->move(public_path('/storage/images'), $imageName);
+      $imageName = time() . '.' . $request->file('image')->getClientOriginalName();
+      $request->file('image')->move(public_path('/storage/buffer'), $imageName);
+      $this->waterMark($imageName, 'storage/images/');
 
-    $image = HouseImagesModel::create([
-      'house_id' => $request->house_id,
-      'name' => '/storage/images/' . $imageName,
-      'category' => $request->category_id,
-      'created_at' => Carbon::now()->addHour(3),
-      'updated_at' => Carbon::now()->addHour(3),
-    ]);
+      $image = HouseImagesModel::create([
+        'house_id' => $request->house_id,
+        'name' => '/storage/images/' . $imageName,
+        'category' => $request->category_id,
+        'created_at' => Carbon::now()->addHour(3),
+        'updated_at' => Carbon::now()->addHour(3),
+      ]);
 
-    HouseModel::where('id', $request->house_id)->update([
-      'active' => 0,
-    ]);
+      HouseModel::where('id', $request->house_id)->update([
+        'active' => 0,
+      ]);
 
       return response()->json($image, 200);
     } else {
       return response()->json('not auth', 401);
     }
+  }
+
+  /**
+   * added watermark on the photo
+   * @param $image
+   * @param $path
+   */
+
+  public function waterMark($image, $path)
+  {
+
+    $image_info = getimagesize('storage/buffer/' . $image);
+    $watermark_info = getimagesize('images/watermark.png');
+
+    // определяем MIME-тип изображения, для выбора соответствующей функции
+    $format = strtolower(substr($image_info['mime'],
+      strpos($image_info['mime'], '/') + 1));
+
+    // определяем названия функция для создания и сохранения картинки
+    $im_cr_func = "imagecreatefrom" . $format;
+    $im_save_func = "image" . $format;
+
+    // загружаем изображение в php
+    $img = $im_cr_func('storage/buffer/' . $image);
+
+    // загружаем в php наш водяной знак
+    $watermark = imagecreatefrompng('images/watermark.png');
+
+    // определяем координаты левого верхнего угла водяного знака
+    $pos_x = ($image_info[0] - $watermark_info[0]) / 2;
+    $pos_y = ($image_info[1] - $watermark_info[1]) / 2;
+
+    // помещаем водяной знак на изображение
+    imagecopy($img, $watermark, $pos_x, $pos_y, 0, 0, $watermark_info[0],
+      $watermark_info[1]);
+
+    // сохраняем изображение с уникальным именем
+    $im_save_func($img, $path . $image);
+    unlink('storage/buffer/'. $image);
   }
 
   /**
@@ -972,19 +1019,22 @@ class HouseController extends Controller
 
   }
 
-  public function getInfos() {
+  public function getInfos()
+  {
 
     return TypesModel::all();
 
   }
 
-  public function getDops() {
+  public function getDops()
+  {
 
     return StructureModel::all();
 
   }
 
-  public function getCityes() {
+  public function getCityes()
+  {
 
     return $this->getCity();
 

@@ -109,10 +109,7 @@ class House extends Section implements Initializable
     $control = $display->getColumns()->getControlColumn();
 
     $button = new \SleepingOwl\Admin\Display\ControlLink(function (\Illuminate\Database\Eloquent\Model $model) {
-
-      HouseModel::where('id', $model->getKey())->update(['active' => 2]);
-
-      return ;
+      return '/house/success?house_id=' . $model->getKey();
     }, 'Прошел модерацию', 100);
 
     $button->setIcon('fa fa-thumbs-up');
@@ -125,6 +122,26 @@ class House extends Section implements Initializable
       $house = HouseModel::where('id', $model->getKey())->first();
 
       if($house->active === 2) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+
+    $button1 = new \SleepingOwl\Admin\Display\ControlLink(function (\Illuminate\Database\Eloquent\Model $model) {
+      return '/house/failed?house_id=' . $model->getKey();
+    }, 'На модерацию', 100);
+
+    $button1->setIcon('fa fa-thumbs-up');
+    $button1->setHtmlAttribute('class', 'btn-danger btn-delete');
+    $button1->hideText();
+
+    $control->addButton($button1);
+
+    $button1->setCondition(function(\Illuminate\Database\Eloquent\Model $model) {
+      $house = HouseModel::where('id', $model->getKey())->first();
+
+      if($house->active !== 2) {
         return false;
       } else {
         return true;
