@@ -211,7 +211,7 @@
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
-    <div class="_container">
+    <div class="_container" v-if="user.role !== 1">
       <app-description-object-other-j-k :house="house" :slider="slider" :language="language" :selectLanguage="selectLanguage" :city_name="city_array" :area_name="area_array" />
     </div>
   </main>

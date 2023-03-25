@@ -951,7 +951,7 @@ class HouseController extends Controller
         'active' => 0,
       ]);
 
-      return response()->json($image, 200);
+      return response()->json("/storage/images/" .$imageName, 200);
     } else {
       return response()->json('not auth', 401);
     }
@@ -1000,21 +1000,20 @@ class HouseController extends Controller
 
     $image = Image::make('storage/buffer/' . $image_buffer);
     $image->insert('images/watermark.png');
-    $image->resize(600, 420);
+//    $image->resize(600, 420);
+    $image->heighten(420);
 
     if($blur) {
       $image1 = Image::make('storage/buffer/' . $image_buffer);
       $image1->resize(800, 420);
-      $image1->blur(25);
+      $image1->blur(50);
       $image1->insert($image, 'center');
 
-      $image1->save($path . $image_buffer);
+      $image1->save($path . $image_buffer, 100);
     } else {
-      $image->save($path . $image_buffer);
+
+      $image->save($path . $image_buffer, 100);
     }
-
-
-
 
     unlink('storage/buffer/'. $image_buffer);
   }
@@ -1048,7 +1047,9 @@ class HouseController extends Controller
 
     if ($this->checkToken($request->token)) {
 
-      HouseImagesModel::where('name', $request->image_name)->delete();
+      HouseImagesModel::where('name', $request->image_name)
+        ->where('house_id', $request->house_id)
+        ->delete();
 
       HouseModel::where('id', $request->house_id)->update([
         'active' => 0,

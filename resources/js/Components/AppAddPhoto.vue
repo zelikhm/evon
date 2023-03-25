@@ -76,6 +76,8 @@ export default {
         formData.append('house_id', this.house.id);
         formData.append('category_id', this.category);
 
+        this.myPhotos.push({ url: URL.createObjectURL(file), name: file.name, size: formatBytes, file: file })
+
       axios.post('/api/house/addedImages',
         formData,
         {
@@ -84,10 +86,9 @@ export default {
           }
         }
       ).then(res => {
-        this.myPhotos.push({ url: URL.createObjectURL(file), name: res.data.name, size: formatBytes, file: file })
         this.house.images.push({
           id: 15,
-          name: res.data.name,
+          name: res.data,
           house_id: this.house.id,
           category: this.category,
         });
@@ -145,6 +146,8 @@ export default {
         house_id: this.house.id,
         image_name: photo.name,
         token: this.user.token
+      }).then(res => {
+        console.log('delete')
       })
 
 
