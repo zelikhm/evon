@@ -1,130 +1,100 @@
 <script setup>
-  import { Link } from '@inertiajs/inertia-vue3'
+import { Link } from '@inertiajs/inertia-vue3'
 </script>
 <template>
-  <div v-if="loader_status">
-   vfvfvfvf
+  <div v-if="loader_status" class="preloader">
+    <div class="loader">
+      
+    </div>
+    <h3>Идет обработка фотографий. Подождите... </h3>
   </div>
-  <app-modal-add-contact @close-add-contact="closeModalContact"
-                         @close-modal-add-contact="closeModalAddContact"
-                         @close-edit-contact="closeModalBeforeEdit"
-                         v-if="modalAddContact"
-                         :contact="contact"
-                         :house="house"
-                         :language="language"
-  />
-  <app-modal-add-apartments @close-add-apartments="closeAddApartments"
-                            v-if="modalAddApatments"
-                            :house="house"
-                            :activeFrame="activeFrame"
-                            :selectFlat="selectFlat"
-                            @call-notification="callNotification"
-                            :language="language"
-                            :statuses="statuses"
-  />
-  <app-modal-add-frame v-if="modalAddFrame"
-                       @close-add-frame="closeAddFrame"
-                       @close-modal-add-frame="closeModalAddFrame"
-                       :house="house"
-                       :isEdit="isEdit"
-                       :frame="frame"
-                       :language="language"
-  />
-  <app-modal-notification
-    class="left-[2vw] transition-all duration-1000"
-    :class="{'-left__full': !openNotification}"
-    @close-notification="openNotification = false"
-    :text="text"
-  />
+  <app-modal-add-contact @close-add-contact="closeModalContact" @close-modal-add-contact="closeModalAddContact"
+    @close-edit-contact="closeModalBeforeEdit" v-if="modalAddContact" :contact="contact" :house="house"
+    :language="language" />
+  <app-modal-add-apartments @close-add-apartments="closeAddApartments" v-if="modalAddApatments" :house="house"
+    :activeFrame="activeFrame" :selectFlat="selectFlat" @call-notification="callNotification" :language="language"
+    :statuses="statuses" />
+  <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="closeAddFrame" @close-modal-add-frame="closeModalAddFrame"
+    :house="house" :isEdit="isEdit" :frame="frame" :language="language" />
+  <app-modal-notification class="left-[2vw] transition-all duration-1000" :class="{ '-left__full': !openNotification }"
+    @close-notification="openNotification = false" :text="text" />
   <app-header :user="user" :language="language" @selectLanguage="choseLanguage" />
   <main>
     <div class="_container">
-      <div :class="{'grid__apartments': page === 1}" class="grid__add-object my-14 xxl:my-10 xl:my-8 gap-7 xxl:gap-5 xl:gap-4">
+      <div :class="{ 'grid__apartments': page === 1 }"
+        class="grid__add-object my-14 xxl:my-10 xl:my-8 gap-7 xxl:gap-5 xl:gap-4">
         <div class="relative">
           <div class="sticky lg:relative top-10 lg:top-0 z-50 lg:w-full">
             <div class="bg-[#F6F3FA] h-fit p-7 xxl:p-5 xl:p-4 rounded-[6px]">
               <div class="flex flex-col gap-3 xxl:gap-2.5 xl:gap-2">
-                <Link :href="url"><div :class="{ 'menu-add-obj': page === 0}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">
-                  {{ language.form_dob_ob[0] }}</div></Link>
-                <div @click="openPage(4)" :class="{ 'menu-add-obj': page === 4}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">
+                <Link :href="url">
+                <div :class="{ 'menu-add-obj': page === 0 }"
+                  class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">
+                  {{ language.form_dob_ob[0] }}</div>
+                </Link>
+                <div @click="openPage(4)" :class="{ 'menu-add-obj': page === 4 }"
+                  class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">
                   {{ language.form_dob_ob[1] }}</div>
-                <div @click="openPage(1)" :class="{ 'menu-add-obj': page === 1}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">
+                <div @click="openPage(1)" :class="{ 'menu-add-obj': page === 1 }"
+                  class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">
                   {{ language.form_dob_ob[2] }}</div>
-                <div @click="openPage(2)" :class="{ 'menu-add-obj': page === 2}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">
+                <div @click="openPage(2)" :class="{ 'menu-add-obj': page === 2 }"
+                  class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">
                   {{ language.form_dob_ob[3] }}</div>
-                <div @click="openPage(3)" :class="{ 'menu-add-obj': page === 3}" class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">
+                <div @click="openPage(3)" :class="{ 'menu-add-obj': page === 3 }"
+                  class="hover__menu-add-obj transition-all cursor-pointer rounded-[6px] leading-none text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px] p-5 xxl:p-4 xl:p-3">
                   {{ language.form_dob_ob[4] }}</div>
               </div>
             </div>
-            <div :class="{'hidden': page !== 1}" class="flex justify-center mt-12 xxl:mt-10 xl:mt-8" v-if="readyHouse !== undefined && readyHouse.frames.length > 0">
-              <button @click="addFlatModal" class="register__button--white text-[#6435A5] flex justify-center items-center gap-2 xl:gap-1.5 border border-solid rounded-[5px] border-[#6435A5] px-4 xxl:px-3 xl:px-2.5 py-2.5 xxl:py-2 xl:py-1.5">
+            <div :class="{ 'hidden': page !== 1 }" class="flex justify-center mt-12 xxl:mt-10 xl:mt-8"
+              v-if="readyHouse !== undefined && readyHouse.frames.length > 0">
+              <button @click="addFlatModal"
+                class="register__button--white text-[#6435A5] flex justify-center items-center gap-2 xl:gap-1.5 border border-solid rounded-[5px] border-[#6435A5] px-4 xxl:px-3 xl:px-2.5 py-2.5 xxl:py-2 xl:py-1.5">
                 <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                   <g clip-path="url(#clip0_519_1862)">
-                    <path d="M7.33398 7.33301V3.33301H8.66732V7.33301H12.6673V8.66634H8.66732V12.6663H7.33398V8.66634H3.33398V7.33301H7.33398Z" fill="#6435A5"/>
+                    <path
+                      d="M7.33398 7.33301V3.33301H8.66732V7.33301H12.6673V8.66634H8.66732V12.6663H7.33398V8.66634H3.33398V7.33301H7.33398Z"
+                      fill="#6435A5" />
                   </g>
                   <defs>
                     <clipPath id="clip0_519_1862">
-                      <rect width="16" height="16" fill="white"/>
+                      <rect width="16" height="16" fill="white" />
                     </clipPath>
                   </defs>
                 </svg>
-                <span class="leading-none text-base xxl:text-sm xl:text-xs lg:text-[15px] font-medium">{{ language.dob_kv_1[14] }}</span>
+                <span class="leading-none text-base xxl:text-sm xl:text-xs lg:text-[15px] font-medium">{{
+                  language.dob_kv_1[14] }}</span>
               </button>
             </div>
           </div>
         </div>
 
-<!--  Информация о ЖК  -->
+        <!--  Информация о ЖК  -->
         <div v-if="page === 0">
-          <app-info-j-k :dops="dops"
-                        :infos="infos"
-                        :city="city"
-                        :count="count"
-                        :house="house"
-                        :supports="supports"
-                        @addAndContinue="addAndContinue"
-                        @call-notification="callNotification"
-                        :language="language"
-                        :selectLanguage="selectLanguage"
-          />
+          <app-info-j-k :dops="dops" :infos="infos" :city="city" :count="count" :house="house" :supports="supports"
+            @addAndContinue="addAndContinue" @call-notification="callNotification" :language="language"
+            :selectLanguage="selectLanguage" />
         </div>
 
-<!--  Корпуса и квартиры  -->
+        <!--  Корпуса и квартиры  -->
         <div v-if="page === 1">
-          <app-apartments @open-add-frame="openAddFrame"
-                          :house="readyHouse"
-                          @change-frame="changeFrame"
-                          @edit-flat="editFlat"
-                          :language="language"
-                          :statuses="statuses"
-                          :titleTable="titleTable"
-          />
+          <app-apartments @open-add-frame="openAddFrame" :house="readyHouse" @change-frame="changeFrame"
+            @edit-flat="editFlat" :language="language" :statuses="statuses" :titleTable="titleTable" />
         </div>
 
-<!--  Фото  -->
+        <!--  Фото  -->
         <div v-if="page === 2">
-          <app-add-photo :house="readyHouse"
-                         :language="language"
-                         :photos="photos"
-                         @loader="loader_status = !loader_status"
-          />
+          <app-add-photo :house="readyHouse" :language="language" :photos="photos"
+            @loader="loader_status = !loader_status" />
         </div>
 
         <div v-if="page === 3">
-          <app-add-files
-              :house="readyHouse"
-              :language="language"
-          />
+          <app-add-files :house="readyHouse" :language="language" />
         </div>
 
         <div v-if="page === 4">
-          <app-add-contacts
-              :house="readyHouse"
-              :supports="supports"
-              @open-add-contact="openAddContact"
-              @open-edit-contact="openEditContact"
-              :language="language"
-          />
+          <app-add-contacts :house="readyHouse" :supports="supports" @open-add-contact="openAddContact"
+            @open-edit-contact="openEditContact" :language="language" />
         </div>
 
       </div>
@@ -199,7 +169,7 @@ export default {
     choseLanguage(language) {
       this.selectLanguage = language;
 
-      if(this.selectLanguage === 0) {
+      if (this.selectLanguage === 0) {
         this.language = this.$ru;
       } else if (this.selectLanguage === 1) {
         this.language = this.$en;
@@ -283,7 +253,7 @@ export default {
     changeFrame(data) {
       this.activeFrame = data
 
-      if(data.length > 0) {
+      if (data.length > 0) {
         this.isHiddenAddFlat = false;
       } else {
         this.isHiddenAddFlat = true;
@@ -318,7 +288,7 @@ export default {
     }
   },
   created() {
-    if(this.user.lang === 0) {
+    if (this.user.lang === 0) {
       this.language = this.$ru;
       this.selectLanguage = 0;
     } else if (this.user.lang === 1) {
@@ -386,13 +356,87 @@ export default {
 
 <style src="@vueform/multiselect/themes/default.css"></style>
 
-<style scoped>
-  .loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
+<style scoped> 
 
+.preloader {
+   position: fixed;
+   width: 100%;
+   height: 100%;
+   background-color: rgb(255, 255, 255,0.8);
+   z-index: 20000;
+ }
+ .preloader h3{
+  text-align: center;
+    font-weight: 700;
+    font-size: 1.5vw;
+    max-width: 23vw;
+    line-height: 2vw;
+    margin: 0 auto;
+    position: absolute;
+    left: calc(50% - 11.5vw);
+    top: calc(50% - -9vw);
+ }
+ .loader {
+    width: 12vw;
+    height: 12vw;
+    border: 0.8vw solid rgba(100, 53, 165, 0.5);
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    top: calc(50% - 7vw);
+    left: calc(50% - 7vw);
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    animation: rotation-764cadab 1s linear infinite;
+ }
+
+ .loader::after {
+   content: '';
+   box-sizing: border-box;
+   position: absolute;
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   width: 15.4vw;
+   height: 15.4vw;
+   border-radius: 50%;
+   border: .8vw solid;
+   border-color: #6435A5 transparent;
+ }
+
+ @keyframes rotation {
+   0% {
+     transform: rotate(0deg);
+   }
+
+   100% {
+     transform: rotate(360deg);
+   }
+ }
+
+
+ @media (max-width:1000px) {
+   .loader {
+    width: 34vw;
+    height: 34vw;
+    border: 2vw solid rgba(100, 53, 165, 0.5); 
+    top: calc(50% - 17.5vw);
+    left: calc(50% - 17.5vw); 
+   }
+
+   .loader::after {
+    content: '';   
+    width: 41.4vw;
+    height: 41.4vw; 
+    border: 2vw solid;
+    border-color: #6435A5 transparent;
+   }
+   .preloader h3  { 
+      font-size: 5vw;
+      max-width: 86vw;
+      line-height: 6vw; 
+      left: calc(50% - 43vw);
+      top: calc(50% - -29vw);
+  }
+ }
 </style>
