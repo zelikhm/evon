@@ -2,6 +2,9 @@
   import { Link } from '@inertiajs/inertia-vue3'
 </script>
 <template>
+  <div v-if="loader_status">
+   vfvfvfvf
+  </div>
   <app-modal-add-contact @close-add-contact="closeModalContact"
                          @close-modal-add-contact="closeModalAddContact"
                          @close-edit-contact="closeModalBeforeEdit"
@@ -103,6 +106,7 @@
           <app-add-photo :house="readyHouse"
                          :language="language"
                          :photos="photos"
+                         @loader="loader_status = !loader_status"
           />
         </div>
 
@@ -185,9 +189,13 @@ export default {
       statuses: [],
       titleTable: [],
       photos: [],
+      loader_status: false,
     }
   },
   methods: {
+    loader(status) {
+      this.loader_status = status;
+    },
     choseLanguage(language) {
       this.selectLanguage = language;
 
@@ -379,5 +387,12 @@ export default {
 <style src="@vueform/multiselect/themes/default.css"></style>
 
 <style scoped>
+  .loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
 
 </style>
