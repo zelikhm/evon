@@ -86,6 +86,15 @@ class FavoriteController extends Controller
    */
 
     public function getAll(Request $request) {
-      return FavoritesModel::where('user_id', $request->user_id)->get();
+
+      $favorites = FavoritesModel::where('user_id', $request->user_id)->get();
+
+      foreach ($favorites as $item) {
+
+        $item->house = $this->getHouseOnId($item->house_id);
+
+      }
+
+      return $favorites;
     }
 }
