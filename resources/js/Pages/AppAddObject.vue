@@ -6,7 +6,9 @@ import { Link } from '@inertiajs/inertia-vue3'
     <div class="loader">
       
     </div>
-    <h3>Идет обработка фотографий. Подождите... </h3>
+    <h3 v-if="selectLanguage===0">Идет обработка фотографий. Подождите... </h3>
+    <h3 v-if="selectLanguage===1">Photos are being processed. Wait... </h3>
+    <h3 v-if="selectLanguage===2" class="sm"> Fotoğrafa filigran işlemesi devam ediyor. Lütfen bekleyin… </h3>
   </div>
   <app-modal-add-contact @close-add-contact="closeModalContact" @close-modal-add-contact="closeModalAddContact"
     @close-edit-contact="closeModalBeforeEdit" v-if="modalAddContact" :contact="contact" :house="house"
@@ -168,7 +170,7 @@ export default {
     },
     choseLanguage(language) {
       this.selectLanguage = language;
-
+  
       if (this.selectLanguage === 0) {
         this.language = this.$ru;
       } else if (this.selectLanguage === 1) {
@@ -376,6 +378,9 @@ export default {
     left: calc(50% - 11.5vw);
     top: calc(50% - -9vw);
  }
+ .preloader h3.sm{ 
+    font-size: 1.4vw; 
+ }
  .loader {
     width: 12vw;
     height: 12vw;
@@ -438,5 +443,8 @@ export default {
       left: calc(50% - 43vw);
       top: calc(50% - -29vw);
   }
+  .preloader h3.sm{ 
+    font-size: 5vw;
+ }
  }
 </style>
