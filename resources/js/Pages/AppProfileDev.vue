@@ -31,7 +31,7 @@
             <div :class="{'border-[#6435A5]': activeInput.email, 'border-[#E5DFEE]': !activeInput.email}"  class="flex flex-col w-full border border-solid gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
               <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="email_dev">{{ language.prof_zastr[3] }}</label>
               <div class="flex items-center">
-                <input v-model="userValue.email" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" disabled type="text" id="email_dev">
+                <input readonly v-model="userValue.email" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" disabled type="text" id="email_dev">
               </div>
             </div>
           </div>
