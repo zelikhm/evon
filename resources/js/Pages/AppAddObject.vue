@@ -6,9 +6,7 @@ import { Link } from '@inertiajs/inertia-vue3'
     <div class="loader">
 
     </div>
-    <h3 v-if="selectLanguage===0">Идет обработка фотографий. Подождите... </h3>
-    <h3 v-if="selectLanguage===1">Photos are being processed. Wait... </h3>
-    <h3 v-if="selectLanguage===2" class="sm"> Fotoğrafa filigran işlemesi devam ediyor. Lütfen bekleyin… </h3>
+    <h3>{{ this.language.form_dob_ob[5] }}</h3>
   </div>
   <app-modal-add-contact @close-add-contact="closeModalContact" @close-modal-add-contact="closeModalAddContact"
     @close-edit-contact="closeModalBeforeEdit" v-if="modalAddContact" :contact="contact" :house="house"
