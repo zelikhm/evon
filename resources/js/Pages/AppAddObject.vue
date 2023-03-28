@@ -6,7 +6,7 @@ import { Link } from '@inertiajs/inertia-vue3'
     <div class="loader">
 
     </div>
-    <h3>{{ this.language.form_dob_ob[5] }}</h3>
+    <h3>{{ language.form_dob_ob[5] }}</h3>
   </div>
   <app-modal-add-contact @close-add-contact="closeModalContact" @close-modal-add-contact="closeModalAddContact"
     @close-edit-contact="closeModalBeforeEdit" v-if="modalAddContact" :contact="contact" :house="house"
@@ -361,9 +361,10 @@ export default {
    position: fixed;
    width: 100%;
    height: 100%;
-   background-color: rgb(255, 255, 255,0.8);
+   background-color: rgb(255, 255, 255, 0.8);
    z-index: 20000;
  }
+
  .preloader h3{
   text-align: center;
     font-weight: 700;
@@ -375,9 +376,11 @@ export default {
     left: calc(50% - 11.5vw);
     top: calc(50% - -9vw);
  }
+
  .preloader h3.sm{
     font-size: 1.4vw;
  }
+
  .loader {
     width: 12vw;
     height: 12vw;
