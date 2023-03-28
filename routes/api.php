@@ -99,7 +99,7 @@ Route::prefix('user')->group(function () {
 
 Route::prefix('chat')->group(function () {
   Route::post('/checkChat', ['App\Http\Controllers\User\ChatController', 'checkChatApi']);
-  Route::post('/checkChat', ['App\Http\Controllers\User\ChatController', 'getOrCreateChat']);
+  Route::post('/getOrCreateChat', ['App\Http\Controllers\User\ChatController', 'getOrCreateChat']);
   Route::post('/message', ['App\Http\Controllers\Messages\MessageController', 'message']);
   Route::post('/reloadChats', ['App\Http\Controllers\Messages\MessageController', 'reloadChats']);
   Route::post('/reloadChat', ['App\Http\Controllers\Messages\MessageController', 'reloadChat']);
