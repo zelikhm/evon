@@ -49,7 +49,7 @@
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-2 gap-8 xxl:gap-6 xl:gap-5">
+      <div class="grid grid-cols-2 gap-8 xxl:gap-6 xl:gap-5" style="padding-bottom: 80px">
         <button @click="createCompilation" class="login__btn--bg text-white text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">
           {{ language.dob_ob_1[24] }}</button>
         <button @click="closeModal" class="bg-litepink text-[#E84680] text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">
