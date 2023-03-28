@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 <template>
   <div v-if="loader_status" class="preloader">
     <div class="loader">
-      
+
     </div>
     <h3 v-if="selectLanguage===0">Идет обработка фотографий. Подождите... </h3>
     <h3 v-if="selectLanguage===1">Photos are being processed. Wait... </h3>
@@ -119,7 +119,6 @@ import AppModalNotification from "@/Layouts/modal/AppModalNotification.vue"
 import AppAddFiles from "@/Components/AppAddFiles.vue";
 import AppAddContacts from "@/Components/AppAddContacts.vue";
 
-
 export default {
   props: {
     dops: [],
@@ -170,7 +169,7 @@ export default {
     },
     choseLanguage(language) {
       this.selectLanguage = language;
-  
+
       if (this.selectLanguage === 0) {
         this.language = this.$ru;
       } else if (this.selectLanguage === 1) {
@@ -358,7 +357,7 @@ export default {
 
 <style src="@vueform/multiselect/themes/default.css"></style>
 
-<style scoped> 
+<style scoped>
 
 .preloader {
    position: fixed;
@@ -378,8 +377,8 @@ export default {
     left: calc(50% - 11.5vw);
     top: calc(50% - -9vw);
  }
- .preloader h3.sm{ 
-    font-size: 1.4vw; 
+ .preloader h3.sm{
+    font-size: 1.4vw;
  }
  .loader {
     width: 12vw;
@@ -424,26 +423,26 @@ export default {
    .loader {
     width: 34vw;
     height: 34vw;
-    border: 2vw solid rgba(100, 53, 165, 0.5); 
+    border: 2vw solid rgba(100, 53, 165, 0.5);
     top: calc(50% - 17.5vw);
-    left: calc(50% - 17.5vw); 
+    left: calc(50% - 17.5vw);
    }
 
    .loader::after {
-    content: '';   
+    content: '';
     width: 41.4vw;
-    height: 41.4vw; 
+    height: 41.4vw;
     border: 2vw solid;
     border-color: #6435A5 transparent;
    }
-   .preloader h3  { 
+   .preloader h3  {
       font-size: 5vw;
       max-width: 86vw;
-      line-height: 6vw; 
+      line-height: 6vw;
       left: calc(50% - 43vw);
       top: calc(50% - -29vw);
   }
-  .preloader h3.sm{ 
+  .preloader h3.sm{
     font-size: 5vw;
  }
  }

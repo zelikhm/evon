@@ -18,6 +18,38 @@ class ChatController extends Controller
   use MainInfo, AuthCheck;
 
   /**
+   * get or create chat
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function getOrCreateChat(Request $request) {
+
+    if ($request->from && $request->to) {
+      $chat = ChatModel::where('from_id', $request->from)
+        ->where('to_id', $request->to)
+        ->first();
+
+      if ($chat === null) {
+        $chat = ChatModel::where('from_id', $request->to)
+          ->where('to_id', $request->from)
+          ->first();
+
+        if ($chat === null) {
+
+          $chat = ChatModel::create([
+            'from_id' => $request->from,
+            'to_id' => $request->to,
+          ]);
+        }
+      }
+    }
+
+    return response()->json($chat, 200);
+
+  }
+
+  /**
    * index method for load or create chat
    * @param Request $request
    * @return \Illuminate\Http\RedirectResponse

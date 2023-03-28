@@ -71,7 +71,6 @@ export default {
   },
   methods: {
     save(file, formatBytes) {
-      this.$emit('loader', true);
       let formData = new FormData();
 
         formData.append('image', file);
@@ -94,7 +93,6 @@ export default {
           house_id: this.house.id,
           category: this.category,
         });
-
         this.$emit('loader', false);
       })
 
@@ -111,6 +109,7 @@ export default {
       this.loadPhotos();
     },
     addPhotos(e) {
+      this.$emit('loader', true);
       Array.from(e.target.files).forEach((i) => {
         let formatBytes,
           bytes = i.size,
