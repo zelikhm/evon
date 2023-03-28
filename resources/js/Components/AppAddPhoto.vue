@@ -142,11 +142,11 @@ export default {
           i.style.display = 'none'
         })
       }, 1000)
-      setTimeout(() => {
-        this.$refs.uploudBackground.forEach((i) => {
-          i.style.display = 'none'
-        })
-      }, 1000)
+      // setTimeout(() => {
+      //   this.$refs.uploudBackground.forEach((i) => {
+      //     i.style.display = 'none'
+      //   })
+      // }, 1000)
     },
     deletePhoto(photo) {
       this.myPhotos.forEach((item, idx) => {
