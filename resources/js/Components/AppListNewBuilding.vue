@@ -320,6 +320,7 @@
             <span>{{ language.rielt_1[4] }}</span>
           </div>
           <button
+            @click="reloadFilter"
             class="text-[#6435A5] text-[16px] xxl:text-[14px] xl:text-[12px] md:text-[14px] lg:text-[15px] cursor-pointer leading-none">
             {{ language.rielt_1[8] }}
           </button>
