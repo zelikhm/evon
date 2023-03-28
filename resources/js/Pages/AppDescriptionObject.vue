@@ -19,6 +19,9 @@
   <app-immovables-create-selection
     v-if="openCreateSelection"
     @close-i-create-selection="closeCreateSel"
+    @updateCompilation="updateCompilation"
+    :house="house"
+    :user="user"
     :language="language"
   />
   <app-all-news
@@ -283,6 +286,9 @@ export default {
     this.area_name = this.area_array.find(item => item.title === this.house.area);
   },
   methods: {
+    updateCompilation(data) {
+      this.compilation.push(data)
+    },
     getDate(date) {
 
       const data = new Date(date);

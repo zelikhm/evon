@@ -67,11 +67,12 @@ export default {
       files: [],
       category: 0,
       loader: false,
+      image_count: 0,
+      load_count: 0,
     }
   },
   methods: {
     save(file, formatBytes) {
-      this.$emit('loader', true);
       let formData = new FormData();
 
         formData.append('image', file);
@@ -95,7 +96,11 @@ export default {
           category: this.category,
         });
 
-        this.$emit('loader', false);
+        this.load_count += 1;
+
+        if(this.load_count === this.image_count) {
+          this.$emit('loader', false);
+        }
       })
 
       this.photos.forEach((item, idx) => {
@@ -111,6 +116,10 @@ export default {
       this.loadPhotos();
     },
     addPhotos(e) {
+      this.$emit('loader', true);
+      this.image_count = e.target.files.length;
+      this.load_count = 0;
+
       Array.from(e.target.files).forEach((i) => {
         let formatBytes,
           bytes = i.size,
@@ -124,9 +133,9 @@ export default {
             it = Math.floor(Math.log(bytes) / Math.log(k))
           formatBytes = parseFloat((bytes / Math.pow(k, it)).toFixed(dm)) + ' ' + sizes[it]
         }
+
         this.save(i, formatBytes);
       })
-
 
       setTimeout(() => {
         this.$refs.progressBar.forEach((i) => {
@@ -134,9 +143,11 @@ export default {
         })
       }, 1000)
       setTimeout(() => {
-        this.$refs.uploudBackground.forEach((i) => {
-          i.style.display = 'none'
-        })
+        if(this.$refs.uploudBackground !== undefined) {
+          this.$refs.uploudBackground.forEach((i) => {
+            i.style.display = 'none'
+          })
+        }
       }, 1000)
     },
     deletePhoto(photo) {

@@ -1,7 +1,3 @@
-<script setup>
-import { Link } from '@inertiajs/inertia-vue3'
-import ChangeLanguage from "../Components/ChangeLanguage.vue";
-</script>
 
 <template>
   <AppChessScheme v-if="scheme" :flat="selectFlat" @closeChess="scheme = false" :language="language"></AppChessScheme>
@@ -71,13 +67,14 @@ import ChangeLanguage from "../Components/ChangeLanguage.vue";
           </div>
           <div class="flex items-center gap-1.5 xxl:gap-1 xl:gap-0.5">
             <img src="../../assets/svg/reload_icon.svg" class="h-4 xx:h-3.5 xl:h-3" alt="reload">
-            <span class="text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">{{ house.updated_at }}</span>
+            <span class="text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">{{ getDate(house.updated_at) }}</span>
           </div>
         </div>
       </div>
       <div class="grid__68-30 justify-between">
         <div class="flex flex-col">
           <swiper
+            :modules="modules"
             :navigation="true"
             :loop="true"
             class="mySwiper w-full"
@@ -426,6 +423,9 @@ import ChangeLanguage from "../Components/ChangeLanguage.vue";
   import "swiper/css/pagination";
   import { Navigation, Pagination} from "swiper";
 
+  import { Link } from '@inertiajs/inertia-vue3'
+  import ChangeLanguage from "../Components/ChangeLanguage.vue";
+
   export default {
     props: {
       house: [],
@@ -470,6 +470,15 @@ import ChangeLanguage from "../Components/ChangeLanguage.vue";
       }
     },
     methods: {
+      getDate(date) {
+
+        const data = new Date(date);
+
+        const month = data.getMonth() + 1;
+
+        return (data.getDate() < 10 ? '0' + data.getDate() : data.getDate()) + '-' + (month < 10 ? '0' + month : month) + '-' + data.getFullYear();
+
+      },
       getCity(city) {
         let name = this.city_array.find(item => item.title === city);
 
@@ -798,7 +807,9 @@ import ChangeLanguage from "../Components/ChangeLanguage.vue";
       AppModalAlbum,
       Swiper,
       SwiperSlide,
-      AppChessScheme
+      AppChessScheme,
+      Link,
+      ChangeLanguage
     },
     setup() {
       return {
