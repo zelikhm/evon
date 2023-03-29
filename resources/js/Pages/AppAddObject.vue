@@ -391,8 +391,11 @@ export default {
     top: calc(50% - 4vw);
     left: calc(50% - 4vw);
     transform: translate(-50%,-50%);
-    box-sizing: border-box;
-    animation: rotation-764cadab 1s linear infinite;
+    box-sizing: border-box; 
+
+    will-change: transform; 
+    animation: rotation 2s linear infinite;
+    transform-origin: center center; 
  }
 
  .loader::after {
