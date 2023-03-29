@@ -425,8 +425,8 @@ export default {
     width: 34vw;
     height: 34vw;
     border: 2vw solid rgba(100,53,165,.5);
-    top: calc(50%);
-    left: calc(50% );
+    top: calc(50% - 17vw);
+    left: calc(50% - 17vw);
    }
 
    .loader::after {
