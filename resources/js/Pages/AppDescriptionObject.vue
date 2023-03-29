@@ -6,6 +6,14 @@
     @close-album="album = false"
     :language="language"
   />
+
+
+  <!--Модалка для отправить клиенту-->
+  <app-moadal-add-client 
+      v-if="addClient"
+      @close-addClient="closeAddClient"
+  /> 
+
   <app-add-selections
     v-if="openAddSelection"
     @open-i-create-selections="openCreateSel"
@@ -97,8 +105,13 @@
                 <div class="seek absolute opacity-0 overflow-hidden pointer-events-none px-3 xxl:px-2.5 xl:px-2 bg-white border border-solid border-[#E5DFEE] rounded-[3px] z-10 text-base xxl:text-sm xl:text-xs top-[140%] -left-1/2 whitespace-nowrap transition-all">
                   {{ language.rielt_1[8] }}</div>
               </button>
+ 
+              <span @click="addClient=true" class="send_client flex items-center justify-center  border border-solid border-[#E84680] h-fit text-[#E84680]  font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]">Отправить клиенту</span>
+          
+              
             </div>
 
+             
             <div class="flex items-center p-4 xxl:p-3 xl:p-2" @click="chess = true" v-if="house.flats.length > 0">
               <button class="login__btn--bg bg-[#E84680] px-4 xxl:px-4 xl:px-2.5 rounded-[3px] h-10 xxl:h-8 xl:h-6 font-semibold text-white text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px] leading-none">
                 {{ language.shahm[0] }}</button>
@@ -232,6 +245,7 @@ import AppAddSelections from "@/Layouts/modal/AppAddSelections.vue"
 import AppImmovablesCreateSelection from "@/Layouts/modal/AppImmovablesCreateSelection.vue"
 import AppChess from "@/Components/AppChess.vue"
 import AppChessScheme from "../Layouts/modal/AppChessScheme.vue"
+import AppMoadalAddClient from "../Layouts/modal/AppMoadalAddClient.vue"
 
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
@@ -259,6 +273,7 @@ export default {
       selectFlat: null,
       city: null,
       markers: null,
+      addClient:false,
       language: {},
       selectLanguage: 0,
       city_name: {},
@@ -324,6 +339,9 @@ export default {
     },
     closeChess() {
       this.chess = false
+    },
+    closeAddClient() {
+      this.addClient = false
     },
     closeCreateSel() {
       this.openCreateSelection = false
@@ -477,6 +495,7 @@ export default {
     AppImmovablesCreateSelection,
     AppChess,
     AppChessScheme,
+    AppMoadalAddClient
   },
   setup() {
     return {
@@ -490,5 +509,13 @@ export default {
 .disableColor {
   color: #8A8996;
 }
-
+.send_client{
+  padding: 7px 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.send_client:hover{
+  color: white;
+  background-color: #E84680;
+}
 </style>
