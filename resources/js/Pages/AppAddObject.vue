@@ -382,17 +382,17 @@ export default {
  }
 
  .loader {
-    width: 12vw;
+  width: 12vw;
     height: 12vw;
-    border: 0.8vw solid rgba(100, 53, 165, 0.5);
+    border: 0.8vw solid rgba(100,53,165,.5);
     border-radius: 50%;
     display: inline-block;
     position: absolute;
-    top: calc(50% - 7vw);
-    left: calc(50% - 7vw);
-    transform: translate(-50%, -50%);
+    top: calc(50%);
+    left: calc(50%);
+    transform: translate(-50%,-50%);
     box-sizing: border-box;
-    animation: rotation-764cadab 1s linear infinite;
+    animation: rotation 1s linear infinite;
  }
 
  .loader::after {
@@ -424,9 +424,9 @@ export default {
    .loader {
     width: 34vw;
     height: 34vw;
-    border: 2vw solid rgba(100, 53, 165, 0.5);
-    top: calc(50% - 17.5vw);
-    left: calc(50% - 17.5vw);
+    border: 2vw solid rgba(100,53,165,.5);
+    top: calc(50%);
+    left: calc(50% );
    }
 
    .loader::after {
