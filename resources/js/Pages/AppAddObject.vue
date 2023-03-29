@@ -382,31 +382,31 @@ export default {
  }
 
  .loader {
-  width: 12vw;
-    height: 12vw;
+    width: 8vw;
+    height: 8vw;
     border: 0.8vw solid rgba(100,53,165,.5);
     border-radius: 50%;
     display: inline-block;
     position: absolute;
-    top: calc(50%);
-    left: calc(50%);
+    top: calc(50% - 4vw);
+    left: calc(50% - 4vw);
     transform: translate(-50%,-50%);
     box-sizing: border-box;
-    animation: rotation 1s linear infinite;
+    animation: rotation-764cadab 1s linear infinite;
  }
 
  .loader::after {
-   content: '';
-   box-sizing: border-box;
-   position: absolute;
-   left: 50%;
-   top: 50%;
-   transform: translate(-50%, -50%);
-   width: 15.4vw;
-   height: 15.4vw;
-   border-radius: 50%;
-   border: .8vw solid;
-   border-color: #6435A5 transparent;
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 11.4vw;
+    height: 11.4vw;
+    border-radius: 50%;
+    border: .8vw solid;
+    border-color: #6435A5 transparent;
  }
 
  @keyframes rotation {
