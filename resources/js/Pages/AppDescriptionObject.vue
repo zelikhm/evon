@@ -552,7 +552,11 @@ export default {
   border: 1px solid #E84680; 
   line-height: 1.1;
 }
-
+@media (max-width:992px) {
+  .send_client button {
+    height: 32px;
+  }
+}
 .send_client button:hover {
   color: white;
   background-color: #E84680;
