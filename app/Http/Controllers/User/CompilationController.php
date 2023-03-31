@@ -67,11 +67,11 @@ class CompilationController extends Controller
     } else {
       $user = [];
     }
-dd($id, $house);
+
     $user_info = User::where('id', $id)->firstOrFail();
 
     $compilation = [
-      'company' => User\CompanyModel::where('id', $user_info->company_id)->firstOrFail(),
+      'company' => User\CompanyModel::where('id', $user_info->company_id)->first(),
       'user' => $user_info,
       'isVisible' => 0,
     ];
