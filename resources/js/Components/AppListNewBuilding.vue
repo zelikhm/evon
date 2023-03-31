@@ -1224,7 +1224,9 @@
 
         let object6 = [];
 
-        if (this.filters.builder !== '' && this.filters.builder !== 'Не важно' && this.filters.builder !== null) {
+        console.log(this.filters.builder)
+
+        if (this.filters.builder !== '' && this.filters.builder !== 'Не важно' && this.filters.builder !== this.language.ob[24] && this.filters.builder !== null) {
           object5.forEach(item => {
             if (item.user !== null) {
               if (item.user.first_name !== null) {

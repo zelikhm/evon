@@ -67,7 +67,7 @@ class CompilationController extends Controller
     } else {
       $user = [];
     }
-
+dd($id, $house);
     $user_info = User::where('id', $id)->firstOrFail();
 
     $compilation = [
