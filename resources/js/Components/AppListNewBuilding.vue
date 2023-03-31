@@ -635,7 +635,7 @@
             max: '',
           },
           deadline: 'Не важно',
-          builder: '',
+          builder: 'Не важно',
           location: {
             toSea: '',
             toSchool: '',
@@ -669,7 +669,7 @@
           {deadline: this.language.ob[24], id: 0},
           {deadline: this.language.rielt_1[10], id: 1},
         ],
-        selectDev: null,
+        selectDev: this.language.ob[24],
         openSelectDev: false,
         selectInstallment: 'Да',
         openSelectInstallment: false,
@@ -727,8 +727,8 @@
         this.filters.badge.sales = false;
         this.filters.badge.news = false;
         //builder
-        this.selectDev = '';
-        this.filters.builder = '';
+        this.selectDev = this.language.ob[24];
+        this.filters.builder = this.language.ob[24];
         //deadlines
         this.selectDeadline = this.language.ob[24];
         this.filters.deadline = this.language.ob[24];
@@ -1076,10 +1076,12 @@
         }
       }
 
-      // this.builders.unshift({'id': -1, 'first_name': 'Не важно'});
+      this.builders.unshift({'id': -1, 'first_name': 'Не важно'});
+
+      console.log(this.builders);
 
       if (this.city[0] !== null) {
-        this.selectDev = this.builders[0].first_name
+        this.selectDev = this.language.ob[24]
         this.selectCity = this.language.ob[15]
         this.selectRegion = this.language.ob[16]
         // this.selectRegion = this.city[0].regions[0].title
