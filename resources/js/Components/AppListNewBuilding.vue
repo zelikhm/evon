@@ -601,6 +601,9 @@
           {deadline: this.language.rielt_1[10], id: 1},
         ]
 
+        this.builders.find(item => item.id === -1).first_name = this.language.ob[24];
+        this.selectDev = this.language.ob[24];
+
         this.selectCity = this.language.ob[15]
         this.selectRegion = this.language.ob[16]
 
@@ -1076,9 +1079,7 @@
         }
       }
 
-      this.builders.unshift({'id': -1, 'first_name': 'Не важно'});
-
-      console.log(this.builders);
+      this.builders.unshift({'id': -1, 'first_name': this.language.ob[24]});
 
       if (this.city[0] !== null) {
         this.selectDev = this.language.ob[24]
