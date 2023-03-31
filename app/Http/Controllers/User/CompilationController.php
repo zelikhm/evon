@@ -51,6 +51,44 @@ class CompilationController extends Controller
   }
 
   /**
+   * get solo house
+   * @param $house
+   * @return \Inertia\Response
+   */
+
+  public function soloHouse($id, $house) {
+
+    HouseModel::where('slug', $house)->firstOrFail();
+
+    $house = $this->getHouseSlug($house);
+
+    if(Auth::check()) {
+      $user = $this->getUser();
+    } else {
+      $user = [];
+    }
+
+    $user_info = User::where('id', $id)->firstOrFail();
+
+    $compilation = [
+      'company' => User\CompanyModel::where('id', $user_info->company_id)->firstOrFail(),
+      'user' => $user_info,
+      'isVisible' => 0,
+    ];
+
+    return Inertia::render('AppLinkDescriptionObject', [
+      'house' => $house,
+      'compilation' => $compilation,
+      'city_array' => $this->getCity(),
+      'area_array' => $this->getRegions(),
+      'user' => $user,
+      'dops' => $this->getDop(),
+      'infos' => $this->getInfo(),
+    ]);
+
+  }
+
+  /**
    * get compilation
    * @param Request $request
    * @return mixed

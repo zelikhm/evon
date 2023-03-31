@@ -5,7 +5,7 @@
 
 
   <!--Модалка для отправить клиенту-->
-  <app-moadal-add-client v-if="addClient" @close-addClient="closeAddClient" />
+  <app-moadal-add-client v-if="addClient" :house="house" :user="user" @close-addClient="closeAddClient" />
 
   <app-add-selections v-if="openAddSelection" @open-i-create-selections="openCreateSel"
     @close-add-selection="openAddSelection = false" :compilation="compilation" :city_array="city_array"
@@ -549,7 +549,7 @@ export default {
   transition: 0.3s;
   background-color: white;
   color: #E84680;
-  border: 1px solid #E84680; 
+  border: 1px solid #E84680;
   line-height: 1.1;
 }
 @media (max-width:992px) {

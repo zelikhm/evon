@@ -11,7 +11,6 @@
         </div>
       </div>
     </div>
-
     <img
       v-if="compilation.company === null || compilation.company.banner === null || compilation.company.banner === 'undefined'"
       class=" h-[13.4vw] lg:h-[130px] w-full absolute top-[60px] xxl:top-12 xl:top-10 lg:top-12 left-0" src="../../assets/bg_links.jpg" alt="">

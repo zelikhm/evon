@@ -107,7 +107,6 @@
       },
       addNews() {
         if (this.itemEdit === undefined) {
-          console.log(this.dataNews);
           axios.post('/api/news/add', {
             house_id: this.dataNews.house_id,
             title: this.dataNews.title,
