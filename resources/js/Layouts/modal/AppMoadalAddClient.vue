@@ -5,7 +5,7 @@
       <div class="relative    ">
 
         <div class="flex justify-between items-center mb-5 xxl:mb-4 xl:mb-3">
-          <h2 class="text-[22px] xxl:text-[18px] xl:text-[16px] font-semibold leading-none">Отправить объект клиенту</h2>
+          <h2 class="text-[22px] xxl:text-[18px] xl:text-[16px] font-semibold leading-none">{{ language.send_client[0] }}</h2>
           <button class="hover__close right-0 z-50">
             <svg class="transition-all cursor-pointer w-6 xxl:w-5 xl:w-4" width="24" @click="closeAddClient" height="24"
               viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -44,14 +44,15 @@
 <script>
 export default {
 
-  props: ['house', 'user'],
+  props: ['house', 'user','language'],
   data() {
     return {
       isVisible: false,
+      selectLanguage: 0, 
     }
   },
-  created() {
-
+  mounted() {
+      console.log(this.language)
   },
   emits: ['close-addClient'],
   methods: {
@@ -77,22 +78,27 @@ export default {
   position: fixed;
   width: 100%;
   height: 100%;
-  background-color: rgb(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   z-index: 100;
 }
 
 .Modal_bg {
   width: 100%;
   height: 100%;
-  background-color: rgb(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .Modal_body {
   background-color: white;
-    border-radius: 16px;
-    position: absolute;
-    top: calc(50% - 70px);
-    left: calc(50% - 165px);
+  border-radius: 16px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  max-height: 90%;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 @media only screen and (max-width: 1000px) {

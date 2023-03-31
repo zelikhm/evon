@@ -5,7 +5,7 @@
 
 
   <!--Модалка для отправить клиенту-->
-  <app-moadal-add-client v-if="addClient" :house="house" :user="user" @close-addClient="closeAddClient" />
+  <app-moadal-add-client v-if="addClient" :house="house" :user="user" :language="language" @close-addClient="closeAddClient" />
 
   <app-add-selections v-if="openAddSelection" @open-i-create-selections="openCreateSel"
     @close-add-selection="openAddSelection = false" :compilation="compilation" :city_array="city_array"
@@ -103,7 +103,7 @@
               <div class="send_client flex items-center p-4 xxl:p-3 xl:p-2" @click="addClient = true">
                 <button
                   class="login__btn--bg bg-[#E84680] px-4 xxl:px-4 xl:px-2.5 rounded-[3px] h-10 xxl:h-8 xl:h-6 font-semibold text-white text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px] leading-none">
-                  Отправить клиенту</button>
+                  {{ language.btn_send[0] }}</button>
               </div>
 
             </div>
