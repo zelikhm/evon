@@ -365,5 +365,16 @@
     "9": "October",
     "10": "November",
     "11": "December"
+  },
+
+
+
+  "send_client": {
+    "0": "Send the project to the client"
+  },
+  "btn_send":{
+    "0": "Send to client"
   }
+
+
 }

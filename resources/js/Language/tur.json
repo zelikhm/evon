@@ -365,5 +365,13 @@
     "9": "Ekim",
     "10": "Kasım",
     "11": "Aralık"
+  },
+
+
+  "send_client": {
+    "0": "Konutu müşteri ile paylaş"
+  },
+  "btn_send":{
+    "0": "Müşteri ile paylaş"
   }
 }
