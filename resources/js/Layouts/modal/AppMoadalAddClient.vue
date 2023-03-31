@@ -48,26 +48,22 @@ export default {
   data() {
     return {
       isVisible: false,
-      selectLanguage: 0, 
+      selectLanguage: 0,  
     }
   },
   mounted() {
-      console.log(this.language)
+ 
   },
   emits: ['close-addClient'],
   methods: {
-    getLink() {
-
-      return window.location.origin + '/compilation/user/' + this.user.id + '/' + this.house.slug;
-
+    getLink() { 
+      return window.location.origin + '/compilation/user/' + this.user.id + '/' + this.house.slug; 
     },
     closeAddClient() {
       this.$emit('close-addClient')
-    },
-
-
-    copy() {
-      navigator.clipboard.writeText(this.valueLink)
+    }, 
+    copy() { 
+      navigator.clipboard.writeText(this.getLink())
     }
   }
 }
