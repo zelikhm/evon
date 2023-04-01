@@ -49,7 +49,7 @@
                   v-if="house.created && !Number.isInteger(+house.created[0])">{{ language.rielt_1[10] }}</span>
                 <span
                   class="flex items-center justify-center uppercase border border-solid border-[#E84680] h-fit text-[#E84680] leading-none font-medium rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]"
-                  v-else-if="house.created">{{ language.rielt_1[10] }}</span>
+                  v-else-if="house.created">{{ house.created }}</span>
                 <span
                   class="flex items-center justify-center text-white font-semibold bg-[#FA8D50] leading-none rounded-[3px] px-3 xxl:px-2 xl:px-1.5 h-[25px] xxl:h-[20px] xl:h-[16px]"
                   v-if="house.promotion">{{ language.rielt_1[52] }}</span>
