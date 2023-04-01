@@ -54,8 +54,6 @@
           </div>
         </div>
 
-
-
         <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3">
 
           <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]"
@@ -90,7 +88,7 @@
             <div class="relative">
               <div ref="city" @click.stop="openSelectCity = !openSelectCity"
                    class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3">
-                <span>{{ selectCity }}</span>
+                <span>{{ getTitleCity() }}</span>
                 <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all"
                      :class="{ 'rotate-180': openSelectCity }" alt="">
               </div>
@@ -122,7 +120,7 @@
             <div class="relative" :tabindex="tabindex" @blur="openSelectRegion = false">
               <div @click="openSelectRegion = !openSelectRegion"
                    class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
-                <span>{{ selectRegion }}</span>
+                <span>{{ getTitleArea() }}</span>
                 <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all"
                      :class="{ 'rotate-180': openSelectRegion }" alt="">
               </div>
@@ -777,6 +775,45 @@
       }
     },
     methods: {
+      getTitleCity() {
+
+        if(this.filters.cities.length > 0) {
+
+          let city = '';
+
+          this.filters.cities.forEach(item => {
+            if(city !== '') {
+              city += ', ' + item.title
+            } else {
+              city += item.title
+            }
+          })
+
+          return city;
+        } else {
+          return this.selectCity;
+        }
+      },
+      getTitleArea() {
+
+        if(this.filters.areas.length > 0) {
+
+          let area = '';
+
+          this.filters.areas.forEach(item => {
+            if(area !== '') {
+              area += ', ' + item.title
+            } else {
+              area += item.title
+            }
+          })
+
+          return area;
+        } else {
+          return this.selectRegion;
+        }
+
+      },
       noDelete() {
       //  noDelete
       },
