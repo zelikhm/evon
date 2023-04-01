@@ -54,7 +54,35 @@
           </div>
         </div>
 
+
+
         <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3">
+
+          <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]"
+               :class="{ 'border__bottom--0': openSelectPlan}">
+            <span
+              class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">{{ language.ob[49] }}</span>
+            <div class="relative">
+              <div ref="city" @click.stop="openSelectPlan = !openSelectPlan"
+                   class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3">
+                <span>{{ language.ob[48] }}</span>
+                <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all"
+                     :class="{ 'rotate-180': openSelectPlan }" alt="">
+              </div>
+              <div v-if="openSelectPlan"
+                   class="max-h-[215px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
+                <div class="flex items-center text-[#1E1D2D] ml-5 mt-2" v-for="(item, index) in selectPlan"
+                     :key="idx">
+                  <input class="custom__checkbox" name="infrastructure" type="checkbox"
+                         v-bind:checked="item.active">
+                  <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
+                         v-on:click="changeSelectPlan(item)">{{ item.name }}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]"
                :class="{ 'border__bottom--0': openSelectCity}">
             <span
@@ -100,35 +128,28 @@
               </div>
               <div v-if="openSelectRegion"
                    class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
-                <div class="flex items-center text-[#1E1D2D] ml-5 mt-2" v-for="(item, index) in regions" :key="idx">
-                  <input class="custom__checkbox" name="infrastructure" type="checkbox"
-                         v-bind:checked="checkRegion(item.id)">
-                  <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
-                         v-on:click="changeSelectRegion(item)">{{ selectLanguage === 0 ? item.title : selectLanguage === 1 ? item.title_en !== undefined ? item.title_en : '' : item.title_tr !== undefined ? item.title_tr : '' }}
-                  </label>
+                <div v-if="filters.areas.length > 0">
+                  <p>
+                    {{ language.ob[17] }}
+                  </p>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex flex-col border border-solid border-[#E5DFEE] rounded-[6px]" v-if="filters.areas.length > 0"
-               :class="{ 'border__bottom--0': openSelectRegionOpen}">
-            <span
-              class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-5 xxl:pt-4 xl:pt-3">{{ language.ob[17] }} </span>
-            <div class="relative" :tabindex="tabindex" @blur="openSelectRegionOpen = false">
-              <div @click="openSelectRegionOpen = !openSelectRegionOpen"
-                   class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
-                <span>{{ selectRegion }}</span>
-                <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all"
-                     :class="{ 'rotate-180': openSelectRegionOpen }" alt="">
-              </div>
-              <div v-if="openSelectRegionOpen"
-                   class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
                 <div class="flex items-center text-[#1E1D2D] ml-5 mt-2" v-for="(item, index) in filters.areas" :key="idx">
                   <input class="custom__checkbox" name="infrastructure" type="checkbox"
                          v-bind:checked="checkRegion(item.id)">
                   <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
                          v-on:click="changeSelectRegion(item)">{{ selectLanguage === 0 ? item.title : selectLanguage === 1 ? item.title_en : item.title_tr }}
+                  </label>
+                </div>
+                <div v-if="regions.length > 0">
+                  <p>
+                    {{ language.ob[48] }}
+                  </p>
+                </div>
+                <div class="flex items-center text-[#1E1D2D] ml-5 mt-2" v-for="(item, index) in regions" :key="idx">
+                  <input class="custom__checkbox" name="infrastructure" type="checkbox"
+                         v-bind:checked="checkRegion(item.id)">
+                  <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
+                         v-on:click="changeSelectRegion(item)">{{ selectLanguage === 0 ? item.title : selectLanguage === 1 ? item.title_en !== undefined ? item.title_en : '' : item.title_tr !== undefined ? item.title_tr : '' }}
                   </label>
                 </div>
               </div>
@@ -702,7 +723,57 @@
         infos_array: [],
         dops_array: [],
         select_city_id: '',
-        openSelectRegionOpen: false,
+        openSelectPlan: false,
+        selectPlan: [
+          {
+            name: '1 + 1',
+            active: false
+          },
+          {
+            name: '1 + 1(D)',
+            active: false
+          },
+          {
+            name: '2 + 1',
+            active: false
+          },
+          {
+            name: '2 + 1(D)',
+            active: false
+          },
+          {
+            name: '3 + 1',
+            active: false
+          },
+          {
+            name: '3 + 1(D)',
+            active: false
+          },
+          {
+            name: '4 + 1',
+            active: false
+          },
+          {
+            name: '4 + 1(D)',
+            active: false
+          },
+          {
+            name: '5 + 1',
+            active: false
+          },
+          {
+            name: '5 + 1(D)',
+            active: false
+          },
+          {
+            name: 'Duplex',
+            active: false
+          },
+          {
+            name: 'Studia',
+            active: false
+          },
+        ],
       }
     },
     methods: {
@@ -768,7 +839,6 @@
         this.count_house = this.houses_array.length;
         this.updatedMap();
 
-        console.log(this.houses_array);
       },
       include(where, what) {
 
@@ -916,12 +986,9 @@
 
         }
 
-        if(this.filters.areas.length === 0) {
-
-          this.openSelectRegionOpen = false;
-
-        }
-
+      },
+      changeSelectPlan(item) {
+        item.active = !item.active
       },
       changeSelectDeadline(deadline) {
         this.selectDeadline = deadline.deadline
@@ -1187,8 +1254,6 @@
               this.filters.deadline = 'Сдан';
             }
 
-            console.log(this.filters.deadline);
-
             object3.forEach(item => {
               if (item.created === this.filters.deadline) {
                 object4.push(item);
@@ -1375,8 +1440,30 @@
           object10 = object9;
         }
 
-        this.houses_array = object10;
-        this.map_array = object10;
+        let object11 = [];
+
+        if(this.selectPlan.find(obj => obj.active === true) !== undefined) {
+          object10.forEach(item => {
+            let options = this.selectPlan.filter(i => i.active === true);
+
+            for(let i = 0; i < options.length; i++) {
+
+              let status = item.flats.find(item => item.count === options[i].name);
+
+              if(status !== undefined) {
+                if(!object11.find(b => b.id === item.id)) {
+                  object11.push(item);
+                  break;
+                }
+              }
+            }
+          })
+        } else {
+          object11 = object10;
+        }
+
+        this.houses_array = object11;
+        this.map_array = object11;
         this.count_house = this.houses_array.length;
         this.updatedMap();
         return this.houses_array.splice(0, this.count);

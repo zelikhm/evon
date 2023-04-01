@@ -321,7 +321,9 @@
     "44": "text a message",
     "45": "Realtor",
     "46": "Developer",
-    "47": "Search"
+    "47": "Search",
+    "48": "Selected",
+    "49": "layout"
   },
   "reg": {
     "0": "Registration on the platform",

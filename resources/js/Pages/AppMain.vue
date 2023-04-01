@@ -47,7 +47,7 @@
             </div>
           </div>
         </div>
-      </div> 
+      </div>
     </div>
 
 
@@ -58,19 +58,19 @@
             <div class="py-[60px] xl:py-20">
               <div class="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5">
                 <div class="block-count flex flex-col gap-3 justify-between items-start sm:items-center bg-white exl:h-fit  rounded-xl p-7 xxl:p-5 xl:p-4">
-                  <h4> {{ count_house }}</h4> 
+                  <h4> {{ count_house }}</h4>
                   <!-- <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Кол-во проектов</span> -->
-                  <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Объектов на платформе</span> 
-                  
+                  <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Объектов на платформе</span>
+
                 </div>
                 <div class="block-count flex flex-col gap-3 justify-between items-start sm:items-center bg-white  exl:h-fit  rounded-xl p-7 xxl:p-5 xl:p-4">
-              
-                  <h4>{{ count_flats }}</h4> 
+
+                  <h4>{{ count_flats }}</h4>
                   <!-- <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Кол-во квартир</span> -->
                   <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Актуальных квартир</span>
                 </div>
                 <div class="block-count flex flex-col gap-3 justify-between items-start sm:items-center bg-white  exl:h-fit  rounded-xl p-7 xxl:p-5 xl:p-4">
-                  <h4>{{ count_people }}</h4> 
+                  <h4>{{ count_people }}</h4>
                   <!-- <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Кол-во риелторов </span> -->
                   <span class="text-base xxl:text-sm xl:text-xs lg:text-[14px] sm:text-center">Агентов пользуются  нашим сервисом</span>
                 </div>
@@ -80,7 +80,7 @@
         </div>
      </div>
     <!--Для риэлтора -->
-    <div class="_container"> 
+    <div class="_container">
       <div class="_container--inter">
         <h3 class="text-lg xxl:text-base xl:text-sm lg:text-[17px] font-semibold pb-8 xl:pb-5">{{ language.main[4] }}</h3>
         <div class="grid grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5 xl:gap-3 mb-[100px] xxl:mb-10">
@@ -190,7 +190,6 @@ export default {
       this.user = this.userInfo;
     }
 
-    console.log(this.user);
     if(this.user !== null) {
       if(this.user.lang === 0) {
         this.language = this.$ru;
@@ -253,7 +252,7 @@ export default {
   font-weight: 600;
   font-size: 25px;
   text-align: center;
-  display: block; 
+  display: block;
   width: 100%;
 }
 .count-blocks span{
