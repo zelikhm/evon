@@ -109,6 +109,7 @@ Route::prefix('chat')->group(function () {
 });
 
 Route::prefix('/payment')->group(function () {
+  Route::get('/plan', ['App\Http\Controllers\Payment\IndexController', 'plan']);
   Route::post('/', ['App\Http\Controllers\Payment\IndexController', 'index'])->name('pair');
   Route::post('/success', ['App\Http\Controllers\User\SubscriptionController', 'payment']);
 });

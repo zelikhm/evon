@@ -4,12 +4,17 @@ namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
 use App\Models\PaymentModel;
+use App\Models\TarifModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 class IndexController extends Controller
 {
+
+  public function plan() {
+    return response()->json(TarifModel::all(), 200);
+  }
 
   public function index(Request $request) {
     $merchant_id    = '332444';
