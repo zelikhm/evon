@@ -541,8 +541,9 @@ path editCompany \ [post] / поля:
 path payment \ [post] / поля: 
 
 - user_id - Айди юзера
+- type - айди подписки
 - day - Кол-во дней
-- price - цена (Нет мерчанта - нет кассы - не надо передавать)
+- price - цена
 
 
 ## Info 
