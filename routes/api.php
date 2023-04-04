@@ -95,6 +95,7 @@ Route::prefix('user')->group(function () {
   Route::post('/payment/success', ['App\Http\Controllers\User\SubscriptionController', 'payment']);
   //
   Route::post('/lang', ['App\Http\Controllers\User\IndexController', 'lang']);
+  Route::post('/setLink', ['App\Http\Controllers\User\IndexController', 'setLink']);
 });
 
 Route::prefix('chat')->group(function () {

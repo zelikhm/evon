@@ -14,6 +14,8 @@ class SubscriptionModel extends Model
       'user_id',
       'active',
       'finished_at',
+      'free',
+      'free_link',
     ];
 
     public function user() {

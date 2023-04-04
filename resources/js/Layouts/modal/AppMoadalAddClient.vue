@@ -23,11 +23,14 @@
         </div>
 
         <div class="relative mt-10 xxl:mt-8 xl:mt-6">
-          
-          <input :value="getLink()" readonly ref="text" disabled
+
+          <input v-if="user.subscription_info.free == 1 && user.subscription_info.free_link == 1 || user.subscription_info.free == 0" :value="getLink()" readonly ref="text" disabled
             class="w-full text-[#1E1D2D] text-[16px] focus:ring-[#6435A5] focus:border-[#6435A5] xxl:text-[14px] xl:text-[12px] pl-5 xxl:pl-4 xl:pl-3 py-3 xxl:py-2.5 xl:py-2 leading-none rounded-[5px] border border-solid border-[#E5DFEE] pr-12 xxl:pr-10 xl:pr-8"
             type="text">
-          <img @click="copy"
+          <input v-else :value="getLink()" readonly ref="text" disabled
+                 class="w-full text-[#1E1D2D] text-[16px] focus:ring-[#6435A5] focus:border-[#6435A5] xxl:text-[14px] xl:text-[12px] pl-5 xxl:pl-4 xl:pl-3 py-3 xxl:py-2.5 xl:py-2 leading-none rounded-[5px] border border-solid border-[#E5DFEE] pr-12 xxl:pr-10 xl:pr-8"
+                 type="text">
+          <img v-if="user.subscription_info.free == 1 && user.subscription_info.free_link == 1 || user.subscription_info.free == 0" @click="copy"
             class="absolute cursor-pointer top-1/2 -translate-y-1/2 w-6 xxl:w-5 xl:w-4 right-5 xxl:right-4 xl:right-3"
             src="../../../assets/svg/copy_icon_purple.svg" alt="">
         </div>
@@ -48,21 +51,34 @@ export default {
   data() {
     return {
       isVisible: false,
-      selectLanguage: 0,  
+      selectLanguage: 0,
     }
   },
   mounted() {
- 
+
   },
   emits: ['close-addClient'],
   methods: {
-    getLink() { 
-      return window.location.origin + '/compilation/user/' + this.user.id + '/' + this.house.slug; 
+    getLink() {
+
+      if(this.user.subscription_info.free_link == 1) {
+        axios.post('/api/user/setLink', {
+          'token': this.user.token,
+          'id': this.user.subscription_info.id,
+        })
+      }
+
+      if(this.user.subscription_info.free == 1 && this.user.subscription_info.free_link == 0) {
+        return window.location.origin + '/compilation/user/' + this.user.id + '/' + '****';
+      } else {
+        return window.location.origin + '/compilation/user/' + this.user.id + '/' + this.house.slug;
+      }
+
     },
     closeAddClient() {
       this.$emit('close-addClient')
-    }, 
-    copy() { 
+    },
+    copy() {
       navigator.clipboard.writeText(this.getLink())
     }
   }

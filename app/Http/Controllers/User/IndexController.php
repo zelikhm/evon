@@ -36,6 +36,31 @@ class IndexController extends Controller
     }
   }
 
+  /**
+   * set link
+   * @param Request $request
+   */
+
+  public function setLink(Request $request) {
+
+    if($this->checkToken($request->token)) {
+
+      User\SubscriptionModel::where('id', $request->id)->update(['free_link' => 0]);
+
+      return response()->json(true, 200);
+    } else {
+
+      return response()->json('not auth', 401);
+    }
+
+  }
+
+  /**
+   * save lang
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
   public function lang(Request $request) {
 
     if ($this->checkToken($request->token)) {
@@ -72,6 +97,7 @@ class IndexController extends Controller
         'last_name' => $request->last_name,
         'status' => $request->status,
         'link' => $request->link,
+        'phone' => $request->phone,
         'description' => $request->description,
         'email' => $request->email,
         'image' => $imageName,
@@ -83,6 +109,11 @@ class IndexController extends Controller
       return response()->json('not auth', 401);
     }
   }
+
+  /**
+   * send register
+   * @param Request $request
+   */
 
   public function sendRegister(Request $request) {
 

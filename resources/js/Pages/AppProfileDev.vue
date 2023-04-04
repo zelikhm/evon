@@ -113,6 +113,7 @@ export default {
           status: null,
           link: null,
           desciption: null,
+          phone: this.userValue.tel,
           image: '',
           email: this.userValue.email,
           token: this.user.token

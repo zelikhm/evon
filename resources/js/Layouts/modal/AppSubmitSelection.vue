@@ -44,6 +44,7 @@ export default {
     }
   },
   created() {
+    console.log(this.link)
     this.valueLink = this.link
   }
 }

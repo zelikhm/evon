@@ -123,6 +123,8 @@ class Subscription extends Section implements Initializable
         ->setModelForOptions(User::class, 'email')
         ->setUsageKey('id'),
       AdminFormElement::datetime('finished_at', 'Время окончания'),
+      AdminFormElement::checkbox('free', 'Бесплатная?'),
+      AdminFormElement::checkbox('free_link', 'Бесплатная ссылка?'),
 
     ]);
 

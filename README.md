@@ -477,6 +477,12 @@ path login \ [post] / поля:
 Для риелтора смс-код после token
 Возврат token - 200 or 401 with status error
 
+Обновление бесплатной ссылки \
+path setLink \ [post] / поля:
+
+- id - айди подписки
+- token
+
 Проверка юзера по емейлу (кроме риелтора)\
 path email \ [post] / поля:
 

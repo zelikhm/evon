@@ -162,7 +162,7 @@ export default {
     },
     choseLanguage(n) {
       this.selectLanguage = n;
-console.log(n);
+
       if(this.selectLanguage === 0) {
         this.language = this.$ru;
       } else if (this.selectLanguage === 1) {

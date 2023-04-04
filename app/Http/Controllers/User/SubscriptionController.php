@@ -36,15 +36,24 @@ class SubscriptionController extends Controller
 
             $sub = SubscriptionModel::where('user_id', $user->id)->update([
               'finished_at' => Carbon::now()->addHour(3)->addDay($type->days),
+              'free' => 0,
             ]);
 
           } else {
 
-            $date = new Carbon($sub->finished_at);
+            if($sub->free === 1) {
+              $sub = SubscriptionModel::where('user_id', $user->id)->update([
+                'finished_at' => new Carbon(),
+                'free' => 0,
+              ]);
+            } else {
+              $date = new Carbon($sub->finished_at);
 
-            $sub = SubscriptionModel::where('user_id', $user->id)->update([
-              'finished_at' => $date->addDay($type->days),
-            ]);
+              $sub = SubscriptionModel::where('user_id', $user->id)->update([
+                'finished_at' => $date->addDay($type->days),
+                'free' => 0,
+              ]);
+            }
           }
 
           return response()->json(['message' => 'thanks, subscription was updated', 'status' => 'SUCCESS', 'subscription' => $sub], 200);
@@ -53,6 +62,7 @@ class SubscriptionController extends Controller
           $sub = SubscriptionModel::create([
             'user_id' => $user->id,
             'active' => true,
+            'free' => 0,
             'finished_at' => Carbon::now()->addHour(3)->addDay($type->days),
             'created_at' => Carbon::now()->addHour(3),
             'updated_at' => Carbon::now()->addHour(3),

@@ -21,11 +21,13 @@
         <div class="flex items-center gap-4 xxl:gap-3 xl:gap-2.5">
 <!--          <img :src="'/storage/' + house.user.image" class="h-14 xxl:h-12 xl:h-10" alt="avatar">-->
           <div class="flex flex-col gap-1.5 xxl:gap-1 xl:gap-0.5">
-            <span class="font-medium text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none" v-if="house.user.first_name">{{ house.user.first_name }}</span>
+            <span class="font-medium text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none" v-if="house.user.first_name && user.subscription_info.free == 0">{{ house.user.first_name }}</span>
+            <span class="font-medium text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none" v-bind:title="language.ob[50]" v-if="house.user.first_name && user.subscription_info.free == 1">{{   '*****' }}</span>
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px] leading-none" v-if="house.user.status">{{ house.user.status }}</span>
           </div>
         </div>
-        <button class="w-full  bg-[#F6F3FA] text-[#6536A5] text-base xxl:text-sm xl:text-xs lg:text-[15px] rounded-[6px] py-4 xxl:py-3 xl:py-2.5" v-on:click="openChat(house.user.id)">{{ language.ob[9] }}</button>
+        <button class="w-full  bg-[#F6F3FA] text-[#6536A5] text-base xxl:text-sm xl:text-xs lg:text-[15px] rounded-[6px] py-4 xxl:py-3 xl:py-2.5" v-if="user.subscription_info.free !== 1" v-on:click="openChat(house.user.id)">{{language.ob[9] }}</button>
+        <button class="w-full  bg-[#F6F3FA] text-[#6536A5] text-base xxl:text-sm xl:text-xs lg:text-[15px] rounded-[6px] py-4 xxl:py-3 xl:py-2.5" :data-tooltip="language.ob[50]" v-else :disabled="user.subscription_info.free === 1">{{language.ob[9] }}</button>
       </div>
     </div>
     <div class="pb-10 xxl:pb-8 xl:pb-6" v-if="house.info.exclusive && house.info.exclusive !== 'null'">
@@ -35,7 +37,7 @@
     <div class="pb-14 xxl:pb-10 xl:pb-8">
       <div class="font-medium text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] pb-5 xxl:pb-4 xl:pb-3 leading-none">{{ language.ob[3] }}</div>
       <div class="flex items-start gap-4 xxl:gap-3 xl:gap-2.5">
-        <span class="font-medium text-[32px] xxl:text-[26px] xl:text-[22px] lg:text-[26px]">{{ house.percent }}%</span>
+        <span class="font-medium text-[32px] xxl:text-[26px] xl:text-[22px] lg:text-[26px]">{{ user.subscription_info.free === 1 ? language.ob[50] : house.percent + '%' }}</span>
         <span class="text-base text-[#8A8996] xxl:text-sm xl:text-xs lg:text-[15px]" v-if="house.comment && house.comment !== 'null'">{{ house.comment }}</span>
       </div>
     </div>
@@ -53,7 +55,7 @@
         <div class="text-[14px] xxl:text-[12px] xl:text-[10px] leading-none pb-4 xxl:pb-3 xl:pb-2.5"><span class="text-[#8A8996]" v-if="item.link !== 'null' && item.link !== null">{{ language.dob_ob_2[7] }}:</span> {{ item.link }}</div>
         <div class="flex cursor-pointer mb-4 xxl:mb-3 xl:mb-2.5 bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]" v-if="item.phone">
           <img src="../../assets/svg/chat_tel_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
-          <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ item.phone }}</span>
+          <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ user.subscription_info.free === 1 ? language.ob[50] : item.phone }}</span>
         </div>
         <div class="flex cursor-pointer mb-4 xxl:mb-3 xl:mb-2.5 bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]" v-if="item.email">
           <img src="../../assets/svg/chat_mail_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
@@ -93,11 +95,52 @@ export default {
     }
   },
   created() {
+    console.log(this.user);
     this.news = this.house.news.slice(0, 4).sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at))
   }
 }
 </script>
 
 <style scoped>
+  [data-tooltip]::after {
+    content: attr(data-tooltip); /* Выводим текст */
+    position: absolute;
+    top: 245px;
+    right: 150px;
+    background: rgb(246 243 250 / var(--tw-bg-opacity));
 
+  }
+  [data-tooltip]::after {
+    opacity: 0;
+  }
+  [data-tooltip]::after {
+    transition: 1s;
+  }
+  [data-tooltip]::after {
+    pointer-events: none;
+  }
+  [data-tooltip]:hover::after {
+    opacity: 1;
+  }
+
+  [data-tooltipName]::after {
+    content: attr(data-tooltip); /* Выводим текст */
+    position: absolute;
+    top: 245px;
+    right: 150px;
+    background: rgb(246 243 250 / var(--tw-bg-opacity));
+
+  }
+  [data-tooltipName]::after {
+    opacity: 0;
+  }
+  [data-tooltipName]::after {
+    transition: 1s;
+  }
+  [data-tooltipName]::after {
+    pointer-events: none;
+  }
+  [data-tooltipName]:hover::after {
+    opacity: 1;
+  }
 </style>
