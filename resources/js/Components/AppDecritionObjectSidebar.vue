@@ -38,7 +38,7 @@
       <div class="font-medium text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] pb-5 xxl:pb-4 xl:pb-3 leading-none">{{ language.ob[3] }}</div>
       <div class="flex items-start gap-4 xxl:gap-3 xl:gap-2.5">
         <span class="font-medium text-[32px] xxl:text-[26px] xl:text-[22px] lg:text-[26px]">{{ user.subscription_info.free === 1 ? language.ob[50] : house.percent + '%' }}</span>
-        <span class="text-base text-[#8A8996] xxl:text-sm xl:text-xs lg:text-[15px]" v-if="house.comment && house.comment !== 'null'">{{ house.comment }}</span>
+        <span class="text-base text-[#8A8996] xxl:text-sm xl:text-xs lg:text-[15px]" v-if="house.comment && house.comment !== 'null' && user.subscription_info.free === 0">{{house.comment }}</span>
       </div>
     </div>
     <div class="pb-14 xxl:pb-10 xl:pb-8" v-if="house.supports.length > 0">
@@ -59,7 +59,7 @@
         </div>
         <div class="flex cursor-pointer mb-4 xxl:mb-3 xl:mb-2.5 bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]" v-if="item.email">
           <img src="../../assets/svg/chat_mail_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
-          <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ item.email }}</span>
+          <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ user.subscription_info.free === 1 ? language.ob[50] : item.email }}</span>
         </div>
       </div>
     </div>

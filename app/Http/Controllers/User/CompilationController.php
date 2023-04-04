@@ -112,7 +112,12 @@ class CompilationController extends Controller
 
   public function show($id)
   {
-    $compilation = CompilationModel::where('id', $id - 10000)->with(['values', 'user', 'company'])->firstOrFail();
+    if(is_int($id)) {
+      $compilation = CompilationModel::where('id', $id - 10000)->with(['values', 'user', 'company'])->firstOrFail();
+    } else {
+      return redirect('404');
+    }
+
 
     $houses = collect();
 

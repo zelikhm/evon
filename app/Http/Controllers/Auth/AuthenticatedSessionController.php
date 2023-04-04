@@ -214,8 +214,6 @@ class AuthenticatedSessionController extends Controller
 
     $session = rand(10000, 100000);
 
-//    $cookie = cookie('session_key', $session, 120000);
-
     Cookie::queue('session_key', $session, 262800);
 
     User\SessionModel::create([
