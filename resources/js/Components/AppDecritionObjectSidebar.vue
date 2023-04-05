@@ -37,7 +37,8 @@
     <div class="pb-14 xxl:pb-10 xl:pb-8">
       <div class="font-medium text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] pb-5 xxl:pb-4 xl:pb-3 leading-none">{{ language.ob[3] }}</div>
       <div class="flex items-start gap-4 xxl:gap-3 xl:gap-2.5">
-        <span class="font-medium text-[32px] xxl:text-[26px] xl:text-[22px] lg:text-[26px]">{{ user.subscription_info.free === 1 ? language.ob[50] : house.percent + '%' }}</span>
+        <span class="font-medium text-[32px] xxl:text-[26px] xl:text-[22px] lg:text-[26px]" v-if="user.subscription_info.free === 1">{{ house.percent + '%' }}</span>
+        <span class="font-medium text-[24px] xxl:text-[18px] xl:text-[16px] lg:text-[18px]" v-else>{{ language.ob[50] }}</span>
         <span class="text-base text-[#8A8996] xxl:text-sm xl:text-xs lg:text-[15px]" v-if="house.comment && house.comment !== 'null' && user.subscription_info.free === 0">{{house.comment }}</span>
       </div>
     </div>
