@@ -41,11 +41,14 @@ class NewsController extends Controller
 
   public function getAllNews() {
 
-    $news = HouseNewsModel::where('visible', 1)->orderBy('created_at', 'ASC')->get();
+    $news = HouseNewsModel::where('visible', 1)
+      ->with(['house'])
+      ->orderBy('created_at', 'ASC')
+      ->get();
 
     foreach ($news as $item) {
 
-      $item->house = $this->getHouseOnId($item->house_id);
+      $item->house->image = $this->getPhoto($item->house);
 
     }
 
