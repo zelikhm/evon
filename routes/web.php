@@ -35,7 +35,6 @@ Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
     Route::get('/news/create', ['App\Http\Controllers\House\NewsController', 'createNews']);
     Route::get('/news/edit/{id}', ['App\Http\Controllers\House\NewsController', 'editNews']);
     Route::get('/compilation', ['App\Http\Controllers\User\CompilationController', 'index']);
-
     Route::get('/favorites', ['App\Http\Controllers\User\FavoriteController', 'index']);
   });
 //
