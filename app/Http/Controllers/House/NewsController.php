@@ -45,7 +45,7 @@ class NewsController extends Controller
 
     foreach ($news as $item) {
 
-      $item->house = $this->getHouseOnId($item->house->id);
+      $item->house = $this->getHouseOnId($item->house_id);
 
     }
 
