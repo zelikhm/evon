@@ -40,7 +40,7 @@ class NewsController extends Controller
    */
 
   public function getAllNews() {
-    return HouseNewsModel::orderBy('created_at', 'ASC')->with([
+    return HouseNewsModel::where('visible')->orderBy('created_at', 'ASC')->with([
       'house'
     ])->get();
   }
