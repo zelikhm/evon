@@ -43,7 +43,7 @@ class SubscriptionController extends Controller
 
             if($sub->free === 1) {
               $sub = SubscriptionModel::where('user_id', $user->id)->update([
-                'finished_at' => new Carbon(),
+                'finished_at' => Carbon::now()->addHour(3)->addDay($type->days),
                 'free' => 0,
               ]);
             } else {
