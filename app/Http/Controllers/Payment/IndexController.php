@@ -26,7 +26,7 @@ class IndexController extends Controller
       'type' => $request->type,
     ]);
 
-    $count = PaymentModel::count();
+    $count = PaymentModel::orderBy('id', 'DESC')->first();
 
     $name            = "подписка: для пользователя " . $request->email;
     $price           = $request->price;
@@ -50,7 +50,7 @@ class IndexController extends Controller
     $expiry_date        = Carbon::now()->addDay();
     $max_count          = "1";
     $callback_link      = "https://evon-tr.com/api/payment/success";
-    $callback_id        = $count;
+    $callback_id        = $count->id;
     $debug_on           = 1;
 
     $paytr_token=base64_encode(hash_hmac('sha256', $required.$merchant_salt, $merchant_key, true));
