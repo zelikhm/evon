@@ -39,17 +39,20 @@
             <div class="flex items-center text-[#1E1D2D]">
               <input class="custom__checkbox" name="filters" type="checkbox" id="filters_1"
                      v-model="filters.badge.news">
-              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_1">{{ language.rielt_1[51] }}</label>
+              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_1">{{
+                language.rielt_1[51] }}</label>
             </div>
             <div class="flex items-center text-[#1E1D2D]">
               <input class="custom__checkbox" name="filters" type="checkbox" id="filters_2"
                      v-model="filters.badge.sales">
-              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_2">{{ language.rielt_1[52] }}</label>
+              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_2">{{
+                language.rielt_1[52] }}</label>
             </div>
             <div class="flex items-center text-[#1E1D2D]">
               <input class="custom__checkbox" name="filters" type="checkbox" id="filters_3"
                      v-model="filters.badge.popular">
-              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_3">{{ language.rielt_1[53] }}</label>
+              <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" for="filters_3">{{
+                language.rielt_1[53] }}</label>
             </div>
           </div>
         </div>
@@ -63,7 +66,7 @@
             <div class="relative">
               <div ref="city" @click.stop="openSelectPlan = !openSelectPlan"
                    class="flex items-center justify-between cursor-pointer text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-5 xxl:mb-4 xl:mb-3">
-                <span>{{ language.ob[48] }}</span>
+                <span>{{ getTitlePlan() }}</span>
                 <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all"
                      :class="{ 'rotate-180': openSelectPlan }" alt="">
               </div>
@@ -106,7 +109,9 @@
                   <input class="custom__checkbox" name="infrastructure" type="checkbox"
                          v-bind:checked="checkCity(item.id)">
                   <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
-                         v-on:click="changeSelectCity(item)">{{ selectLanguage === 0 ? item.title : selectLanguage === 1 ? item.title_en !== undefined ? item.title_en : '' : item.title_tr !== undefined ? item.title_tr : '' }}
+                         v-on:click="changeSelectCity(item)">{{ selectLanguage === 0 ? item.title : selectLanguage === 1
+                    ? item.title_en !== undefined ? item.title_en : '' : item.title_tr !== undefined ? item.title_tr :
+                    '' }}
                   </label>
                 </div>
               </div>
@@ -131,11 +136,13 @@
                     {{ language.ob[17] }}
                   </p>
                 </div>
-                <div class="flex items-center text-[#1E1D2D] ml-5 mt-2" v-for="(item, index) in filters.areas" :key="idx">
+                <div class="flex items-center text-[#1E1D2D] ml-5 mt-2" v-for="(item, index) in filters.areas"
+                     :key="idx">
                   <input class="custom__checkbox" name="infrastructure" type="checkbox"
                          v-bind:checked="checkRegion(item.id)">
                   <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
-                         v-on:click="changeSelectRegion(item)">{{ selectLanguage === 0 ? item.title : selectLanguage === 1 ? item.title_en : item.title_tr }}
+                         v-on:click="changeSelectRegion(item)">{{ selectLanguage === 0 ? item.title : selectLanguage ===
+                    1 ? item.title_en : item.title_tr }}
                   </label>
                 </div>
                 <div v-if="regions.length > 0">
@@ -147,7 +154,9 @@
                   <input class="custom__checkbox" name="infrastructure" type="checkbox"
                          v-bind:checked="checkRegion(item.id)">
                   <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
-                         v-on:click="changeSelectRegion(item)">{{ selectLanguage === 0 ? item.title : selectLanguage === 1 ? item.title_en !== undefined ? item.title_en : '' : item.title_tr !== undefined ? item.title_tr : '' }}
+                         v-on:click="changeSelectRegion(item)">{{ selectLanguage === 0 ? item.title : selectLanguage ===
+                    1 ? item.title_en !== undefined ? item.title_en : '' : item.title_tr !== undefined ? item.title_tr :
+                    '' }}
                   </label>
                 </div>
               </div>
@@ -156,16 +165,19 @@
 
           <div :class="{'border__purple': isBorder === 1 }"
                class="ones__select border border-solid border-[#E5DFEE] rounded-[6px] p-5 xx:p-4 xl:p-3">
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">{{ language.rielt_1[18] }}</span>
+            <span
+              class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">{{ language.rielt_1[18] }}</span>
             <div class="flex gap-2">
               <div class="flex items-center gap-1">
-                <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="cost_from">{{ language.rielt_1[19] }}</label>
+                <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="cost_from">{{
+                  language.rielt_1[19] }}</label>
                 <input @click="changeBorder(1)" v-model="filters.price.min"
                        class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0"
                        type="number" id="cost_from">
               </div>
               <div class="flex items-center gap-1">
-                <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="cost_before">{{ language.rielt_1[20] }}</label>
+                <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="cost_before">{{
+                  language.rielt_1[20] }}</label>
                 <input @click="changeBorder(1)" v-model="filters.price.max"
                        class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0"
                        type="number" id="cost_before">
@@ -180,35 +192,45 @@
             <div class="relative" :tabindex="tabindex" @blur="openSelectDeadline = false">
               <div @click="openSelectDeadline = !openSelectDeadline"
                    class="flex items-center justify-between cursor-pointer text-[#1E1D2D]  text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] px-5 xxl:px-4 xl:px-3 mb-4 xxl:mb-3 xl:mb-2.5">
-                <span>{{ selectDeadline }}</span>
+                <span>{{ getTitleDeadline() }}</span>
                 <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all"
                      :class="{ 'rotate-180': openSelectDeadline }" alt="">
               </div>
               <div v-if="openSelectDeadline"
                    class="max-h-[150px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
-                <span
-                  v-for="(deadline, idx) in deadlines" :key="idx"
-                  @click="changeSelectDeadline(deadline)"
-                  class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
-                >
-                  {{ deadline.deadline }}
-                </span>
+                <!--                <span-->
+                <!--                  v-for="(deadline, idx) in deadlines" :key="idx"-->
+                <!--                  @click="changeSelectDeadline(deadline)"-->
+                <!--                  class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"-->
+                <!--                >-->
+                <!--                  {{ deadline.deadline }}-->
+                <!--                </span>-->
+                <div class="flex items-center text-[#1E1D2D] ml-5 mt-2" v-for="(deadline, idx) in deadlines" :key="idx">
+                  <input class="custom__checkbox" name="infrastructure" type="checkbox"
+                         v-bind:checked="deadline.active">
+                  <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
+                         v-on:click="changeSelectDeadline(deadline)">{{ deadline.deadline }}
+                  </label>
+                </div>
               </div>
             </div>
           </div>
 
           <div :class="{'border__purple': isBorder === 2 }"
                class="ones__select border border-solid border-[#E5DFEE] rounded-[6px] p-5 xx:p-4 xl:p-3">
-            <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">{{ language.rielt_1[22] }}</span>
+            <span
+              class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">{{ language.rielt_1[22] }}</span>
             <div class="flex gap-2">
               <div class="flex items-center gap-1">
-                <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="from">{{ language.rielt_1[19] }}</label>
+                <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="from">{{
+                  language.rielt_1[19] }}</label>
                 <input @click="changeBorder(2)" v-model="filters.square.min"
                        class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0"
                        type="number" id="from">
               </div>
               <div class="flex items-center gap-1">
-                <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="before">{{ language.rielt_1[20] }}</label>
+                <label class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" for="before">{{
+                  language.rielt_1[20] }}</label>
                 <input @click="changeBorder(2)" v-model="filters.square.max"
                        class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] border__bottom p-0 w-full bg-[#F6F3FA] border-transparent focus:ring-0"
                        type="number" id="before">
@@ -218,7 +240,7 @@
 
           <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]"
                :class="{ 'border__bottom--0': openSelectDev}"
-                v-if="user.subscription_info.free === 0"
+               v-if="user.subscription_info.free === 0"
           >
             <span
               class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">{{ language.rielt_1[23] }}</span>
@@ -251,7 +273,8 @@
             <div v-if="openLocation" class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
               <div :class="{'border__purple': isBorder === 3 }"
                    class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_sea">{{ language.rielt_1[26] }}
+                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_sea">{{
+                  language.rielt_1[26] }}
                   (м)</label>
                 <input @click="changeBorder(3)" v-model="filters.location.toSea"
                        class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
@@ -259,21 +282,24 @@
               </div>
               <div :class="{'border__purple': isBorder === 4 }"
                    class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_school">{{ language.rielt_1[30] }} (м)</label>
+                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_school">{{
+                  language.rielt_1[30] }} (м)</label>
                 <input @click="changeBorder(4)" v-model="filters.location.toSchool"
                        class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                        type="number" id="for_school">
               </div>
               <div :class="{'border__purple': isBorder === 5 }"
                    class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_shoping">{{ language.rielt_1[28] }} (м)</label>
+                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_shoping">{{
+                  language.rielt_1[28] }} (м)</label>
                 <input @click="changeBorder(5)" v-model="filters.location.toShop"
                        class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                        type="number" id="for_shoping">
               </div>
               <div :class="{'border__purple': isBorder === 6 }"
                    class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_park">{{ language.rielt_1[33] }}
+                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_park">{{
+                  language.rielt_1[33] }}
                   (м)</label>
                 <input @click="changeBorder(6)" v-model="filters.location.toPark"
                        class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
@@ -281,14 +307,16 @@
               </div>
               <div :class="{'border__purple': isBorder === 7 }"
                    class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_child">{{ language.rielt_1[29] }} (м)</label>
+                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_child">{{
+                  language.rielt_1[29] }} (м)</label>
                 <input @click="changeBorder(7)" v-model="filters.location.toChildrenSchool"
                        class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                        type="number" id="for_child">
               </div>
               <div :class="{'border__purple': isBorder === 8 }"
                    class="flex flex-col gap-2 xxl:gap-1.5 border border-solid border-[#E5DFEE] rounded-[6px] p-5 xxl:p-4 xl:p-3">
-                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_stop">{{ language.rielt_1[34] }} (м)</label>
+                <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]" for="for_stop">{{
+                  language.rielt_1[34] }} (м)</label>
                 <input @click="changeBorder(8)" v-model="filters.location.toBus"
                        class="bg-[#F6F3FA] text-[#1E1D2D] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                        type="number" id="for_stop">
@@ -305,8 +333,11 @@
             <div v-if="openInfrastruktura"
                  class="transition-all duration-500 h-fit flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
               <div class="flex items-center text-[#1E1D2D]" v-for="(item, index) in infos_array">
-                <input class="custom__checkbox" name="infrastructure" type="checkbox" :id="'infrastructure' + item.id" v-model="item.active">
-                <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" :for="'infrastructure' + item.id">{{  selectLanguage === 0 ? item.name : selectLanguage === 1 ? item.name_en : item.name_tr }}</label>
+                <input class="custom__checkbox" name="infrastructure" type="checkbox" :id="'infrastructure' + item.id"
+                       v-model="item.active">
+                <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]"
+                       :for="'infrastructure' + item.id">{{ selectLanguage === 0 ? item.name : selectLanguage === 1 ?
+                  item.name_en : item.name_tr }}</label>
               </div>
             </div>
           </div>
@@ -319,8 +350,10 @@
             </div>
             <div v-if="openDopServices" class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
               <div class="flex items-center text-[#1E1D2D]" v-for="(item, index) in dops_array">
-                <input class="custom__checkbox" name="services" type="checkbox" :id="'services' + item.id" v-model="item.active">
-                <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" :for="'services' + item.id">{{ selectLanguage === 0 ? item.name : selectLanguage === 1 ? item.name_en : item.name_tr }}</label>
+                <input class="custom__checkbox" name="services" type="checkbox" :id="'services' + item.id"
+                       v-model="item.active">
+                <label class="text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px]" :for="'services' + item.id">{{
+                  selectLanguage === 0 ? item.name : selectLanguage === 1 ? item.name_en : item.name_tr }}</label>
               </div>
             </div>
           </div>
@@ -348,10 +381,18 @@
         </div>
         <div class="flex justify-between md:flex-col md:gap-3 items-center">
           <div class="flex flex-col items-start lg:gap-2">
-            <h2 class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] lg:text-[20px] whitespace-nowrap text-center" v-if="isSeatch === ''">{{ language.ob[23] }}</h2>
-            <h2 class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] lg:text-[20px] whitespace-nowrap text-center" v-else>{{ language.ob[47] + ': ' + isSearch }}</h2>
-            <span class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center" v-if="!preloader">{{ language.izbr_1[3] + ': ' + count_house }}</span>
-            <span class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center" v-else>  <div class="minLoader"></div>  {{ language.izbr_1[3] + ': ' }}</span>
+            <h2
+              class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] lg:text-[20px] whitespace-nowrap text-center"
+              v-if="isSeatch === ''">{{ language.ob[23] }}</h2>
+            <h2
+              class="text-[22px] font-semibold xxl:text-[18px] xl:text-[15px] lg:text-[20px] whitespace-nowrap text-center"
+              v-else>{{ language.ob[47] + ': ' + isSearch }}</h2>
+            <span
+              class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center"
+              v-if="!preloader">{{ language.izbr_1[3] + ': ' + count_house }}</span>
+            <span
+              class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center"
+              v-else>  <div class="minLoader"></div>  {{ language.izbr_1[3] + ': ' }}</span>
           </div>
           <div class="flex items-center md:flex-col gap-8 xxl:gap-6 xl:gap-5 md:gap-3">
             <div v-if="!map" :tabindex="tabindex" @blur="openDate = false" class="relative">
@@ -508,7 +549,8 @@
                     </button>
                   </div>
                 </div>
-                <div class="flex flex-col justify-between px-7 xxl:px-6 xl:px-5 md:px-1.5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3 md:py-3 md:gap-3.5">
+                <div
+                  class="flex flex-col justify-between px-7 xxl:px-6 xl:px-5 md:px-1.5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3 md:py-3 md:gap-3.5">
                   <div class="flex justify-between sm:flex-col gap-2">
                     <div class="w-full flex flex-col gap-3 xxl:gap-2 xl:gap-1.5">
                       <a target="_blank" :href="'/house/' + item.slug"
@@ -532,7 +574,8 @@
                 </div>
               </div>
             </div>
-            <div class="flex flex-col justify-between gap-1.5 px-7 xxl:px-6 xl:px-5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3">
+            <div
+              class="flex flex-col justify-between gap-1.5 px-7 xxl:px-6 xl:px-5 pt-7 xxl:pt-6 xl:pt-5 pb-5 xxl:pb-4 xl:pb-3">
               <div class="flex justify-between items-center gap-1">
                 <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] md:text-[13px] whitespace-nowrap">{{ item.flats.length }} {{ item.flats.length === 1 ? language.dob_kv_1[15] : item.flats.length === 2 || item.flats.length === 3 || item.flats.length === 4 ? language.dob_kv_1[16] : language.dob_kv_1[17] }}</span>
                 <span
@@ -543,10 +586,13 @@
                   v-else-if="item.created">{{ item.created }}</span>
               </div>
               <div class="flex flex-col gap-2.5 xxl:gap-1.5 xl:gap-1">
-              <span class="font-medium whitespace-nowrap text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] md:text-[17px] leading-none leading-none">{{ language.rielt_1[19] }} {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} €</span>
-                <span class="text-[#8A8996] whitespace-nowrap text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px]">{{ isNaN(item.minPrice / item.minSquare) ? "-" : Math.round(item.minPrice / item.minSquare) }} € м²</span>
+                <span
+                  class="font-medium whitespace-nowrap text-[#1E1D2D] text-[18px] xxl:text-[15px] xl:text-[13px] md:text-[17px] leading-none leading-none">{{ language.rielt_1[19] }} {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} €</span>
+                <span
+                  class="text-[#8A8996] whitespace-nowrap text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px]">{{ isNaN(item.minPrice / item.minSquare) ? "-" : Math.round(item.minPrice / item.minSquare) }} € м²</span>
               </div>
-              <div class="gray-backg flex items-center justify-center w-fit px-3 xxl:px-2.5 xl:px-2 gap-2 xxl:gap-1.5 xl:gap-1">
+              <div
+                class="gray-backg flex items-center justify-center w-fit px-3 xxl:px-2.5 xl:px-2 gap-2 xxl:gap-1.5 xl:gap-1">
                 <img src="../../assets/svg/ruller_icon.svg" class="h-4 xxl:h-3 xl:h-2.5" alt="Линейка">
                 <span class="text-[14px] xxl:text-[12px] xl:text-[10px] md:text-[13px] whitespace-nowrap">{{ Number.isInteger(item.minSquare) ? item.minSquare : "-" }} м² - {{ Number.isInteger(item.maxSquare) ? item.maxSquare : "-" }} м²</span>
               </div>
@@ -618,7 +664,6 @@
         this.selectDeadline = this.language.ob[24];
 
         this.deadlines = [
-          {deadline: this.language.ob[24], id: 0},
           {deadline: this.language.rielt_1[10], id: 1},
         ]
 
@@ -658,7 +703,7 @@
             min: '',
             max: '',
           },
-          deadline: 'Не важно',
+          deadline: [],
           builder: 'Не важно',
           location: {
             toSea: '',
@@ -690,7 +735,6 @@
         openSelectDeadline: false,
         openSelectType: false,
         deadlines: [
-          {deadline: this.language.ob[24], id: 0},
           {deadline: this.language.rielt_1[10], id: 1},
         ],
         selectDev: this.language.ob[24],
@@ -777,14 +821,57 @@
       }
     },
     methods: {
+      getTitleDeadline() {
+
+        if(this.deadlines.find(item => item.active === true) !== undefined) {
+          let deadline = '';
+          this.deadlines.forEach(item => {
+            if(item.active) {
+              if (deadline !== '') {
+                deadline += ', ' + item.deadline
+              } else {
+                deadline += item.deadline
+              }
+            }
+          })
+
+          return deadline;
+        } else {
+          return this.language.ob[24];
+        }
+
+
+      },
+      getTitlePlan() {
+
+        if(this.selectPlan.find(obj => obj.active === true) !== undefined) {
+
+          let plan = '';
+          this.selectPlan.forEach(item => {
+
+            console.log(item);
+            if(item.active) {
+              if (plan !== '') {
+                plan += ', ' + item.name
+              } else {
+                plan += item.name
+              }
+            }
+          });
+
+          return plan;
+        } else {
+          return this.language.ob[48];
+        }
+      },
       getTitleCity() {
 
-        if(this.filters.cities.length > 0) {
+        if (this.filters.cities.length > 0) {
 
           let city = '';
 
           this.filters.cities.forEach(item => {
-            if(city !== '') {
+            if (city !== '') {
               city += ', ' + item.title
             } else {
               city += item.title
@@ -798,12 +885,12 @@
       },
       getTitleArea() {
 
-        if(this.filters.areas.length > 0) {
+        if (this.filters.areas.length > 0) {
 
           let area = '';
 
           this.filters.areas.forEach(item => {
-            if(area !== '') {
+            if (area !== '') {
               area += ', ' + item.title
             } else {
               area += item.title
@@ -817,18 +904,18 @@
 
       },
       noDelete() {
-      //  noDelete
+        //  noDelete
       },
       getArea(area) {
 
         let name = this.areas.find(item => item.title === area);
 
-        if(name !== undefined) {
-          if(this.selectLanguage === 0) {
+        if (name !== undefined) {
+          if (this.selectLanguage === 0) {
             return name.title;
-          } else if(this.selectLanguage === 1) {
+          } else if (this.selectLanguage === 1) {
             return name.title_en !== undefined ? name.title_en : '';
-          } else if(this.selectLanguage === 2) {
+          } else if (this.selectLanguage === 2) {
             return name.title_tr !== undefined ? name.title_tr : '';
           }
         }
@@ -1029,10 +1116,8 @@
       changeSelectPlan(item) {
         item.active = !item.active
       },
-      changeSelectDeadline(deadline) {
-        this.selectDeadline = deadline.deadline
-        this.filters.deadline = deadline.deadline
-        this.openSelectDeadline = false
+      changeSelectDeadline(deadline, idx) {
+        deadline.active = !deadline.active;
 
       },
       changeSelectDev(dev) {
@@ -1286,22 +1371,26 @@
 
         let object4 = [];
 
-        if (this.filters.deadline && this.filters.deadline !== 'Не важно') {
-          if(this.filters.deadline !== this.language.ob[24] && this.filters.deadline !== 'Не важно') {
+        if(this.deadlines.find(item => item.active === true) !== undefined) {
+          this.deadlines.forEach(value => {
 
-            if(this.filters.deadline === 'Başarılı' || this.filters.deadline === 'Finished-Done') {
-              this.filters.deadline = 'Сдан';
+            let name = '';
+
+            if(value.deadline === 'Başarılı' || value.deadline  === 'Finished-Done') {
+              name = 'Сдан';
+            } else {
+              name = value.deadline;
             }
 
-            object3.forEach(item => {
-              if (item.created === this.filters.deadline) {
-                object4.push(item);
-              }
-            })
-          } else {
-            object4 = object3;
-          }
+            if(value.active === true) {
+              object3.forEach(item => {
+                if (item.created === name) {
+                  object4.push(item);
+                }
+              })
+            }
 
+          })
         } else {
           object4 = object3;
         }
@@ -1404,7 +1493,7 @@
               let array_info = [];
 
               Object.values(this.infos_array).forEach(item => {
-                if(item.active === true) {
+                if (item.active === true) {
                   array_info.push(item.id);
                 }
               })
@@ -1434,7 +1523,7 @@
               let array_dops = [];
 
               Object.values(this.dops_array).forEach(item => {
-                if(item.active === true) {
+                if (item.active === true) {
                   array_dops.push(item.id);
                 }
               })
@@ -1481,16 +1570,16 @@
 
         let object11 = [];
 
-        if(this.selectPlan.find(obj => obj.active === true) !== undefined) {
+        if (this.selectPlan.find(obj => obj.active === true) !== undefined) {
           object10.forEach(item => {
             let options = this.selectPlan.filter(i => i.active === true);
 
-            for(let i = 0; i < options.length; i++) {
+            for (let i = 0; i < options.length; i++) {
 
               let status = item.flats.find(item => item.count === options[i].name);
 
-              if(status !== undefined) {
-                if(!object11.find(b => b.id === item.id)) {
+              if (status !== undefined) {
+                if (!object11.find(b => b.id === item.id)) {
                   object11.push(item);
                   break;
                 }
