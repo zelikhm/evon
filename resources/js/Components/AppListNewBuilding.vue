@@ -506,6 +506,7 @@
                  class="hover__title-block transition-all font-semibold text-xl xxl:text-base xl:text-sm md:text-[17px]">
                 {{ item.title }}
               </a>
+              <Link :href="'/profile/edit/' + item.slug" v-if="user.role > 1">edit</Link>
               <span class="text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">от {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} € до {{ Number.isInteger(item.maxPrice) ? item.maxPrice.toLocaleString('ru') : "-" }}</span>
             </div>
           </div>
@@ -631,6 +632,7 @@
   import Multiselect from '@vueform/multiselect'
   import AppModalNotification from "../Layouts/modal/AppModalNotification.vue"
   import {router} from "@inertiajs/vue3";
+  import {Link} from '@inertiajs/vue3'
 
   export default {
     props: {
@@ -1601,7 +1603,8 @@
       AppMap,
       Multiselect,
       AppModalNotification,
-      NewsModal
+      NewsModal,
+      Link
     }
   }
 </script>

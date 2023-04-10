@@ -56,6 +56,7 @@
             :adminNews="adminNews"
             v-if="!isWithClient"
             :language="language"
+            :user="user"
         />
       </div>
       <app-news-developer class="hidden lg:block mb-14 xxl:mb-10 xl:mb-8"
@@ -63,6 +64,7 @@
                           :adminNews="adminNews"
                           v-if="!isWithClient"
                           :language="language"
+                          :user="user"
       />
     </div>
   </main>

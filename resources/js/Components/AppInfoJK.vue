@@ -447,7 +447,7 @@
     components: {
       Multiselect, QuillEditor
     },
-    props: ['dops', 'infos', 'city', 'supports', 'count', 'house', 'language', 'selectLanguage'],
+    props: ['dops', 'infos', 'city', 'supports', 'count', 'house', 'language', 'selectLanguage', 'token'],
     inject: ['user'],
     emits: ['open-add-contact'],
     data() {
@@ -649,7 +649,7 @@
             formData.append('exclusive', this.object.text_agency);
             formData.append('toChildrenSchool', this.object.toChildrenSchool);
             formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
-            formData.append('token', this.user.token);
+            formData.append('token', this.token);
 
             axios({
               method: 'post',
@@ -720,7 +720,7 @@
             formData.append('exclusive', this.object.text_agency);
             formData.append('toChildrenSchool', this.object.toChildrenSchool);
             formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
-            formData.append('token', this.user.token);
+            formData.append('token', this.token);
 
             axios({
               method: 'post',
@@ -905,7 +905,6 @@
               }
             }
           }
-          console.log(this.valueSelectServices)
         }
       },
     },

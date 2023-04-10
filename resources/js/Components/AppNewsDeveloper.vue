@@ -19,6 +19,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                 <div class="flex gap-3 xxl:gap-2 xl:gap-1.5">
                   <div class="flex flex-col gap-1 xxl:gap-0.5">
                     <Link :href="'/house/' + item.house.slug" class="hover__title-block font-semibold text-[13px] xxl:text-[11px] xl:text-[10px] lg:text-[13px]">{{ item.house.title }}</Link>
+                    <Link :href="'/profile/news/edit/' + item.id" v-if="user.role > 1">edit</Link>
                     <span class="text-[11px] xxl:text-[9px] xl:text-[8px] lg:text-[11px]">{{ item.updated_at }}</span>
                   </div>
                 </div>
@@ -63,7 +64,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 
 <script>
 export default {
-  props: ['adminNews', 'news', 'language'],
+  props: ['adminNews', 'news', 'language', 'user'],
   data() {
     return {
       state: 0

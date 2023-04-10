@@ -175,7 +175,7 @@
   import { usePage } from '@inertiajs/vue3'
 
 export default {
-  props: ['house', 'activeFrame', 'selectFlat', 'language', 'statuses'],
+  props: ['house', 'activeFrame', 'selectFlat', 'language', 'statuses', 'token'],
   inject:['user'],
   data() {
     return {
@@ -284,7 +284,7 @@ export default {
       formData.append('status', this.flat.status)
       formData.append('stairs', this.flat.stairs)
       formData.append('price', this.flat.price)
-      formData.append('token', this.user.token)
+      formData.append('token', this.token)
 
 
       console.log(this.selectFlat)
@@ -328,7 +328,7 @@ export default {
       formData.append('price', this.flat.price)
       formData.append('image_up', this.flat.image_up)
       formData.append('image_down', this.flat.image_down)
-      formData.append('token', this.user.token)
+      formData.append('token', this.token)
 
       axios({
         method: 'post',

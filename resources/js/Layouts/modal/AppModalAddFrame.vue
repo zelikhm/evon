@@ -25,7 +25,7 @@
   import { usePage } from '@inertiajs/vue3'
 
   export default {
-  props: ['house', 'isEdit', 'frame', 'language'],
+  props: ['house', 'isEdit', 'frame', 'language', 'token'],
     inject:['user'],
   data() {
     return {
@@ -40,7 +40,7 @@
           house_id: this.house.id,
           frame_id: this.frame.id,
           name: this.frameName,
-          token: this.user.token
+          token: this.token
         })
              .then(response => {
                this.house.frames = response.data
@@ -48,7 +48,7 @@
              })
             .catch(e => console.error(e))
       } else {
-        axios.post('/api/house/createFrame', { house_id: this.house.id, name: this.frameName, token: this.user.token })
+        axios.post('/api/house/createFrame', { house_id: this.house.id, name: this.frameName, token: this.token })
             .then(response => {
               response.data.forEach((item, idx) => {
                 item.active = 0

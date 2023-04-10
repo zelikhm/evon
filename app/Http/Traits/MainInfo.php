@@ -265,7 +265,30 @@ trait MainInfo
 
   protected function getHouseForUserPagination($id)
   {
-    $houses = HouseModel::where('user_id', $id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->paginate(100);
+    $houses = HouseModel::where('user_id', $id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->get();
+
+    foreach ($houses as $house) {
+      $house->image = $this->getPhoto($house);
+
+      $house->view = [
+        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addHour(-24))->count(),
+        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-5))->count(),
+        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-7))->count(),
+        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addWeek(-1))->count(),
+        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addYear(-1))->count(),
+      ];
+    }
+
+    return $houses;
+  }
+
+  /**
+   * getHouses
+   * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+   */
+
+  protected function getHouseForAdminPagination() {
+    $houses = HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'news'])->get();
 
     foreach ($houses as $house) {
       $house->image = $this->getPhoto($house);

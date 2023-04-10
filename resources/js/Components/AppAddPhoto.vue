@@ -58,7 +58,7 @@
 
 export default {
 
-  props: ['house', 'photos', 'language'],
+  props: ['house', 'photos', 'language', 'token'],
   inject:['user'],
   data() {
     return {
@@ -160,7 +160,7 @@ export default {
       axios.post('/api/house/deletedImage', {
         house_id: this.house.id,
         image_name: photo.name,
-        token: this.user.token
+        token: this.token
       }).then(res => {
         console.log('delete')
       })

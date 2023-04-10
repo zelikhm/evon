@@ -100,7 +100,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 <script>
 
 export default {
-  props: ['house', 'language', 'statuses', 'titleTable'],
+  props: ['house', 'language', 'statuses', 'titleTable', 'token'],
   emits: ['open-add-frame'],
   inject:['user'],
   data() {
@@ -131,7 +131,7 @@ export default {
         house_id: this.house.id,
         flat_id: item.id,
         status: item.status,
-        token: this.user.token
+        token: this.token
       }).then(response => console.log(response.data))
     },
     targetFrame(frame, idx) {
@@ -175,13 +175,13 @@ export default {
 
       axios.post('/api/house/deleteFrame', {
         frame_id: frame.id,
-        token: this.user.token
+        token: this.token
       }).then(response => console.log(response.data))
     },
     deleteFlat(item) {
       axios.post('/api/house/deletedFlat', {
         flat_id: item.id,
-        token: this.user.token
+        token: this.token
       }).then(response => console.log(response))
 
       this.house.frames.forEach((i, index) => {

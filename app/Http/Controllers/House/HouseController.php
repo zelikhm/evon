@@ -176,10 +176,20 @@ class HouseController extends Controller
 
   public function showHouse()
   {
-    return Inertia::render('AppPrivateOfficeDev', [
-      'houses' => $this->getHouseForUserPagination(Auth::id()),
-      'user' => $this->getUser(),
-    ]);
+
+    if(Auth::user()->role === 1) {
+      return Inertia::render('AppPrivateOfficeDev', [
+        'houses' => $this->getHouseForUserPagination(Auth::id()),
+        'user' => $this->getUser(),
+      ]);
+    } else {
+      return Inertia::render('AppPrivateOfficeDev', [
+        'houses' => $this->getHouseForAdminPagination(),
+        'user' => $this->getUser(),
+      ]);
+    }
+
+
   }
 
   /**
@@ -286,13 +296,28 @@ class HouseController extends Controller
   {
     HouseModel::where('slug', $slug)->firstOrFail();
 
+    if(Auth::user()->role === 1) {
+
+      $user = $this->getUser();
+      $token = $user->token;
+
+    } else if(Auth::user()->role === 2 || Auth::user()->role === 3) {
+
+      $house = $this->getHouseSlug($slug);
+      $user = User::where('id', $house->user_id)->first();
+      $token = Auth::user()->token;
+
+    }
+
     return Inertia::render('AppAddObject', [
       'house' => $this->getHouseSlug($slug),
       'dops' => $this->getDop(),
       'infos' => $this->getInfo(),
       'city' => $this->getCity(),
       'notification' => $this->getNotification(),
-      'user' => $this->getUser(),
+      'user' => $user,
+      'token' => $token,
+      'admin' => Auth::user()->role > 1 ? Auth::user() : null,
     ]);
   }
 
