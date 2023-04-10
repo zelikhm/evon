@@ -10,6 +10,9 @@ import { Link } from '@inertiajs/inertia-vue3'
         <div class="flex justify-between items-center mb-7 xxl:mb-5 xl:mb-4">
           <span class="font-semibold text-[22px] xxl:text-[18px] xl:text-[14px]">{{ language.menu_zastr[3] }}</span>
           <input type="text" placeholder="Поиск" v-model="search">
+          <p v-if="loader">
+            Загрузка...
+          </p>
           <Link href="/profile/addedHouse" class="text-base xxl:text-sm xl:text-xs text-white bg-[#E84680] leading-none rounded-[3px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5">{{ language.menu_zastr[2] }}</Link>
         </div>
         <div v-if="houses.length === 0" class="grid grid-cols-2 lg:grid-cols-1 mt-10 xxl:mt-8 xl:mt-6">
@@ -175,7 +178,8 @@ export default {
       deleteConfirm: false,
       selectLanguage: 0,
       language: {},
-      search: ''
+      search: '',
+      loader: false
     }
   },
   methods: {
@@ -262,12 +266,15 @@ export default {
     this.reloadObject();
 
     if(this.admin !== null) {
+      this.loader = true;
+
       axios.post('/api/house/getHousesForAdmin', {
         token: this.token
       }).then(res => {
         if(res.status === 200) {
           this.houses_object = res.data;
           this.reloadObject();
+          this.loader = false;
         } else {
           console.log('not auth')
         }
