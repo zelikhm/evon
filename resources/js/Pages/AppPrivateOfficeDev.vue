@@ -168,6 +168,7 @@ export default {
         { number: '...', active: false },
         { number: '24', active: false },
       ],
+      houses_object: [],
       pages: 0,
       page: 0,
       nextPage: 0,
@@ -189,7 +190,7 @@ export default {
         this.language = this.$tur;
       }
 
-      this.houses.data.forEach(item => {
+      this.houses_object.forEach(item => {
         item.selectTime = null
 
         item.watchTime = []
@@ -209,14 +210,14 @@ export default {
       object.views = object.view[time.id]
     },
     deleteHouse(house) {
-      this.houses.data.forEach((item, idx) => {
+      this.houses_object.forEach((item, idx) => {
         if (item.id === house.id) {
           this.houses.data.splice(idx, 1)
         }
       })
       axios.post('/api/house/delete', {
         house_id: house.id,
-        token: this.user.token
+        token: this.token
       }).then(res => console.log(res)).catch(err => console.error(err))
 
       this.deleteConfirm = false
@@ -226,11 +227,29 @@ export default {
       axios.post('/api/house/setVisible', {
         house_id: item.id,
         visible: item.visible,
-        token: this.user.token
+        token: this.token
       }).then(res => { console.log(res.data) })
+    },
+    reloadObject() {
+      this.houses_object.forEach(item => {
+        item.openWatchTime = false
+        item.views = null
+        item.selectTime = null
+
+        item.watchTime = []
+        item.watchTime.push(
+          { id: 0, time: this.language.menu_zastr_1[3] },
+          { id: 1, time: this.language.menu_zastr_1[4] },
+          { id: 2, time: this.language.menu_zastr_1[5] },
+          { id: 3, time: this.language.menu_zastr_1[6] },
+          { id: 4, time: this.language.menu_zastr_1[7] },
+        )
+      })
     }
   },
   created() {
+
+    this.houses_object = this.houses;
 
     if(this.user.lang === 0) {
       this.language = this.$ru;
@@ -240,20 +259,20 @@ export default {
       this.language = this.$tur;
     }
 
-    this.houses.forEach(item => {
-      item.openWatchTime = false
-      item.views = null
-      item.selectTime = null
+    this.reloadObject();
 
-      item.watchTime = []
-      item.watchTime.push(
-        { id: 0, time: this.language.menu_zastr_1[3] },
-        { id: 1, time: this.language.menu_zastr_1[4] },
-        { id: 2, time: this.language.menu_zastr_1[5] },
-        { id: 3, time: this.language.menu_zastr_1[6] },
-        { id: 4, time: this.language.menu_zastr_1[7] },
-      )
-    })
+    if(this.admin !== null) {
+      axios.post('/api/house/getHousesForAdmin', {
+        token: this.token
+      }).then(res => {
+        if(res.status === 200) {
+          this.houses_object = res.data;
+          this.reloadObject();
+        } else {
+          console.log('not auth')
+        }
+      })
+    }
   },
   components: {
     AppHeader,
@@ -267,8 +286,7 @@ export default {
   computed: {
     searchObject() {
 
-      return Object.values(this.houses).filter(item => {
-        console.log(item)
+      return Object.values(this.houses_object).filter(item => {
         return item.title.toUpperCase().indexOf(this.search.toUpperCase()) !== -1
       })
 

@@ -184,11 +184,31 @@ class HouseController extends Controller
       ]);
     } else {
       return Inertia::render('AppPrivateOfficeDev', [
-        'houses' => $this->getHouseForAdminPagination(),
+        'houses' => $this->getHouseForAdminPagination(30),
         'user' => $this->getUser(),
       ]);
     }
 
+
+  }
+
+  /**
+   * get houses for admin
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function getHousesForAdmin(Request $request) {
+
+    if($this->checkToken($request->token)) {
+
+      return response()->json($this->getHouseForAdminPagination(1000), 200);
+
+    } else {
+
+      return response()->json('not auth', 401);
+
+    }
 
   }
 

@@ -287,8 +287,8 @@ trait MainInfo
    * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
    */
 
-  protected function getHouseForAdminPagination() {
-    $houses = HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'news'])->get();
+  protected function getHouseForAdminPagination($limit) {
+    $houses = HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'news'])->limit($limit)->get();
 
     foreach ($houses as $house) {
       $house->image = $this->getPhoto($house);

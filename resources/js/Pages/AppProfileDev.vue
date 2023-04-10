@@ -150,6 +150,7 @@ export default {
     this.userValue.name = this.user.first_name
     this.userValue.email = this.user.email
     this.userValue.tel = this.user.phone
+
   }
 }
 </script>

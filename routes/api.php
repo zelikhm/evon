@@ -19,6 +19,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('house')->group(function () {
+  //admin
+  Route::post('/getHousesForAdmin', ['App\Http\Controllers\House\HouseController', 'getHousesForAdmin']);
+  //
   Route::post('create', ['App\Http\Controllers\House\HouseController', 'create']);
   Route::post('editHouse', ['App\Http\Controllers\House\HouseController', 'editHouse']);
   Route::post('addedSupport', ['App\Http\Controllers\House\HouseController', 'supports']);
