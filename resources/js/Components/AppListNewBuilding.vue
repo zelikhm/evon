@@ -1284,6 +1284,41 @@
       }
 
       this.updateHouses()
+
+      let obj = [
+        {
+        name: '1 + 1',
+        active: true,
+        },
+        {
+        name: '2 + 1',
+        active: true,
+        },
+        {
+          name: '3 + 1',
+          active: false,
+        },
+      ]
+
+      this.readyHouses.forEach(item => {
+
+        (item.flats).forEach(value => {
+
+          console.log(obj.find( (v) => {
+            if(v.active === true) {
+              if(value.count === v.name) {
+                return true;
+              } else {
+                false
+              }
+            } else {
+              false
+            }
+          }))
+
+        })
+
+      })
     },
     mounted() {
       // NO DELETE
@@ -1353,26 +1388,6 @@
 
         let object3 = [];
 
-        object2.forEach(item => {
-          if (this.filters.price.min !== '' && this.filters.price.max !== '') {
-            if (item.minPrice > this.filters.price.min && item.minPrice < this.filters.price.max) {
-              object3.push(item);
-            }
-          } else if (this.filters.price.min !== '' && this.filters.price.max === '') {
-            if (item.minPrice > this.filters.price.min) {
-              object3.push(item);
-            }
-          } else if (this.filters.price.max !== '' && this.filters.price.min === '') {
-            if (item.minPrice < this.filters.price.max) {
-              object3.push(item);
-            }
-          } else {
-            object3 = object2;
-          }
-        })
-
-        let object4 = [];
-
         if(this.deadlines.find(item => item.active === true) !== undefined) {
           this.deadlines.forEach(value => {
 
@@ -1385,11 +1400,30 @@
             }
 
             if(value.active === true) {
-              object3.forEach(item => {
+              object2.forEach(item => {
                 if (item.created === name) {
-                  object4.push(item);
+                  object3.push(item);
                 }
               })
+            }
+
+          })
+        } else {
+          object3 = object2;
+        }
+
+        let object4 = [];
+
+        if (this.filters.builder !== '' && this.filters.builder !== 'Не важно' && this.filters.builder !== this.language.ob[24] && this.filters.builder !== null) {
+          object3.forEach(item => {
+            if (item.user !== null) {
+              if (item.user.first_name !== null) {
+                if (item.user.first_name.toLowerCase() === this.filters.builder.toLowerCase()) {
+                  object4.push(item);
+                }
+              }
+            } else {
+              object4.push(item);
             }
 
           })
@@ -1399,46 +1433,7 @@
 
         let object5 = [];
 
-        object4.forEach(item => {
-          if (this.filters.square.min !== '' && this.filters.square.max !== '') {
-            if (item.minSquare > this.filters.square.min && item.maxSquare < this.filters.square.max) {
-              object5.push(item);
-            }
-          } else if (this.filters.square.min !== '' && this.filters.square.max === '') {
-            if (item.minSquare > this.filters.square.min) {
-              object5.push(item);
-            }
-          } else if (this.filters.square.max !== '' && this.filters.square.min === '') {
-            if (item.maxSquare < this.filters.square.max) {
-              object5.push(item);
-            }
-          } else {
-            object5 = object4;
-          }
-        })
-
-        let object6 = [];
-
-        if (this.filters.builder !== '' && this.filters.builder !== 'Не важно' && this.filters.builder !== this.language.ob[24] && this.filters.builder !== null) {
-          object5.forEach(item => {
-            if (item.user !== null) {
-              if (item.user.first_name !== null) {
-                if (item.user.first_name.toLowerCase() === this.filters.builder.toLowerCase()) {
-                  object6.push(item);
-                }
-              }
-            } else {
-              object6.push(item);
-            }
-
-          })
-        } else {
-          object6 = object5;
-        }
-
-        let object7 = [];
-
-        object7 = object6.filter(location => {
+        object5 = object4.filter(location => {
           let status = true;
 
           if (this.filters.location.toSea !== '') {
@@ -1479,10 +1474,10 @@
 
         })
 
-        let object8 = [];
+        let object6 = [];
 
         if (this.infos_array.find((item) => item.active === true) !== undefined) {
-          object7.forEach(item => {
+          object5.forEach(item => {
             if (item.info_array !== null) {
               let array = [];
 
@@ -1503,18 +1498,18 @@
               const diff = this.include(array, array_info);
 
               if (diff === true) {
-                object8.push(item);
+                object6.push(item);
               }
             }
           })
         } else {
-          object8 = object7;
+          object6 = object5;
         }
 
-        let object9 = [];
+        let object7 = [];
 
         if (this.dops_array.find((item) => item.active === true) !== undefined) {
-          object8.forEach(item => {
+          object6.forEach(item => {
             if (item.dop_array !== null) {
               let array = [];
 
@@ -1533,19 +1528,19 @@
               const diff = this.include(array, array_dops);
 
               if (diff === true) {
-                object9.push(item);
+                object7.push(item);
               }
 
             }
           })
         } else {
-          object9 = object8;
+          object7 = object6;
         }
 
-        let object10 = [];
+        let object8 = [];
 
         if (Object.keys(this.filters.cities).length > 0) {
-          object9.forEach(item => {
+          object7.forEach(item => {
             if (item.city !== null) {
 
               let status = this.filters.cities.find(val => val.title === item.city);
@@ -1556,24 +1551,24 @@
                   let push = this.filters.areas.find(val => val.title === item.area);
 
                   if (push !== undefined) {
-                    object10.push(item);
+                    object8.push(item);
                   }
 
                 } else {
 
-                  object10.push(item);
+                  object8.push(item);
                 }
               }
             }
           })
         } else {
-          object10 = object9;
+          object8 = object7;
         }
 
-        let object11 = [];
+        let object9 = [];
 
         if (this.selectPlan.find(obj => obj.active === true) !== undefined) {
-          object10.forEach(item => {
+          object8.forEach(item => {
             let options = this.selectPlan.filter(i => i.active === true);
 
             for (let i = 0; i < options.length; i++) {
@@ -1581,19 +1576,117 @@
               let status = item.flats.find(item => item.count === options[i].name);
 
               if (status !== undefined) {
-                if (!object11.find(b => b.id === item.id)) {
-                  object11.push(item);
+                if (!object9.find(b => b.id === item.id)) {
+                  object9.push(item);
                   break;
                 }
               }
             }
           })
         } else {
-          object11 = object10;
+          object9 = object8;
         }
 
-        this.houses_array = object11;
-        this.map_array = object11;
+        let object10 = [];
+        let object11 = [];
+
+        if(this.selectPlan.find(obj => obj.active === true) === undefined) {
+
+          object9.forEach(item => {
+            if (this.filters.price.min !== '' && this.filters.price.max !== '') {
+              if (item.minPrice > this.filters.price.min && item.minPrice < this.filters.price.max) {
+                object10.push(item);
+              }
+            } else if (this.filters.price.min !== '' && this.filters.price.max === '') {
+              if (item.minPrice > this.filters.price.min) {
+                object10.push(item);
+              }
+            } else if (this.filters.price.max !== '' && this.filters.price.min === '') {
+              if (item.minPrice < this.filters.price.max) {
+                object10.push(item);
+              }
+            } else {
+              object10 = object9;
+            }
+          })
+
+          object10.forEach(item => {
+            if (this.filters.square.min !== '' && this.filters.square.max !== '') {
+              if (item.minSquare > this.filters.square.min && item.maxSquare < this.filters.square.max) {
+                object11.push(item);
+              }
+            } else if (this.filters.square.min !== '' && this.filters.square.max === '') {
+              if (item.minSquare > this.filters.square.min) {
+                object11.push(item);
+              }
+            } else if (this.filters.square.max !== '' && this.filters.square.min === '') {
+              if (item.maxSquare < this.filters.square.max) {
+                object11.push(item);
+              }
+            } else {
+              object11 = object10;
+            }
+          })
+
+        } else {
+
+          object9.forEach(item => {
+            item.flats.forEach(value => {
+              let status = this.selectPlan.find((v) => {
+                if(v.active === true && v.name === value.count) {
+
+                  if (this.filters.price.min !== '' && this.filters.price.max !== '') {
+                    if (value.price > this.filters.price.min && value.price < this.filters.price.max) {
+                      object10.push(item);
+                    }
+                  } else if (this.filters.price.min !== '' && this.filters.price.max === '') {
+                    if (value.price > this.filters.price.min) {
+                      object10.push(item);
+                    }
+                  } else if (this.filters.price.max !== '' && this.filters.price.min === '') {
+                    if (value.price < this.filters.price.max) {
+                      object10.push(item);
+                    }
+                  } else {
+                    object10 = object9;
+                  }
+
+                }
+              })
+            })
+          })
+
+          object10.forEach(item => {
+            item.flats.forEach(value => {
+              let status = this.selectPlan.find((v) => {
+                if(v.active === true && v.name === value.count) {
+                  if (this.filters.square.min !== '' && this.filters.square.max !== '') {
+                    if (value.square > this.filters.square.min && value.square < this.filters.square.max) {
+                      object11.push(item);
+                    }
+                  } else if (this.filters.square.min !== '' && this.filters.square.max === '') {
+                    if (value.square > this.filters.square.min) {
+                      object11.push(item);
+                    }
+                  } else if (this.filters.square.max !== '' && this.filters.square.min === '') {
+                    if (value.square < this.filters.square.max) {
+                      object11.push(item);
+                    }
+                  } else {
+                    object11 = object10;
+                  }
+                }
+              })
+            })
+          })
+
+        }
+
+        const unique_obj = {};
+        const res = object11.filter(({title}) =>(!unique_obj[title] && (unique_obj[title] = 1)));
+
+        this.houses_array = res;
+        this.map_array = res;
         this.count_house = this.houses_array.length;
         this.updatedMap();
         return this.houses_array.splice(0, this.count);
