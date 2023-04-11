@@ -6,7 +6,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
 <template>
   <div v-if="overlaySelect" @click="closeOverlaySelect" class="absolute h-full w-full z-40"></div>
   <!--  Меню до входа-->
-  <header v-if="user === null" class="relative bg-[#6435A5] leading-[100%]">
+  <header v-if="user_info === null" class="relative bg-[#6435A5] leading-[100%]">
     <div class="_container h-[60px] xxl:h-12 xl:h-10 sm:px-1">
       <div class="flex items-center justify-between h-full ">
         <Link href="/" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
@@ -39,7 +39,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
   </header>
 
   <!-- Меню агента -->
-  <header v-if="user !== null && user.role === 0" class="relative bg-[#6435A5] leading-[100%]">
+  <header v-if="user_info !== null && user_info.role === 0" class="relative bg-[#6435A5] leading-[100%]">
 
     <app-burger-agent :tabindex="tabindex" @blur="openBurgerAgent = false" :class="{ 'left__0': openBurgerAgent }"
       :user="user" :language="language" @target-with-client="targetWithClient" @logout="logout" />
@@ -132,10 +132,10 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
 
   <!-- Меню Застройщик-->
   <!--  v-if="user.role === 1" -->
-  <header v-if="user !== null && user.role === 1 || user !== null && user.role === 2 || user !== null && user.role === 3"
+  <header v-if="user_info !== null && user_info.role === 1"
     class="relative bg-[#6435A5] leading-[100%]">
 
-    <app-burger-dev :user="user" :language="language" :class="{ 'left__0': openBurgerDev }" @logout="logout"
+    <app-burger-dev :user="user_info" :language="language" :class="{ 'left__0': openBurgerDev }" @logout="logout"
       @target-with-client="targetWithClient" />
 
     <div class="_container h-[60px] xxl:h-12 xl:h-10 lg:h-12 sm:px-1">
@@ -173,8 +173,8 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
             <change-language @selectLanguage="selectLanguage" :selectLang="selectLang" />
             <div class="lg:hidden relative flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
               <button @click="openProfile" class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
-                <span class="text-white text-lg xxl:text-sm xl:text-xs leading-none">{{ user.first_name === 'null' ? '-' :
-                  user.first_name }} {{ user.last_name === 'null' ? '-' : user.last_name }}</span>
+                <span class="text-white text-lg xxl:text-sm xl:text-xs leading-none">{{ user_info.first_name === 'null' ? '-' :
+                  user_info.first_name }} {{ user_info.last_name === 'null' ? '-' : user_info.last_name }}</span>
                 <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелка вниз">
               </button>
               <div v-if="openProfileMenu"
@@ -183,13 +183,109 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
                   class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
                   <span class="leading-none whitespace-nowrap cursor-default">{{ language.ob[42] }}</span>
                   <span class="leading-none whitespace-nowrap cursor-default"
-                    v-if="user !== null && user.subscription_info !== null">{{ getDate(user.subscription_info.finished_at) }}</span>
+                    v-if="user_info !== null && user_info.subscription_info !== null">{{ getDate(user_info.subscription_info.finished_at) }}</span>
                 </div>
                 <Link href="/profile"
                   class="hover__select border__bottom--not whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">{{
                     language.prof_zastr[0] }}</Link>
                 <div @click="logout"
                   class="hover:bg-[#F6F3FA] border__bottom--not text-[#E84680] whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">
+                  {{ language.menu_zastr_1[2] }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Меню Админа и модератора -->
+  <header v-if="user_info !== null && user_info.role === 2 || user_info !== null && user_info.role === 3" class="relative bg-[#6435A5] leading-[100%]">
+
+    <app-burger-agent :tabindex="tabindex" @blur="openBurgerAgent = false" :class="{ 'left__0': openBurgerAgent }"
+                      :user="user_info" :language="language" @target-with-client="targetWithClient" @logout="logout" />
+
+    <div class="_container h-[60px] xxl:h-12 xl:h-10 lg:h-12 sm:px-1">
+      <div class="flex items-center justify-between h-full ">
+        <div class="flex gap-20 xxl:gap-16 xl:gap-12 lg:gap-2 sm:gap-1.5 items-baseline lg:items-center">
+          <div @click="openBurgerAgent = !openBurgerAgent"
+               class="hidden lg:flex relative flex-col justify-evenly py-0.5 items-center cursor-pointer h-8 w-8 rounded-[5px] bg-[#6435A5]">
+            <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
+            <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
+            <span class="bg-white h-[1px] w-[60%] rounded-[2px]"></span>
+          </div>
+          <Link href="/houses" class="flex items-center gap-3 xxl:gap-2 xl:gap-1.5">
+            <img src="../../assets/svg/header_logo_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5 sm:h-4" alt="Логотип">
+          </Link>
+          <div
+            class="lg:hidden text-white text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[15px] flex gap-20 xxl:gap-16 xl:gap-12 x:gap-10">
+            <Link href="/profile/houses" :class="{ 'opacity-60': $page.url !== '/profile/houses' }">{{
+              language.menu_zastr[0] }}</Link>
+            <Link href="/profile/news" :class="{ 'opacity-60': $page.url !== '/profile/news' }">{{ language.menu_zastr[1]
+              }}</Link>
+            <Link href="/houses" :class="{ 'opacity-60': $page.url !== '/houses' }" class="whitespace-nowrap">
+              {{ language.rielt_1[0] }}</Link>
+            <Link href="/villages" :class="{ 'opacity-60': $page.url !== '/villages' }" class="whitespace-nowrap">
+              {{ language.rielt_1[1] }}</Link>
+            <Link href="/profile/compilation" :class="{ 'opacity-60': $page.url !== '/profile/compilation' }"
+                  class="whitespace-nowrap">
+              {{ language.rielt_1[2] }}</Link>
+<!--            <Link href="/profile/favorites" :class="{ 'opacity-60': $page.url !== '/profile/favorites' }"-->
+<!--                  class="whitespace-nowrap">-->
+<!--              {{ language.rielt_1[3] }}</Link>-->
+          </div>
+        </div>
+        <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[15px]">
+          <div class="relative hover__search">
+            <input @keydown.enter="startSearch" v-model="search"
+                   class="text-white focus:ring-white pr-14 xxl:pr-10 xl:pr-8 lg:pr-6 pl-4 xxl:pl-3 xl:pl-2.5 lg:pl-1.5 text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] leading-none bg-[#6435A5] h-12 xxl:h-10 xl:h-8 w-[380px] exl:w-[18vw] lg:w-[160px] sm:w-[100px] rounded-[5px]"
+                   type="text">
+            <img @click="startSearch" src="../../assets/svg/search_icon.svg"
+                 class="cursor-pointer absolute top-1/2 -translate-y-1/2 right-3 exl:right-[1vw] h-6 xxl:h-5 xl:h-4"
+                 alt="Поиск">
+          </div>
+          <div class="flex">
+            <Link class="flex-shrink-0" :href="route('chats')">
+              <div
+                class="header__chat cursor-pointer flex items-center justify-center h-[60px] lg:h-12 xxl:h-12 xl:h-10 px-8 xxl:px-6 xl:px-5 lg:px-4 sm:px-3.5">
+                <div class="relative">
+                  <img src="../../assets/svg/chat_icon.svg" class="h-6 xxl:h-5 xl:h-4 lg:h-5" alt="Чат">
+                  <div v-if="isChat === true"
+                       class="absolute flex items-center justify-center -top-[30%] -right-[50%] rounded-full bg-[#E84680] h-3.5 xxl:h-3 xl:h-2.5 lg:h-3.5 w-3.5 xxl:w-3 xl:w-2.5 lg:w-3.5">
+                    <span class="text-white text-[12px] xxl:text-[10px] xl:text-[8px]">{{ chats }}</span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+            <change-language @selectLanguage="selectLanguage" :selectLang="selectLang" />
+            <div class="lg:hidden relative flex items-center gap-3.5 xxl:gap-3 xl:gap-2.5 ml-5 xxl:mr-4 xl:mr-3">
+              <button @click="openProfile" class="flex items-center gap-2.5 xxl:gap-2 xl:gap-1.5">
+                <span class="text-white text-lg xxl:text-sm xl:text-xs leading-none whitespace-nowrap">{{ user_info.first_name
+                  + ' ' + user_info.last_name }}</span>
+                <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px]" alt="Стрелка вниз">
+              </button>
+              <div v-if="openProfileMenu"
+                   class="overflow-hidden border border-solid border-[#E5DFEE] absolute z-50 top-[90%] right-0 flex flex-col bg-white rounded-[5px]">
+                <div
+                  class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
+                  <span class="leading-none whitespace-nowrap cursor-default">{{ language.ob[42] }}</span>
+                  <span class="leading-none whitespace-nowrap cursor-default"
+                        v-if="user_info !== null && user_info.subscription_info !== null">{{ getDate(user_info.subscription_info.finished_at) }}</span>
+                </div>
+                <div v-if="user_info.role === 0"
+                     class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
+                  <span class="leading-none whitespace-nowrap cursor-default">{{ language.ob[32] }}</span>
+                  <label
+                    class="relative cursor-pointer inline-block w-[42px] xxl:w-[36px] xl:w-[30px] h-[24px] xxl:h-[20px] xl:h-[18px]">
+                    <input v-model="withClient" @change="targetWithClient" class="hidden" type="checkbox">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <Link href="/profile"
+                      class="hover__select border__bottom--not whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">{{
+                  language.prof_zastr[0] }}</Link>
+                <div @click="logout"
+                     class="hover:bg-[#F6F3FA] border__bottom--not text-[#E84680] whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">
                   {{ language.menu_zastr_1[2] }}</div>
               </div>
             </div>
@@ -215,6 +311,7 @@ export default {
       default: 0,
     },
     language: {},
+    admin: [],
   },
   data() {
     return {
@@ -227,7 +324,8 @@ export default {
       search: null,
       isChat: false,
       chats: 0,
-      selectLang: 0
+      selectLang: 0,
+      user_info: [],
     }
   },
 
@@ -236,8 +334,8 @@ export default {
     if (this.user !== null) {
       setInterval(() => {
         axios.post('/api/chat/checkChat', {
-          user_id: this.user.id,
-          token: this.user.token,
+          user_id: this.user_info.id,
+          token: this.user_info.token,
         }).then(res => {
           this.chats = res.data;
 
@@ -279,11 +377,11 @@ export default {
     selectLanguage(n) {
       this.$emit('selectLanguage', n);
 
-      if (this.user !== null) {
+      if (this.user_info !== null) {
 
         axios.post('/api/user/lang', {
-          token: this.user.token,
-          id: this.user.id,
+          token: this.user_info.token,
+          id: this.user_info.id,
           lang: n,
         })
 
@@ -337,10 +435,17 @@ export default {
     }
   },
   created() {
+
+    if(this.admin !== null && this.admin !== undefined) {
+      this.user_info = this.admin;
+    } else {
+      this.user_info = this.user;
+    }
+
     this.withClient = localStorage.getItem('withClient') === 'true' ? true : false
 
     if (this.user !== null) {
-      this.selectLang = this.user.lang
+      this.selectLang = this.user_info.lang
     }
   },
   components: {

@@ -64,7 +64,7 @@
   import { usePage } from '@inertiajs/vue3'
 
 export default {
-  props: ['contact', 'isEdit', 'house', 'language'],
+  props: ['contact', 'isEdit', 'house', 'language', 'token'],
   inject:['user'],
   data() {
     return {
@@ -93,7 +93,7 @@ export default {
       formData.append('email', this.dataSupport.email)
       formData.append('status', this.dataSupport.status)
       formData.append('link', this.dataSupport.link)
-      formData.append('token', this.user.token)
+      formData.append('token', this.token)
 
       axios({
         method: 'post',
@@ -123,7 +123,7 @@ export default {
       formData.append('email', this.dataSupport.email)
       formData.append('status', this.dataSupport.status)
       formData.append('link', this.dataSupport.link)
-      formData.append('token', this.user.token)
+      formData.append('token', this.token)
 
       axios({
         method: 'post',

@@ -546,11 +546,9 @@ path editCompany \ [post] / поля:
 Подписка по тарифу / 
 path payment \ [post] / поля: 
 
-- user_id - Айди юзера
 - type - айди подписки
-- day - Кол-во дней
 - price - цена
-
+- email
 
 ## Info 
 

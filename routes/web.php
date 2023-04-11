@@ -26,7 +26,7 @@ Route::get('/', ['App\Http\Controllers\Controller', 'main']);
 Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
   Route::get('/', ['App\Http\Controllers\User\ProfileController', 'index']);
 
-  Route::middleware('CheckSubscription')->group(function () {
+  Route::middleware('CheckSubscription', 'CheckRealtor')->group(function () {
 //    Route::middleware('CheckRealtor')->group(function () {
     Route::get('/addedHouse', ['App\Http\Controllers\House\HouseController', 'createHouse']);
     Route::get('/edit/{house}', ['App\Http\Controllers\House\HouseController', 'edit']);
@@ -45,7 +45,7 @@ Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
 });
 
 Route::prefix('/compilation')->group(function () {
-  Route::get('/{id}', ['App\Http\Controllers\User\CompilationController', 'show']);
+  Route::get('/{id}', ['App\Http\Controllers\User\CompilationController', 'show`']);
   Route::get('/user/{id}/{house}', ['App\Http\Controllers\User\CompilationController', 'soloHouse']);
   Route::get('/{id}/{house}', ['App\Http\Controllers\User\CompilationController', 'house']);
 });
@@ -55,7 +55,7 @@ Route::prefix('/house')->group(function () {
   Route::get('/failed', ['App\Http\Controllers\AdminController', 'failed']);
 });
 
-Route::middleware('auth', 'session', 'CheckSubscription')->group(function () {
+Route::middleware('auth', 'session', 'CheckSubscription', 'CheckBuilder')->group(function () {
   Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'index']);
   Route::get('/villages', ['App\Http\Controllers\House\HouseController', 'villages']);
   Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'house']);

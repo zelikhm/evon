@@ -8,17 +8,17 @@ import { Link } from '@inertiajs/inertia-vue3'
     </div>
     <h3>{{ language.form_dob_ob[5] }}</h3>
   </div>
-  <app-modal-add-contact @close-add-contact="closeModalContact" @close-modal-add-contact="closeModalAddContact"
+  <app-modal-add-contact @close-add-contact="closeModalContact" @close-modal-add-contact="closeModalAddContact" :token="token"
     @close-edit-contact="closeModalBeforeEdit" v-if="modalAddContact" :contact="contact" :house="house"
     :language="language" />
-  <app-modal-add-apartments @close-add-apartments="closeAddApartments" v-if="modalAddApatments" :house="house"
+  <app-modal-add-apartments @close-add-apartments="closeAddApartments" v-if="modalAddApatments" :house="house" :token="token"
     :activeFrame="activeFrame" :selectFlat="selectFlat" @call-notification="callNotification" :language="language"
     :statuses="statuses" />
-  <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="closeAddFrame" @close-modal-add-frame="closeModalAddFrame"
+  <app-modal-add-frame v-if="modalAddFrame" @close-add-frame="closeAddFrame" @close-modal-add-frame="closeModalAddFrame" :token="token"
     :house="house" :isEdit="isEdit" :frame="frame" :language="language" />
   <app-modal-notification class="left-[2vw] transition-all duration-1000" :class="{ '-left__full': !openNotification }"
     @close-notification="openNotification = false" :text="text" />
-  <app-header :user="user" :language="language" @selectLanguage="choseLanguage" />
+  <app-header :user="user" :admin="admin" :language="language" @selectLanguage="choseLanguage" />
   <main>
     <div class="_container">
       <div :class="{ 'grid__apartments': page === 1 }"
@@ -71,29 +71,29 @@ import { Link } from '@inertiajs/inertia-vue3'
 
         <!--  Информация о ЖК  -->
         <div v-if="page === 0">
-          <app-info-j-k :dops="dops" :infos="infos" :city="city" :count="count" :house="house" :supports="supports"
+          <app-info-j-k :dops="dops" :infos="infos" :city="city" :count="count" :house="house" :supports="supports" :token="token"
             @addAndContinue="addAndContinue" @call-notification="callNotification" :language="language"
             :selectLanguage="selectLanguage" />
         </div>
 
         <!--  Корпуса и квартиры  -->
         <div v-if="page === 1">
-          <app-apartments @open-add-frame="openAddFrame" :house="readyHouse" @change-frame="changeFrame"
+          <app-apartments @open-add-frame="openAddFrame" :house="readyHouse" @change-frame="changeFrame" :token="token"
             @edit-flat="editFlat" :language="language" :statuses="statuses" :titleTable="titleTable" />
         </div>
 
         <!--  Фото  -->
         <div v-if="page === 2">
-          <app-add-photo :house="readyHouse" :language="language" :photos="photos"
+          <app-add-photo :house="readyHouse" :language="language" :photos="photos" :token="token"
             @loader="loader_status = !loader_status" />
         </div>
 
         <div v-if="page === 3">
-          <app-add-files :house="readyHouse" :language="language" />
+          <app-add-files :house="readyHouse" :language="language" :token="token" />
         </div>
 
         <div v-if="page === 4">
-          <app-add-contacts :house="readyHouse" :supports="supports" @open-add-contact="openAddContact"
+          <app-add-contacts :house="readyHouse" :supports="supports" @open-add-contact="openAddContact" :token="token"
             @open-edit-contact="openEditContact" :language="language" />
         </div>
 
@@ -125,7 +125,9 @@ export default {
     user: [],
     count: Number,
     frames: null,
-    house: []
+    house: [],
+    token: String,
+    admin: []
   },
   provide() {
     return {
@@ -287,6 +289,7 @@ export default {
     }
   },
   created() {
+    console.log(this.admin)
     if (this.user.lang === 0) {
       this.language = this.$ru;
       this.selectLanguage = 0;
@@ -391,11 +394,11 @@ export default {
     top: calc(50% - 4vw);
     left: calc(50% - 4vw);
     transform: translate(-50%,-50%);
-    box-sizing: border-box; 
+    box-sizing: border-box;
 
-    will-change: transform; 
+    will-change: transform;
     animation: rotation 2s linear infinite;
-    transform-origin: center center; 
+    transform-origin: center center;
  }
 
  .loader::after {

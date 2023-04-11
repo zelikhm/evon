@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminAuth;
+use App\Http\Middleware\CheckBuilder;
 use App\Http\Middleware\CheckRealtor;
 use App\Http\Middleware\CheckRole;
 use App\Http\Middleware\CheckSubscription;
@@ -74,6 +75,7 @@ class Kernel extends HttpKernel
     'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
     'AdminAuth' => AdminAuth::class,
     'CheckRealtor' => CheckRealtor::class,
+    'CheckBuilder' => CheckBuilder::class,
     'CheckSubscription' => CheckSubscription::class,
   ];
 }

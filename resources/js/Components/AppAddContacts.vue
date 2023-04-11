@@ -37,7 +37,7 @@
 
 <script>
 export default {
-  props: ['house', 'supports', 'language'],
+  props: ['house', 'supports', 'language', 'token'],
   inject:['user'],
   name: "AppAddContacts",
   data() {
@@ -48,7 +48,7 @@ export default {
     deleteSupport(item) {
       axios.post('/api/house/deleteSupport', {
         id: item.id,
-        token: this.user.token
+        token: this.token
       })
 
       this.supports.forEach((support, idx) => {

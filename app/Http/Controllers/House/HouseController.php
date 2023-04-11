@@ -137,6 +137,7 @@ class HouseController extends Controller
 
   public function createHouse()
   {
+
     return Inertia::render('AppAddObject', [
       'dops' => $this->getDop(),
       'infos' => $this->getInfo(),
@@ -144,6 +145,8 @@ class HouseController extends Controller
       'notification' => $this->getNotification(),
       'count' => HouseModel::count(),
       'user' => $this->getUser(),
+      'admin' => null,
+      'token' => $token = Auth::user()->token,
     ]);
 
   }
@@ -176,10 +179,40 @@ class HouseController extends Controller
 
   public function showHouse()
   {
-    return Inertia::render('AppPrivateOfficeDev', [
-      'houses' => $this->getHouseForUserPagination(Auth::id()),
-      'user' => $this->getUser(),
-    ]);
+
+    if(Auth::user()->role === 1) {
+      return Inertia::render('AppPrivateOfficeDev', [
+        'houses' => $this->getHouseForUserPagination(Auth::id()),
+        'user' => $this->getUser(),
+      ]);
+    } else {
+      return Inertia::render('AppPrivateOfficeDev', [
+        'houses' => $this->getHouseForAdminPagination(30),
+        'user' => $this->getUser(),
+      ]);
+    }
+
+
+  }
+
+  /**
+   * get houses for admin
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function getHousesForAdmin(Request $request) {
+
+    if($this->checkToken($request->token)) {
+
+      return response()->json($this->getHouseForAdminPagination(1000), 200);
+
+    } else {
+
+      return response()->json('not auth', 401);
+
+    }
+
   }
 
   /**
@@ -286,13 +319,28 @@ class HouseController extends Controller
   {
     HouseModel::where('slug', $slug)->firstOrFail();
 
+    if(Auth::user()->role === 1) {
+
+      $user = $this->getUser();
+      $token = $user->token;
+
+    } else if(Auth::user()->role === 2 || Auth::user()->role === 3) {
+
+      $house = $this->getHouseSlug($slug);
+      $user = User::where('id', $house->user_id)->first();
+      $token = Auth::user()->token;
+
+    }
+
     return Inertia::render('AppAddObject', [
       'house' => $this->getHouseSlug($slug),
       'dops' => $this->getDop(),
       'infos' => $this->getInfo(),
       'city' => $this->getCity(),
       'notification' => $this->getNotification(),
-      'user' => $this->getUser(),
+      'user' => $user,
+      'token' => $token,
+      'admin' => Auth::user()->role > 1 ? Auth::user() : null,
     ]);
   }
 

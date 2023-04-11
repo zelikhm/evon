@@ -9,9 +9,13 @@ import { Link } from '@inertiajs/inertia-vue3'
       <div class="my-14 xxl:my-10 xl:my-8">
         <div class="flex justify-between items-center mb-7 xxl:mb-5 xl:mb-4">
           <span class="font-semibold text-[22px] xxl:text-[18px] xl:text-[14px]">{{ language.menu_zastr[3] }}</span>
+          <input type="text" placeholder="Поиск" v-model="search">
+          <p v-if="loader">
+            Загрузка...
+          </p>
           <Link href="/profile/addedHouse" class="text-base xxl:text-sm xl:text-xs text-white bg-[#E84680] leading-none rounded-[3px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5">{{ language.menu_zastr[2] }}</Link>
         </div>
-        <div v-if="houses.data.length === 0" class="grid grid-cols-2 lg:grid-cols-1 mt-10 xxl:mt-8 xl:mt-6">
+        <div v-if="houses.length === 0" class="grid grid-cols-2 lg:grid-cols-1 mt-10 xxl:mt-8 xl:mt-6">
           <div class="flex justify-between sm:flex-col sm:items-center p-7 xxl:p-5 xl:p-4 bg-[#F6F3FA] rounded-[10px]">
             <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
               <span class="text-[18px] xxl:text-[15px] xl:text-[13px] leading-none font-medium">{{ language.menu_zastr[4] }}</span>
@@ -29,7 +33,7 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
         </div>
         <div v-else class="grid grid-cols-2 md:grid-cols-1 gap-7 xxl:gap-5 xl:gap-4 md:gap-10">
-          <div class="flex flex-col" v-for="house in houses.data">
+          <div class="flex flex-col" v-for="house in searchObject">
             <div class="object__block relative h-[500px] exl:h-fit exl:h-[26vw] md:h-[52vw]">
               <img v-if="house.images.length > 0" :src="house.image" class="w-full h-full object-cover rounded-[8px]" alt="">
               <img v-else src="../../assets/no-img-houses-zastroy.jpg" class="w-full h-full rounded-[8px]" alt="">
@@ -167,12 +171,15 @@ export default {
         { number: '...', active: false },
         { number: '24', active: false },
       ],
+      houses_object: [],
       pages: 0,
       page: 0,
       nextPage: 0,
       deleteConfirm: false,
       selectLanguage: 0,
       language: {},
+      search: '',
+      loader: false
     }
   },
   methods: {
@@ -187,7 +194,7 @@ export default {
         this.language = this.$tur;
       }
 
-      this.houses.data.forEach(item => {
+      this.houses_object.forEach(item => {
         item.selectTime = null
 
         item.watchTime = []
@@ -207,14 +214,14 @@ export default {
       object.views = object.view[time.id]
     },
     deleteHouse(house) {
-      this.houses.data.forEach((item, idx) => {
+      this.houses_object.forEach((item, idx) => {
         if (item.id === house.id) {
           this.houses.data.splice(idx, 1)
         }
       })
       axios.post('/api/house/delete', {
         house_id: house.id,
-        token: this.user.token
+        token: this.token
       }).then(res => console.log(res)).catch(err => console.error(err))
 
       this.deleteConfirm = false
@@ -224,11 +231,29 @@ export default {
       axios.post('/api/house/setVisible', {
         house_id: item.id,
         visible: item.visible,
-        token: this.user.token
+        token: this.token
       }).then(res => { console.log(res.data) })
+    },
+    reloadObject() {
+      this.houses_object.forEach(item => {
+        item.openWatchTime = false
+        item.views = null
+        item.selectTime = null
+
+        item.watchTime = []
+        item.watchTime.push(
+          { id: 0, time: this.language.menu_zastr_1[3] },
+          { id: 1, time: this.language.menu_zastr_1[4] },
+          { id: 2, time: this.language.menu_zastr_1[5] },
+          { id: 3, time: this.language.menu_zastr_1[6] },
+          { id: 4, time: this.language.menu_zastr_1[7] },
+        )
+      })
     }
   },
   created() {
+
+    this.houses_object = this.houses;
 
     if(this.user.lang === 0) {
       this.language = this.$ru;
@@ -238,20 +263,23 @@ export default {
       this.language = this.$tur;
     }
 
-    this.houses.data.forEach(item => {
-      item.openWatchTime = false
-      item.views = null
-      item.selectTime = null
+    this.reloadObject();
 
-      item.watchTime = []
-      item.watchTime.push(
-        { id: 0, time: this.language.menu_zastr_1[3] },
-        { id: 1, time: this.language.menu_zastr_1[4] },
-        { id: 2, time: this.language.menu_zastr_1[5] },
-        { id: 3, time: this.language.menu_zastr_1[6] },
-        { id: 4, time: this.language.menu_zastr_1[7] },
-      )
-    })
+    if(this.admin !== null) {
+      this.loader = true;
+
+      axios.post('/api/house/getHousesForAdmin', {
+        token: this.token
+      }).then(res => {
+        if(res.status === 200) {
+          this.houses_object = res.data;
+          this.reloadObject();
+          this.loader = false;
+        } else {
+          console.log('not auth')
+        }
+      })
+    }
   },
   components: {
     AppHeader,
@@ -261,8 +289,15 @@ export default {
     this.page = new URL(location.href).searchParams.get('page');
     this.page = +this.page;
     this.pages = this.houses.last_page;
-    console.log(this.houses)
-    console.log(this.user)
+  },
+  computed: {
+    searchObject() {
+
+      return Object.values(this.houses_object).filter(item => {
+        return item.title.toUpperCase().indexOf(this.search.toUpperCase()) !== -1
+      })
+
+    }
   }
 }
 </script>

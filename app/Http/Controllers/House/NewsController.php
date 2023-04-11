@@ -111,8 +111,14 @@ class NewsController extends Controller
       redirect('/news');
     }
 
+    if(Auth::user()->role === 1) {
+      $houses = $this->getHouseForUser(Auth::id());
+    } else {
+      $houses = $this->getHouseForUser($new->house->user_id);
+    }
+
     return Inertia::render('AppAddNews', [
-      'houses' => $this->getHouseForUser(Auth::id()),
+      'houses' => $houses,
       'new' => $new,
       'user' => $this->getUser(),
       'notification' => $this->getNotification(),

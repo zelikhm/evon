@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CheckRealtor
+class CheckBuilder
 {
     /**
      * Handle an incoming request.
@@ -15,14 +15,13 @@ class CheckRealtor
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, $guard = null)
+    public function handle(Request $request, Closure $next)
     {
-      $auth = Auth::guard($guard);
 
-      if($auth->user()->role !== 0) {
+      if(Auth::user()->role !== 1) {
         return $next($request);
       } else {
-        return redirect('/profile');
+        return redirect()->to('/profile');
       }
     }
 }
