@@ -18,7 +18,7 @@ import { Link } from '@inertiajs/inertia-vue3'
     :house="house" :isEdit="isEdit" :frame="frame" :language="language" />
   <app-modal-notification class="left-[2vw] transition-all duration-1000" :class="{ '-left__full': !openNotification }"
     @close-notification="openNotification = false" :text="text" />
-  <app-header :user="admin !== null ? admin : user" :language="language" @selectLanguage="choseLanguage" />
+  <app-header :user="user" :admin="admin" :language="language" @selectLanguage="choseLanguage" />
   <main>
     <div class="_container">
       <div :class="{ 'grid__apartments': page === 1 }"
@@ -289,6 +289,7 @@ export default {
     }
   },
   created() {
+    console.log(this.admin)
     if (this.user.lang === 0) {
       this.language = this.$ru;
       this.selectLanguage = 0;

@@ -137,6 +137,7 @@ class HouseController extends Controller
 
   public function createHouse()
   {
+
     return Inertia::render('AppAddObject', [
       'dops' => $this->getDop(),
       'infos' => $this->getInfo(),
@@ -144,6 +145,8 @@ class HouseController extends Controller
       'notification' => $this->getNotification(),
       'count' => HouseModel::count(),
       'user' => $this->getUser(),
+      'admin' => null,
+      'token' => $token = Auth::user()->token,
     ]);
 
   }

@@ -851,7 +851,6 @@
           let plan = '';
           this.selectPlan.forEach(item => {
 
-            console.log(item);
             if(item.active) {
               if (plan !== '') {
                 plan += ', ' + item.name
@@ -962,6 +961,14 @@
           toBus: '',
         }
 
+        this.selectPlan.forEach(item => {
+          item.active = false;
+        })
+
+        this.deadlines.forEach(item => {
+          item.active = false;
+        })
+
         this.houses_array = this.readyHouses;
         this.map_array = this.readyHouses;
         this.count_house = this.houses_array.length;
@@ -1049,7 +1056,6 @@
         } else if (this.selectDateId === 3) {
           this.houses_array = this.readyHouses.sort((a, b) => b.minPrice - a.minPrice)
         }
-        console.log(this.houses_array)
       },
       checkCity(id) {
 
@@ -1299,26 +1305,6 @@
           active: false,
         },
       ]
-
-      this.readyHouses.forEach(item => {
-
-        (item.flats).forEach(value => {
-
-          console.log(obj.find( (v) => {
-            if(v.active === true) {
-              if(value.count === v.name) {
-                return true;
-              } else {
-                false
-              }
-            } else {
-              false
-            }
-          }))
-
-        })
-
-      })
     },
     mounted() {
       // NO DELETE
