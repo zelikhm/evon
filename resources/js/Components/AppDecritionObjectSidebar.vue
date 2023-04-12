@@ -62,7 +62,7 @@
       </div>
       <div class="flex items-start gap-4 xxl:gap-3 xl:gap-2.5">
         <span class="transparent font-medium text-[28px] xxl:text-[22px] xl:text-[18px] lg:text-[22px]"
-          v-if="user.subscription_info.free === 0 && house.percent !== 'null'">{{ house.percent + '%' }}</span>
+          v-if="user.subscription_info.free === 0 && house.percent !== 'null' && house.percent">{{ house.percent + '%' }}</span>
         <span class="transparent font-medium text-[20px] xxl:text-[14px] xl:text-[12px] lg:text-[14px]" v-else>{{
           language.ob[50] }}</span>
         <span class="transparent text-base text-[#8A8996] xxl:text-sm xl:text-xs lg:text-[15px]"
