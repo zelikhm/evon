@@ -38,10 +38,10 @@
           </div>
         </div>
         <button
-          class="w-full  bg-[#F6F3FA] text-[#6536A5] text-base xxl:text-sm xl:text-xs lg:text-[15px] rounded-[6px] py-4 xxl:py-3 xl:py-2.5"
+          class="w-full bg-[#F6F3FA] text-[#6536A5] text-base xxl:text-sm xl:text-xs lg:text-[15px] rounded-[6px] py-4 xxl:py-3 xl:py-2.5"
           v-if="user.subscription_info.free !== 1" v-on:click="openChat(house.user.id)">{{ language.ob[9] }}</button>
         <button
-          class="w-full  bg-[#F6F3FA] text-[#6536A5] text-base xxl:text-sm xl:text-xs lg:text-[15px] rounded-[6px] py-4 xxl:py-3 xl:py-2.5"
+          class="w-full bg-[#F6F3FA] text-[#6536A5] text-base xxl:text-sm xl:text-xs lg:text-[15px] rounded-[6px] py-4 xxl:py-3 xl:py-2.5"
           :data-tooltip="language.ob[50]" v-else :disabled="user.subscription_info.free === 1">{{ language.ob[9]
           }}</button>
       </div>
@@ -60,13 +60,17 @@
           class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
         </span>
       </div>
-      <div class="flex items-start gap-4 xxl:gap-3 xl:gap-2.5">
+      <div v-if="user.subscription_info.free === 0" >
+        <div class="flex items-start gap-4 xxl:gap-3 xl:gap-2.5">
         <span class=" font-medium text-[28px] xxl:text-[22px] xl:text-[18px] lg:text-[22px]"
-          v-if="user.subscription_info.free === 0 && house.percent !== 'null' && house.percent">{{ house.percent + '%' }}</span>
-        <span class="transparent font-medium text-[20px] xxl:text-[14px] xl:text-[12px] lg:text-[14px]" v-else>{{
+              v-if="house.percent !== 'null' && house.percent">{{ house.percent + '%' }}</span>
+          <span class=" text-base text-[#8A8996] xxl:text-sm xl:text-xs lg:text-[15px]"
+                v-if="house.comment && house.comment !== 'null'">{{ house.comment }}</span>
+        </div>
+      </div>
+      <div v-else>
+        <span class="transparent font-medium text-[20px] xxl:text-[14px] xl:text-[12px] lg:text-[14px]">{{
           language.ob[50] }}</span>
-        <span class=" text-base text-[#8A8996] xxl:text-sm xl:text-xs lg:text-[15px]"
-          v-if="house.comment && house.comment !== 'null' && user.subscription_info.free === 0">{{ house.comment }}</span>
       </div>
     </div>
     <div class="pb-14 xxl:pb-10 xl:pb-8" v-if="house.supports.length > 0">
@@ -138,7 +142,6 @@ export default {
     }
   },
   created() {
-    console.log(this.user);
     this.news = this.house.news.slice(0, 4).sort((a, b) => Date.parse(b.created_at) - Date.parse(a.created_at))
   }
 }
