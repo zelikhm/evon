@@ -19,7 +19,7 @@ class CheckSubscription
     {
 
       if(Auth::user()->role === 0) {
-        if(!Auth::user()->subscription()) {
+        if(Auth::user()->subscription() === false) {
           return redirect('/profile');
         }
       }
