@@ -463,7 +463,7 @@ trait MainInfo
 
   protected function getHouse($id)
   {
-    $house = HouseModel::with(['info', 'supports', 'files', 'frames', 'user', 'news', 'images'])
+    $house = HouseModel::with(['info', 'supports', 'files', 'frames', 'user', 'news', 'images', 'flats'])
       ->where('id', $id)
       ->first();
 
