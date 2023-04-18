@@ -152,7 +152,8 @@ import AppFooter from "../Layouts/AppFooter.vue"
 export default {
   props: {
     houses: [],
-    user: []
+    user: [],
+    admin: false
   },
   data() {
     return {
@@ -265,7 +266,9 @@ export default {
 
     this.reloadObject();
 
-    if(this.admin !== undefined) {
+    console.log(this.admin, 1);
+
+    if(this.admin !== false) {
       this.loader = true;
 
       axios.post('/api/house/getHousesForAdmin', {

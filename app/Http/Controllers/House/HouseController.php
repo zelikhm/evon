@@ -180,15 +180,19 @@ class HouseController extends Controller
   public function showHouse()
   {
 
+    $admin = Auth::user()->role > 1 ? true : false;
+
     if(Auth::user()->role === 1) {
       return Inertia::render('AppPrivateOfficeDev', [
         'houses' => $this->getHouseForUserPagination(Auth::id()),
         'user' => $this->getUser(),
+        'admin' => $admin
       ]);
     } else {
       return Inertia::render('AppPrivateOfficeDev', [
         'houses' => $this->getHouseForAdminPagination(30),
         'user' => $this->getUser(),
+        'admin' => $admin
       ]);
     }
 
