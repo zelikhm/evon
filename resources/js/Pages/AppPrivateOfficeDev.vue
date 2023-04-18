@@ -265,7 +265,7 @@ export default {
 
     this.reloadObject();
 
-    if(this.admin !== null) {
+    if(this.admin !== undefined) {
       this.loader = true;
 
       axios.post('/api/house/getHousesForAdmin', {
