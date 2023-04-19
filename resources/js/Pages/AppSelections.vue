@@ -7,7 +7,9 @@
   <app-submit-selection v-if="submitSelection"
                         @closeSubmitSelection="submitSelection = false"
                         :link="link"
-                        :language="language" />
+                        :language="language"
+                        :user="user"
+                         />
   <app-header :user="user" :language="language" @selectLanguage="choseLanguage" />
   <main>
     <div class="_container">
