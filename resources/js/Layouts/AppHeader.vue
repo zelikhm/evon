@@ -230,9 +230,6 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
             <Link href="/profile/compilation" :class="{ 'opacity-60': $page.url !== '/profile/compilation' }"
                   class="whitespace-nowrap">
               {{ language.rielt_1[2] }}</Link>
-<!--            <Link href="/profile/favorites" :class="{ 'opacity-60': $page.url !== '/profile/favorites' }"-->
-<!--                  class="whitespace-nowrap">-->
-<!--              {{ language.rielt_1[3] }}</Link>-->
           </div>
         </div>
         <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[15px]">
@@ -356,8 +353,6 @@ export default {
 
       let date = new Date();
       let finish = new Date(d);
-
-
 
       if (finish - date > 0) {
         var timeDiff = Math.abs(finish.getTime() - date.getTime());

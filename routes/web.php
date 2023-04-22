@@ -54,9 +54,11 @@ Route::prefix('/house')->group(function () {
   Route::get('/failed', ['App\Http\Controllers\AdminController', 'failed']);
 });
 
-Route::middleware('auth', 'session', 'CheckSubscription', 'CheckBuilder')->group(function () {
-  Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'index']);
-  Route::get('/villages', ['App\Http\Controllers\House\HouseController', 'villages']);
+Route::middleware('auth', 'session', 'CheckSubscription')->group(function () {
+  Route::middleware('CheckBuilder')->group(function () {
+    Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'index']);
+    Route::get('/villages', ['App\Http\Controllers\House\HouseController', 'villages']);
+  });
   Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
 });
 
