@@ -300,6 +300,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
 import AppBurgerAgent from "@/Layouts/AppBurgerAgent.vue"
 import AppBurgerDev from "@/Layouts/AppBurgerDev.vue"
 import { useForm } from '@inertiajs/inertia-vue3'
+import { router } from '@inertiajs/vue3'
 
 export default {
   props: {
@@ -411,8 +412,7 @@ export default {
       this.openProfileMenu = false
     },
     logout() {
-      const form = useForm({});
-      form.post('/logout');
+      router.post('/logout');
     },
     selectOption(language) {
       // this.langSelected =  language
