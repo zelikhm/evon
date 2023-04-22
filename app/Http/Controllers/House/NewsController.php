@@ -79,7 +79,9 @@ class NewsController extends Controller
 
     foreach ($houses as $house) {
       $news = HouseNewsModel::where('house_id', $house->id)->get();
-      $collections->push($news);
+      if(count($news) > 0) {
+        $collections->push($news);
+      }
     }
 
     return $collections;

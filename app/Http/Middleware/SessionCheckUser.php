@@ -7,6 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 
 class SessionCheckUser
 {
@@ -15,18 +16,20 @@ class SessionCheckUser
    *
    * @param \Illuminate\Http\Request $request
    * @param \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-   * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+   * @return \Symfony\Component\HttpFoundation\Response
    */
   public function handle(Request $request, Closure $next, $guard = null)
   {
-    $hasSession = SessionModel::where('user_id', Auth::id())->where('session', $request->cookie('session_key'))->first();
+    $hasSession = SessionModel::where('user_id', Auth::id())
+      ->where('session', $request->cookie('session_key'))
+      ->first();
 
     if ($hasSession === null) {
-      if(Auth::user()->role === 0 || Auth::user()->role === 1) {
+      if(Auth::user()->role < 2) {
         Auth::logout();
       }
 
-      return \redirect('/');
+      return Inertia::location('/');
     }
 
     return $next($request);
