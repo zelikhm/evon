@@ -13,7 +13,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         <div v-if="openProfileMenu" class="border border-solid border-[#E5DFEE] lg:text-[15px] overflow-hidden z-20 absolute top-[90%] flex flex-col bg-white rounded-[5px]">
           <div class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
             <span class="leading-none whitespace-nowrap">{{ language.ob[42] }} PRO</span>
-            <span class="leading-none whitespace-nowrap">6 дней</span>
+            <span class="leading-none whitespace-nowrap">{{ getDate(user.subscription_info.finished_at) }}</span>
           </div>
           <div class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
             <span class="leading-none whitespace-nowrap">{{ language.ob[32] }}</span>
@@ -41,7 +41,27 @@ export default {
     }
   },
   methods: {
+    getDate(d) {
 
+      let date = new Date();
+      let finish = new Date(d);
+
+      if (finish - date > 0) {
+        var timeDiff = Math.abs(finish.getTime() - date.getTime());
+        var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+        if (diffDays <= 1) {
+          return diffDays + ' ' + this.language.default[2];
+        } else if (diffDays > 1 && diffDays < 5) {
+          return diffDays + ' ' + this.language.default[4];
+        } else {
+          return diffDays + ' ' + this.language.default[3];
+        }
+      } else {
+        return '0 ' + this.language.default[3];
+      }
+
+    },
   }
 }
 </script>
