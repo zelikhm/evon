@@ -19,7 +19,7 @@
       <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ language.podbor_1[0] }}</span>
       <div class="relative mt-10 xxl:mt-8 xl:mt-6">
         <input :value="valueLink" ref="text" disabled class="copy-link w-full text-[#1E1D2D] text-[16px] focus:ring-[#6435A5] focus:border-[#6435A5] xxl:text-[14px] xl:text-[12px] pl-5 xxl:pl-4 xl:pl-3 py-3 xxl:py-2.5 xl:py-2 leading-none rounded-[5px] border border-solid border-[#E5DFEE] pr-12 xxl:pr-10 xl:pr-8" type="text">
-        <span class="copy-link-text">{{language.ob[50]}}</span>      
+        <span  v-if="user.subscription_info.free == 1"  class="copy-link-text">{{language.ob[50]}}</span>      
         <img @click="copy" class="absolute cursor-pointer top-1/2 -translate-y-1/2 w-6 xxl:w-5 xl:w-4 right-5 xxl:right-4 xl:right-3" src="../../../assets/svg/copy_icon_purple.svg" alt="">
       </div>
     </div>
@@ -31,6 +31,7 @@
 export default {
   props: {
     link: String,
+    user: Object,
     language: {}
   },
   emits: ['closeSubmitSelection'],
@@ -46,7 +47,7 @@ export default {
   },
   created() {
     console.log(this.link)
-    this.valueLink = this.link
+    this.valueLink = this.link 
   }
 }
 </script>
