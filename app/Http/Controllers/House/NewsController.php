@@ -50,7 +50,7 @@ class NewsController extends Controller
 
     foreach ($news as $item) {
 
-      if(count($item->house) !== 0) {
+      if($item->house !== []) {
         if($item->house->active === 2 && $item->house->visible === 1) {
           $item->house->image = $this->getPhoto($item->house);
           $collections->push($item);
