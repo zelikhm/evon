@@ -46,13 +46,18 @@ class NewsController extends Controller
       ->orderBy('created_at', 'ASC')
       ->get();
 
+    $collections = collect();
+
     foreach ($news as $item) {
 
-      $item->house->image = $this->getPhoto($item->house);
+      if($item->house->active === 2 && $item->house->visible === 1) {
+        $item->house->image = $this->getPhoto($item->house);
+        $collections->push($item);
+      }
 
     }
 
-    return $news;
+    return $collections;
   }
 
   /**

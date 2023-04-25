@@ -528,6 +528,12 @@ trait MainInfo
 
     $house->image = $this->getPhoto($house);
 
+    $house->maxPrice = $house->flats->max('price');
+    $house->minPrice = $house->flats->min('price');
+
+    $house->maxSquare = $house->flats->max('square');
+    $house->minSquare = $house->flats->min('square');
+
     $favorite = FavoritesModel::where('user_id', Auth::id())
       ->where('house_id', $house->id)
       ->first();
