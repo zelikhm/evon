@@ -1,0 +1,27 @@
+Index: app/Http/Controllers/Bot/QuizController.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/Http/Controllers/Bot/QuizController.php	(revision 2e8dc40727ea2116cc40fa7e36a3bf98100ca478)
++++ app/Http/Controllers/Bot/QuizController.php	(date 1682935133937)
+@@ -8,6 +8,7 @@
+ use Illuminate\Http\Request;
+ use TelegramBot\Api\Client;
+ use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
++use TelegramBot\Api\BotApi;
+ 
+ class QuizController extends Controller
+ {
+@@ -36,9 +37,9 @@
+     $bot = new Client($this->api_key);
+     // команда для start
+     $bot->command('start', function ($message) use ($bot) {
+-      $user_id = $message->getFrom()->getId();
++//      $user_id = $message->getFrom()->getId();
+ 
+-      $this->setCommand('start', $user_id);
++//      $this->setCommand('start', $user_id);
+ 
+       $answer = 'Добро пожаловать! Бот создан командой B&B для игры в квиз... ' . "\n" . 'Для продолжения необходимо нажать "начать" и получать удовольствия от игры';
+ 
