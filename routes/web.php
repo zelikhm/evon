@@ -63,10 +63,6 @@ Route::middleware('auth', 'session', 'CheckSubscription')->group(function () {
   Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
 });
 
-Route::get('test', ['App\Http\Controllers\House\HouseController', 'waterMark']);
-
-Route::post('/bot/webhook', ['App\Http\Controllers\Bot\QuizController', 'index']);
-
 Route::get('/setBot', function () {
     $token = '6172255563:AAHiCQlABKJMpQRJ6TDAxChK8Do5eTc49lU';
 
