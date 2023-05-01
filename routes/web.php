@@ -70,6 +70,9 @@ Route::get('/setBot', function () {
     $token = '6172255563:AAHiCQlABKJMpQRJ6TDAxChK8Do5eTc49lU';
 
     $http = 'https://api.telegram.org/bot'.$token.'/setWebhook?url=https://evon-tr.com/bot';
+
+    $http = Http::post($http);
+    dd($http);
 });
 
 Route::get('/404', function () {
