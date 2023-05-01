@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Bot\QuizModel;
 use App\Models\User;
 use Illuminate\Http\Request;
+use TelegramBot\Api\Client;
 use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
 
 class QuizController extends Controller
@@ -32,7 +33,7 @@ class QuizController extends Controller
 
   public function index()
   {
-    $bot = new \TelegramBot\Api\Client($this->api_key);
+    $bot = new Client($this->api_key);
     // команда для start
     $bot->command('start', function ($message) use ($bot) {
       $user_id = $message->getFrom()->getId();

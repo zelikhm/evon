@@ -66,10 +66,11 @@ Route::middleware('auth', 'session', 'CheckSubscription')->group(function () {
 Route::get('test', ['App\Http\Controllers\House\HouseController', 'waterMark']);
 
 Route::get('/bot', ['App\Http\Controllers\Bot\QuizController', 'index']);
+
 Route::get('/setBot', function () {
     $token = '6172255563:AAHiCQlABKJMpQRJ6TDAxChK8Do5eTc49lU';
 
-    $http = 'https://api.telegram.org/bot'.$token.'/setWebhook?url=https://evon-tr.com/bot';
+    $http = 'https://api.telegram.org/bot6172255563:AAHiCQlABKJMpQRJ6TDAxChK8Do5eTc49lU/setWebhook?url=https://evon-tr.com/bot';
 
     $http = Http::post($http);
 
