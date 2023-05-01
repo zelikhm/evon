@@ -55,11 +55,11 @@ class QuizController extends Controller
   public function index()
   {
     $token = '6172255563:AAHiCQlABKJMpQRJ6TDAxChK8Do5eTc49lU';
-
+    info(1);
     $bot = new \TelegramBot\Api\Client($token);
     // команда для start
     $bot->command('start', function ($message) use ($bot) {
-
+      info(2);
       $answer = 'Добро пожаловать! Бот создан командой B&B для доступа к арбитражным сигналам... ' . "\n" . 'Для продолжения необходимо (ввести свой email и нажать проверить)';
 
       $keyboard = new \TelegramBot\Api\Types\Inline\InlineKeyboardMarkup(
