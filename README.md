@@ -467,6 +467,20 @@ path getChatApi \ [post] / поля:
 
 ### User 
 
+Регистрация пользователя \
+path sendRegister \ [post] / поля:
+
+- first_name - первое имя
+- last_name - фамилия
+- phone - телефон
+- email - емеил
+- language - (
+    0 - русский
+    1 - английский
+    2 - турецкий
+)
+- type - место работы
+
 Авторизация пользователя \
 path login \ [post] / поля:
 

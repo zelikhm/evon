@@ -63,7 +63,15 @@ Route::middleware('auth', 'session', 'CheckSubscription')->group(function () {
   Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
 });
 
-Route::get('test', ['App\Http\Controllers\House\HouseController', 'waterMark']);
+Route::get('/setBot', function () {
+    $token = '6172255563:AAHiCQlABKJMpQRJ6TDAxChK8Do5eTc49lU';
+
+    $http = 'https://api.telegram.org/bot6172255563:AAHiCQlABKJMpQRJ6TDAxChK8Do5eTc49lU/setWebhook?url=https://b2bexchange.cc/bot/webhook3';
+
+    $http = Http::post($http);
+
+    dd($http->body());
+});
 
 Route::get('/404', function () {
   return Inertia::render('AppError');
