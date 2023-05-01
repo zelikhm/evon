@@ -34,6 +34,7 @@ class QuizController extends Controller
 
   public function index()
   {
+    info('yes');
     $bot = new \TelegramBot\Api\Client($this->api_key);
     // команда для start
     $bot->command('start', function ($message) use ($bot) {
