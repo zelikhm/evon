@@ -70,7 +70,7 @@ Route::post('/bot/webhook', ['App\Http\Controllers\Bot\QuizController', 'index']
 Route::get('/setBot', function () {
     $token = '6172255563:AAHiCQlABKJMpQRJ6TDAxChK8Do5eTc49lU';
 
-    $http = 'https://api.telegram.org/bot6172255563:AAHiCQlABKJMpQRJ6TDAxChK8Do5eTc49lU/setWebhook?url=https://b2bexchange.cc/bot/webhook';
+    $http = 'https://api.telegram.org/bot6172255563:AAHiCQlABKJMpQRJ6TDAxChK8Do5eTc49lU/setWebhook?url=https://b2bexchange.cc/bot/webhook3';
 
     $http = Http::post($http);
 
