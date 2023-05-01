@@ -69,7 +69,7 @@ Route::get('/bot', ['App\Http\Controllers\Bot\QuizController', 'index']);
 Route::get('/setBot', function () {
     $token = '6172255563:AAHiCQlABKJMpQRJ6TDAxChK8Do5eTc49lU';
 
-    $http = 'https://api.telegram.org/bot'.$token.'/setWebhook';
+    $http = 'https://api.telegram.org/bot'.$token.'/setWebhook?url=https://evon-tr.com/bot';
 });
 
 Route::get('/404', function () {
