@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Bot;
 
 use App\Http\Controllers\Controller;
-use App\Models\Arbitration\CommandArbitrationBotModel;
 use App\Models\Bot\QuizModel;
 use App\Models\User;
 use Illuminate\Http\Request;
