@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use TelegramBot\Api\Client;
 use TelegramBot\Api\Types\Inline\InlineKeyboardMarkup;
+use TelegramBot\Api\BotApi;
 
 class QuizController extends Controller
 {
@@ -36,9 +37,9 @@ class QuizController extends Controller
     $bot = new Client($this->api_key);
     // команда для start
     $bot->command('start', function ($message) use ($bot) {
-      $user_id = $message->getFrom()->getId();
+//      $user_id = $message->getFrom()->getId();
 
-      $this->setCommand('start', $user_id);
+//      $this->setCommand('start', $user_id);
 
       $answer = 'Добро пожаловать! Бот создан командой B&B для игры в квиз... ' . "\n" . 'Для продолжения необходимо нажать "начать" и получать удовольствия от игры';
 
