@@ -71,6 +71,8 @@ class QuizController extends Controller
         ]
       );
 
+      info($message->getChat()->getId());
+
       $bot->sendMessage($message->getChat()->getId(), $answer, null, false, null, $keyboard);
     });
 
