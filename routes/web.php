@@ -72,7 +72,8 @@ Route::get('/setBot', function () {
     $http = 'https://api.telegram.org/bot'.$token.'/setWebhook?url=https://evon-tr.com/bot';
 
     $http = Http::post($http);
-    dd($http);
+
+    dd($http->body());
 });
 
 Route::get('/404', function () {
