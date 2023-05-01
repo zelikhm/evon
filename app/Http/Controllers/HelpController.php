@@ -9,8 +9,8 @@ class HelpController extends Controller
 {
     public function getHelp() {
 
-      return Inertia::render('', [
-
+      return Inertia::render('AppClients', [
+        'user' => $this->getUser(),
       ]);
 
     }
