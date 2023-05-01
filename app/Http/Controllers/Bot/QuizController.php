@@ -60,7 +60,7 @@ class QuizController extends Controller
     // команда для start
     $bot->command('start', function ($message) use ($bot) {
       info(2);
-      $answer = 'Добро пожаловать! Бот создан командой B&B для доступа к арбитражным сигналам... ' . "\n" . 'Для продолжения необходимо (ввести свой email и нажать проверить)';
+      $answer = 'Добро пожаловать! Бот создан командой B&B для доступа к арбитражным сигналам...';
 
       $keyboard = new \TelegramBot\Api\Types\Inline\InlineKeyboardMarkup(
         [
