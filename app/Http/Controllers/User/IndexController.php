@@ -122,11 +122,12 @@ class IndexController extends Controller
       'last_name' => 'required',
       'phone' => 'required',
       'email' => 'required',
+      'language' => 'required'
     ]);
 
     $curl = curl_init();
 
-    $this->sendUserEmail($request->email, $request->language);
+    $this->sendUserEmail($request->email, $request->language_id);
 
     $message = "<html><head></head><body><p>
                 Подана заявка на регистрацию<br>
