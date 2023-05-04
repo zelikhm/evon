@@ -100,7 +100,7 @@ Route::prefix('user')->group(function () {
   Route::post('/lang', ['App\Http\Controllers\User\IndexController', 'lang']);
   Route::post('/setLink', ['App\Http\Controllers\User\IndexController', 'setLink']);
   //
-  Route::post('register', ['App\Http\Controllers\User\IndexController', 'sendRegister']);
+  Route::post('/register', ['App\Http\Controllers\User\IndexController', 'sendRegister']);
 });
 
 Route::prefix('chat')->group(function () {
