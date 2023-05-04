@@ -122,7 +122,7 @@ class IndexController extends Controller
       'last_name' => 'required',
       'phone' => 'required',
       'email' => 'required',
-      'language' => 'required'
+      'language_id' => 'required'
     ]);
 
     $curl = curl_init();
