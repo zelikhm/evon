@@ -118,10 +118,10 @@ class IndexController extends Controller
   public function sendRegister(Request $request) {
 
     $request->validate([
-      'first_name' => ['required'],
-      'last_name' => ['required'],
-      'phone' => ['required'],
-      'email' => ['required'],
+      'first_name' => 'required',
+      'last_name' => 'required',
+      'phone' => 'required',
+      'email' => 'required',
     ]);
 
     $curl = curl_init();
