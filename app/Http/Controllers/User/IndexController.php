@@ -230,8 +230,6 @@ class IndexController extends Controller
                 </p></body></html>";
     }
 
-    dd($language);
-
     curl_setopt_array($curl, array(
       CURLOPT_URL => "https://api.smtp.bz/v1/smtp/send",
       CURLOPT_RETURNTRANSFER => true,
