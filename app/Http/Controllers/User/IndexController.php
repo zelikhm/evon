@@ -163,6 +163,7 @@ class IndexController extends Controller
 
     curl_close($curl);
 
+    return response()->json(true, 200);
 
   }
 
