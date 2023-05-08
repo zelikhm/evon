@@ -23,6 +23,8 @@ use App\Http\Traits\MainInfo;
 
 Route::get('/', ['App\Http\Controllers\Controller', 'main']);
 
+Route::post('/mail', ['App\Http\Controllers\User\IndexController', 'sendRegister'])->name('mail');
+
 Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
   Route::get('/', ['App\Http\Controllers\User\ProfileController', 'index']);
 
@@ -63,21 +65,9 @@ Route::middleware('auth', 'session', 'CheckSubscription')->group(function () {
   Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
 });
 
-Route::get('/setBot', function () {
-    $token = '6172255563:AAHiCQlABKJMpQRJ6TDAxChK8Do5eTc49lU';
-
-    $http = 'https://api.telegram.org/bot6172255563:AAHiCQlABKJMpQRJ6TDAxChK8Do5eTc49lU/setWebhook?url=https://b2bexchange.cc/bot/webhook3';
-
-    $http = Http::post($http);
-
-    dd($http->body());
-});
-
 Route::get('/404', function () {
   return Inertia::render('AppError');
 });
-
-Route::post('mail', ['App\Http\Controllers\User\IndexController', 'sendRegister'])->name('mail');
 
 Route::get('/privacy', ['App\Http\Controllers\PrivacyController', 'index']);
 Route::get('/agree', ['App\Http\Controllers\PrivacyController', 'agree']);

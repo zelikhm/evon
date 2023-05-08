@@ -7,13 +7,13 @@
     phone: '',
     first_name: '',
     last_name: '',
-    language: 0,
+    language_id: 0,
     type: 'Агентство недвижимости (владелец/директор)',
     remember: false,
   });
 
   const submit = () => {
-    form.language = document.getElementById("language").value;
+    form.language_id = document.getElementById("language").value;
 
     form.post(route('mail'), {
       onSuccess: () => {
@@ -169,6 +169,7 @@ export default {
     //     email: this.user.email,
     //     phone: this.user.phone,
     //     type: this.selectType,
+    //     language_id: this.selectLanguage
     //   });
     //
     //   form.post(route('mail'), {

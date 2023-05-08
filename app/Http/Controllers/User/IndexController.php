@@ -122,7 +122,6 @@ class IndexController extends Controller
       'last_name' => 'required',
       'phone' => 'required',
       'email' => 'required',
-      'language_id' => 'required'
     ]);
 
     $curl = curl_init();
@@ -163,7 +162,7 @@ class IndexController extends Controller
 
     curl_close($curl);
 
-    return response()->json(true, 200);
+    return redirect('/');
 
   }
 

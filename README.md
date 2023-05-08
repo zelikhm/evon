@@ -474,7 +474,7 @@ path sendRegister \ [post] / поля:
 - last_name - фамилия
 - phone - телефон
 - email - емеил
-- language - (
+- language_id - (
     0 - русский
     1 - английский
     2 - турецкий
