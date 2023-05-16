@@ -62,8 +62,6 @@ class Password implements Rule, DataAwareRule
         return true;
       }
     }
-
-
   }
 
   /**

@@ -18,6 +18,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::prefix('client')->group(function () {
+  Route::get('/get', ['App\Http\Controllers\HelpController', 'getClient']);
+  Route::post('/send', ['App\Http\Controllers\HelpController', 'sendClient']);
+  Route::post('/edit', ['App\Http\Controllers\HelpController', 'editClient']);
+});
+
 Route::prefix('house')->group(function () {
   //admin
   Route::post('/getHousesForAdmin', ['App\Http\Controllers\House\HouseController', 'getHousesForAdmin']);
