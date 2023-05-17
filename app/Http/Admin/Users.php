@@ -171,6 +171,7 @@ class Users extends Section implements Initializable
     $card = AdminForm::card();
 
     $form = AdminForm::elements([
+      AdminFormElement::checkbox('openClient', 'Показывать страницу клиентов?'),
       AdminFormElement::columns()
         ->addColumn([
           AdminFormElement::text('email', 'Email/Логин'),

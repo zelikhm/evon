@@ -36,6 +36,7 @@ class User extends Authenticatable
     'checked',
     'token',
     'lang',
+    'openClient'
   ];
 
   /**
