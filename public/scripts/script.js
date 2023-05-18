@@ -4,44 +4,9 @@
 
 
 
-document.querySelectorAll('#welcom .welcom-cont .right .contant .btn').forEach(btn => {
-    btn.addEventListener('mouseenter', () => {
-        btn.classList.add('hide');
-    });
+ 
 
-    btn.addEventListener('mouseleave', () => {
-        setTimeout(() => {
-            btn.classList.remove('hide');
-        }, 3000);
-    });
-});
-
-
-
-document.querySelectorAll('#help .help-cont .right .contant .btn').forEach(btn => {
-    btn.addEventListener('mouseenter', () => {
-        btn.classList.add('hide');
-    });
-
-    btn.addEventListener('mouseleave', () => {
-        setTimeout(() => {
-            btn.classList.remove('hide');
-        }, 3000);
-    });
-});
-
-
-
-
-document.querySelectorAll("#ForBuilders .left ul li").forEach((element, index) => {
-    element.addEventListener("click", () => {
-        document.querySelectorAll("#ForBuilders .left ul li").forEach(el => el.classList.remove('active'));
-        element.classList.add('active');
-        document.querySelectorAll("#ForBuilders .right img").forEach(img => img.classList.remove('active'));
-        document.querySelectorAll("#ForBuilders .right img")[index].classList.add('active');
-    });
-});
-
+  
 
 
 

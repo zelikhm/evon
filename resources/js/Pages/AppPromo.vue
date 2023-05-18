@@ -59,7 +59,7 @@ import '../../../public/styles/ForRealtors.css'
             </div>
             <button class="registr">Зарегистрироваться</button>
           </li>
-          <li class="user">
+          <li class="user" >
             <img src="images/img/header/User.png" alt="" srcset="">
           </li>
         </ul>
@@ -132,7 +132,7 @@ import '../../../public/styles/ForRealtors.css'
         </div>
         <div class="right">
           <div class="contant">
-            <div class="btn" v-for="n in 80" :key="n">
+            <div class="btn" v-for="n in 80" :key="n" @mouseenter="hideBtn" @mouseleave="showBtn">
               <img src="images/img/welcom/plus.png" alt="" srcset="">
             </div>
           </div>
@@ -221,74 +221,25 @@ import '../../../public/styles/ForRealtors.css'
 
       <div class="cont">
         <div class="left">
-          <div class="slide active slide1">
+          <div class="slide" v-for="(slide, index) in slides"
+            :class="['slide', `slide${step}`, { active: step === (index + 1) }]" :key="index">
             <div class="slide-text">
-              <h4>Находим нужные объекты <br>по фильтрам</h4>
-              <span>1</span>
+              <h4>{{ slide.title }}</h4>
+              <span>{{ index + 1 }}</span>
             </div>
             <div class="slide-info">
-              <h5>Фильтры для поиска объекта под запрос вашего клиента</h5>
-              <em>до
-                <span>30</span>
-              </em>
-            </div>
-          </div>
-          <div class="slide  slide2">
-            <div class="slide-text">
-              <h4>Ищем нужные объекты <br> на карте</h4>
-              <span>2</span>
-            </div>
-            <div class="slide-info purple">
-              <h5>Расположение объектов на карте</h5>
-              <img src="images/img/forRealtors/planet.png" alt="" srcset="">
-            </div>
-          </div>
-          <div class="slide  slide3">
-            <div class="slide-text">
-              <h4>Добавляем объекты <br> в подборку</h4>
-              <span>3</span>
-            </div>
-            <div class="slide-info ">
-              <h5>Полная база новостроек побережья с контактами застройщиков и отделов продаж</h5>
-              <em>
-                <span>400</span>
-                <img src="images/img/forRealtors/Mask.png" alt="" srcset="">
-              </em>
-            </div>
-          </div>
-          <div class="slide  slide4">
-            <div class="slide-text">
-              <h4>Формируем подборку <br> объектов для клиента и <br>отправляем в один клик</h4>
-              <span>4</span>
-            </div>
-            <div class="slide-info purple">
-              <h5>Формирование подборки под вашего клиента и отправка от вашего имени/агентства</h5>
-              <img src="images/img/forRealtors/vector.png" alt="" srcset="">
-            </div>
-          </div>
-          <div class="slide  slide5">
-            <div class="slide-text">
-              <h4>Отправляем прайс-лист <br> клиенту</h4>
-              <span>5</span>
-            </div>
-            <div class="slide-info last">
-              <h5>Актуальный прайс лист по объекту</h5>
-              <em>
-                <span>Обновления <br>каждые 24 часа</span>
-                <img src="images/img/forRealtors/cl.png" alt="" srcset="">
-              </em>
+              <h5>{{ slide.infoTitle }}</h5>
+              <em>до <span>{{ slide.infoCount??slide.infoBtn }}</span></em>
             </div>
           </div>
         </div>
         <div class="right">
-          <img class="slide active slide1" src="images/img/forRealtors/s1.png" alt="">
-          <img class="slide slide2" src="images/img/forRealtors/s2.png" alt="">
-          <img class="slide slide3" src="images/img/forRealtors/s3.png" alt="">
-          <img class="slide slide4" src="images/img/forRealtors/s4.png" alt="">
-          <img class="slide slide5" src="images/img/forRealtors/s5.png" alt="">
+          <img class="slide" v-for="(slide, index) in slides"
+            :class="['slide', `slide${index + 1}`, { active: step === (index + 1) }]"
+            :src="'images/img/forRealtors/s' + (index + 1) + '.png'" :alt="'Slide ' + (index + 1)" :key="index" />
           <div class="tools">
-            <img class="tool" src="images/img/forRealtors/tool.png" alt="" srcset="">
-            <p>Потяните влево <br> на следующий этап</p>
+            <img class="tool" src="images/img/forRealtors/tool.png" alt="" srcset="" />
+            <p>Потяните влево <br /> на следующий этап</p>
           </div>
         </div>
       </div>
@@ -333,9 +284,12 @@ import '../../../public/styles/ForRealtors.css'
           </p>
         </div>
         <div class="right">
-          <img src="images/img/forBuilders/sl1.png" v-bind:class="{ active: forBuilders.activeIndex === 0 }" alt="" srcset="">
-          <img src="images/img/forBuilders/sl2.png" v-bind:class="{ active: forBuilders.activeIndex === 1 }" alt="" srcset="">
-          <img src="images/img/forBuilders/sl3.png" v-bind:class="{ active: forBuilders.activeIndex === 2 }" alt="" srcset="">
+          <img src="images/img/forBuilders/sl1.png" v-bind:class="{ active: forBuilders.activeIndex === 0 }" alt=""
+            srcset="">
+          <img src="images/img/forBuilders/sl2.png" v-bind:class="{ active: forBuilders.activeIndex === 1 }" alt=""
+            srcset="">
+          <img src="images/img/forBuilders/sl3.png" v-bind:class="{ active: forBuilders.activeIndex === 2 }" alt=""
+            srcset="">
 
         </div>
       </div>
@@ -382,7 +336,7 @@ import '../../../public/styles/ForRealtors.css'
         </div>
         <div class="right">
           <div class="contant">
-            <div class="btn" v-for="n in 80" :key="n">
+            <div class="btn" v-for="n in 80" :key="n" @mouseenter="hideBtn" @mouseleave="showBtn">
               <img src="images/img/welcom/plus.png" alt="" srcset="">
             </div>
           </div>
@@ -534,6 +488,38 @@ export default {
       user: [],
 
 
+      isMouseDown: false,
+      startX: 0,
+      scrollLeft: 0,
+      step: 1,
+      slides: [
+        {
+          title: "Находим нужные объекты по фильтрам",
+          infoTitle: "Фильтры для поиска объекта под запрос вашего клиента",
+          infoCount: "30",
+        },
+        {
+          title: "Ищем нужные объекты на карте",
+          infoTitle: "Расположение объектов на карте",
+          infoCount: "",
+        },
+        {
+          title: "Добавляем объекты в подборку",
+          infoTitle: "Полная база новостроек побережья с контактами застройщиков и отделов продаж",
+          infoCount: "400",
+        },
+        {
+          title: "Формируем подборку объектов для клиента и отправляем в один клик",
+          infoTitle: "Формирование подборки под вашего клиента и отправка от вашего имени/агентства",
+          infoCount: "",
+        },
+        {
+          title: "Отправляем прайс-лист клиенту",
+          infoTitle: "Актуальный прайс лист по объекту",
+          infoBtn:"Обновления каждые 24 часа",
+          infoCount:null
+        },
+      ],
       forBuilders: {
         activeIndex: 0
       },
@@ -574,21 +560,56 @@ export default {
 
     this.type()
   },
+  mounted() {
+    /* const cont = document.querySelector('.cont');
+    cont.addEventListener('mousedown', this.startDrag);
+    cont.addEventListener('mouseleave', this.endDrag);
+    cont.addEventListener('mouseup', this.endDrag);
+    cont.addEventListener('mousemove', this.drag); */
+  },
   methods: {
+    startDrag(e) {
+      this.isMouseDown = true;
+      this.startX = e.pageX - e.currentTarget.offsetLeft;
+      this.scrollLeft = e.currentTarget.scrollLeft;
+    },
+    endDrag(e) {
+      this.isMouseDown = false;
+      if (Math.abs(e.pageX - this.startX) >= 200) {
+        this.animationChange();
+      }
+    },
+    drag(e) {
+      if (!this.isMouseDown) return;
+      e.preventDefault();
+      const x = e.pageX - e.currentTarget.offsetLeft;
+      const walk = (x - this.startX) * 3;
+      e.currentTarget.scrollLeft = this.scrollLeft - walk;
+    },
+    animationChange() {
+      this.step++;
+      if (this.step > 5) {
+        this.step = 1;
+      }
+    },
+    hideBtn(event) {
+      event.target.classList.add('hide');
+    },
+    showBtn(event) {
+      setTimeout(() => {
+        event.target.classList.remove('hide');
+      }, 3000);
+    },
     type() {
-      const text = this.welcomText.texts[this.welcomText.index]; 
-
+      const text = this.welcomText.texts[this.welcomText.index];
       if (this.welcomText.isDeleting) {
-
         this.welcomText.letterIndex--;
-
         if (this.welcomText.letterIndex == 0) {
           this.welcomText.isDeleting = false;
         }
       } else {
         this.welcomText.text = `Evon - универсальная площадка для ${text.substring(0, this.welcomText.letterIndex + 1)}`;
         this.welcomText.letterIndex++;
-
         if (this.welcomText.letterIndex == text.length) {
           this.welcomText.isDeleting = true;
           setTimeout(() => {
@@ -600,7 +621,6 @@ export default {
         }
       }
       setTimeout(this.type, 100)
-
     },
 
     activateItem(index) {
