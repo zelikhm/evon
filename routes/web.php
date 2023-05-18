@@ -22,6 +22,7 @@ use App\Http\Traits\MainInfo;
 */
 
 Route::get('/', ['App\Http\Controllers\Controller', 'main']);
+Route::get('/promo', ['App\Http\Controllers\Controller', 'promo']);
 
 Route::post('/mail', ['App\Http\Controllers\User\IndexController', 'sendRegister'])->name('mail');
 

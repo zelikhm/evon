@@ -1,0 +1,371 @@
+/*lowSection*/
+#lowSection {
+    background: #F9F9FF;
+    min-height: 100vh;
+    height: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+#lowSection .container {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+}
+
+#lowSection .upp-row {
+    display: flex;
+    justify-content: space-between;
+    height: 200px;
+}
+
+#lowSection h2 {
+    font-family: 'ALS Gorizont';
+    font-style: normal;
+    font-weight: 400;
+    max-width: 1457px;
+    font-size: 60px;
+    margin: 0 auto;
+    line-height: 77px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #3B3A45;
+}
+
+#lowSection h3 {
+    font-family: 'ALS Gorizont';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 40px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #9657EC;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+#lowSection button {
+    background-color: transparent;
+    border: 0;
+    display: flex;
+    gap: 15px;
+    margin: 75px auto 270px;
+}
+
+#lowSection button span {
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 31px;
+    display: flex;
+    align-items: center;
+    color: #9657EC;
+}
+
+#lowSection button img {
+    width: 45px;
+}
+
+#lowSection .row-soc {
+    display: flex;
+    gap: 50px;
+    margin: 80px auto;
+    width: fit-content;
+}
+
+#lowSection .row-soc img {
+    width: 45px;
+}
+
+#lowSection .foot {
+    height: 159px;
+    background-image: url(../img/lowSection/t.png);
+    background-position: 0;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding-top: 150px;
+    position: relative;
+    z-index: 2;
+}
+
+#lowSection .foot p {
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    margin-top: 40px;
+}
+
+#lowSection .bg-houses {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+}
+
+#lowSection .bg-houses img {
+    width: 40vw;
+    height: auto;
+    z-index: 1;
+}
+
+#lowSection .bg-houses img:nth-child(1) {
+    position: absolute;
+    bottom: 0;
+    left: 40%;
+    transform: translate(-40%, 20%);
+}
+
+#lowSection .bg-houses img:nth-child(2) {
+    position: absolute;
+    right: 0;
+    bottom: -10%;
+}
+
+/*footer*/
+footer {
+    background: #3B3A45;
+}
+
+footer nav {
+    margin-bottom: 50px;
+}
+
+footer nav ul {
+    display: flex;
+    gap: 85px;
+    flex-wrap: wrap;
+}
+
+footer nav ul li {
+    list-style: none;
+}
+
+footer nav ul li a {
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+footer nav ul li span {
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    color: #B590F8;
+}
+
+footer p {
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+    opacity: 0.55;
+}
+
+footer .row-ref {
+    display: flex;
+    align-items: center;
+    gap: 85px;
+    margin-bottom: 25px;
+}
+
+footer .row-ref a {
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+footer .row-ref a span {
+    color: #B590F8;
+}
+
+footer .mobile-contant {
+    display: none;
+}
+
+@media only screen and (max-width:1000px) {
+
+
+    #lowSection h2 {
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 134.5%;
+        margin-top: 80px;
+    }
+
+    #lowSection h3 {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 134.5%;
+    }
+
+    #lowSection {
+        min-height: auto;
+    }
+
+    #lowSection .bg-houses img:nth-child(2) {
+        display: none;
+    }
+
+    #lowSection .upp-row {
+        display: none;
+    }
+
+    #lowSection button {
+        margin: 75px auto 140px;
+    }
+
+    #lowSection .bg-houses img:nth-child(1) {
+        width: 496px;
+        margin: 0 auto;
+        display: block;
+        left: calc(50% - 248px);
+        transform: translate(calc(50% - 248px), 20%);
+    }
+
+    #lowSection .row-soc img {
+        width: 31px;
+    }
+
+    #lowSection button span {
+        font-size: 22px;
+        line-height: 33px;
+    }
+
+    footer .mobile-contant {
+        display: block;
+        padding-top: 25px;
+    }
+
+    footer .mobile-contant p {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 120%;
+        color: #FFFFFF;
+        opacity: 1;
+        margin-bottom: 50px;
+    }
+
+    footer .mobile-contant .logo {
+        max-width: 105px;
+        width: 100%;
+        display: block;
+        margin: 0 auto;
+        margin-bottom: 30px;
+    }
+
+    #lowSection .foot .container {
+        display: none;
+    }
+
+    footer .row-ref {
+        display: block;
+    }
+
+    #lowSection .foot {
+        height: 100px;
+        padding-top: 0;
+    }
+
+    footer .row-soc {
+        width: 167.99px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+
+    footer p {
+        display: block;
+        text-align: center;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 120%;
+    }
+
+    footer nav ul li {
+        display: none;
+    }
+
+    footer nav ul li:first-child span {
+        display: none;
+    }
+
+    footer nav ul li:first-child {
+        display: block;
+        width: 100%;
+    }
+
+    footer nav ul li:first-child a {
+        color: #D6BFFF;
+        font-size: 14px;
+        line-height: 120%;
+        display: block;
+        text-align: center;
+    }
+
+    footer .row-ref a {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 120%;
+        display: block;
+        text-align: center;
+        margin: 20px 0px;
+        color: #FFFFFF;
+    }
+
+    footer .row-ref a:last-child {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 120%;
+        color: #FFFFFF;
+        opacity: 0.3;
+    }
+
+
+
+}
+
+
+@media (min-width: 1000px) and (max-width: 1700px) {
+    #lowSection h2 {
+        font-size: 4vw;
+        line-height: 4.5vw;
+    }
+    #lowSection h3 { 
+        font-size: 2.5vw;
+        line-height: 3vw; 
+    }
+}

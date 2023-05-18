@@ -1,0 +1,673 @@
+header ul {
+    display: grid;
+    grid-template-columns: 1fr auto auto auto;
+    padding: 35px 0px;
+    align-items: center;
+}
+
+header ul li {
+    list-style: none;
+    display: flex;
+}
+
+header ul li a {
+    text-decoration: none;
+}
+
+header img.logo {
+    width: 144.55px;
+    height: 29.12px;
+}
+
+header .ref-soc img {
+    height: 28px;
+    margin: 0px 15px;
+}
+
+header .lang {
+    margin-left: 70px;
+}
+
+header .lang svg {
+    position: relative;
+    left: 6px;
+    top: 6px;
+}
+
+header .lang span {
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 16px;
+
+    color: #000000;
+
+}
+
+header button {
+    cursor: pointer;
+}
+
+header .container {
+    overflow: visible;
+}
+
+header button.login {
+    padding: 18px 50px;
+    width: 167px;
+    height: 52px;
+    border: 1px solid #9657EC;
+    border-radius: 2px;
+    background-color: transparent;
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 15px;
+    margin-left: 50px;
+    position: relative;
+    z-index: 22;
+    margin-right: 40px;
+    color: #9657EC;
+    transition: 0.5s;
+}
+
+header button.login:hover {
+    background-color: #9657EC;
+    color: white;
+}
+
+header button.registr {
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+    border: 0;
+    background-color: transparent;
+    color: #000000;
+}
+
+
+
+
+header .lines-animations {
+    position: absolute;
+    left: calc(50vw - 360px);
+}
+
+header .modal {
+    display: none;
+}
+
+header .modal.active {
+    display: block;
+}
+
+header .modal-bg {
+    display: block;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #3B3A45;
+    opacity: 0.9;
+    z-index: 100;
+}
+
+header .modal-contant {
+    position: absolute;
+    z-index: 101;
+    padding: 77px 83px;
+    background: #3B3A45;
+    border-radius: 5px;
+    width: fit-content;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+header .modal-contant h2 {
+    font-family: 'ALS Gorizont';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 51px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+}
+
+header .modal-contant input {
+    height: 82px;
+    width: 100%;
+    text-align: center;
+    background: #FFFFFF;
+    border-radius: 5px;
+    border: 0;
+    outline: none;
+    margin: 35px 0px;
+
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+
+
+}
+
+header .modal-contant input::placeholder {
+    color: #9657EC;
+}
+
+header .modal-contant button {
+    background: #9657EC;
+    width: 100%;
+    border: 0;
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #FFFFFF;
+    padding: 26px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+header .modal-contant a {
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    opacity: 0.6;
+}
+
+header .modal-contant a {
+    display: block;
+    text-align: center;
+    margin-top: 70px;
+}
+
+header .modal-contant a.login-ref {
+
+    text-decoration: none;
+    margin-top: 35px;
+}
+
+header .logIn {
+    position: relative;
+}
+
+header .logIn .select-login {
+    display: none;
+}
+
+header .logIn.active .select-login {
+    display: block;
+    background: white;
+}
+
+header .logIn .select-login {
+    position: absolute;
+    width: 100%;
+    left: calc(50% - 102px);
+    top: -15px;
+    max-width: 213px;
+    height: 227px;
+    border: 1px solid #9657EC;
+    border-radius: 2px;
+    z-index: 20;
+}
+
+header .logIn button:not(.login):nth-child(1) {
+    margin-top: 90px;
+}
+
+header .logIn button:not(.login) {
+    height: 52px;
+    background: #3B3A45;
+    border-radius: 3px;
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 16px;
+    text-align: center;
+    color: #FFFFFF;
+    width: 100%;
+    max-width: 167px;
+    display: block;
+    margin: 15px auto;
+    cursor: pointer;
+}
+
+header ul li.user {
+    display: none;
+}
+header .enter{
+   display: none;
+}
+header .enter.active{
+    display: block;
+}
+
+header .modal-contant button.hiden{
+    display: none;
+}
+
+header .modal-contant .back{ 
+    background-color: transparent;
+    color: #3B3A45;
+    opacity: 0.6;
+    width: fit-content;
+    padding: 0;
+    margin: 0 auto;
+    margin-top: 14px;
+    border-bottom: 1px solid #3B3A45;
+    border-radius: 0;
+}
+/*!header*/
+/*welcom*/
+#welcom {
+    padding-bottom: 50px;
+    position: relative;
+    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-content: stretch;
+    align-items: center;
+}
+
+#welcom .welcom-cont {
+    display: grid;
+    grid-template-columns: 1fr 0.8fr;
+    /*  grid-gap: 100px; */
+}
+
+#welcom .welcom-cont .left {
+    background-image: url(../img//welcom/Rectangle.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+#welcom h1 {
+    font-family: 'ALS Gorizont';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 54px;
+    line-height: 77px;
+    height: 280px;
+    display: flex;
+    color: #000000;
+}
+
+#welcom h4 {
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
+
+#welcom h4 img {
+    width: 38px;
+    height: 38px;
+    position: relative;
+    top: 11px;
+}
+
+#welcom h4 span {
+    font-family: 'ALS Gorizont';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 31px;
+    color: #000000;
+}
+
+#welcom p {
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 35px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    opacity: 0.7;
+    max-width: 760px;
+}
+
+#welcom button {
+    margin: 30px 0px;
+    border: 1px solid #9657EC;
+    border-radius: 2px;
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    padding: 22px 55px;
+    line-height: 16px;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    transition: 0.5s;
+    color: #9657EC;
+    cursor: pointer;
+}
+
+#welcom button:hover {
+    background-color: #9657EC;
+    color: white;
+}
+
+#welcom .save-prog p {
+    display: flex;
+    gap: 15px;
+    width: fit-content;
+}
+
+#welcom .save-prog span {
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 26px;
+    display: flex;
+    align-items: center;
+
+    color: #3B3A45;
+
+    opacity: 0.4;
+}
+
+#welcom .scroll {
+    margin-top: 60px;
+    width: fit-content;
+}
+
+#welcom .scroll img {
+    animation: jump .6s infinite;
+}
+
+@keyframes jump {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(-10px);
+    }
+
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+#welcom .scroll span {
+    font-family: 'ALS Gorizont';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 28px;
+    display: flex;
+    color: #9657EC;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#welcom .scroll img {
+    height: 12px;
+    margin: 0 auto;
+    width: 32px;
+    display: block;
+
+}
+
+#welcom .ref-soc {
+    display: none;
+    justify-content: space-between;
+}
+
+#welcom .lines-animations {
+    position: absolute;
+    left: calc(50vw - 0px);
+    bottom: 0;
+    transform: rotate(-180deg);
+}
+
+
+
+#welcom .welcom-cont .right .contant {
+    width: 100%;
+    height: 100%;
+    max-height: 840px;
+    max-width: 672px;
+    background-image: url(../img/welcom/bgImg.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-left: auto;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+}
+
+#welcom .welcom-cont .right .contant .btn {
+    background-color: white;
+    padding: 26px;
+    width: fit-content;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#welcom .welcom-cont .right .contant .btn.hide {
+    opacity: 0;
+}
+
+
+
+
+
+@media only screen and (max-width: 1000px) {
+    .lines-animations {
+        display: none;
+    }
+
+    .container {
+        padding: 0px 15px;
+    }
+
+    #welcom .welcom-cont {
+        display: block;
+    }
+
+    #welcom {
+        align-items: start;
+    }
+
+    #welcom .welcom-cont .right .contant {
+        height: auto;
+        margin: 0 auto;
+        height: 355px;
+        width: 100%;
+    }
+
+    #welcom .welcom-cont .right .contant .btn {
+        display: none;
+    }
+
+    #welcom .ref-soc {
+        display: flex;
+        margin: 0 auto;
+        margin: 70px auto 37px auto;
+        max-width: 163px;
+    }
+
+    #welcom .ref-soc img {
+        height: 19px;
+    }
+
+    #welcom h1 {
+        font-size: 20px;
+        line-height: 24px;
+        height: 110px;
+    }
+
+    #welcom h4 img {
+        width: 22px;
+        height: 22px;
+        top: 6px;
+    }
+
+    #welcom h4 span {
+        font-size: 14px;
+        line-height: 14px;
+    }
+
+    #welcom button {
+        font-size: 14px;
+        line-height: 16px;
+        padding: 10px 23px;
+    }
+
+    #welcom .save-prog span {
+        font-size: 14px;
+        line-height: 17px;
+    }
+
+    #welcom .save-prog img {
+        width: 18px;
+    }
+
+    #welcom p {
+        font-size: 13px;
+        line-height: 160.5%;
+    }
+
+    #welcom .scroll {
+        display: none;
+    }
+
+
+
+    header ul li.btns {
+        display: none;
+    }
+
+    header ul li.ref-soc {
+        display: none;
+    }
+
+    header .lang span {
+        font-size: 14px;
+        line-height: 16px;
+    }
+    header .lang {
+        margin-right: 28px;
+    }
+
+    header ul li.user {
+        display: block;
+        width: 22px;
+        height: 22px;
+    }
+
+    header .modal-contant{
+        padding: 23px;
+        width: calc(100% - 80px);
+    }
+    header .modal.lodinn-btns .modal-contant{
+        background: white;
+        display: flex;
+        align-content: center;
+        flex-direction: column;
+        gap: 15px;
+        
+    }
+    header .modal-contant button {
+        font-size: 16px;
+        padding: 13px;
+        line-height: 16px;
+    }
+    header .modal-contant h2 { 
+        text-align: center;
+        font-size: 25px;
+        line-height: 30px; 
+    }
+    header .modal-contant input {
+        height: 70px;  
+        margin: 35px 0px; 
+        font-size: 16px;
+        line-height: 16px; 
+    }
+    header .modal-contant a { 
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 16px; 
+    }
+    header .modal-contant a {
+        display: block;
+        text-align: center;
+        margin-top: 50px;
+    }
+}
+
+@media  (min-width: 1000px) and (max-width: 1700px) {
+    #welcom .welcom-cont { 
+        grid-template-columns: 55vw 38vw;
+        width: 100%;
+    }
+    #welcom .welcom-cont .right .contant .btn { 
+        padding: 30%;
+    }
+
+    .container {
+        margin: 0 auto;
+        padding: 0px 50px;
+        overflow: hidden;
+    }
+    #welcom h1 { 
+        font-size: 2.6vw;
+        line-height: 3vw;
+        height: 11vw;
+        display: flex;
+        color: #000000;
+    }
+    #welcom p{
+        font-size: 1.6vw;
+        line-height: 2.4vw;
+    }
+    #welcom .welcom-cont .right{
+       overflow: hidden;
+    }
+
+
+
+
+    
+}
+
+
+@media  (max-width: 1200px) {
+    header .lines-animations{
+        display: none;
+    }
+}
+
+/*!welcom*/

@@ -167,7 +167,13 @@ import {usePage} from "@inertiajs/inertia-vue3";
 import AppModalRegister from "@/Layouts/modal/AppModalRegister.vue";
 
 export default {
-  props:['error', 'userInfo','count_flats' ,'count_house','count_people'],
+  props:[
+    'error',
+    'userInfo',
+    'count_flats',
+    'count_house',
+    'count_people'
+  ],
   provide() {
     return {
       error: this.error,

@@ -1,0 +1,180 @@
+/*blockInfo*/
+#blockInfo {
+    min-height: 100vh;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+#blockInfo .contant {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 180px;
+    position: relative;
+    z-index: 2;
+}
+
+#blockInfo .contant .right p {
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    height: 100%;
+    line-height: 35px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+    align-content: center;
+    justify-content: space-evenly;
+}
+
+#blockInfo .carusel-obertka {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-2.26deg);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+}
+
+#blockInfo .carusel {
+    display: flex;
+    gap: 15px;
+    animation: slideOut 10s linear infinite;
+    transform: rotate(2.26deg); 
+    transform-origin: top left;
+}
+
+#blockInfo .carusel img {
+    transform: rotate(2.26deg);
+}
+
+@keyframes slideOut {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-1950px);
+    }
+}
+
+#blockInfo .contant .left {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+#blockInfo .contant .left .block {
+    background-image: url(../img/carusel/Circle.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 100px 0px;
+}
+
+#blockInfo .contant .left .block h4 {
+    font-family: 'ALS Gorizont';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 70px;
+    line-height: 89px;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    color: #9657EC;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: center;
+}
+
+#blockInfo .contant .left .block p {
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 120%;
+    display: flex;
+    text-align: center;
+    color: #000000;
+    max-width: 210px;
+    margin: 0 auto;
+    opacity: 0.7;
+    justify-content: space-between;
+    align-content: flex-end;
+
+}
+
+
+
+
+@media only screen and (max-width: 1000px) {
+    #blockInfo .contant {
+        display: block;
+    }
+
+    #blockInfo .contant .left {
+        display: block;
+        padding-top: 30px;
+    }
+    #blockInfo .contant .left .block { 
+        padding: 71px 0px;
+        width: 269px;
+        margin: 32px auto;
+    }
+    #blockInfo .contant .left .block h4 {
+        font-size: 40px;
+        line-height: 40px;
+    }
+
+    #blockInfo .contant .left .block p {
+        font-size: 14px;
+        line-height: 120%;
+        display: block;
+        width: 139px;
+    }
+    #blockInfo .contant .left .block { 
+        padding: 65px 0px;
+    }
+    #blockInfo .contant .right p{
+        font-size: 14px;
+        line-height: 160.5%;  
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    #blockInfo .carusel img{
+        width: 200px;
+    }
+}
+
+
+
+@media  (min-width: 1000px) and (max-width: 1700px) {
+    #blockInfo .contant .left .block h4 { 
+        font-size: 4vw;
+        line-height: 5vw; 
+    }
+    #blockInfo .contant .left .block p { 
+        font-size: 1.7vw;
+        line-height: 120%; 
+    }
+    #blockInfo .contant .left .block { 
+        padding: 6vw 7vw;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+    #blockInfo .contant { 
+        grid-column-gap: 5vw;
+    }
+    #blockInfo .contant .right p { 
+        font-size: 1.7vw; 
+        line-height: 2.2vw; 
+    }
+}
+/*!blockInfo*/

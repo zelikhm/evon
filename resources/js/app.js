@@ -1,6 +1,7 @@
 import './bootstrap';
 import '../css/app.css';
 import './yatranslate.js';
+
 import ru from './Language/ru.json';
 import tur from './Language/tur.json';
 import en from './Language/en.json';

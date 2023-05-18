@@ -25,4 +25,14 @@ class Controller extends BaseController
         'count_people' => User::where('role', 0)->count() < 150 ? 150 : User::where('role', 0)->count(),
       ]);
     }
+
+    public function promo() {
+
+      return Inertia::render('AppPromo', [
+        'userInfo' => $this->getUser(),
+        'count_flats' => FlatModel::count(),
+        'count_house' => HouseModel::count(),
+        'count_people' => User::where('role', 0)->count() < 150 ? 150 : User::where('role', 0)->count(),
+      ]);
+    }
 }

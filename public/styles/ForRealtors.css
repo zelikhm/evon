@@ -1,0 +1,415 @@
+/*ForRealtors*/
+
+#ForRealtors .title {
+    background-image: url(../img/forRealtors/Rectangle.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
+    padding: 80px 0px;
+    position: relative;
+    z-index: 2;
+}
+
+#ForRealtors {
+    height: auto;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+
+    background-image: url(../img/forRealtors/BG.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding-bottom: 40px;
+
+}
+
+#ForRealtors .bg {
+    width: auto;
+    position: absolute;
+    right: -8%;
+    bottom: 0;
+}
+
+#ForRealtors h2 {
+    font-family: 'ALS Gorizont';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 77px;
+    text-align: center;
+
+    color: #9657EC;
+}
+
+#ForRealtors h3 {
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 160.5%;
+    text-align: center;
+    color: #000000;
+    margin-top: 22px;
+}
+
+#ForRealtors .cont {
+    display: grid;
+    grid-template-columns: 1fr minmax(100px, 765px);
+    grid-column-gap: 35px;
+    position: relative;
+    grid-column-gap: 100px;
+    z-index: 2;
+
+
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+#ForRealtors .cont .right {
+    position: relative;
+    padding-bottom: 145px;
+}
+
+#ForRealtors .cont .right img.slide {
+    width: 100%;
+    height: 429.5px;
+}
+ 
+#ForRealtors .cont  .slide {  
+    opacity: 0; 
+
+    transition: opacity 0.4s ease-out;
+}
+ 
+#ForRealtors .cont  .slide.active {
+    opacity: 1; 
+    transition: opacity 0.4s ease-in;
+} 
+
+#ForRealtors .cont .right .tools {
+    position: absolute;
+    right: 50px;
+    bottom: 0;
+}
+
+#ForRealtors .cont .right .tools img.tool {
+    width: 137px;
+    height: 137px;
+    margin-left: auto;
+    display: block;
+}
+
+#ForRealtors .cont .right .tools p {
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 120%;
+
+    color: #FFFFFF;
+}
+
+
+
+
+
+#ForRealtors .row-houses {
+    position: absolute;
+    bottom: -150px;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#ForRealtors .row-houses img {
+    width: auto;
+    height: auto;
+}
+
+
+
+
+#ForRealtors .cont .left {
+    position: relative;
+    height: 600px;
+} 
+
+#ForRealtors .cont .slide{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#ForRealtors .cont .left .slide-text {
+    padding: 66px 30px 0px;
+    background: linear-gradient(113.51deg, rgba(255, 255, 255, 0.8) 21.88%, rgba(255, 255, 255, 0) 100%);
+}
+
+#ForRealtors .cont .left .slide-text h4 {
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+
+    color: #3B3A45;
+}
+
+#ForRealtors .cont .left .slide-text span {
+    font-family: 'Gilroy';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 200px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    color: #9657EC;
+    opacity: 0.4;
+}
+
+#ForRealtors .cont .left .slide-info {
+    padding: 27px;
+    border: 1px solid #8E67D4;
+    display: block;
+    width: 100%;
+    max-width: 313px;
+    margin-left: auto;
+    position: absolute;
+    right: 0px;
+    top: 205px;
+    bottom: auto;
+}
+#ForRealtors .cont .slide-info.last em{
+    justify-content: space-between;
+    align-items: flex-end;
+}
+#ForRealtors .cont .left .slide-info.last em span{
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;  
+    margin-left: 0;
+    color: #000000;
+    -webkit-text-stroke:transparent;
+}
+#ForRealtors .cont .slide-info h5 {
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 120%;
+    max-width: 206px;
+    margin-bottom: 80px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+
+#ForRealtors .cont .slide-info em {
+    font-style: normal;
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 100%;
+    gap: 15px;
+    display: flex;
+    margin-left: auto;
+    color: #000000;
+    align-content: center;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+#ForRealtors .cont .slide-info em span {
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 80px;
+    line-height: 80%;
+    display: flex;
+    align-items: center;
+
+    color: transparent;
+    -webkit-text-stroke: 1px #9657EC;
+    text-stroke: 1px #9657EC;
+}
+
+#ForRealtors .cont .slide-info.purple {
+    background-color: #9657EC;
+}
+
+#ForRealtors .cont .slide-info.purple h5 {
+    color: white;
+}
+
+#ForRealtors .cont .slide-info.purple img {
+    display: block;
+    margin-left: auto;
+}
+#ForRealtors .cont .left .slide.slide4 .slide-info{ 
+    top: auto;
+    bottom: 0;
+}
+
+
+@media only screen and (max-width: 1000px) {
+    #ForRealtors h2 {
+        font-size: 30px;
+        line-height: 115%;
+    }
+
+    #ForRealtors h3 {
+        font-size: 14px;
+        line-height: 160.5%;
+    }
+
+    #ForRealtors .cont {
+        display: block;
+    }
+
+    #ForRealtors .cont .left {
+        min-height: 216px;
+        height: 450px;
+    }
+
+    #ForRealtors .cont .left .slide-text {
+        padding: 25px 9px 0px;
+    }
+
+    #ForRealtors .cont .left .slide-text h4 {
+        font-size: 20px;
+        line-height: 120%;
+        margin-bottom: 30px;
+    }
+
+    #ForRealtors .cont .left .slide-text span {
+        font-size: 80px;
+        line-height: 120%;
+    }
+
+    #ForRealtors .cont .left .slide-info {
+        padding: 13px;
+        bottom: 0;
+        max-width: 191px;
+        height: fit-content;
+        top: 135px;
+    }
+    #ForRealtors .cont .left .slide.slide4 .slide-info{
+        top: 135px;
+    }
+    #ForRealtors .cont .slide-info h5 {
+        font-size: 14px;
+        line-height: 120%;
+        margin-bottom: 60px;
+    }
+
+    #ForRealtors .cont .slide-info em span {
+        font-size: 40px;
+        line-height: 80%;
+    }
+
+
+    #ForRealtors .cont .right img.slide{ 
+        max-width: 289.67px;
+        margin: 0 auto;
+        height: auto;
+        left: calc(50% - 145px); 
+        display: block;
+    }
+    #ForRealtors .cont .right { 
+        height: 250px;
+    }
+    #ForRealtors .cont .right .tools img.tool{
+        margin: 0 auto;
+        display: block;
+    }
+    #ForRealtors .cont .right .tools { 
+        right: 0; 
+        width: 100%;
+    }
+    #ForRealtors .cont .right .tools p{
+        text-align: center;
+        margin-top: 15px;
+    }
+    #ForRealtors .row-houses img { 
+        max-width: 300px;
+        margin: 0 auto;
+        display: block;
+    }
+    #ForRealtors .row-houses img:last-child{
+        display: none;
+    }
+    #ForRealtors .row-houses {  
+        margin: 0 auto;
+        display: block;
+        bottom: 0;
+    }
+}
+
+
+
+
+
+
+@media (min-width: 1000px) and (max-width: 1700px) {
+    #ForRealtors h2 {
+        font-size: 4vw;
+        line-height: 4.5vw;
+    }
+    #ForRealtors h3{
+        font-size: 1.6vw;
+        line-height: 2.4vw;
+    }
+    #ForRealtors .cont{
+        grid-template-columns: 40vw 43vw;
+    }
+
+    #ForRealtors .cont .left .slide-text{
+        padding: 2vw 30px 0px;
+    }
+    #ForRealtors .cont .left .slide-text h4{
+        font-size: 1.8vw;
+        line-height: 120%;
+    }
+    #ForRealtors .cont .slide-info h5{
+        font-size: 1.3vw;
+        line-height: 2vw;
+        margin-bottom: 4vw;
+    }
+    #ForRealtors .cont .left .slide-info { 
+        max-width: 15vw;
+        padding: 1.5vw;
+        top: 12vw;
+        max-height: 22vw;
+    }
+
+    #ForRealtors .cont .left .slide.slide4 .slide-info{
+        top: 12vw;
+    }
+
+    #ForRealtors .cont .slide-info em span { 
+        font-size: 5vw;
+        line-height: 80%; 
+    }
+    #ForRealtors .cont .left .slide-text span { 
+        font-size: 15vw; 
+    }
+    #ForRealtors .cont .right img.slide { 
+        height: auto;
+    }
+    #ForRealtors .row-houses img { 
+        max-width: 20vw;
+    }
+    #ForRealtors .row-houses { 
+        bottom: 0; 
+    }
+}
