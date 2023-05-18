@@ -81,15 +81,15 @@
     width: 45px;
 }
 
-#lowSection .foot {
-    height: 159px;
-    background-image: url(../img/lowSection/t.png);
+#lowSection .foot { 
+    background-image: url(../images/img/lowSection/t.png);
     background-position: 0;
     background-repeat: no-repeat;
-    background-size: 100% 100%;
-    padding-top: 150px;
+    background-size: 100% 100%; 
     position: relative;
-    z-index: 2;
+    z-index: 2; 
+    height: 284px; 
+    padding-top: 140px;  
 }
 
 #lowSection .foot p {

@@ -39,15 +39,14 @@
     display: flex;
     align-items: center;
 }
-
-#blockInfo .carusel {
+  
+#blockInfo .carusel   {
     display: flex;
     gap: 15px;
     animation: slideOut 10s linear infinite;
     transform: rotate(2.26deg); 
     transform-origin: top left;
 }
-
 #blockInfo .carusel img {
     transform: rotate(2.26deg);
 }
@@ -68,7 +67,7 @@
 }
 
 #blockInfo .contant .left .block {
-    background-image: url(../img/carusel/Circle.png);
+    background-image: url(../images/img/carusel/Circle.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

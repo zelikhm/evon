@@ -1,41 +1,28 @@
 <script setup>
-  import '/public/styles/ForBuilders.css'
-  import '/public/styles/lowSection.css'
-  import '/public/styles/blockInfo.css'
-  import '/public/styles/watchvideo.css'
-  import '/public/styles/welcom.css'
-  import '/public/styles/help.css'
-  import '/public/styles/ForRealtors.css'
-  import '/public/styles/adapt.css'
-  import '/public/styles/fonts.css'
-  import '/public/styles/styles.css'
+
+import '../../../public/styles/styles.css'
+import '../../../public/styles/fonts.css'
+import '../../../public/styles/adapt.css'
+import '../../../public/styles/lowSection.css'
+import '../../../public/styles/ForBuilders.css'
+import '../../../public/styles/blockInfo.css'
+import '../../../public/styles/watchvideo.css'
+import '../../../public/styles/welcom.css'
+import '../../../public/styles/help.css'
+import '../../../public/styles/ForRealtors.css'
+
 </script>
 
 <template>
-  <app-modal-auth
-    :oLoginRealtor="openLoginRealtor"
-    :oLoginDeveloper="openLoginDeveloper"
-    @close-modal="closeModal"
-    @open-modal-realtor="openModalRealtor"
-    @open-modal-developer="openModalDeveloper"
-    :language="language"
-    :selectLanguage="selectLanguage"
-  />
-  <app-header
-    @login-developer="openLoginDeveloper = !openLoginDeveloper"
-    @login-realtor="openLoginRealtor = !openLoginRealtor"
-    @open-register="openRegister = !openRegister"
-    @selectLanguage="choseLanguage"
-    :user="user"
-    :language="language"
-  />
+  <app-modal-auth :oLoginRealtor="openLoginRealtor" :oLoginDeveloper="openLoginDeveloper" @close-modal="closeModal"
+    @open-modal-realtor="openModalRealtor" @open-modal-developer="openModalDeveloper" :language="language"
+    :selectLanguage="selectLanguage" />
+  <app-header @login-developer="openLoginDeveloper = !openLoginDeveloper"
+    @login-realtor="openLoginRealtor = !openLoginRealtor" @open-register="openRegister = !openRegister"
+    @selectLanguage="choseLanguage" :user="user" :language="language" />
 
-  <app-modal-register
-    :oLoginRegister="openRegister"
-    @close-modal="closeModalRegister"
-    :language="language"
-    :selectLanguage="selectLanguage"
-  />
+  <app-modal-register :oLoginRegister="openRegister" @close-modal="closeModalRegister" :language="language"
+    :selectLanguage="selectLanguage" />
 
   <!--header-->
   <header>
@@ -59,7 +46,7 @@
           <li class="lang">
             <span class="select">RU </span>
             <svg width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 0.5L4.5 3.5L8 0.5" stroke="black"/>
+              <path d="M1 0.5L4.5 3.5L8 0.5" stroke="black" />
             </svg>
           </li>
           <li class="btns">
@@ -111,8 +98,8 @@
     <div class="container">
       <div class="welcom-cont">
         <div class="left">
-          <h4><img src="images/img/welcom/Mask.png" alt="" srcset=""> <span>Турция</span></h4>
-          <h1 id="text">Evon - универсальная площадка для</h1>
+          <h4 class="title"><img src="images/img/welcom/Mask.png" alt="" srcset=""> <span>Турция</span></h4>
+          <h1 id="text">{{ welcomText.text }}</h1>
           <p>
             Мы предлагаем профессиональный инструмент продаж для агентов по недвижимости и строительных
             компаний.
@@ -145,7 +132,9 @@
         </div>
         <div class="right">
           <div class="contant">
-            <div class="btn"><img src="images/img/welcom/plus.png" alt="" srcset=""></div>
+            <div class="btn" v-for="n in 80" :key="n">
+              <img src="images/img/welcom/plus.png" alt="" srcset="">
+            </div>
           </div>
         </div>
       </div>
@@ -168,10 +157,9 @@
           компании — Смотреть видео о компании —</h2>
 
       </div>
-      <iframe class="video" src="https://www.youtube.com/embed/lTNZFH-CZWc"
-              title="YouTube video player" frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen></iframe>
+      <iframe class="video" src="https://www.youtube.com/embed/lTNZFH-CZWc" title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
     </div>
 
     <img class="low-t" src="images/img/watchvideo/t.png" alt="" srcset="">
@@ -185,10 +173,12 @@
     <div class="container">
       <div class="carusel-obertka">
         <div class="carusel">
-          <img src="images/img/carusel/1.png" alt="" srcset="">
-          <img src="images/img/carusel/2.png" alt="" srcset="">
-          <img src="images/img/carusel/3.png" alt="" srcset="">
-          <img src="images/img/carusel/4.png" alt="" srcset="">
+          <template v-for="n in 40">
+            <img src="images/img/carusel/1.png" alt="" srcset="">
+            <img src="images/img/carusel/2.png" alt="" srcset="">
+            <img src="images/img/carusel/3.png" alt="" srcset="">
+            <img src="images/img/carusel/4.png" alt="" srcset="">
+          </template>
         </div>
       </div>
 
@@ -322,17 +312,17 @@
       <div class="cont">
         <div class="left">
           <ul>
-            <li class="active">
-                            <span>Платформа Evon позволит вам увеличить продажи за счет охвата огромной партнерской
-                                сети</span><em>1</em>
+            <li v-bind:class="{ active: forBuilders.activeIndex === 0 }" @click="activateItem(0)">
+              <span>Платформа Evon позволит вам увеличить продажи за счет охвата огромной партнерской
+                сети</span><em>1</em>
             </li>
-            <li>
-                            <span> При добавлении вашего объекта на платформу о нем узнает большинство агентств и
-                                частных риелторов</span><em>2</em>
+            <li v-bind:class="{ active: forBuilders.activeIndex === 1 }" @click="activateItem(1)">
+              <span> При добавлении вашего объекта на платформу о нем узнает большинство агентств и
+                частных риелторов</span><em>2</em>
             </li>
-            <li>
-                            <span>Делитесь новостями со всеми партнерами в режиме реального времени. На платформе
-                                реализован чат с партнером /риелтором</span><em>3</em>
+            <li v-bind:class="{ active: forBuilders.activeIndex === 2 }" @click="activateItem(2)">
+              <span>Делитесь новостями со всеми партнерами в режиме реального времени. На платформе
+                реализован чат с партнером /риелтором</span><em>3</em>
             </li>
           </ul>
           <p>
@@ -343,9 +333,9 @@
           </p>
         </div>
         <div class="right">
-          <img src="images/img/forBuilders/sl1.png" class="active" alt="" srcset="">
-          <img src="images/img/forBuilders/sl2.png" alt="" srcset="">
-          <img src="images/img/forBuilders/sl3.png" alt="" srcset="">
+          <img src="images/img/forBuilders/sl1.png" v-bind:class="{ active: forBuilders.activeIndex === 0 }" alt="" srcset="">
+          <img src="images/img/forBuilders/sl2.png" v-bind:class="{ active: forBuilders.activeIndex === 1 }" alt="" srcset="">
+          <img src="images/img/forBuilders/sl3.png" v-bind:class="{ active: forBuilders.activeIndex === 2 }" alt="" srcset="">
 
         </div>
       </div>
@@ -392,7 +382,9 @@
         </div>
         <div class="right">
           <div class="contant">
-            <div class="btn"><img src="images/img/welcom/plus.png" alt="" srcset=""></div>
+            <div class="btn" v-for="n in 80" :key="n">
+              <img src="images/img/welcom/plus.png" alt="" srcset="">
+            </div>
           </div>
         </div>
       </div>
@@ -508,105 +500,150 @@
       </div>
     </div>
   </footer>
-
 </template>
 
 <script>
-  import AppHeader from '../Layouts/AppHeader.vue'
-  import AppFooter from "../Layouts/AppFooter.vue"
-  import AppModalAuth from "../Layouts/modal/AppModalAuth.vue"
-  import {computed} from "vue";
-  import {usePage} from "@inertiajs/inertia-vue3";
-  import AppModalRegister from "@/Layouts/modal/AppModalRegister.vue";
+import AppHeader from '../Layouts/AppHeader.vue'
+import AppFooter from "../Layouts/AppFooter.vue"
+import AppModalAuth from "../Layouts/modal/AppModalAuth.vue"
+import { computed } from "vue";
+import { usePage } from "@inertiajs/inertia-vue3";
+import AppModalRegister from "@/Layouts/modal/AppModalRegister.vue";
 
-  export default {
-    name: "AppPromo",
-    props: [
-      'count_flats',
-      'count_house',
-      'count_people',
-      'error',
-      'userInfo'
-    ],
-    provide() {
-      return {
-        error: this.error,
-      }
-    },
-    data() {
-      return {
-        openLoginRealtor: false,
-        openLoginDeveloper: false,
-        openRegister: false,
-        language: {},
-        selectLanguage: 0,
-        user: [],
-      }
-    },
-    created() {
-      if(this.userInfo.length === 0) {
-        this.user = null;
-      } else {
-        this.user = this.userInfo;
-      }
-
-      if(this.user !== null) {
-        if(this.user.lang === 0) {
-          this.language = this.$ru;
-        } else if (this.user.lang === 1) {
-          this.language = this.$en;
-        } else if (this.user.lang === 2) {
-          this.language = this.$tur;
-        }
-      } else {
-        if(this.selectLanguage === 0) {
-          this.language = this.$ru;
-        } else if (this.selectLanguage === 1) {
-          this.language = this.$en;
-        } else if (this.selectLanguage === 2) {
-          this.language = this.$tur;
-        }
-      }
-    },
-    methods: {
-      choseLanguage(language) {
-        this.selectLanguage = language;
-
-        if(this.selectLanguage === 0) {
-          this.language = this.$ru;
-        } else if (this.selectLanguage === 1) {
-          this.language = this.$en;
-        } else if (this.selectLanguage === 2) {
-          this.language = this.$tur;
-        }
-
-      },
-      closeModal() {
-        this.openLoginRealtor = false
-        this.openLoginDeveloper = false
-        this.openRegister = false
-      },
-      openModalRealtor() {
-        this.openLoginRealtor = true
-        this.openLoginDeveloper = false
-      },
-      openModalDeveloper() {
-        this.openLoginRealtor = false
-        this.openLoginDeveloper = true
-      },
-      closeModalRegister() {
-        this.openRegister = false
-      }
-    },
-    components: {
-      AppModalRegister,
-      AppHeader,
-      AppFooter,
-      AppModalAuth,
+export default {
+  name: "AppPromo",
+  props: [
+    'count_flats',
+    'count_house',
+    'count_people',
+    'error',
+    'userInfo'
+  ],
+  provide() {
+    return {
+      error: this.error,
     }
+  },
+  data() {
+    return {
+      openLoginRealtor: false,
+      openLoginDeveloper: false,
+      openRegister: false,
+      language: {},
+      selectLanguage: 0,
+      user: [],
+
+
+      forBuilders: {
+        activeIndex: 0
+      },
+      welcomText: {
+        texts: ["строительных компаний", "частных риелторов", "агентств недвижимости"],
+        text: "",
+        index: 0,
+        letterIndex: 0,
+        isDeleting: false,
+      }
+
+    }
+  },
+  created() {
+    if (this.userInfo.length === 0) {
+      this.user = null;
+    } else {
+      this.user = this.userInfo;
+    }
+
+    if (this.user !== null) {
+      if (this.user.lang === 0) {
+        this.language = this.$ru;
+      } else if (this.user.lang === 1) {
+        this.language = this.$en;
+      } else if (this.user.lang === 2) {
+        this.language = this.$tur;
+      }
+    } else {
+      if (this.selectLanguage === 0) {
+        this.language = this.$ru;
+      } else if (this.selectLanguage === 1) {
+        this.language = this.$en;
+      } else if (this.selectLanguage === 2) {
+        this.language = this.$tur;
+      }
+    }
+
+    this.type()
+  },
+  methods: {
+    type() {
+      const text = this.welcomText.texts[this.welcomText.index]; 
+
+      if (this.welcomText.isDeleting) {
+
+        this.welcomText.letterIndex--;
+
+        if (this.welcomText.letterIndex == 0) {
+          this.welcomText.isDeleting = false;
+        }
+      } else {
+        this.welcomText.text = `Evon - универсальная площадка для ${text.substring(0, this.welcomText.letterIndex + 1)}`;
+        this.welcomText.letterIndex++;
+
+        if (this.welcomText.letterIndex == text.length) {
+          this.welcomText.isDeleting = true;
+          setTimeout(() => {
+            this.welcomText.index++;
+            if (this.welcomText.index == this.welcomText.texts.length) {
+              this.welcomText.index = 0;
+            }
+          }, 1000);
+        }
+      }
+      setTimeout(this.type, 100)
+
+    },
+
+    activateItem(index) {
+      this.forBuilders.activeIndex = index;
+    },
+
+
+    choseLanguage(language) {
+      this.selectLanguage = language;
+
+      if (this.selectLanguage === 0) {
+        this.language = this.$ru;
+      } else if (this.selectLanguage === 1) {
+        this.language = this.$en;
+      } else if (this.selectLanguage === 2) {
+        this.language = this.$tur;
+      }
+
+    },
+    closeModal() {
+      this.openLoginRealtor = false
+      this.openLoginDeveloper = false
+      this.openRegister = false
+    },
+    openModalRealtor() {
+      this.openLoginRealtor = true
+      this.openLoginDeveloper = false
+    },
+    openModalDeveloper() {
+      this.openLoginRealtor = false
+      this.openLoginDeveloper = true
+    },
+    closeModalRegister() {
+      this.openRegister = false
+    }
+  },
+  components: {
+    AppModalRegister,
+    AppHeader,
+    AppFooter,
+    AppModalAuth,
   }
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
