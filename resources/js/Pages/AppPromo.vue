@@ -11,87 +11,40 @@ import '../../../public/styles/welcom.css'
 import '../../../public/styles/help.css'
 import '../../../public/styles/ForRealtors.css'
 
+
 </script>
 
 <template>
-  <app-modal-auth :oLoginRealtor="openLoginRealtor" :oLoginDeveloper="openLoginDeveloper" @close-modal="closeModal"
-    @open-modal-realtor="openModalRealtor" @open-modal-developer="openModalDeveloper" :language="language"
-    :selectLanguage="selectLanguage" />
-  <app-header @login-developer="openLoginDeveloper = !openLoginDeveloper"
-    @login-realtor="openLoginRealtor = !openLoginRealtor" @open-register="openRegister = !openRegister"
-    @selectLanguage="choseLanguage" :user="user" :language="language" />
+  <app-modal-auth
+    :oLoginRealtor="openLoginRealtor"
+    :oLoginDeveloper="openLoginDeveloper"
+    @close-modal="closeModal"
+    @open-modal-realtor="openModalRealtor"
+    @open-modal-developer="openModalDeveloper"
+    :language="language"
+    :selectLanguage="selectLanguage"
+  />
+<!--  <app-header
+@login-developer="openLoginDeveloper = !openLoginDeveloper"-->
+<!--    @login-realtor="openLoginRealtor = !openLoginRealtor"
+@open-register="openRegister = !openRegister"-->
+<!--    @selectLanguage="choseLanguage" :user="user" :language="language" />-->
 
-  <app-modal-register :oLoginRegister="openRegister" @close-modal="closeModalRegister" :language="language"
-    :selectLanguage="selectLanguage" />
+  <app-modal-register
+    :oLoginRegister="openRegister"
+    @close-modal="closeModalRegister"
+    :language="language"
+    :selectLanguage="selectLanguage"
+  />
 
-  <!--header-->
-  <header>
-    <div class="container">
-      <div class="lines-animations">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-      </div>
-      <nav>
-        <ul>
-          <li>
-            <a href="#"><img class="logo" src="images/img/header/logo.png" alt="" srcset=""></a>
-          </li>
-          <li class="ref-soc">
-            <a href="#"><img src="images/img/header/s1.png" alt="" srcset=""></a>
-            <a href="#"><img src="images/img/header/s2.png" alt="" srcset=""></a>
-            <a href="#"><img src="images/img/header/s3.png" alt="" srcset=""></a>
-            <a href="#"><img src="images/img/header/s4.png" alt="" srcset=""></a>
-          </li>
-          <li class="lang">
-            <span class="select">RU </span>
-            <svg width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 0.5L4.5 3.5L8 0.5" stroke="black" />
-            </svg>
-          </li>
-          <li class="btns">
-            <div class="logIn">
-              <button class="login">Войти</button>
-              <div class="select-login">
-                <button>Как риэлтор</button>
-                <button>Как застройщик</button>
-              </div>
-            </div>
-            <button class="registr">Зарегистрироваться</button>
-          </li>
-          <li class="user" >
-            <img src="images/img/header/User.png" alt="" srcset="">
-          </li>
-        </ul>
-      </nav>
-    </div>
-
-    <div class="modal">
-      <div class="modal-bg"></div>
-      <div class="modal-contant">
-        <h2>Вход в личный кабинет</h2>
-        <input type="text" placeholder="Email/Login">
-        <input type="text" placeholder="Пароль">
-        <button>Войти</button>
-        <a href="#" class="login-ref">Войти как риэлтор</a>
-        <a href="#" class="close">Закрыть</a>
-      </div>
-    </div>
-
-    <div class="modal lodinn-btns">
-      <div class="modal-bg"></div>
-      <div class="modal-contant">
-        <button>Войти</button>
-        <button>Зарегистрироваться</button>
-
-        <button class="enter">Как риэлтор</button>
-        <button class="enter">Как застройщик</button>
-        <button class="enter back">Назад</button>
-
-      </div>
-    </div>
-  </header>
-  <!--!header-->
+  <new-header
+    @openModalRealtor="openModalRealtor"
+    @login-developer="openLoginDeveloper = !openLoginDeveloper"
+    @open-register="openRegister = !openRegister"
+    @selectLanguage="choseLanguage"
+    :user_info="userInfo"
+    :language="language"
+  ></new-header>
 
   <!--welcom-->
   <section id="welcom">
@@ -394,66 +347,8 @@ import '../../../public/styles/ForRealtors.css'
   </section>
   <!--!lowSection-->
 
+  <new-footer></new-footer>
 
-  <!--footer-->
-  <footer>
-    <div class="container">
-
-      <div class="mobile-contant">
-        <img class="logo" src="images/img/footer/logo.png" alt="" srcset="">
-        <p>
-          ©Evon 2023. Все права защищены
-        </p>
-        <div class="row-soc">
-          <a href="#">
-            <img src="images/img/footer/s1.png" alt="" srcset="">
-          </a>
-          <a href="#">
-            <img src="images/img/footer/s2.png" alt="" srcset="">
-          </a>
-          <a href="#">
-            <img src="images/img/footer/s3.png" alt="" srcset="">
-          </a>
-          <a href="#">
-            <img src="images/img/footer/s4.png" alt="" srcset="">
-          </a>
-        </div>
-      </div>
-
-      <nav>
-        <ul>
-          <li>
-            <span>Почта</span>
-            <a href="#">evon.information@gmail.com</a>
-          </li>
-          <li>
-            <span>WhatsApp</span>
-            <a href="#">+90(544)225 85 59</a>
-          </li>
-          <li>
-            <span>Telegram</span>
-            <a href="#">evon_real_estate</a>
-          </li>
-          <li>
-            <span>Instagram</span>
-            <a href="#">evon_platform_tr</a>
-          </li>
-          <li>
-            <span>Facebook</span>
-            <a href="#">ServisEvon</a>
-          </li>
-        </ul>
-      </nav>
-      <p>
-        Не является публичной офертой
-      </p>
-      <div class="row-ref">
-        <a href="#">Политика конфиденциальности</a>
-        <a href="#">Пользовательское соглашение</a>
-        <a href="#">VERGI NO <span>3830916930</span></a>
-      </div>
-    </div>
-  </footer>
 </template>
 
 <script>
@@ -463,6 +358,8 @@ import AppModalAuth from "../Layouts/modal/AppModalAuth.vue"
 import { computed } from "vue";
 import { usePage } from "@inertiajs/inertia-vue3";
 import AppModalRegister from "@/Layouts/modal/AppModalRegister.vue";
+import NewHeader from "@/Components/NewsComponent/NewHeader.vue";
+import NewFooter from "@/Components/NewsComponent/NewFooter.vue";
 
 export default {
   name: "AppPromo",
@@ -646,10 +543,12 @@ export default {
       this.openRegister = false
     },
     openModalRealtor() {
+      console.log(1);
       this.openLoginRealtor = true
       this.openLoginDeveloper = false
     },
     openModalDeveloper() {
+      console.log(1);
       this.openLoginRealtor = false
       this.openLoginDeveloper = true
     },
@@ -662,6 +561,8 @@ export default {
     AppHeader,
     AppFooter,
     AppModalAuth,
+    NewHeader,
+    NewFooter
   }
 }
 </script>
