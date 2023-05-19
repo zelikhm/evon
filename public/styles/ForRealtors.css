@@ -69,6 +69,7 @@
 }
 
 #ForRealtors .cont .right {
+    
     position: relative;
     padding-bottom: 145px;
 }
@@ -326,7 +327,10 @@
         display: block;
     }
     #ForRealtors .cont .right { 
-        height: 250px;
+        height: 440px;
+    }
+    #ForRealtors{
+        height: auto;
     }
     #ForRealtors .cont .right .tools img.tool{
         margin: 0 auto;

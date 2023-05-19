@@ -507,8 +507,9 @@ header{
         display: block;
     }
 
-    #welcom {
+    #welcom { 
         align-items: start;
+        min-height: auto;
     }
 
     #welcom .welcom-cont .right .contant {
