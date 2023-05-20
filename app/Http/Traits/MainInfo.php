@@ -363,10 +363,12 @@ trait MainInfo
       $house->description_tr = [];
 
       $house->image = $this->getPhoto($house);
+
       if($dop) {
         $house->dop_array = $this->getDopForHouse($house->info->dop);
         $house->info_array = $this->getInfoForHouse($house->info->info);
       }
+
       $house->popular = HouseViewsModel::where('house_id', $house->id)->count() > 30;
 
       $house->maxPrice = $house->flats->max('price');
