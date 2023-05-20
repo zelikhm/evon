@@ -7,6 +7,7 @@ use App\Models\Builder\HouseImagesModel;
 use App\Models\Builder\Info\RegionModel;
 use App\Models\News\AdminNewsModel;
 use App\Models\TarifModel;
+use App\Models\User\ClientModel;
 use App\Models\User\CompanyModel;
 use App\Models\User\SubscriptionModel;
 use SleepingOwl\Admin\Providers\AdminSectionsServiceProvider as ServiceProvider;
@@ -38,6 +39,8 @@ class AdminSectionsServiceProvider extends ServiceProvider
     //
     TarifModel::class => 'App\Http\Admin\Tarif',
     SubscriptionModel::class => 'App\Http\Admin\Subscription',
+    //
+    ClientModel::class => 'App\Http\Admin\Client'
   ];
 
   /**
@@ -83,6 +86,12 @@ class AdminSectionsServiceProvider extends ServiceProvider
         'icon' => 'fab fa-dev',
         'priority' => 400,
       ],
+      [
+        'title' => 'Клиенты',
+        'id' => 'client',
+        'icon' => 'fab fa-dev',
+        'priority' => 500,
+      ]
     ]);
   }
 }

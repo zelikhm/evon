@@ -18,11 +18,12 @@ class Controller extends BaseController
 
     public function main() {
 
-      return Inertia::render('AppMain', [
+      return Inertia::render('AppPromo', [
         'userInfo' => $this->getUser(),
         'count_flats' => FlatModel::count(),
         'count_house' => HouseModel::count(),
         'count_people' => User::where('role', 0)->count() < 150 ? 150 : User::where('role', 0)->count(),
+        'block_show' => false,
       ]);
     }
 
@@ -33,6 +34,7 @@ class Controller extends BaseController
         'count_flats' => FlatModel::count(),
         'count_house' => HouseModel::count(),
         'count_people' => User::where('role', 0)->count() < 150 ? 150 : User::where('role', 0)->count(),
+        'block_show' => true,
       ]);
     }
 }

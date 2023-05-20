@@ -28,13 +28,13 @@
           </li>
           <li class="btns">
             <div class="logIn">
-              <button class="login" @click="$emit('login-developer')">Войти</button>
+              <button class="login" @click="$emit('login-developer')">{{ language.main[61] }}</button>
               <div class="select-login">
                 <button>Как риэлтор</button>
                 <button>Как застройщик</button>
               </div>
             </div>
-            <button class="registr" @click="$emit('open-register')">Зарегистрироваться</button>
+            <button class="registr" @click="$emit('open-register')">{{ language.main[22] }}</button>
           </li>
           <li class="user">
             <img src="images/img/header/User.png" alt="" srcset="">
@@ -50,7 +50,7 @@
 <script>
   export default {
     name: "NewHeader",
-    props:['user_info'],
+    props:['user_info', 'language'],
     data() {
       return {
         openLanguage: false,

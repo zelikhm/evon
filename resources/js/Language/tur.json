@@ -43,9 +43,9 @@
     "39": "Filtrelemeyle istediğiniz konutu kolayca bulma",
     "40": "Müşterinizin ihtiyaçlarına uygun konut arama filtreleri",
     "41": "En fazla",
-    "42": "Bir sonraki adıma geçmek için sola kaydır",
+    "42": "Bir sonraki adıma <br> geçmek için sola kaydır",
     "43": "Konutları harita üzerinde arama",
-    "44": "Konutların harita üzerindeki tam konumu",     
+    "44": "Konutların harita üzerindeki tam konumu",
     "45": "Konutları koleksiyona ekleme",
     "46": "Müteahhitlerin iletişim bilgileriyle birlikte deniz kıyısındaki inşaatların tümünü içeren geniş veri tabanı",
     "47": "Tek tıklamayla konutların sunumunu oluşturma ve gönderme",
@@ -67,7 +67,9 @@
     "63": "©2023 Evon - Her Hakkı Saklıdır.",
     "64": "Halka açık şirket değil",
     "65": "Gizlilik Koşulları",
-    "66": "Kullanıcı Sözleşmesi"
+    "66": "Kullanıcı Sözleşmesi",
+    "67": "Emlakçı veya inşaatçı olarak oturum açın <br> ve siteye tam erişim sağlayın",
+    "68": "bağımsız emlakçılar"
   },
   "footer": {
     "0": "Vergi Mükellefi Kimlik Numarası(İNN) 215125125125125",

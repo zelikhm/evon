@@ -24,11 +24,6 @@ import '../../../public/styles/ForRealtors.css'
     :language="language"
     :selectLanguage="selectLanguage"
   />
-<!--  <app-header
-@login-developer="openLoginDeveloper = !openLoginDeveloper"-->
-<!--    @login-realtor="openLoginRealtor = !openLoginRealtor"
-@open-register="openRegister = !openRegister"-->
-<!--    @selectLanguage="choseLanguage" :user="user" :language="language" />-->
 
   <app-modal-register
     :oLoginRegister="openRegister"
@@ -51,19 +46,15 @@ import '../../../public/styles/ForRealtors.css'
     <div class="container">
       <div class="welcom-cont">
         <div class="left">
-          <h4 class="title"><img src="images/img/welcom/Mask.png" alt="" srcset=""> <span>Турция</span></h4>
+          <h4 class="title"><img src="images/img/welcom/Mask.png" alt="" srcset=""> <span>{{ language.main[23] }}</span></h4>
           <h1 id="text">{{ welcomText.text }}</h1>
-          <p>
-            Мы предлагаем профессиональный инструмент продаж для агентов по недвижимости и строительных
-            компаний.
-            Самая большая и актуальная база новостроек, с удобным поиском объектов, изучением новых
-            объектов,
-            коммуникацией с застройщиками и отправкой клиентам в один клик
+          <p v-html="language.main[28]">
+
           </p>
-          <button>Попробовать бесплатно</button>
+          <button v-on:click="openRegister = !openRegister">{{ language.main[29] }}</button>
           <div class="save-prog">
             <p>
-              <span>Скачайте наше приложение</span>
+              <span>{{ language.main[30] }}</span>
               <img src="images/img/welcom/apl.png" alt="" srcset="">
               <img src="images/img/welcom/andr.png" alt="" srcset="">
             </p>
@@ -77,7 +68,7 @@ import '../../../public/styles/ForRealtors.css'
           </div>
 
           <h4 class="scroll">
-            <span>Скролл вниз</span>
+            <span>{{ language.main[31] }}</span>
             <img src="images/img/welcom/Vector.png" alt="" srcset="">
             <img src="images/img/welcom/Vector.png" alt="" srcset="">
             <img src="images/img/welcom/Vector.png" alt="" srcset="">
@@ -106,8 +97,7 @@ import '../../../public/styles/ForRealtors.css'
   <section id="watchvideo">
     <div class="container">
       <div class="title-text">
-        <h2>Смотреть видео о компании — Смотреть видео о компании — Смотреть видео о компании — Смотреть видео о
-          компании — Смотреть видео о компании —</h2>
+        <h2>{{ language.main[32] }} — {{ language.main[32] }} — {{ language.main[32] }} — {{ language.main[32] }} — {{ language.main[32] }} —</h2>
 
       </div>
       <iframe class="video" src="https://www.youtube.com/embed/lTNZFH-CZWc" title="YouTube video player" frameborder="0"
@@ -139,21 +129,20 @@ import '../../../public/styles/ForRealtors.css'
         <div class="left">
           <div class="block">
             <h4>{{ count_house }}</h4>
-            <p>Объектов на платформе</p>
+            <p>{{ language.main[34] }}</p>
           </div>
           <div class="block">
             <h4>{{ count_people }}</h4>
-            <p>Агентов пользуются нашим сервисом</p>
+            <p>{{ language.main[35] }}</p>
           </div>
           <div class="block">
             <h4>{{ count_flats }}</h4>
-            <p>Актуальных квартир</p>
+            <p>{{ language.main[36] }}</p>
           </div>
         </div>
         <div class="right">
-          <p>
-            Каждый день мы продолжаем добавлять новые объекты на платформу и обновляем уже имеющиеся прайс
-            листы. Функционал сайта дорабатывается каждый день для вашей продуктивной работы
+          <p v-html="language.main[33]">
+
           </p>
         </div>
       </div>
@@ -165,8 +154,8 @@ import '../../../public/styles/ForRealtors.css'
   <section id="ForRealtors">
     <div class="title">
       <div class="container">
-        <h2>Для риелторов</h2>
-        <h3>У вас есть запрос от клиента?</h3>
+        <h2>{{ language.main[37] }}</h2>
+        <h3>{{ language.main[38] }}</h3>
       </div>
     </div>
     <div class="container">
@@ -182,7 +171,7 @@ import '../../../public/styles/ForRealtors.css'
             </div>
             <div class="slide-info">
               <h5>{{ slide.infoTitle }}</h5>
-              <em>до <span>{{ slide.infoCount??slide.infoBtn }}</span></em>
+              <em>{{ language.main[41] }} <span>{{ slide.infoCount??slide.infoBtn }}</span></em>
             </div>
           </div>
         </div>
@@ -192,7 +181,9 @@ import '../../../public/styles/ForRealtors.css'
             :src="'images/img/forRealtors/s' + (index + 1) + '.png'" :alt="'Slide ' + (index + 1)" :key="index" />
           <div class="tools">
             <img class="tool" src="images/img/forRealtors/tool.png" alt="" srcset="" />
-            <p>Потяните влево <br /> на следующий этап</p>
+            <p v-html="language.main[42]">
+
+            </p>
           </div>
         </div>
       </div>
@@ -212,28 +203,22 @@ import '../../../public/styles/ForRealtors.css'
   <!--ForBuilders-->
   <section id="ForBuilders">
     <div class="container">
-      <h2>Для застройщиков</h2>
+      <h2>{{ language.main[52] }}</h2>
       <div class="cont">
         <div class="left">
           <ul>
             <li v-bind:class="{ active: forBuilders.activeIndex === 0 }" @click="activateItem(0)">
-              <span>Платформа Evon позволит вам увеличить продажи за счет охвата огромной партнерской
-                сети</span><em>1</em>
+              <span>{{ language.main[53] }}</span><em>1</em>
             </li>
             <li v-bind:class="{ active: forBuilders.activeIndex === 1 }" @click="activateItem(1)">
-              <span> При добавлении вашего объекта на платформу о нем узнает большинство агентств и
-                частных риелторов</span><em>2</em>
+              <span> {{ language.main[54] }}</span><em>2</em>
             </li>
             <li v-bind:class="{ active: forBuilders.activeIndex === 2 }" @click="activateItem(2)">
-              <span>Делитесь новостями со всеми партнерами в режиме реального времени. На платформе
-                реализован чат с партнером /риелтором</span><em>3</em>
+              <span>{{ language.main[55] }}</span><em>3</em>
             </li>
           </ul>
-          <p>
-            Присоединение к нашей площадке агентства недвижимости - это прекрасная возможность для
-            застройщиков получить широкий доступ к покупателям недвижимости. Мы предлагаем эффективную
-            платформу для продажи жилой и коммерческой недвижимости, которая позволяет снизить затраты на
-            маркетинг и рекламу.
+          <p v-html="language.main[56]">
+
           </p>
         </div>
         <div class="right">
@@ -255,22 +240,18 @@ import '../../../public/styles/ForRealtors.css'
 
 
   <!--help-->
-  <section id="help">
+  <section id="help" v-if="block_show">
     <div class="container">
-      <h2>Помощь в сопровождении сделки</h2>
+      <h2>{{ language.main[57] }}</h2>
       <div class="help-cont">
         <div class="left">
-          <p>
-            Мы работаем только с профессионалами, которые имеют большой опыт в области недвижимости. Мы
-            предоставляем все необходимые услуги, начиная от консультации по выбору недвижимости и
-            заканчивая сопровождением сделки на всех этапах. Мы гарантируем нашим клиентам полную поддержку
-            и надежность во всех аспектах сделки.
+          <p v-html="language.main[58]">
           </p>
 
           <div class="colums-info">
             <div class="block">
               <p>
-                Мы предлагаем широкий выбор объектов недвижимости в различных районах Турции.
+                {{ language.main[59] }}
               </p>
               <img src="images/img/help/gr.png" alt="" srcset="">
             </div>
@@ -278,8 +259,7 @@ import '../../../public/styles/ForRealtors.css'
             <div class="block"></div>
             <div class="block">
               <p>
-                Мы гарантируем прозрачность
-                и честность в наших услугах
+                {{ language.main[60] }}
               </p>
               <img src="images/img/help/arrow.png" alt="" srcset="">
             </div>
@@ -318,10 +298,9 @@ import '../../../public/styles/ForRealtors.css'
         </div>
       </div>
 
-      <h2>Авторизируйтесь как риэлтор
-        или застройщик и получите полный доступ к площадке </h2>
-      <button><span>Войти</span> <img src="images/img/lowSection/arrow.png" alt="" srcset=""></button>
-      <h3>Скачайте наше приложение на Android или IOS</h3>
+      <h2 v-html="language.main[67]"></h2>
+      <button v-on:click="openLoginDeveloper = !openLoginDeveloper"><span>{{ language.main[61] }}</span> <img src="images/img/lowSection/arrow.png" alt="" srcset=""></button>
+      <h3>{{ language.main[62] }}</h3>
 
       <div class="row-soc">
         <a href="#"><img src="images/img/lowSection/andr.png" alt="" srcset=""></a>
@@ -334,7 +313,7 @@ import '../../../public/styles/ForRealtors.css'
       <div class="container">
         <img src="images/img/lowSection/logo.png" alt="" srcset="">
         <p>
-          ©Evon 2023. Все права защищены
+          {{ language.main[63] }}
         </p>
       </div>
     </div>
@@ -347,7 +326,7 @@ import '../../../public/styles/ForRealtors.css'
   </section>
   <!--!lowSection-->
 
-  <new-footer></new-footer>
+  <new-footer :language="language"></new-footer>
 
 </template>
 
@@ -368,8 +347,14 @@ export default {
     'count_house',
     'count_people',
     'error',
-    'userInfo'
+    'userInfo',
+    'block_show'
   ],
+  watch: {
+    language(item) {
+      this.editObject();
+    }
+  },
   provide() {
     return {
       error: this.error,
@@ -380,7 +365,7 @@ export default {
       openLoginRealtor: false,
       openLoginDeveloper: false,
       openRegister: false,
-      language: {},
+      language: this.$ru,
       selectLanguage: 0,
       user: [],
 
@@ -389,44 +374,11 @@ export default {
       startX: 0,
       scrollLeft: 0,
       step: 1,
-      slides: [
-        {
-          title: "Находим нужные объекты по фильтрам",
-          infoTitle: "Фильтры для поиска объекта под запрос вашего клиента",
-          infoCount: "30",
-        },
-        {
-          title: "Ищем нужные объекты на карте",
-          infoTitle: "Расположение объектов на карте",
-          infoCount: "",
-        },
-        {
-          title: "Добавляем объекты в подборку",
-          infoTitle: "Полная база новостроек побережья с контактами застройщиков и отделов продаж",
-          infoCount: "400",
-        },
-        {
-          title: "Формируем подборку объектов для клиента и отправляем в один клик",
-          infoTitle: "Формирование подборки под вашего клиента и отправка от вашего имени/агентства",
-          infoCount: "",
-        },
-        {
-          title: "Отправляем прайс-лист клиенту",
-          infoTitle: "Актуальный прайс лист по объекту",
-          infoBtn:"Обновления каждые 24 часа",
-          infoCount:null
-        },
-      ],
+      slides: [],
       forBuilders: {
         activeIndex: 0
       },
-      welcomText: {
-        texts: ["строительных компаний", "частных риелторов", "агентств недвижимости"],
-        text: "",
-        index: 0,
-        letterIndex: 0,
-        isDeleting: false,
-      }
+      welcomText: {}
 
     }
   },
@@ -455,6 +407,8 @@ export default {
       }
     }
 
+    this.editObject();
+
     this.type()
   },
   mounted() {
@@ -465,6 +419,44 @@ export default {
     cont.addEventListener('mousemove', this.drag); */
   },
   methods: {
+    editObject() {
+      this.slides = [
+        {
+          title: this.language.main[39],
+          infoTitle: this.language.main[40],
+          infoCount: "30",
+        },
+        {
+          title: this.language.main[43],
+          infoTitle: this.language.main[44],
+          infoCount: "",
+        },
+        {
+          title: this.language.main[45],
+          infoTitle: this.language.main[46],
+          infoCount: "400",
+        },
+        {
+          title: this.language.main[47],
+          infoTitle: this.language.main[48],
+          infoCount: "",
+        },
+        {
+          title: this.language.main[49],
+          infoTitle: this.language.main[50],
+          infoBtn: this.language.main[51],
+          infoCount:null
+        },
+      ];
+
+      this.welcomText = {
+        texts: [this.language.main[27], this.language.main[68], this.language.main[26]],
+        text: "",
+        index: 0,
+        letterIndex: 0,
+        isDeleting: false,
+      }
+    },
     startDrag(e) {
       this.isMouseDown = true;
       this.startX = e.pageX - e.currentTarget.offsetLeft;
@@ -505,7 +497,7 @@ export default {
           this.welcomText.isDeleting = false;
         }
       } else {
-        this.welcomText.text = `Evon - универсальная площадка для ${text.substring(0, this.welcomText.letterIndex + 1)}`;
+        this.welcomText.text = this.language.main[24] + ' ' + text.substring(0, this.welcomText.letterIndex + 1);
         this.welcomText.letterIndex++;
         if (this.welcomText.letterIndex == text.length) {
           this.welcomText.isDeleting = true;
@@ -543,12 +535,10 @@ export default {
       this.openRegister = false
     },
     openModalRealtor() {
-      console.log(1);
       this.openLoginRealtor = true
       this.openLoginDeveloper = false
     },
     openModalDeveloper() {
-      console.log(1);
       this.openLoginRealtor = false
       this.openLoginDeveloper = true
     },

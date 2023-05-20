@@ -43,7 +43,7 @@
     "39": "Find the necessary properties using filters",
     "40": "Filters to search for properties based on your client's request",
     "41": "To",
-    "42": "Swipe left to the next step",
+    "42": "Swipe left <br> to the next step",
     "43": "Search for the desired properties on the map",
     "44": "Precise location of properties on the map",
     "45": "Add properties to the selection",
@@ -67,9 +67,9 @@
     "63": "©Evon 2023. All rights reserved.",
     "64": "Not a public offer",
     "65": "Privacy Policy",
-    "66": "User Agreement"
-
-    
+    "66": "User Agreement",
+    "67": "Log in as a real estate agent <br> or developer and gain full access to the platform",
+    "68": "self-employed agents"
   },
   "footer": {
     "0": "ИНН 215125125125125",

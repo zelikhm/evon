@@ -6,7 +6,7 @@
       <div class="mobile-contant">
         <img class="logo" src="images/img/footer/logo.png" alt="" srcset="">
         <p>
-          ©Evon 2023. Все права защищены
+          {{ language.main[63] }}
         </p>
         <div class="row-soc">
           <a href="#">
@@ -27,7 +27,7 @@
       <nav>
         <ul>
           <li>
-            <span>Почта</span>
+            <span>{{ language.dob_ob_2[6] }}</span>
             <a href="#">evon.information@gmail.com</a>
           </li>
           <li>
@@ -49,11 +49,11 @@
         </ul>
       </nav>
       <p>
-        Не является публичной офертой
+        {{ language.main[64] }}
       </p>
       <div class="row-ref">
-        <a href="#">Политика конфиденциальности</a>
-        <a href="#">Пользовательское соглашение</a>
+        <a href="#">{{ language.main[65] }}</a>
+        <a href="#">{{ language.main[66] }}</a>
         <a href="#">VERGI NO <span>3830916930</span></a>
       </div>
     </div>
@@ -61,9 +61,10 @@
 </template>
 
 <script>
-    export default {
-        name: "NewFooter"
-    }
+  export default {
+    props: ['language'],
+    name: "NewFooter"
+  }
 </script>
 
 <style scoped>

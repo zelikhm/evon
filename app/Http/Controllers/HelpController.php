@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Traits\AuthCheck;
 use App\Models\User\ClientModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -19,12 +20,15 @@ class HelpController extends Controller
     $ip = $request->ip();
     $currentUserInfo = Location::get($ip);
 
-    if($currentUserInfo->countryCode !== 'RU' && Auth::user()->openClient !== 1) {
-      return Inertia::location('/');
+    if($ip !== '127.0.0.1') {
+      if($currentUserInfo->countryCode !== 'RU' && Auth::user()->openClient !== 1) {
+        return Inertia::location('/');
+      }
     }
 
     return Inertia::render('AppClients', [
       'user' => $this->getUser(),
+      'client' => ClientModel::where('user_id', $this->getUser()->id)->get(),
     ]);
 
   }
@@ -71,7 +75,7 @@ class HelpController extends Controller
         'jk' => $request->jk,
         'status_client' => $request->status_client,
         'status_order' => $request->status_order,
-        'comment' => $request->comment,
+        'comment' => $request->comment
       ]);
 
       return response()->json(ClientModel::where('user_id', $request->user_id)->get(), 200);
