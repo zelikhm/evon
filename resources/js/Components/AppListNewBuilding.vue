@@ -1423,36 +1423,36 @@
           let status = true;
 
           if (this.filters.location.toSea !== '') {
-            location.info.toSea !== null ? status = location.info.toSea < this.filters.location.toSea : status = true;
+            location.info.toSea !== null ? status = location.info.toSea <= this.filters.location.toSea : status = true;
           }
 
           if (this.filters.location.toBus !== '') {
             if (status !== false) {
-              location.info.toBus !== null ? status = location.info.toBus < this.filters.location.toBus : status = true;
+              location.info.toBus !== null ? status = location.info.toBus <= this.filters.location.toBus : status = true;
             }
           }
 
           if (this.filters.location.toChildrenSchool !== '') {
             if (status !== false) {
-              location.info.toChildrenSchool !== null ? status = location.info.toChildrenSchool < this.filters.location.toChildrenSchool : status = true;
+              location.info.toChildrenSchool !== null ? status = location.info.toChildrenSchool <= this.filters.location.toChildrenSchool : status = true;
             }
           }
 
           if (this.filters.location.toPark !== '') {
             if (status !== false) {
-              location.info.toPark !== null ? status = location.info.toPark < this.filters.location.toPark : status = true;
+              location.info.toPark !== null ? status = location.info.toPark <= this.filters.location.toPark : status = true;
             }
           }
 
           if (this.filters.location.toShop !== '') {
             if (status !== false) {
-              location.info.toShop !== null ? status = location.info.toShop < this.filters.location.toShop : status = true;
+              location.info.toShop !== null ? status = location.info.toShop <= this.filters.location.toShop : status = true;
             }
           }
 
           if (this.filters.location.toSchool !== '') {
             if (status !== false) {
-              location.info.toSchool !== null ? status = location.info.toSchool < this.filters.location.toSchool : status = true;
+              location.info.toSchool !== null ? status = location.info.toSchool <= this.filters.location.toSchool : status = true;
             }
           }
 
@@ -1598,15 +1598,15 @@
 
           object10.forEach(item => {
             if (this.filters.square.min !== '' && this.filters.square.max !== '') {
-              if (item.minSquare > this.filters.square.min && item.maxSquare < this.filters.square.max) {
+              if (item.minSquare >= this.filters.square.min && item.maxSquare <= this.filters.square.max) {
                 object11.push(item);
               }
             } else if (this.filters.square.min !== '' && this.filters.square.max === '') {
-              if (item.minSquare > this.filters.square.min) {
+              if (item.minSquare >= this.filters.square.min) {
                 object11.push(item);
               }
             } else if (this.filters.square.max !== '' && this.filters.square.min === '') {
-              if (item.maxSquare < this.filters.square.max) {
+              if (item.maxSquare <= this.filters.square.max) {
                 object11.push(item);
               }
             } else {
@@ -1622,15 +1622,15 @@
                 if(v.active === true && v.name === value.count) {
 
                   if (this.filters.price.min !== '' && this.filters.price.max !== '') {
-                    if (value.price > this.filters.price.min && value.price < this.filters.price.max) {
+                    if (value.price >= this.filters.price.min && value.price <= this.filters.price.max) {
                       object10.push(item);
                     }
                   } else if (this.filters.price.min !== '' && this.filters.price.max === '') {
-                    if (value.price > this.filters.price.min) {
+                    if (value.price >= this.filters.price.min) {
                       object10.push(item);
                     }
                   } else if (this.filters.price.max !== '' && this.filters.price.min === '') {
-                    if (value.price < this.filters.price.max) {
+                    if (value.price <= this.filters.price.max) {
                       object10.push(item);
                     }
                   } else {
@@ -1647,15 +1647,15 @@
               let status = this.selectPlan.find((v) => {
                 if(v.active === true && v.name === value.count) {
                   if (this.filters.square.min !== '' && this.filters.square.max !== '') {
-                    if (value.square > this.filters.square.min && value.square < this.filters.square.max) {
+                    if (value.square >= this.filters.square.min && value.square <= this.filters.square.max) {
                       object11.push(item);
                     }
                   } else if (this.filters.square.min !== '' && this.filters.square.max === '') {
-                    if (value.square > this.filters.square.min) {
+                    if (value.square >= this.filters.square.min) {
                       object11.push(item);
                     }
                   } else if (this.filters.square.max !== '' && this.filters.square.min === '') {
-                    if (value.square < this.filters.square.max) {
+                    if (value.square <= this.filters.square.max) {
                       object11.push(item);
                     }
                   } else {
