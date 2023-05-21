@@ -22,7 +22,8 @@ import '../../../public/styles/ForRealtors.css'
   <app-modal-register :oLoginRegister="openRegister" @close-modal="closeModalRegister" :language="language"
     :selectLanguage="selectLanguage" />
 
-  <new-header @openModalRealtor="openModalRealtor" @login-developer="openLoginDeveloper = !openLoginDeveloper"
+  <new-header @login-realtor="openLoginRealtor = !openLoginRealtor"
+              @login-developer="openLoginDeveloper = !openLoginDeveloper"
     @open-register="openRegister = !openRegister" @selectLanguage="choseLanguage" :user_info="userInfo"
     :language="language"></new-header>
 
@@ -163,12 +164,12 @@ import '../../../public/styles/ForRealtors.css'
               <em>
                 <sub v-if="index < 1 || index > 4">{{ language.main[41] }}</sub>
                 <span v-if="index!=4">{{ slide.infoCount ?? slide.infoBtn }}</span>
-                <img v-if="index == 2" src="images/img/forRealtors/Mask.png" alt="" srcset=""> 
+                <img v-if="index == 2" src="images/img/forRealtors/Mask.png" alt="" srcset="">
                 <img v-if="index == 4" src="images/img/forRealtors/cl.png" alt="" srcset="">
               </em>
-              <img v-if="index == 1" src="images/img/forRealtors/planet.png" alt="" srcset=""> 
+              <img v-if="index == 1" src="images/img/forRealtors/planet.png" alt="" srcset="">
               <img v-if="index == 3" src="images/img/forRealtors/vector.png" alt="" srcset="">
-             
+
             </div>
           </div>
         </div>

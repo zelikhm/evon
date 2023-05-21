@@ -30,9 +30,9 @@
           <li class="btns">
             <div class="logIn">
               <button class="login" @click="openLogIn = !openLogIn">{{ language.main[61] }}</button>
-              <div class="select-login" v-if="openLogIn===true">
-                <button @click="$emit('login-developer'),openLogIn=false">Как риэлтор</button>
-                <button @click="$emit('login-developer'),openLogIn=false">Как застройщик</button>
+              <div class="select-login" v-if="openLogIn === true">
+                <button @click="$emit('login-realtor'),openLogIn = false">Как риэлтор</button>
+                <button @click="$emit('login-developer'),openLogIn = false">Как застройщик</button>
               </div>
             </div>
             <button class="registr" @click="$emit('open-register')">{{ language.main[22] }}</button>
