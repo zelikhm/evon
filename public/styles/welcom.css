@@ -55,7 +55,7 @@ header .container {
 
 header button.login {
     padding: 18px 50px;
-    width: 167px;
+    width: auto;
     height: 52px;
     border: 1px solid #9657EC;
     border-radius: 2px;
@@ -98,16 +98,13 @@ header .lines-animations {
     position: absolute;
     left: calc(50vw - 360px);
 }
+ 
 
-header .modal {
-    display: none;
-}
-
-header .modal.active {
+ .modal.active {
     display: block;
 }
 
-header .modal-bg {
+ .modal-bg {
     display: block;
     position: fixed;
     left: 0;
@@ -115,24 +112,23 @@ header .modal-bg {
     width: 100%;
     height: 100%;
     background: #3B3A45;
-    opacity: 0.9;
-    z-index: 100;
+    opacity: 0.9; 
 }
 
-header .modal-contant {
-    position: absolute;
+ .modal {
+   /*  position: absolute; */
     z-index: 101;
     padding: 77px 83px;
     background: #3B3A45;
     border-radius: 5px;
-    width: fit-content;
+    width: 100%;
+    max-width: 726px;
 
-    top: 50%;
+    /* top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
 }
-
-header .modal-contant h2 {
+.modal  h2 {
     font-family: 'ALS Gorizont';
     font-style: normal;
     font-weight: 400;
@@ -142,33 +138,14 @@ header .modal-contant h2 {
     align-items: center;
     color: #FFFFFF;
 }
+ 
 
-header .modal-contant input {
-    height: 82px;
-    width: 100%;
+.modal a {
+    display: block;
     text-align: center;
-    background: #FFFFFF;
-    border-radius: 5px;
-    border: 0;
-    outline: none;
-    margin: 35px 0px;
-
-    font-family: 'Nekst';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-    display: flex;
-    align-items: center;
-
-
+    margin-top: 70px;
 }
-
-header .modal-contant input::placeholder {
-    color: #9657EC;
-}
-
-header .modal-contant button {
+.modal button:not(.login-ref) {
     background: #9657EC;
     width: 100%;
     border: 0;
@@ -178,12 +155,13 @@ header .modal-contant button {
     font-size: 24px;
     line-height: 29px;
     color: #FFFFFF;
+    display: block;
     padding: 26px;
     text-align: center;
     border-radius: 5px;
+    opacity: 1;
 }
-
-header .modal-contant a {
+.modal button {
     font-family: 'Nekst';
     font-style: normal;
     font-weight: 400;
@@ -193,27 +171,53 @@ header .modal-contant a {
     align-items: center;
     color: #FFFFFF;
     opacity: 0.6;
-}
-
-header .modal-contant a {
-    display: block;
-    text-align: center;
-    margin-top: 70px;
-}
-
-header .modal-contant a.login-ref {
-
     text-decoration: none;
     margin-top: 35px;
+} 
+.modal input {
+    height: 82px;
+    width: 100%;
+    text-align: center;
+    background: #FFFFFF;
+    border-radius: 5px;
+    border: 0;
+    outline: none;
+    margin: 5px 0px; 
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    display: flex;
+    align-items: center; 
+}
+.modal.reg{
+    padding: 50px 83px;
+}
+.modal.reg input{
+    height: 62px;
+}
+
+.modal input::placeholder {
+    color: #9657EC;
 }
 
 header .logIn {
     position: relative;
+    z-index: 41;
 }
-
-header .logIn .select-login {
-    display: none;
+header span.select-lang{
+    position: relative;
+    z-index: 2;
 }
+header  .lang .select {
+    width: 94px;
+    left: calc(50% - 22px );
+    text-align: center;
+    padding-top: 61px;
+    top: 0px;
+}
+ 
 
 header .logIn.active .select-login {
     display: block;
@@ -230,6 +234,7 @@ header .logIn .select-login {
     border: 1px solid #9657EC;
     border-radius: 2px;
     z-index: 20;
+    background: white;
 }
 
 header .logIn button:not(.login):nth-child(1) {
@@ -264,11 +269,11 @@ header .enter.active{
     display: block;
 }
 
-header .modal-contant button.hiden{
+.modal-contant button.hiden{
     display: none;
 }
 
-header .modal-contant .back{ 
+.modal-contant .back{ 
     background-color: transparent;
     color: #3B3A45;
     opacity: 0.6;
@@ -599,11 +604,11 @@ header{
         height: 22px;
     }
 
-    header .modal-contant{
+    .modal{
         padding: 23px;
         width: calc(100% - 80px);
     }
-    header .modal.lodinn-btns .modal-contant{
+    .modal.lodinn-btns .modal-contant{
         background: white;
         display: flex;
         align-content: center;
@@ -611,31 +616,62 @@ header{
         gap: 15px;
         
     }
-    header .modal-contant button {
+    .modal button {
         font-size: 16px;
         padding: 13px;
         line-height: 16px;
     }
-    header .modal-contant h2 { 
+    .modal h2 { 
         text-align: center;
         font-size: 25px;
         line-height: 30px; 
     }
-    header .modal-contant input {
-        height: 70px;  
-        margin: 35px 0px; 
+     .modal input {
+        height: 38px;
+        margin: 0px 0px;
         font-size: 16px;
-        line-height: 16px; 
+        line-height: 16px;
+        margin-bottom: -15px;
     }
-    header .modal-contant a { 
+     .modal a { 
         font-weight: 400;
         font-size: 16px;
         line-height: 16px; 
     }
-    header .modal-contant a {
+     .modala {
         display: block;
         text-align: center;
         margin-top: 50px;
+    }
+    .modal button:not(.login-ref) {
+        background: #9657EC;
+        width: 100%;
+        border: 0;
+        font-family: 'Nekst';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 29px;
+        color: #FFFFFF;
+        display: block;
+        padding: 6px;
+        text-align: center;
+        border-radius: 5px;
+        opacity: 1;
+        margin-top: 0px;
+    }
+    header .lang .select {
+        width: 44px;
+        left: calc(50% - 15px );
+        text-align: center;
+        padding-top: 43px;
+        top: 0px;
+    }
+    header ul { 
+        grid-template-columns: 105px 1fr auto; 
+    }
+    header .lang {
+        margin-left: auto;
     }
 }
 

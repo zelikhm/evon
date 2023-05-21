@@ -6,6 +6,7 @@
 <template>
   <!--header-->
   <header>
+    <div v-if="openLogIn" @click="openLogIn=false" class="absolute h-[100vh] w-full z-40"></div>
     <div class="container">
       <div class="lines-animations">
         <div class="line"></div>
@@ -28,15 +29,15 @@
           </li>
           <li class="btns">
             <div class="logIn">
-              <button class="login" @click="$emit('login-developer')">{{ language.main[61] }}</button>
-              <div class="select-login">
-                <button>Как риэлтор</button>
-                <button>Как застройщик</button>
+              <button class="login" @click="openLogIn = !openLogIn">{{ language.main[61] }}</button>
+              <div class="select-login" v-if="openLogIn===true">
+                <button @click="$emit('login-developer'),openLogIn=false">Как риэлтор</button>
+                <button @click="$emit('login-developer'),openLogIn=false">Как застройщик</button>
               </div>
             </div>
             <button class="registr" @click="$emit('open-register')">{{ language.main[22] }}</button>
           </li>
-          <li class="user">
+          <li class="user" @click="$emit('login-developer'),openLogIn=false">
             <img src="images/img/header/User.png" alt="" srcset="">
           </li>
         </ul>
@@ -55,6 +56,8 @@
       return {
         openLanguage: false,
         selectLang: 0,
+
+        openLogIn:false
       }
     },
     methods: {

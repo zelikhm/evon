@@ -9,22 +9,23 @@
     <div ref="lang"
       class="flex h-full text-white items-center cursor-pointer px-7 xxl:px-5 xl:px-4 lg:px-3 gap-2.5 xl:gap-1.5"
       @click="langOptionVisible = !langOptionVisible">
-      <span>{{ langSelected }}</span>
+      <span class="select-lang">{{ langSelected }}</span>
       <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px] lg:w-2" alt="Стрелочка вниз"
         :class="{ 'rotate-180': langOptionVisible }">
     </div>
-    <div v-if="langOptionVisible"
-      class="border border-solid overflow-hidden border-[#E5DFEE] absolute top-[90%] w-full left-0 flex flex-col bg-white rounded-[5px]">
-      <span @click="selectOption('ru')"
-        class="hover__select border__bottom--not cursor-pointer leading-none p-4 xxl:p-3 xl:p-2.5">
+    
+    <div  v-if="langOptionVisible"
+      class="select border border-solid overflow-hidden border-[#E5DFEE] absolute top-[90%] w-full left-0 flex flex-col bg-white rounded-[5px]">
+      <span @click="selectOption('ru'),langOptionVisible = !langOptionVisible"
+        class="hover__select   cursor-pointer leading-none p-4 xxl:p-3 xl:p-2.5">
         RU
       </span>
-      <span @click="selectOption('en')"
-        class="hover__select border__bottom--not cursor-pointer leading-none p-4 xxl:p-3 xl:p-2.5">
+      <span @click="selectOption('en'),langOptionVisible = !langOptionVisible"
+        class="hover__select   cursor-pointer leading-none p-4 xxl:p-3 xl:p-2.5">
         EN
       </span>
-      <span @click="selectOption('tr')"
-        class="hover__select border__bottom--not cursor-pointer leading-none p-4 xxl:p-3 xl:p-2.5">
+      <span @click="selectOption('tr'),langOptionVisible = !langOptionVisible"
+        class="hover__select   cursor-pointer leading-none p-4 xxl:p-3 xl:p-2.5">
         TR
       </span>
     </div>

@@ -164,7 +164,7 @@
 }
 
 #ForRealtors .cont .left .slide-text span {
-    font-family: 'Gilroy';
+    /* font-family: 'Gilroy'; */
     font-style: normal;
     font-weight: 300;
     font-size: 200px;
@@ -260,7 +260,10 @@
     top: auto;
     bottom: 0;
 }
-
+#ForRealtors sub{
+    font-size: 18px;
+    line-height: 100%;
+}
 
 @media only screen and (max-width: 1000px) {
     #ForRealtors h2 {
@@ -327,7 +330,7 @@
         display: block;
     }
     #ForRealtors .cont .right { 
-        height: 440px;
+        height: 400px;
     }
     #ForRealtors{
         height: auto;
@@ -375,8 +378,7 @@
     }
     #ForRealtors .cont{
         grid-template-columns: 40vw 43vw;
-    }
-
+    } 
     #ForRealtors .cont .left .slide-text{
         padding: 2vw 30px 0px;
     }

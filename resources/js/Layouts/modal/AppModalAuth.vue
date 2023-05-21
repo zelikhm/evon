@@ -29,20 +29,21 @@
   <!--  Вход в приложение как риэлтор -->
   <div v-if="oLoginRealtor" class="fixed z-[100] w-full h-full flex items-center justify-center">
     <div
-      class="relative bg-white rounded-[12px] p-10 xxl:p-9 xl:p-8 lg:p-5 z-50 w-[30%] lg:w-[48%] md:w-[60%] sm:w-[90%] h-fit">
+      class="modal relative bg-white rounded-[12px] p-10 xxl:p-9 xl:p-8 lg:p-5 z-50 w-[30%] lg:w-[48%] md:w-[60%] sm:w-[90%] h-fit">
       <div class="relative mb-10 xxl:mb-8 xl:mb-6">
         <h2 class="text-center text-[22px] xxl:text-lg xl:text-base font-semibold">{{ language.po_v_r[0] }}</h2>
-        <button @click="closeModal" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
+       <!--  <button @click="closeModal" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
           <div class="absolute h-[1px] w-4 bg-[#8A8996] rotate-45"></div>
           <div class="absolute h-[1px] w-4 bg-[#8A8996] -rotate-45"></div>
-        </button>
+        </button> -->
       </div>
       <div
-        class="flex flex-col p-5 xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5 border border-solid border-[#E5DFEE] rounded-[6px]"
+        class="flex flex-col   xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5  "
         v-bind:class="{ 'Error': email_error }">
-        <label for="telephone" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]" v-if="not_email !== true">Email</label>
-        <label for="telephone" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996] Error" v-else>{{ language.reg[11] }}</label>
+        <!-- <label for="telephone" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]" v-if="not_email !== true">Email</label>
+        <label for="telephone" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996] Error" v-else>{{ language.reg[11] }}</label> -->
         <input
+          placeholder="Email"
           v-model="email"
           class="text-[#1E1D2D] border-transparent focus:border-transparent focus:ring-0 text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
           type="email"
@@ -101,10 +102,10 @@
       </button>
 
       <div class="flex items-center justify-center text-base xxl:text-sm xl:text-xs">
-        <button @click="openLoginDeveloper" class="text-[#E84680]">{{ language.po_v_r[3] }}</button>
+        <button @click="openLoginDeveloper" class="text-[#E84680] login-ref">{{ language.po_v_r[3] }}</button>
       </div>
     </div>
-    <div @click="closeModal" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
+    <div @click="closeModal" class="modal-bg absolute bg-black opacity-50 h-full w-full z-40"></div>
   </div>
 
   <!--&lt;!&ndash; Вход с кодом с телефона &ndash;&gt;-->
@@ -140,45 +141,48 @@
   <!-- Вход в приложение как застройщик -->
   <div v-if="oLoginDeveloper" class="fixed z-[100] w-full h-full flex items-center justify-center">
     <div
-      class="relative bg-white rounded-[12px] p-10 xxl:p-9 xl:p-8 lg:p-5 z-50 w-[30%] lg:w-[48%] md:w-[60%] sm:w-[90%] h-fit">
+      class="modal relative   rounded-[12px] p-10 xxl:p-9 xl:p-8 lg:p-5 z-50 w-[30%] lg:w-[48%] md:w-[60%] sm:w-[90%] h-fit">
       <div class="relative mb-10 xxl:mb-8 xl:mb-6">
         <h2 class="text-center text-[22px] xxl:text-lg xl:text-base font-semibold">{{ language.po_v_r[0] }}</h2>
-        <button @click="closeModal" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
+        <!-- <button @click="closeModal" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
           <div class="absolute h-[1px] w-4 bg-[#8A8996] rotate-45"></div>
           <div class="absolute h-[1px] w-4 bg-[#8A8996] -rotate-45"></div>
-        </button>
+        </button> -->
       </div>
-      <form @submit.prevent="submit">
+      <form @submit.prevent="submit" >
         <div
-          class="flex flex-col p-5 xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5 border border-solid border-[#E5DFEE] rounded-[6px]">
-          <label for="email" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]"
-                 :class="{'error': form.errors.email}">Email \ Login {{ form.errors.email }}</label>
+          class="flex flex-col  xxl:pb-4 xl:pb-3 mb-[30px] xxl:mb-6 xl:mb-5  rounded-[6px]">
+          <!-- 
+            mb-8 p-5 border border-solid border-[#E5DFEE]
+            <label for="email" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]"
+                 :class="{'error': form.errors.email}">Email \ Login {{ form.errors.email }}</label> -->
           <input
             class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
             id="email"
-            v-model="form.email"
+            v-model="form.email" placeholder="Email/Login"
           >
         </div>
         <div
-          class="flex flex-col p-5 xxl:pb-4 xl:pb-3 mb-8 xxl:mb-6 xl:mb-5 border border-solid border-[#E5DFEE] rounded-[6px]">
-          <label for="password" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]"
-                 :class="{ 'error': form.errors.password }">{{ language.po_v_r[9] }} {{ form.errors.password }}</label>
+          class="flex flex-col xxl:pb-4 xl:pb-3 mb-[30px]  xxl:mb-6 xl:mb-5 rounded-[6px]">
+          <!-- mb-8  p-5 border border-solid border-[#E5DFEE] 
+            <label for="password" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]"
+                 :class="{ 'error': form.errors.password }">{{ language.po_v_r[9] }} {{ form.errors.password }}</label> -->
           <div class="relative">
-            <input v-model="form.password"
+            <input v-model="form.password" placeholder="Пароль"
                    class="border-transparent focus:border-transparent focus:ring-0 text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-xs bg-none outline-none p-0"
-                   type="password" id="password">
+                   type="password" id="password ">
           </div>
         </div>
         <button :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
-                class="login__btn--bg text-white w-full text-lg xxl:text-[15px] xl:text-xs mb-5 xxl:mb-4 xl:mb-3 p-5 xxl:p-4 xl:p-3 border border-solid border-[#E5DFEE] rounded-[6px]">
+                class="login__btn--bg text-white w-full text-lg xxl:text-[15px] xl:text-xs mb-5 xxl:mb-4 xl:mb-3 p-5 xxl:p-4 xl:p-3   rounded-[6px]">
           {{ language.po_v_r[8] }}
         </button>
       </form>
       <div class="flex items-center justify-center text-base xxl:text-sm xl:text-xs">
-        <button @click="openLoginRealtor" class="text-[#E84680]">{{ language.po_v_r[10] }}</button>
+        <button @click="openLoginRealtor" class="text-[#E84680] login-ref">{{ language.po_v_r[10] }}</button>
       </div>
     </div>
-    <div @click="closeModal" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
+    <div @click="closeModal" class="modal-bg absolute bg-black opacity-50 h-full w-full z-40"></div>
   </div>
 </template>
 

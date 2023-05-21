@@ -15,38 +15,24 @@ import '../../../public/styles/ForRealtors.css'
 </script>
 
 <template>
-  <app-modal-auth
-    :oLoginRealtor="openLoginRealtor"
-    :oLoginDeveloper="openLoginDeveloper"
-    @close-modal="closeModal"
-    @open-modal-realtor="openModalRealtor"
-    @open-modal-developer="openModalDeveloper"
-    :language="language"
-    :selectLanguage="selectLanguage"
-  />
+  <app-modal-auth :oLoginRealtor="openLoginRealtor" :oLoginDeveloper="openLoginDeveloper" @close-modal="closeModal"
+    @open-modal-realtor="openModalRealtor" @open-modal-developer="openModalDeveloper" :language="language"
+    :selectLanguage="selectLanguage" />
 
-  <app-modal-register
-    :oLoginRegister="openRegister"
-    @close-modal="closeModalRegister"
-    :language="language"
-    :selectLanguage="selectLanguage"
-  />
+  <app-modal-register :oLoginRegister="openRegister" @close-modal="closeModalRegister" :language="language"
+    :selectLanguage="selectLanguage" />
 
-  <new-header
-    @openModalRealtor="openModalRealtor"
-    @login-developer="openLoginDeveloper = !openLoginDeveloper"
-    @open-register="openRegister = !openRegister"
-    @selectLanguage="choseLanguage"
-    :user_info="userInfo"
-    :language="language"
-  ></new-header>
+  <new-header @openModalRealtor="openModalRealtor" @login-developer="openLoginDeveloper = !openLoginDeveloper"
+    @open-register="openRegister = !openRegister" @selectLanguage="choseLanguage" :user_info="userInfo"
+    :language="language"></new-header>
 
   <!--welcom-->
   <section id="welcom">
     <div class="container">
       <div class="welcom-cont">
         <div class="left">
-          <h4 class="title"><img src="images/img/welcom/Mask.png" alt="" srcset=""> <span>{{ language.main[23] }}</span></h4>
+          <h4 class="title"><img src="images/img/welcom/Mask.png" alt="" srcset=""> <span>{{ language.main[23] }}</span>
+          </h4>
           <h1 id="text">{{ welcomText.text }}</h1>
           <p v-html="language.main[28]">
 
@@ -97,7 +83,8 @@ import '../../../public/styles/ForRealtors.css'
   <section id="watchvideo">
     <div class="container">
       <div class="title-text">
-        <h2>{{ language.main[32] }} — {{ language.main[32] }} — {{ language.main[32] }} — {{ language.main[32] }} — {{ language.main[32] }} —</h2>
+        <h2>{{ language.main[32] }} — {{ language.main[32] }} — {{ language.main[32] }} — {{ language.main[32] }} — {{
+          language.main[32] }} —</h2>
 
       </div>
       <iframe class="video" src="https://www.youtube.com/embed/lTNZFH-CZWc" title="YouTube video player" frameborder="0"
@@ -161,7 +148,9 @@ import '../../../public/styles/ForRealtors.css'
     <div class="container">
 
 
-      <div class="cont">
+      <div class="cont" @mousedown="handleMouseDown" @mouseleave="handleMouseLeave" @mouseup="handleMouseUp"
+    @mousemove="handleMouseMove" @touchstart="handleTouchStart" @touchend="handleTouchEnd"
+    @touchmove="handleTouchMove">
         <div class="left">
           <div class="slide" v-for="(slide, index) in slides"
             :class="['slide', `slide${step}`, { active: step === (index + 1) }]" :key="index">
@@ -169,9 +158,17 @@ import '../../../public/styles/ForRealtors.css'
               <h4>{{ slide.title }}</h4>
               <span>{{ index + 1 }}</span>
             </div>
-            <div class="slide-info">
+            <div class="slide-info" :class="{ purple: slide.color === 1 }">
               <h5>{{ slide.infoTitle }}</h5>
-              <em>{{ language.main[41] }} <span>{{ slide.infoCount??slide.infoBtn }}</span></em>
+              <em>
+                <sub v-if="index < 1 || index > 4">{{ language.main[41] }}</sub>
+                <span v-if="index!=4">{{ slide.infoCount ?? slide.infoBtn }}</span>
+                <img v-if="index == 2" src="images/img/forRealtors/Mask.png" alt="" srcset=""> 
+                <img v-if="index == 4" src="images/img/forRealtors/cl.png" alt="" srcset="">
+              </em>
+              <img v-if="index == 1" src="images/img/forRealtors/planet.png" alt="" srcset=""> 
+              <img v-if="index == 3" src="images/img/forRealtors/vector.png" alt="" srcset="">
+             
             </div>
           </div>
         </div>
@@ -181,9 +178,7 @@ import '../../../public/styles/ForRealtors.css'
             :src="'images/img/forRealtors/s' + (index + 1) + '.png'" :alt="'Slide ' + (index + 1)" :key="index" />
           <div class="tools">
             <img class="tool" src="images/img/forRealtors/tool.png" alt="" srcset="" />
-            <p v-html="language.main[42]">
-
-            </p>
+            <p v-html="language.main[42]"></p>
           </div>
         </div>
       </div>
@@ -299,7 +294,8 @@ import '../../../public/styles/ForRealtors.css'
       </div>
 
       <h2 v-html="language.main[67]"></h2>
-      <button v-on:click="openLoginDeveloper = !openLoginDeveloper"><span>{{ language.main[61] }}</span> <img src="images/img/lowSection/arrow.png" alt="" srcset=""></button>
+      <button v-on:click="openLoginDeveloper = !openLoginDeveloper"><span>{{ language.main[61] }}</span> <img
+          src="images/img/lowSection/arrow.png" alt="" srcset=""></button>
       <h3>{{ language.main[62] }}</h3>
 
       <div class="row-soc">
@@ -327,7 +323,6 @@ import '../../../public/styles/ForRealtors.css'
   <!--!lowSection-->
 
   <new-footer :language="language"></new-footer>
-
 </template>
 
 <script>
@@ -378,7 +373,10 @@ export default {
       forBuilders: {
         activeIndex: 0
       },
-      welcomText: {}
+      welcomText: {},
+      touchStartX: 0,
+      touchMoveX: 0,
+
 
     }
   },
@@ -419,33 +417,96 @@ export default {
     cont.addEventListener('mousemove', this.drag); */
   },
   methods: {
+    handleMouseDown(e) {
+      this.isMouseDown = true;
+      this.startX = e.pageX - this.$refs.cont.offsetLeft;
+      this.scrollLeft = this.$refs.cont.scrollLeft;
+    },
+    handleMouseLeave() {
+      this.isMouseDown = false;
+    },
+    handleMouseUp(e) {
+      this.isMouseDown = false;
+      if (Math.abs(e.pageX - this.startX) >= 200) {
+        this.animationChange();
+      }
+    },
+    handleMouseMove(e) {
+      if (!this.isMouseDown) return;
+      e.preventDefault();
+      const x = e.pageX - this.$refs.cont.offsetLeft;
+      const walk = (x - this.startX) * 3;
+      this.$refs.cont.scrollLeft = this.scrollLeft - walk;
+    },
+    animationChange() {
+      this.step++;
+      if (this.step > 5) {
+        this.step = 1;
+      }
+      const slides = this.$refs.cont.querySelectorAll(".slide");
+      slides.forEach((element) => {
+        element.classList.remove("active");
+        if (element.classList.contains(`slide${this.step}`)) {
+          element.classList.add("active");
+        }
+      });
+    },
+    handleTouchStart(event) {
+      this.touchStartX = event.touches[0].clientX;
+    },
+    handleTouchEnd() {
+      const touchDistance = this.touchMoveX - this.touchStartX;
+      if (Math.abs(touchDistance) >= 200) {
+        if (touchDistance > 0) {
+          // Свайп вправо
+          this.step--;
+          if (this.step < 1) {
+            this.step = this.slides.length;
+          }
+        } else {
+          // Свайп влево
+          this.step++;
+          if (this.step > this.slides.length) {
+            this.step = 1;
+          }
+        }
+      }
+    },
+    handleTouchMove(event) {
+      this.touchMoveX = event.touches[0].clientX;
+    },
     editObject() {
       this.slides = [
         {
           title: this.language.main[39],
           infoTitle: this.language.main[40],
           infoCount: "30",
+          color: 0,
         },
         {
           title: this.language.main[43],
           infoTitle: this.language.main[44],
           infoCount: "",
+          color: 1,
         },
         {
           title: this.language.main[45],
           infoTitle: this.language.main[46],
           infoCount: "400",
+          color: 0,
         },
         {
           title: this.language.main[47],
           infoTitle: this.language.main[48],
           infoCount: "",
+          color: 1,
         },
         {
           title: this.language.main[49],
           infoTitle: this.language.main[50],
           infoBtn: this.language.main[51],
-          infoCount:null
+          infoCount: null,
+          color: 0,
         },
       ];
 
