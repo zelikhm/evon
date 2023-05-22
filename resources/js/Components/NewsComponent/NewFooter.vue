@@ -28,23 +28,23 @@
         <ul>
           <li>
             <span>{{ language.dob_ob_2[6] }}</span>
-            <a href="#">evon.information@gmail.com</a>
+            <a href="mailto:evon.information@gmail.com">evon.information@gmail.com</a>
           </li>
           <li>
             <span>WhatsApp</span>
-            <a href="#">+90(544)225 85 59</a>
+            <a href="wa.me/+905442258559">+90(544)225 85 59</a>
           </li>
           <li>
             <span>Telegram</span>
-            <a href="#">evon_real_estate</a>
+            <a href="https://t.me/evon_real_estate">evon_real_estate</a>
           </li>
           <li>
             <span>Instagram</span>
-            <a href="#">evon_platform_tr</a>
+            <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA==">evon_platform_tr</a>
           </li>
           <li>
             <span>Facebook</span>
-            <a href="#">ServisEvon</a>
+            <a href="https://m.facebook.com/people/EVON/100092335686616/">ServisEvon</a>
           </li>
         </ul>
       </nav>
