@@ -30,7 +30,7 @@
 </script>
 
 <template>
-
+  <input id="language" hidden type="number" :value="selectLanguage">
 <!-- Вход в приложение как застройщик -->
   <div v-if="oLoginRegister" class="fixed z-[100] w-full h-full flex items-center justify-center">
     <div class=" modal reg relative bg-white rounded-[12px] p-10 xxl:p-9 xl:p-8 lg:p-5 z-50 w-[30%] lg:w-[48%] md:w-[60%] sm:w-[90%] h-fit">
@@ -45,7 +45,7 @@
         </button> -->
       </div>
       <form v-if="!form.success" @submit.prevent="submit">
-        <!-- <input id="language" hidden type="number" :value="selectLanguage"> -->
+
       <div class="flex flex-col  xxl:pb-2 xl:pb-2 mb-6 xxl:mb-4 xl:mb-3   rounded-[6px]">
         <!-- <label for="name" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]" :class="{'error': form.errors.first_name}">{{ language.reg[1] }} {{ form.errors.first_name }}</label> -->
         <input
