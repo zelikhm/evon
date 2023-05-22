@@ -1,16 +1,15 @@
-/*ForBuilders*/
 #ForBuilders {
     height: auto;
     min-height: 100vh;
     position: relative;
     overflow: hidden;
-    padding-bottom: 180px;
+    padding-bottom: 9.375vw;
 }
 
 #ForBuilders .bg {
-    width: auto;
+    width: 66vw;
     position: absolute;
-    right: -8%;
+    right: -12.1666666667vw;
     bottom: 0;
     z-index: 1;
 }
@@ -19,52 +18,58 @@
     font-family: 'ALS Gorizont';
     font-style: normal;
     font-weight: 400;
-    font-size: 60px;
-    line-height: 77px;
+    font-size: 3.125vw;
+    line-height: 4.0104166667vw;
     text-align: center;
-    margin: 119px 0px;
+    margin: 6.1979166667vw 0px;
     color: #9657EC;
 }
 
 #ForBuilders .cont {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-column-gap: 35px;
+    grid-column-gap: 1.8229166667vw;
     position: relative;
     z-index: 2;
 }
 
 
 #ForBuilders .left ul li {
-    padding: 8px 19px;
-    border: 1px solid #9657EC;
-    margin-bottom: 15px;
+    padding: 1.04166666667vw  ;
+    border: 0.0520833333vw solid #9657EC;
+    margin-bottom: 0.78125vw;
     display: grid;
     grid-template-columns: 1fr auto;
-    grid-column-gap: 15px;
+    grid-column-gap: 0.78125vw;
     list-style: none;
     cursor: pointer;
     transition: 0.8s;
 }
+
 #ForBuilders .left ul li:hover{
     background-color: #9657EC;
 }
+
 #ForBuilders .left ul li:hover em{
     color: transparent;
-    -webkit-text-stroke: 1px white;
-    text-stroke: 1px white;
+    -webkit-text-stroke: 0.0520833333vw white;
+    text-stroke: 0.0520833333vw white;
 }
+
 #ForBuilders .left ul li.active{
     background-color: #9657EC;
 }
+
 #ForBuilders .left ul li.active span{
     color: white;
 }
+
 #ForBuilders .left ul li.active em{
     color: transparent;
-    -webkit-text-stroke: 1px white;
-    text-stroke: 1px white;
+    -webkit-text-stroke: 0.0520833333vw white;
+    text-stroke: 0.0520833333vw white;
 }
+
 #ForBuilders .left ul li:hover span{
     color: white;
 }
@@ -73,8 +78,8 @@
     font-family: 'Nekst';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
-    line-height: 35px;
+    font-size: 1.0416666667vw;
+    line-height: 1.8229166667vw;
     display: flex;
     align-items: center;
     color: #9657EC;
@@ -84,47 +89,45 @@
     font-family: 'Nekst';
     font-style: normal;
     font-weight: 400;
-    font-size: 22px;
-    line-height: 35px;
+    font-size: 1.1458333333vw;
+    line-height: 1.8229166667vw;
     display: flex;
     align-items: center;
-
-    margin-top: 47px;
+    margin-top: 2.4479166667vw;
     color: #000000;
-
 }
-
 
 #ForBuilders .left em {
     font-family: 'ALS Gorizont';
     font-style: normal;
     font-weight: 400;
-    font-size: 60px;
-    line-height: 160.5%;
-
+    font-size: 3.125vw;
+    line-height: 120%;
     display: flex;
     align-items: center;
     color: transparent;
-    -webkit-text-stroke: 1px #9657EC;
-    text-stroke: 1px #9657EC;
+    -webkit-text-stroke: 0.0520833333vw #9657EC;
+    text-stroke: 0.0520833333vw #9657EC;
     opacity: 0.4;
 }
-#ForBuilders .cont .right{
+
+#ForBuilders .cont .right {
     overflow: hidden;
-    height: 582px;
+    height: 30.3125vw;
     position: relative;
 }
+
 #ForBuilders .cont .right img { 
-    max-width: 756px;
+    max-width: 39.375vw;
     width: 100%;
     margin-left: auto;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
     position: absolute;
     right: 0;
-    top:  0;
+    top: 0;
 }
-  
+
 #ForBuilders .cont .right img.active{ 
     opacity: 1;
 }
@@ -132,59 +135,65 @@
 
 
 @media only screen and   (max-width: 1000px) {
-    #ForBuilders { 
-        padding-bottom: 100px;
+    #ForBuilders {
+        padding-bottom: 6.25vw;
+        height: auto;
+        min-height: auto;
     }
-    #ForBuilders h2{
-        font-size: 30px;
+    
+    #ForBuilders h2 {
+        font-size: 9.375vw;
         line-height: 115%;
         margin: 0;
-        margin-top: 100px;
+        margin-top: 31.25vw;
+        margin-bottom: 16.52vw;
     }
+    
     #ForBuilders .cont {
-        display: block; 
+        display: block;
     }
-    #ForBuilders .left ul li span{
-        font-size: 14px;
+    
+    #ForBuilders .left ul li span {
+        font-size: 3.8vw;
         line-height: 140%;
     }
-    #ForBuilders .cont .left{
+    #ForBuilders .left ul li{
+        padding: 4.6vw;
+        margin-bottom: 3.78125vw;
+    }
+    #ForBuilders .left ul li em{
+        font-size: 18.75vw;
+    }
+    #ForBuilders .cont .right img{
+        width: 95vw;
+        height: 70vw; 
+    }
+    #ForBuilders .cont .left {
         display: flex;
         flex-direction: column-reverse;
     }
-
-    #ForBuilders .cont .left p{
-        font-size: 14px;
+    
+    #ForBuilders .cont .left p {
+        font-size: 4.375vw;
         line-height: 160.5%;
         text-align: center;
-        margin-bottom: 70px;
+        margin-bottom: 21.875vw;
     }
-    #ForBuilders .cont .right { 
-        height: 70vw;
-        margin-top: 40px; 
+    
+    #ForBuilders .cont .right {
+        height: 134vw;
+        margin-top: 12.5vw;
     }
+    
     #ForBuilders .bg {
-        width: 800px;
-        right: calc(50% - 400px);
-        bottom: calc(50% - 996px);
+        width: 109vw;
+        right: calc(50% - 53.5vw);
+        bottom: 0;
+    }
+    #ForBuilders .cont .right img {
+        width: 95vw;
+        height: 70vw;
+        max-width: none;
     }
 }
-
-@media (min-width: 1000px) and (max-width: 1700px) {
-    #ForBuilders h2 {
-        font-size: 4vw;
-        line-height: 4.5vw;
-    }
-    #ForBuilders .left ul li span{
-        font-size: 1.3vw;
-        line-height: 1.8vw;
-    } 
-    #ForBuilders .cont { 
-        grid-template-columns: 48vw 42vw;
-        grid-column-gap: 4vw;
-    }
-    #ForBuilders .left p{
-        font-size: 1.6vw;
-        line-height: 2.4vw;
-    }
-}
+ 

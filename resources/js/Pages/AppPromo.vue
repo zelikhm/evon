@@ -167,6 +167,7 @@ import '../../../public/styles/ForRealtors.css'
               <em>
                 <sub v-if="index < 1 || index > 4">{{ language.main[41] }}</sub>
                 <span v-if="index!=4">{{ slide.infoCount ?? slide.infoBtn }}</span>
+                <sub v-if="index===4">{{ slide.infoBtn }}</sub>
                 <img v-if="index == 2" src="images/img/forRealtors/Mask.png" alt="" srcset="">
                 <img v-if="index == 4" src="images/img/forRealtors/cl.png" alt="" srcset="">
               </em>
@@ -238,7 +239,7 @@ import '../../../public/styles/ForRealtors.css'
   <!--!ForBuilders-->
 
 
-  <!--help-->
+  <!--help -->
   <section id="help" v-if="block_show">
     <div class="container">
       <h2>{{ language.main[57] }}</h2>

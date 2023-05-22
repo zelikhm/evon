@@ -1,7 +1,7 @@
 /*lowSection*/
 #lowSection {
     background: #F9F9FF;
-    min-height: 100vh;
+    height: 100vh;
     height: auto;
     position: relative;
     overflow: hidden;
@@ -16,17 +16,17 @@
 #lowSection .upp-row {
     display: flex;
     justify-content: space-between;
-    height: 200px;
+    height: 10.4167vw;
 }
 
 #lowSection h2 {
     font-family: 'ALS Gorizont';
     font-style: normal;
     font-weight: 400;
-    max-width: 1457px;
-    font-size: 60px;
+    max-width: 76.0156vw;
+    font-size: 3.125vw;
     margin: 0 auto;
-    line-height: 77px;
+    line-height: 4vw;
     display: flex;
     align-items: center;
     text-align: center;
@@ -37,13 +37,13 @@
     font-family: 'ALS Gorizont';
     font-style: normal;
     font-weight: 400;
-    font-size: 40px;
-    line-height: 40px;
+    font-size: 2.0833vw;
+    line-height: 2.0833vw;
     display: flex;
     align-items: center;
     text-align: center;
     color: #9657EC;
-    max-width: 720px;
+    max-width: 37.5vw;
     margin: 0 auto;
 }
 
@@ -51,34 +51,34 @@
     background-color: transparent;
     border: 0;
     display: flex;
-    gap: 15px;
-    margin: 75px auto 270px;
+    gap: 0.7813vw;
+    margin: 3.9063vw auto 14.0625vw;
 }
 
 #lowSection button span {
     font-family: 'Nekst';
     font-style: normal;
     font-weight: 400;
-    font-size: 26px;
-    line-height: 31px;
+    font-size: 1.3542vw;
+    line-height: 1.6vw;
     display: flex;
     align-items: center;
     color: #9657EC;
 }
 
 #lowSection button img {
-    width: 45px;
+    width: 2.3438vw;
 }
 
 #lowSection .row-soc {
     display: flex;
-    gap: 50px;
-    margin: 80px auto;
+    gap: 2.6042vw;
+    margin: 4.1667vw auto;
     width: fit-content;
 }
 
 #lowSection .row-soc img {
-    width: 45px;
+    width: 2.3438vw;
 }
 
 #lowSection .foot { 
@@ -88,20 +88,20 @@
     background-size: 100% 100%; 
     position: relative;
     z-index: 2; 
-    height: 284px; 
-    padding-top: 140px;  
+    height: 14.7917vw; 
+    padding-top: 7.2917vw;  
 }
 
 #lowSection .foot p {
     font-family: 'Nekst';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 1.0417vw;
     line-height: 120%;
     display: flex;
     align-items: center;
     color: #FFFFFF;
-    margin-top: 40px;
+    margin-top: 2.0833vw;
 }
 
 #lowSection .bg-houses {
@@ -110,40 +110,43 @@
     left: 0;
     width: 100%;
     height: 100%;
-
 }
 
 #lowSection .bg-houses img {
-    width: 40vw;
+    width: 2.0833vw;
     height: auto;
     z-index: 1;
 }
 
 #lowSection .bg-houses img:nth-child(1) {
     position: absolute;
-    bottom: 0;
-    left: 40%;
-    transform: translate(-40%, 20%);
+    bottom: auto;
+    top: 2.65vw;
+    left: 20vw;
+    width: 42vw;
 }
 
 #lowSection .bg-houses img:nth-child(2) {
     position: absolute;
     right: 0;
-    bottom: -10%;
+    bottom: -1.0417vw;
+    width: 32vw;
 }
-
+#lowSection .foot img{
+    width: 7.5vw;
+}
 /*footer*/
 footer {
     background: #3B3A45;
 }
 
 footer nav {
-    margin-bottom: 50px;
+    margin-bottom: 2.6042vw;
 }
 
 footer nav ul {
     display: flex;
-    gap: 85px;
+    gap: 4.4271vw;
     flex-wrap: wrap;
 }
 
@@ -155,7 +158,7 @@ footer nav ul li a {
     font-family: 'Nekst';
     font-style: normal;
     font-weight: 400;
-    font-size: 22px;
+    font-size: 1.1458vw;
     line-height: 120%;
     display: flex;
     align-items: center;
@@ -167,11 +170,11 @@ footer nav ul li span {
     font-family: 'Nekst';
     font-style: normal;
     font-weight: 400;
-    font-size: 24px;
+    font-size: 1.25vw;
     line-height: 120%;
     display: flex;
     align-items: center;
-    margin-bottom: 5px;
+    margin-bottom: 0.2604vw;
     color: #B590F8;
 }
 
@@ -179,27 +182,27 @@ footer p {
     font-family: 'Nekst';
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
+    font-size: 0.9375vw;
     line-height: 120%;
     display: flex;
     align-items: center;
     color: #FFFFFF;
-    margin-bottom: 20px;
+    margin-bottom: 1.0417vw;
     opacity: 0.55;
 }
 
 footer .row-ref {
     display: flex;
     align-items: center;
-    gap: 85px;
-    margin-bottom: 25px;
+    gap: 4.4271vw;
+    margin-bottom: 1.3021vw;
 }
 
 footer .row-ref a {
     font-family: 'Nekst';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
+    font-size: 1.0417vw;
     line-height: 120%;
     display: flex;
     align-items: center;
@@ -220,152 +223,153 @@ footer .mobile-contant {
 
     #lowSection h2 {
         font-weight: 400;
-        font-size: 24px;
-        line-height: 134.5%;
-        margin-top: 80px;
+        font-size: 6.5vw;
+        line-height: 9vw;
+        margin-top: 25vw;
     }
-
+    
     #lowSection h3 {
         font-weight: 400;
-        font-size: 20px;
+        font-size: 6.25vw;
         line-height: 134.5%;
+        max-width: none;
+        margin-bottom: 13vw;
     }
-
+    #lowSection button img {
+        width: 15.3438vw;
+        margin-left: 3vw;
+    }
     #lowSection {
         min-height: auto;
     }
-
+    #lowSection .row-soc { 
+        gap: 7.6042vw; 
+    }
     #lowSection .bg-houses img:nth-child(2) {
         display: none;
     }
-
+    
     #lowSection .upp-row {
         display: none;
     }
-
+    
     #lowSection button {
-        margin: 75px auto 140px;
+        margin: 23.4375vw auto 43.75vw;
     }
-
+    
     #lowSection .bg-houses img:nth-child(1) {
-        width: 496px;
+        width: 130vw;
         margin: 0 auto;
         display: block;
-        left: calc(50% - 248px);
-        transform: translate(calc(50% - 248px), 20%);
+        bottom: 0;
+        height: auto;
+        top: auto;
+        left: 0;
     }
-
+    
     #lowSection .row-soc img {
-        width: 31px;
+        width: 9.6875vw;
     }
-
+    
     #lowSection button span {
-        font-size: 22px;
-        line-height: 33px;
+        font-size: 6.875vw;
+        line-height: 10.3125vw;
     }
-
+    
     footer .mobile-contant {
         display: block;
-        padding-top: 25px;
+        padding-top: 7.8125vw;
     }
-
+    
     footer .mobile-contant p {
         font-weight: 400;
-        font-size: 12px;
+        font-size: 3.75vw;
         line-height: 120%;
         color: #FFFFFF;
         opacity: 1;
-        margin-bottom: 50px;
+        margin-bottom: 15.625vw;
     }
-
+    
     footer .mobile-contant .logo {
-        max-width: 105px;
+        max-width: 32.8125vw;
         width: 100%;
         display: block;
         margin: 0 auto;
-        margin-bottom: 30px;
+        margin-bottom: 9.375vw;
     }
-
+    
     #lowSection .foot .container {
         display: none;
     }
-
+    
     footer .row-ref {
         display: block;
     }
-
+    
     #lowSection .foot {
-        height: 100px;
+        height: 31.25vw;
         padding-top: 0;
+        margin-top: 20vw;
     }
-
+    
     footer .row-soc {
-        width: 167.99px;
+        width: 52.4975vw;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
-        margin-bottom: 30px;
+        margin-bottom: 9.375vw;
     }
-
+    
     footer p {
         display: block;
         text-align: center;
         font-weight: 400;
-        font-size: 12px;
+        font-size: 3.75vw;
         line-height: 120%;
     }
-
+    
     footer nav ul li {
         display: none;
     }
-
+    
     footer nav ul li:first-child span {
         display: none;
     }
-
+    
     footer nav ul li:first-child {
         display: block;
         width: 100%;
     }
-
+    
     footer nav ul li:first-child a {
         color: #D6BFFF;
-        font-size: 14px;
+        font-size: 4.375vw;
         line-height: 120%;
         display: block;
         text-align: center;
     }
-
+    footer .row-soc a img{
+        height: 7.5vw;
+    }
     footer .row-ref a {
         font-weight: 400;
-        font-size: 14px;
+        font-size: 4.375vw;
         line-height: 120%;
         display: block;
         text-align: center;
-        margin: 20px 0px;
+        margin: 6.25vw 0vw;
         color: #FFFFFF;
     }
-
+    
     footer .row-ref a:last-child {
         font-weight: 400;
-        font-size: 12px;
+        font-size: 3.75vw;
         line-height: 120%;
         color: #FFFFFF;
         opacity: 0.3;
     }
 
 
-
 }
 
-
-@media (min-width: 1000px) and (max-width: 1700px) {
-    #lowSection h2 {
-        font-size: 4vw;
-        line-height: 4.5vw;
-    }
-    #lowSection h3 { 
-        font-size: 2.5vw;
-        line-height: 3vw; 
-    }
-}
+ 

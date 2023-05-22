@@ -1,7 +1,7 @@
 header ul {
     display: grid;
-    grid-template-columns: 1fr auto auto auto;
-    padding: 35px 0px;
+    grid-template-columns: 1fr 0.5fr auto auto;
+    padding: 1.822vw 0px;
     align-items: center;
 }
 
@@ -15,31 +15,31 @@ header ul li a {
 }
 
 header img.logo {
-    width: 144.55px;
-    height: 29.12px;
+    width: 7.528vw;
+    height: 1.516vw;
 }
 
 header .ref-soc img {
-    height: 28px;
-    margin: 0px 15px;
+    height: 1.458vw;
+    margin: 0px .781vw;
 }
 
 header .lang {
-    margin-left: 70px;
+    margin-left: 3.645;
 }
 
 header .lang svg {
     position: relative;
-    left: 6px;
-    top: 6px;
+    left: 0.3125vw;
+    top:0.3125vw;
 }
 
 header .lang span {
     font-family: 'Nekst';
     font-style: normal;
     font-weight: 400;
-    font-size: 22px;
-    line-height: 16px;
+    font-size: 1.1458vw;
+    line-height: 0.833vw;
 
     color: #000000;
 
@@ -52,23 +52,22 @@ header button {
 header .container {
     overflow: visible;
 }
-
 header button.login {
-    padding: 18px 50px;
+    padding: 0.9375vw 2.6041666666666665vw;
     width: auto;
-    height: 52px;
-    border: 1px solid #9657EC;
-    border-radius: 2px;
+    height: 2.7083333333333335vw;
+    border: 0.052083333333333336vw solid #9657EC;
+    border-radius: 0.10416666666666667vw;
     background-color: transparent;
     font-family: 'Nekst';
     font-style: normal;
     font-weight: 400;
-    font-size: 22px;
-    line-height: 15px;
-    margin-left: 50px;
+    font-size: 1.1458333333333333vw;
+    line-height: 0.78125vw;
+    margin-left: 2.6041666666666665vw;
     position: relative;
     z-index: 22;
-    margin-right: 40px;
+    margin-right: 2.0833333333333335vw;
     color: #9657EC;
     transition: 0.5s;
 }
@@ -82,8 +81,8 @@ header button.registr {
     font-family: 'Nekst';
     font-style: normal;
     font-weight: 400;
-    font-size: 22px;
-    line-height: 26px;
+    font-size: 1.1458333333333333vw;
+    line-height: 1.3541666666666667vw;
     display: flex;
     align-items: center;
     border: 0;
@@ -91,20 +90,16 @@ header button.registr {
     color: #000000;
 }
 
-
-
-
 header .lines-animations {
     position: absolute;
-    left: calc(50vw - 360px);
+    left: calc(50vw - 18.75vw);
 }
- 
 
- .modal.active {
+.modal.active {
     display: block;
 }
 
- .modal-bg {
+.modal-bg {
     display: block;
     position: fixed;
     left: 0;
@@ -112,39 +107,38 @@ header .lines-animations {
     width: 100%;
     height: 100%;
     background: #3B3A45;
-    opacity: 0.9; 
+    opacity: 0.9;
 }
-
- .modal {
-   /*  position: absolute; */
+.modal {
+    /* position: absolute; */
     z-index: 101;
-    padding: 77px 83px;
+    padding: 4.010416666666667vw 4.34375vw;
     background: #3B3A45;
-    border-radius: 5px;
+    border-radius: 0.2604166666666667vw;
     width: 100%;
-    max-width: 726px;
-
+    max-width: 37.6875vw;
     /* top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); */
 }
-.modal  h2 {
+
+.modal h2 {
     font-family: 'ALS Gorizont';
     font-style: normal;
     font-weight: 400;
-    font-size: 40px;
-    line-height: 51px;
+    font-size: 2.0833333333333335vw;
+    line-height: 2.6354166666666665vw;
     display: flex;
     align-items: center;
     color: #FFFFFF;
 }
- 
 
 .modal a {
     display: block;
     text-align: center;
-    margin-top: 70px;
+    margin-top: 3.6458333333333335vw;
 }
+
 .modal button:not(.login-ref) {
     background: #9657EC;
     width: 100%;
@@ -152,50 +146,54 @@ header .lines-animations {
     font-family: 'Nekst';
     font-style: normal;
     font-weight: 400;
-    font-size: 24px;
-    line-height: 29px;
+    font-size: 1.25vw;
+    line-height: 1.5104166666666667vw;
     color: #FFFFFF;
     display: block;
-    padding: 26px;
+    padding: 1.354vw;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 0.2604166666666667vw;
     opacity: 1;
 }
+
 .modal button {
     font-family: 'Nekst';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 1.0416666666666667vw;
+    line-height: 1.25vw;
     display: flex;
     align-items: center;
     color: #FFFFFF;
     opacity: 0.6;
     text-decoration: none;
-    margin-top: 35px;
-} 
+    margin-top: 1.8229166666666667vw;
+}
+
 .modal input {
-    height: 82px;
+    height: 4.270833333333333vw;
     width: 100%;
     text-align: center;
     background: #FFFFFF;
-    border-radius: 5px;
+    border-radius: 0.2604166666666667vw;
     border: 0;
     outline: none;
-    margin: 5px 0px; 
+    margin: 0.2604166666666667vw 0;
     font-family: 'Nekst';
     font-style: normal;
     font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
+    font-size: 1.0416666666666667vw;
+    line-height: 1.25vw;
     display: flex;
-    align-items: center; 
+    align-items: center;
 }
-.modal.reg{
-    padding: 50px 83px;
+
+.modal.reg {
+    padding: 2.6041666666666665vw 4.34375vw;
 }
-.modal.reg input{
-    height: 62px;
+
+.modal.reg input {
+    height: 3.2291666666666665vw;
 }
 
 .modal input::placeholder {
@@ -206,18 +204,19 @@ header .logIn {
     position: relative;
     z-index: 41;
 }
-header span.select-lang{
+
+header span.select-lang {
     position: relative;
     z-index: 2;
 }
-header  .lang .select {
-    width: 94px;
-    left: calc(50% - 22px );
+
+header .lang .select {
+    width: 4.895833333333333vw;
+    left: calc(50% - 2.9vw);
     text-align: center;
-    padding-top: 61px;
+    padding-top: 3.1770833333333335vw;
     top: 0px;
 }
- 
 
 header .logIn.active .select-login {
     display: block;
@@ -227,70 +226,72 @@ header .logIn.active .select-login {
 header .logIn .select-login {
     position: absolute;
     width: 100%;
-    left: calc(50% - 102px);
-    top: -15px;
-    max-width: 213px;
-    height: 227px;
-    border: 1px solid #9657EC;
-    border-radius: 2px;
+    left: calc(50% - 5.3125vw);
+    top: -0.78125vw;
+    max-width: 10.989583333333334vw;
+    height: 11.927083333333334vw;
+    border: 0.052083333333333336vw solid #9657EC;
+    border-radius: 0.10416666666666667vw;
     z-index: 20;
     background: white;
 }
 
 header .logIn button:not(.login):nth-child(1) {
-    margin-top: 90px;
+    margin-top: 4.6875vw;
 }
 
 header .logIn button:not(.login) {
-    height: 52px;
+    height: 2.7083333333333335vw;
     background: #3B3A45;
-    border-radius: 3px;
+    border-radius: 0.15625vw;
     font-family: 'Nekst';
     font-style: normal;
     font-weight: 400;
-    font-size: 18px;
-    line-height: 16px;
+    font-size: 1.0416666666666667vw;
+    line-height: 0.9375vw;
     text-align: center;
     color: #FFFFFF;
     width: 100%;
-    max-width: 167px;
+    max-width: 8.75vw;
     display: block;
-    margin: 15px auto;
+    margin: 0.78125vw auto;
     cursor: pointer;
 }
-
 header ul li.user {
     display: none;
 }
-header .enter{
-   display: none;
-}
-header .enter.active{
-    display: block;
-}
 
-.modal-contant button.hiden{
+header .enter {
     display: none;
 }
 
-.modal-contant .back{ 
+header .enter.active {
+    display: block;
+}
+
+.modal-contant button.hiden {
+    display: none;
+}
+
+.modal-contant .back {
     background-color: transparent;
     color: #3B3A45;
     opacity: 0.6;
     width: fit-content;
     padding: 0;
     margin: 0 auto;
-    margin-top: 14px;
-    border-bottom: 1px solid #3B3A45;
+    margin-top: 0.7291666666666666vw;
+    border-bottom: 0.052083333333333336vw solid #3B3A45;
     border-radius: 0;
 }
-header{
+
+header {
     position: relative;
 }
-/*!header*/
+
 /*welcom*/
 #welcom {
-    padding-bottom: 50px;
+    padding-bottom: 2.6041666666666665vw;
     position: relative;
     height: 100%;
     min-height: 100vh;
@@ -302,7 +303,7 @@ header{
 #welcom .welcom-cont {
     display: grid;
     grid-template-columns: 1fr 0.8fr;
-    /*  grid-gap: 100px; */
+    grid-gap: 5.208vw;
 }
 
 #welcom .welcom-cont .left {
@@ -316,38 +317,40 @@ header{
     font-family: 'ALS Gorizont';
     font-style: normal;
     font-weight: 400;
-    font-size: 54px;
-    line-height: 77px;
-    height: 280px;
+    font-size: 2.8125vw;
+    line-height: 4.010416666666667vw;
+    height: 14.583333333333334vw;
     display: flex;
     color: #000000;
 }
 
 #welcom h4 {
-    margin-top: 60px;
-    margin-bottom: 20px;
+    margin-top: 3.125vw;
+    margin-bottom: 1.0416666666666667vw;
 }
 
-#welcom h4.title{
+#welcom h4.title {
     display: flex;
 }
-#welcom h4.title img{
+
+#welcom h4.title img {
     top: 0;
-    margin-right: 15px;
+    margin-right: 0.78125vw;
 }
+
 #welcom h4 img {
-    width: 38px;
-    height: 38px;
+    width: 1.9791666666666667vw;
+    height: 1.9791666666666667vw;
     position: relative;
-    top: 11px;
+    top: 0.5729166666666666vw;
 }
 
 #welcom h4 span {
     font-family: 'ALS Gorizont';
     font-style: normal;
     font-weight: 400;
-    font-size: 24px;
-    line-height: 31px;
+    font-size: 1.25vw;
+    line-height: 1.6302083333333333vw;
     color: #000000;
 }
 
@@ -355,25 +358,25 @@ header{
     font-family: 'Nekst';
     font-style: normal;
     font-weight: 400;
-    font-size: 22px;
-    line-height: 35px;
+    font-size: 1.1458333333333333vw;
+    line-height: 1.8229166666666667vw;
     display: flex;
     align-items: center;
     color: #000000;
     opacity: 0.7;
-    max-width: 760px;
+    max-width: 39.791666666666664vw;
 }
 
 #welcom button {
-    margin: 30px 0px;
-    border: 1px solid #9657EC;
-    border-radius: 2px;
+    margin: 1.5625vw 0px;
+    border: 0.052083333333333336vw solid #9657EC;
+    border-radius: 0.10416666666666667vw;
     font-family: 'Nekst';
     font-style: normal;
     font-weight: 400;
-    font-size: 22px;
-    padding: 22px 55px;
-    line-height: 16px;
+    font-size: 1.1458333333333333vw;
+    padding: 1.8229166666666667vw 4.427083333333333vw;
+    line-height: 0.8333333333333334vw;
     background-color: transparent;
     display: flex;
     align-items: center;
@@ -389,7 +392,7 @@ header{
 
 #welcom .save-prog p {
     display: flex;
-    gap: 15px;
+    gap: 0.78125vw;
     width: fit-content;
 }
 
@@ -397,27 +400,23 @@ header{
     font-family: 'Nekst';
     font-style: normal;
     font-weight: 400;
-    font-size: 22px;
-    line-height: 26px;
+    font-size: 1.1458333333333333vw;
+    line-height: 1.3541666666666667vw;
     display: flex;
     align-items: center;
-
     color: #3B3A45;
-
     opacity: 0.4;
 }
 
 #welcom .scroll {
-    margin-top: 60px;
+    margin-top: 3.125vw;
     width: fit-content;
 }
 
 #welcom .scroll img {
-    animation: jump .6s infinite;
+    animation: jump 0.6s infinite;
 }
-
 @keyframes jump {
-
     0%,
     20%,
     50%,
@@ -425,11 +424,9 @@ header{
     100% {
         transform: translateY(0);
     }
-
     40% {
         transform: translateY(-10px);
     }
-
     60% {
         transform: translateY(-5px);
     }
@@ -439,20 +436,19 @@ header{
     font-family: 'ALS Gorizont';
     font-style: normal;
     font-weight: 400;
-    font-size: 22px;
-    line-height: 28px;
+    font-size: 1.25vw;
+    line-height: 1.5625vw;
     display: flex;
     color: #9657EC;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 0.5208333333333334vw;
 }
 
 #welcom .scroll img {
-    height: 12px;
+    height: 0.625vw;
     margin: 0 auto;
-    width: 32px;
+    width: 2.1875vw;
     display: block;
-
 }
 
 #welcom .ref-soc {
@@ -467,13 +463,11 @@ header{
     transform: rotate(-180deg);
 }
 
-
-
 #welcom .welcom-cont .right .contant {
     width: 100%;
     height: 100%;
-    max-height: 840px;
-    max-width: 672px;
+    max-height: 70vw;
+    max-width: 56vw;
     background-image: url(../images/img/welcom/bgImg.jpg);
     background-repeat: no-repeat;
     background-position: center;
@@ -484,165 +478,211 @@ header{
 }
 
 #welcom .welcom-cont .right .contant .btn {
-    background-color: white;
-    padding: 26px;
-    width: fit-content;
+    background-color: white; 
+    width: -moz-fit-content;
+    width: 100%;
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
+#welcom .welcom-cont .right .contant .btn img{
+    display: block;
+    margin: 0 auto;
+    width: 1.666vw;
+}
 #welcom .welcom-cont .right .contant .btn.hide {
     opacity: 0;
 }
+.modal.reg  .transition-all{
+    filter: brightness(0) invert(1);
+}
 
-
-
-
+.modal.reg .select-title{
+    padding: .825vw;
+}
+.modal.reg .select-title span  {
+    font-size: 0.833vw;
+    line-height: 0.833vw;
+}
 
 @media only screen and (max-width: 1000px) {
     .lines-animations {
         display: none;
     }
-
+    
     .container {
-        padding: 0px 15px;
+        padding: 0 4.6875vw; /* (значение px / 320) * 100 */
     }
-
+    
     #welcom .welcom-cont {
         display: block;
     }
-
+    
     #welcom { 
         align-items: start;
         min-height: auto;
     }
-
+    
     #welcom .welcom-cont .right .contant {
         height: auto;
         margin: 0 auto;
-        height: 355px;
+        height: 110.9375vw;
         width: 100%;
+        max-width: 90vw;
     }
-
+    
     #welcom .welcom-cont .right .contant .btn {
         display: none;
     }
-
+    
     #welcom .ref-soc {
         display: flex;
         margin: 0 auto;
-        margin: 70px auto 37px auto;
-        max-width: 163px;
+        margin: 21.875vw auto 11.5625vw auto; /* (значение px / 320) * 100 */
+        max-width: 51.25vw; /* (значение px / 320) * 100 */
     }
-
+    
     #welcom .ref-soc img {
-        height: 19px;
+        height: 5.9375vw; /* (значение px / 320) * 100 */
     }
-
+    
     #welcom h1 {
-        font-size: 20px;
-        line-height: 24px;
-        height: 110px;
+        font-size: 6.25vw; /* (значение px / 320) * 100 */
+        line-height: 7.5vw; /* (значение px / 320) * 100 */
+        height: 34.375vw; /* (значение px / 320) * 100 */
     }
-
+    
     #welcom h4 img {
-        width: 22px;
-        height: 22px;
-        top: 6px;
+        width: 6.875vw; /* (значение px / 320) * 100 */
+        height: 6.875vw; /* (значение px / 320) * 100 */
+        top: 1.875vw; /* (значение px / 320) * 100 */
     }
-
+    
     #welcom h4 span {
-        font-size: 14px;
-        line-height: 14px;
+        font-size: 4.375vw; /* (значение px / 320) * 100 */
+        line-height: 4.375vw; /* (значение px / 320) * 100 */
     }
-
+    
     #welcom button {
-        font-size: 14px;
-        line-height: 16px;
-        padding: 10px 23px;
+        font-size: 4.375vw;
+        line-height: 5vw;
+        padding: 3.125vw 7.1875vw;
+        margin-bottom: 5.31vw;
     }
-
+    
     #welcom .save-prog span {
-        font-size: 14px;
-        line-height: 17px;
+        font-size: 4.375vw; /* (значение px / 320) * 100 */
+        line-height: 5.3125vw; /* (значение px / 320) * 100 */
     }
-
+    
     #welcom .save-prog img {
-        width: 18px;
+        width: 5.625vw;
+        margin-left: 4.68vw;
     }
-
+    
     #welcom p {
-        font-size: 13px;
+        font-size: 4.0625vw;
         line-height: 160.5%;
+        max-width: none;
+        margin-bottom: 5.3125vw;
     }
-
+    header img.logo {
+        width: 30.8vw;
+        height: auto;
+    }
+    #welcom h4 {
+        margin-top: 18.75vw;
+        margin-bottom: 4.0416666666666667vw;
+    }
+    header ul li.user img{
+        width: 100%;
+    }
     #welcom .scroll {
         display: none;
     }
-
-
-
+    
     header ul li.btns {
         display: none;
     }
-
+    
     header ul li.ref-soc {
         display: none;
     }
-
+    
     header .lang span {
-        font-size: 14px;
-        line-height: 16px;
+        font-size: 4.375vw; /* (значение px / 320) * 100 */
+        line-height: 5vw; /* (значение px / 320) * 100 */
     }
+    
     header .lang {
-        margin-right: 28px;
+        margin-right: 8.75vw; /* (значение px / 320) * 100 */
+        margin-left: auto;
+        padding-top: 3vw;
     }
-
+    
     header ul li.user {
         display: block;
-        width: 22px;
-        height: 22px;
+        width: 6.875vw; /* (значение px / 320) * 100 */
+        height: 6.875vw; /* (значение px / 320) * 100 */
     }
-
-    .modal{
-        padding: 23px;
-        width: calc(100% - 80px);
+    
+    .modal {
+        padding: 7.1875vw;
+        width: calc(100% - 25vw);
+        max-width: none;
     }
-    .modal.lodinn-btns .modal-contant{
+    
+    .modal.lodinn-btns .modal-contant {
         background: white;
         display: flex;
         align-content: center;
         flex-direction: column;
-        gap: 15px;
-        
+        gap: 4.6875vw; /* (значение px / 320) * 100 */
     }
+    
     .modal button {
-        font-size: 16px;
-        padding: 13px;
-        line-height: 16px;
+        font-size: 3.75vw;
+        padding: 4.0625vw;
+        line-height: 5vw;
     }
+    
     .modal h2 { 
         text-align: center;
-        font-size: 25px;
-        line-height: 30px; 
+        font-size: 6.25vw;
+        line-height: 8.125vw;
+        margin-bottom: 10vw;
     }
-     .modal input {
-        height: 38px;
-        margin: 0px 0px;
-        font-size: 16px;
-        line-height: 16px;
-        margin-bottom: -15px;
+    
+    .modal input {
+        height: 11.875vw;
+        margin: 0;
+        font-size: 3.75vw;
+        line-height: 4.375vw;
+        margin-bottom: -4.6875vw;
     }
-     .modal a { 
+
+    .modal form div{
+        height: 11.875vw;
+        padding: 0;
+    }
+    .modal div.flex{
+        height: 11.875vw;
+        padding: 0;
+    }
+    .modal a { 
         font-weight: 400;
-        font-size: 16px;
-        line-height: 16px; 
+        font-size: 5vw; /* (значение px / 320) * 100 */
+        line-height: 5vw; /* (значение px / 320) * 100 */
     }
-     .modala {
+    
+    .modala {
         display: block;
         text-align: center;
-        margin-top: 50px;
+        margin-top: 15.625vw; /* (значение px / 320) * 100 */
     }
+    
     .modal button:not(.login-ref) {
         background: #9657EC;
         width: 100%;
@@ -650,71 +690,49 @@ header{
         font-family: 'Nekst';
         font-style: normal;
         font-weight: 400;
-        font-size: 14px;
-        line-height: 29px;
+        font-size: 4.375vw; /* (значение px / 320) * 100 */
+        line-height: 8.125vw; /* (значение px / 320) * 100 */
         color: #FFFFFF;
         display: block;
-        padding: 6px;
+        padding: 1.875vw; /* (значение px / 320) * 100 */
         text-align: center;
-        border-radius: 5px;
+        border-radius: 1.5625vw; /* (значение px / 320) * 100 */
         opacity: 1;
-        margin-top: 0px;
+        margin-top: 0;
     }
+    
     header .lang .select {
-        width: 44px;
-        left: calc(50% - 15px );
+        width: 13.75vw; /* (значение px / 320) * 100 */
+        left: calc(50% - 4.6875vw);
         text-align: center;
-        padding-top: 43px;
-        top: 0px;
+        padding-top: 13.4375vw; /* (значение px / 320) * 100 */
+        top: 0;
     }
+    
     header ul { 
-        grid-template-columns: 105px 1fr auto; 
+        grid-template-columns: 32.8125vw 1fr auto; /* (значение px / 320) * 100 */
     }
+    
     header .lang {
         margin-left: auto;
     }
-}
-
-@media  (min-width: 1000px) and (max-width: 1700px) {
-    #welcom .welcom-cont { 
-        grid-template-columns: 55vw 38vw;
-        width: 100%;
+    .modal.reg {
+        padding: 8.75vw;
     }
-    #welcom .welcom-cont .right .contant .btn { 
-        padding: 30%;
+    .modal.reg input {
+        height: 9.87vw;
     }
-
-    .container {
-        margin: 0 auto;
-        padding: 0px 50px;
-        overflow: hidden;
+    .modal.reg .select {
+        height: auto;
     }
-    #welcom h1 { 
-        font-size: 2.6vw;
+    .modal.reg .select-title{
+        padding: 3.75vw;
+    }
+    .modal.reg .select-title span  {
+        font-size: 3vw;
         line-height: 3vw;
-        height: 11vw;
-        display: flex;
-        color: #000000;
-    }
-    #welcom p{
-        font-size: 1.6vw;
-        line-height: 2.4vw;
-    }
-    #welcom .welcom-cont .right{
-       overflow: hidden;
-    }
-
-
-
-
-    
-}
-
-
-@media  (max-width: 1200px) {
-    header .lines-animations{
-        display: none;
     }
 }
+ 
 
 /*!welcom*/

@@ -8,9 +8,9 @@ body.fix{
     overflow: hidden;
 }
 
-.container { 
+.container {
     margin: 0 auto;
-    padding: 0px 100px;
+    padding: 0px 5.208vw;
     overflow: hidden;
 }
 
@@ -19,9 +19,9 @@ body.fix{
 }
 
 .lines-animations .line {
-    height: 187px;
-    width: 2px;
-    margin-right: 11px;
+    height: 9.739vw;
+    width: 0.104vw;
+    margin-right: 0.572vw;
     background: #9657EC;
 
 
@@ -41,44 +41,44 @@ body.fix{
 
 @keyframes change-lines-animations1 {
     0% {
-        height: 187px;
+        height: 9.739vw;
     }
 
     50% {
-        height: 100px;
+        height: 5.208vw;
     }
 
     100% {
-        height: 187px;
+        height: 9.739vw;
     }
 }
 
 @keyframes change-lines-animations2 {
     0% {
-        height: 187px;
+        height: 9.739vw;
     }
 
     50% {
-        height: 150px;
+        height: 5.208vw;
     }
 
     100% {
-        height: 187px;
+        height: 9.739vw;
     }
 }
 
 @keyframes change-lines-animations3 {
     0% {
-        height: 100px;
+        height: 5.208vw;
 
     }
 
     50% {
-        height: 187px;
+        height: 9.739vw;
     }
 
     100% {
-        height: 100px;
+        height: 5.208vw;
     }
 }
 
