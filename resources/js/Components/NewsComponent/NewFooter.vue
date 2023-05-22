@@ -9,16 +9,16 @@
           {{ language.main[63] }}
         </p>
         <div class="row-soc">
-          <a href="#">
+          <a href="wa.me/+905442258559">
             <img src="images/img/footer/s1.png" alt="" srcset="">
           </a>
-          <a href="#">
+          <a href="https://m.facebook.com/people/EVON/100092335686616/">
             <img src="images/img/footer/s2.png" alt="" srcset="">
           </a>
-          <a href="#">
+          <a href="https://t.me/evon_real_estate">
             <img src="images/img/footer/s3.png" alt="" srcset="">
           </a>
-          <a href="#">
+          <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA==">
             <img src="images/img/footer/s4.png" alt="" srcset="">
           </a>
         </div>
@@ -52,8 +52,8 @@
         {{ language.main[64] }}
       </p>
       <div class="row-ref">
-        <a href="#">{{ language.main[65] }}</a>
-        <a href="#">{{ language.main[66] }}</a>
+        <a href="https://evon-tr.com/privacy">{{ language.main[65] }}</a>
+        <a href="https://evon-tr.com/agree">{{ language.main[66] }}</a>
         <a href="#">VERGI NO <span>3830916930</span></a>
       </div>
     </div>

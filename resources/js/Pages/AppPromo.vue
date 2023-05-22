@@ -45,16 +45,18 @@ import '../../../public/styles/ForRealtors.css'
           <div class="save-prog">
             <p>
               <span>{{ language.main[30] }}</span>
-              <img src="images/img/welcom/apl.png" alt="" srcset="">
-              <img src="images/img/welcom/andr.png" alt="" srcset="">
+              <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew&pli=1" class="flex gap-[1vw]">
+                <img src="images/img/welcom/apl.png" alt="" srcset="">
+                <img src="images/img/welcom/andr.png" alt="" srcset="">
+              </a> 
             </p>
           </div>
 
           <div class="ref-soc">
-            <a href="#"><img src="images/img/header/s1.png" alt="" srcset=""></a>
-            <a href="#"><img src="images/img/header/s2.png" alt="" srcset=""></a>
-            <a href="#"><img src="images/img/header/s3.png" alt="" srcset=""></a>
-            <a href="#"><img src="images/img/header/s4.png" alt="" srcset=""></a>
+            <a href="wa.me/+905442258559"><img src="images/img/header/s1.png" alt="" srcset=""></a>
+            <a href="https://m.facebook.com/people/EVON/100092335686616/"><img src="images/img/header/s2.png" alt="" srcset=""></a>
+            <a href="https://t.me/evon_real_estate"><img src="images/img/header/s3.png" alt="" srcset=""></a>
+            <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA=="><img src="images/img/header/s4.png" alt="" srcset=""></a>
           </div>
 
           <h4 class="scroll">
@@ -304,8 +306,9 @@ import '../../../public/styles/ForRealtors.css'
       <h3>{{ language.main[62] }}</h3>
 
       <div class="row-soc">
-        <a href="#"><img src="images/img/lowSection/andr.png" alt="" srcset=""></a>
-        <a href="#"><img src="images/img/lowSection/apl.png" alt="" srcset=""></a>
+        
+        <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew&pli=1"><img src="images/img/lowSection/andr.png" alt="" srcset=""></a>
+        <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew&pli=1"><img src="images/img/lowSection/apl.png" alt="" srcset=""></a>
       </div>
 
 

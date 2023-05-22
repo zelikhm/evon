@@ -20,9 +20,9 @@
           </li>
           <li class="ref-soc">
             <a href="wa.me/+905442258559"><img src="images/img/header/s1.png" alt="" srcset=""></a>
-            <a href="https://t.me/evon_real_estate"><img src="images/img/header/s2.png" alt="" srcset=""></a>
-            <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA=="><img src="images/img/header/s3.png" alt="" srcset=""></a>
-            <a href="https://m.facebook.com/people/EVON/100092335686616/"><img src="images/img/header/s4.png" alt="" srcset=""></a>
+            <a href="https://m.facebook.com/people/EVON/100092335686616/"><img src="images/img/header/s2.png" alt="" srcset=""></a>
+            <a href="https://t.me/evon_real_estate"><img src="images/img/header/s3.png" alt="" srcset=""></a>
+            <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA=="><img src="images/img/header/s4.png" alt="" srcset=""></a>  
           </li>
           <li class="lang">
             <change-language @selectLanguage="selectLanguage" :selectLang="selectLang"/>
