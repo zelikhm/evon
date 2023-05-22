@@ -152,7 +152,7 @@
       <form @submit.prevent="submit" >
         <div
           class="flex flex-col  xxl:pb-4 xl:pb-3 mb-[30px] xxl:mb-6 xl:mb-5  rounded-[6px]">
-          <!-- 
+          <!--
             mb-8 p-5 border border-solid border-[#E5DFEE]
             <label for="email" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]"
                  :class="{'error': form.errors.email}">Email \ Login {{ form.errors.email }}</label> -->
@@ -164,7 +164,7 @@
         </div>
         <div
           class="flex flex-col xxl:pb-4 xl:pb-3 mb-[30px]  xxl:mb-6 xl:mb-5 rounded-[6px]">
-          <!-- mb-8  p-5 border border-solid border-[#E5DFEE] 
+          <!-- mb-8  p-5 border border-solid border-[#E5DFEE]
             <label for="password" class="text-sm xxl:text-xs xl:text-[10px] text-[#8A8996]"
                  :class="{ 'error': form.errors.password }">{{ language.po_v_r[9] }} {{ form.errors.password }}</label> -->
           <div class="relative">

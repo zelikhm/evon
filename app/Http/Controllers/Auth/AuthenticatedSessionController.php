@@ -99,7 +99,7 @@ class AuthenticatedSessionController extends Controller
       'email' => ['required', 'max:50', 'exists:App\Models\User,email'],
     ]);
 
-    $user = User::where('email', $request->email)
+    $user = User::where('email', 'LIKE', '%' . $request->email . '%')
       ->where('role', 0)
       ->first();
 
