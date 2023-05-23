@@ -217,7 +217,28 @@ footer .row-ref a span {
 footer .mobile-contant {
     display: none;
 }
+#lowSection button.reg-btn {
+    margin: 5vw auto 10vw;
+    border: 0.052083333333333336vw solid #9657EC;
+    border-radius: 0.10416666666666667vw;
+    font-family: 'Nekst';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.1458333333333333vw;
+    padding: 1.2229166666666667vw 4.427083333333333vw;
+    line-height: 0.8333333333333334vw;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    transition: 0.5s;
+    color: #9657EC;
+    cursor: pointer;
+}
 
+#lowSection button.reg-btn:hover {
+    background-color: #9657EC;
+    color: white;
+}
 @media only screen and (max-width:1000px) {
 
 
@@ -226,6 +247,7 @@ footer .mobile-contant {
         font-size: 6.5vw;
         line-height: 9vw;
         margin-top: 25vw;
+        max-width: none;
     }
     
     #lowSection h3 {
@@ -280,7 +302,13 @@ footer .mobile-contant {
         display: block;
         padding-top: 7.8125vw;
     }
-    
+    #lowSection button.reg-btn {
+        font-size: 4.375vw;
+        line-height: 5vw;
+        padding: 3.125vw 7.1875vw;
+        margin-bottom: 9.31vw;
+        margin-top: 12vw;
+    }
     footer .mobile-contant p {
         font-weight: 400;
         font-size: 3.75vw;

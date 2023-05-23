@@ -195,11 +195,23 @@ header .lines-animations {
 .modal.reg input {
     height: 3.2291666666666665vw;
 }
-
+.modal.choise{
+   padding: 5.8vw;
+   background: #FFFFFF;
+   border: .3125vw solid #9657EC;
+   border-radius: 1.56vw;
+}
 .modal input::placeholder {
     color: #9657EC;
 }
-
+.modal.choise .btns{
+    display: flex; 
+    gap: 5vw;
+    flex-direction: column;
+}
+.modal.choise .btns button:last-child{
+    margin-bottom: 0;
+}
 header .logIn {
     position: relative;
     z-index: 41;

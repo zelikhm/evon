@@ -346,6 +346,11 @@
         right: -2vw;
         bottom: -6vw;
     }
+    #ForRealtors .slide:nth-child(5) sub {
+        font-size: 3.35vw;
+        margin-right: 1.25vw;
+        max-width: 32vw;
+    }
     #ForRealtors .cont .right{
         height: 100vw;
     } 

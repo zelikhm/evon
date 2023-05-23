@@ -19,17 +19,27 @@ import '../../../public/styles/ForRealtors.css'
     @open-modal-realtor="openModalRealtor" @open-modal-developer="openModalDeveloper" :language="language"
     :selectLanguage="selectLanguage" />
 
-  <app-modal-register
-    :oLoginRegister="openRegister"
-    @close-modal="closeModalRegister"
-    :language="language"
+  <app-modal-register :oLoginRegister="openRegister" @close-modal="closeModalRegister" :language="language"
     :selectLanguage="selectLanguage" />
 
   <new-header @login-realtor="openLoginRealtor = !openLoginRealtor"
-              @login-developer="openLoginDeveloper = !openLoginDeveloper"
-    @open-register="openRegister = !openRegister" @selectLanguage="choseLanguage" :user_info="userInfo"
-    :language="language"></new-header>
+    @login-developer="openLoginDeveloper = !openLoginDeveloper" @open-register="openRegister = !openRegister"
+    @open-modal-choise="mobileModal=!mobileModal"
+    @selectLanguage="choseLanguage" :user_info="userInfo" :language="language"></new-header>
 
+
+  <div v-if="mobileModal" class="fixed z-[100] w-full h-full flex items-center justify-center">
+    <div
+      class=" modal choise relative bg-white rounded-[12px] p-10   z-50 w-[30%] lg:w-[48%] md:w-[60%] sm:w-[90%] h-fit">
+      <div class="relative   ">
+        <div class="btns">
+          <button class="login" v-on:click="openLoginRealtor = !openLoginRealtor , mobileModal=!mobileModal">Войти</button>
+          <button class="registr" v-on:click="openRegister = !openRegister, mobileModal=!mobileModal">Зарегистрироваться</button>
+        </div>
+      </div>
+    </div>
+    <div @click="mobileModal=!mobileModal" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
+  </div>
   <!--welcom-->
   <section id="welcom">
     <div class="container">
@@ -48,15 +58,17 @@ import '../../../public/styles/ForRealtors.css'
               <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew&pli=1" class="flex gap-[1vw]">
                 <img src="images/img/welcom/apl.png" alt="" srcset="">
                 <img src="images/img/welcom/andr.png" alt="" srcset="">
-              </a> 
+              </a>
             </p>
           </div>
 
           <div class="ref-soc">
             <a href="wa.me/+905442258559"><img src="images/img/header/s1.png" alt="" srcset=""></a>
-            <a href="https://m.facebook.com/people/EVON/100092335686616/"><img src="images/img/header/s2.png" alt="" srcset=""></a>
+            <a href="https://m.facebook.com/people/EVON/100092335686616/"><img src="images/img/header/s2.png" alt=""
+                srcset=""></a>
             <a href="https://t.me/evon_real_estate"><img src="images/img/header/s3.png" alt="" srcset=""></a>
-            <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA=="><img src="images/img/header/s4.png" alt="" srcset=""></a>
+            <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA=="><img src="images/img/header/s4.png"
+                alt="" srcset=""></a>
           </div>
 
           <h4 class="scroll">
@@ -155,8 +167,8 @@ import '../../../public/styles/ForRealtors.css'
 
 
       <div class="cont" @mousedown="handleMouseDown" @mouseleave="handleMouseLeave" @mouseup="handleMouseUp"
-    @mousemove="handleMouseMove" @touchstart="handleTouchStart" @touchend="handleTouchEnd"
-    @touchmove="handleTouchMove">
+        @mousemove="handleMouseMove" @touchstart="handleTouchStart" @touchend="handleTouchEnd"
+        @touchmove="handleTouchMove">
         <div class="left">
           <div class="slide" v-for="(slide, index) in slides"
             :class="['slide', `slide${step}`, { active: step === (index + 1) }]" :key="index">
@@ -168,8 +180,8 @@ import '../../../public/styles/ForRealtors.css'
               <h5>{{ slide.infoTitle }}</h5>
               <em>
                 <sub v-if="index < 1 || index > 4">{{ language.main[41] }}</sub>
-                <span v-if="index!=4">{{ slide.infoCount ?? slide.infoBtn }}</span>
-                <sub v-if="index===4">{{ slide.infoBtn }}</sub>
+                <span v-if="index != 4">{{ slide.infoCount ?? slide.infoBtn }}</span>
+                <sub v-if="index === 4">{{ slide.infoBtn }}</sub>
                 <img v-if="index == 2" src="images/img/forRealtors/Mask.png" alt="" srcset="">
                 <img v-if="index == 4" src="images/img/forRealtors/cl.png" alt="" srcset="">
               </em>
@@ -301,14 +313,17 @@ import '../../../public/styles/ForRealtors.css'
       </div>
 
       <h2 v-html="language.main[67]"></h2>
-      <button v-on:click="openLoginDeveloper = !openLoginDeveloper"><span>{{ language.main[61] }}</span> <img
-          src="images/img/lowSection/arrow.png" alt="" srcset=""></button>
+      <button class="reg-btn" v-on:click="openRegister = !openRegister">{{ language.main[22] }}</button>
+      <!--  <button v-on:click="openLoginDeveloper = !openLoginDeveloper"><span>{{ language.main[61] }}</span> <img
+          src="images/img/lowSection/arrow.png" alt="" srcset=""></button> -->
       <h3>{{ language.main[62] }}</h3>
 
       <div class="row-soc">
-        
-        <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew&pli=1"><img src="images/img/lowSection/andr.png" alt="" srcset=""></a>
-        <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew&pli=1"><img src="images/img/lowSection/apl.png" alt="" srcset=""></a>
+
+        <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew&pli=1"><img
+            src="images/img/lowSection/andr.png" alt="" srcset=""></a>
+        <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew&pli=1"><img
+            src="images/img/lowSection/apl.png" alt="" srcset=""></a>
       </div>
 
 
@@ -371,6 +386,7 @@ export default {
       language: this.$ru,
       selectLanguage: 0,
       user: [],
+      mobileModal:false,
 
 
       isMouseDown: false,
