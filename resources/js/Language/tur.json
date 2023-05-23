@@ -88,7 +88,9 @@
     "7": "Gizlilik Politikası",
     "8": "Giriş",
     "9": "Şifre",
-    "10": "emlakçı olarak giriş yap"
+    "10": "emlakçı olarak giriş yap",
+    "11": "emlakçı olarak giriş yap",
+    "12": "geliştirici olarak giriş yapmak"
   },
   "menu_zastr": {
     "0": "Tesisler",

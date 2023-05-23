@@ -33,14 +33,14 @@ import '../../../public/styles/ForRealtors.css'
       class=" modal choise relative bg-white rounded-[12px] p-10   z-50 w-[30%] lg:w-[48%] md:w-[60%] sm:w-[90%] h-fit">
       <div class="relative   ">
         <div class="btns">
-          <button class="login" v-on:click="openLoginRealtor = !openLoginRealtor , mobileModal=!mobileModal">Войти</button>
-          <button class="registr" v-on:click="openRegister = !openRegister, mobileModal=!mobileModal">Зарегистрироваться</button>
+          <button class="login" v-on:click="openLoginRealtor = !openLoginRealtor , mobileModal=!mobileModal">{{ language.main[21] }}</button>
+          <button class="registr" v-on:click="openRegister = !openRegister, mobileModal=!mobileModal">{{ language.main[22] }}</button>
         </div>
       </div>
     </div>
     <div @click="mobileModal=!mobileModal" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
   </div>
-  <!--welcom-->
+  <!--welcom--> 
   <section id="welcom">
     <div class="container">
       <div class="welcom-cont">

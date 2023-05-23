@@ -33,8 +33,8 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
             <div class="logIn">
               <button class="login" @click="openLogIn = !openLogIn">{{ language.main[61] }}</button>
               <div class="select-login" v-if="openLogIn === true">
-                <button @click="$emit('login-realtor'), openLogIn = false">Как риэлтор</button>
-                <button @click="$emit('login-developer'), openLogIn = false">Как застройщик</button>
+                <button @click="$emit('login-realtor'), openLogIn = false">{{ language.po_v_r[11] }}</button>
+                <button @click="$emit('login-developer'), openLogIn = false">{{ language.po_v_r[12] }}</button>
               </div>
             </div>
             <button class="registr" @click="$emit('open-register')">{{ language.main[22] }}</button>
