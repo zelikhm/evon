@@ -20,7 +20,7 @@ class Controller extends BaseController
     public function main() {
 
       if(Auth::check()) {
-        return redirect('/profile');
+        return redirect('/houses');
       }
 
       return Inertia::render('AppPromo', [
@@ -35,7 +35,7 @@ class Controller extends BaseController
     public function promo() {
 
       if(Auth::check()) {
-        return redirect('/profile');
+        return redirect('/houses');
       }
 
       return Inertia::render('AppPromo', [
