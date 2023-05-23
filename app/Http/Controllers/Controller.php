@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class Controller extends BaseController
@@ -17,6 +18,10 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, MainInfo;
 
     public function main() {
+
+      if(Auth::check()) {
+        return redirect('/profile');
+      }
 
       return Inertia::render('AppPromo', [
         'userInfo' => $this->getUser(),
@@ -28,6 +33,10 @@ class Controller extends BaseController
     }
 
     public function promo() {
+
+      if(Auth::check()) {
+        return redirect('/profile');
+      }
 
       return Inertia::render('AppPromo', [
         'userInfo' => $this->getUser(),
