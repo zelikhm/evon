@@ -35,8 +35,13 @@
 <script>
 export default {
   name: "ChangeLanguage",
-  props: {
+  props: { 
     selectLang: 0,
+    user_info: {
+      type: Object,
+      required: false,
+      default: null,
+    },
     tabindex: {
       type: Number,
       required: false,
@@ -63,12 +68,13 @@ export default {
 
     },
   },
-  created() {
-    if (this.selectLang === 0) {
+  created() { 
+  
+    if (this.user_info.lang === 0) {
       this.langSelected = 'ru'
-    } else if (this.selectLang === 1) {
+    } else if (this.user_info.lang === 1) {
       this.langSelected = 'en'
-    } else if (this.selectLang === 2) {
+    } else if (this.user_info.lang === 2) {
       this.langSelected = 'tr'
     }
 

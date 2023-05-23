@@ -95,8 +95,20 @@
     height: 7.13541667vw;
     display: block;
     margin: 0 auto;
+    animation: move 4s infinite;
+    
+} 
+@keyframes move {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-4vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
-
 #ForRealtors .cont .right .tools p {
     font-family: 'Nekst';
     font-style: normal;
@@ -360,7 +372,19 @@
     #ForRealtors .cont .right .tools img.tool {
         width: 26vw;
         height: 26vw; 
+        animation: move2 4s infinite;
     }
+    @keyframes move2 {
+        0% {
+          transform: translateX(0);
+        }
+        50% {
+          transform: translateX(-13vw);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
     #ForRealtors .cont .right .tools {
         position: absolute;
         right: calc(50% - 21vw);

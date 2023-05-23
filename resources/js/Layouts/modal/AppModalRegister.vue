@@ -92,7 +92,9 @@ const submit = () => {
         </div>
 
         <button type="submit" :class="{ 'opacity-25': form.processing }" :disabled="form.processing"
-          class="mt-2 login__btn--bg text-white w-full text-lg xxl:text-[15px] xl:text-xs mb-5 xxl:mb-4 xl:mb-3 p-5 xxl:p-4 xl:p-3 border border-solid border-[#E5DFEE] rounded-[6px]">Отправить</button>
+          class="mt-2 login__btn--bg text-white w-full text-lg xxl:text-[15px] xl:text-xs mb-5 xxl:mb-4 xl:mb-3 p-5 xxl:p-4 xl:p-3 border border-solid border-[#E5DFEE] rounded-[6px]">
+          {{ language.main[22] }}
+        </button>
       </form>
     </div>
     <div @click="closeModal" class="absolute bg-black opacity-50 h-full w-full z-40"></div>

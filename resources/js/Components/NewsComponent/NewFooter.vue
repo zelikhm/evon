@@ -9,16 +9,16 @@
           {{ language.main[63] }}
         </p>
         <div class="row-soc">
-          <a href="wa.me/+905442258559">
+          <a href="https://wa.me/+905442258559" target="_blank">
             <img src="images/img/footer/s1.png" alt="" srcset="">
           </a>
-          <a href="https://m.facebook.com/people/EVON/100092335686616/">
+          <a href="https://m.facebook.com/people/EVON/100092335686616/" target="_blank">
             <img src="images/img/footer/s2.png" alt="" srcset="">
           </a>
-          <a href="https://t.me/evon_real_estate">
+          <a href="https://t.me/evon_real_estate" target="_blank">
             <img src="images/img/footer/s3.png" alt="" srcset="">
           </a>
-          <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA==">
+          <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA==" target="_blank">
             <img src="images/img/footer/s4.png" alt="" srcset="">
           </a>
         </div>
@@ -28,23 +28,23 @@
         <ul>
           <li>
             <span>{{ language.dob_ob_2[6] }}</span>
-            <a href="mailto:evon.information@gmail.com">evon.information@gmail.com</a>
+            <a href="mailto:evon.information@gmail.com" target="_blank" >evon.information@gmail.com</a>
           </li>
           <li>
             <span>WhatsApp</span>
-            <a href="wa.me/+905442258559">+90(544)225 85 59</a>
+            <a href="https://wa.me/+905442258559" target="_blank">+90(544)225 85 59</a>
           </li>
           <li>
             <span>Telegram</span>
-            <a href="https://t.me/evon_real_estate">evon_real_estate</a>
+            <a href="https://t.me/evon_real_estate" target="_blank">evon_real_estate</a>
           </li>
           <li>
             <span>Instagram</span>
-            <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA==">evon_platform_tr</a>
+            <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA==" target="_blank">evon_platform_tr</a>
           </li>
           <li>
             <span>Facebook</span>
-            <a href="https://m.facebook.com/people/EVON/100092335686616/">ServisEvon</a>
+            <a href="https://m.facebook.com/people/EVON/100092335686616/" target="_blank">ServisEvon</a>
           </li>
         </ul>
       </nav>
@@ -52,9 +52,9 @@
         {{ language.main[64] }}
       </p>
       <div class="row-ref">
-        <a href="https://evon-tr.com/privacy">{{ language.main[65] }}</a>
-        <a href="https://evon-tr.com/agree">{{ language.main[66] }}</a>
-        <a href="#">VERGI NO <span>3830916930</span></a>
+        <a href="https://evon-tr.com/privacy" target="_blank">{{ language.main[65] }}</a>
+        <a href="https://evon-tr.com/agree" target="_blank">{{ language.main[66] }}</a>
+        <a href="#" >VERGI NO <span>3830916930</span></a>
       </div>
     </div>
   </footer>

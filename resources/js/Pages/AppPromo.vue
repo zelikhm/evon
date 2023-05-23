@@ -24,8 +24,8 @@ import '../../../public/styles/ForRealtors.css'
 
   <new-header @login-realtor="openLoginRealtor = !openLoginRealtor"
     @login-developer="openLoginDeveloper = !openLoginDeveloper" @open-register="openRegister = !openRegister"
-    @open-modal-choise="mobileModal=!mobileModal"
-    @selectLanguage="choseLanguage" :user_info="userInfo" :language="language"></new-header>
+    @open-modal-choise="mobileModal = !mobileModal" @selectLanguage="choseLanguage" :user_info="userInfo"
+    :language="language"></new-header>
 
 
   <div v-if="mobileModal" class="fixed z-[100] w-full h-full flex items-center justify-center">
@@ -33,14 +33,16 @@ import '../../../public/styles/ForRealtors.css'
       class=" modal choise relative bg-white rounded-[12px] p-10   z-50 w-[30%] lg:w-[48%] md:w-[60%] sm:w-[90%] h-fit">
       <div class="relative   ">
         <div class="btns">
-          <button class="login" v-on:click="openLoginRealtor = !openLoginRealtor , mobileModal=!mobileModal">{{ language.main[21] }}</button>
-          <button class="registr" v-on:click="openRegister = !openRegister, mobileModal=!mobileModal">{{ language.main[22] }}</button>
+          <button class="login" v-on:click="openLoginRealtor = !openLoginRealtor, mobileModal = !mobileModal">{{
+            language.main[21] }}</button>
+          <button class="registr" v-on:click="openRegister = !openRegister, mobileModal = !mobileModal">{{ language.main[22]
+          }}</button>
         </div>
       </div>
     </div>
-    <div @click="mobileModal=!mobileModal" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
+    <div @click="mobileModal = !mobileModal" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
   </div>
-  <!--welcom--> 
+  <!--welcom-->
   <section id="welcom">
     <div class="container">
       <div class="welcom-cont">
@@ -55,7 +57,8 @@ import '../../../public/styles/ForRealtors.css'
           <div class="save-prog">
             <p>
               <span>{{ language.main[30] }}</span>
-              <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew&pli=1" class="flex gap-[1vw]">
+              <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew&pli=1" target="_blank"
+                class="flex gap-[1vw]">
                 <img src="images/img/welcom/apl.png" alt="" srcset="">
                 <img src="images/img/welcom/andr.png" alt="" srcset="">
               </a>
@@ -63,12 +66,14 @@ import '../../../public/styles/ForRealtors.css'
           </div>
 
           <div class="ref-soc">
-            <a href="wa.me/+905442258559"><img src="images/img/header/s1.png" alt="" srcset=""></a>
-            <a href="https://m.facebook.com/people/EVON/100092335686616/"><img src="images/img/header/s2.png" alt=""
+            <a href="https://wa.me/+905442258559" target="_blank"><img src="images/img/header/s1.png" alt=""
                 srcset=""></a>
-            <a href="https://t.me/evon_real_estate"><img src="images/img/header/s3.png" alt="" srcset=""></a>
-            <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA=="><img src="images/img/header/s4.png"
-                alt="" srcset=""></a>
+            <a href="https://m.facebook.com/people/EVON/100092335686616/" target="_blank"><img
+                src="images/img/header/s2.png" alt="" srcset=""></a>
+            <a href="https://t.me/evon_real_estate" target="_blank"><img src="images/img/header/s3.png" alt=""
+                srcset=""></a>
+            <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA==" target="_blank"><img
+                src="images/img/header/s4.png" alt="" srcset=""></a>
           </div>
 
           <h4 class="scroll">
@@ -105,7 +110,11 @@ import '../../../public/styles/ForRealtors.css'
           language.main[32] }} —</h2>
 
       </div>
-      <iframe class="video" src="https://www.youtube.com/embed/lTNZFH-CZWc" title="YouTube video player" frameborder="0"
+      <iframe v-if="selectLanguage!=2" class="video" src="https://www.youtube.com/embed/lTNZFH-CZWc" title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+      <iframe v-else class="video"  width="560" height="315" src="https://www.youtube.com/embed/EGsUvgFSEFc" title="YouTube video player"
+        frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen></iframe>
     </div>
@@ -156,7 +165,7 @@ import '../../../public/styles/ForRealtors.css'
   <!--!blockInfo-->
 
   <!--ForRealtors-->
-  <section id="ForRealtors">
+  <section id="ForRealtors"   >
     <div class="title">
       <div class="container">
         <h2>{{ language.main[37] }}</h2>
@@ -175,8 +184,8 @@ import '../../../public/styles/ForRealtors.css'
             <div class="slide-text">
               <h4>{{ slide.title }}</h4>
               <span>{{ index + 1 }}</span>
-            </div>
-            <div class="slide-info" :class="{ purple: slide.color === 1 }">
+            </div> 
+            <div class="slide-info"   ref="slideInfoRef" :class="{ purple: slide.color === 1 }">
               <h5>{{ slide.infoTitle }}</h5>
               <em>
                 <sub v-if="index < 1 || index > 4">{{ language.main[41] }}</sub>
@@ -196,7 +205,7 @@ import '../../../public/styles/ForRealtors.css'
             :class="['slide', `slide${index + 1}`, { active: step === (index + 1) }]"
             :src="'images/img/forRealtors/s' + (index + 1) + '.png'" :alt="'Slide ' + (index + 1)" :key="index" />
           <div class="tools">
-            <img class="tool" src="images/img/forRealtors/tool.png" alt="" srcset="" />
+            <img class="tool" :class="{ anim: showToolAnimation }" src="images/img/forRealtors/tool.png" alt="" srcset="" />
             <p v-html="language.main[42]"></p>
           </div>
         </div>
@@ -320,9 +329,9 @@ import '../../../public/styles/ForRealtors.css'
 
       <div class="row-soc">
 
-        <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew&pli=1"><img
+        <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew&pli=1" target="_blank"><img
             src="images/img/lowSection/andr.png" alt="" srcset=""></a>
-        <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew&pli=1"><img
+        <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew&pli=1" target="_blank"><img
             src="images/img/lowSection/apl.png" alt="" srcset=""></a>
       </div>
 
@@ -357,6 +366,7 @@ import { usePage } from "@inertiajs/inertia-vue3";
 import AppModalRegister from "@/Layouts/modal/AppModalRegister.vue";
 import NewHeader from "@/Components/NewsComponent/NewHeader.vue";
 import NewFooter from "@/Components/NewsComponent/NewFooter.vue";
+import { ref, onMounted } from 'vue';
 
 export default {
   name: "AppPromo",
@@ -386,7 +396,8 @@ export default {
       language: this.$ru,
       selectLanguage: 0,
       user: [],
-      mobileModal:false,
+      mobileModal: false,
+      showToolAnimation:false,
 
 
       isMouseDown: false,
@@ -431,16 +442,22 @@ export default {
 
     this.editObject();
 
-    this.type()
+    this.type() 
   },
   mounted() {
-    /* const cont = document.querySelector('.cont');
-    cont.addEventListener('mousedown', this.startDrag);
-    cont.addEventListener('mouseleave', this.endDrag);
-    cont.addEventListener('mouseup', this.endDrag);
-    cont.addEventListener('mousemove', this.drag); */
+    const showToolAnimation = ref(false);
+    const slideInfoElement = this.$refs.slideInfoRef;
+
+    const handleScroll = () => {
+      if (slideInfoElement) {
+        const rect = slideInfoElement.getBoundingClientRect();
+        showToolAnimation.value = rect.top < window.innerHeight && rect.bottom > 0;
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
   },
   methods: {
+     
     handleMouseDown(e) {
       this.isMouseDown = true;
       this.startX = e.pageX - this.$refs.cont.offsetLeft;
@@ -480,7 +497,7 @@ export default {
     },
     handleTouchEnd() {
       const touchDistance = this.touchMoveX - this.touchStartX;
-      if (Math.abs(touchDistance) >= 200) {
+      if (Math.abs(touchDistance) >= 100) {
         if (touchDistance > 0) {
           // Свайп вправо
           this.step--;
@@ -631,6 +648,7 @@ export default {
       this.openRegister = false
     }
   },
+   
   components: {
     AppModalRegister,
     AppHeader,
