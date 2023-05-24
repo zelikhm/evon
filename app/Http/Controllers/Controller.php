@@ -6,12 +6,14 @@ use App\Http\Traits\MainInfo;
 use App\Models\Builder\Flat\FlatModel;
 use App\Models\Builder\HouseModel;
 use App\Models\User;
+use http\Env\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
+use Stevebauman\Location\Facades\Location;
 
 class Controller extends BaseController
 {
@@ -32,10 +34,19 @@ class Controller extends BaseController
       ]);
     }
 
-    public function promo() {
+    public function promo(Request $request) {
 
       if(Auth::check()) {
         return redirect('/houses');
+      }
+
+      $ip = $request->ip();
+      $currentUserInfo = Location::get($ip);
+
+      if($ip !== '127.0.0.1') {
+        if($currentUserInfo->countryCode !== 'TR') {
+          return Inertia::location('/');
+        }
       }
 
       return Inertia::render('AppPromo', [

@@ -467,6 +467,17 @@ path getChatApi \ [post] / поля:
 
 ### User 
 
+Получения пользователя \
+path get \ [post] / поля:
+
+- token
+
+Изменения статуса ссылки \
+path setLink \ [post] / поля:
+
+- token
+- id - айди подписки
+
 Регистрация пользователя \
 path sendRegister \ [post] / поля:
 
