@@ -44,7 +44,7 @@ class Controller extends BaseController
       $currentUserInfo = Location::get($ip);
 
       if($ip !== '127.0.0.1') {
-        if($currentUserInfo->countryCode !== 'TR') {
+        if($currentUserInfo->countryCode === 'TR') {
           return Inertia::location('/');
         }
       }
