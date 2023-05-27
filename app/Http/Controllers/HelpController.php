@@ -20,8 +20,8 @@ class HelpController extends Controller
     $ip = $request->ip();
     $currentUserInfo = Location::get($ip);
 
-    if($ip !== '127.0.0.1') {
-      if($currentUserInfo->countryCode !== 'RU' && Auth::user()->openClient !== 1) {
+    if ($ip !== '127.0.0.1') {
+      if ($currentUserInfo->countryCode !== 'RU' && Auth::user()->openClient !== 1) {
         return Inertia::location('/');
       }
     }
@@ -30,7 +30,6 @@ class HelpController extends Controller
       'user' => $this->getUser(),
       'client' => ClientModel::where('user_id', $this->getUser()->id)->get(),
     ]);
-
   }
 
   /**
@@ -39,20 +38,19 @@ class HelpController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function delete(Request $request) {
+  public function delete(Request $request)
+  {
 
-    if($this->checkToken($request->token)) {
+    if ($this->checkToken($request->token)) {
 
       ClientModel::where('id', $request->id)
         ->where('user_id', $request->user_id)
         ->delete();
 
       return response()->json(true, 205);
-
     } else {
       return response()->json('not auth', 401);
     }
-
   }
 
   /**
@@ -79,11 +77,9 @@ class HelpController extends Controller
       ]);
 
       return response()->json(ClientModel::where('user_id', $request->user_id)->get(), 200);
-
     } else {
 
       return response()->json('not auth', 401);
-
     }
   }
 
@@ -93,31 +89,29 @@ class HelpController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function editClient(Request $request) {
+  public function editClient(Request $request)
+  {
 
     if ($this->checkToken($request->token)) {
 
       ClientModel::where('id', $request->client_id)
         ->where('user_id', $request->user_id)
         ->update([
-        'name' => $request->name,
-        'phone' => $request->phone,
-        'soc' => $request->soc,
-        'client_text' => $request->client_text,
-        'jk' => $request->jk,
-        'status_client' => $request->status_client,
-        'status_order' => $request->status_order,
-        'comment' => $request->comment,
-      ]);
+          'name' => $request->name,
+          'phone' => $request->phone,
+          'soc' => $request->soc,
+          'client_text' => $request->client_text,
+          'jk' => $request->jk,
+          'status_client' => $request->status_client,
+          'status_order' => $request->status_order,
+          'comment' => $request->comment,
+        ]);
 
       return response()->json(ClientModel::where('user_id', $request->user_id)->get(), 200);
-
     } else {
 
       return response()->json('not auth', 401);
-
     }
-
   }
 
   /**
@@ -126,11 +120,15 @@ class HelpController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function getClient(Request $request) {
+  public function getClient(Request $request)
+  {
 
     return response()->json(
-      ClientModel::where('user_id', $request->user_id
-      )->get(), 200);
-
+      ClientModel::where(
+        'user_id',
+        $request->user_id
+      )->get(),
+      200
+    );
   }
 }

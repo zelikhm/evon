@@ -67,14 +67,15 @@ export default {
       }
 
     },
+   
   },
   created() { 
   
-    if (this.user_info.lang === 0) {
+    if (this.selectLang===0) {
       this.langSelected = 'ru'
-    } else if (this.user_info.lang === 1) {
+    } else if (this.selectLang===1) {
       this.langSelected = 'en'
-    } else if (this.user_info.lang === 2) {
+    } else if (this.selectLang===2) {
       this.langSelected = 'tr'
     }
 

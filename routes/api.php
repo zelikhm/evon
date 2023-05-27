@@ -22,7 +22,7 @@ Route::prefix('client')->group(function () {
   Route::get('/get', ['App\Http\Controllers\HelpController', 'getClient']);
   Route::post('/send', ['App\Http\Controllers\HelpController', 'sendClient']);
   Route::post('/edit', ['App\Http\Controllers\HelpController', 'editClient']);
-  Route::post('/delete', ['App\Http\Controllers\HelpController', 'deleteClient']);
+  Route::post('/delete', ['App\Http\Controllers\HelpController', 'delete']);
 });
 
 Route::prefix('house')->group(function () {
