@@ -68,6 +68,9 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
             <Link href="/profile/favorites" :class="{ 'opacity-60': $page.url !== '/profile/favorites' }"
               class="whitespace-nowrap">
             {{ language.rielt_1[3] }}</Link>
+            <Link href="/profile/help" :class="{ 'opacity-60': $page.url !== '/profile/help' }"
+                  class="whitespace-nowrap">
+              {{ language.rielt_1[58] }}</Link>
           </div>
         </div>
         <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[15px]">
@@ -298,6 +301,8 @@ import AppBurgerAgent from "@/Layouts/AppBurgerAgent.vue"
 import AppBurgerDev from "@/Layouts/AppBurgerDev.vue"
 import { useForm } from '@inertiajs/inertia-vue3'
 import { router } from '@inertiajs/vue3'
+import { computed } from 'vue'
+import { usePage } from '@inertiajs/inertia-vue3'
 
 export default {
   props: {
@@ -324,10 +329,13 @@ export default {
       chats: 0,
       selectLang: 0,
       user_info: [],
+      openClient: computed(() => usePage().props.value.check)
     }
   },
 
   mounted() {
+
+    console.log(this.openClient);
 
     if (this.user !== null) {
       setInterval(() => {

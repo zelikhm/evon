@@ -132,6 +132,7 @@ export default {
     },
     closeModal() {
       this.$emit('close-create-selection')
+
       Object.assign(this.compilation, {
         name: "",
         phone: null,
@@ -145,18 +146,18 @@ export default {
     },
     validateCompilation() {
       const keys = Object.keys(this.compilation);
-      this.validation = {}; 
+      this.validation = {};
       for (const key of keys) {
         this.validation[key] = Boolean(this.compilation[key]);
       }
-      const { name, phone, WatTelg, interested, comment, checkbox1Active, checkbox2Active } = this.validation; 
-      if (name && phone && WatTelg && interested && comment && (checkbox1Active || checkbox2Active)) { 
-        this.sendData(); 
+      const { name, phone, WatTelg, interested, comment, checkbox1Active, checkbox2Active } = this.validation;
+      if (name && phone && WatTelg && interested && comment && (checkbox1Active || checkbox2Active)) {
+        this.sendData();
       }
     },
     sendData() {
       axios.post(this.tool === 1 ? '/api/client/send' : '/api/client/edit', {
-        id: this.tool === 2 ? this.compilation.id : undefined,
+        client_id: this.tool === 2 ? this.compilation.id : undefined,
         user_id: this.user.id,
         name: this.compilation.name,
         phone: this.compilation.phone,
@@ -166,8 +167,11 @@ export default {
         status_client: this.user.role,
         status_order: 0,
         comment: this.compilation.comment,
-      }).then(() => {
-        this.$emit("close-create-selection"); 
+      }).then(res => {
+
+        this.$emit("reload", res.data);
+
+        this.$emit("close-create-selection");
       });
     }
   },

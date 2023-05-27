@@ -13,7 +13,7 @@
       <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px] lg:w-2" alt="Стрелочка вниз"
         :class="{ 'rotate-180': langOptionVisible }">
     </div>
-    
+
     <div  v-if="langOptionVisible"
       class="select border border-solid overflow-hidden border-[#E5DFEE] absolute top-[90%] w-full left-0 flex flex-col bg-white rounded-[5px]">
       <span @click="selectOption('ru'),langOptionVisible = !langOptionVisible"
@@ -35,7 +35,7 @@
 <script>
 export default {
   name: "ChangeLanguage",
-  props: { 
+  props: {
     selectLang: 0,
     user_info: {
       type: Object,
@@ -67,10 +67,10 @@ export default {
       }
 
     },
-   
+
   },
-  created() { 
-  
+  created() {
+
     if (this.selectLang===0) {
       this.langSelected = 'ru'
     } else if (this.selectLang===1) {

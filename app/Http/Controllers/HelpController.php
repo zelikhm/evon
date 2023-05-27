@@ -43,11 +43,13 @@ class HelpController extends Controller
 
     if ($this->checkToken($request->token)) {
 
-      ClientModel::where('id', $request->id)
+      ClientModel::where('id', $request->client_id)
         ->where('user_id', $request->user_id)
         ->delete();
 
-      return response()->json(true, 205);
+      $clients = ClientModel::where('user_id', $request->user_id)->get();
+
+      return response()->json($clients, 200);
     } else {
       return response()->json('not auth', 401);
     }
@@ -76,7 +78,9 @@ class HelpController extends Controller
         'comment' => $request->comment
       ]);
 
-      return response()->json(ClientModel::where('user_id', $request->user_id)->get(), 200);
+      return response()->json(
+        ClientModel::where('user_id', $request->user_id)
+          ->get(), 200);
     } else {
 
       return response()->json('not auth', 401);
@@ -94,7 +98,7 @@ class HelpController extends Controller
 
     if ($this->checkToken($request->token)) {
 
-      ClientModel::where('id', $request->client_id)
+      $client = ClientModel::where('id', $request->client_id)
         ->where('user_id', $request->user_id)
         ->update([
           'name' => $request->name,
@@ -107,7 +111,9 @@ class HelpController extends Controller
           'comment' => $request->comment,
         ]);
 
-      return response()->json(ClientModel::where('user_id', $request->user_id)->get(), 200);
+      return response()->json(
+        ClientModel::where('user_id', $request->user_id)
+          ->get(), 200);
     } else {
 
       return response()->json('not auth', 401);

@@ -69,7 +69,7 @@
     "65": "Gizlilik Koşulları",
     "66": "Kullanıcı Sözleşmesi",
     "67": "Emlak danışmanı veya inşaat şirketi olarak kaydolun <br> ve platforma tam erişim elde edin",
-    "68": "bağımsız emlakçılar" 
+    "68": "bağımsız emlakçılar"
   },
   "footer": {
     "0": "Vergi Mükellefi Kimlik Numarası(İNN) 215125125125125",
@@ -287,7 +287,8 @@
     "54": "En yüksek fiyat",
     "55": "En düşük fiyat",
     "56": "min",
-    "57": "min fiyat"
+    "57": "min fiyat",
+    "58": "Помощь с клиентом"
   },
   "rielt_2": {
     "0": "seçimlerim",
