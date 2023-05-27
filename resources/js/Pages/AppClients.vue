@@ -16,7 +16,7 @@
             <div class="flex items-center lg:justify-center gap-5 xxl:gap-4 xl:gap-3"><span
               class="font-semibold text-xl xxl:text-lg xl:text-sm lg:text-[19px]">Мои клиенты </span>
             </div>
-            <span class="text-[#8A8996]  text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">Найдено 1 шт.</span>
+            <span class="text-[#8A8996]  text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">Найдено {{ clients.length }} шт.</span>
           </div>
           <div class="flex lg:flex-col lg:items-center h-20 xxl:h-16 xl:h-12 lg:h-fit">
             <div class="flex items-center p-4 xxl:p-3 xl:p-2">
