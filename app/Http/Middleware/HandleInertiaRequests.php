@@ -51,7 +51,7 @@ class HandleInertiaRequests extends Middleware
 
         if ($user) {
           $check = true;
-        } else if ($currentUserInfo->countryCode === 'RU' || $currentUserInfo->countryCode === 'BY') {
+        } else if ($currentUserInfo->countryCode !== 'TR') {
           $check = true;
         }
 
