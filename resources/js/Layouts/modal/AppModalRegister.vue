@@ -37,7 +37,7 @@ const submit = () => {
       class=" modal reg relative bg-white rounded-[12px] p-10 xxl:p-9 xl:p-8 lg:p-5 z-50 w-[30%] lg:w-[48%] md:w-[60%] sm:w-[90%] h-fit">
       <div class="relative mb-9 xxl:mb-6 xl:mb-5">
         <h2 class="text-center text-[22px] xxl:text-lg xl:text-base font-semibold">{{ language.reg[0] }}</h2>
-        <p v-if="form.success" class="mt-10 text-center">
+        <p v-if="form.success" class="mt-10 text-center" style="color: #FFFFFF;">
           {{ language.reg[10] }}
         </p>
         <!-- <button @click="closeModal" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
