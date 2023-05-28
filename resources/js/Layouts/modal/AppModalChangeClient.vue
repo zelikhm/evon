@@ -164,13 +164,12 @@ export default {
         soc: this.compilation.WatTelg,
         client_text: this.compilation.interested,
         jk: this.compilation.checkbox1Active ? 1 : 2,
-        status_client: this.user.role,
+        status_client: 0,
         status_order: 0,
         comment: this.compilation.comment,
       }).then(res => {
 
-        this.$emit("reload", res.data);
-
+        this.$emit("reload", res.data);  
         this.$emit("close-create-selection");
       });
     }
