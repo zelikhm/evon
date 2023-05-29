@@ -71,7 +71,15 @@
                                 cli.jk === "1" ? "Определился с жк" : "Не определился с жк" }}</span></div>
               <div class="text-xs font-bold mb-2">Партнер: <span class="font-normal">{{
                                 user.first_name }}</span></div>
-              <div class="text-xs font-bold mb-2">Статус партнера: <span class="font-normal">-</span></div>
+              <div class="text-xs font-bold mb-5">Статус партнера: <span class="font-normal">-</span></div>
+              <div v-if="cli.manager_name">
+                <div class="text-s font-bold mb-2">Менеджер:</div>
+                <div class="text-xs font-bold mb-2">ФИО: {{ cli.manager_name }}</div>
+                <div class="text-xs font-bold mb-2">Телефон: {{ cli.manager_phone }}</div>
+              </div>
+              <div v-else>
+                <div class="text-s font-bold mb-2">Менеджер: не назначен</div>
+              </div>
               <!--  <div class="text-xs font-bold mb-2">Комментарий: <span class="font-normal">Комментарий</span> </div> -->
               <div v-if="cli.deleteConfirm"
                    class="cursor-auto z-20 w-full text-sm lg:text-base absolute top-1/4 bg-white right-0 flex flex-col border border-solid border-purple-400 rounded-lg ">

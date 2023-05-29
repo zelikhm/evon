@@ -20,7 +20,9 @@ class ClientModel extends Model
       'status_client',
       'status_order',
       'comment',
-      'isJk'
+      'isJk',
+      'manager_name',
+      'manager_phone'
     ];
 
     public function user() {

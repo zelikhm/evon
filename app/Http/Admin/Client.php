@@ -128,40 +128,79 @@ class Client extends Section implements Initializable
   {
     $card = AdminForm::card();
 
-    $form = AdminForm::elements([
-      AdminFormElement::checkbox('isJk', 'Определился с жк?'),
-      AdminFormElement::columns()
-        ->addColumn([
-          AdminFormElement::text('name', 'ФИО'),
-          AdminFormElement::text('phone', 'Телефон')
-            ->required(),
-          AdminFormElement::text('soc', 'WhatsApp/Telegramm'),
-        ], 6)->addColumn([
-          AdminFormElement::text('client_text', 'Запрос клиента'),
-          AdminFormElement::text('jk', 'ссылка на жк/подборку'),
-          AdminFormElement::select('status_client', 'Статус клиента', [
-            0 => 'Заявка',
-            1 => 'Обработка',
-            2 => 'Работа с клиентом',
-            3 => 'Завершено успешно',
-            4 => 'Завершено не удачно',
-          ])->required(),
-          AdminFormElement::select('status_order', 'Статус заказа', [
-            0 => 'Заявка',
-            1 => 'Отклонено',
-            2 => 'Завершено',
-          ])->required(),
-        ]),
-    ]);
+    $display = AdminDisplay::tabbed();
+    $display->setTabs(function () use ($id) {
+      $tabs = [];
 
-    $card->getButtons()->setButtons([
-      'save_and_continue' => (new Save())->setText('Применить'),
-//            'save_and_close' => (new SaveAndClose())->setText('Сохранить и закрыть'),
-      'delete' => (new Delete()),
-    ]);
+      $main = AdminForm::form();
 
-    return $card->addBody([$form]);
+      $main->setElements([
+        AdminFormElement::checkbox('isJk', 'Определился с жк?'),
+        AdminFormElement::select('status_client', 'Статус клиента', [
+          0 => 'Заявка',
+          1 => 'Обработка',
+          2 => 'Работа с клиентом',
+          3 => 'Завершено успешно',
+          4 => 'Завершено не удачно',
+        ])->required(),
+        AdminFormElement::select('status_order', 'Статус заказа', [
+          0 => 'Заявка',
+          1 => 'Отклонено',
+          2 => 'Завершено',
+        ])->required(),
+        AdminFormElement::html('<hr>'),
+
+        AdminFormElement::columns()
+          ->addColumn([
+            AdminFormElement::select('user_id', 'Пользователь')->setOptions($this->getUser()),
+            AdminFormElement::text('name', 'ФИО'),
+            AdminFormElement::text('phone', 'Телефон')
+              ->required(),
+          ], 6)->addColumn([
+            AdminFormElement::text('client_text', 'Запрос клиента'),
+            AdminFormElement::text('jk', 'ссылка на жк/подборку'),
+            AdminFormElement::text('soc', 'WhatsApp/Telegramm'),
+          ]),
+      ]);
+
+      $tabs[] = AdminDisplay::tab($main)
+        ->setLabel("Основная инофрмация")
+        ->setIcon('<i class="fa fa-credit-card"></i>');
+
+      $manager = AdminForm::form();
+
+      $manager->setElements([
+        AdminFormElement::text('manager_name', 'ФИО менеджера'),
+        AdminFormElement::text('manager_phone', 'Телефон'),
+      ]);
+
+      $tabs[] = AdminDisplay::tab($manager)
+        ->setLabel("Менеджер")
+        ->setIcon('<i class="fa fa-credit-card"></i>');
+
+      return $tabs;
+    });
+
+    return $display;
   }
+
+  /**
+   * get user
+   * @return mixed
+   */
+
+  protected function getUser()
+  {
+    $users = \App\Models\User::all();
+
+    return $users->map(static function ($item, $key) {
+      return [
+        'id' => $item->id,
+        'value' => $item->first_name . '-' . $item->last_name,
+      ];
+    })->pluck('value', 'id')->toArray();
+  }
+
 
   /**
    * @param array $payload
