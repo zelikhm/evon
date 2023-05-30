@@ -141,20 +141,13 @@ class Client extends Section implements Initializable
             AdminFormElement::number('commission', 'Вознаграждение')->setStep(0.01),
           ], 6)->addColumn([
             AdminFormElement::select('status_client', 'Статус клиента', [
-              0 => 'Заявка',
-              1 => 'Обработка',
-              2 => 'Работа с клиентом',
-              3 => 'Завершено успешно',
-              4 => 'Завершено не удачно',
-            ])->required(),
-            AdminFormElement::select('status_order', 'Статус заказа', [
-              0 => 'Заявка',
-              1 => 'Отклонено',
-              2 => 'Завершено',
+              0 => 'Новая заявка',
+              1 => 'В работе с партнером',
+              2 => 'Бронь',
+              3 => 'Оформление',
+              4 => 'Сделка завершена',
             ])->required(),
           ]),
-
-
         AdminFormElement::html('<hr>'),
 
         AdminFormElement::columns()
@@ -165,7 +158,6 @@ class Client extends Section implements Initializable
               ->required(),
           ], 6)->addColumn([
             AdminFormElement::text('client_text', 'Запрос клиента'),
-            AdminFormElement::text('jk', 'ссылка на жк/подборку'),
             AdminFormElement::text('soc', 'WhatsApp/Telegramm'),
             AdminFormElement::text('comment', 'Комментарий')->required(),
           ]),
