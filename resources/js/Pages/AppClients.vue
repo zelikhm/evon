@@ -41,7 +41,7 @@ import { Link } from '@inertiajs/inertia-vue3'
             v-for="(cli) of clients" :key="cli">
             <div class="info p-4">
               <div class="flex justify-between items-center mb-4">
-                <div class="text-lg font-bold">{{ cli.name }}</div>
+                <div class="text-lg font-bold custom-style">{{ cli?.name }}</div>
                 <div class="flex gap-2">
                   <button @click="openSelection(cli), tool = 2" class="p-2">
                     <img src="../../assets/svg/pen_icon_grey.svg" class="w-6 h-6" alt="">
@@ -53,22 +53,37 @@ import { Link } from '@inertiajs/inertia-vue3'
               </div>
               <div class="text-base mb-2"></div>
               <div class="flex items-center mb-2">
-                <div class="w-6 h-6 bg-gray-400 rounded-full mr-2 flex items-center justify-center">
-                  <i class="fa fa-whatsapp"></i>
-                </div>
                 <div class="font-bold">{{ cli.phone }}</div>
               </div>
               <div class="flex items-center mb-2">
-                <div class="w-6 h-6 bg-gray-400 rounded-full mr-2 flex items-center justify-center">
-                  <i class="fa fa-telegram"></i>
-                </div>
                 <div class="font-bold">{{ cli.soc }}</div>
               </div>
+               
               <!-- <div class="text-xs font-bold mb-2">Запрос клиента: <span class="font-normal">Запрос</span></div> -->
-              <div class="text-xs font-bold mb-2">Заинтересован в: <span class="font-normal">{{
-                cli.client_text }}</span></div>
-              <div class="text-xs font-bold mb-2">Статус клиента: <span class="font-normal">{{
-                cli.jk === "1" ? "Определился с жк" : "Не определился с жк" }}</span></div>
+              <div class="text-xs font-bold mb-2">Заинтересован в:
+                <span class="font-normal">
+                  {{ cli.client_text }}
+                </span>
+              </div>
+              <div class="text-xs font-bold decided">{{ cli.jk === "1" ? "Определился с жк" : "Не определился с жк" }} </div>
+              <div class="client-status">
+                <div class="text-xs font-bold mb-2">Статус клиента:
+                  <!-- <span class="font-normal">
+                    {{ cli.jk === "1" ? "Определился с жк" : "Не определился с жк" }}
+                  </span> -->
+                </div>
+                <div class="dropdown">
+                  <button class="dropdown-toggle text-lg " type="button" data-toggle="dropdown" @click="dropdownVisible=!dropdownVisible">
+                    {{ clientsStatus[clientsSelect-1]?.name }}
+                  </button>
+                  <ul class="dropdown-menu" v-if="dropdownVisible">
+                    <li v-for="status in clientsStatus" :key="status.id" @click="changeStatus(status.id)">
+                      {{ status.name }}
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
               <div class="text-xs font-bold mb-2">Статус партнера: <span class="font-normal">{{
                 visStatusClient(cli.status_client) }}</span></div>
               <div class="text-xs font-bold mb-2">Статус сделки: <span class="font-normal">{{
@@ -145,11 +160,41 @@ export default {
       tool: 0,
       clientInfo: null,
       clients: {},
+
+      
+      clientsSelect: 1,
+      clientsStatus: [
+        {
+          id: 1,
+          name: "Новая заявка"
+        },
+        {
+          id: 2,
+          name: "В работе с партнером"
+        },
+        {
+          id: 3,
+          name: "Бронь"
+        },
+        {
+          id: 4,
+          name: "Оформление"
+        },
+        {
+          id: 5,
+          name: "Сделка завершена"
+        }
+      ], 
+      dropdownVisible: false, 
     }
   },
-  methods: {
+  methods: { 
+    changeStatus(statusId) {
+      this.clientsSelect = statusId;
+      this.dropdownVisible = false; 
+    }, 
     visStatusClient(status) {
-       switch (status) {
+      switch (status) {
         case 0: return "Заявка";
         case 1: return "Обработка";
         case 2: return "Работа с клиентом";
@@ -158,7 +203,7 @@ export default {
         default: return "-";
       }
     },
-    visStatusOrder(status){
+    visStatusOrder(status) {
       switch (status) {
         case 0: return "Заявка";
         case 1: return "Отклонено";
@@ -292,6 +337,71 @@ h2 {
   flex-wrap: wrap;
 }
 
+.client-status {
+  background-color: rgb(246 243 250);
+  position: relative;
+  padding: 8px 15px;
+  left: -15px;
+  margin: 5px 0px;
+  width: calc(100% + 30px);
+} 
+.dropdown-toggle {
+  transition: 0.5s;
+  background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px 5px;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    font-size: 11px;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 500;
+}
+.dropdown-toggle:hover{
+  border: 1px solid rgb(101 54 165);
+}
+
+.decided{
+  color: rgb(101 54 165);
+} 
+
+.dropdown-menu { 
+  position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc; 
+    list-style: none;
+    margin: 0;
+    width: calc(100% - 30px);
+}
+
+.dropdown-menu li {
+  cursor: pointer;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  padding: 5px  ;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f1f1f1;
+  color: rgb(101 54 165);
+}
+.check.active{
+  background-color: #6435A5;
+}
+.check{
+    
+    width: 19px;
+    height: 19px;
+    display: inline-block;
+    border: 1px solid #6435A5;
+    margin-left: 10px;
+    border-radius: 6px;
+    position: relative; 
+    top: 5px;
+    cursor: pointer;
+}
+
 .client {
   width: calc(33.33% - 25px);
   margin-bottom: 25px;
@@ -314,7 +424,10 @@ h2 {
 .client .warning::after {
   content: "";
 }
-
+.custom-style {
+  max-width: 114px;
+  word-break: break-word;
+}
 .info {
   display: flex;
   flex-direction: column;
