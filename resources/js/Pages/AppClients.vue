@@ -3,10 +3,20 @@ import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
-  <app-modal-change-client :clientInfo="clientInfo" :user="user" @close-create-selection="closeCreateSelection"
-    :openSideBar="openSideBar" :tool="tool" v-if="openChangeClient" :openChangeClient="openChangeClient" @reload="reload"
-    :language="language" />
+  <app-modal-change-client
+    :clientInfo="clientInfo"
+    :user="user"
+    @close-create-selection="closeCreateSelection"
+    :openSideBar="openSideBar"
+    :tool="tool" v-if="openChangeClient"
+    :openChangeClient="openChangeClient"
+    @notification="notification"
+    @reload="reload"
+    :language="language"
+  />
   <app-header :user="user" :language="language" @selectLanguage="choseLanguage" />
+  <app-modal-notification class="left-[2vw] transition-all duration-1000" :class="{ '-left__full': !openNotification }"
+                          @close-notification="openNotification = false" :text="text" :openNotification="openNotification" />
   <main>
     <div class="_container">
       <div class=" h-20 xxl:h-16 xl:h-12 lg:h-fit rounded-[12px] my-7 xxl:my-5 xl:my-4">
@@ -65,7 +75,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                   {{ cli.client_text }}
                 </span>
               </div>
-              <div class="text-xs font-bold decided">{{ cli.jk === "1" ? "Определился с жк" : "Не определился с жк" }} </div>
+              <div class="text-xs font-bold decided">{{ cli.isJk === 1 ? "Определился с жк" : "Не определился с жк" }} </div>
               <div class="client-status">
                 <div class="text-xs font-bold mb-2">Статус клиента:
                   <!-- <span class="font-normal">
@@ -73,10 +83,10 @@ import { Link } from '@inertiajs/inertia-vue3'
                   </span> -->
                 </div>
                 <div class="dropdown">
-                  <button class="dropdown-toggle text-lg " type="button" data-toggle="dropdown" @click="dropdownVisible=!dropdownVisible">
+                  <button class="dropdown-toggle text-lg " type="button" data-toggle="dropdown" @click="cli.dropActive = !cli.dropActive">
                     {{ visStatusClient(cli.status_client !== null ? cli.status_client : clientsSelect ) }}
                   </button>
-                  <ul class="dropdown-menu" v-if="dropdownVisible">
+                  <ul class="dropdown-menu" v-if="cli.dropActive">
                     <li v-for="status in clientsStatus" :key="status.id" @click="changeStatus(cli.status_client !== null ? status.id : cli.status_client, cli.id, index)">
                       {{ status.name }}
                     </li>
@@ -142,6 +152,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 import AppFooter from "@/Layouts/AppFooter.vue"
 import AppHeader from "@/Layouts/AppHeader.vue"
 import AppModalChangeClient from "@/Layouts/modal/AppModalChangeClient.vue"
+import AppModalNotification from "@/Layouts/modal/AppModalNotification.vue"
 
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
@@ -160,7 +171,8 @@ export default {
       tool: 0,
       clientInfo: null,
       clients: {},
-
+      openNotification: false,
+      text: '',
 
       clientsSelect: 1,
       clientsStatus: [
@@ -190,8 +202,8 @@ export default {
   },
   methods: {
     changeStatus(statusId, id, index) {
-      this.clientsSelect = statusId;
-      this.dropdownVisible = false;
+
+      this.clients[index].dropActive = false;
 
       axios.post('/api/client/editStatus', {
         id: id,
@@ -199,10 +211,11 @@ export default {
         status: statusId
       }).then(res => {
         this.clients[index].status_client = statusId;
+        this.openNotification = true;
+        this.text = 'Статус сделки был изменен';
       })
     },
     visStatusClient(status) {
-      console.log(status)
       switch (status) {
         case 0: return "Новая заявка";
         case 1: return "В работе с партнером";
@@ -257,10 +270,15 @@ export default {
         user_id: item.user_id,
         token: this.user.token
       }).then(res => {
-
         this.clients = res.data
 
+        this.openNotification = true;
+        this.text = 'Клиент был удален из базы';
       })
+    },
+    notification(text) {
+      this.openNotification = true;
+      this.text = text;
     },
   },
   created() {
@@ -279,6 +297,7 @@ export default {
     AppModalChangeClient,
     AppHeader,
     AppFooter,
+    AppModalNotification
   },
 }
 </script>

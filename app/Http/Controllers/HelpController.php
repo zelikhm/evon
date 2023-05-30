@@ -89,10 +89,9 @@ class HelpController extends Controller
         'phone' => $request->phone,
         'soc' => $request->soc,
         'client_text' => $request->client_text,
-        'jk' => $request->jk,
         'status_client' => $request->status_client,
-        'status_order' => $request->status_order,
-        'comment' => $request->comment
+        'comment' => $request->comment,
+        'isJk' => $request->isJk
       ]);
 
       return response()->json(
@@ -122,10 +121,9 @@ class HelpController extends Controller
           'phone' => $request->phone,
           'soc' => $request->soc,
           'client_text' => $request->client_text,
-          'jk' => $request->jk,
           'status_client' => $request->status_client,
-          'status_order' => $request->status_order,
           'comment' => $request->comment,
+          'isJk' => $request->isJk
         ]);
 
       return response()->json(

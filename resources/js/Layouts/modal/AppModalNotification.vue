@@ -19,7 +19,17 @@
 
 <script>
 export default {
-  props: ['text'],
+  props: ['text', 'openNotification'],
+  mounted() {
+
+  },
+  watch: {
+    openNotification() {
+      setTimeout(() => {
+        this.$emit('close-notification');
+      }, 2500)
+    }
+  }
 }
 </script>
 
