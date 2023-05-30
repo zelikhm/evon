@@ -89,7 +89,6 @@ class HelpController extends Controller
         'phone' => $request->phone,
         'soc' => $request->soc,
         'client_text' => $request->client_text,
-        'status_client' => $request->status_client,
         'comment' => $request->comment,
         'isJk' => $request->isJk
       ]);
@@ -121,7 +120,6 @@ class HelpController extends Controller
           'phone' => $request->phone,
           'soc' => $request->soc,
           'client_text' => $request->client_text,
-          'status_client' => $request->status_client,
           'comment' => $request->comment,
           'isJk' => $request->isJk
         ]);

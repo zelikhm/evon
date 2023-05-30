@@ -59,7 +59,7 @@
         </div>
         <div class="status"
           :class="{ validation: validation.checkbox1Active == false && validation.checkbox2Active == false }">
-          <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="checkbox1">Статус клиента </label>
+          <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="checkbox1">Статус:</label>
         </div>
         <div class="flex flex-row w-full gap-5 rounded-[6px] px-5 xxl:px-4 py-4 xl:py-2.5">
           <div class="mb-4 xxl:mb-3 xl:mb-3">
@@ -164,8 +164,6 @@ export default {
         soc: this.compilation.WatTelg,
         client_text: this.compilation.interested,
         isJk: this.compilation.checkbox1Active ? 1 : 2,
-        status_client: 0,
-        status_order: 0,
         comment: this.compilation.comment,
       }).then(res => {
 
