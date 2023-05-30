@@ -136,18 +136,25 @@ class Client extends Section implements Initializable
 
       $main->setElements([
         AdminFormElement::checkbox('isJk', 'Определился с жк?'),
-        AdminFormElement::select('status_client', 'Статус клиента', [
-          0 => 'Заявка',
-          1 => 'Обработка',
-          2 => 'Работа с клиентом',
-          3 => 'Завершено успешно',
-          4 => 'Завершено не удачно',
-        ])->required(),
-        AdminFormElement::select('status_order', 'Статус заказа', [
-          0 => 'Заявка',
-          1 => 'Отклонено',
-          2 => 'Завершено',
-        ])->required(),
+        AdminFormElement::columns()
+          ->addColumn([
+            AdminFormElement::number('commission', 'Вознаграждение')->setStep(0.01),
+          ], 6)->addColumn([
+            AdminFormElement::select('status_client', 'Статус клиента', [
+              0 => 'Заявка',
+              1 => 'Обработка',
+              2 => 'Работа с клиентом',
+              3 => 'Завершено успешно',
+              4 => 'Завершено не удачно',
+            ])->required(),
+            AdminFormElement::select('status_order', 'Статус заказа', [
+              0 => 'Заявка',
+              1 => 'Отклонено',
+              2 => 'Завершено',
+            ])->required(),
+          ]),
+
+
         AdminFormElement::html('<hr>'),
 
         AdminFormElement::columns()
@@ -160,6 +167,7 @@ class Client extends Section implements Initializable
             AdminFormElement::text('client_text', 'Запрос клиента'),
             AdminFormElement::text('jk', 'ссылка на жк/подборку'),
             AdminFormElement::text('soc', 'WhatsApp/Telegramm'),
+            AdminFormElement::text('comment', 'Комментарий')->required(),
           ]),
       ]);
 

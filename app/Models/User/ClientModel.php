@@ -22,7 +22,8 @@ class ClientModel extends Model
       'comment',
       'isJk',
       'manager_name',
-      'manager_phone'
+      'manager_phone',
+      'commission'
     ];
 
     public function user() {
