@@ -41,7 +41,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
   <!-- Меню агента -->
   <header v-if="user_info !== null && user_info.role === 0" class="relative bg-[#6435A5] leading-[100%]">
 
-    <app-burger-agent :tabindex="tabindex" @blur="openBurgerAgent = false" :class="{ 'left__0': openBurgerAgent }"
+    <app-burger-agent :openClient="openClient" :tabindex="tabindex" @blur="openBurgerAgent = false" :class="{ 'left__0': openBurgerAgent }"
       :user="user" :language="language" @target-with-client="targetWithClient" @logout="logout" />
 
     <div class="_container h-[60px] xxl:h-12 xl:h-10 lg:h-12 sm:px-1">
@@ -205,7 +205,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
   <!-- Меню Админа и модератора -->
   <header v-if="user_info !== null && user_info.role === 2 || user_info !== null && user_info.role === 3" class="relative bg-[#6435A5] leading-[100%]">
 
-    <app-burger-agent :tabindex="tabindex" @blur="openBurgerAgent = false" :class="{ 'left__0': openBurgerAgent }"
+    <app-burger-agent :openClient="true" :tabindex="tabindex" @blur="openBurgerAgent = false" :class="{ 'left__0': openBurgerAgent }"
                       :user="user_info" :language="language" @target-with-client="targetWithClient" @logout="logout" />
 
     <div class="_container h-[60px] xxl:h-12 xl:h-10 lg:h-12 sm:px-1">

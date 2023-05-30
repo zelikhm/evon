@@ -38,7 +38,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         <div class="clients-list">
           <div
             class="client w-1/3 md:w-1/4 lg:w-1/5 mb-8 bg-white shadow-md rounded-lg relative z-10 text-sm md:text-base"
-            v-for="(cli) of clients" :key="cli">
+            v-for="(cli, index) of clients" :key="cli">
             <div class="info p-4">
               <div class="flex justify-between items-center mb-4">
                 <div class="text-lg font-bold custom-style">{{ cli?.name }}</div>
@@ -58,7 +58,7 @@ import { Link } from '@inertiajs/inertia-vue3'
               <div class="flex items-center mb-2">
                 <div class="font-bold">{{ cli.soc }}</div>
               </div>
-               
+
               <!-- <div class="text-xs font-bold mb-2">Запрос клиента: <span class="font-normal">Запрос</span></div> -->
               <div class="text-xs font-bold mb-2">Заинтересован в:
                 <span class="font-normal">
@@ -74,20 +74,20 @@ import { Link } from '@inertiajs/inertia-vue3'
                 </div>
                 <div class="dropdown">
                   <button class="dropdown-toggle text-lg " type="button" data-toggle="dropdown" @click="dropdownVisible=!dropdownVisible">
-                    {{ clientsStatus[clientsSelect-1]?.name }}
+                    {{ visStatusClient(cli.status_client !== null ? cli.status_client : clientsSelect ) }}
                   </button>
                   <ul class="dropdown-menu" v-if="dropdownVisible">
-                    <li v-for="status in clientsStatus" :key="status.id" @click="changeStatus(status.id)">
+                    <li v-for="status in clientsStatus" :key="status.id" @click="changeStatus(cli.status_client !== null ? status.id : cli.status_client, cli.id, index)">
                       {{ status.name }}
                     </li>
                   </ul>
                 </div>
               </div>
 
-              <div class="text-xs font-bold mb-2">Статус партнера: <span class="font-normal">{{
-                visStatusClient(cli.status_client) }}</span></div>
-              <div class="text-xs font-bold mb-2">Статус сделки: <span class="font-normal">{{
-                visStatusOrder(cli.status_order) }}</span></div>
+<!--              <div class="text-xs font-bold mb-2">Статус партнера: <span class="font-normal">{{-->
+<!--                visStatusClient(cli.status_client) }}</span></div>-->
+<!--              <div class="text-xs font-bold mb-2">Статус сделки: <span class="font-normal">{{-->
+<!--                visStatusOrder(cli.status_order) }}</span></div>-->
               <div v-if="cli.manager_name">
                 <div class="text-s font-bold mb-2">Менеджер:</div>
                 <div class="text-xs font-bold mb-2">ФИО: {{ cli.manager_name }}</div>
@@ -161,45 +161,54 @@ export default {
       clientInfo: null,
       clients: {},
 
-      
+
       clientsSelect: 1,
       clientsStatus: [
         {
-          id: 1,
+          id: 0,
           name: "Новая заявка"
         },
         {
-          id: 2,
+          id: 1,
           name: "В работе с партнером"
         },
         {
-          id: 3,
+          id: 2,
           name: "Бронь"
         },
         {
-          id: 4,
+          id: 3,
           name: "Оформление"
         },
         {
-          id: 5,
+          id: 4,
           name: "Сделка завершена"
         }
-      ], 
-      dropdownVisible: false, 
+      ],
+      dropdownVisible: false,
     }
   },
-  methods: { 
-    changeStatus(statusId) {
+  methods: {
+    changeStatus(statusId, id, index) {
       this.clientsSelect = statusId;
-      this.dropdownVisible = false; 
-    }, 
+      this.dropdownVisible = false;
+
+      axios.post('/api/client/editStatus', {
+        id: id,
+        token: this.user.token,
+        status: statusId
+      }).then(res => {
+        this.clients[index].status_client = statusId;
+      })
+    },
     visStatusClient(status) {
+      console.log(status)
       switch (status) {
-        case 0: return "Заявка";
-        case 1: return "Обработка";
-        case 2: return "Работа с клиентом";
-        case 3: return "Завершено успешно";
-        case 4: return "Завершено не удачно";
+        case 0: return "Новая заявка";
+        case 1: return "В работе с партнером";
+        case 2: return "Бронь";
+        case 3: return "Оформление";
+        case 4: return "Сделка завершена";
         default: return "-";
       }
     },
@@ -232,9 +241,6 @@ export default {
       this.openSideBar = false
       setTimeout(() => {
         this.openChangeClient = false
-        /* axios.get('/api/client/get ', {
-            user_id: this.user.id,
-        }).then((data) => { console.log(data)}) */
       }, 500)
     },
     openSelection(cli) {
@@ -344,7 +350,7 @@ h2 {
   left: -15px;
   margin: 5px 0px;
   width: calc(100% + 30px);
-} 
+}
 .dropdown-toggle {
   transition: 0.5s;
   background-color: #fff;
@@ -364,12 +370,12 @@ h2 {
 
 .decided{
   color: rgb(101 54 165);
-} 
+}
 
-.dropdown-menu { 
+.dropdown-menu {
   position: absolute;
     background-color: #fff;
-    border: 1px solid #ccc; 
+    border: 1px solid #ccc;
     list-style: none;
     margin: 0;
     width: calc(100% - 30px);
@@ -390,14 +396,14 @@ h2 {
   background-color: #6435A5;
 }
 .check{
-    
+
     width: 19px;
     height: 19px;
     display: inline-block;
     border: 1px solid #6435A5;
     margin-left: 10px;
     border-radius: 6px;
-    position: relative; 
+    position: relative;
     top: 5px;
     cursor: pointer;
 }

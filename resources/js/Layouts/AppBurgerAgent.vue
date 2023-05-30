@@ -30,13 +30,16 @@ import { Link } from '@inertiajs/inertia-vue3'
       <Link href="/villages" :class="{ 'opacity-60': $page.url !== '/villages' }" class="whitespace-nowrap leading-none">{{ language.rielt_1[1] }}</Link>
       <Link href="/profile/compilation" :class="{ 'opacity-60': $page.url !== '/profile/compilation' }" class="whitespace-nowrap leading-none">{{ language.rielt_1[2] }}</Link>
       <Link href="/profile/favorites" :class="{ 'opacity-60': $page.url !== '/profile/favorites' }" class="whitespace-nowrap leading-none">{{ language.rielt_1[3] }}</Link>
+      <Link v-if="openClient" href="/profile/help" :class="{ 'opacity-60': $page.url !== '/profile/help' }"
+            class="whitespace-nowrap leading-none">
+        {{ language.rielt_1[58] }}</Link>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['user', 'language'],
+  props: ['user', 'language', 'openClient'],
   data() {
     return {
       openProfileMenu: false,

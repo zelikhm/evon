@@ -32,6 +32,23 @@ class HelpController extends Controller
     ]);
   }
 
+  public function editStatus(Request $request) {
+
+    if($this->checkToken($request->token)) {
+
+      $client = ClientModel::where('id', $request->id)
+        ->update([
+          'status_client' => $request->status,
+        ]);
+
+      return response()->json($request->status ,200);
+
+    } else {
+      return response()->json('not auth', 401);
+    }
+
+  }
+
   /**
    * force delete client
    * @param Request $request

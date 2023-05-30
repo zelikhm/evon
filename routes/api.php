@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('client')->group(function () {
   Route::get('/get', ['App\Http\Controllers\HelpController', 'getClient']);
+  Route::post('/editStatus', ['App\Http\Controllers\HelpController', 'editStatus']);
   Route::post('/send', ['App\Http\Controllers\HelpController', 'sendClient']);
   Route::post('/edit', ['App\Http\Controllers\HelpController', 'editClient']);
   Route::post('/delete', ['App\Http\Controllers\HelpController', 'delete']);
