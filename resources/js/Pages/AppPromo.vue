@@ -261,7 +261,6 @@ import '../../../public/styles/ForRealtors.css'
   </section>
   <!--!ForBuilders-->
 
-
   <!--help -->
   <section id="help" v-if="openClient">
     <div class="container">

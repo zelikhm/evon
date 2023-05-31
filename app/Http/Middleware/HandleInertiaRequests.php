@@ -44,7 +44,19 @@ class HandleInertiaRequests extends Middleware
 
     if (Auth::check()) {
       $user = Auth::user()->openClient;
+    } else {
+      $user = null;
+    }
 
+    if($user === null) {
+      if ($ip === '127.0.0.1') {
+        $check = true;
+      } else {
+        if ($currentUserInfo->countryCode !== 'TR') {
+          $check = true;
+        }
+      }
+    } else {
       if ($ip === '127.0.0.1') {
         $check = true;
       } else {
@@ -54,7 +66,6 @@ class HandleInertiaRequests extends Middleware
         } else if ($currentUserInfo->countryCode !== 'TR') {
           $check = true;
         }
-
       }
     }
 
