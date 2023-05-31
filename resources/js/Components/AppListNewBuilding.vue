@@ -389,7 +389,7 @@
               v-else>{{ language.ob[47] + ': ' + isSearch }}</h2>
             <span
               class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center"
-              v-if="!preloader">{{ language.izbr_1[3] + ': ' + count_house }}</span>
+              v-if="!preloader">{{ language.izbr_1[3] + ': ' + count_house}}</span>
             <span
               class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center"
               v-else>  <div class="minLoader"></div>  {{ language.izbr_1[3] + ': ' }}</span>
@@ -1669,12 +1669,16 @@
         }
 
         const unique_obj = {};
-        const res = object11.filter(({title}) =>(!unique_obj[title] && (unique_obj[title] = 1)));
-
+        console.log(object11.length)
+        // const res = object11.filter(({title}) =>(!unique_obj[title] && (unique_obj[title] = 1)));
+        const res = object11;
         this.houses_array = res;
         this.map_array = res;
         this.count_house = this.houses_array.length;
         this.updatedMap();
+
+        console.log(res.length);
+
         return this.houses_array.splice(0, this.count);
       }
     },
