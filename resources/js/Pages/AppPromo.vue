@@ -184,7 +184,7 @@ import '../../../public/styles/ForRealtors.css'
             <div class="slide-text">
               <h4>{{ slide.title }}</h4>
               <span>{{ index + 1 }}</span>
-            </div> 
+            </div>
             <div class="slide-info"   ref="slideInfoRef" :class="{ purple: slide.color === 1 }">
               <h5>{{ slide.infoTitle }}</h5>
               <em>
@@ -263,7 +263,7 @@ import '../../../public/styles/ForRealtors.css'
 
 
   <!--help -->
-  <section id="help" v-if="block_show">
+  <section id="help" v-if="openClient">
     <div class="container">
       <h2>{{ language.main[57] }}</h2>
       <div class="help-cont">
@@ -376,7 +376,6 @@ export default {
     'count_people',
     'error',
     'userInfo',
-    'block_show'
   ],
   watch: {
     language(item) {
@@ -411,7 +410,7 @@ export default {
       welcomText: {},
       touchStartX: 0,
       touchMoveX: 0,
-
+      openClient: computed(() => usePage().props.value.check)
 
     }
   },
@@ -442,7 +441,7 @@ export default {
 
     this.editObject();
 
-    this.type() 
+    this.type()
   },
   mounted() {
     const showToolAnimation = ref(false);
@@ -457,7 +456,7 @@ export default {
     window.addEventListener('scroll', handleScroll);
   },
   methods: {
-     
+
     handleMouseDown(e) {
       this.isMouseDown = true;
       this.startX = e.pageX - this.$refs.cont.offsetLeft;
@@ -648,7 +647,7 @@ export default {
       this.openRegister = false
     }
   },
-   
+
   components: {
     AppModalRegister,
     AppHeader,
