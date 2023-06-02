@@ -132,9 +132,9 @@ import { Link } from '@inertiajs/inertia-vue3'
           <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold">Связаться с менеджером</h2>
           <p>Evon в Турции</p>
           <ul>
-            <li>WatsApp <a href="https://wa.me/+905442258559">Ссылка</a></li>
-            <li>Телеграмм <a href="https://t.me/evon_turkey">Ссылка</a></li>
-            <li>Почта <a href="mailto:evon.information@gmail.com">Ссылка</a></li>
+            <li>WatsApp <a href="https://wa.me/+905442258559">905442258559</a></li>
+            <li>Телеграмм <a href="https://t.me/evon_turkey">@evon_turkey</a></li>
+            <li>Почта <a href="mailto:evon.information@gmail.com">evon.information@gmail.com</a></li>
             <li>Телефон <span><a href="tel:+905442258559">905367764107</a></span></li>
           </ul>
         </div>
