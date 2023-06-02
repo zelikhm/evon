@@ -62,10 +62,12 @@ import { Link } from '@inertiajs/inertia-vue3'
                 </div>
               </div>
               <div class="text-base mb-2"></div>
-              <div class="flex items-center mb-2">
+              <div class="numb-phone flex items-center mb-2">
+                <img src="../../../resources/assets/svg/chat_tel_purple.svg" alt="" srcset="">
                 <div class="font-bold">{{ cli.phone }}</div>
               </div>
-              <div class="flex items-center mb-2">
+              <div class="numb-phone flex items-center mb-2">
+                <img src="../../../resources/assets/svg/whatsapp.svg" alt="" srcset=""> 
                 <div class="font-bold">{{ cli.soc }}</div>
               </div>
 
@@ -139,8 +141,9 @@ import { Link } from '@inertiajs/inertia-vue3'
       </div>
       <div class="flex flex-col pt-7 pb-7 xxl:pb-5 xl:pb-4">
         <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4">
-          <span style="color: rgb(0, 0, 0);">После добавления клиента, менеджер Evon свяжется с вами для подбора
-            партнера в сопровождении сделки </span>
+          <!-- <span style="color: rgb(0, 0, 0);">После добавления клиента, менеджер Evon свяжется с вами для подбора
+            партнера в сопровождении сделки </span> -->
+            <span style="color: rgb(0, 0, 0);">После добавления клиента, свяжитесь с менеджером EVON для подбора партнёра в сопровождении сделки</span>
         </p>
       </div>
     </div>
@@ -307,18 +310,27 @@ export default {
   border: 1px solid red;
 }
 
+*{
+  word-break: break-word;
+}
 
 .columns-clients {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-top: 50px;
+  display: grid;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 50px;
+    grid-template-columns: 1fr auto;
+    grid-column-gap: 25px;
 }
 
 h2 {
   text-align: center;
 }
-
+.numb-phone img{
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+} 
 .columns-clients .clients-menager {
   background: rgb(246 243 250);
   border-radius: 10px;
@@ -354,12 +366,12 @@ h2 {
 }
 
 /*clients-list*/
-.clients-list {
+.clients-list { 
   display: flex;
-  gap: 25px;
-  justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
+    gap: 25px;
+    flex-direction: row;
+    max-width: 1050px;
+    flex-wrap: wrap;
 }
 
 .client-status {
@@ -460,8 +472,9 @@ h2 {
 }
 
 .info span {
-  color: black;
-  font-size: 13px;
+     color: black;
+    word-break: break-word;
+    font-size: 13px;
 }
 
 .name {
@@ -521,9 +534,12 @@ h2 {
   .columns-clients .clients-menager {
     margin: 0 auto;
   }
-
+  .columns-clients{
+    display: block;
+  } 
   .clients-list {
-    margin: 0 auto;
+    margin: 0 auto; 
+    justify-content: center;
   }
 }
 </style>

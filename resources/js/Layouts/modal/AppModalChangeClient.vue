@@ -181,7 +181,7 @@ export default {
   },
   created() {
     if (this.tool === 2) {
-      const { id, name, phone, soc: WatTelg, client_text: interested, comment, jk } = this.clientInfo;
+      const { id, name, phone, soc: WatTelg, client_text: interested, comment, isJk } = this.clientInfo;
       this.compilation = {
         ...this.compilation,
         id,
@@ -190,8 +190,8 @@ export default {
         WatTelg,
         interested,
         comment,
-        checkbox1Active: jk === "1" ? true : false,
-        checkbox2Active: jk === "2" ? true : false,
+        checkbox1Active: isJk === 1 ? true : false,
+        checkbox2Active: isJk === 2 ? true : false,
       };
     }
   },
@@ -203,6 +203,9 @@ export default {
   border: 1px solid red;
 }
 
+textarea{
+  height: 120px !important;
+}
 .status {
   border: 0px solid !important;
 }
