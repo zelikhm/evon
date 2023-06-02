@@ -91,8 +91,11 @@ class HelpController extends Controller
         'client_text' => $request->client_text,
         'status_client' => 0,
         'comment' => $request->comment,
-        'isJk' => $request->isJk
+        'isJk' => $request->isJk,
+        'commission' => $request->isJk === 2 ? '85%' : '45%'
       ]);
+
+
 
       return response()->json(
         ClientModel::where('user_id', $request->user_id)
@@ -122,7 +125,8 @@ class HelpController extends Controller
           'soc' => $request->soc,
           'client_text' => $request->client_text,
           'comment' => $request->comment,
-          'isJk' => $request->isJk
+          'isJk' => $request->isJk,
+          'commission' => $request->isJk === 1 ? '85%' : '45%'
         ]);
 
       return response()->json(
