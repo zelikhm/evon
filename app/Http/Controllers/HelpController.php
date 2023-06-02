@@ -92,7 +92,7 @@ class HelpController extends Controller
         'status_client' => 0,
         'comment' => $request->comment,
         'isJk' => $request->isJk,
-        'commission' => $request->isJk === 1 ? '85%' : '45%'
+        'commission' => $request->isJk === 1 ? '80%' : '45%'
       ]);
 
 
@@ -126,7 +126,7 @@ class HelpController extends Controller
           'client_text' => $request->client_text,
           'comment' => $request->comment,
           'isJk' => $request->isJk,
-          'commission' => $request->isJk === 1 ? '85%' : '45%'
+          'commission' => $request->isJk === 1 ? '80%' : '45%'
         ]);
 
       return response()->json(
