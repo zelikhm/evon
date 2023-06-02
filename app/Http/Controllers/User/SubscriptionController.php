@@ -27,6 +27,8 @@ class SubscriptionController extends Controller
 
         $type = TarifModel::where('id', $payment->type)->first();
 
+        info($type->days);
+
         $user = User::where('email', $payment->email)->first();
 
         $sub = SubscriptionModel::where('user_id', $user->id)->first();

@@ -138,7 +138,7 @@ class Client extends Section implements Initializable
         AdminFormElement::checkbox('isJk', 'Определился с жк?'),
         AdminFormElement::columns()
           ->addColumn([
-            AdminFormElement::number('commission', 'Вознаграждение')->setStep(0.01),
+            AdminFormElement::text('commission', 'Вознаграждение'),
           ], 6)->addColumn([
             AdminFormElement::select('status_client', 'Статус клиента', [
               0 => 'Новая заявка',

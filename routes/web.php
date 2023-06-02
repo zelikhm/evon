@@ -33,8 +33,6 @@ Route::get('/test', function () {
     ->distinct()
 //    ->with(['info', 'files', 'frames', 'flats', 'user', 'news', 'images'])
     ->get();
-
-  dd(count($houses));
 });
 
 Route::post('/mail', ['App\Http\Controllers\User\IndexController', 'sendRegister'])->name('mail');
