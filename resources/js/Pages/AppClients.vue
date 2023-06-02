@@ -3,20 +3,12 @@ import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
-  <app-modal-change-client
-    :clientInfo="clientInfo"
-    :user="user"
-    @close-create-selection="closeCreateSelection"
-    :openSideBar="openSideBar"
-    :tool="tool" v-if="openChangeClient"
-    :openChangeClient="openChangeClient"
-    @notification="notification"
-    @reload="reload"
-    :language="language"
-  />
+  <app-modal-change-client :clientInfo="clientInfo" :user="user" @close-create-selection="closeCreateSelection"
+    :openSideBar="openSideBar" :tool="tool" v-if="openChangeClient" :openChangeClient="openChangeClient"
+    @notification="notification" @reload="reload" :language="language" />
   <app-header :user="user" :language="language" @selectLanguage="choseLanguage" />
   <app-modal-notification class="left-[2vw] transition-all duration-1000" :class="{ '-left__full': !openNotification }"
-                          @close-notification="openNotification = false" :text="text" :openNotification="openNotification" />
+    @close-notification="openNotification = false" :text="text" :openNotification="openNotification" />
   <main>
     <div class="_container">
       <div class=" h-20 xxl:h-16 xl:h-12 lg:h-fit rounded-[12px] my-7 xxl:my-5 xl:my-4">
@@ -51,7 +43,7 @@ import { Link } from '@inertiajs/inertia-vue3'
             v-for="(cli, index) of clients" :key="cli">
             <div class="info p-4">
               <div class="flex justify-between items-center mb-4">
-                <div class="text-lg font-bold custom-style">{{ cli?.name }}</div>
+                <div class="text-sm font-bold custom-style">{{ cli?.name }}</div>
                 <div class="flex gap-2">
                   <button @click="openSelection(cli), tool = 2" class="p-2">
                     <img src="../../assets/svg/pen_icon_grey.svg" class="w-6 h-6" alt="">
@@ -64,11 +56,11 @@ import { Link } from '@inertiajs/inertia-vue3'
               <div class="text-base mb-2"></div>
               <div class="numb-phone flex items-center mb-2">
                 <img src="../../../resources/assets/svg/chat_tel_purple.svg" alt="" srcset="">
-                <div class="font-bold">{{ cli.phone }}</div>
+                <div class="text-sm font-bold">{{ cli.phone }}</div>
               </div>
               <div class="numb-phone flex items-center mb-2">
-                <img src="../../../resources/assets/svg/whatsapp.svg" alt="" srcset=""> 
-                <div class="font-bold">{{ cli.soc }}</div>
+                <img src="../../../resources/assets/svg/whatsapp.svg" alt="" srcset="">
+                <div class="text-sm font-bold">{{ cli.soc }}</div>
               </div>
 
               <!-- <div class="text-xs font-bold mb-2">Запрос клиента: <span class="font-normal">Запрос</span></div> -->
@@ -77,7 +69,8 @@ import { Link } from '@inertiajs/inertia-vue3'
                   {{ cli.client_text }}
                 </span>
               </div>
-              <div class="text-xs font-bold decided">{{ cli.isJk === 1 ? "Определился с жк" : "Не определился с жк" }} </div>
+              <div class="text-xs font-bold decided">{{ cli.isJk === 1 ? "Определился с жк" : "Не определился с жк" }}
+              </div>
               <div class="client-status">
                 <div class="text-xs font-bold mb-2">Статус клиента:
                   <!-- <span class="font-normal">
@@ -85,21 +78,28 @@ import { Link } from '@inertiajs/inertia-vue3'
                   </span> -->
                 </div>
                 <div class="dropdown">
-                  <button class="dropdown-toggle text-lg " type="button" data-toggle="dropdown" @click="cli.dropActive = !cli.dropActive">
-                    {{ visStatusClient(cli.status_client !== null ? cli.status_client : clientsSelect ) }}
+                  <button class="dropdown-toggle text-lg " type="button" data-toggle="dropdown"
+                    @click="cli.dropActive = !cli.dropActive">
+                    {{ visStatusClient(cli.status_client !== null ? cli.status_client : clientsSelect) }}
                   </button>
                   <ul class="dropdown-menu" v-if="cli.dropActive">
-                    <li v-for="status in clientsStatus" :key="status.id" @click="changeStatus(cli.status_client !== null ? status.id : cli.status_client, cli.id, index)">
+                    <li v-for="status in clientsStatus" :key="status.id"
+                      @click="changeStatus(cli.status_client !== null ? status.id : cli.status_client, cli.id, index)">
                       {{ status.name }}
                     </li>
                   </ul>
                 </div>
               </div>
+              <div class="text-xs font-bold mb-2">
+                Комментарий:
+                <span class="coment-user font-normal" :class="{hidden:cli.comment.length>=50 && !cli.showFullComment}" >
+                  {{ cli.comment }} 
+                </span>
+              </div> 
+              <button v-if="cli.comment.length>=88" @click="cli.showFullComment = !cli.showFullComment" class="more-min text-blue-500 underline">
+                {{ cli.showFullComment ? 'Скрыть' : 'Показать полностью' }}
+              </button>
 
-<!--              <div class="text-xs font-bold mb-2">Статус партнера: <span class="font-normal">{{-->
-<!--                visStatusClient(cli.status_client) }}</span></div>-->
-<!--              <div class="text-xs font-bold mb-2">Статус сделки: <span class="font-normal">{{-->
-<!--                visStatusOrder(cli.status_order) }}</span></div>-->
               <div v-if="cli.manager_name">
                 <div class="text-s font-bold mb-2">Менеджер:</div>
                 <div class="text-xs font-bold mb-2">ФИО: {{ cli.manager_name }}</div>
@@ -143,7 +143,8 @@ import { Link } from '@inertiajs/inertia-vue3'
         <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4">
           <!-- <span style="color: rgb(0, 0, 0);">После добавления клиента, менеджер Evon свяжется с вами для подбора
             партнера в сопровождении сделки </span> -->
-            <span style="color: rgb(0, 0, 0);">После добавления клиента, свяжитесь с менеджером EVON для подбора партнёра в сопровождении сделки</span>
+          <span style="color: rgb(0, 0, 0);">После добавления клиента, свяжитесь с менеджером EVON для подбора партнёра в
+            сопровождении сделки</span>
         </p>
       </div>
     </div>
@@ -204,6 +205,9 @@ export default {
     }
   },
   methods: {
+    checkCommentHeight(comment) {
+      console.log(comment)
+    },
     changeStatus(statusId, id, index) {
 
       this.clients[index].dropActive = false;
@@ -310,27 +314,58 @@ export default {
   border: 1px solid red;
 }
 
-*{
+* {
   word-break: break-word;
+}
+
+.max-h-100 {
+  max-height: 100px;
+}
+
+.more-min{
+  color: rgb(101 54 165);
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  transition: 0.5s;
+}
+.more-min:hover{
+  color: #E84680;
+}
+.coment-user.hidden {
+  max-height: 48px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  text-overflow: ellipsis;
+}
+
+.max-h-none {
+  max-height: none;
 }
 
 .columns-clients {
   display: grid;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top: 50px;
-    grid-template-columns: 1fr auto;
-    grid-column-gap: 25px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 50px;
+  grid-template-columns: 1fr auto;
+  grid-column-gap: 25px;
 }
 
 h2 {
   text-align: center;
 }
-.numb-phone img{
+
+.numb-phone img {
   width: 30px;
   height: 30px;
   margin-right: 10px;
-} 
+}
+
 .columns-clients .clients-menager {
   background: rgb(246 243 250);
   border-radius: 10px;
@@ -366,12 +401,12 @@ h2 {
 }
 
 /*clients-list*/
-.clients-list { 
+.clients-list {
   display: flex;
-    gap: 25px;
-    flex-direction: row;
-    max-width: 1050px;
-    flex-wrap: wrap;
+  gap: 25px;
+  flex-direction: row;
+  max-width: 1050px;
+  flex-wrap: wrap;
 }
 
 .client-status {
@@ -382,61 +417,65 @@ h2 {
   margin: 5px 0px;
   width: calc(100% + 30px);
 }
+
 .dropdown-toggle {
   transition: 0.5s;
   background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 5px 5px;
-    cursor: pointer;
-    text-align: left;
-    width: 100%;
-    font-size: 11px;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    font-weight: 500;
+  border: 1px solid #ccc;
+  padding: 5px 5px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  font-size: 11px;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 500;
 }
-.dropdown-toggle:hover{
+
+.dropdown-toggle:hover {
   border: 1px solid rgb(101 54 165);
 }
 
-.decided{
+.decided {
   color: rgb(101 54 165);
 }
 
 .dropdown-menu {
   position: absolute;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    list-style: none;
-    margin: 0;
-    width: calc(100% - 30px);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  list-style: none;
+  margin: 0;
+  width: calc(100% - 30px);
 }
 
 .dropdown-menu li {
   cursor: pointer;
   font-size: 0.75rem;
   line-height: 1rem;
-  padding: 5px  ;
+  padding: 5px;
 }
 
 .dropdown-menu li:hover {
   background-color: #f1f1f1;
   color: rgb(101 54 165);
 }
-.check.active{
+
+.check.active {
   background-color: #6435A5;
 }
-.check{
 
-    width: 19px;
-    height: 19px;
-    display: inline-block;
-    border: 1px solid #6435A5;
-    margin-left: 10px;
-    border-radius: 6px;
-    position: relative;
-    top: 5px;
-    cursor: pointer;
+.check {
+
+  width: 19px;
+  height: 19px;
+  display: inline-block;
+  border: 1px solid #6435A5;
+  margin-left: 10px;
+  border-radius: 6px;
+  position: relative;
+  top: 5px;
+  cursor: pointer;
 }
 
 .client {
@@ -461,10 +500,12 @@ h2 {
 .client .warning::after {
   content: "";
 }
+
 .custom-style {
   max-width: 114px;
   word-break: break-word;
 }
+
 .info {
   display: flex;
   flex-direction: column;
@@ -472,9 +513,9 @@ h2 {
 }
 
 .info span {
-     color: black;
-    word-break: break-word;
-    font-size: 13px;
+  color: black;
+  word-break: break-word;
+  font-size: 13px;
 }
 
 .name {
@@ -534,12 +575,13 @@ h2 {
   .columns-clients .clients-menager {
     margin: 0 auto;
   }
-  .columns-clients{
+
+  .columns-clients {
     display: block;
-  } 
+  }
+
   .clients-list {
-    margin: 0 auto; 
+    margin: 0 auto;
     justify-content: center;
   }
-}
-</style>
+}</style>
