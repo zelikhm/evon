@@ -135,7 +135,7 @@ import { Link } from '@inertiajs/inertia-vue3'
             <li>WatsApp <a href="https://wa.me/+905442258559">905442258559</a></li>
             <li>Телеграмм <a href="https://t.me/evon_turkey">@evon_turkey</a></li>
             <li>Почта <a href="mailto:evon.information@gmail.com">evon.information@gmail.com</a></li>
-            <li>Телефон <span><a href="tel:+905442258559">905367764107</a></span></li>
+            <li>Телефон <span><a href="tel:+905442258559">905442258559</a></span></li>
           </ul>
         </div>
       </div>
