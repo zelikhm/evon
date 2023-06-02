@@ -93,9 +93,9 @@ import { Link } from '@inertiajs/inertia-vue3'
               <div class="text-xs font-bold mb-2">
                 Комментарий:
                 <span class="coment-user font-normal" :class="{hidden:cli.comment.length>=50 && !cli.showFullComment}" >
-                  {{ cli.comment }} 
+                  {{ cli.comment }}
                 </span>
-              </div> 
+              </div>
               <button v-if="cli.comment.length>=88" @click="cli.showFullComment = !cli.showFullComment" class="more-min text-blue-500 underline">
                 {{ cli.showFullComment ? 'Скрыть' : 'Показать полностью' }}
               </button>
@@ -132,10 +132,10 @@ import { Link } from '@inertiajs/inertia-vue3'
           <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold">Связаться с менеджером</h2>
           <p>Evon в Турции</p>
           <ul>
-            <li>WatsApp <a href="#">Ссылка</a></li>
-            <li>Телеграмм <a href="#">Ссылка</a></li>
-            <li>Почта <a href="#">Ссылка</a></li>
-            <li>Телефон <span>905367764107</span></li>
+            <li>WatsApp <a href="https://wa.me/+905442258559">Ссылка</a></li>
+            <li>Телеграмм <a href="https://t.me/evon_turkey">Ссылка</a></li>
+            <li>Почта <a href="mailto:evon.information@gmail.com">Ссылка</a></li>
+            <li>Телефон <span><a href="tel:+905442258559">905367764107</a></span></li>
           </ul>
         </div>
       </div>
@@ -204,7 +204,7 @@ export default {
       dropdownVisible: false,
     }
   },
-  methods: { 
+  methods: {
     changeStatus(statusId, id, index) {
 
       this.clients[index].dropActive = false;
