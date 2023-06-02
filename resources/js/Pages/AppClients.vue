@@ -108,7 +108,7 @@ import { Link } from '@inertiajs/inertia-vue3'
               <div v-else>
                 <div class="text-s font-bold mb-2">Менеджер: не назначен</div>
               </div>
-              <div class="text-s font-bold mb-2" v-if="cli.commission">Вознаграждение: {{ cli.commission + '%' }}</div>
+              <div class="text-s font-bold mb-2" v-if="cli.commission">Вознаграждение: {{ cli.commission/*  + '%' */ }}</div>
               <div v-if="cli.deleteConfirm"
                 class="cursor-auto z-20 w-full text-sm lg:text-base absolute top-1/4 bg-white right-0 flex flex-col border border-solid border-purple-400 rounded-lg ">
                 <span class="whitespace-nowrap text-center border__bottom p-2.5 xxl:p-2 xl:p-1.5 leading-none">Вы
