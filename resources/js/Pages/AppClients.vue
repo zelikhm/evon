@@ -204,10 +204,7 @@ export default {
       dropdownVisible: false,
     }
   },
-  methods: {
-    checkCommentHeight(comment) {
-      console.log(comment)
-    },
+  methods: { 
     changeStatus(statusId, id, index) {
 
       this.clients[index].dropActive = false;
