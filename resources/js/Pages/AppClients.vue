@@ -131,11 +131,11 @@ import { Link } from '@inertiajs/inertia-vue3'
         <div class="clients-menager">
           <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold">Связаться с менеджером</h2>
           <p>Evon в Турции</p>
-          <ul>
-            <li>WatsApp <a href="https://wa.me/+905442258559">905442258559</a></li>
-            <li>Телеграмм <a href="https://t.me/evon_turkey">@evon_turkey</a></li>
-            <li>Почта <a href="mailto:evon.information@gmail.com">evon.information@gmail.com</a></li>
-            <li>Телефон <span><a href="tel:+905442258559">905442258559</a></span></li>
+          <ul class="clients-menager-refs">
+            <li><em>WhatsApp</em> <a href="https://wa.me/+905442258559">905442258559</a></li>
+            <li><em>Telegram</em> <a href="https://t.me/evon_turkey">@evon_turkey</a></li>
+            <li><em>E-mail</em> <a href="mailto:evon.information@gmail.com">evon.information@gmail.com</a></li>
+            <li><em>Phone</em>   <a href="tel:+905442258559">905442258559</a> </li>
           </ul>
         </div>
       </div>
@@ -315,6 +315,13 @@ export default {
   word-break: break-word;
 }
 
+.clients-menager-refs li em{
+   font-style: normal;
+   font-size: 0.829vw;
+}
+.clients-menager-refs li a{
+  font-size: 0.829vw;
+}
 .max-h-100 {
   max-height: 100px;
 }
@@ -366,6 +373,7 @@ h2 {
 .columns-clients .clients-menager {
   background: rgb(246 243 250);
   border-radius: 10px;
+  width: 360px;
   padding: 1.75rem;
   height: 310px;
 }
@@ -383,8 +391,8 @@ h2 {
 }
 
 .columns-clients .clients-menager ul li {
-  font-size: 14px;
-  margin: 7px 0px;
+ 
+  margin: .366vw 0px;
 }
 
 .columns-clients .clients-menager ul li a {
@@ -476,15 +484,15 @@ h2 {
 }
 
 .client {
-  width: calc(33.33% - 25px);
+  width: calc(25.33% - 25px);
   margin-bottom: 25px;
   background-color: #fff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   position: relative;
   z-index: 1;
-  max-width: 240px;
-  min-width: 230px;
+  max-width: 25%;
+  min-width: 188px;
 }
 
 .client .warning {
