@@ -384,6 +384,11 @@
                 <span
                   class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[14px]">{{ compilation.user.email }}</span>
               </div>
+              <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]"
+                   > 
+                <span
+                  class=" leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[14px]">{{ compilation.user.description }}</span>
+              </div>
             </div>
           </div>
           <GMapMap v-if="house.visible === 1 && compilation.isVisible === 1" :center="center" :zoom="15"
