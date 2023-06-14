@@ -27,9 +27,8 @@ class FavoriteController extends Controller
     $favorite = FavoritesModel::where('user_id', Auth::id())->get();
 
     foreach ($favorite as $item) {
-
-      $item->house = $this->getHouseOnId($item->house_id);
-
+      $house = $this->getHouseOnId($item->house_id);
+      $item->house = $this->getHouseSlug($house->slug);
     }
 
     return Inertia::render('AppFavorites', [

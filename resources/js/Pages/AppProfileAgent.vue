@@ -1,5 +1,6 @@
 <template>
   <app-modal-profile v-if="openPayProfile" @close-pay-profile="openPayProfile = false" :tarifs="tarifs" :language="language" :user="user" />
+  <app-modal-rus-profile v-if="openPayRusProfile" @close-pay-profile="openPayRusProfile = false" :tarifs="tarifs_rus" :language="language" :user="user" />
   <app-header :user="userHeader" :language="language" @selectLanguage="choseLanguage" />
   <app-modal-notification
     class="left-[2vw] transition-all duration-1000"
@@ -38,7 +39,8 @@
                  </span>
                </div>
                 <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
-                <button @click="openPayProfile = true" class="hover__button--purple transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">{{ language.prof_rielt[13] }}</button>
+                <button @click="openPayProfile = true" class="hover__button--purple transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">{{ language.prof_rielt[13] + ' TR' }}</button>
+                <button @click="openPayRusProfile = true" class="hover__button--purple transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">{{ language.prof_rielt[13] + ' RUB' }}</button>
               </div>
             </div>
             <div>
@@ -124,9 +126,10 @@ import {computed} from "vue";
 import {usePage} from "@inertiajs/inertia-vue3";
 import AppModalNotification from "@/Layouts/modal/AppModalNotification.vue"
 import AppModalProfile from "@/Layouts/modal/AppModalProfile.vue";
+import AppModalRusProfile from "@/Layouts/modal/AppModalRusProfile.vue";
 
 export default {
-  props:['user', 'tarifs'],
+  props:['user', 'tarifs', 'tarifs_rus'],
   data() {
     return {
       myPhoto: null,
@@ -150,6 +153,7 @@ export default {
       user_avatar: null,
       text: null,
       openPayProfile: false,
+      openPayRusProfile: false,
       selectLanguage: 0,
       language: {},
     }
@@ -252,7 +256,8 @@ export default {
     AppModalProfile,
     AppHeader,
     AppFooter,
-    AppModalNotification
+    AppModalNotification,
+    AppModalRusProfile
   }
 }
 

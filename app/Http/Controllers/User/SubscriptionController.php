@@ -12,69 +12,94 @@ use Illuminate\Http\Request;
 
 class SubscriptionController extends Controller
 {
-    public function payment(Request $request) {
+  /**
+   * Paytr method
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse|string
+   * @throws \Exception
+   */
 
-      info($request->callback_id);
+  public function payment(Request $request)
+  {
 
-      $payment = PaymentModel::where('id', $request->callback_id)
-        ->where('status', 0)
-        ->first();
+    info($request->callback_id);
 
-      PaymentModel::where('id', $request->callback_id)
-        ->update(['status' => 1]);
+    $payment = PaymentModel::where('id', $request->callback_id)
+      ->where('status', 0)
+      ->first();
 
-      if($request->status === 'success' && $payment !== null) {
+    PaymentModel::where('id', $request->callback_id)
+      ->update(['status' => 1]);
 
-        $type = TarifModel::where('id', $payment->type)->first();
+    if ($request->status === 'success' && $payment !== null) {
 
-        info($type->days);
+      $type = TarifModel::where('id', $payment->type)->first();
 
-        $user = User::where('email', $payment->email)->first();
+      info($type->days);
 
-        $sub = SubscriptionModel::where('user_id', $user->id)->first();
+      $user = User::where('email', $payment->email)->first();
 
-        if($sub !== null) {
-          if($sub->finished_at < Carbon::now()->addHour(3)) {
-
-            $sub = SubscriptionModel::where('user_id', $user->id)->update([
-              'finished_at' => Carbon::now()->addHour(3)->addDay($type->days),
-              'free' => 0,
-            ]);
-
-          } else {
-
-            if($sub->free === 1) {
-              $sub = SubscriptionModel::where('user_id', $user->id)->update([
-                'finished_at' => Carbon::now()->addHour(3)->addDay($type->days),
-                'free' => 0,
-              ]);
-            } else {
-              $date = new Carbon($sub->finished_at);
-
-              $sub = SubscriptionModel::where('user_id', $user->id)->update([
-                'finished_at' => $date->addDay($type->days),
-                'free' => 0,
-              ]);
-            }
-          }
-
-          return response()->json(['message' => 'thanks, subscription was updated', 'status' => 'SUCCESS', 'subscription' => $sub], 200);
-        } else {
-
-          $sub = SubscriptionModel::create([
-            'user_id' => $user->id,
-            'active' => true,
-            'free' => 0,
-            'finished_at' => Carbon::now()->addHour(3)->addDay($type->days),
-            'created_at' => Carbon::now()->addHour(3),
-            'updated_at' => Carbon::now()->addHour(3),
-          ]);
-
-          return response()->json(['message' => 'thanks, subscription was created', 'status' => 'SUCCESS', 'subscription' => $sub], 200);
-
-        }
-      } else {
-        return "OK";
-      }
+      return $this->setSubscription($user, $type);
+    } else {
+      return "OK";
     }
+
+  }
+
+  /**
+   * main method for set subscription for users
+   * @param $user
+   * @param $type
+   * @return \Illuminate\Http\JsonResponse
+   * @throws \Exception
+   */
+
+  public function setSubscription($user, $type)
+  {
+
+    $sub = SubscriptionModel::where('user_id', $user->id)->first();
+
+    if ($sub !== null) {
+      if ($sub->finished_at < Carbon::now()->addHour(3)) {
+
+        $sub = SubscriptionModel::where('user_id', $user->id)->update([
+          'finished_at' => Carbon::now()->addHour(3)->addDay($type->days),
+          'free' => 0,
+        ]);
+
+      } else {
+
+        if ($sub->free === 1) {
+          $sub = SubscriptionModel::where('user_id', $user->id)->update([
+            'finished_at' => Carbon::now()->addHour(3)->addDay($type->days),
+            'free' => 0,
+          ]);
+        } else {
+          $date = new Carbon($sub->finished_at);
+
+          $sub = SubscriptionModel::where('user_id', $user->id)->update([
+            'finished_at' => $date->addDay($type->days),
+            'free' => 0,
+          ]);
+        }
+      }
+
+      return response()->json(['message' => 'thanks, subscription was updated', 'status' => 'SUCCESS', 'subscription' => $sub], 200);
+    } else {
+
+      $sub = SubscriptionModel::create([
+        'user_id' => $user->id,
+        'active' => true,
+        'free' => 0,
+        'finished_at' => Carbon::now()->addHour(3)->addDay($type->days),
+        'created_at' => Carbon::now()->addHour(3),
+        'updated_at' => Carbon::now()->addHour(3),
+      ]);
+
+      return response()->json(['message' => 'thanks, subscription was created', 'status' => 'SUCCESS', 'subscription' => $sub], 200);
+
+    }
+
+
+  }
 }

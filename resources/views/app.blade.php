@@ -52,6 +52,7 @@
       webvisor: true
     });
   </script>
+  <script src="https://widget.cloudpayments.ru/bundles/cloudpayments.js"></script>
   <noscript>
     <div><img src="https://mc.yandex.ru/watch/93097610" style="position:absolute; left:-9999px;" alt=""/></div>
   </noscript>

@@ -13,7 +13,7 @@
           <input type="radio" value="1" id="pay_1" name="payd" >
           <span class="text-[18px] xxl:text-[15px] xl:text-[13px]" for="pay_1">{{ item.title }}</span>
         </label>
-        <span class="text-[18px] xxl:text-[15px] xl:text-[13px]">{{ item.price / 100 }} TL</span>
+        <span class="text-[18px] xxl:text-[15px] xl:text-[13px]">{{ item.price }} RUB</span>
       </div>
       <button class="login__btn--bg  rounded-[5px] w-full py-5 xxl:py-4 xl:py-3" v-on:click="payment()" v-if="preloader === false">
         <span class="text-white font-semibold text-lg xxl:text-[15px] xl:text-[13px] leading-none">{{ language.prof_zastr[7] }}</span>
@@ -28,52 +28,102 @@
 
 <script>
   import { useForm } from '@inertiajs/inertia-vue3'
-export default {
-  props: ['tarifs', 'language', 'user'],
-  data() {
-    return {
-      amount: 0,
-      type: 0,
-      preloader: false,
-    }
-  },
-  methods: {
 
-    payment() {
-      this.preloader = true;
+  export default {
+    props: ['tarifs', 'language', 'user'],
+    data() {
+      return {
+        amount: 0,
+        type: 0,
+        preloader: false,
+      }
+    },
+    methods: {
 
-      if(this.amount !== 0) {
+      cloudPaymentTrial: function (price, email) {
+        let language = "ru-RU";
+        let dateNow = new Date();
+        let newDate = new Date();
+        let date = newDate.setDate(dateNow.getDate() + 3);
+        let data = {};
 
-        axios.post(route('pair'), {
-            email: this.user.email,
-            price: this.amount,
-            type: this.type,
-        }).then(res => {
-          if(res.status === 200) {
-            window.location.href = res.data;
-            this.preloader = false;
-          } else {
-            this.preloader = false;
+        const generateRandomString = (length) => {
+          let result = '';
+          const characters =
+            'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+          const charactersLength = characters.length;
+          for (let i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * charactersLength));
           }
+          return result;
+        };
 
-        }).catch(e => {
-          this.preloader = false;
+        data.CloudPayments = {
+          Amounts: price,
+          Email: email,
+          Type: this.type,
+          user_id: this.user.id,
+          random: generateRandomString(20),
+        };
+
+
+
+        var widget = new cp.CloudPayments({
+          language: language
         })
+        widget.pay('auth', // или 'charge'
+          { //options
+            publicId: 'pk_bfb7636e452f95334466cd885af0f',
+            description: 'Оформление подписки на evon-tr.com',
+            amount: price,
+            currency: 'RUB',
+            accountId: email,
+            invoiceId: 1,
+            skin: "mini",
+            autoClose: 3,
+            data: data,
+          }, {
+            onSuccess: function (options) {
+              console.log('success');
+            },
+            onFail: function (reason, options) {
+              const form = useForm({
+                options: options
+              })
 
-      } else {
-        this.preloader = false;
+              form.post('/cloud/failed');
+            },
+            onComplete: function (paymentResult, options) {
+              if (paymentResult.success === true) {
+                  const form = useForm({
+                    options: options
+                  })
+
+                  form.post('/cloud/payment');
+              }
+            }
+          }
+        )
+      },
+      payment() {
+        this.preloader = true;
+
+        if(this.amount !== 0) {
+
+          this.cloudPaymentTrial(this.amount, this.user.email);
+
+        }
+
+      },
+      setDate(item) {
+
+        this.type = item.id;
+        this.amount = item.price;
+
       }
 
-    },
-    setDate(item) {
-
-      this.type = item.id;
-      this.amount = item.price;
-
     }
-
   }
-}
 </script>
 
 <style scoped>

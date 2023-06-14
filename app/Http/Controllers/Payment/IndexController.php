@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\User\SubscriptionController;
 use App\Models\PaymentModel;
 use App\Models\TarifModel;
+use App\Models\TarifRussionModel;
+use App\Models\TraceModel;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Inertia\Inertia;
 
 class IndexController extends Controller
 {
@@ -15,6 +20,60 @@ class IndexController extends Controller
   public function plan() {
     return response()->json(TarifModel::all(), 200);
   }
+
+  /**
+   * cloud success payment
+   * @param Request $request
+   * @return \Symfony\Component\HttpFoundation\Response
+   * @throws \Exception
+   */
+
+  public function cloud(Request $request) {
+
+     TraceModel::create([
+      'user_id' => $request->options['data']['CloudPayments']['user_id'],
+      'order_id' => $request->options['data']['CloudPayments']['random'],
+      'price' => $request->options['data']['CloudPayments']['Amounts'],
+      'title' => 'Оплата русской подписки',
+      'status' => 'Оплачено',
+      'type' => $request->options['data']['CloudPayments']['Type'],
+    ]);
+
+    $tarif = TarifRussionModel::where('id', $request->options['data']['CloudPayments']['Type'])->first();
+    $user = User::where('id', $request->options['data']['CloudPayments']['user_id'])->first();
+
+    $subscription = new SubscriptionController();
+    $subscription->setSubscription($user, $tarif);
+
+    return Inertia::location('/profile');
+
+  }
+
+  /**
+   * set failed subscription
+   * @param Request $request
+   * @return \Symfony\Component\HttpFoundation\Response
+   */
+
+  public function setFailed(Request $request) {
+
+    TraceModel::create([
+      'user_id' => $request->options['data']['CloudPayments']['user_id'],
+      'order_id' => $request->options['data']['CloudPayments']['random'],
+      'price' => $request->options['data']['CloudPayments']['Amounts'],
+      'title' => 'Оплата русской подписки',
+      'status' => 'Оплачено',
+      'type' => $request->options['data']['CloudPayments']['Type'],
+    ]);
+
+    return Inertia::location('/profile');
+  }
+
+  /**
+   * paytr generation link for payment
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
 
   public function index(Request $request) {
     $merchant_id    = '332444';

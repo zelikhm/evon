@@ -1669,15 +1669,12 @@
         }
 
         const unique_obj = {};
-        console.log(object11.length)
-        // const res = object11.filter(({title}) =>(!unique_obj[title] && (unique_obj[title] = 1)));
-        const res = object11;
+        const res = object11.filter(({title}) =>(!unique_obj[title] && (unique_obj[title] = 1)));
+        // const res = object11;
         this.houses_array = res;
         this.map_array = res;
         this.count_house = this.houses_array.length;
         this.updatedMap();
-
-        console.log(res.length);
 
         return this.houses_array.splice(0, this.count);
       }

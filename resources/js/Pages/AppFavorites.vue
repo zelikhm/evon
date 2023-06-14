@@ -64,7 +64,7 @@ import { Link } from '@inertiajs/inertia-vue3'
             <div class="absolute left-0 bottom-0 flex items-center gap-2 xl:gap-1.5 z-20 p-5 xxl:p-4 xl:p-3">
               <span class="text-white text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none">{{ item.house.area }}</span>
               <div class="bg-white w-1 h-1 rounded-full"></div>
-              <span class="text-white text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap">49 Квартир</span>
+              <span class="text-white text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap">{{ item.house.flats.length }} Квартир</span>
             </div>
           </div>
           <div class="p-5 xxl:p-4 xl:p-3 flex flex-col gap-3.5 xxl:gap-3 xl:gap-2.5">
@@ -73,11 +73,11 @@ import { Link } from '@inertiajs/inertia-vue3'
               <img @click="addFavorite(item)" v-if="!item.house.favorite" src="../../assets/svg/heart_icon_grey.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 lg:w-6" alt="Сердце" >
               <img @click="removeFavorite(item)" v-else src="../../assets/svg/heart_icon_pink.svg" class="cursor-pointer w-6 xxl:w-5 xl:w-4 lg:w-6" alt="">
             </div>
-            <span class="text-[17px] xxl:text-[14px] xl:tex-[12px] lg:text-[16px]  text-[#1E1D2D] leading-none whitespace-nowrap">от 1 490 000 €</span>
+            <span class="text-[17px] xxl:text-[14px] xl:tex-[12px] lg:text-[16px]  text-[#1E1D2D] leading-none whitespace-nowrap">от {{ item.house.minPrice !== null ? item.house.minPrice.toLocaleString('ru') : 0 }} €</span>
             <div class="flex items-center gap-2 xl:gap-1.5 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px]">
-              <span class="leading-none whitespace-nowrap">85 000 € за м²</span>
+              <span class="leading-none whitespace-nowrap">{{ item.house.minPrice !== null || item.house.minSquare !== null ? (item.house.minPrice / item.house.minSquare).toLocaleString('ru') : 0 }} € за м²</span>
               <div class="w-1 h-1 bg-[#8A8996] rounded-full"></div>
-              <span class="leading-none whitespace-nowrap">14.9 м² - 23.4 м²</span>
+              <span class="leading-none whitespace-nowrap">{{ item.house.minSquare !== null ? item.house.minSquare.toLocaleString('ru') : 0 }} м² - {{ item.house.maxSquare !== null ? item.house.maxSquare.toLocaleString('ru') : 0 }} м²</span>
             </div>
           </div>
         </div>
@@ -125,6 +125,18 @@ export default {
     }
   },
   methods: {
+    getMinPrice(house) {
+      let object = [];
+
+      house.flats.forEach(item => {
+        object.push(item.price);
+      })
+
+      object.sort((a, b) => a - b);
+
+      return object.length > 0 ? object[0].toFixed(0) : 0;
+
+    },
     choseLanguage(language) {
       this.selectLanguage = language;
 

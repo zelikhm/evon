@@ -7,6 +7,8 @@ use App\Models\Builder\HouseImagesModel;
 use App\Models\Builder\Info\RegionModel;
 use App\Models\News\AdminNewsModel;
 use App\Models\TarifModel;
+use App\Models\TarifRussionModel;
+use App\Models\TraceModel;
 use App\Models\User\ClientModel;
 use App\Models\User\CompanyModel;
 use App\Models\User\SubscriptionModel;
@@ -38,7 +40,9 @@ class AdminSectionsServiceProvider extends ServiceProvider
     CompanyModel::class => 'App\Http\Admin\Company',
     //
     TarifModel::class => 'App\Http\Admin\Tarif',
+    TarifRussionModel::class => 'App\Http\Admin\TarifRussion',
     SubscriptionModel::class => 'App\Http\Admin\Subscription',
+    TraceModel::class => 'App\Http\Admin\Trace',
     //
     ClientModel::class => 'App\Http\Admin\Client'
   ];

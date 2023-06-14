@@ -33,6 +33,8 @@ Route::get('/test', function () {
     ->distinct()
 //    ->with(['info', 'files', 'frames', 'flats', 'user', 'news', 'images'])
     ->get();
+
+  dd($houses);
 });
 
 Route::post('/mail', ['App\Http\Controllers\User\IndexController', 'sendRegister'])->name('mail');
@@ -83,5 +85,10 @@ Route::get('/404', function () {
 
 Route::get('/privacy', ['App\Http\Controllers\PrivacyController', 'index']);
 Route::get('/agree', ['App\Http\Controllers\PrivacyController', 'agree']);
+
+Route::prefix('cloud')->group(function () {
+  Route::post('payment', ['App\Http\Controllers\Payment\IndexController', 'cloud']);
+  Route::post('failed', ['App\Http\Controllers\Payment\IndexController', 'setFailed']);
+});
 
 require __DIR__ . '/auth.php';
