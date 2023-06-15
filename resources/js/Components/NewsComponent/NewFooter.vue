@@ -5,6 +5,7 @@
 
       <div class="mobile-contant">
         <img class="logo" src="images/img/footer/logo.png" alt="" srcset="">
+        
         <p>
           {{ language.main[63] }}
         </p>
@@ -51,10 +52,14 @@
       <p>
         {{ language.main[64] }}
       </p>
+      <p style="opacity: 1;">
+          ИП Захаров Максим Анатольевич  ИНН 583714084101 
+      </p>
       <div class="row-ref">
         <a href="https://evon-tr.com/privacy" target="_blank">{{ language.main[65] }}</a>
         <a href="https://evon-tr.com/agree" target="_blank">{{ language.main[66] }}</a>
         <a href="#" >VERGI NO <span>3830916930</span></a>
+        
       </div>
     </div>
   </footer>
