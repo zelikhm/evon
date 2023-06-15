@@ -237,7 +237,7 @@
               </div>
             </div>
           </div>
- 
+
           <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]"
                :class="{ 'border__bottom--0': openSelectDev}"
                v-if="user.subscription_info.free === 0"
@@ -250,8 +250,8 @@
                 <span class="text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ selectDev }}</span>
                 <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all"
                      :class="{ 'rotate-180': openSelectDev }" alt="">
-              </div> 
-              <div 
+              </div>
+              <div
                    v-if="openSelectDev"
                    class="max-h-[300px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
                 <span
@@ -1279,8 +1279,9 @@
         }
       }
 
-      this.builders.unshift({'id': -1, 'first_name': this.language.ob[24]});  
-      this.builders.sort((a, b) => a.first_name.localeCompare(b.first_name)); 
+      this.builders.unshift({'id': -1, 'first_name': this.language.ob[24]});
+      // this.builders.sort((a, b) => a.first_name.localeCompare(b.first_name));
+
       if (this.city[0] !== null) {
         this.selectDev = this.language.ob[24]
         this.selectCity = this.language.ob[15]

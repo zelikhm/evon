@@ -75,7 +75,6 @@ import { Link } from '@inertiajs/inertia-vue3'
             </div>
             <span class="text-[17px] xxl:text-[14px] xl:tex-[12px] lg:text-[16px]  text-[#1E1D2D] leading-none whitespace-nowrap">от {{ item.house.minPrice !== null ? item.house.minPrice.toLocaleString('ru') : 0 }} €</span>
             <div class="flex items-center gap-2 xl:gap-1.5 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px]">
-              <span class="leading-none whitespace-nowrap">{{ item.house.minPrice !== null || item.house.minSquare !== null ? (item.house.minPrice / item.house.minSquare).toLocaleString('ru') : 0 }} € за м²</span>
               <div class="w-1 h-1 bg-[#8A8996] rounded-full"></div>
               <span class="leading-none whitespace-nowrap">{{ item.house.minSquare !== null ? item.house.minSquare.toLocaleString('ru') : 0 }} м² - {{ item.house.maxSquare !== null ? item.house.maxSquare.toLocaleString('ru') : 0 }} м²</span>
             </div>
