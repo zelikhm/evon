@@ -1608,7 +1608,7 @@
                 object11.push(item);
               }
             } else if (this.filters.square.max !== '' && this.filters.square.min === '') {
-              if (item.maxSquare <= this.filters.square.max) {
+              if (item.maxSquare >= this.filters.square.max) {
                 object11.push(item);
               }
             } else {
@@ -1657,7 +1657,7 @@
                       object11.push(item);
                     }
                   } else if (this.filters.square.max !== '' && this.filters.square.min === '') {
-                    if (value.square <= this.filters.square.max) {
+                    if (value.square >= this.filters.square.max) {
                       object11.push(item);
                     }
                   } else {
