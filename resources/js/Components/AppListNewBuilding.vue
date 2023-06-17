@@ -1581,39 +1581,43 @@
         if(this.selectPlan.find(obj => obj.active === true) === undefined) {
 
           object9.forEach(item => {
-            if (this.filters.price.min !== '' && this.filters.price.max !== '') {
-              if (item.minPrice >= this.filters.price.min && item.minPrice <= this.filters.price.max) {
-                object10.push(item);
+            item.flats.forEach(value => {
+              if (this.filters.price.min !== '' && this.filters.price.max !== '') {
+                if (value.price >= this.filters.price.min && value.price <= this.filters.price.max) {
+                  object10.push(item);
+                }
+              } else if (this.filters.price.min !== '' && this.filters.price.max === '') {
+                if (value.price >= this.filters.price.min) {
+                  object10.push(item);
+                }
+              } else if (this.filters.price.max !== '' && this.filters.price.min === '') {
+                if (value.price <= this.filters.price.max) {
+                  object10.push(item);
+                }
+              } else {
+                object10 = object9;
               }
-            } else if (this.filters.price.min !== '' && this.filters.price.max === '') {
-              if (item.minPrice >= this.filters.price.min) {
-                object10.push(item);
-              }
-            } else if (this.filters.price.max !== '' && this.filters.price.min === '') {
-              if (item.minPrice <= this.filters.price.max) {
-                object10.push(item);
-              }
-            } else {
-              object10 = object9;
-            }
+            })
           })
 
           object10.forEach(item => {
-            if (this.filters.square.min !== '' && this.filters.square.max !== '') {
-              if (item.minSquare >= this.filters.square.min && item.maxSquare <= this.filters.square.max) {
-                object11.push(item);
+            item.flats.forEach(value => {
+              if (this.filters.square.min !== '' && this.filters.square.max !== '') {
+                if (value.square >= this.filters.square.min && value.square <= this.filters.square.max) {
+                  object11.push(item);
+                }
+              } else if (this.filters.square.min !== '' && this.filters.square.max === '') {
+                if (value.square >= this.filters.square.min) {
+                  object11.push(item);
+                }
+              } else if (this.filters.square.max !== '' && this.filters.square.min === '') {
+                if (value.square <= this.filters.square.max) {
+                  object11.push(item);
+                }
+              } else {
+                object11 = object10;
               }
-            } else if (this.filters.square.min !== '' && this.filters.square.max === '') {
-              if (item.minSquare >= this.filters.square.min) {
-                object11.push(item);
-              }
-            } else if (this.filters.square.max !== '' && this.filters.square.min === '') {
-              if (item.maxSquare >= this.filters.square.max) {
-                object11.push(item);
-              }
-            } else {
-              object11 = object10;
-            }
+            });
           })
 
         } else {
@@ -1657,7 +1661,7 @@
                       object11.push(item);
                     }
                   } else if (this.filters.square.max !== '' && this.filters.square.min === '') {
-                    if (value.square >= this.filters.square.max) {
+                    if (value.square <= this.filters.square.max) {
                       object11.push(item);
                     }
                   } else {
