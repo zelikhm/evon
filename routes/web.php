@@ -31,10 +31,23 @@ Route::get('/test', function () {
     ->select('house_models.*')
     ->where('house_characteristics_models.type', 'Новостройка')
     ->distinct()
-//    ->with(['info', 'files', 'frames', 'flats', 'user', 'news', 'images'])
+    ->with(['info', 'files', 'frames', 'flats', 'user', 'news', 'images'])
     ->get();
 
-  dd($houses);
+  $i = 0;
+  $array = collect();
+
+  foreach ($houses as $house) {
+    foreach ($house->flats as $flat) {
+      if($flat->price >= 290000 && $flat->price <= 291000) {
+        $i++;
+        $array->push($house);
+        continue;
+      }
+    }
+  }
+
+  dd($array->unique('id'));
 });
 
 Route::post('/mail', ['App\Http\Controllers\User\IndexController', 'sendRegister'])->name('mail');
