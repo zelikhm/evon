@@ -227,7 +227,8 @@
     "11": "Active until: ",
     "12": "Tell us about yourself",
     "13": "Pay",
-    "14": "languages"
+    "14": "languages",
+    "15": "Rates"
   },
   "rielt_1": {
     "0": "New buildings",
@@ -429,7 +430,10 @@
   },
   "btn_send":{
     "0": "Send to client"
-  }
-
-
+  },
+  "free_version":{
+    "0": "Free version. Available",
+    "1": "projects out of ",
+    "2": "Buy"
+  } 
 }

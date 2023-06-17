@@ -227,7 +227,8 @@
     "11": "tarihine kadar aktif",
     "12": "bize kendinizden bahsedin",
     "13": "Öde",
-    "14": "diller"
+    "14": "diller",
+    "15": "Tarifeler"
   },
   "rielt_1": {
     "0": "Yeni binalar",
@@ -428,5 +429,10 @@
   },
   "btn_send":{
     "0": "Müşteri ile paylaş"
+  },
+  "free_version":{
+    "0": "Free version. Available",
+    "1": "projects out of ",
+    "2": "Buy"
   }
 }
