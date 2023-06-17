@@ -1,3 +1,8 @@
+<script setup>
+import { Link } from '@inertiajs/inertia-vue3' 
+</script>
+
+
 <template>
   <NewsModal v-if="isNews" @close="isNews = false" :new_object="new_object" :language="language" ></NewsModal>
   <app-modal-notification
@@ -32,7 +37,18 @@
   />
   <main>
     <div class="_container">
-      <div class="immovables__grid relative my-14 xxl:my-10 xl:my-8">
+      <div class="hints ">
+         <p class="text-[#E84680]   transition-all   text-xl xxl:text-base xl:text-sm md:text-[17px]">Бесплатная версия. Доступно:</p>
+         <div class="progress">
+           <div class="line" :style="{width:`${getWidth(count_houses)}%`}"></div>
+           <h4 class="text-[#6435A5] text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">30 объектов из {{ count_houses }}</h4>
+         </div>
+         <Link href="/profile"  >
+           <button class="cursor-pointer uppercase   text-[#E84680] text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none font-semibold rounded-[3px] px-8 xxl:px-8 xl:px-8 py-2 xxl:py-1.5 xl:py-1 cursor-default" >Купить</button>
+         </Link>
+         
+      </div>
+      <div class="immovables__grid relative my-14 xxl:my-10 xl:my-8  ">
         <app-list-new-building
           @open-add-selections="openSelection"
           :houses="houses"
@@ -82,8 +98,7 @@ import AppAddSelections from "@/Layouts/modal/AppAddSelections.vue"
 import AppImmovablesCreateSelection from "@/Layouts/modal/AppImmovablesCreateSelection.vue"
 import { router } from '@inertiajs/vue3'
 import {usePage} from "@inertiajs/inertia-vue3";
-import {computed} from "vue";
-
+import {computed} from "vue"; 
 export default {
   emits: {
 
@@ -124,6 +139,9 @@ export default {
     }
   },
   methods: {
+    getWidth(count){
+        return Math.round((30 / count) * 100)
+    },
     choseLanguage(language) {
       this.selectLanguage = language;
 
@@ -201,5 +219,69 @@ export default {
 </script>
 
 <style scoped>
+
+.hints{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin: 0 auto;
+    gap: 25px;
+    padding: 20px 0px;
+}
+.hints p{
+  line-height: 30px;
+}
+.hints .progress{
+    border: 2px solid rgba(100, 53, 165, 0.12);
+    border-radius: 16px;
+    padding: 0px 90px;
+    overflow: hidden;
+    position: relative;
+}
+.hints .progress .line{
+  background-color: rgba(100, 53, 165, 0.12);
+ 
+  height: 100%;
+  position: absolute;
+  left: 0;
+}
+.hints .progress h4{
+  text-align: center;
+}
+.hints button{
+  border: 2px solid #E84680;
+  transition: 0.2s;
+  display: block;
+}
+.hints button:hover{
+  background: #E84680;
+  color: white;
+}
+@media (max-width:800px) {
+  .hints{
+    display: block;
+    width: 100%;
+  }
+  .hints p  {
+    line-height: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.hints button{
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  padding: 10px;
+  margin-top: 15px; 
+}
+.hints .progress { 
+    padding: 0px 0; 
+}
+  .hints .progress{
+    width: 100%;
+    margin: 0 auto;
+  }
+}
 
 </style>

@@ -94,8 +94,12 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
                 <img src="../../assets/svg/chat_mail_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5 lg:w-[4.5]" alt="">
                 <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ compilation.user.email }}</span>
               </div>
+              <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]" v-if="compilation.description">
+                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" v-if="compilation.description">{{ language.rielt_3[3] }}: {{ compilation.description }}</span>
+              </div>
             </div>
-            <span class="w-full text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px]" v-if="compilation.description">{{ language.rielt_3[3] }}: {{ compilation.description }}</span>
+             
+            
           </div>
         </div>
       </div>
