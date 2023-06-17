@@ -35,7 +35,8 @@
                 <div class="flex flex-col gap-3 xxl:gap-2.5 xl:gap-2">
                   <span class="text-[#1E1D2D] font-medium text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">{{ JK.house.title }}</span>
                   <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ JK.house.city }}, {{ JK.house.area }}</span>
-                  <!-- <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ JK.description }} </span> -->
+                  <img class="cursor-pointer w-6 xxl:w-5 xl:w-4 mx-5 xxl:mx-4 xl:mx-3" src="../../../assets/svg/chat_icon_grey.svg" alt="" srcset="">
+                  <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] leading-none">{{ JK.description }} </span>
                 </div>
               </div>
               <div class="flex items-center" @click="deleteJK(JK.house)">
