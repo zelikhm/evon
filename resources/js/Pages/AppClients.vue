@@ -579,8 +579,14 @@ h2 {
 @media (max-width: 768px) {
   .columns-clients .clients-menager {
     margin: 0 auto;
-  }
-
+    width: auto;
+  } 
+.clients-menager-refs li em { 
+    font-size:  3vw;
+}
+.clients-menager-refs li  a { 
+    font-size:  3vw;
+}
   .columns-clients {
     display: block;
   }
