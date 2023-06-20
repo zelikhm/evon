@@ -23,33 +23,6 @@ use App\Http\Traits\MainInfo;
 
 Route::get('/', ['App\Http\Controllers\Controller', 'main']);
 
-Route::get('/test', function () {
-  $houses = HouseModel::where('visible', 1)
-    ->orderBy('updated_at', 'DESC')
-    ->where('active', 2)
-    ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
-    ->select('house_models.*')
-    ->where('house_characteristics_models.type', 'Новостройка')
-    ->distinct()
-    ->with(['info', 'files', 'frames', 'flats', 'user', 'news', 'images'])
-    ->get();
-
-  $i = 0;
-  $array = collect();
-
-  foreach ($houses as $house) {
-    foreach ($house->flats as $flat) {
-      if($flat->price >= 290000 && $flat->price <= 291000) {
-        $i++;
-        $array->push($house);
-        continue;
-      }
-    }
-  }
-
-  dd($array->unique('id'));
-});
-
 Route::post('/mail', ['App\Http\Controllers\User\IndexController', 'sendRegister'])->name('mail');
 
 Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
