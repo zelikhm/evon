@@ -255,7 +255,7 @@
                    v-if="openSelectDev"
                    class="max-h-[300px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-[17px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
                 <span
-                  v-for="(item, idx) in builders" :key="idx"
+                  v-for="(item, idx) in sortBilders()" :key="idx"
                   @click="changeSelectDev(item)"
                   class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
                 >
@@ -824,6 +824,9 @@
       }
     },
     methods: {
+      sortBilders(){
+        return this.builders.sort((a, b) => a.first_name.localeCompare(b.first_name))
+      },
       getTitleDeadline() {
 
         if(this.deadlines.find(item => item.active === true) !== undefined) {
@@ -1256,7 +1259,7 @@
           })
         }
       }
-
+      
       this.infos.forEach(item => {
         item.active = false;
 
@@ -1279,8 +1282,7 @@
         }
       }
 
-      this.builders.unshift({'id': -1, 'first_name': this.language.ob[24]});
-      // this.builders.sort((a, b) => a.first_name.localeCompare(b.first_name));
+      this.builders.unshift({'id': -1, 'first_name': this.language.ob[24]}); 
 
       if (this.city[0] !== null) {
         this.selectDev = this.language.ob[24]
@@ -1312,8 +1314,7 @@
       // NO DELETE
       document.addEventListener('click', (e) => {
         this.openSelectCity = false
-      })
-
+      }) 
     },
     computed: {
       filteredCity() {

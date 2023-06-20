@@ -95,7 +95,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
                 <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ compilation.user.email }}</span>
               </div>
               <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]" v-if="compilation.description">
-                <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" v-if="compilation.description">{{ language.rielt_3[3] }}: {{ compilation.description }}</span>
+                <span class="leading-normal	 leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" v-if="compilation.user.description"><!-- {{ language.rielt_3[3] }}:  -->{{ compilation.user.description }}</span>
               </div>
             </div>
              
