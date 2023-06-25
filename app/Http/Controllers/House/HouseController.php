@@ -104,7 +104,15 @@ class HouseController extends Controller
   public function villages()
   {
 
-    $houses = $this->getAllHouse('Вилла', true, true);
+    $user = $this->getUser();
+
+    $limit = 30;
+
+    if($user->subscriptionInfo !== null && $user->subscriptionInfo->free === 1) {
+      $limit = 10;
+    }
+
+    $houses = $this->getAllHouse('Вилла', true, true, $limit);
 
     $count = HouseModel::where('visible', 1)
       ->where('active', 2)
@@ -243,8 +251,9 @@ class HouseController extends Controller
 
   public function getHousesJk(Request $request)
   {
+
     if ($this->checkToken($request->token)) {
-      return $this->getAllHouse('Новостройка', $request->limit, $request->dop);
+      return $this->getAllHouse('Новостройка', $request->limit, $request->dop, $request->limit_count);
     } else {
       return response()->json('not auth', 401);
     }
@@ -260,7 +269,7 @@ class HouseController extends Controller
   public function getHousesVillages(Request $request)
   {
     if ($this->checkToken($request->token)) {
-      return $this->getAllHouse('Вилла', $request->limit, $request->dop);
+      return $this->getAllHouse('Вилла', $request->limit, $request->dop, $request->limit_count);
     } else {
       return response()->json('not auth', 401);
     }
