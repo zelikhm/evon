@@ -80,8 +80,20 @@ export default {
       this.$emit('close-addClient')
     },
     copy() {
-      navigator.clipboard.writeText(this.getLink())
+      try {
+        navigator.clipboard.writeText(this.getLink())
+      } catch (error) {
+        var textToCopy = this.getLink();   
+        var input = document.createElement("textarea");
+        input.value = textToCopy;
+        document.body.appendChild(input);
+        input.select();
+        input.setSelectionRange(0, 99999); 
+        document.execCommand("copy");
+        document.body.removeChild(input); 
+      } 
     }
+    
   }
 }
 </script>
