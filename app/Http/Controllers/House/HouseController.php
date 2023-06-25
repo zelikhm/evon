@@ -79,8 +79,8 @@ class HouseController extends Controller
       ->select('house_models.*')
       ->where('house_characteristics_models.type', 'Новостройка')
       ->distinct()
-      ->with(['info', 'files', 'frames', 'flats', 'user', 'news', 'images'])
-      ->count();
+//    ->with(['info', 'files', 'frames', 'flats', 'user', 'news', 'images'])
+      ->get();
 
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
@@ -94,7 +94,7 @@ class HouseController extends Controller
       'news' => $this->getNewsForPage(),
       'adminNews' => $this->getAdminNews(),
       'user' => $this->getUser(),
-      'count_houses' => $count,
+      'count_houses' => $count->count(),
       'free_count' => 30,
       'type' => 0,
     ]);
