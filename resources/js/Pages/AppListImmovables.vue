@@ -37,7 +37,7 @@ import { Link } from '@inertiajs/inertia-vue3'
   />
   <main>
     <div class="_container">
-      <!-- <div class="hints ">
+      <div class="hints ">
          <p class="text-[#E84680]   transition-all   text-xl xxl:text-base xl:text-sm md:text-[17px]">{{language.free_version[0]}}:</p>
          <div class="progress">
            <div class="line" :style="{width:`${getWidth(count_houses)}%`}"></div>
@@ -47,7 +47,7 @@ import { Link } from '@inertiajs/inertia-vue3'
            <button class="cursor-pointer uppercase   text-[#E84680] text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none font-semibold rounded-[3px] px-8 xxl:px-8 xl:px-8 py-2 xxl:py-1.5 xl:py-1 cursor-default" >{{language.free_version[2]}}</button>
          </Link>
          
-      </div> -->
+      </div>
       <div class="immovables__grid relative my-14 xxl:my-10 xl:my-8  ">
         <app-list-new-building
           @open-add-selections="openSelection"
