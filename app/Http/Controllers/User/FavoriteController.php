@@ -89,9 +89,8 @@ class FavoriteController extends Controller
       $favorites = FavoritesModel::where('user_id', $request->user_id)->get();
 
       foreach ($favorites as $item) {
-
-        $item->house = $this->getHouseOnId($item->house_id);
-
+        $house = $this->getHouseOnId($item->house_id);
+        $item->house = $this->getHouseSlug($house->slug);
       }
 
       return $favorites;
