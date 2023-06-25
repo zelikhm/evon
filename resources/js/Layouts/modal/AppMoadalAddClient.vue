@@ -5,7 +5,8 @@
       <div class="relative    ">
 
         <div class="flex justify-between items-center mb-5 xxl:mb-4 xl:mb-3">
-          <h2 class="text-[22px] xxl:text-[18px] xl:text-[16px] font-semibold leading-none">{{ language.send_client[0] }}</h2>
+          <h2 class="text-[22px] xxl:text-[18px] xl:text-[16px] font-semibold leading-none">{{ language.send_client[0]
+          }}</h2>
           <button class="hover__close right-0 z-50">
             <svg class="transition-all cursor-pointer w-6 xxl:w-5 xl:w-4" width="24" @click="closeAddClient" height="24"
               viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -19,19 +20,17 @@
                   <rect width="24" height="24" fill="white"></rect>
                 </clipPath>
               </defs>
-            </svg></button>
+            </svg>
+          </button>
         </div>
 
         <div class="relative mt-10 xxl:mt-8 xl:mt-6">
 
-          <input v-if="user.subscription_info.free == 1 && user.subscription_info.free_link == 1 || user.subscription_info.free == 0" :value="getLink()" readonly ref="text" disabled
+          <input :value="getLink()" readonly ref="text" disabled
             class="copy-link w-full text-[#1E1D2D] text-[16px] focus:ring-[#6435A5] focus:border-[#6435A5] xxl:text-[14px] xl:text-[12px] pl-5 xxl:pl-4 xl:pl-3 py-3 xxl:py-2.5 xl:py-2 leading-none rounded-[5px] border border-solid border-[#E5DFEE] pr-12 xxl:pr-10 xl:pr-8"
             type="text">
-          <input v-else :value="getLink()" readonly ref="text" disabled
-                 class="copy-link w-full text-[#1E1D2D] text-[16px] focus:ring-[#6435A5] focus:border-[#6435A5] xxl:text-[14px] xl:text-[12px] pl-5 xxl:pl-4 xl:pl-3 py-3 xxl:py-2.5 xl:py-2 leading-none rounded-[5px] border border-solid border-[#E5DFEE] pr-12 xxl:pr-10 xl:pr-8"
-                 type="text">
-          <span class="copy-link-text" v-if="user.subscription_info.free == 1">{{language.ob[50]}}</span>       
-          <img v-if="user.subscription_info.free == 1 && user.subscription_info.free_link == 1 || user.subscription_info.free == 0" @click="copy"
+          <!--          <span class="copy-link-text">{{language.ob[50]}}</span>-->
+          <img @click="copy"
             class="absolute cursor-pointer top-1/2 -translate-y-1/2 w-6 xxl:w-5 xl:w-4 right-5 xxl:right-4 xl:right-3"
             src="../../../assets/svg/copy_icon_purple.svg" alt="">
         </div>
@@ -48,7 +47,7 @@
 <script>
 export default {
 
-  props: ['house', 'user','language'],
+  props: ['house', 'user', 'language'],
   data() {
     return {
       isVisible: false,
@@ -62,18 +61,14 @@ export default {
   methods: {
     getLink() {
 
-      if(this.user.subscription_info.free_link == 1) {
+      if (this.user.subscription_info.free_link == 1) {
         axios.post('/api/user/setLink', {
           'token': this.user.token,
           'id': this.user.subscription_info.id,
         })
       }
 
-      if(this.user.subscription_info.free == 1 && this.user.subscription_info.free_link == 0) {
-        return window.location.origin + '/compilation/user/' + this.user.id + '/' + '****';
-      } else {
-        return window.location.origin + '/compilation/user/' + this.user.id + '/' + this.house.slug;
-      }
+      return window.location.origin + '/compilation/user/' + this.user.id + '/' + this.house.slug;
 
     },
     closeAddClient() {
@@ -83,43 +78,40 @@ export default {
       try {
         navigator.clipboard.writeText(this.getLink())
       } catch (error) {
-        var textToCopy = this.getLink();   
+        var textToCopy = this.getLink();
         var input = document.createElement("textarea");
         input.value = textToCopy;
         document.body.appendChild(input);
         input.select();
-        input.setSelectionRange(0, 99999); 
+        input.setSelectionRange(0, 99999);
         document.execCommand("copy");
-        document.body.removeChild(input); 
-      } 
+        document.body.removeChild(input);
+      }
     }
-    
   }
 }
 </script>
 
 <style scoped>
-
-
-.copy-link-text {  
+.copy-link-text {
   position: absolute;
-    top: 40px;
-    right: 99px;
-    /* box-shadow: 0px 0px 0px 1px; */
-    background: white;
-    color: rgb(101 54 165 );
-    border-radius: 10px;
-    /* opacity: 0; */
-    font-size: 12px;
-    padding: 2px 22px;
-    opacity: 0;
-    transition: .7s;
-    border: 0;
-    pointer-events: none;
+  top: 40px;
+  right: 99px;
+  /* box-shadow: 0px 0px 0px 1px; */
+  background: white;
+  color: rgb(101 54 165);
+  border-radius: 10px;
+  /* opacity: 0; */
+  font-size: 12px;
+  padding: 2px 22px;
+  opacity: 0;
+  transition: .7s;
+  border: 0;
+  pointer-events: none;
 
 }
 
-.copy-link:hover + .copy-link-text {
+.copy-link:hover+.copy-link-text {
   opacity: 1;
 }
 
@@ -159,4 +151,3 @@ export default {
   }
 }
 </style>
-

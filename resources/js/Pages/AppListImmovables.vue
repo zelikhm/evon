@@ -1,5 +1,5 @@
 <script setup>
-import { Link } from '@inertiajs/inertia-vue3' 
+import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
 
@@ -37,16 +37,16 @@ import { Link } from '@inertiajs/inertia-vue3'
   />
   <main>
     <div class="_container">
-      <div class="hints ">
+      <div class="hints " v-if="user.subscription_info.free == 1">
          <p class="text-[#E84680]   transition-all   text-xl xxl:text-base xl:text-sm md:text-[17px]">{{language.free_version[0]}}:</p>
          <div class="progress">
            <div class="line" :style="{width:`${getWidth(count_houses)}%`}"></div>
-           <h4 class="text-[#6435A5] text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">30 {{language.free_version[1]}}{{ count_houses }}</h4>
+           <h4 class="text-[#6435A5] text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">{{free_count + ' ' + language.free_version[1]}}{{ count_houses }}</h4>
          </div>
          <Link href="/profile"  >
            <button class="cursor-pointer uppercase   text-[#E84680] text-sm xxl:text-xs xl:text-[10px] md:text-[12px] leading-none font-semibold rounded-[3px] px-8 xxl:px-8 xl:px-8 py-2 xxl:py-1.5 xl:py-1 cursor-default" >{{language.free_version[2]}}</button>
          </Link>
-         
+
       </div>
       <div class="immovables__grid relative my-14 xxl:my-10 xl:my-8  ">
         <app-list-new-building
@@ -98,7 +98,7 @@ import AppAddSelections from "@/Layouts/modal/AppAddSelections.vue"
 import AppImmovablesCreateSelection from "@/Layouts/modal/AppImmovablesCreateSelection.vue"
 import { router } from '@inertiajs/vue3'
 import {usePage} from "@inertiajs/inertia-vue3";
-import {computed} from "vue"; 
+import {computed} from "vue";
 export default {
   emits: {
 
@@ -113,6 +113,7 @@ export default {
     adminNews: [],
     news: [],
     count_houses: 0,
+    free_count: 0,
     type: 0,
     user: [],
     areas: {},
@@ -241,7 +242,7 @@ export default {
 }
 .hints .progress .line{
   background-color: rgba(100, 53, 165, 0.12);
- 
+
   height: 100%;
   position: absolute;
   left: 0;
@@ -273,10 +274,10 @@ export default {
   display: block;
   margin: 0 auto;
   padding: 10px;
-  margin-top: 15px; 
+  margin-top: 15px;
 }
-.hints .progress { 
-    padding: 0px 0; 
+.hints .progress {
+    padding: 0px 0;
 }
   .hints .progress{
     width: 100%;
