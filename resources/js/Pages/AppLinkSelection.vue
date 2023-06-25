@@ -93,13 +93,35 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
               <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]" v-if="compilation.user.email">
                 <img src="../../assets/svg/chat_mail_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5 lg:w-[4.5]" alt="">
                 <span class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{ compilation.user.email }}</span>
+              </div> 
+            </div>
+
+            <!--Информация о себе-->
+            <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 mb-5" v-if="compilation.user.description">
+              <div class="flex items-center mb-5 xxl:mb-4 xl:mb-4 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none">
+                <span class="text-[#8A8996] leading-none">{{ language.ob[51] }}:&nbsp;</span>
+                <span class="leading-none">{{ compilation.user.link }}</span>
               </div>
-              <div class="flex cursor-pointer bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]" v-if="compilation.description">
-                <span class="leading-normal	 leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" v-if="compilation.user.description"><!-- {{ language.rielt_3[3] }}:  -->{{ compilation.user.description }}</span>
+              <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5  ">
+                <div class="flex    rounded-[5px] border border-solid border-[#E5DFEE]  p-4 xxl:p-3 xl:p-2.5 rounded-[5px]" >
+                  <span class="leading-normal	 leading-none text-center w-full   text-[14px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]"  ><!-- {{ language.rielt_3[3] }}:  -->{{ compilation.user.description }}</span>
+                </div> 
               </div>
             </div>
-             
+            <!--Комментарий-->
+            <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5  " v-if="compilation.description">
+              <div class="flex items-center mb-5 xxl:mb-4 xl:mb-4 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none">
+                <span class="text-[#8A8996] leading-none">{{ language.ob[52] }}:&nbsp;</span>
+                <span class="leading-none">{{ compilation.user.link }}</span>
+              </div>
+              <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 mb-5">
+                <div class="flex  rounded-[5px] border border-solid border-[#E5DFEE]  p-4 xxl:p-3 xl:p-2.5 rounded-[5px]" >
+                  <span class="leading-normal	 leading-none text-center w-full   text-[14px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]" ><!-- {{ language.rielt_3[3] }}:  -->{{ compilation.description }}</span>
+                </div> 
+              </div>
+            </div>
             
+           
           </div>
         </div>
       </div>

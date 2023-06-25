@@ -377,7 +377,9 @@
     "47": "Search",
     "48": "Selected",
     "49": "layout",
-    "50": "Available in paid version"
+    "50": "Available in paid version",
+    "51":"About Me",
+    "52":"Comment"
   },
   "reg": {
     "0": "Registration on the platform",
