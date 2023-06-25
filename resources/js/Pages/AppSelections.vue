@@ -162,11 +162,8 @@ export default {
       })
     },
     onModalWithLink(item) {
-
-      console.log(this.user)
-
       this.submitSelection = true
-      if (this.user.subscription_info.free == 1 && this.user.subscription_info.free_link == 1 || this.user.subscription_info.free == 0) {
+      if (this.user.subscription) {
         this.link = `${document.location.protocol}//${document.location.host}/compilation/${10000 + item.id}`
       } else {
         this.link = `${document.location.protocol}//${document.location.host}/compilation/****`

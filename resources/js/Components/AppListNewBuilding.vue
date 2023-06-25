@@ -1240,8 +1240,16 @@
         this.map_array = this.houses;
 
         if (this.type === 0) {
-          axios.get('/api/house/getHousesJk?dop=true').then(res => {
+
+          let link = '/api/house/getHousesJk?dop=true';
+
+          if(this.user.subscription === true && this.user.subscription_info.free == 1) {
+            link = '/api/house/getHousesJk?dop=true&limit=true&limit_count=30';
+          }
+
+          axios.get(link).then(res => {
             this.readyHouses = res.data;
+            console.log(res.data);
             this.count_house = this.readyHouses.length;
             this.map_array = this.readyHouses;
             this.updateHouses();
@@ -1249,7 +1257,14 @@
             this.preloader = false;
           })
         } else {
-          axios.get('/api/house/getHousesVillages?dop=true').then(res => {
+
+          let link = '/api/house/getHousesVillages?dop=true';
+
+          if(this.user.subscription === true && this.user.subscription_info.free == 1) {
+            link = '/api/house/getHousesVillages?dop=true&limit=true&limit_count=10';
+          }
+console.log(link)
+          axios.get(link).then(res => {
             this.readyHouses = res.data;
             this.count_house = this.readyHouses.length;
             this.map_array = this.readyHouses;
@@ -1259,7 +1274,7 @@
           })
         }
       }
-      
+
       this.infos.forEach(item => {
         item.active = false;
 
@@ -1282,7 +1297,7 @@
         }
       }
 
-      this.builders.unshift({'id': -1, 'first_name': this.language.ob[24]}); 
+      this.builders.unshift({'id': -1, 'first_name': this.language.ob[24]});
 
       if (this.city[0] !== null) {
         this.selectDev = this.language.ob[24]
@@ -1314,7 +1329,7 @@
       // NO DELETE
       document.addEventListener('click', (e) => {
         this.openSelectCity = false
-      }) 
+      })
     },
     computed: {
       filteredCity() {

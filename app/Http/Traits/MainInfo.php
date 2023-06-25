@@ -333,7 +333,7 @@ trait MainInfo
    * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
    */
 
-  public function getAllHouse($type, $limit, $dop)
+  public function getAllHouse($type, $limit, $dop, $count = null)
   {
     if($limit) {
       $houses = HouseModel::where('visible', 1)
@@ -344,7 +344,7 @@ trait MainInfo
         ->where('house_characteristics_models.type', $type)
         ->distinct()
         ->with(['info', 'files', 'frames', 'flats', 'user', 'news', 'images'])
-        ->limit(30)
+        ->limit($count !== null ? $count : 30)
         ->get();
     } else {
       $houses = HouseModel::where('visible', 1)

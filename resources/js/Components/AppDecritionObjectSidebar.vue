@@ -29,21 +29,14 @@
           <!--          <img :src="'/storage/' + house.user.image" class="h-14 xxl:h-12 xl:h-10" alt="avatar">-->
           <div class=" flex flex-col gap-1.5 xxl:gap-1 xl:gap-0.5">
             <span class="font-medium text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none"
-              v-if="house.user.first_name && user.subscription_info.free == 0">{{ house.user.first_name }}</span>
-            <span class="stars font-medium text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none"
-              v-bind:title="language.ob[50]" v-if="house.user.first_name && user.subscription_info.free == 1">{{ '*****'
-              }}</span>
+              v-if="house.user.first_name">{{ house.user.first_name }}</span>
             <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px] leading-none"
               v-if="house.user.status">{{ house.user.status }}</span>
           </div>
         </div>
         <button
           class="w-full bg-[#F6F3FA] text-[#6536A5] text-base xxl:text-sm xl:text-xs lg:text-[15px] rounded-[6px] py-4 xxl:py-3 xl:py-2.5"
-          v-if="user.subscription_info.free !== 1" v-on:click="openChat(house.user.id)">{{ language.ob[9] }}</button>
-        <button
-          class="w-full bg-[#F6F3FA] text-[#6536A5] text-base xxl:text-sm xl:text-xs lg:text-[15px] rounded-[6px] py-4 xxl:py-3 xl:py-2.5"
-          :data-tooltip="language.ob[50]" v-else :disabled="user.subscription_info.free === 1">{{ language.ob[9]
-          }}</button>
+          v-on:click="openChat(house.user.id)">{{ language.ob[9] }}</button>
       </div>
     </div>
     <div class="pb-10 xxl:pb-8 xl:pb-6" v-if="house.info.exclusive && house.info.exclusive !== 'null'">
@@ -60,17 +53,13 @@
           class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">
         </span>
       </div>
-      <div v-if="user.subscription_info.free === 0" >
         <div class="flex items-start gap-4 xxl:gap-3 xl:gap-2.5">
         <span class=" font-medium text-[28px] xxl:text-[22px] xl:text-[18px] lg:text-[22px]"
               v-if="house.percent !== 'null' && house.percent">{{ house.percent + '%' }}</span>
           <span class=" text-base text-[#8A8996] xxl:text-sm xl:text-xs lg:text-[15px]"
                 v-if="house.comment && house.comment !== 'null'">{{ house.comment }}</span>
         </div>
-      </div>
-      <div v-else>
-        <span class="transparent font-medium text-[20px] xxl:text-[14px] xl:text-[12px] lg:text-[14px]">{{
-          language.ob[50] }}</span>
+      <div>
       </div>
     </div>
     <div class="pb-14 xxl:pb-10 xl:pb-8" v-if="house.supports.length > 0">
@@ -92,18 +81,18 @@
             class="text-[#8A8996]" v-if="item.link !== 'null' && item.link !== null">{{ language.dob_ob_2[7] }}:</span> {{
               item.link }}</div>
         <div class=" flex cursor-pointer mb-4 xxl:mb-3 xl:mb-2.5 bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]"
-          v-if="item.phone" v-bind:class="{available:user.subscription_info.free === 1}">
+          v-if="item.phone">
           <img src="../../assets/svg/chat_tel_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
           <span
             class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{
-              user.subscription_info.free === 1 ? language.ob[50] : item.phone }}</span>
+               item.phone }}</span>
         </div>
         <div class="flex cursor-pointer mb-4 xxl:mb-3 xl:mb-2.5 bg-[#F6F3FA] p-4 xxl:p-3 xl:p-2.5 rounded-[5px]"
           v-if="item.email">
           <img src="../../assets/svg/chat_mail_purple.svg" class="w-4.5 xxl:w-4 xl:w-3.5" alt="">
           <span
             class="leading-none text-center w-full text-[#6536A5] text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]">{{
-              user.subscription_info.free === 1 ? language.ob[50] : item.email }}</span>
+              item.email }}</span>
         </div>
       </div>
     </div>
