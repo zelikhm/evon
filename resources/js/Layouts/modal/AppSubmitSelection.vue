@@ -41,8 +41,19 @@ export default {
     }
   },
   methods: {
-    copy() {
-      navigator.clipboard.writeText(this.valueLink)
+    copy() { 
+      try {
+        navigator.clipboard.writeText(this.valueLink)  
+      } catch (error) {
+        var textToCopy = this.valueLink;   
+        var input = document.createElement("textarea");
+        input.value = textToCopy;
+        document.body.appendChild(input);
+        input.select();
+        input.setSelectionRange(0, 99999); 
+        document.execCommand("copy");
+        document.body.removeChild(input); 
+      } 
     }
   },
   created() {
