@@ -100,23 +100,23 @@
             <div class="flex flex-col justify-center md:py-2">
               <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">{{
                 minPriceForM.toLocaleString('ru') }} €</span>
-              <span
-                class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">{{ language.rielt_1[56] }}
+              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">{{
+                language.rielt_1[56] }}
                 м²</span>
             </div>
             <div class="h-full md:h-[1px] w-[1px] md:w-full bg-[#E5DFEE]"></div>
             <div class="flex flex-col justify-center md:py-2">
               <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">{{
                 minPriceFlat.toLocaleString('ru') }} €</span>
-              <span
-                class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">{{ language.rielt_1[57] }}</span>
+              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">{{
+                language.rielt_1[57] }}</span>
             </div>
             <div class="h-full md:h-[1px] w-[1px] md:w-full bg-[#E5DFEE]"></div>
             <div class="flex flex-col justify-center md:py-2">
               <span class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[15px] text-center leading-none">{{
                 minSquareFlat }} - {{ maxSquareFlat }}</span>
-              <span
-                class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">{{ language.rielt_1[22] }},
+              <span class="text-center text-[#8A8996] text-[13px] xxl:text-[11px] xl:text-[9px] lg:text-[11px]">{{
+                language.rielt_1[22] }},
                 м²</span>
             </div>
           </div>
@@ -430,35 +430,41 @@
                 <div
                   class="flex items-center mb-5 xxl:mb-4 xl:mb-4 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none">
                   <span class="text-[#8A8996] leading-none">{{ language.ob[51] }}:&nbsp;</span>
-                  <span class="leading-none">{{ compilation.user.link }}</span>
+                  <!-- <span class="break leading-none">{{ compilation.user.link }}</span> -->
                 </div>
                 <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5  ">
                   <div
-                    class="flex    rounded-[5px] border border-solid border-[#E5DFEE]  p-4 xxl:p-3 xl:p-2.5 rounded-[5px]">
-                    <span
-                      class="leading-normal	 leading-none text-center w-full   text-[14px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]"><!-- {{ language.rielt_3[3] }}:  -->{{
+                    class="     rounded-[5px] border border-solid border-[#E5DFEE]  p-4 xxl:p-3 xl:p-2.5 rounded-[5px]">
+                    <span :class="{ hidden: compilation.user.description.length >= 50 && !showFullInfo }"
+                      class="break leading-normal	 leading-none text-center w-full   text-[14px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]"><!-- {{ language.rielt_3[3] }}:  -->{{
                         compilation.user.description }}</span>
+                    <button v-if="compilation.user.description.length >= 50" @click="showFullInfo = !showFullInfo"
+                      class="block more-min mx-auto text-blue-500 underline text-[14px]">
+                      {{ showFullInfo ? 'Скрыть' : 'Показать полностью' }}
+                    </button>
                   </div>
+
                 </div>
+
               </div>
               <!--Комментарий-->
               <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5  " v-if="compilation.description">
                 <div
                   class="flex items-center mb-5 xxl:mb-4 xl:mb-4 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none">
                   <span class="text-[#8A8996] leading-none">{{ language.ob[52] }}:&nbsp;</span>
-                  <span class="leading-none">{{ compilation.user.link }}</span>
+                  <!-- <span class="break leading-none">{{ compilation.user.link }}</span> -->
                 </div>
                 <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5 mb-5">
                   <div
                     class="flex  rounded-[5px] border border-solid border-[#E5DFEE]  p-4 xxl:p-3 xl:p-2.5 rounded-[5px]">
                     <span
-                      class="leading-normal	 leading-none text-center w-full   text-[14px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]"><!-- {{ language.rielt_3[3] }}:  -->{{
+                      class="break leading-normal	 leading-none text-center w-full   text-[14px] xxl:text-[14px] xl:text-[12px] lg:text-[15px]"><!-- {{ language.rielt_3[3] }}:  -->{{
                         compilation.description }}</span>
                   </div>
                 </div>
               </div>
-            </div>
 
+            </div>
           </div>
           <GMapMap v-if="house.visible === 1 && compilation.isVisible === 1" :center="center" :zoom="15"
             map-type-id="roadmap" class="w-full h-[18vw] lg:h-[28vw] sm:h-[36vw] rounded-[10px] mb-10" :draggable="false"
@@ -514,6 +520,7 @@ export default {
   },
   data() {
     return {
+      showFullInfo: this.compilation.user.description >= 50 ? true : false,
       selectFlat: [],
       scheme: false,
       center: null,
@@ -890,7 +897,23 @@ export default {
 }
 </script>
 
-<style scoped>.disableColor {
+<style scoped>
+.break {
+  white-space: normal;
+  word-break: break-all;
+}
+
+.hidden {
+  max-height: 90px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  text-overflow: ellipsis;
+}
+
+.disableColor {
   color: #8A8996;
 }</style>
 
