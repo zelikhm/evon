@@ -72,16 +72,6 @@ class HouseController extends Controller
   {
     $houses = $this->getAllHouse('Новостройка', true, true);
 
-    $count = HouseModel::where('visible', 1)
-      ->orderBy('updated_at', 'DESC')
-      ->where('active', 2)
-      ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
-      ->select('house_models.*')
-      ->where('house_characteristics_models.type', 'Новостройка')
-      ->distinct()
-//    ->with(['info', 'files', 'frames', 'flats', 'user', 'news', 'images'])
-      ->get();
-
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
       'dops' => TypesModel::all(),
@@ -94,7 +84,7 @@ class HouseController extends Controller
       'news' => $this->getNewsForPage(),
       'adminNews' => $this->getAdminNews(),
       'user' => $this->getUser(),
-      'count_houses' => $count->count(),
+      'count_houses' => HouseModel::count(),
       'free_count' => 30,
       'type' => 0,
     ]);
@@ -118,13 +108,6 @@ class HouseController extends Controller
 
     $houses = $this->getAllHouse('Вилла', true, true, $limit);
 
-    $count = HouseModel::where('visible', 1)
-      ->where('active', 2)
-      ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
-      ->select('house_models.*')
-      ->where('house_characteristics_models.type', 'Вилла')
-      ->count();
-
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
       'dops' => TypesModel::all(),
@@ -137,7 +120,7 @@ class HouseController extends Controller
       'news' => $this->getNewsForPage(),
       'adminNews' => $this->getAdminNews(),
       'user' => $this->getUser(),
-      'count_houses' => $count,
+      'count_houses' => HouseModel::count(),
       'free_count' => $limit,
       'type' => 1,
     ]);
