@@ -216,6 +216,17 @@ class HouseController extends Controller
   }
 
   /**
+   * get count houses
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function getCountHouse() {
+
+    return response()->json(HouseModel::count(), 200);
+
+  }
+
+  /**
    * get house api
    * @param Request $request
    * @return \Inertia\Response
