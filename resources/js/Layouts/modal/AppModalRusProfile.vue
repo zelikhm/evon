@@ -180,4 +180,72 @@
     text-align: center;
   }
 
+
+
+
+  .title {
+  font-size: 1.14vw;
+}
+
+.block {
+  padding: 1.04vw;
+}
+
+p {
+  font-size: 0.933vw;
+  line-height: 160%;
+}
+
+.payd__checkbox span {
+  font-size: 1.03vw;
+}
+
+.payd__checkbox+span {
+  font-size: 1.03vw;
+}
+
+button {
+  padding: 0.677vw 0;
+}
+
+button span {
+  font-size: 0.87vw;
+  line-height: 140%;
+  display: block;
+}
+
+
+
+@media (max-width:700px) {
+  .title {
+    font-size: 4.37vw;
+  }
+
+  .payd__checkbox span {
+    font-size: 3.7vw;
+  }
+
+  .payd__checkbox+span {
+    font-size: 3.7vw;
+  }
+
+  button {
+    padding: 3.7vw 0;
+  }
+
+  button span {
+    font-size: 4vw;
+    line-height: 100%;
+  }
+
+  p {
+    font-size: 3.4vw;
+    line-height: 150%;
+    word-break: break-all;
+  }
+}
+
+
+
+
 </style>
