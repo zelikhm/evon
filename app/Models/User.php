@@ -36,7 +36,8 @@ class User extends Authenticatable
     'checked',
     'token',
     'lang',
-    'openClient'
+    'openClient',
+    'deleted'
   ];
 
   /**

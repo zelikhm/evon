@@ -150,7 +150,11 @@ class AuthenticatedSessionController extends Controller
 
       $token = $this->checkSession($user->id);
 
-      return response()->json($token, 200);
+      if($user->deleted !== 1) {
+        return response()->json($token, 200);
+      } else {
+        return response()->json(false, 205);
+      }
 
     } else {
 
@@ -182,7 +186,11 @@ class AuthenticatedSessionController extends Controller
 
       $token = $this->checkSession($user->id);
 
-      return response()->json($token, 200);
+      if($user->deleted !== 1) {
+        return response()->json($token, 200);
+      } else {
+        return response()->json(false, 205);
+      }
 
     } else {
       return response()->json(false, 401);
