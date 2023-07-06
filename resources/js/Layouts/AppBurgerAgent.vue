@@ -11,10 +11,11 @@ import { Link } from '@inertiajs/inertia-vue3'
           <img src="../../assets/svg/arrow_down.svg" class="w-2.5 xxl:w-2 xl:w-[7px] lg:w-2.5" alt="Стрелка вниз">
         </button>
         <div v-if="openProfileMenu" class="border border-solid border-[#E5DFEE] lg:text-[15px] overflow-hidden z-20 absolute top-[90%] flex flex-col bg-white rounded-[5px]">
-          <div class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
-            <span class="leading-none whitespace-nowrap">{{ language.ob[42] }} PRO</span>
+          <Link href="/profile" class="hover__select border__bottom--not whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5"> 
+            <span class="leading-none whitespace-nowrap">{{ language.ob[42] }} <!-- PRO --></span>
             <span class="leading-none whitespace-nowrap">{{ getDate(user.subscription_info.finished_at) }}</span>
-          </div>
+          </Link>
+         
           <div class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
             <span class="leading-none whitespace-nowrap">{{ language.ob[32] }}</span>
             <label class="relative cursor-pointer inline-block w-[42px] xxl:w-[36px] xl:w-[30px] h-[24px] xxl:h-[20px] xl:h-[18px]">

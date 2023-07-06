@@ -8,7 +8,7 @@
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] -rotate-45"></span>
         </button>
       </div>
-      <div v-for="item in tarifs" class="flex justify-between items-center border border-solid border-[#E5DFEE] rounded-[5px] p-5 xxl:p-4 xl:p-3">
+      <div v-for="item in tarifs" class="block flex justify-between items-center border border-solid border-[#E5DFEE] rounded-[5px] p-5 xxl:p-4 xl:p-3">
         <label class="payd__checkbox" v-on:click="setDate(item)">
           <input type="radio" value="1" id="pay_1" name="payd" >
           <span class="text-[18px] xxl:text-[15px] xl:text-[13px]" for="pay_1">{{ item.title }}</span>
@@ -179,5 +179,73 @@
   .loader_text {
     text-align: center;
   }
+
+
+
+
+  .title {
+  font-size: 1.14vw;
+}
+
+.block {
+  padding: 1.04vw;
+}
+
+p {
+  font-size: 0.933vw;
+  line-height: 160%;
+}
+
+.payd__checkbox span {
+  font-size: 1.03vw;
+}
+
+.payd__checkbox+span {
+  font-size: 1.03vw;
+}
+
+button {
+  padding: 0.677vw 0;
+}
+
+button span {
+  font-size: 0.87vw;
+  line-height: 140%;
+  display: block;
+}
+
+
+
+@media (max-width:700px) {
+  .title {
+    font-size: 4.37vw;
+  }
+
+  .payd__checkbox span {
+    font-size: 3.7vw;
+  }
+
+  .payd__checkbox+span {
+    font-size: 3.7vw;
+  }
+
+  button {
+    padding: 3.7vw 0;
+  }
+
+  button span {
+    font-size: 4vw;
+    line-height: 100%;
+  }
+
+  p {
+    font-size: 3.4vw;
+    line-height: 150%;
+    word-break: break-all;
+  }
+}
+
+
+
 
 </style>
