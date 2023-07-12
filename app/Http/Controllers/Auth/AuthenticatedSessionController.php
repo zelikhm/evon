@@ -49,7 +49,7 @@ class AuthenticatedSessionController extends Controller
       $user = User::where('email', $request->email)
         ->first();
 
-      if($user !== null && Hash::check($request->password, $user->password)) {
+      if($user !== null && Hash::check($request->password, $user->password) && $user->deleted !== 1) {
 
         Auth::logoutOtherDevices(Hash::make($request->password));
 
@@ -103,7 +103,7 @@ class AuthenticatedSessionController extends Controller
       ->where('role', 0)
       ->first();
 
-    if($user !== null && $user->code == $request->code) {
+    if($user !== null && $user->code == $request->code && $user->deleted !== 1) {
 
       Auth::logoutOtherDevices(Hash::make($request->password));
 
@@ -146,7 +146,7 @@ class AuthenticatedSessionController extends Controller
     $user = User::where('email', $request->email)
       ->first();
 
-    if($user !== null && Hash::check($request->password, $user->password)) {
+    if($user !== null && Hash::check($request->password, $user->password) && $user->deleted !== 1) {
 
       $token = $this->checkSession($user->id);
 
@@ -182,7 +182,7 @@ class AuthenticatedSessionController extends Controller
       ->where('code', $request->code)
       ->first();
 
-    if($user !== null) {
+    if($user !== null && $user->deleted !== 1) {
 
       $token = $this->checkSession($user->id);
 
