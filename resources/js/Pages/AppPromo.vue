@@ -57,11 +57,14 @@ import '../../../public/styles/ForRealtors.css'
           <div class="save-prog">
             <p>
               <span>{{ language.main[30] }}</span>
+              <a href="https://apps.apple.com/ru/app/evon/id6450259354" target="_blank"
+                class="flex gap-[1vw]">
+                <img src="images/img/welcom/apl.png" alt="" srcset=""> 
+              </a> 
               <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew&pli=1" target="_blank"
                 class="flex gap-[1vw]">
-                <img src="images/img/welcom/apl.png" alt="" srcset="">
                 <img src="images/img/welcom/andr.png" alt="" srcset="">
-              </a>
+              </a> 
             </p>
           </div>
 
@@ -328,10 +331,14 @@ import '../../../public/styles/ForRealtors.css'
 
       <div class="row-soc">
 
-        <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew&pli=1" target="_blank"><img
-            src="images/img/lowSection/andr.png" alt="" srcset=""></a>
-        <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew&pli=1" target="_blank"><img
-            src="images/img/lowSection/apl.png" alt="" srcset=""></a>
+        <a href="https://apps.apple.com/ru/app/evon/id6450259354" target="_blank"
+                class="flex gap-[1vw]">
+                <img src="images/img/welcom/apl.png" alt="" srcset=""> 
+              </a> 
+              <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew&pli=1" target="_blank"
+                class="flex gap-[1vw]">
+                <img src="images/img/welcom/andr.png" alt="" srcset="">
+              </a> 
       </div>
 
 
