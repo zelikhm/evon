@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Traits\AuthCheck;
 use App\Http\Traits\MainInfo;
 use App\Mail\RegisterEmail;
 use App\Models\TarifModel;
@@ -17,31 +18,44 @@ use Inertia\Inertia;
 class ProfileController extends Controller
 {
   use MainInfo;
+  use AuthCheck;
 
-    public function index() {
+  /**
+   * profile controller
+   * @return \Inertia\Response
+   */
 
-      if(Auth::user()->role !== 0) {
-        return Inertia::render('AppProfileDev', [
-          'user' => $this->getUser(),
-          'tarifs' => TarifModel::all(),
-          'tarifs_rus' => TarifRussionModel::all(),
-          'notification' => $this->getNotification(),
-        ]);
+  public function index()
+  {
 
-      } else {
+    if (Auth::user()->role !== 0) {
+      return Inertia::render('AppProfileDev', [
+        'user' => $this->getUser(),
+        'tarifs' => TarifModel::all(),
+        'tarifs_rus' => TarifRussionModel::all(),
+        'notification' => $this->getNotification(),
+      ]);
 
-        return Inertia::render('AppProfileAgent', [
-          'user' => $this->getUser(),
-          'tarifs' => TarifModel::all(),
-          'tarifs_rus' => TarifRussionModel::all(),
-          'notification' => $this->getNotification(),
-        ]);
+    } else {
 
-      }
+      return Inertia::render('AppProfileAgent', [
+        'user' => $this->getUser(),
+        'tarifs' => TarifModel::all(),
+        'tarifs_rus' => TarifRussionModel::all(),
+        'notification' => $this->getNotification(),
+      ]);
 
     }
 
-    public function sendRegister(Request $request) {
+  }
+
+  /**
+   * send register
+   * @param Request $request
+   */
+
+  public function sendRegister(Request $request)
+  {
 
     $key = 'AwFGFIPriK4AQad1rFXt9ox1c00PT8LjugQ1';
 
@@ -63,7 +77,32 @@ class ProfileController extends Controller
 
     dd(json_decode($client));
 
+  }
+
+  /**
+   * delete account
+   * @param Request $request
+   * @return \Illuminate\Http\JsonResponse
+   */
+
+  public function deleteAccount(Request $request) {
+
+    if($this->checkToken($request->token)) {
+
+      User::where('id', $request->user_id)
+        ->update([
+          'deleted' => 1,
+        ]);
+
+      return response()->json(true, 200);
+
+    } else {
+
+      return response()->json(false, 401);
+
     }
+
+  }
 
 
 }

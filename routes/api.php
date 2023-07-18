@@ -110,6 +110,8 @@ Route::prefix('user')->group(function () {
   Route::post('/setLink', ['App\Http\Controllers\User\IndexController', 'setLink']);
   //
   Route::post('/register', ['App\Http\Controllers\User\IndexController', 'sendRegister']);
+  //
+  Route::post('/deleteAccount', ['App\Http\Controllers\User\ProfileController', 'deleteAccount']);
 });
 
 Route::prefix('chat')->group(function () {

@@ -472,6 +472,14 @@ path get \ [post] / поля:
 
 - token
 
+Удаление аккаунта \
+path deleteAccount \ [post] / поля:
+
+- token
+- user_id
+
+Ошибка 205 при входе, означает что удален
+
 Изменения статуса ссылки \
 path setLink \ [post] / поля:
 
