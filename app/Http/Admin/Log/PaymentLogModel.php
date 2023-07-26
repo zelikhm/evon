@@ -95,6 +95,11 @@ class PaymentLogModel extends Section implements Initializable
 
     $form = AdminForm::elements([
 
+      AdminFormElement::text('title', 'Заголовок(дней за $)'),
+      AdminFormElement::number('days', 'Кол-во дней')
+        ->required(),
+      AdminFormElement::number('price', 'Цена'),
+
     ]);
 
     $card->getButtons()->setButtons([

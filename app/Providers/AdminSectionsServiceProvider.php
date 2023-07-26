@@ -44,7 +44,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
     TarifRussionModel::class => 'App\Http\Admin\TarifRussion',
     SubscriptionModel::class => 'App\Http\Admin\Subscription',
     TraceModel::class => 'App\Http\Admin\Trace',
-    PaymentLogModel::class => 'App\Http\Admin\Log\PaymentLogModel',
+    \App\Models\Log\PaymentLogModel::class => 'App\Http\Admin\Log\PaymentLogModel',
     //
     ClientModel::class => 'App\Http\Admin\Client'
   ];
