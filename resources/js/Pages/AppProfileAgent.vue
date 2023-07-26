@@ -1,6 +1,6 @@
 <template>
-  <app-modal-profile v-if="openPayProfile" @close-pay-profile="openPayProfile = false" :tarifs="tarifs" :language="language" :user="user" />
-  <app-modal-rus-profile v-if="openPayRusProfile" @close-pay-profile="openPayRusProfile = false" :tarifs="tarifs_rus" :language="language" :user="user" />
+  <app-modal-profile v-if="openPayProfile" @close-pay-profile="openPayProfile = false" :selectLanguage="selectLanguage" :tarifs="tarifs" :language="language" :user="user" />
+  <app-modal-rus-profile v-if="openPayRusProfile" @close-pay-profile="openPayRusProfile = false" :tarifs="tarifs_rus" :selectLanguage="selectLanguage" :language="language" :user="user" />
   <app-header :user="userHeader" :language="language" @selectLanguage="choseLanguage" />
   <app-modal-notification
     class="left-[2vw] transition-all duration-1000"

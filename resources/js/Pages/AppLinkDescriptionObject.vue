@@ -490,7 +490,7 @@
 </template>
 
 <script>
-import AppFooter from '../Layouts/AppFooter.vue';
+import  AppFooter from '../Layouts/AppFooter.vue';
 import AppModalAlbum from "../Layouts/modal/AppModalAlbum.vue";
 import AppChessScheme from "../Layouts/modal/AppChessScheme.vue";
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Log\PaymentLogModel;
 use App\Models\PaymentModel;
 use App\Models\TarifModel;
 use App\Models\User;
@@ -47,6 +48,21 @@ class SubscriptionController extends Controller
   }
 
   /**
+   * create log
+   * @param $user_id
+   * @param $text
+   */
+
+  private function setLog($user_id, $text) {
+
+    PaymentLogModel::create([
+      'user_id' => $user_id,
+      'text' => $text
+    ]);
+
+  } //end
+
+  /**
    * main method for set subscription for users
    * @param $user
    * @param $type
@@ -57,35 +73,65 @@ class SubscriptionController extends Controller
   public function setSubscription($user, $type)
   {
 
+    self::setLog($user->id, 'Инициализация подписки');
+
     $sub = SubscriptionModel::where('user_id', $user->id)->first();
 
     if ($sub !== null) {
       if ($sub->finished_at < Carbon::now()->addHour(3)) {
+
+        self::setLog($user->id, 'Продление закончившейся подписки (1)');
 
         $sub = SubscriptionModel::where('user_id', $user->id)->update([
           'finished_at' => Carbon::now()->addHour(3)->addDay($type->days),
           'free' => 0,
         ]);
 
+        try {
+          self::setLog($user->id, 'Успешное продление (1)');
+        } catch (\Exception $exception) {
+          self::setLog($user->id, 'Неудачное продление (1):' . $exception);
+        }
+
       } else {
 
         if ($sub->free === 1) {
+
+          self::setLog($user->id, 'Продление бесплатной подписки (2)');
+
           $sub = SubscriptionModel::where('user_id', $user->id)->update([
             'finished_at' => Carbon::now()->addHour(3)->addDay($type->days),
             'free' => 0,
           ]);
+
+          try {
+            self::setLog($user->id, 'Успешное продление (2)');
+          } catch (\Exception $exception) {
+            self::setLog($user->id, 'Неудачное продление (2):' . $exception);
+          }
+
         } else {
           $date = new Carbon($sub->finished_at);
+
+          self::setLog($user->id, 'Продление подписки (3)');
 
           $sub = SubscriptionModel::where('user_id', $user->id)->update([
             'finished_at' => $date->addDay($type->days),
             'free' => 0,
           ]);
+
+          try {
+            self::setLog($user->id, 'Успешное продление (3)');
+          } catch (\Exception $exception) {
+            self::setLog($user->id, 'Неудачное продление (3):' . $exception);
+          }
         }
       }
 
       return response()->json(['message' => 'thanks, subscription was updated', 'status' => 'SUCCESS', 'subscription' => $sub], 200);
     } else {
+
+      self::setLog($user->id, 'Оформление новой подписки (4)');
 
       $sub = SubscriptionModel::create([
         'user_id' => $user->id,
@@ -95,6 +141,12 @@ class SubscriptionController extends Controller
         'created_at' => Carbon::now()->addHour(3),
         'updated_at' => Carbon::now()->addHour(3),
       ]);
+
+      try {
+        self::setLog($user->id, 'Успешное оформление (4)');
+      } catch (\Exception $exception) {
+        self::setLog($user->id, 'Неудачное оформление (4):' . $exception);
+      }
 
       return response()->json(['message' => 'thanks, subscription was created', 'status' => 'SUCCESS', 'subscription' => $sub], 200);
 

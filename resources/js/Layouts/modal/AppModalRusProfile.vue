@@ -21,7 +21,7 @@
       <button class="login__btn--bg  rounded-[5px] w-full py-5 xxl:py-4 xl:py-3" v-else-if="preloader === true">
         <div class="loader"></div>
       </button>
-      <p>
+      <p v-if="selectLanguage === 0">
         Тариф для Агентств недвижимости: 
         <br>
         — До 15 кабинетов – 15 000 руб. в месяц<br>
@@ -34,6 +34,31 @@
         Также можете написать нам:<br>
         - WhatsApp: +90 544 225 85 59
       </p>
+      <p v-if="selectLanguage === 1">
+        Real Estate Agency Tariff:
+        <br>
+        - Up to 15 desks - 4,500 TL per month<br>
+        - Up to 30 desks - 7,500 TL per month<br>
+        <br>
+        *Discounts of 5% and 10% are applicable for payments made for 3 and 6 months, respectively.
+        <br>
+        *When choosing the "Real Estate Agency" tariff, payment should be made as a single transaction for all employees to EVON company's account. To coordinate and calculate the payment amount, please send the information regarding the selected tariff and the number of agents to evon.information@gmail.com in the following format: Name, Surname, Phone, E-mail.
+        You can also reach us via:<br>
+        - WhatsApp: +90 544 225 85 59
+      </p>
+      <p v-if="selectLanguage === 2">
+        Emlak Şirketleri için Abonelik:
+        <br>
+        - 15 hesaba kadar - Aylık 4500 TL,<br>
+        - 30 hesaba kadar - aylık 7500 TL.<br>
+        <br>
+        *3 veya 6 aylık peşin ödeme yaparsanız - %5 ve %10 indirim.
+        <br>
+        *"Emlak şirketleri için" tarifesini seçerseniz, ödeme tüm hesaplar için tek bir taksitte EVON'un hesabına yapılır. Ödeme miktarını kabul etmek ve hesaplamak için, lütfen evon.information@gmail.com adresine seçilen tarife ve hesap sayısı hakkında bilgi gönderin ve listeyi şu formatta belirtin:
+        Ad, Soyad, telefon numarası, E-posta.
+        İrtibat:<br>
+        - WhatsApp: +90 544 225 85 59
+      </p>
     </div>
     <div @click="$emit('close-pay-profile')" class="absolute bg-black opacity-50 h-full w-full z-40"></div>
   </div>
@@ -43,7 +68,7 @@
   import { useForm } from '@inertiajs/inertia-vue3'
 
   export default {
-    props: ['tarifs', 'language', 'user'],
+    props: ['tarifs', 'language', 'user', 'selectLanguage'],
     data() {
       return {
         amount: 0,
