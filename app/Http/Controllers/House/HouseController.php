@@ -908,13 +908,13 @@ class HouseController extends Controller
   public function get(Request $request)
   {
     if ($this->checkToken($request->token)) {
-      $house = $this->getHouse($request->id);
+      $house = $this->getHouseSlug($this->getHouse($request->id)->slug);
 
       return response()->json($house, 200);
     } else {
       return response()->json('not auth', 401);
     }
-  }
+  } //end
 
   /**
    * edit visible for house
