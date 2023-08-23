@@ -76,6 +76,7 @@ class Subscription extends Section implements Initializable
       }),
       AdminColumn::relatedLink('company.title', 'Название компании')->setWidth('350px'),
       AdminColumn::datetime('finished_at', 'Дата окончания')->setFormat('d.m.Y')->setWidth('150px'),
+      AdminColumnEditable::checkbox('free', 'Бесплатная', 'Не бесплатная')->setLabel('Подписка'),
     ];
 
     $display = AdminDisplay::datatablesAsync()
@@ -99,6 +100,7 @@ class Subscription extends Section implements Initializable
       )->setTo(
         AdminColumnFilter::date()->setColumnName('finished_at')->setPlaceholder('To Date')->setFormat('Y-m-d')
       ),
+      AdminColumnFilter::select([0 => 'Бесплатная', 1 => 'Платная'] ,'free')->setPlaceholder('Подписка'),
     ]);
 
     $display->setApply(function (Builder $query) {
