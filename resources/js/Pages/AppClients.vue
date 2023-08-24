@@ -30,11 +30,16 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
         </div>
       </div>
-      <div class="flex flex-col pb-7 xxl:pb-5 xl:pb-4">
-        <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4">
-          <span style="color: rgb(0, 0, 0);">Добавьте своих клиентов для помощи в сопровождении сделки или
-            свяжитесь с нашим менеджером по вопросам проведения дистанционных сделок </span>
-        </p>
+      <div class="purple-hints flex flex-col pb-7 xxl:pb-5 xl:pb-4">
+        <p class="text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2 strong">- Ваши клиенты хотят приобрести недвижимость в Турции?</p>
+        <p class="text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2 strong" >- Хотите продавать дистанционно?</p>
+        <p class="text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2 strong">- Нужна квалифицированная помощь в работе с клиентом в Турции?</p>
+
+        <p class=" text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2">Теперь это возможно, получать комиссионной вознаграждение, даже если вы не бывали в Турции и не планируете!</p>
+        <p class=" text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2">Наш сервис предлагает вам партнерское сотрудничество. В котором вы можете передать своего клиента, за часть комиссионного вознаграждения, после проведения сделки с вашим клиентом.</p>
+        <p class=" text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2">Вы можете быть уверены, что партнеры с нашей стороны, с 15 летнем стажем, проведут высококвалифицированную работу с вашим клиентом. Подберут объект под запрос клиента, встретят клиента в аэропорту, организуют прокат по всем выбранным объектам, услуги переводчика, юридическое сопровождение сделки, послепродажный сервис.</p>
+        <p class=" text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2">Все условия сотрудничества фиксированы документально и гарантируют выплату вашего комиссионного вознаграждения</p>
+
       </div>
       <div class="columns-clients">
         <div class="clients-list">
@@ -137,16 +142,76 @@ import { Link } from '@inertiajs/inertia-vue3'
             <li><em>E-mail</em> <a href="mailto:evon.information@gmail.com">evon.information@gmail.com</a></li>
             <li><em>Phone</em>   <a href="tel:+905442258559">905442258559</a> </li>
           </ul>
+
+          <ul class="clients-menager-refs low">
+            <li>После добавления клиента, свяжитесь с менеджером EVON для подбора партнёра в
+              сопровождении сделки</li>
+          </ul>
+
+          <button @click="cooperation_modal=!cooperation_modal" class="login__btn--bg bg-[#E84680] px-4 xxl:px-4 xl:px-2.5 rounded-[5px] h-10 xxl:h-8 xl:h-6 font-semibold text-white text-base xxl:text-[11px] xl:text-[9px] lg:text-[12px] leading-none">Соглашение о сотрудничестве</button>
+
         </div>
       </div>
       <div class="flex flex-col pt-7 pb-7 xxl:pb-5 xl:pb-4">
         <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs pb-6 xxl:pb-5 xl:pb-4">
-          <!-- <span style="color: rgb(0, 0, 0);">После добавления клиента, менеджер Evon свяжется с вами для подбора
-            партнера в сопровождении сделки </span> -->
-          <span style="color: rgb(0, 0, 0);">После добавления клиента, свяжитесь с менеджером EVON для подбора партнёра в
-            сопровождении сделки</span>
+
         </p>
       </div>
+
+
+      <!--Модалка соглашения-->
+      <div class="modal-cooperation-agreement" v-if="cooperation_modal" >
+         <div class="bg-modal" @click="cooperation_modal=!cooperation_modal"></div>
+         <div class="contant relative bg-white rounded-[12px]  xxl:p-9 xl:p-8 lg:p-5  lg:w-[48%] md:w-[60%] sm:w-[90%] h-fit">
+           <p class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">1. Настоящее соглашение регламентирует правила передачи и работы между Агентом/риелтором – пользователем платформы EVON (Далее «Агент») и компанией EVON (далее «Компания») при передаче Клиента – потенциального покупателя для сопровождения и проведения сделок на территории Турции.</p>
+
+           <p class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">2. Настоящее соглашение действует с момента создания личного Кабинета Агента на сайте и до удаления аккаунта Агента по инициативе любой из сторон.</p>
+
+           <p class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">3. По данному соглашению Агент передает за вознаграждение (фактом передачи является внесение на сайте Агентом контактных данных Клиента) для совместной работы с Клиентом, а Компания принимает, уточняет и передает данные Клиента своему партнеру – лицензированному Агентству Недвижимости на территории Турции (далее «Партнер»).</p>
+
+           <p class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">4. При передаче Клиента Агент вносит на сайт следующую информацию о клиенте: ФИО, телефон, контакты мессенджеров, Информацию по цели и времени покупки, форме оплате и другую исчерпывающую информацию.</p>
+
+           <p class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">5. Переданными считаются Клиенты, с которыми установлен контакт, проведена первоначальная консультация, сделан первичный подбор недвижимости с использование подборок сайта EVON, установлены в ходе переговоров цели покупки, планируемая дата сделки или приезда в Турцию для выбора недвижимости, форма оплаты, подробное описание рассматриваемой недвижимости.</p>
+
+           <p class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">6. Регламент выплаты и расчета вознаграждения:</p>
+
+           <p class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">6.1. Если Клиент не определился с объектом недвижимости и ему требуется: осуществить поиск объекта, подбор недвижимости, исчерпывающая информация о рынке недвижимости Турции, юридическое сопровождение сделки, услуги переводчика, полное сопровождение и консультация на всех этапах работы с продавцом, включая: встреча на территории Турции, показ объектов, составление всех необходимых документов для сделки и оплаты, консультирование по вопросам оплаты, международных переводов, рассрочке, а так же послепродажный сервис (консультации по миграционным вопросам, ремонту, покупки мебели и пр.), то Вознаграждение Агента составляет 40% от прибыли, за вычетом всех возможных расходов по сделке (в том числе, транспорт, проживание Клиента, налоги и пр.).</p>
+
+           <p class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">6.2. Если Клиент определился с объектом недвижимости и ему требуется: юридическое сопровождение сделки (составление всех необходимых документов для сделки и оплаты), встреча Клиента с сопровождение его до Продавца, помощь в переговорах с Продавцом, консультация по оплате и переводе средств, услуги переводчика, то Вознаграждение Агента составляет 75% от прибыли, за вычетом всех возможных расходов по сделке (в том числе, транспорт, проживание Клиента, налоги и пр.). Это условие распространяется на переданных клиентов, которые готовы оплатить 100% стоимости объекта, без применения рассрочек и других форм оплаты.  Если в ходе сделки Клиент решает сменить форму оплату (например, применить рассрочку) или сменить объект приобретения, то вознаграждение по такому Клиенту будет рассчитываться согласно п. 6.1</p>
+
+           <p class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">7. Агент не имеет права требовать от Компании и Партнера предоставления клиенту дополнительных скидок, бонусов или подарков при покупке недвижимости. Если Агентство недвижимости предоставляет клиенту такие льготы, их стоимость будет вычтена из общего комиссионного вознаграждения, если иное не согласовано между сторонами и будут являться расходами по сделке.</p>
+
+           <p class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">8. Агент может претендовать на комиссионное вознаграждение только от сделок с Клиентами, контактные данные которых он передал.</p>
+
+           <p class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">9. Основанием для выплаты вознаграждения являются:</p>
+           <ul class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">
+             <li class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">- Заключение договора купли-продажи недвижимости Клиентом с участием Партнера.</li>
+             <li class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">- Клиент выполняет все обязательства по оплате согласно договору купли-продажи недвижимости.</li>
+             <li class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">- Компания получила комиссионное вознаграждение от Продавца или Партнера.</li>
+           </ul>
+
+           <p class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">10. Выплата комиссионного вознаграждения Агенту будет производиться в течение 15 рабочих дней после получения комиссионного вознаграждения от продавца или Партнера наличными или на счет Агента в РФ. Выплата на счет производится в рублях по текущему курсу на момент перевода. Возможные издержки/комиссии при переводе и конвертации оплачивает Агент. В случае если Комиссионное вознаграждение получено не в полном объеме (например, по условию продавца при рассрочке), то Компания передает Агенту вознаграждение частично, пропорционально полученной прибыли.</p>
+
+           <p class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">11. Агент обязуется не передавать контакты Клиента любому другому Агентству/агенту на территории Турции с момента внесения данных этого Клиента на сайт Компании.</p>
+
+           <p class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">12. Компания обязуется сохранять конфиденциальность по переданным контактам Клиентов и не передавать их третьим лицам, за исключением Партнера.</p>
+
+           <p class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">13. Компания настоятельно рекомендует транслировать Клиенту о необходимости приоритетного сотрудничества с Компанией и Партнером для лучшего взаимодействия всех сторон соглашения и успешных проведения сделок.</p>
+
+           <p class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">14. В случае, если Агент использует сервис добавления клиентов в рамках обозначенного Соглашением, то таким образом, он подтверждает, что:</p>
+           <ul>
+             <li class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">- Полностью ознакомился с настоящим Соглашением;</li>
+             <li class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">- Полностью осознает весь смысл Соглашения, без оговорок и/или исключений;</li>
+             <li class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">- Безоговорочно принял все условия Соглашения, без всяких оговорок и исключений, и обязуется их соблюдать;</li>
+             <li class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">- Не имеет возражения против условий пользования Сайтом (или его отдельных положений);</li>
+             <li class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">- Является совершеннолетним и дееспособным.</li>
+             <li class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">- Рекомендация работать в Турции только с нашим партнером</li>
+
+           </ul>
+         </div>
+      </div>
+
+
     </div>
   </main>
   <app-footer :language="language" />
@@ -177,6 +242,8 @@ export default {
       clients: {},
       openNotification: false,
       text: '',
+
+      cooperation_modal:false,
 
       clientsSelect: 1,
       clientsStatus: [
@@ -375,7 +442,7 @@ h2 {
   border-radius: 10px;
   width: 360px;
   padding: 1.75rem;
-  height: 310px;
+  height: 450px;
 }
 
 .columns-clients .clients-menager p {
@@ -391,7 +458,7 @@ h2 {
 }
 
 .columns-clients .clients-menager ul li {
- 
+
   margin: .366vw 0px;
 }
 
@@ -481,6 +548,29 @@ h2 {
   position: relative;
   top: 5px;
   cursor: pointer;
+}
+
+.purple-hints{
+  background: rgb(246 243 250);
+  border-radius: 10px;
+  padding: 1.75rem;
+}
+
+.clients-menager-refs.low{
+  font-style: normal;
+  font-size: 0.829vw;
+  text-align: center;
+  line-height: 140%;
+}
+
+.purple-hints p.strong{
+   font-weight: 600;
+}
+
+.clients-menager button{
+   width: 100%;
+   margin: 0 auto;
+   margin-top: 15px;
 }
 
 .client {
@@ -576,15 +666,51 @@ h2 {
   margin-bottom: 8px;
 }
 
+.modal-cooperation-agreement{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  left: 0;
+  top: 0;
+}
+
+.bg-modal{
+  background-color: rgb(0,0,0,0.5);
+  z-index: 10;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.modal-cooperation-agreement .contant {
+  background: white;
+  left: 0;
+  top: calc(50% - 25vw);
+  z-index: 10;
+  width: 50%;
+  margin: 0 auto;
+  max-height: 50vw;
+  overflow-y: scroll;
+  padding: 1.2rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.modal-cooperation-agreement .contant::-webkit-scrollbar {
+  display: none;
+}
 @media (max-width: 768px) {
   .columns-clients .clients-menager {
     margin: 0 auto;
     width: auto;
-  } 
-.clients-menager-refs li em { 
+  }
+.clients-menager-refs li em {
     font-size:  3vw;
 }
-.clients-menager-refs li  a { 
+.clients-menager-refs li  a {
     font-size:  3vw;
 }
   .columns-clients {
@@ -594,5 +720,11 @@ h2 {
   .clients-list {
     margin: 0 auto;
     justify-content: center;
+  }
+  .clients-menager-refs.low{
+    font-style: normal;
+    font-size: 3vw;
+    text-align: center;
+    line-height: 140%;
   }
 }</style>
