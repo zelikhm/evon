@@ -373,11 +373,11 @@ trait MainInfo
 
       $house->popular = HouseViewsModel::where('house_id', $house->id)->count() > 30;
 
-      $house->maxPrice = $house->flats->max('price');
-      $house->minPrice = $house->flats->min('price');
+      $house->maxPrice = round($house->flats->max('price'));
+      $house->minPrice = round($house->flats->min('price'));
 
-      $house->maxSquare = $house->flats->max('square');
-      $house->minSquare = $house->flats->min('square');
+      $house->maxSquare = round($house->flats->max('square'));
+      $house->minSquare = round($house->flats->min('square'));
 
       $house->builder = $house->user->first_name;
 
