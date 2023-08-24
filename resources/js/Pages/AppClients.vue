@@ -441,7 +441,7 @@ h2 {
   border-radius: 10px;
   width: 360px;
   padding: 1.75rem;
-  height: 450px;
+  height: fit-content;
 }
 
 .columns-clients .clients-menager p {

@@ -45,6 +45,23 @@
         </div>
         <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none">{{ language.rielt_3[1]
           }}</h3>
+        <div class="status"
+             :class="{ validation: validation.checkbox1Active == false && validation.checkbox2Active == false }">
+          <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="checkbox1">Статус:</label>
+          <div class="flex flex-row w-full gap-5 rounded-[6px] px-5 xxl:px-4 py-4 xl:py-2.5">
+            <div class="mb-4 xxl:mb-3 xl:mb-3">
+              <input class="custom__checkbox" type="checkbox" id="checkbox1" v-model="compilation.checkbox1Active"
+                     @click="toggleCheckbox(1)">
+              <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="checkbox1">Определился с объектом</label>
+            </div>
+            <div class="mb-4 xxl:mb-3 xl:mb-3">
+              <input class="custom__checkbox" type="checkbox" id="checkbox2" v-model="compilation.checkbox2Active"
+                     @click="toggleCheckbox(2)">
+              <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="checkbox2">Не определился с
+                объектом</label>
+            </div>
+          </div>
+        </div>
         <div :class="{ validation: validation.name == false }"
           class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
           <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">Ф.И.О</label>
@@ -87,23 +104,7 @@
             class="text-[#1E1D2D] resize-none text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0 min-h-[50px]"
             type="text"></textarea>
         </div>
-        <div class="status"
-          :class="{ validation: validation.checkbox1Active == false && validation.checkbox2Active == false }">
-          <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="checkbox1">Статус:</label>
-          <div class="flex flex-row w-full gap-5 rounded-[6px] px-5 xxl:px-4 py-4 xl:py-2.5">
-            <div class="mb-4 xxl:mb-3 xl:mb-3">
-              <input class="custom__checkbox" type="checkbox" id="checkbox1" v-model="compilation.checkbox1Active"
-                     @click="toggleCheckbox(1)">
-              <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="checkbox1">Определился с объектом</label>
-            </div>
-            <div class="mb-4 xxl:mb-3 xl:mb-3">
-              <input class="custom__checkbox" type="checkbox" id="checkbox2" v-model="compilation.checkbox2Active"
-                     @click="toggleCheckbox(2)">
-              <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="checkbox2">Не определился с
-                объектом</label>
-            </div>
-          </div>
-        </div>
+
         <div :class="{ validation: validation.interested == false }"
              class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
           <div v-if="compilation.checkbox1Active">
