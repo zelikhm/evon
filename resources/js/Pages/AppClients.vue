@@ -205,7 +205,6 @@ import { Link } from '@inertiajs/inertia-vue3'
              <li class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">- Безоговорочно принял все условия Соглашения, без всяких оговорок и исключений, и обязуется их соблюдать;</li>
              <li class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">- Не имеет возражения против условий пользования Сайтом (или его отдельных положений);</li>
              <li class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">- Является совершеннолетним и дееспособным.</li>
-             <li class=" text-base xxl:text-sm xl:text-xs pb-5 xxl:pb-4 xl:pb-3">- Рекомендация работать в Турции только с нашим партнером</li>
 
            </ul>
          </div>

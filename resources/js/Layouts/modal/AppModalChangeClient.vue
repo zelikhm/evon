@@ -39,6 +39,9 @@
           <p class="text-base xxl:text-sm xl:text-xs pb-3 xxl:pb-2 xl:pb-1">
             - Форма оплаты
           </p>
+          <p class="text-base xxl:text-sm xl:text-xs pb-3 xxl:pb-2 xl:pb-1">
+            - Рекомендация работать в Турции только с нашим партнером
+          </p>
         </div>
         <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none">{{ language.rielt_3[1]
           }}</h3>
