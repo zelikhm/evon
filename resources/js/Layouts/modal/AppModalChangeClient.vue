@@ -48,7 +48,7 @@
         <div class="status"
              :class="{ validation: validation.checkbox1Active == false && validation.checkbox2Active == false }">
           <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="checkbox1">Статус:</label>
-          <div class="flex flex-row w-full gap-5 rounded-[6px] px-5 xxl:px-4 py-4 xl:py-2.5">
+          <div class="row-status flex flex-row w-full gap-5 rounded-[6px] px-5 xxl:px-4 py-4 xl:py-2.5">
             <div class="mb-4 xxl:mb-3 xl:mb-3">
               <input class="custom__checkbox" type="checkbox" id="checkbox1" v-model="compilation.checkbox1Active"
                      @click="toggleCheckbox(1)">
@@ -60,6 +60,25 @@
               <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="checkbox2">Не определился с
                 объектом</label>
             </div>
+          </div>
+        </div>
+        <div :class="{ validation: validation.interested == false }"
+             class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
+          <div v-if="compilation.checkbox1Active">
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">
+              Определился с объектом
+            </label>
+            <p class="text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0">
+              Ваше вознаграждение составляет 75% от общей комиссии, за вычетом расходов по сделке. Требуется юридическое сопровождение сделки (составление всех необходимых документов для сделки и оплаты), встреча Клиента с сопровождение его до Продавца, помощь в переговорах с Продавцом, консультация по оплате и переводе средств, услуги переводчика
+            </p>
+          </div>
+          <div v-else-if="compilation.checkbox2Active">
+            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">
+              Не определился с объектом
+            </label>
+            <p class="text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0">
+              Ваше вознаграждение составляет 40% от общей комиссии, за вычетом расходов по сделке. Требуется осуществить поиск объекта, подбор недвижимости, исчерпывающая информация о рынке недвижимости Турции, юридическое сопровождение сделки, услуги переводчика, полное сопровождение и консультация на всех этапах работы с продавцом, включая: встреча на территории Турции, показ объектов, составление всех необходимых документов для сделки и оплаты, консультирование по вопросам оплаты, международных переводов, рассрочке, а так же послепродажный сервис (консультации по миграционным вопросам, ремонту, покупки мебели и пр.)
+            </p>
           </div>
         </div>
         <div :class="{ validation: validation.name == false }"
@@ -97,6 +116,32 @@
             class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
             type="text">
         </div>
+
+        <!--Новые поля-->
+        <div :class="{ validation: validation.purchasePurpose == false }"
+             class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
+          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact"> Цель покупки</label>
+          <input v-model="compilation.purchasePurpose"
+                 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
+                 type="text">
+        </div>
+        <div :class="{ validation: validation.plannedDate == false }"
+             class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
+          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact"> Планируемая дата сделки или приезда в Турцию</label>
+          <input v-model="compilation.plannedDate"
+                 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
+                 type="date">
+        </div>
+        <div :class="{ validation: validation.paymentMethod == false }"
+             class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
+          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact"> Форма оплаты (наличный, безналичный, рассрочка и т.д.)</label>
+          <input v-model="compilation.paymentMethod"
+                 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
+                 type="text">
+        </div>
+        <!--!Новые поля-->
+
+
         <div :class="{ validation: validation.comment == false }"
           class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
           <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">Комментарий о клиенте и рассматриваемой недвижимости</label>
@@ -105,25 +150,7 @@
             type="text"></textarea>
         </div>
 
-        <div :class="{ validation: validation.interested == false }"
-             class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-          <div v-if="compilation.checkbox1Active">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">
-              Определился с объектом
-            </label>
-            <p>
-              Ваше вознаграждение составляет 75% от общей комиссии, за вычетом расходов по сделке. Требуется юридическое сопровождение сделки (составление всех необходимых документов для сделки и оплаты), встреча Клиента с сопровождение его до Продавца, помощь в переговорах с Продавцом, консультация по оплате и переводе средств, услуги переводчика
-            </p>
-          </div>
-          <div v-else-if="compilation.checkbox2Active">
-            <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">
-              Не определился с объектом
-            </label>
-            <p>
-              Ваше вознаграждение составляет 40% от общей комиссии, за вычетом расходов по сделке. Требуется осуществить поиск объекта, подбор недвижимости, исчерпывающая информация о рынке недвижимости Турции, юридическое сопровождение сделки, услуги переводчика, полное сопровождение и консультация на всех этапах работы с продавцом, включая: встреча на территории Турции, показ объектов, составление всех необходимых документов для сделки и оплаты, консультирование по вопросам оплаты, международных переводов, рассрочке, а так же послепродажный сервис (консультации по миграционным вопросам, ремонту, покупки мебели и пр.)
-            </p>
-          </div>
-        </div>
+
 <!--        <div class="flex flex-row w-full gap-5 rounded-[6px] px-5 xxl:px-4 py-4 xl:py-2.5">-->
 <!--          <div class="mb-4 xxl:mb-3 xl:mb-3">-->
 <!--            <input class="custom__checkbox" type="checkbox" id="checkbox1" v-model="compilation.checkbox1Active"-->
@@ -167,6 +194,10 @@ export default {
         comment: "",
         checkbox1Active: false,
         checkbox2Active: false,
+
+        purchasePurpose:null,
+        plannedDate:null,
+        paymentMethod:null,
       },
       validation: {
         name: null,
@@ -177,6 +208,11 @@ export default {
         comment: null,
         checkbox1Active: null,
         checkbox2Active: null,
+
+
+        purchasePurpose:null,
+        plannedDate:null,
+        paymentMethod:null,
       },
       JK: [],
       JKlist: [],
@@ -280,17 +316,31 @@ textarea{
 .status div{
   align-items: center;
   margin-bottom: 0;
+  max-width: 25vw;
 }
 
 
 .validation label {
   color: red;
 }
-
+.row-status label{
+  white-space: break-spaces;
+}
 .hint-clients{
   background: rgba(232, 70, 128, 0.15);
   color: black;
   padding: 1.25rem;
   margin-top: 1rem;
 }
+.modal-cooperation-agreement .contant{
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .status div{
+    max-width: none;
+  }
+
+}
+
 </style>
