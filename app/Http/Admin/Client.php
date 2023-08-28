@@ -150,6 +150,14 @@ class Client extends Section implements Initializable
           ]),
         AdminFormElement::html('<hr>'),
 
+        AdminFormElement::text('target_buy', 'Цель покупки'),
+        AdminFormElement::text('date_travel', 'Планируемая дата сделки или приезда в Турцию'),
+        AdminFormElement::select('buy_form_id', 'Форма оплаты')->setOptions([
+          0 => 'Наличный',
+          1 => 'Безналичный',
+          2 => 'Рассрочка'
+        ]),
+
         AdminFormElement::columns()
           ->addColumn([
             AdminFormElement::select('user_id', 'Пользователь')->setOptions($this->getUser()),

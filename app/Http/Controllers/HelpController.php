@@ -92,6 +92,9 @@ class HelpController extends Controller
         'status_client' => 0,
         'comment' => $request->comment,
         'isJk' => $request->isJk,
+        'target_buy' => $request->target_buy,
+        'date_travel' => $request->date_travel,
+        'buy_form_id' => $request->buy_form_id,
         'commission' => $request->isJk === 1 ? '80%' : '45%'
       ]);
 
@@ -126,6 +129,9 @@ class HelpController extends Controller
           'client_text' => $request->client_text,
           'comment' => $request->comment,
           'isJk' => $request->isJk,
+          'target_buy' => $request->target_buy,
+          'date_travel' => $request->date_travel,
+          'buy_form_id' => $request->buy_form_id,
           'commission' => $request->isJk === 1 ? '80%' : '45%'
         ]);
 

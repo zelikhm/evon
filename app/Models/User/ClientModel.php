@@ -21,7 +21,10 @@ class ClientModel extends Model
       'isJk',
       'manager_name',
       'manager_phone',
-      'commission'
+      'commission',
+      'target_buy',
+      'date_travel',
+      'buy_form_id',
     ];
 
     public function user() {
