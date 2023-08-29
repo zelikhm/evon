@@ -128,7 +128,7 @@
         <div :class="{ validation: validation.plannedDate == false }"
              class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
           <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact"> Планируемая дата сделки или приезда в Турцию</label>
-          <input v-model="compilation.plannedDate"
+          <input @input="compilation.plannedDate"
                  class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                  type="date">
         </div>
@@ -410,9 +410,16 @@ input[type="date"] {
   -moz-appearance: textfield;
   appearance: textfield;
 }
+
+input[type="date"]  {
+  width: 100%;
+}
 @media (max-width: 768px) {
   .status div{
     max-width: none;
+  }
+  input[type="date"]  {
+    width: 100%;
   }
 
 }
