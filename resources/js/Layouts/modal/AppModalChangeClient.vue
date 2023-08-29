@@ -136,11 +136,12 @@
              class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
           <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact"> Форма оплаты</label>
           <div class="relative">
-            <div @click="toggleDropdown" class="dropdown-toggle text-lg text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0">
+            <div @click="toggleDropdown" class="dropdown-toggle text-base xxl:text-sm xl:text-xs pb-3 xxl:pb-2 xl:pb-1">
               {{ getPaymentMethodName }}
             </div>
+
             <ul v-if="select" class="dropdown-menu">
-              <li class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" v-for="(method, index) in paymentMethods"
+              <li class="text-[#1E1D2D]   text-base xxl:text-sm xl:text-xs pb-3 xxl:pb-2 xl:pb-1" v-for="(method, index) in paymentMethods"
                   :key="index"
                   @click="selectPaymentMethod(index)">
                 {{ method }}
@@ -398,7 +399,17 @@ textarea{
   line-height: 1rem;
   font-weight: 500;
 }
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+input[type="date"] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
 @media (max-width: 768px) {
   .status div{
     max-width: none;
