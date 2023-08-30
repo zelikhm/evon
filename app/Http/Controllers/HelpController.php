@@ -95,7 +95,7 @@ class HelpController extends Controller
         'target_buy' => $request->target_buy,
         'date_travel' => $request->date_travel,
         'buy_form_id' => $request->buy_form_id,
-        'commission' => $request->isJk === 1 ? '80%' : '45%'
+        'commission' => $request->isJk === 1 ? '75%' : '40%'
       ]);
 
 
@@ -132,7 +132,7 @@ class HelpController extends Controller
           'target_buy' => $request->target_buy,
           'date_travel' => $request->date_travel,
           'buy_form_id' => $request->buy_form_id,
-          'commission' => $request->isJk === 1 ? '80%' : '45%'
+          'commission' => $request->isJk === 1 ? '75%' : '40%'
         ]);
 
       return response()->json(
