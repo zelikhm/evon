@@ -128,16 +128,29 @@
         <div :class="{ validation: validation.plannedDate == false }"
              class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
           <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact"> Планируемая дата сделки или приезда в Турцию</label>
-          <input v-model="compilation.plannedDate"
+          <input @input="compilation.plannedDate"
                  class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                  type="date">
         </div>
         <div :class="{ validation: validation.paymentMethod == false }"
              class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact"> Форма оплаты (наличный, безналичный, рассрочка и т.д.)</label>
-          <input v-model="compilation.paymentMethod"
-                 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
-                 type="text">
+          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact"> Форма оплаты</label>
+          <div class="relative">
+            <div @click="toggleDropdown" class="dropdown-toggle text-base xxl:text-sm xl:text-xs pb-3 xxl:pb-2 xl:pb-1">
+              {{ getPaymentMethodName }}
+            </div>
+
+            <ul v-if="select" class="dropdown-menu">
+              <li class="text-[#1E1D2D]   text-base xxl:text-sm xl:text-xs pb-3 xxl:pb-2 xl:pb-1" v-for="(method, index) in paymentMethods"
+                  :key="index"
+                  @click="selectPaymentMethod(index)">
+                {{ method }}
+              </li>
+            </ul>
+          </div>
+<!--          <input v-model="compilation.paymentMethod"-->
+<!--                 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"-->
+<!--                 type="text">-->
         </div>
         <!--!Новые поля-->
 
@@ -184,6 +197,13 @@ export default {
   props: ['openChangeClient', 'openSideBar', 'user', 'itemCompilation', 'language', "tool", "clientInfo"],
   data() {
     return {
+      select: false,
+      paymentMethods: [
+        'Выберите форму оплаты',
+        'Наличные',
+        'Безналичные',
+        'Рассрочка',
+      ],
       compilation: {
         id: null,
         name: "",
@@ -219,8 +239,20 @@ export default {
       arrDelJK: [],
     }
   },
+  computed: {
+    getPaymentMethodName() {
+      return this.paymentMethods[this.compilation.paymentMethod ?? 0];
+    },
+  },
   emits: ['close-create-selection', 'close-selection'],
   methods: {
+    toggleDropdown() {
+      this.select = !this.select;
+    },
+    selectPaymentMethod(index) {
+      this.select = !this.select;
+      this.compilation.paymentMethod = index;
+    },
     toggleCheckbox(checkboxNumber) {
       this.compilation.checkbox1Active = checkboxNumber === 1;
       this.compilation.checkbox2Active = checkboxNumber === 2;
@@ -264,6 +296,10 @@ export default {
         client_text: this.compilation.interested,
         isJk: this.compilation.checkbox1Active ? 1 : 2,
         comment: this.compilation.comment,
+
+        target_buy:this.compilation.purchasePurpose,
+        date_travel :this.compilation.plannedDate,
+        buy_form_id :this.compilation.paymentMethod,
       }).then(res => {
 
         this.$emit("reload", res.data);
@@ -335,12 +371,94 @@ textarea{
 .modal-cooperation-agreement .contant{
   position: relative;
 }
+.dropdown-menu {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  list-style: none;
+  margin: 0;
+  width: 100%;
+}
+.dropdown-menu li {
+  cursor: pointer;
+  line-height: 1rem;
+  padding: 10px;
+  font-size: 0.85rem;
+}
+.dropdown-menu li:hover{
+  background-color: whitesmoke;
+}
+.dropdown-toggle  {
+  transition: 0.5s;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  margin-top: 10px;
+  line-height: 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
+input[type="date"] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type="date"]  {
+  width: 100%;
+}
 @media (max-width: 768px) {
   .status div{
     max-width: none;
   }
+  input[type="date"]  {
+    width: 100%;
+  }
+  .dropdown-menu li {
+    cursor: pointer;
+    line-height: 1rem;
+    padding: 10px;
+    font-size: 13px;
+  }
+  .dropdown-toggle  {
+    transition: 0.5s;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    margin-top: 10px;
+    line-height: 1rem;
+    font-size: 13px;
+    font-weight: 500;
+  }
 
+  input[type="date"]{
+    display: inline-block;
+    position: relative;
+  }
+  input[type="date"]{
+    padding-right: 24px;
+  }
+
+  input[type="date"]::after {
+    content: "📅";
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
 }
 
 </style>

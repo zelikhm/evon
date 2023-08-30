@@ -74,12 +74,12 @@ import { Link } from '@inertiajs/inertia-vue3'
                   {{ cli.client_text }}
                 </span>
               </div>
-              <div class="text-xs font-bold decided">{{ cli.isJk === 1 ? "Определился с жк" : "Не определился с жк" }}
+              <div class="text-xs font-bold decided">{{ cli.isJk === 1 ? "Определился с объектом" : "Не определился с объектом" }}
               </div>
               <div class="client-status">
                 <div class="text-xs font-bold mb-2">Статус клиента:
                   <!-- <span class="font-normal">
-                    {{ cli.jk === "1" ? "Определился с жк" : "Не определился с жк" }}
+                    {{ cli.jk === "1" ? "Определился с объектом" : "Не определился с объектом" }}
                   </span> -->
                 </div>
                 <div class="dropdown">

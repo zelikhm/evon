@@ -28,14 +28,14 @@ createInertiaApp({
         VueApp.config.globalProperties.$tur = tur;
 
         VueApp.use(plugin)
-              .use(VueGoogleMaps, {
-                  load: {
-                      key: 'AIzaSyBo8Ws9ujugchMacJ3BNAvGWTn6b1cmtJ4',
-                      language: 'ru'
-                  }
-              })
-              .use(ZiggyVue, Ziggy)
-              .mount(el);
+            .use(VueGoogleMaps, {
+                load: {
+                    key: 'AIzaSyBo8Ws9ujugchMacJ3BNAvGWTn6b1cmtJ4',
+                    language: 'ru'
+                }
+            })
+            .use(ZiggyVue, Ziggy)
+            .mount(el);
     },
 });
 
