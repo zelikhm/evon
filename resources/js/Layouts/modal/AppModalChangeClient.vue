@@ -383,6 +383,7 @@ textarea{
   cursor: pointer;
   line-height: 1rem;
   padding: 10px;
+  font-size: 0.85rem;
 }
 .dropdown-menu li:hover{
   background-color: whitesmoke;
@@ -397,6 +398,7 @@ textarea{
   width: 100%;
   margin-top: 10px;
   line-height: 1rem;
+  font-size: 0.85rem;
   font-weight: 500;
 }
 input[type="date"]::-webkit-inner-spin-button,
@@ -421,7 +423,25 @@ input[type="date"]  {
   input[type="date"]  {
     width: 100%;
   }
-
+  .dropdown-menu li {
+    cursor: pointer;
+    line-height: 1rem;
+    padding: 10px;
+    font-size: 13px;
+  }
+  .dropdown-toggle  {
+    transition: 0.5s;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    margin-top: 10px;
+    line-height: 1rem;
+    font-size: 13px;
+    font-weight: 500;
+  }
 }
 
 </style>
