@@ -442,6 +442,23 @@ input[type="date"]  {
     font-size: 13px;
     font-weight: 500;
   }
+
+  input[type="date"]{
+    display: inline-block;
+    position: relative;
+  }
+  input[type="date"]{
+    padding-right: 24px;
+  }
+
+  input[type="date"]::after {
+    content: "📅";
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
 }
 
 </style>
