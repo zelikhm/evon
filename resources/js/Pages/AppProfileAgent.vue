@@ -110,6 +110,11 @@
 <!--                    <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px] leading-none">Загрузить обложку</span>-->
 <!--                <input class="pointer-events-none overflow-hidden absolute top-0 left-0 opacity-0" id="cover" type="file" ref="banner" @change="changeBanner">-->
               </div>
+
+
+              <!--Видео-->
+
+
             </div>
           </div>
         </div>
