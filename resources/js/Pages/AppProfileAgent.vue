@@ -115,6 +115,30 @@
               <!--Видео-->
 
 
+              <div v-if="selectLanguage===0" class="video-tutorial">
+                <h3>Подробнее о функциях платформы</h3>
+                <div  @click="modal_video=!modal_video" class="video-bg"></div>
+                <iframe
+                  id="video"
+                  src="https://www.youtube.com/embed/xddj1nZjltU?si=g_W5H6NKzlMtyTu0&autoplay=1&mute=1&controls=0&showinfo=0"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allowfullscreen
+                ></iframe>
+              </div>
+
+              <div v-show="modal_video" class="modal-video">
+                <div @click="modal_video=!modal_video" class="modal-bg"></div>
+                <div class="modal-video-content">
+
+                  <iframe  id="modal-video"  src="https://www.youtube.com/embed/xddj1nZjltU?si=g_W5H6NKzlMtyTu0&autoplay=1&mute=1&controls=1&showinfo=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+                </div>
+              </div>
+
+
+
+
             </div>
           </div>
         </div>
@@ -161,9 +185,17 @@ export default {
       openPayRusProfile: false,
       selectLanguage: 0,
       language: {},
+
+      modal_video:false,
+
     }
   },
   methods: {
+
+    asdasdasd(){
+      alert("asdasd")
+    },
+
     choseLanguage(language) {
       this.selectLanguage = language;
 
@@ -267,3 +299,96 @@ export default {
 }
 
 </script>
+
+
+<style scoped>
+
+.video-tutorial{
+  position: relative;
+}
+.video-tutorial h3{
+  text-align: center;
+  font-weight: 600;
+}
+.video-bg{
+  position: absolute;
+  left: 0;
+  top: 28px;
+  width: 100%;
+  height: calc(100% - 20px);
+  z-index: 10;
+  cursor: pointer;
+}
+
+
+.modal-video{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.modal-bg{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgb(0,0,0,0.5);
+  z-index: 10;
+}
+
+.modal-video .modal-video-content {
+  width: 50vw;
+  height: 28.1vw;
+  margin: 0 auto;
+  background: white;
+  position: absolute;
+  left: calc(50% - 25vw);
+  top: calc(50% - 14.05vw);
+  z-index: 11;
+}
+#modal-video{
+  width: 100%;
+  height: 100%;
+}
+#video{
+  width: 28vw;
+  height: 15.7vw;
+  margin-top: 15px;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+
+@media (max-width: 768px) {
+  .modal-video .modal-video-content  {
+    width: 90vw;
+    height: 50.1vw;
+    margin: 0 auto;
+    background: white;
+    position: absolute;
+    left: calc(50% - 45vw);
+    top: calc(50% - 14.05vw);
+    z-index: 11;
+  }
+  .video-bg{
+    position: absolute;
+    left: 0;
+    top: 31px;
+    width: 100%;
+    height: calc(100% - 30px);
+    z-index: 10;
+    cursor: pointer;
+  }
+  #video {
+    width: 87vw;
+    height: 49vw;
+    margin-top: 15px;
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+</style>
