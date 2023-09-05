@@ -553,13 +553,18 @@ header {
     }
 
     #welcom .welcom-cont .right .contant {
-        height: auto;
-        margin: 0 auto;
-        height: 110.9375vw;
-        width: 100%;
-        max-width: 90vw;
+      margin: 0 auto;
+      height: 158.9375vw;
+      max-height: 112vw;
+      width: 100%;
+      max-width: 90vw;
     }
 
+  #welcom h3{
+    font-size: 3.5vw;
+    line-height: 4vw;
+    height: 12vw;
+  }
     #welcom .welcom-cont .right .contant .btn {
         display: none;
     }

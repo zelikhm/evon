@@ -389,6 +389,9 @@ export default {
     max-width: 100%;
     max-height: 100%;
   }
+  #app > main > div > div > div > div > div:nth-child(3) > div.modal-video{
+    display: none  !important;
+  }
 }
 
 </style>
