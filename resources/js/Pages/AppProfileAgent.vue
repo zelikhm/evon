@@ -32,19 +32,29 @@
                 </div>
               </div>
               <div class="bg-[#F6F3FA] w-full flex flex-col rounded-[10px]">
+                
                <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5 p-5 xxl:p-4 xl:p-3">
                  <span class="text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] leading-none">{{ language.prof_rielt[10] }}</span>
                  <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none" v-if="user.subscription">
                    {{ language.prof_rielt[11] }}: <span class="text-[#E84680]">{{ new Date(Date.parse(user.subscription_info.finished_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span>
                  </span>
                </div>
+               
                 <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
+
+                <!--Текст про подписки-->
+                <div class="text-hint red" v-if="!user.subscription">Подписка закончена</div>
+                <div class="text-hint"  v-if="!user.subscription">Оформить подписку и получить доступ к базе недвижимости и функциям сервиса </div>
+
                 <button @click="openPayProfile = true" class="hover__button--purple transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">{{ language.prof_rielt[15] + ' TR' }}</button>
                 <button @click="openPayRusProfile = true" class="hover__button--purple transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">{{ language.prof_rielt[15] + ' RUB' }}</button>
               </div>
             </div>
             <div>
-              <h3 class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">{{ language.prof_rielt[3] }}</h3>
+              <h3 class="title text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">
+                {{ language.prof_rielt[3] }}
+                <span>Эта информация указывается в презентации для клиента</span>
+              </h3>
               <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 mt-7 xxl:mt-5 xl:mt-4">
                 <div class="grid grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3">
                   <div class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
@@ -310,6 +320,23 @@ export default {
   text-align: center;
   font-weight: 600;
 }
+
+h3.title{
+  display: flex;
+    align-items: center;
+    gap: 14px;
+  
+}
+
+h3 span{
+  background: rgb(246 243 250);
+  padding: 5px 8px;
+  border-radius: 6px;
+  display: block;
+  font-size: 12px;
+  color: rgb(100 53 165 );
+  font-weight: 500;
+}
 .video-bg{
   position: absolute;
   left: 0;
@@ -361,6 +388,24 @@ export default {
   max-height: 100%;
 }
 
+.text-hint{
+  text-align: center;
+    max-width: 90%;
+    width: 100%;
+    font-size: 12px;
+    line-height: 15px;
+    background: white;
+    padding: 6px;
+    font-weight: 500;
+    border-radius: 6px;
+    margin: 10px auto;
+    color: rgb(100 53 165 );
+}
+
+
+.text-hint.red{
+  color:rgb(232 70 128 )
+}
 
 @media (max-width: 768px) {
   .modal-video .modal-video-content  {
@@ -372,6 +417,16 @@ export default {
     left: calc(50% - 45vw);
     top: calc(50% - 14.05vw);
     z-index: 11;
+  }
+  h3.title{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-direction: column;
+  }
+  h3 span{
+    text-align: center;
+    line-height: 16px;
   }
   .video-bg{
     position: absolute;
@@ -389,6 +444,10 @@ export default {
     max-width: 100%;
     max-height: 100%;
   }
+  .text-hint{ 
+    font-size: 12px;
+    line-height: 15px; 
+}
   #app > main > div > div > div > div > div:nth-child(3) > div.modal-video{
     display: none  !important;
   }

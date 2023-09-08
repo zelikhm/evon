@@ -45,8 +45,8 @@
         <div class="flex items-center justify-between sm:flex-col sm:items-start sm:gap-2">
           <div class="flex flex-col sm:gap-3">
             <div class="flex items-center sm:flex-col sm:items-start gap-5 xxl:gap-4 xl:gap-3">
-              <span class="font-semibold text-xl xxl:text-lg xl:text-sm lg:text-[18px]">{{ compilation.isVisible === 1 ?
-                house.title : language.ob[20] + ` №${house.id + 10000}` }}</span>
+             <!--  <span class="font-semibold text-xl xxl:text-lg xl:text-sm lg:text-[18px]">{{ compilation.isVisible === 1 ?
+                house.title : language.ob[20] + ` №${house.id + 10000}` }}</span> -->
               <div
                 class="flex items-center gap-2 xxl:gap-1.5 xl:gap-1 text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[12px]">
                 <span

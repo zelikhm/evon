@@ -29,7 +29,7 @@
           <input :value="getLink()" readonly ref="text" disabled
             class="copy-link w-full text-[#1E1D2D] text-[16px] focus:ring-[#6435A5] focus:border-[#6435A5] xxl:text-[14px] xl:text-[12px] pl-5 xxl:pl-4 xl:pl-3 py-3 xxl:py-2.5 xl:py-2 leading-none rounded-[5px] border border-solid border-[#E5DFEE] pr-12 xxl:pr-10 xl:pr-8"
             type="text">
-          <!--          <span class="copy-link-text">{{language.ob[50]}}</span>-->
+                   <span class="copy-link-text">Ссылка скопирована</span>
           <img @click="copy"
             class="absolute cursor-pointer top-1/2 -translate-y-1/2 w-6 xxl:w-5 xl:w-4 right-5 xxl:right-4 xl:right-3"
             src="../../../assets/svg/copy_icon_purple.svg" alt="">
@@ -96,19 +96,16 @@ export default {
 .copy-link-text {
   position: absolute;
   top: 40px;
-  right: 99px;
-  /* box-shadow: 0px 0px 0px 1px; */
+  right: calc(50% - 85px);
+  box-shadow: 0px 0px 0px 1px;
   background: white;
-  color: rgb(101 54 165);
+  color: rgb(101 54 165 );
   border-radius: 10px;
-  /* opacity: 0; */
   font-size: 12px;
   padding: 2px 22px;
-  opacity: 0;
   transition: .7s;
-  border: 0;
+  border: 7px;
   pointer-events: none;
-
 }
 
 .copy-link:hover+.copy-link-text {
