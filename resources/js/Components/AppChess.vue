@@ -30,7 +30,7 @@
 
         <div class="flex items-center lg:flex-col gap-7 xxl:gap-5 xl:gap-4 x:gap-2">
           <div class="relative flex items-center gap-2 xl:gap-1.5 relative" > 
-            <img class="dateNewPriceIcon" src="../../assets/svg/calender_purple.svg" class="w-4 xxl:w-3" alt="">
+            <img  src="../../assets/svg/calender_purple.svg" class="dateNewPriceIcon w-4 xxl:w-3" alt="">
             <span class=" dateNewPrice text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{ getDate(house.updated_at) }}</span>
           
             <!--Всплывашка-->

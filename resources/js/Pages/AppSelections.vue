@@ -9,17 +9,16 @@
   <app-header :user="user" :language="language" @selectLanguage="choseLanguage" />
   <main>
     <div class="_container">
-      <div class="flex justify-between items-center mt-14 xxl:mt-10 xl:mt-8">
+      <div class="flex wraper-block justify-between items-center mt-14 xxl:mt-10 xl:mt-8">
         <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5">
           <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px] leading-none">{{
             language.rielt_2[0] }} <span>Создайте персональную лэндинг-презентацию для клиента</span></h2>
           <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{
-            language.izbr_1[2] }} {{ compilation.length }} шт.</span>
-          <button class="creat">Создайте новую презентацию</button>
+            language.izbr_1[2] }} {{ compilation.length }} шт.</span> 
         </div>
-        <!-- <button
-          class="login__btn&#45;&#45;bg text-white text-base xxl:text-sm xl:text-xs lg:text-[15px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5 rounded-[3px] leading-none">Создать
-          подборку</button> -->
+        <button
+          class="login__btn&#45;&#45;bg text-white text-base xxl:text-sm xl:text-xs lg:text-[15px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5 rounded-[3px] leading-none">
+          Создать новую презентацию</button>
       </div>
       <div class="grid grid-cols-2 lg:grid-cols-1 gap-x-10 gap-y-4 mt-8 xxl:mt-7 xl:mt-6 mb-28 xxl:mb-24 xl:mb-20">
         <div class="contact__selling grid__selection-block rounded-[10px]" v-for="(item, idx) in compilationReady">
@@ -302,7 +301,22 @@ h2 span{
   
 }
 
+
+
 @media (max-width: 992px) { 
+
+  .wraper-block{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+  }
+  .wraper-block  span{
+    text-align: center;
+  }
+  h2 span{
+    text-align: center;
+  }
 
   .tools button span {
     display: none;
