@@ -29,10 +29,10 @@
         </div>
 
         <div class="flex items-center lg:flex-col gap-7 xxl:gap-5 xl:gap-4 x:gap-2">
-          <div class="relative flex items-center gap-2 xl:gap-1.5 relative" > 
+          <div class="relative flex items-center gap-2 xl:gap-1.5 relative" >
             <img  src="../../assets/svg/calender_purple.svg" class="dateNewPriceIcon w-4 xxl:w-3" alt="">
             <span class=" dateNewPrice text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{ getDate(house.updated_at) }}</span>
-          
+
             <!--Всплывашка-->
             <div class="hitn-text">
                  Дата обновления прайса
@@ -122,7 +122,7 @@
 
 <script>
 import AppChessGrid from "./AppChessGrid.vue"
-import AppChessList from "./AppChessList.vue" 
+import AppChessList from "./AppChessList.vue"
 import {computed} from "vue"
 import {usePage} from "@inertiajs/inertia-vue3"
 
@@ -263,7 +263,7 @@ export default {
   },
   components: {
     AppChessGrid,
-    AppChessList, 
+    AppChessList,
   }
 }
 </script>
@@ -287,18 +287,16 @@ export default {
 .hitn-text {
   position: absolute;
   word-break: unset;
-  width: 175px;
+  width: 155px;
   right: auto;
-  left: -200px;
-  padding: 7px;
+  left: -175px;
+  padding: 4px;
   background: rgb(246 243 250);
   color: rgb(100 53 165);
-  border-radius: 5px; 
-  font-size: 12px;
+  border-radius: 5px;
+  font-size: 10px;
   line-height: 12px;
   text-align: center;
-  opacity: 0;
-  visibility: hidden;
 }
   .loader {
     border: 5px solid #f3f3f3;
@@ -323,7 +321,7 @@ export default {
     text-align: center;
   }
 
-  @media (max-width: 992px) { 
+  @media (max-width: 992px) {
   .hitn-text {
     position: absolute;
     word-break: unset;

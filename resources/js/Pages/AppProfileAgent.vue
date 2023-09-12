@@ -32,14 +32,14 @@
                 </div>
               </div>
               <div class="bg-[#F6F3FA] w-full flex flex-col rounded-[10px]">
-                
+
                <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5 p-5 xxl:p-4 xl:p-3">
                  <span class="text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] leading-none">{{ language.prof_rielt[10] }}</span>
                  <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none" v-if="user.subscription">
                    {{ language.prof_rielt[11] }}: <span class="text-[#E84680]">{{ new Date(Date.parse(user.subscription_info.finished_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span>
                  </span>
                </div>
-               
+
                 <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
 
                 <!--Текст про подписки-->
@@ -325,16 +325,16 @@ h3.title{
   display: flex;
     align-items: center;
     gap: 14px;
-  
+
 }
 
 h3 span{
-  background: rgb(246 243 250);
+  background: rgb(246 , 243 , 250 , 0.7 );
   padding: 5px 8px;
   border-radius: 6px;
   display: block;
   font-size: 12px;
-  color: rgb(100 53 165 );
+  color: rgb(100 , 53 , 165 , 0.7 );
   font-weight: 500;
 }
 .video-bg{
@@ -444,9 +444,9 @@ h3 span{
     max-width: 100%;
     max-height: 100%;
   }
-  .text-hint{ 
+  .text-hint{
     font-size: 12px;
-    line-height: 15px; 
+    line-height: 15px;
 }
   #app > main > div > div > div > div > div:nth-child(3) > div.modal-video{
     display: none  !important;
