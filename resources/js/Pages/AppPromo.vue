@@ -19,6 +19,7 @@ import '../../../public/styles/ForRealtors.css'
     @open-modal-realtor="openModalRealtor" @open-modal-developer="openModalDeveloper" :language="language"
     :selectLanguage="selectLanguage" />
 
+
   <app-modal-register :oLoginRegister="openRegister" @close-modal="closeModalRegister" :language="language"
     :selectLanguage="selectLanguage" />
 
