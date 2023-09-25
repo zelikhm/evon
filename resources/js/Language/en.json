@@ -30,7 +30,7 @@
     "26":"real estate agencies",
     "27":"construction companies",
     "28":"We offer a professional sales tool for real estate agents and construction companies. The largest and most up-to-date database of new buildings in Turkey, with convenient object search, communication with developers, and sending presentations to clients in just one click.",
-    "29":"Try for free",
+    "29":"Register",
     "30":"Download our application",
     "31":"Scroll down",
     "32": "Watch a video",
@@ -69,7 +69,8 @@
     "65": "Privacy Policy",
     "66": "User Agreement",
     "67": "Register as a real estate agent <br> or developer and gain full access to the platform",
-    "68": "self-employed agents"
+    "68": "self-employed agents",
+    "69": "Real estate agencies that work productively"
   },
   "footer": {
     "0": "ИНН 215125125125125",
@@ -437,5 +438,5 @@
     "0": "Free version. Available",
     "1": "projects out of ",
     "2": "Buy"
-  } 
+  }
 }

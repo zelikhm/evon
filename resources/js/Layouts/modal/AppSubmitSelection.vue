@@ -20,6 +20,7 @@
       <div class="relative mt-10 xxl:mt-8 xl:mt-6">
         <input :value="valueLink" ref="text" disabled class="copy-link w-full text-[#1E1D2D] text-[16px] focus:ring-[#6435A5] focus:border-[#6435A5] xxl:text-[14px] xl:text-[12px] pl-5 xxl:pl-4 xl:pl-3 py-3 xxl:py-2.5 xl:py-2 leading-none rounded-[5px] border border-solid border-[#E5DFEE] pr-12 xxl:pr-10 xl:pr-8" type="text">
         <!-- <span  v-if="user.subscription_info.free == 1"  class="copy-link-text">{{language.ob[50]}}</span>       -->
+        <span v-if="copy_link_hint" class="copy-link-text">Ссылка скопирована</span>   
         <img @click="copy" class="absolute cursor-pointer top-1/2 -translate-y-1/2 w-6 xxl:w-5 xl:w-4 right-5 xxl:right-4 xl:right-3" src="../../../assets/svg/copy_icon_purple.svg" alt="">
       </div>
     </div>
@@ -37,13 +38,18 @@ export default {
   emits: ['closeSubmitSelection'],
   data() {
     return {
-      valueLink: 'http://102895812h9051h2081102j9'
+      valueLink: 'http://102895812h9051h2081102j9',
+      copy_link_hint:false
     }
   },
   methods: {
     copy() { 
       try {
         navigator.clipboard.writeText(this.valueLink)  
+        this.copy_link_hint=true
+        setTimeout(() => {
+          this.copy_link_hint=false
+        }, 3000);
       } catch (error) {
         var textToCopy = this.valueLink;   
         var input = document.createElement("textarea");
@@ -53,6 +59,10 @@ export default {
         input.setSelectionRange(0, 99999); 
         document.execCommand("copy");
         document.body.removeChild(input); 
+        this.copy_link_hint=true
+        setTimeout(() => {
+          this.copy_link_hint=false
+        }, 3000);
       } 
     }
   },
@@ -68,16 +78,14 @@ export default {
   position: absolute;
     top: 40px;
     right: 99px;
-    /* box-shadow: 0px 0px 0px 1px; */
+    box-shadow: 0px 0px 0px 1px;
     background: white;
     color: rgb(101 54 165 );
-    border-radius: 10px;
-    /* opacity: 0; */
+    border-radius: 10px; 
     font-size: 12px;
-    padding: 2px 22px;
-    opacity: 0;
+    padding: 2px 22px; 
     transition: .7s;
-    border: 0;
+    border: 7px;
     pointer-events: none;
 }
 

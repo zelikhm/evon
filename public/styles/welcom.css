@@ -205,7 +205,7 @@ header .lines-animations {
     color: #9657EC;
 }
 .modal.choise .btns{
-    display: flex; 
+    display: flex;
     gap: 5vw;
     flex-direction: column;
 }
@@ -490,7 +490,7 @@ header {
 }
 
 #welcom .welcom-cont .right .contant .btn {
-    background-color: white; 
+    background-color: white;
     width: -moz-fit-content;
     width: 100%;
     opacity: 1;
@@ -519,81 +519,101 @@ header {
     line-height: 0.833vw;
 }
 
+
+#welcom h3{
+  font-family: 'ALS Gorizont';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1.8125vw;
+  line-height: 2.5vw;
+  height: 4vw;
+  display: block;
+  color: #000000;
+  margin-bottom: 2vw;
+  text-align: center;
+}
+
+
 @media only screen and (max-width: 1000px) {
     .lines-animations {
         display: none;
     }
-    
+
     .container {
         padding: 0 4.6875vw; /* (значение px / 320) * 100 */
     }
-    
+
     #welcom .welcom-cont {
         display: block;
     }
-    
-    #welcom { 
+
+    #welcom {
         align-items: start;
         min-height: auto;
     }
-    
+
     #welcom .welcom-cont .right .contant {
-        height: auto;
-        margin: 0 auto;
-        height: 110.9375vw;
-        width: 100%;
-        max-width: 90vw;
+      margin: 0 auto;
+      height: 158.9375vw;
+      max-height: 112vw;
+      width: 100%;
+      max-width: 90vw;
     }
-    
+
+  #welcom h3{
+    font-size: 3.5vw;
+    line-height: 4vw;
+    height: 12vw;
+  }
     #welcom .welcom-cont .right .contant .btn {
         display: none;
     }
-    
+
     #welcom .ref-soc {
         display: flex;
         margin: 0 auto;
         margin: 21.875vw auto 11.5625vw auto; /* (значение px / 320) * 100 */
         max-width: 51.25vw; /* (значение px / 320) * 100 */
     }
-    
+
     #welcom .ref-soc img {
         height: 5.9375vw; /* (значение px / 320) * 100 */
     }
-    
+
     #welcom h1 {
         font-size: 6.25vw; /* (значение px / 320) * 100 */
         line-height: 7.5vw; /* (значение px / 320) * 100 */
         height: 34.375vw; /* (значение px / 320) * 100 */
     }
-    
+
     #welcom h4 img {
         width: 6.875vw; /* (значение px / 320) * 100 */
         height: 6.875vw; /* (значение px / 320) * 100 */
         top: 1.875vw; /* (значение px / 320) * 100 */
     }
-    
+
     #welcom h4 span {
         font-size: 4.375vw; /* (значение px / 320) * 100 */
         line-height: 4.375vw; /* (значение px / 320) * 100 */
     }
-    
+
     #welcom button {
         font-size: 4.375vw;
         line-height: 5vw;
         padding: 3.125vw 7.1875vw;
         margin-bottom: 5.31vw;
     }
-    
+
     #welcom .save-prog span {
         font-size: 4.375vw; /* (значение px / 320) * 100 */
         line-height: 5.3125vw; /* (значение px / 320) * 100 */
     }
-    
+
     #welcom .save-prog img {
         width: 5.625vw;
         margin-left: 4.68vw;
     }
-    
+
     #welcom p {
         font-size: 4.0625vw;
         line-height: 160.5%;
@@ -614,38 +634,38 @@ header {
     #welcom .scroll {
         display: none;
     }
-    
+
     header ul li.btns {
         display: none;
     }
-    
+
     header ul li.ref-soc {
         display: none;
     }
-    
+
     header .lang span {
         font-size: 4.375vw; /* (значение px / 320) * 100 */
         line-height: 5vw; /* (значение px / 320) * 100 */
     }
-    
+
     header .lang {
         margin-right: 8.75vw; /* (значение px / 320) * 100 */
         margin-left: auto;
         padding-top: 3vw;
     }
-    
+
     header ul li.user {
         display: block;
         width: 6.875vw; /* (значение px / 320) * 100 */
         height: 6.875vw; /* (значение px / 320) * 100 */
     }
-    
+
     .modal {
         padding: 7.1875vw;
         width: calc(100% - 25vw);
         max-width: none;
     }
-    
+
     .modal.lodinn-btns .modal-contant {
         background: white;
         display: flex;
@@ -653,20 +673,20 @@ header {
         flex-direction: column;
         gap: 4.6875vw; /* (значение px / 320) * 100 */
     }
-    
+
     .modal button {
         font-size: 3.75vw;
         padding: 4.0625vw;
         line-height: 5vw;
     }
-    
-    .modal h2 { 
+
+    .modal h2 {
         text-align: center;
         font-size: 6.25vw;
         line-height: 8.125vw;
         margin-bottom: 10vw;
     }
-    
+
     .modal input {
         height: 11.875vw;
         margin: 0;
@@ -683,18 +703,18 @@ header {
         height: 11.875vw;
         padding: 0;
     }
-    .modal a { 
+    .modal a {
         font-weight: 400;
         font-size: 5vw; /* (значение px / 320) * 100 */
         line-height: 5vw; /* (значение px / 320) * 100 */
     }
-    
+
     .modala {
         display: block;
         text-align: center;
         margin-top: 15.625vw; /* (значение px / 320) * 100 */
     }
-    
+
     .modal button:not(.login-ref) {
         background: #9657EC;
         width: 100%;
@@ -712,7 +732,7 @@ header {
         opacity: 1;
         margin-top: 0;
     }
-    
+
     header .lang .select {
         width: 13.75vw; /* (значение px / 320) * 100 */
         left: calc(50% - 4.6875vw);
@@ -720,11 +740,11 @@ header {
         padding-top: 13.4375vw; /* (значение px / 320) * 100 */
         top: 0;
     }
-    
-    header ul { 
+
+    header ul {
         grid-template-columns: 32.8125vw 1fr auto; /* (значение px / 320) * 100 */
     }
-    
+
     header .lang {
         margin-left: auto;
     }
@@ -745,6 +765,6 @@ header {
         line-height: 3vw;
     }
 }
- 
+
 
 /*!welcom*/

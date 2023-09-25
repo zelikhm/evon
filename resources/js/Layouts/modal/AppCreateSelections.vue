@@ -18,9 +18,17 @@
           <label :class="{ 'validation-text': validation.description }" class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="comment">{{ language.rielt_3[3] }}</label>
           <input @input="validationCheck(1)" v-model="compilation.description" class="text-[#1E1D2D] w-full text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0" type="text" id="comment">
         </div>
-        <div class="mb-8 xxl:mb-6 xl:mb-5">
+        <div class="wrapper relative mb-8 xxl:mb-6 xl:mb-5">
           <input v-model="compilation.isVisible" class="custom__checkbox" type="checkbox" id="chekbox">
+   
           <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="chekbox">{{ language.rielt_3[4] }}</label>
+           <!--Всплывашка-->
+          <div class="hitn-icon">
+            <img src="../../../../public/images/new/question.png" alt="" srcset="">
+          </div>
+          <div class="hitn-text">
+             Вы можете скрыть эту информацию в презентации для клиента
+          </div> 
         </div>
         <div class="text-[#1E1D2D] font-medium text-[18px] xxl:text-[15px] xl:text-[13px] mb-4 xxl:mb-3 xl:mb-2.5">ЖК ({{ JKlist.length }})</div>
         <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 mb-8 xxl:mb-6 xl:mb-5 overflow-y-auto custom__scroll-grey">
@@ -167,4 +175,67 @@ export default {
   color: red;
 }
 
+
+.wrapper{
+  width: -moz-fit-content;
+  width: fit-content;
+  display: block;
+}
+.hitn-icon{
+  position: absolute;
+  right: -20px;
+  left: auto;
+  top: 2px;
+  height: 15px;
+  width: 15px;
+}
+
+.hitn-icon img {
+  width: 15px;
+}
+
+.hitn-icon:hover + .hitn-text {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.hitn-text {
+  position: absolute;
+  word-break: unset;
+  width: 150px;
+  top: -8px;
+  left: auto;
+  right: -180px;
+  padding: 5px;
+  background: rgb(246 243 250);
+  color: rgb(100 53 165);
+  border-radius: 5px;
+  font-size: 10px;
+  line-height: 12px;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media (max-width: 992px) { 
+
+  .hitn-text {
+    position: absolute;
+    word-break: unset;
+    width: 181px;
+    top: 24px;
+    right: -42px;
+    padding: 8px;
+    background: rgb(246 243 250);
+    color: rgb(100 53 165);
+    border-radius: 5px;
+    left: auto;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+}
+}
 </style>

@@ -9,16 +9,16 @@
   <app-header :user="user" :language="language" @selectLanguage="choseLanguage" />
   <main>
     <div class="_container">
-      <div class="flex justify-between items-center mt-14 xxl:mt-10 xl:mt-8">
+      <div class="flex wraper-block justify-between items-center mt-14 xxl:mt-10 xl:mt-8">
         <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5">
           <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px] leading-none">{{
-            language.rielt_2[0] }}</h2>
+            language.rielt_2[0] }} <span>Создайте персональную лэндинг-презентацию для клиента</span></h2>
           <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{
-            language.izbr_1[2] }} {{ compilation.length }} шт.</span>
+            language.izbr_1[2] }} {{ compilation.length }} шт.</span> 
         </div>
-        <!-- <button
-          class="login__btn&#45;&#45;bg text-white text-base xxl:text-sm xl:text-xs lg:text-[15px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5 rounded-[3px] leading-none">Создать
-          подборку</button> -->
+        <button
+          class="login__btn&#45;&#45;bg text-white text-base xxl:text-sm xl:text-xs lg:text-[15px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5 rounded-[3px] leading-none">
+          Создать новую презентацию</button>
       </div>
       <div class="grid grid-cols-2 lg:grid-cols-1 gap-x-10 gap-y-4 mt-8 xxl:mt-7 xl:mt-6 mb-28 xxl:mb-24 xl:mb-20">
         <div class="contact__selling grid__selection-block rounded-[10px]" v-for="(item, idx) in compilationReady">
@@ -31,9 +31,16 @@
           <div class="flex items-center sm:items-start sm:flex-col">
             <div
               class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5 w-full py-2.5 xxl:py-2 xl:py-1.5 pl-2.5 xxl:pl-2 xl:pl-1.5 pr-20 xxl:pr-16 xl:pr-12 md:pr-2.5">
-              <span @click="openSelectionWithProps(item)"
-                class="cursor-pointer text-lg xxl:text-[15px] xl:text-[13px] lg:text-[17px] text-[#1E1D2D] font-medium leading-none">{{
-                  item.title }}</span>
+              <div class="row-preview">
+                <span @click="openSelectionWithProps(item)"
+                  class="cursor-pointer text-lg xxl:text-[15px] xl:text-[13px] lg:text-[17px] text-[#1E1D2D] font-medium leading-none">{{
+                    item.title }}
+                  
+                </span> 
+                <a class="Preview" target="_blank" :href="previewLink(item)">
+                  <button>Предварительный просмотр</button>  
+                </a>
+              </div>
               <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{
                 item.values.length }} {{ language.ob[35] }}</span>
               <div :class="{ 'border-[#6435A5]': item.isEdit, 'border-[#E5DFEE]': !item.isEdit }"
@@ -45,23 +52,27 @@
                   class="text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{ item.isEdit ?
                     language.dob_ob_1[24] : language.menu_zastr_1[9] }}</button>
               </div>
+              
             </div>
             <div
-              class="relative border__left sm:border-0 flex flex-col sm:flex-row h-full sm:h-fit sm:w-full justify-evenly sm:py-1">
-              <button @click="openSelectionWithProps(item)"
-                class="px-5 xxl:px-4 xl:px-3 h-full sm:h-fit sm:flex-shrink-0">
+              class="tools relative border__left sm:border-0 flex flex-col sm:flex-row h-full sm:h-fit sm:w-full justify-evenly sm:py-1">
+              <button  @click="openSelectionWithProps(item)"
+                class="relative px-5 xxl:px-4 xl:px-3 h-full sm:h-fit sm:flex-shrink-0">
                 <img src="../../assets/svg/pen_icon_grey.svg"
                   class="w-6 xxl:w-5.5 xl:w-5 lg:w-6 h-6 xxl:h-5.5 xl:h-5 lg:h-6" alt="">
+                  <span>Редактировать</span>
               </button>
               <div class="w-full sm:w-[1px] h-[1px] sm:h-full bg-[#E5DFEE] flex-shrink-0"></div>
-              <button @click="onModalWithLink(item)" class="px-5 xxl:px-4 xl:px-3 h-full sm:h-fit sm:flex-shrink-0">
-                <img src="../../assets/svg/screp_icon_grey.svg"
+              <button @click="onModalWithLink(item)" class="relative px-5 xxl:px-4 xl:px-3 h-full sm:h-fit sm:flex-shrink-0">
+                <img src="../../assets/svg/arrow_tray_top.svg"
                   class="w-6 xxl:w-5.5 xl:w-5 lg:w-6 h-6 xxl:h-5.5 xl:h-5 lg:h-6" alt="">
+                  <span>Отправить клиенту</span>
               </button>
               <div class="w-full sm:w-[1px] h-[1px] sm:h-full bg-[#E5DFEE]"></div>
-              <button @click="item.deleteConfirm = true" class="px-5 xxl:px-4 xl:px-3 h-full sm:h-fit sm:flex-shrink-0">
+              <button @click="item.deleteConfirm = true" class="relative px-5 xxl:px-4 xl:px-3 h-full sm:h-fit sm:flex-shrink-0">
                 <img src="../../assets/svg/bucket_icon_red.svg"
                   class="w-6 xxl:w-5.5 xl:w-5 lg:w-6 h-6 xxl:h-5.5 xl:h-5 lg:h-6" alt="">
+                  
               </button>
               <div v-if="item.deleteConfirm"
                 class="cursor-auto z-20 text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] absolute top-[110%] bg-white right-0 flex flex-col border border-solid border-[#CEC3DD] rounded-[5px]">
@@ -185,7 +196,12 @@ export default {
         isVisible: item.isVisible,
         token: this.user.token
       }).then(response => console.log(response))
-    }
+    },
+
+
+    previewLink(item) { 
+      return `${window.location.protocol}//${window.location.host}/compilation/${10000 + item.id}`;
+    },
   },
   created() {
     if (this.user.lang === 0) {
@@ -206,7 +222,7 @@ export default {
     })
 
     this.compilationReady = this.compilationReady.sort((a, b) => b.createdAtParse - a.createdAtParse)
-  },
+  }, 
   components: {
     AppHeader,
     AppFooter,
@@ -217,4 +233,99 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+h2 {
+  display: flex;
+    align-items: center;
+    gap: 35px;
+}
+h2 span{
+  font-weight: 400;
+  font-size: 13px;
+  display:block; 
+  background: rgb(246 243 250);
+    padding: 7px 8px;
+    border-radius: 6px;
+    display: block;
+    font-size: 12px;
+    color: rgb(100 53 165 );
+    font-weight: 500;
+}
+.row-preview{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.row-preview .Preview{
+  font-size: 12px;
+    color: rgb(140 92 207 / 1);
+    border: 3px solid rgb(140 92 207 / 50%);
+    border-radius: 10px;
+    padding: 4px 14px;
+    cursor: pointer;
+    transition: 0.2s;
+    text-decoration: none;
+}
+
+.row-preview .Preview:hover{
+  color: white;
+  border: 3px solid transparent;
+  background: rgb(140 92 207 / 50%);
+}
+
+.tools button:hover span{
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+.tools button span{
+  position: absolute;
+    right: calc(50% - 71px );
+    top: -40px;
+    width: 142px;
+    padding: 7px 7px;
+    background: rgb(246 243 250);
+    color: rgb(100 53 165);
+    border-radius: 5px;
+    left: auto;
+    font-size: 13px;
+    line-height: 12px;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.creat{
+  
+}
+
+
+
+@media (max-width: 992px) { 
+
+  .wraper-block{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+  }
+  .wraper-block  span{
+    text-align: center;
+  }
+  h2 span{
+    text-align: center;
+  }
+
+  .tools button span {
+    display: none;
+  }
+  h2 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+</style>
