@@ -25,7 +25,7 @@ class ProfileController extends Controller
    * @return \Inertia\Response
    */
 
-  public function index()
+  public function index(Request $request)
   {
 
     if (Auth::user()->role !== 0) {
@@ -35,16 +35,13 @@ class ProfileController extends Controller
         'tarifs_rus' => TarifRussionModel::all(),
         'notification' => $this->getNotification(),
       ]);
-
     } else {
-
       return Inertia::render('AppProfileAgent', [
         'user' => $this->getUser(),
         'tarifs' => TarifModel::all(),
         'tarifs_rus' => TarifRussionModel::all(),
         'notification' => $this->getNotification(),
       ]);
-
     }
 
   }
