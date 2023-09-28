@@ -13,6 +13,7 @@ class HouseImagesModel extends Model
       'house_id',
       'category',
       'name',
+      'isResize'
     ];
 
     protected $hidden = [

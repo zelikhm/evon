@@ -12,6 +12,9 @@ use App\Http\Traits\MainInfo;
 
 Route::get('/', ['App\Http\Controllers\Controller', 'main']);
 
+Route::get('/test', ['App\Http\Controllers\TestController', 'index']);
+Route::post('/test/image', ['App\Http\Controllers\TestController', 'save']);
+
 Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
   Route::get('/', ['App\Http\Controllers\User\ProfileController', 'index']);
 

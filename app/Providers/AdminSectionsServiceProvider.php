@@ -97,6 +97,12 @@ class AdminSectionsServiceProvider extends ServiceProvider
         'id' => 'client',
         'icon' => 'fab fa-dev',
         'priority' => 500,
+      ],
+      [
+        'title' => 'Логи',
+        'id' => 'logs',
+        'icon' => 'fab fa-dev',
+        'priority' => 600,
       ]
     ]);
   }
