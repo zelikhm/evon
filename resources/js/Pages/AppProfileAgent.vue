@@ -501,6 +501,9 @@ h3 span{
   #app > main > div > div > div > div > div:nth-child(3) > div.modal-video{
     display: none  !important;
   }
+  .row-status h3  {
+    font-size: 3vw;
+  }
 }
 
 </style>
