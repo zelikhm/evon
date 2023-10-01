@@ -18,6 +18,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::prefix('/image')->group(function () {
+  Route::post('/main', ['']);
+  Route::post('/house', ['']);
+  Route::post('/flat', ['']);
+});
+
 Route::prefix('client')->group(function () {
   Route::get('/get', ['App\Http\Controllers\HelpController', 'getClient']);
   Route::post('/editStatus', ['App\Http\Controllers\HelpController', 'editStatus']);

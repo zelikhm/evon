@@ -341,12 +341,12 @@ h3.title{
 }
 
 h3 span{
-  background: rgb(246 243 250);
+  background: rgb(246 , 243 , 250 , 0.7 );
   padding: 5px 8px;
   border-radius: 6px;
   display: block;
   font-size: 12px;
-  color: rgb(100 53 165 );
+  color: rgb(100 , 53 , 165 , 0.7 );
   font-weight: 500;
 }
 .video-bg{

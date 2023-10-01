@@ -10,20 +10,10 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Traits\MainInfo;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 Route::get('/', ['App\Http\Controllers\Controller', 'main']);
 
-Route::post('/mail', ['App\Http\Controllers\User\IndexController', 'sendRegister'])->name('mail');
+Route::get('/test', ['App\Http\Controllers\TestController', 'index']);
+Route::post('/test/image', ['App\Http\Controllers\TestController', 'save']);
 
 Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
   Route::get('/', ['App\Http\Controllers\User\ProfileController', 'index']);
@@ -37,6 +27,7 @@ Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
     Route::get('/news/create', ['App\Http\Controllers\House\NewsController', 'createNews']);
     Route::get('/news/edit/{id}', ['App\Http\Controllers\House\NewsController', 'editNews']);
   });
+
     Route::get('/help', ['App\Http\Controllers\HelpController', 'getHelp']);
     Route::get('/compilation', ['App\Http\Controllers\User\CompilationController', 'index']);
     Route::get('/favorites', ['App\Http\Controllers\User\FavoriteController', 'index']);
@@ -78,3 +69,4 @@ Route::prefix('cloud')->group(function () {
 });
 
 require __DIR__ . '/auth.php';
+require __DIR__ . '/form.php';

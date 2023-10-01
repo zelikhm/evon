@@ -19,7 +19,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, MainInfo;
 
-    public function main() {
+    public function main(Request $request) {
 
       if(Auth::check()) {
         return redirect('/houses');
@@ -27,6 +27,9 @@ class Controller extends BaseController
 
       return Inertia::render('AppPromo', [
         'userInfo' => $this->getUser(),
+        'registration' => $request->registration,
+        'message' => $request->message,
+        'builder' => $request->builder,
         'count_flats' => FlatModel::count(),
         'count_house' => HouseModel::count(),
         'count_people' => User::where('role', 0)->count() < 150 ? 150 : User::where('role', 0)->count(),

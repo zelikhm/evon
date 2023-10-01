@@ -10,12 +10,13 @@ const form = useForm({
   language_id: 0,
   type: 'Агентство недвижимости (владелец/директор)',
   remember: false,
+  type_id: 0,
 });
 
 const submit = () => {
   form.language_id = document.getElementById("language").value;
 
-  form.post(route('mail'), {
+  form.post(route('register'), {
     onSuccess: () => {
       form.success = true;
       form.reset('first_name');
@@ -40,6 +41,13 @@ const submit = () => {
         <p v-if="form.success" class="mt-10 text-center" style="color: #FFFFFF;">
           {{ language.reg[10] }}
         </p>
+        <p style="text-align: center" :style="message == 1 ? failed : success">
+          {{ parseInt(message) === 1 ? '*Проверьте данные' : 'Регистрация успешна' }}
+        </p>
+        <!-- <button @click="closeModal" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
+          <div class="absolute h-[1px] w-4 bg-[#8A8996] rotate-45"></div>
+          <div class="absolute h-[1px] w-4 bg-[#8A8996] -rotate-45"></div>
+        </button> -->
       </div>
       <form v-if="!form.success" @submit.prevent="submit">
 
@@ -80,9 +88,9 @@ const submit = () => {
           </div>
           <div v-if="openSelectPlaceWork"
             class="select xxl:max-h-[120px] xl:max-h-[110px] lg:max-h-[80px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px]">
-            <span v-for="(type, idx) in types" :key="idx" @click="changeSelectTypes(type), form.type = selectType"
+            <span v-for="(type, idx) in types" :key="idx" @click="changeSelectTypes(type), form.type = selectType, form.type_id = type.id"
               class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none">
-              {{ type.type }}
+              {{ type.type + ' ' + type.id + ' ' +  form.type_id}}
             </span>
           </div>
         </div>
@@ -107,15 +115,16 @@ export default {
       type: Boolean
     },
     selectLanguage: 0,
-    language: {}
+    language: {},
+    message: ''
   },
   watch: {
     language(newItem) {
       this.types = [
-        { type: newItem.reg[6] },
-        { type: newItem.reg[7] },
-        { type: newItem.reg[8] },
-        { type: newItem.reg[9] },
+        { id: 0, type: newItem.reg[6] },
+        { id: 1, type: newItem.reg[7] },
+        { id: 2, type: newItem.reg[8] },
+        { id: 3, type: newItem.reg[9] },
       ];
       this.selectType = newItem.reg[6];
       // this.setup();
@@ -123,13 +132,19 @@ export default {
   },
   data() {
     return {
+      success: {
+        color: 'green'
+      },
+      failed: {
+        color: 'red'
+      },
       selectType: this.language.reg[6],
       openSelectPlaceWork: false,
       types: [
-        { type: this.language.reg[6] },
-        { type: this.language.reg[7] },
-        { type: this.language.reg[8] },
-        { type: this.language.reg[9] },
+        { id: 0, type: this.language.reg[6] },
+        { id: 1, type: this.language.reg[7] },
+        { id: 2, type: this.language.reg[8] },
+        { id: 3, type: this.language.reg[9] },
       ],
       user: {
         first_name: '',

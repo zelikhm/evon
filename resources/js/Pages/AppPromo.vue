@@ -19,8 +19,7 @@ import '../../../public/styles/ForRealtors.css'
     @open-modal-realtor="openModalRealtor" @open-modal-developer="openModalDeveloper" :language="language"
     :selectLanguage="selectLanguage" />
 
-
-  <app-modal-register :oLoginRegister="openRegister" @close-modal="closeModalRegister" :language="language"
+  <app-modal-register :message="message" :oLoginRegister="openRegister" @close-modal="closeModalRegister" :language="language"
     :selectLanguage="selectLanguage" />
 
   <new-header @login-realtor="openLoginRealtor = !openLoginRealtor"
@@ -88,7 +87,6 @@ import '../../../public/styles/ForRealtors.css'
           </h4>
         </div>
         <div class="right">
-          <h3>{{language.main[69]}}</h3>
           <div class="contant">
             <div class="btn" v-for="n in 80" :key="n" @mouseenter="hideBtn" @mouseleave="showBtn">
               <img src="images/img/welcom/plus.png" alt="" srcset="">
@@ -384,6 +382,9 @@ export default {
     'count_people',
     'error',
     'userInfo',
+    'registration',
+    'message',
+    'builder'
   ],
   watch: {
     language(item) {
@@ -452,6 +453,7 @@ export default {
     this.type()
   },
   mounted() {
+    this.openRegister = this.registration !== null;
     const showToolAnimation = ref(false);
     const slideInfoElement = this.$refs.slideInfoRef;
 
