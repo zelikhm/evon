@@ -8,6 +8,7 @@
     @close-notification="openNotification = !openNotification"
     :text="text"
   />
+  <app-modal-verification v-if="openModalVer" @close-modal-verification="openModalVer = false" ></app-modal-verification>
   <main class="relative">
     <div class="_container">
       <div class="my-14 xxl:my-12 xl:my-10">
@@ -32,20 +33,19 @@
                 </div>
               </div>
               <div class="bg-[#F6F3FA] w-full flex flex-col rounded-[10px]">
-                
+
                <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5 p-5 xxl:p-4 xl:p-3">
                  <span class="text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] leading-none">{{ language.prof_rielt[10] }}</span>
                  <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none" v-if="user.subscription">
                    {{ language.prof_rielt[11] }}: <span class="text-[#E84680]">{{ new Date(Date.parse(user.subscription_info.finished_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span>
                  </span>
                </div>
-               
+
                 <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
 
                 <!--Текст про подписки-->
                 <div class="text-hint red" v-if="!user.subscription">Подписка закончена</div>
                 <div class="text-hint"  v-if="!user.subscription">Оформить подписку и получить доступ к базе недвижимости и функциям сервиса </div>
-
                 <button @click="openPayProfile = true" class="hover__button--purple transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">{{ language.prof_rielt[15] + ' TR' }}</button>
                 <button @click="openPayRusProfile = true" class="hover__button--purple transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">{{ language.prof_rielt[15] + ' RUB' }}</button>
               </div>
@@ -90,6 +90,17 @@
               </div>
             </div>
             <div class="flex flex-col">
+
+              <div  class="row-status flex w-full flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
+                <div class="info">
+                  <label  class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px]" for="company">Статус</label>
+                  <h3 v-if="status==0" class="red text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">Не верифицирован</h3>
+                  <h3 v-if="status==1" class="orange text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">На верификации</h3>
+                  <h3 v-if="status==2" class="green text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">Верифицирован</h3>
+                </div>
+                <button @click="openModalVer = true" class="hover__button--purple max-w-[170px] ml-[0px] transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">Верификация</button>
+              </div>
+
               <h3 class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">{{language.prof_rielt[1]}}</h3>
               <div class="p-7 xxl:p-5 xl:p-4 x:p-3 mt-7 xxl:mt-5 xl:mt-4 rounded-[10px] white__bg">
                 <div class="flex gap-7 xxl:gap-5 xl:gap-4 x:gap-2.5">
@@ -166,6 +177,7 @@ import {usePage} from "@inertiajs/inertia-vue3";
 import AppModalNotification from "@/Layouts/modal/AppModalNotification.vue"
 import AppModalProfile from "@/Layouts/modal/AppModalProfile.vue";
 import AppModalRusProfile from "@/Layouts/modal/AppModalRusProfile.vue";
+import AppModalVerification from "@/Layouts/modal/AppModalVerification.vue";
 
 export default {
   props:['user', 'tarifs', 'tarifs_rus'],
@@ -198,13 +210,12 @@ export default {
 
       modal_video:false,
 
+      openModalVer:false,
+      status:0,
+
     }
   },
   methods: {
-
-    asdasdasd(){
-      alert("asdasd")
-    },
 
     choseLanguage(language) {
       this.selectLanguage = language;
@@ -304,7 +315,8 @@ export default {
     AppHeader,
     AppFooter,
     AppModalNotification,
-    AppModalRusProfile
+    AppModalRusProfile,
+    AppModalVerification
   }
 }
 
@@ -325,7 +337,7 @@ h3.title{
   display: flex;
     align-items: center;
     gap: 14px;
-  
+
 }
 
 h3 span{
@@ -402,11 +414,49 @@ h3 span{
     color: rgb(100 53 165 );
 }
 
-
 .text-hint.red{
   color:rgb(232 70 128 )
 }
 
+.row-status{
+  margin-bottom: 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.row-status h3{
+  font-size: 0.83vw;
+  font-weight: 500;
+}
+.row-status button{
+  margin: 0;
+  margin-top: 10px;
+  padding: 15px 30px;
+}
+.row-status .info{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.row-status h3{
+  display: inline-block;
+  width: fit-content;
+  padding: 3px 10px;
+  margin: 3px 0px;
+  color:white;
+  border-radius: 3px;
+}
+.row-status h3.red{
+  background: rgb(232 70 128 );
+}
+.row-status h3.orange{
+  background: rgb(246 243 250);
+  color: rgb(100 53 165 );
+}
+.row-status h3.green{
+  background: rgb(48 203 73)
+}
 @media (max-width: 768px) {
   .modal-video .modal-video-content  {
     width: 90vw;
@@ -444,9 +494,9 @@ h3 span{
     max-width: 100%;
     max-height: 100%;
   }
-  .text-hint{ 
+  .text-hint{
     font-size: 12px;
-    line-height: 15px; 
+    line-height: 15px;
 }
   #app > main > div > div > div > div > div:nth-child(3) > div.modal-video{
     display: none  !important;

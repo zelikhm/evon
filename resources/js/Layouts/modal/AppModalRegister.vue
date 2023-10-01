@@ -40,10 +40,6 @@ const submit = () => {
         <p v-if="form.success" class="mt-10 text-center" style="color: #FFFFFF;">
           {{ language.reg[10] }}
         </p>
-        <!-- <button @click="closeModal" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
-          <div class="absolute h-[1px] w-4 bg-[#8A8996] rotate-45"></div>
-          <div class="absolute h-[1px] w-4 bg-[#8A8996] -rotate-45"></div>
-        </button> -->
       </div>
       <form v-if="!form.success" @submit.prevent="submit">
 
