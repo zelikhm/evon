@@ -21,8 +21,6 @@ class Controller extends BaseController
 
     public function main(Request $request) {
 
-      dd(1);
-
       if(Auth::check()) {
         return redirect('/houses');
       }
