@@ -24,11 +24,16 @@ class ImageService implements ImageInterface
    * @return bool
    */
 
-  public function add($image_id, $type, $file): bool
+  public function add($image_id, $type, $file, $image_name): bool
   {
-    Http::post(env('SERVICE_URL') . '/api/add', [
+
+    $photo = fopen('storage/buffer/'.$image_name, 'r');
+
+    $response = Http::attach(
+      'image', $photo, $image_name
+    )->post(env('SERVICE_URL') . '/api/add', [
       'type' => $type,
-      'image' => $file,
+      'imageName' => $image_name,
       'image_id' => $image_id,
       'token' => env('SERVICE_TOKEN')
     ]);

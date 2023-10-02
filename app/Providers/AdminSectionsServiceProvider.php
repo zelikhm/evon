@@ -6,6 +6,7 @@ use App\Http\Admin\Log\PaymentLogModel;
 use App\Models\Builder\HouseFilesModel;
 use App\Models\Builder\HouseImagesModel;
 use App\Models\Builder\Info\RegionModel;
+use App\Models\Log\ImageLogModel;
 use App\Models\News\AdminNewsModel;
 use App\Models\TarifModel;
 use App\Models\TarifRussionModel;
@@ -46,7 +47,9 @@ class AdminSectionsServiceProvider extends ServiceProvider
     TraceModel::class => 'App\Http\Admin\Trace',
     \App\Models\Log\PaymentLogModel::class => 'App\Http\Admin\Log\PaymentLogModel',
     //
-    ClientModel::class => 'App\Http\Admin\Client'
+    ClientModel::class => 'App\Http\Admin\Client',
+    //
+    ImageLogModel::class => 'App\Http\Admin\Log\ImageLog'
   ];
 
   /**
