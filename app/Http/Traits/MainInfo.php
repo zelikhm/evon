@@ -29,6 +29,8 @@ use function Symfony\Component\Routing\Loader\Configurator\collection;
 trait MainInfo
 {
 
+  private $type;
+
   /**
    * get houses for slider in the page house
    * @param $house
@@ -326,104 +328,6 @@ trait MainInfo
     }
 
     return $news;
-  }
-
-  /**
-   * get all houses
-   * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
-   */
-
-  public function getAllHouse($type, $limit, $dop, $count = null)
-  {
-    if($limit) {
-      $houses = HouseModel::where('visible', 1)
-        ->orderBy('updated_at', 'DESC')
-        ->where('active', 2)
-        ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
-        ->select('house_models.*')
-        ->where('house_characteristics_models.type', $type)
-        ->distinct()
-        ->with(['info', 'files', 'frames', 'flats', 'user', 'news', 'images'])
-        ->limit($count !== null ? $count : 30)
-        ->get();
-    } else {
-      $houses = HouseModel::where('visible', 1)
-        ->orderBy('updated_at', 'DESC')
-        ->where('active', 2)
-        ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
-        ->select('house_models.*')
-        ->where('house_characteristics_models.type', $type)
-        ->distinct()
-        ->with(['info', 'files', 'frames', 'flats', 'user', 'news', 'images'])
-        ->get();
-    }
-
-    foreach ($houses as $house) {
-
-      $house->description = [];
-      $house->description_en = [];
-      $house->description_tr = [];
-
-      $house->image = $this->getPhoto($house);
-
-      if($dop) {
-        $house->dop_array = $this->getDopForHouse($house->info->dop);
-        $house->info_array = $this->getInfoForHouse($house->info->info);
-      }
-
-      $house->popular = HouseViewsModel::where('house_id', $house->id)->count() > 30;
-
-      $house->maxPrice = (int)($house->flats->max('price'));
-      $house->minPrice = (int)($house->flats->min('price'));
-
-      $house->maxSquare = (int)($house->flats->max('square'));
-      $house->minSquare = (int)($house->flats->min('square'));
-
-      $house->builder = $house->user->first_name;
-
-      $favorite = FavoritesModel::where('user_id', Auth::id())
-        ->where('house_id', $house->id)
-        ->first();
-
-      if ($favorite !== null) {
-        $house->favorite = true;
-      } else {
-        $house->favorite = false;
-      }
-
-    }
-
-    return $houses;
-  }
-
-  protected function getDopForHouse($dops) {
-
-    if($dops !== null) {
-      $collection = collect();
-      foreach (json_decode($dops) as $item) {
-        $collection->push(TypesModel::where('id', $item)->first());
-      }
-
-      return $collection;
-    } else {
-     return [];
-    }
-
-  }
-
-  protected function getInfoForHouse($infos) {
-
-    if($infos !== null) {
-      $collection = collect();
-      foreach (json_decode($infos) as $item) {
-        $collection->push(StructureModel::where('id', $item)->first());
-      }
-
-      return $collection;
-    } else {
-      return [];
-    }
-
   }
 
   /**

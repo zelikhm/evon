@@ -19,6 +19,7 @@ use App\Models\Builder\Info\CityModel;
 use App\Models\Builder\Info\StructureModel;
 use App\Models\Builder\Info\TypesModel;
 use App\Models\User;
+use App\Services\Houses\HousesService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,9 +69,9 @@ class HouseController extends Controller
    * @return \Inertia\Response
    */
 
-  public function index(Request $request)
+  public function index(Request $request, HousesService $housesService)
   {
-    $houses = $this->getAllHouse('Новостройка', true, true);
+    $houses = $housesService->getHouses('Новостройка', true, true, null);
 
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
@@ -79,7 +80,7 @@ class HouseController extends Controller
       'city' => CityModel::with(['regions'])->get(),
       'areas' => $this->getRegions(),
       'builders' => User::where('role', 1)->get(),
-      'notification' => $this->getNotification(),
+//      'notification' => $this->getNotification(),
       'compilation' => $this->getCompilation(Auth::id()),
       'news' => $this->getNewsForPage(),
       'adminNews' => $this->getAdminNews(),
@@ -95,7 +96,7 @@ class HouseController extends Controller
    * @return \Inertia\Response
    */
 
-  public function villages()
+  public function villages(HousesService $housesService)
   {
 
     $user = $this->getUser();
@@ -106,7 +107,7 @@ class HouseController extends Controller
       $limit = 10;
     }
 
-    $houses = $this->getAllHouse('Вилла', true, true, $limit);
+    $houses = $housesService->getHouses('Вилла', true, true, $limit);
 
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
@@ -115,7 +116,7 @@ class HouseController extends Controller
       'city' => CityModel::with(['regions'])->get(),
       'areas' => $this->getRegions(),
       'builders' => User::where('role', 1)->get(),
-      'notification' => $this->getNotification(),
+//      'notification' => $this->getNotification(),
       'compilation' => $this->getCompilation(Auth::id()),
       'news' => $this->getNewsForPage(),
       'adminNews' => $this->getAdminNews(),
@@ -248,11 +249,11 @@ class HouseController extends Controller
    * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
    */
 
-  public function getHousesJk(Request $request)
+  public function getHousesJk(Request $request, HousesService $housesService)
   {
 
     if ($this->checkToken($request->token)) {
-      return $this->getAllHouse('Новостройка', $request->limit, $request->dop, $request->limit_count);
+      return $housesService->getHouses('Новостройка', $request->limit, $request->dop, $request->limit_count);
     } else {
       return response()->json('not auth', 401);
     }
@@ -265,10 +266,10 @@ class HouseController extends Controller
    * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
    */
 
-  public function getHousesVillages(Request $request)
+  public function getHousesVillages(Request $request, HousesService $housesService)
   {
     if ($this->checkToken($request->token)) {
-      return $this->getAllHouse('Вилла', $request->limit, $request->dop, $request->limit_count);
+      return $housesService->getHouses('Вилла', $request->limit, $request->dop, $request->limit_count);
     } else {
       return response()->json('not auth', 401);
     }

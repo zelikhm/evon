@@ -459,7 +459,7 @@
           <div class="flex flex-col" v-for="(item, idx) in filteredObjects" :key="item.id">
             <div
               class="object__block relative z-10 h-[300px] exl:h-[16vw] lg:h-[24vw] md:h-[36vw] sm:h-[56vw] rounded-[6px]">
-              <img v-if="item.images.length > 0" :src="item.image"
+              <img v-if="item.image !== null" :src="item.image"
                    class="object-cover absolute -z-10 w-full h-full rounded-[6px]" alt="">
               <img v-else src="../../assets/no-img-houses.jpg"
                    class="object-cover absolute -z-10 w-full h-full rounded-[6px]" alt="">

@@ -33,9 +33,14 @@ class HouseModel extends Model
     'created'
   ];
 
-//  protected $casts = [
-//    'updated_at' => 'datetime:d-m-Y'
-//  ];
+  /**
+   * belong method for main image for house
+   * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+   */
+
+  public function mainImage() {
+    return $this->belongsTo(HouseMainImageModel::class, 'house_id', 'id');
+  } //end
 
   public function user() {
     return $this->belongsTo(User::class, 'user_id', 'id');
