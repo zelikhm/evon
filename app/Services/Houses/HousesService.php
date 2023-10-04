@@ -60,7 +60,7 @@ class HousesService implements HousesInterface
         ->select('house_models.*')
         ->where('house_characteristics_models.type', $type)
         ->distinct()
-        ->with(['info', 'files', 'frames', 'flats', 'user', 'news', 'images'])
+        ->with(['flats', 'user', 'mainImage'])
         ->limit($count !== null ? $count : 30)
         ->get();
     } else {
@@ -71,7 +71,7 @@ class HousesService implements HousesInterface
         ->select('house_models.*')
         ->where('house_characteristics_models.type', $type)
         ->distinct()
-        ->with(['flats', 'user'])
+        ->with(['flats', 'user', 'mainImage'])
         ->get();
     }
 
