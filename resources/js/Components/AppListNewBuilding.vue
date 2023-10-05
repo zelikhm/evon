@@ -1238,41 +1238,41 @@
       } else {
         this.readyHouses = this.houses
         this.map_array = this.houses;
+        this.preloader = false;
 
-        if (this.type === 0) {
-
-          let link = '/api/house/getHousesJk?dop=true';
-
-          if(this.user.subscription === true && this.user.subscription_info.free == 1) {
-            link = '/api/house/getHousesJk?dop=true&limit=true&limit_count=30';
-          }
-
-          axios.get(link).then(res => {
-            this.readyHouses = res.data;
-            console.log(res.data);
-            this.count_house = this.readyHouses.length;
-            this.map_array = this.readyHouses;
-            this.updateHouses();
-            this.updatedMap();
-            this.preloader = false;
-          })
-        } else {
-
-          let link = '/api/house/getHousesVillages?dop=true';
-
-          if(this.user.subscription === true && this.user.subscription_info.free == 1) {
-            link = '/api/house/getHousesVillages?dop=true&limit=true&limit_count=10';
-          }
-console.log(link)
-          axios.get(link).then(res => {
-            this.readyHouses = res.data;
-            this.count_house = this.readyHouses.length;
-            this.map_array = this.readyHouses;
-            this.updateHouses();
-            this.updatedMap();
-            this.preloader = false;
-          })
-        }
+      //   if (this.type === 0) {
+      //
+      //     let link = '/api/house/getHousesJk?dop=true';
+      //
+      //     if(this.user.subscription === true && this.user.subscription_info.free == 1) {
+      //       link = '/api/house/getHousesJk?dop=true&limit=true&limit_count=30';
+      //     }
+      //
+      //     axios.get(link).then(res => {
+      //       this.readyHouses = res.data;
+      //       this.count_house = this.readyHouses.length;
+      //       this.map_array = this.readyHouses;
+      //       this.updateHouses();
+      //       this.updatedMap();
+      //       this.preloader = false;
+      //     })
+      //   } else {
+      //
+      //     let link = '/api/house/getHousesVillages?dop=true';
+      //
+      //     if(this.user.subscription === true && this.user.subscription_info.free == 1) {
+      //       link = '/api/house/getHousesVillages?dop=true&limit=true&limit_count=10';
+      //     }
+      //
+      //     axios.get(link).then(res => {
+      //       this.readyHouses = res.data;
+      //       this.count_house = this.readyHouses.length;
+      //       this.map_array = this.readyHouses;
+      //       this.updateHouses();
+      //       this.updatedMap();
+      //       this.preloader = false;
+      //     })
+      //   }
       }
 
       this.infos.forEach(item => {

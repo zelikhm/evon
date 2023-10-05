@@ -23,6 +23,7 @@ use App\Services\Houses\HousesService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Intervention\Image\Facades\Image;
@@ -71,7 +72,8 @@ class HouseController extends Controller
 
   public function index(Request $request, HousesService $housesService)
   {
-    $houses = $housesService->getHouses('Новостройка', true, true, null);
+//    $houses = $housesService->getHouses('Новостройка', false, true, null);
+    $houses = Cache::get('houses_full');
 
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,

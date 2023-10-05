@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Http;
 
 class ImageService implements ImageInterface
 {
+  const NAME = 'name';
 
   /**
    * method for add image
@@ -70,7 +71,7 @@ class ImageService implements ImageInterface
 
     } else if ($type === 1) {
 
-      HouseImagesModel::where('name', $image)
+      HouseImagesModel::where(self::NAME, $image)
         ->update([
           'isResize' => true,
         ]);

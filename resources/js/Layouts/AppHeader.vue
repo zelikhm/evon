@@ -104,14 +104,14 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
               </button>
               <div v-if="openProfileMenu"
                 class="overflow-hidden border border-solid border-[#E5DFEE] absolute z-50 top-[90%] right-0 flex flex-col bg-white rounded-[5px]">
-                
+
                 <Link href="/profile"
                   class="cursor-pointer hover__select border__bottom--not whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">
                   <span class="cursor-pointer pr-1 leading-none whitespace-nowrap cursor-default">{{ language.ob[42] }}</span>
                   <span class="cursor-pointer leading-none whitespace-nowrap cursor-default"
                     v-if="user !== null && user.subscription_info !== null"> {{ getDate(user.subscription_info.finished_at) }}</span>
                 </Link>
-                    
+
                 <div v-if="user.role === 0"
                   class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
                   <span class="leading-none whitespace-nowrap cursor-default">{{ language.ob[32] }}</span>
@@ -343,20 +343,20 @@ export default {
     console.log(this.openClient);
 
     if (this.user !== null) {
-      setInterval(() => {
-        axios.post('/api/chat/checkChat', {
-          user_id: this.user_info.id,
-          token: this.user_info.token,
-        }).then(res => {
-          this.chats = res.data;
-
-          if (this.chats > 0) {
-            this.isChat = true;
-          } else {
-            this.isChat = false;
-          }
-        })
-      }, 5000)
+      // setInterval(() => {
+      //   axios.post('/api/chat/checkChat', {
+      //     user_id: this.user_info.id,
+      //     token: this.user_info.token,
+      //   }).then(res => {
+      //     this.chats = res.data;
+      //
+      //     if (this.chats > 0) {
+      //       this.isChat = true;
+      //     } else {
+      //       this.isChat = false;
+      //     }
+      //   })
+      // }, 5000)
     }
 
   },

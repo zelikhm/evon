@@ -14,6 +14,7 @@
         "laravel/sanctum": "^2.8",
         "laravel/tinker": "^2.7",
         "laravelrus/sleepingowl": "^9.5",
+        "predis/predis": "^2.2",
         "stevebauman/location": "^6.6",
         "telegram-bot/api": "^2.3",
         "tightenco/ziggy": "^1.0"
