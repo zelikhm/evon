@@ -72,7 +72,7 @@ class HouseController extends Controller
 
   public function index(Request $request, HousesService $housesService)
   {
-    $houses = Cache::get('houses_full', $housesService->getHouses('Новостройка', false, true, null));
+    $houses = Cache::get('houses_full');
 
     dd($houses);
 
