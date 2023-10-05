@@ -74,7 +74,9 @@ class HouseController extends Controller
   {
     $houses = Cache::get('houses_full');
 
-    dd($houses);
+    if(!$houses) {
+      $houses = $housesService->getHouses('Новостройка', false, true, null);
+    }
 
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
