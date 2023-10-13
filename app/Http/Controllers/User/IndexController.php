@@ -36,8 +36,8 @@ class IndexController extends Controller
         'user_id' => Auth::id(),
         'active' => 1,
         'finished_at' => Carbon::now()->addDays(20),
-        'free' => 1,
-        'free_link' => 1,
+        'free' => 0,
+        'free_link' => 0,
       ]);
 
       $user->free_subscription = 0;
