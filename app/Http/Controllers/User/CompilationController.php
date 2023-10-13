@@ -41,11 +41,9 @@ class CompilationController extends Controller
     }
 
     return Inertia::render('AppSelections', [
-
       'compilation' => $compilations,
       'user' => $this->getUser(),
       'notification' => $this->getNotification(),
-
     ]);
 
   }

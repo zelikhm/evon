@@ -48,6 +48,14 @@ import { Link } from '@inertiajs/inertia-vue3'
                   <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ language.menu_zastr_1[9] }}</span>
                   <img src="../../assets/svg/pen_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
                 </Link>
+                <button @click="sendLink(0, house)" class="immovables__button--card flex items-center justify-between w-[30%] lg:w-[50%] border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5 sm:py-1">
+                  <span class="text-black text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ language.menu_zastr_1[15] }}</span>
+                  <img src="../../assets/svg/pen_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
+                </button>
+                <button @click="sendLink(1, house)" class="immovables__button--card flex items-center justify-between w-[30%] lg:w-[50%] border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5 sm:py-1">
+                  <span class="text-black text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ language.menu_zastr_1[16] }}</span>
+                  <img src="../../assets/svg/pen_icon_white.svg" class="w-4.5 xxl:w-3.5 xl:w-3" alt="">
+                </button>
 
                 <button @click="deleteConfirm = true" class="immovables__button--card flex items-center justify-between w-[30%] lg:w-[50%]  border border-solid border-[#EFEEF580] rounded-[3px] px-3 xxl:px-2 xl:px-1.5 py-3 xxl:py-2 xl:py-1.5 sm:py-1">
                   <span class="text-white text-sm xxl:text-xs xl:text-[10px] leading-none whitespace-nowrap">{{ language.menu_zastr_1[10] }}</span>
@@ -180,10 +188,27 @@ export default {
       selectLanguage: 0,
       language: {},
       search: '',
-      loader: false
+      loader: false,
+      linkModal: {
+        link: '',
+        open: false,
+      }
     }
   },
   methods: {
+    sendLink(type, house) {
+      const link = house.slug + '-client';
+
+      axios.post('/compilation/builder/getLink', {
+        type: type,
+        slug: house.slug
+      }).then(res => {
+        this.linkModal.link = res.data;
+        this.linkModal.open = true;
+      })
+
+
+    },
     choseLanguage(language) {
       this.selectLanguage = language;
 
@@ -223,7 +248,7 @@ export default {
       axios.post('/api/house/delete', {
         house_id: house.id,
         token: this.token
-      }).then(res => console.log(res)).catch(err => console.error(err))
+      }).then().catch()
 
       this.deleteConfirm = false
     },
@@ -233,7 +258,9 @@ export default {
         house_id: item.id,
         visible: item.visible,
         token: this.token
-      }).then(res => { console.log(res.data) })
+      }).then(res => {
+
+      })
     },
     reloadObject() {
       this.houses_object.forEach(item => {
@@ -266,8 +293,6 @@ export default {
 
     this.reloadObject();
 
-    console.log(this.admin, 1);
-
     if(this.admin !== false) {
       this.loader = true;
 
@@ -279,7 +304,7 @@ export default {
           this.reloadObject();
           this.loader = false;
         } else {
-          console.log('not auth')
+
         }
       })
     }

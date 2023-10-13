@@ -16,6 +16,11 @@ Route::prefix('/compilation')->group(function () {
   Route::get('/{id}', ['App\Http\Controllers\User\CompilationController', 'show']);
   Route::get('/user/{id}/{house}', ['App\Http\Controllers\User\CompilationController', 'soloHouse']);
   Route::get('/{id}/{house}', ['App\Http\Controllers\User\CompilationController', 'house']);
+
+  Route::prefix('builder')->group(function () {
+    Route::get('/compilation/{slug}', ['App\Http\Controllers\User\BuilderCompilationController', 'compilation']);
+    Route::post('/getLink', ['App\Http\Controllers\User\BuilderCompilationController', 'getLink']);
+  });
 });
 
 Route::get('/404', function () {

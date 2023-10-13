@@ -127,7 +127,9 @@
     "11": "Hide",
     "12": "View on site",
     "13": "Add news",
-    "14": "Show"
+    "14": "Show",
+    "15": "Отправить клиенту",
+    "16": "Отправить партнеру"
   },
   "form_dob_ob": {
     "0": "Project Information",
