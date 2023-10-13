@@ -146,34 +146,27 @@
 <!--                <input class="pointer-events-none overflow-hidden absolute top-0 left-0 opacity-0" id="cover" type="file" ref="banner" @change="changeBanner">-->
               </div>
 
-
               <!--Видео-->
+<!--              <div v-if="selectLanguage===0" class="video-tutorial">-->
+<!--                <h3>Подробнее о функциях платформы</h3>-->
+<!--                <div  @click="modal_video=!modal_video" class="video-bg"></div>-->
+<!--                <iframe-->
+<!--                  id="video"-->
+<!--                  src="https://www.youtube.com/embed/xddj1nZjltU?si=g_W5H6NKzlMtyTu0&autoplay=1&mute=1&controls=0&showinfo=0"-->
+<!--                  title="YouTube video player"-->
+<!--                  frameborder="0"-->
+<!--                  allowfullscreen-->
+<!--                ></iframe>-->
+<!--              </div>-->
 
+<!--              <div v-show="modal_video" class="modal-video">-->
+<!--                <div @click="modal_video=!modal_video" class="modal-bg"></div>-->
+<!--                <div class="modal-video-content">-->
 
-              <div v-if="selectLanguage===0" class="video-tutorial">
-                <h3>Подробнее о функциях платформы</h3>
-                <div  @click="modal_video=!modal_video" class="video-bg"></div>
-                <iframe
-                  id="video"
-                  src="https://www.youtube.com/embed/xddj1nZjltU?si=g_W5H6NKzlMtyTu0&autoplay=1&mute=1&controls=0&showinfo=0"
-                  title="YouTube video player"
-                  frameborder="0"
-                  allowfullscreen
-                ></iframe>
-              </div>
+<!--                  <iframe  id="modal-video"  src="https://www.youtube.com/embed/xddj1nZjltU?si=g_W5H6NKzlMtyTu0&autoplay=1&mute=1&controls=1&showinfo=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
 
-              <div v-show="modal_video" class="modal-video">
-                <div @click="modal_video=!modal_video" class="modal-bg"></div>
-                <div class="modal-video-content">
-
-                  <iframe  id="modal-video"  src="https://www.youtube.com/embed/xddj1nZjltU?si=g_W5H6NKzlMtyTu0&autoplay=1&mute=1&controls=1&showinfo=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-                </div>
-              </div>
-
-
-
-
+<!--                </div>-->
+<!--              </div>-->
             </div>
           </div>
         </div>
