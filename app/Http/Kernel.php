@@ -7,6 +7,7 @@ use App\Http\Middleware\CheckBuilder;
 use App\Http\Middleware\CheckRealtor;
 use App\Http\Middleware\CheckRole;
 use App\Http\Middleware\CheckSubscription;
+use App\Http\Middleware\CheckVerification;
 use App\Http\Middleware\SessionCheckUser;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -77,5 +78,6 @@ class Kernel extends HttpKernel
     'CheckRealtor' => CheckRealtor::class,
     'CheckBuilder' => CheckBuilder::class,
     'CheckSubscription' => CheckSubscription::class,
+    'CheckVerification' => CheckVerification::class,
   ];
 }

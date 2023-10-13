@@ -4,11 +4,13 @@
 namespace App\Services\Houses;
 
 
+use App\Models\Builder\HouseMainImageModel;
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\HouseViewsModel;
 use App\Models\Builder\Info\StructureModel;
 use App\Models\Builder\Info\TypesModel;
 use App\Models\User\FavoritesModel;
+use App\Services\Image\ImageService;
 use Illuminate\Support\Facades\Auth;
 
 class HousesService implements HousesInterface
@@ -16,15 +18,17 @@ class HousesService implements HousesInterface
 
   private $dops_array;
   private $infos_array;
+  private $imageService;
 
   /**
    * render array for info and dop
    * HousesService constructor.
+   * @param ImageService $imageService
    */
 
-  public function __construct()
+  public function __construct(ImageService $imageService)
   {
-
+    $this->imageService = $imageService;
     $this->dops_array = TypesModel::all();
     $this->infos_array = StructureModel::all();
 
@@ -144,6 +148,49 @@ class HousesService implements HousesInterface
     } else {
       return [];
     }
+
+  } //end
+
+  /**
+   * added or edit main image for house
+   * 0 - add
+   * 1 - edit
+   * @param $id
+   * @param $image
+   * @param $type
+   */
+
+  public function mainImage($id, $image, $type):void
+  {
+    if($image) {
+      $image_name = time() . '.' . $image->getClientOriginalName();
+      $image->move(public_path('/storage/buffer'), $image_name);
+      $this->imageService->add($id, 2, $image, $image_name);
+    } else {
+      $image_name = '';
+    }
+
+    if($type === 0) {
+      HouseMainImageModel::create([
+        'house_id' => $id,
+        'image' => $image_name,
+      ]);
+    } else {
+      $image = HouseMainImageModel::where('house_id', $id)->first();
+
+      if($image !== null) {
+        HouseMainImageModel::where('house_id', $id)
+          ->update([
+            'image' => $image_name
+          ]);
+      } else {
+        HouseMainImageModel::create([
+            'house_id' => $id,
+            'image' => $image_name
+          ]);
+      }
+    }
+
 
   } //end
 }

@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Services\Cache\CacheService;
 use App\Services\Houses\HousesService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;
@@ -27,12 +28,8 @@ class RedisVillagesCommand extends Command
      *
      * @return int
      */
-    public function handle(HousesService $housesService)
+    public function handle(HousesService $housesService, CacheService $cacheService)
     {
-      $houses = $housesService->getHouses('Вилла', true, true, 30);
-
-      Cache::put('houses_villages_full', $houses, 21600);
-
-      dd(true);
+      $cacheService->updateCacheVillages($housesService);
     }
 }

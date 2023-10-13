@@ -41,6 +41,9 @@ class ProfileController extends Controller
         'tarifs' => TarifModel::all(),
         'tarifs_rus' => TarifRussionModel::all(),
         'notification' => $this->getNotification(),
+        'verification' => $request->verification,
+        'subscription' => $request->subscription,
+        'setTrial' => $request->setTrial,
       ]);
     }
 

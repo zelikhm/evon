@@ -11,6 +11,7 @@ use App\Models\Builder\Flat\FrameModel;
 use App\Models\Builder\HouseCharacteristicsModel;
 use App\Models\Builder\HouseFilesModel;
 use App\Models\Builder\HouseImagesModel;
+use App\Models\Builder\HouseMainImageModel;
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\HouseNewsModel;
 use App\Models\Builder\HouseSupportModel;
@@ -19,7 +20,9 @@ use App\Models\Builder\Info\CityModel;
 use App\Models\Builder\Info\StructureModel;
 use App\Models\Builder\Info\TypesModel;
 use App\Models\User;
+use App\Services\Cache\CacheService;
 use App\Services\Houses\HousesService;
+use App\Services\Image\ImageService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -70,12 +73,12 @@ class HouseController extends Controller
    * @return \Inertia\Response
    */
 
-  public function index(Request $request, HousesService $housesService)
+  public function index(Request $request, HousesService $housesService, CacheService $cacheService)
   {
     $houses = Cache::get('houses_full');
 
     if(!$houses) {
-      $houses = $housesService->getHouses('Новостройка', false, true, null);
+      $houses = $cacheService->updateCacheHouses($housesService);
     }
 
     return Inertia::render('AppListImmovables', [
@@ -101,18 +104,22 @@ class HouseController extends Controller
    * @return \Inertia\Response
    */
 
-  public function villages(HousesService $housesService)
+  public function villages(HousesService $housesService, CacheService $cacheService)
   {
 
-    $user = $this->getUser();
+//    $user = $this->getUser();
 
-    $limit = 30;
+//    $limit = 30;
+//
+//    if($user->subscriptionInfo !== null && $user->subscriptionInfo->free === 1) {
+//      $limit = 10;
+//    }
 
-    if($user->subscriptionInfo !== null && $user->subscriptionInfo->free === 1) {
-      $limit = 10;
+    $houses = Cache::get('houses_villages_full');
+
+    if(!$houses) {
+      $houses = $cacheService->updateCacheVillages($housesService);
     }
-
-    $houses = $housesService->getHouses('Вилла', true, true, $limit);
 
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
@@ -127,7 +134,7 @@ class HouseController extends Controller
       'adminNews' => $this->getAdminNews(),
       'user' => $this->getUser(),
       'count_houses' => HouseModel::count(),
-      'free_count' => $limit,
+      'free_count' => 30,
       'type' => 1,
     ]);
   }
@@ -393,7 +400,7 @@ class HouseController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function create(Request $request)
+  public function create(Request $request, HousesService $housesService)
   {
     if ($this->checkToken($request->token)) {
       if ($request->floors && $request->count_flat) {
@@ -416,6 +423,8 @@ class HouseController extends Controller
           'created_at' => Carbon::now()->addHour(3),
           'updated_at' => Carbon::now()->addHour(3),
         ]);
+
+        $housesService->mainImage($house->id, $request->file('mainImage'), 0);
 
         if ($request->info !== null) {
           $info = explode(',', $request->info);
@@ -482,10 +491,11 @@ class HouseController extends Controller
   /**
    * edit house
    * @param Request $request
+   * @param HousesService $housesService
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function editHouse(Request $request)
+  public function editHouse(Request $request, HousesService $housesService)
   {
 
     if ($this->checkToken($request->token)) {
@@ -507,6 +517,8 @@ class HouseController extends Controller
           'fool_price' => $request->fool_price,
           'updated_at' => Carbon::now()->addHour(3),
         ]);
+
+      $housesService->mainImage($request->house_id, $request->file('mainImage'), 1);
 
       if ($request->info !== null) {
         $info = explode(',', $request->info);
@@ -996,14 +1008,13 @@ class HouseController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function addedImages(Request $request)
+  public function addedImages(Request $request, ImageService $imageService)
   {
 
     if ($this->checkToken($request->token)) {
 
       $imageName = time() . '.' . $request->file('image')->getClientOriginalName();
       $request->file('image')->move(public_path('/storage/buffer'), $imageName);
-      $this->waterMark($imageName, 'storage/images/', true);
 
       $image = HouseImagesModel::create([
         'house_id' => $request->house_id,
@@ -1013,11 +1024,13 @@ class HouseController extends Controller
         'updated_at' => Carbon::now()->addHour(3),
       ]);
 
+      $imageService->add($image->id, 0, $request->file('image'), $imageName);
+
       HouseModel::where('id', $request->house_id)->update([
         'active' => 0,
       ]);
 
-      return response()->json("/storage/images/" .$imageName, 200);
+      return response()->json("/storage/images/".$imageName, 200);
     } else {
       return response()->json('not auth', 401);
     }

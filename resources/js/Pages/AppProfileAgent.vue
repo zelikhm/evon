@@ -8,7 +8,9 @@
     @close-notification="openNotification = !openNotification"
     :text="text"
   />
-  <app-modal-verification v-if="openModalVer" @close-modal-verification="openModalVer = false" ></app-modal-verification>
+  <app-modal-verification v-if="openModalVer || verification !== null" @close-modal-verification="openModalVer = false, verification = null" :verification="verification"></app-modal-verification>
+  <AppModalSubscription v-if="subscription !== null" @close-modal-verification="subscription = null" :subscription="subscription"></AppModalSubscription>
+
   <main class="relative">
     <div class="_container">
       <div class="my-14 xxl:my-12 xl:my-10">
@@ -94,11 +96,23 @@
               <div  class="row-status flex w-full flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
                 <div class="info">
                   <label  class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px]" for="company">Статус</label>
-                  <h3 v-if="status==0" class="red text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">Не верифицирован</h3>
-                  <h3 v-if="status==1" class="orange text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">На верификации</h3>
-                  <h3 v-if="status==2" class="green text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">Верифицирован</h3>
+                  <h3 v-if="user.verification === null" class="red text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">Не верифицирован</h3>
+                  <h3 v-else-if="user.verification.isVerification === 0" class="red text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">Не верифицирован</h3>
+                  <h3 v-else-if="user.verification.isVerification === 1" class="orange text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">На верификации</h3>
+                  <h3 v-else-if="user.verification.isVerification === 2" class="green text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">Верифицирован</h3>
                 </div>
-                <button @click="openModalVer = true" class="hover__button--purple max-w-[170px] ml-[0px] transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">Верификация</button>
+                <div v-if="user.verification === null">
+                  <button @click="openModalVer = true"
+                          class="hover__button--purple max-w-[170px] ml-[0px] transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">
+                    Верификация
+                  </button>
+                </div>
+                <div v-else-if="user.verification.isVerification !== 2">
+                  <button @click="openModalVer = true"
+                          class="hover__button--purple max-w-[170px] ml-[0px] transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">
+                    Верификация
+                  </button>
+                </div>
               </div>
 
               <h3 class="text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">{{language.prof_rielt[1]}}</h3>
@@ -178,9 +192,10 @@ import AppModalNotification from "@/Layouts/modal/AppModalNotification.vue"
 import AppModalProfile from "@/Layouts/modal/AppModalProfile.vue";
 import AppModalRusProfile from "@/Layouts/modal/AppModalRusProfile.vue";
 import AppModalVerification from "@/Layouts/modal/AppModalVerification.vue";
+import AppModalSubscription from "@/Layouts/modal/AppModalSubscription.vue";
 
 export default {
-  props:['user', 'tarifs', 'tarifs_rus'],
+  props:['user', 'tarifs', 'tarifs_rus', 'verification', 'subscription'],
   data() {
     return {
       myPhoto: null,
@@ -316,7 +331,8 @@ export default {
     AppFooter,
     AppModalNotification,
     AppModalRusProfile,
-    AppModalVerification
+    AppModalVerification,
+    AppModalSubscription
   }
 }
 

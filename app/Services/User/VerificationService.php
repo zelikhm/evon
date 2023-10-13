@@ -20,18 +20,22 @@ class VerificationService extends UserService implements VerificationInterface
    * @return bool
    */
 
-  public function sendVerification($form, $user_id, RegisterMailService $registerMailService): Boolean
+  public function sendVerification($form, $user_id, RegisterMailService $registerMailService)
   {
 
     $user = $this->getUser($user_id);
 
-    if ($user->isVerification) {
+    if ($user->verification === null) {
 
-      $verification = VerificationModel::create([
+      $fileName = time() . '.' . $form->file('file')->getClientOriginalName();
+      $form->file('file')->move(public_path('/storage/verification'), $fileName);
+
+      VerificationModel::create([
         'user_id' => $user_id,
         'link' => $form->link,
-        'file' => $form->file,
-        'text' => $form->text
+        'file' => $fileName,
+        'text' => $form->text,
+        'isVerification' => 1,
       ]);
 
       $message = "<html><head></head><body><p>
@@ -43,7 +47,9 @@ class VerificationService extends UserService implements VerificationInterface
                 Ссылка на админку: . <br>
                 </p></body></html>";
 
-      return $registerMailService->sendMail("evon.information@gmail.com", $message);
+      $registerMailService->sendMail("evon.information@gmail.com", $message);
+
+      return true;
 
     } else {
       return false;

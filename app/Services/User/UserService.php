@@ -5,10 +5,12 @@ namespace App\Services\User;
 
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 Abstract class UserService implements UserInterface
 {
+
 
   /**
    * get user
@@ -20,7 +22,7 @@ Abstract class UserService implements UserInterface
   {
 
     $user = User::where('id', $user_id)
-      ->with(['company', 'subscriptionInfo'])
+      ->with(['company', 'subscriptionInfo', 'verification'])
       ->first();
 
     if ($user !== null) {

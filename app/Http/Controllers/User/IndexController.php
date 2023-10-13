@@ -9,13 +9,45 @@ use App\Models\Builder\HouseSupportModel;
 use App\Models\User;
 use App\Rules\Password;
 use App\Services\User\RegisterService;
+use App\Services\User\UserService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class IndexController extends Controller
 {
 
   use AuthCheck;
+
+  /**
+   * set trial
+   * @param UserService $userService
+   * @return \Symfony\Component\HttpFoundation\Response
+   */
+
+  public function trial() {
+    $user = User::where('id', Auth::id())
+      ->with(['subscription'])
+      ->first();
+
+    if($user->subscription === null && $user->free_subscription === 1) {
+      User\SubscriptionModel::create([
+        'user_id' => Auth::id(),
+        'active' => 1,
+        'finished_at' => Carbon::now()->addDays(20),
+        'free' => 1,
+        'free_link' => 1,
+      ]);
+
+      $user->free_subscription = 0;
+      $user->save();
+
+      return Inertia::location('/profile?setTrial=1');
+    } else {
+      return Inertia::location('/profile?setTrial=0');
+    }
+  } //end
 
   /**
    * get user

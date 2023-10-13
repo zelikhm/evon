@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\User\CompanyModel;
 use App\Models\User\SubscriptionModel;
+use App\Models\User\VerificationModel;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -37,7 +38,8 @@ class User extends Authenticatable
     'token',
     'lang',
     'openClient',
-    'deleted'
+    'deleted',
+    'free_subscription'
   ];
 
   /**
@@ -67,21 +69,42 @@ class User extends Authenticatable
     }
   }
 
-  public function subscription() {
+  /**
+   * has subscription
+   * @return bool
+   */
 
-    $sub = SubscriptionModel::where('user_id', $this->id)->first();
+  public function hasSubscription() {
+    $subscription = SubscriptionModel::where('user_id', $this->id)
+      ->first();
 
-    if($sub !== null) {
-      if($sub->finished_at > Carbon::now()->addHour(3)) {
-          return true;
-      } else {
-        return false;
+    if($subscription) {
+      if($subscription->finished_at > Carbon::now()) {
+        return true;
       }
-    } else {
-      return false;
     }
 
-  }
+    return false;
+  } //end
+
+  /**
+   * get subscription
+   * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+   */
+
+  public function subscription() {
+    return $this->belongsTo(SubscriptionModel::class, 'id', 'user_id');
+  } //end
+
+  /**
+   * belong method for verification
+   * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+   */
+
+  public function verification()
+  {
+    return $this->belongsTo(VerificationModel::class, 'id', 'user_id');
+  } //end
 
   public function subscriptionInfo() {
     return $this->belongsTo(SubscriptionModel::class, 'id', 'user_id');

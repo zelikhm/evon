@@ -170,7 +170,6 @@ export default {
     loadPhotos() {
       this.myPhotos = [];
 
-
       this.house.images.forEach(item => {
         if (this.category === item.category) {
           this.myPhotos.push(item);

@@ -12,48 +12,10 @@ use App\Http\Traits\MainInfo;
 
 Route::get('/', ['App\Http\Controllers\Controller', 'main']);
 
-Route::get('/test', ['App\Http\Controllers\TestController', 'index']);
-Route::post('/test/image', ['App\Http\Controllers\TestController', 'save']);
-
-Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
-  Route::get('/', ['App\Http\Controllers\User\ProfileController', 'index']);
-
-  Route::middleware('CheckSubscription')->group(function () {
-    Route::middleware('CheckRealtor')->group(function () {
-    Route::get('/addedHouse', ['App\Http\Controllers\House\HouseController', 'createHouse']);
-    Route::get('/edit/{house}', ['App\Http\Controllers\House\HouseController', 'edit']);
-    Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'showHouse']);
-    Route::get('/news', ['App\Http\Controllers\House\NewsController', 'index']);
-    Route::get('/news/create', ['App\Http\Controllers\House\NewsController', 'createNews']);
-    Route::get('/news/edit/{id}', ['App\Http\Controllers\House\NewsController', 'editNews']);
-  });
-
-    Route::get('/help', ['App\Http\Controllers\HelpController', 'getHelp']);
-    Route::get('/compilation', ['App\Http\Controllers\User\CompilationController', 'index']);
-    Route::get('/favorites', ['App\Http\Controllers\User\FavoriteController', 'index']);
-    Route::get('/chat', ['App\Http\Controllers\User\ChatController', 'index']);
-    Route::get('/chats', ['App\Http\Controllers\User\ChatController', 'getChats'])->name('chats');
-    Route::get('/chat/{id}', ['App\Http\Controllers\User\ChatController', 'getChat']);
-  });
-});
-
 Route::prefix('/compilation')->group(function () {
   Route::get('/{id}', ['App\Http\Controllers\User\CompilationController', 'show']);
   Route::get('/user/{id}/{house}', ['App\Http\Controllers\User\CompilationController', 'soloHouse']);
   Route::get('/{id}/{house}', ['App\Http\Controllers\User\CompilationController', 'house']);
-});
-
-Route::prefix('/house')->group(function () {
-  Route::get('/success', ['App\Http\Controllers\AdminController', 'success']);
-  Route::get('/failed', ['App\Http\Controllers\AdminController', 'failed']);
-});
-
-Route::middleware('auth', 'session', 'CheckSubscription')->group(function () {
-  Route::middleware('CheckBuilder')->group(function () {
-    Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'index']);
-    Route::get('/villages', ['App\Http\Controllers\House\HouseController', 'villages']);
-  });
-  Route::get('/house/{house}', ['App\Http\Controllers\House\HouseController', 'house']);
 });
 
 Route::get('/404', function () {
@@ -70,3 +32,7 @@ Route::prefix('cloud')->group(function () {
 
 require __DIR__ . '/auth.php';
 require __DIR__ . '/form.php';
+require __DIR__ . '/admin.php';
+require __DIR__ . '/agentRoutes.php';
+require __DIR__ . '/profile.php';
+

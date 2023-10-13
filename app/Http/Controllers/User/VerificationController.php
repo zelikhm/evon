@@ -23,7 +23,7 @@ class VerificationController extends Controller
     public function send(Request $request, VerificationService $verificationService, RegisterMailService $registerMailService)
     {
 
-      if(!$request->link && !$request->file) {
+      if(!$request->link && !$request->file === null) {
         return Inertia::location(RouteServiceProvider::HOME);
       }
 

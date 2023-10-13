@@ -2,9 +2,11 @@
 
 namespace App\Http\Middleware;
 
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class CheckSubscription
 {
@@ -13,17 +15,29 @@ class CheckSubscription
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\Response
      */
+
     public function handle(Request $request, Closure $next)
     {
 
       if(Auth::user()->role === 0) {
-        if(Auth::user()->subscription() === false) {
-          return redirect('/profile');
+        $subscription = Auth::user()->subscription()->first();
+
+        if($subscription === null) {
+          if(Auth::user()->free_subscription === 1) {
+            return Inertia::location('/profile?subscription=1');
+          } else {
+            return Inertia::location('/profile?subscription=0');
+          }
+        } else {
+          if($subscription->finished_at > Carbon::now()) {
+            return $next($request);
+          } else {
+            return Inertia::location('/profile?subscription=0');
+          }
         }
       }
 
-        return $next($request);
-    }
+    } //end
 }

@@ -75,10 +75,12 @@ trait MainInfo
   protected function getUser()
   {
 
-    $user = User::where('id', Auth::id())->with(['company', 'subscriptionInfo'])->first();
+    $user = User::where('id', Auth::id())
+      ->with(['company', 'subscriptionInfo', 'verification'])
+      ->first();
 
     if ($user !== null) {
-      $user->subscription = $user->subscription();
+      $user->subscription = $user->hasSubscription();
     } else {
       $user = [];
     }

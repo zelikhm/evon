@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Http;
 
 class ImageService implements ImageInterface
 {
-  const NAME = 'name';
+  const NAME = 'id';
 
   /**
    * method for add image
@@ -54,16 +54,18 @@ class ImageService implements ImageInterface
    * edit image
    * @param $type
    * @param $image
+   * @param $id
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function edit($type, $image)
+  public function edit($type, $image, $id)
   {
 
     if ($type === 0) {
 
-      HouseMainImageModel::where('image', $image)
+      HouseMainImageModel::where(self::NAME, $id)
         ->update([
+          'image' => $image,
           'isResize' => true
         ]);
 
@@ -71,8 +73,9 @@ class ImageService implements ImageInterface
 
     } else if ($type === 1) {
 
-      HouseImagesModel::where(self::NAME, $image)
+      HouseImagesModel::where(self::NAME, $id)
         ->update([
+          'name' => $image,
           'isResize' => true,
         ]);
 
@@ -80,8 +83,9 @@ class ImageService implements ImageInterface
 
     } else if ($type === 2) {
 
-      FlatImagesModel::where('')
+      FlatImagesModel::where(self::NAME, $id)
         ->update([
+          'name' => $image,
           'isResize' => true
         ]);
 

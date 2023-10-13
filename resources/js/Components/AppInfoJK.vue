@@ -20,6 +20,8 @@
              type="text" id="name_object">
     </div>
 
+    <input type="file" @change="addImage">
+
     <label
       :class="{ validationText: validation.description }"
       class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5"
@@ -452,6 +454,7 @@
     emits: ['open-add-contact'],
     data() {
       return {
+        mainImage: [],
         openedMarkerID: null,
         center: {lat: 38.789057678005726, lng: 35.39768557787735},
         markers: [],
@@ -551,6 +554,9 @@
       }
     },
     methods: {
+      addImage(e) {
+        this.mainImage = e.target.files[0];
+      },
       changeBorder(id) {
         this.isBorder = id
       },
@@ -587,10 +593,6 @@
       addAndContinue(flag) {
 
         this.checkValidation(1)
-
-        console.log(this.selectType, this.language.rielt_1[0])
-
-        console.log(this.selectType === this.language.rielt_1[0] ? 'Новостройка' : 'Вилла');
 
         if (!this.validation.description && !this.validation.title && !this.validation.coordinates && !this.validation.count && !this.validation.floors && !this.validation.image) {
           if (this.isEdit) {
@@ -648,6 +650,7 @@
             formData.append('count_flat', this.object.count_flat);
             formData.append('exclusive', this.object.text_agency);
             formData.append('toChildrenSchool', this.object.toChildrenSchool);
+            formData.append('mainImage', this.mainImage);
             formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
             formData.append('token', this.token);
 
@@ -719,6 +722,7 @@
             formData.append('count_flat', this.object.count_flat);
             formData.append('exclusive', this.object.text_agency);
             formData.append('toChildrenSchool', this.object.toChildrenSchool);
+            formData.append('mainImage', this.mainImage);
             formData.append('fool_price', this.object.installment === 0 ? 1 : 0);
             formData.append('token', this.token);
 
