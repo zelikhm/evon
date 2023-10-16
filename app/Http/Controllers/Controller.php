@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Traits\MainInfo;
 use App\Models\Builder\Flat\FlatModel;
+use App\Models\Builder\HouseImagesModel;
 use App\Models\Builder\HouseModel;
 use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -21,6 +22,11 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, MainInfo;
 
     public function main(Request $request) {
+
+      HouseImagesModel::where('isResize', 0)
+        ->update([
+          'isResize' => 1,
+        ]);
 
       if(Auth::check()) {
         return redirect('/houses');

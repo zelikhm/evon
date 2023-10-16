@@ -593,7 +593,7 @@ class HouseController extends Controller
     if ($this->checkToken($request->token)) {
 
       if ($request->image_up) {
-        $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
+        $imageUp = time() . '.flat';
         $request->image_up->move(public_path('/storage/buffer'), $imageUp);
         $this->waterMark($imageUp, 'storage/flat/', false);
         $imageUp = '/storage/flat/' . $imageUp;
@@ -603,7 +603,7 @@ class HouseController extends Controller
       }
 
       if ($request->image_down) {
-        $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
+        $imageDown = time() . '.flat';
         $request->image_down->move(public_path('/storage/buffer'), $imageDown);
         $this->waterMark($imageDown, 'storage/flat/', false);
         $imageDown = '/storage/flat/' . $imageDown;
@@ -663,7 +663,7 @@ class HouseController extends Controller
       if ($request->image_up === 'null' ) {
         $imageUp = null;
       } else if ($request->image_up) {
-        $imageUp = time() . '.' . $request->image_up->getClientOriginalName();
+        $imageUp = time() . '.flat';
         $request->image_up->move(public_path('/storage/buffer'), $imageUp);
         $this->waterMark($imageUp, 'storage/flat/', false);
         $imageUp = '/storage/flat/' . $imageUp;
@@ -677,7 +677,7 @@ class HouseController extends Controller
       if ($request->image_down === 'null') {
         $imageDown = null;
       } else if ($request->image_down) {
-        $imageDown = time() . '.' . $request->image_down->getClientOriginalName();
+        $imageDown = time() . '.flat';
         $request->image_down->move(public_path('/storage/buffer'), $imageDown);
         $this->waterMark($imageDown, 'storage/flat/', false);
         $imageDown = '/storage/flat/' . $imageDown;
@@ -815,7 +815,7 @@ class HouseController extends Controller
     if ($this->checkToken($request->token)) {
 
       if ($request->avatar) {
-        $imageName = time() . '.' . $request->avatar->getClientOriginalName();
+        $imageName = time() . '.support';
         $request->avatar->move(public_path('/storage/support'), $imageName);
       } else {
         $imageName = null;
@@ -850,7 +850,7 @@ class HouseController extends Controller
 
     if ($this->checkToken($request->token)) {
       if ($request->avatar !== 'not') {
-        $imageName = time() . '.' . $request->avatar->getClientOriginalName();
+        $imageName = time() . '.support';
         $request->avatar->move(public_path('/storage/support'), $imageName);
         $imageName = '/storage/support/' . $imageName;
       } else {
@@ -966,7 +966,7 @@ class HouseController extends Controller
   {
     if ($this->checkToken($request->token)) {
 
-      $fileName = time() . '.' . $request->file('file')->getClientOriginalName();
+      $fileName = time() . '.files';
       $request->file('file')->move(public_path('/storage/files'), $fileName);
 
       $file = HouseFilesModel::create([
@@ -1013,7 +1013,7 @@ class HouseController extends Controller
 
     if ($this->checkToken($request->token)) {
 
-      $imageName = time() . '.' . $request->file('image')->getClientOriginalName();
+      $imageName = time() . '.house';
       $request->file('image')->move(public_path('/storage/buffer'), $imageName);
 
       $image = HouseImagesModel::create([
