@@ -27,15 +27,19 @@ class Controller extends BaseController
     public function main(Request $request) {
 
       $client = new Client([ 'verify' => false ]);
+
       $array = [
         'type' => 1,
         'image' => '123',
         'id' => 23854
       ];
 
-      $response = $client->post('https://evon-tr-test.info/api/image/edit', $array);
+      $response = $client->post('https://evon-tr-test.info/api/image/edit', [
+        'json' => $array,
+      ]);
 
       dd(json_decode($response->getBody()));
+
 
       HouseImagesModel::where('isResize', 0)
         ->update([
