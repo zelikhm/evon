@@ -27,11 +27,13 @@ class Controller extends BaseController
     public function main(Request $request) {
 
       $client = new Client([ 'verify' => false ]);
-      $client->post('https://evon-tr-test.info/api/image/edit', [
+      $array = [
         'type' => 1,
         'image' => '123',
         'id' => 23854
-      ]);
+      ];
+
+      $client->post('https://evon-tr-test.info/api/image/edit', $array);
 
       dd($client);
 
