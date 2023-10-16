@@ -7,6 +7,8 @@ use App\Models\Builder\Flat\FlatModel;
 use App\Models\Builder\HouseImagesModel;
 use App\Models\Builder\HouseModel;
 use App\Models\User;
+
+use GuzzleHttp\Client;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -14,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Http;
 use Inertia\Inertia;
 use Stevebauman\Location\Facades\Location;
 
@@ -22,6 +25,15 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, MainInfo;
 
     public function main(Request $request) {
+
+      $client = new Client([ 'verify' => false ]);
+      $client->post('https://evon-tr-test.info/api/image/edit', [
+        'type' => 1,
+        'image' => '123',
+        'id' => 23854
+      ]);
+
+      dd($client);
 
       HouseImagesModel::where('isResize', 0)
         ->update([
