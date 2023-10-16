@@ -19,9 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('/image')->group(function () {
-  Route::post('/main', ['']);
-  Route::post('/house', ['']);
-  Route::post('/flat', ['']);
+  Route::post('/edit', ['App\Http\Controllers\House\HouseController', 'editImage']);
 });
 
 Route::prefix('client')->group(function () {

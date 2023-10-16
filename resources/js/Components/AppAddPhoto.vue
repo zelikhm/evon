@@ -30,7 +30,7 @@
               <div class="progress-bar bg-white h-full rounded-[100px]"></div>
             </div>
           </div>
-          <img class="absolute object-cover w-full h-full rounded-[5px]" :src="photo.url ? (photo.isResize === 1 ? imageServiceUrl + photo.url : photo.url) : photo.name" alt="">
+          <img class="absolute object-cover w-full h-full rounded-[5px]" :src="photo.url ? (photo.isResize === 1 ? imageServiceUrl + photo.url : photo.url) : (photo.isResize === 1 ? imageServiceUrl + photo.name : photo.name)" alt="">
         </div>
         <div class="relative border border-solid border-[#E5DFEE] w-full h-[163px] exl:h-[8.5vw] lg:h-[16.7vw] md:h-[20.8vw] sm:h-[42.2vw] rounded-[5px]">
           <div class="w-full h-full rounded-[5px]">

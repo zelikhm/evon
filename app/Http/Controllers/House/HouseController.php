@@ -39,6 +39,16 @@ class HouseController extends Controller
   use AuthCheck;
 
   /**
+   * edit image for house\main\flat
+   * @param Request $request
+   * @param ImageService $imageService
+   */
+
+  public function editImage(Request $request, ImageService $imageService) {
+    $imageService->edit($request->type, $request->image, $request->id);
+  } //end
+
+  /**
    * search object for user
    * @param Request $request
    * @return \Illuminate\Http\JsonResponse
@@ -1014,7 +1024,7 @@ class HouseController extends Controller
 
       $image = HouseImagesModel::create([
         'house_id' => $request->house_id,
-        'name' => "/storage/images/" . $imageName,
+        'name' => "/storage/buffer/" . $imageName,
         'category' => $request->category_id,
         'created_at' => Carbon::now()->addHour(3),
         'updated_at' => Carbon::now()->addHour(3),
@@ -1026,7 +1036,7 @@ class HouseController extends Controller
         'active' => 0,
       ]);
 
-      return response()->json("/storage/images/".$imageName, 200);
+      return response()->json("/storage/buffer/".$imageName, 200);
     } else {
       return response()->json('not auth', 401);
     }
@@ -1040,13 +1050,13 @@ class HouseController extends Controller
 
   public function waterMark($image_buffer, $path, $blur)
   {
-    $image = Image::make('storage/buffer/' . $image_buffer);
+    $image = Image::make('storage/' . $image_buffer);
     $image->insert('images/watermark.png');
 //    $image->resize(600, 420);
     $image->heighten(420);
 
     if($blur) {
-      $image1 = Image::make('storage/buffer/' . $image_buffer);
+      $image1 = Image::make('storage/' . $image_buffer);
       $image1->resize(800, 420);
       $image1->blur(50);
       $image1->insert($image, 'center');

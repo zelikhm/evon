@@ -13,7 +13,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import VueGoogleMaps from '@fawmi/vue-google-maps'
 
-const imageServiceUrl = 'http://159.253.23.123:7777/image.evon.service';
+const imageServiceUrl = 'http://159.253.23.123:7777/image.evon.service/';
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
