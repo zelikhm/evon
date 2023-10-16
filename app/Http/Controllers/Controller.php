@@ -33,9 +33,9 @@ class Controller extends BaseController
         'id' => 23854
       ];
 
-      $client->post('https://evon-tr-test.info/api/image/edit', $array);
+      $response = $client->post('https://evon-tr-test.info/api/image/edit', $array);
 
-      dd($client);
+      dd(json_decode($response->getBody()));
 
       HouseImagesModel::where('isResize', 0)
         ->update([

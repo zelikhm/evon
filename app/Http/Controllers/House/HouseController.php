@@ -45,7 +45,7 @@ class HouseController extends Controller
    */
 
   public function editImage(Request $request, ImageService $imageService) {
-    return true;
+    return $request->type;
     $imageService->edit($request->type, $request->image, $request->id);
   } //end
 
