@@ -289,7 +289,6 @@ export default {
     }
   },
   created() {
-    console.log(this.admin)
     if (this.user.lang === 0) {
       this.language = this.$ru;
       this.selectLanguage = 0;
