@@ -459,7 +459,7 @@
           <div class="flex flex-col" v-for="(item, idx) in filteredObjects" :key="item.id">
             <div
               class="object__block relative z-10 h-[300px] exl:h-[16vw] lg:h-[24vw] md:h-[36vw] sm:h-[56vw] rounded-[6px]">
-              <img v-if="item.mainImage !== null && item.mainImage !== undefined" :src="item.mainImage.image"
+              <img v-if="item.image !== null" :src="item.image.isResize === 1 ? (imageServiceUrl + item.image.name) : item.image.name"
                    class="object-cover absolute -z-10 w-full h-full rounded-[6px]" alt="">
               <img v-else src="../../assets/no-img-houses.jpg"
                    class="object-cover absolute -z-10 w-full h-full rounded-[6px]" alt="">
@@ -523,7 +523,7 @@
                 <div class="relative object__block h-full">
                   <div
                     class="seek opacity-0 transition-all immovables__overlay h-full w-full absolute z-10 rounded-[6px]"></div>
-                  <img v-if="item.mainImage !== null && item.mainImage !== undefined" :src="item.mainImage.image"
+                  <img v-if="item.image !== null" :src="item.image.isResize === 1 ? (imageServiceUrl + item.image.name) : item.image.name"
                        class="object-cover w-full h-[180px] exl:h-fit exl:h-[9.3vw] x:h-[10vw] lg:h-[14vw] md:h-[32vw] sm:h-[42vw]"
                        alt="">
                   <img v-else src="../../assets/no-img-houses.jpg"
@@ -689,6 +689,7 @@
     },
     data() {
       return {
+        imageServiceUrl: '',
         markers: [],
         preloader: true,
         housesFilters: [],
@@ -1217,6 +1218,7 @@
       },
     },
     created() {
+      this.imageServiceUrl = this.$service;
       this.selectDate = this.dates[0].date;
       this.count_house = this.count_houses;
       let href = window.location.href

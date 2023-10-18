@@ -4,6 +4,7 @@
 namespace App\Services\Houses;
 
 
+use App\Models\Builder\HouseImagesModel;
 use App\Models\Builder\HouseMainImageModel;
 use App\Models\Builder\HouseModel;
 use App\Models\Builder\HouseViewsModel;
@@ -85,7 +86,11 @@ class HousesService implements HousesInterface
       $house->description_en = [];
       $house->description_tr = [];
 
-//      $house->image = $this->getPhoto($house);
+      if($house->mainImage === null) {
+        $house->image = HouseImagesModel::where('house_id', $house->id)->first();
+      } else {
+        $house->image = $house->mainImage;
+      }
 
       if ($dop) {
         $house->dop_array = $this->getDopForHouse($house->info->dop);

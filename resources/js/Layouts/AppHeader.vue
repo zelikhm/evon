@@ -340,8 +340,6 @@ export default {
 
   mounted() {
 
-    console.log(this.openClient);
-
     if (this.user !== null) {
       // setInterval(() => {
       //   axios.post('/api/chat/checkChat', {

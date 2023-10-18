@@ -26,11 +26,6 @@ class Controller extends BaseController
 
     public function main(Request $request) {
 
-      HouseImagesModel::where('isResize', 0)
-        ->update([
-          'isResize' => 1,
-        ]);
-
       if(Auth::check()) {
         return redirect('/houses');
       }
