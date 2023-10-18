@@ -58,10 +58,10 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
           </Link>
           <div
             class="lg:hidden text-white text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[15px] flex gap-20 xxl:gap-16 xl:gap-12 x:gap-10">
-            <Link href="/houses" :class="{ 'opacity-60': $page.url !== '/houses' }" class="whitespace-nowrap">
-            {{ language.rielt_1[0] }}</Link>
-            <Link href="/villages" :class="{ 'opacity-60': $page.url !== '/villages' }" class="whitespace-nowrap">
-            {{ language.rielt_1[1] }}</Link>
+            <Link href="/houses" v-on:click="tag = 0" :class="{ 'opacity-60': $page.url !== '/houses' }" class="whitespace-nowrap">
+            {{ tag === 0 ? '' : language.rielt_1[0] }} <div v-if="tag === 0" class="minLoader"></div></Link>
+            <Link href="/villages" v-on:click="tag = 1" :class="{ 'opacity-60': $page.url !== '/villages' }" class="whitespace-nowrap">
+            {{ tag === 1 ? '' : language.rielt_1[1] }} <div v-if="tag === 1" class="minLoader"></div></Link>
             <Link href="/profile/compilation" :class="{ 'opacity-60': $page.url !== '/profile/compilation' }"
               class="whitespace-nowrap">
             {{ language.rielt_1[2] }}</Link>
@@ -323,6 +323,7 @@ export default {
   },
   data() {
     return {
+      tag: null,
       loginOpen: false,
       openProfileMenu: false,
       openBurgerAgent: false,
@@ -461,4 +462,15 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+  .minLoader {
+    border: 3px solid #000; /* Light grey */
+    border-top: 3px solid; /* Blue */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+</style>
