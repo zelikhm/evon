@@ -473,4 +473,12 @@ export default {
     padding-left: 5%;
     padding-right: 5%;
   }
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 </style>
