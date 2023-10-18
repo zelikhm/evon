@@ -45,7 +45,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         <div class="relative block__favorites rounded-[5px] transition-all" v-for="item in favorites">
           <div class="relative">
             <img v-if="item.house.images.length === 0" src="../../assets/no-img-houses-zastroy.jpg" class="object-cover relative z-0 h-[240px] exl:h-[12.5vw] x:h-[16vw] lg:h-[23vw] md:h-[30vw] sm:h-[52vw] w-full rounded-[5px]" alt="">
-            <img v-else :src="item.house.images[0].name" class="object-cover relative z-0 h-[240px] exl:h-[12.5vw] x:h-[16vw] lg:h-[23vw] md:h-[30vw] sm:h-[52vw] w-full rounded-[5px]" alt="">
+            <img v-else :src="item.house.images[0].isResize === 1 ? imageServiceUrl + item.house.images[0].name : item.house.images[0].name" class="object-cover relative z-0 h-[240px] exl:h-[12.5vw] x:h-[16vw] lg:h-[23vw] md:h-[30vw] sm:h-[52vw] w-full rounded-[5px]" alt="">
             <div class="seek opacity-0 transition-all immovables__overlay top-0 h-full w-full absolute z-10 rounded-[5px]"></div>
             <div class="seek opacity-0 transition-all absolute top-1/2 -translate-y-1/2 left-0 z-10 flex flex-col items-center gap-3 xxl:gap-2 xl:gap-1.5 w-full">
               <button @click="openAddSelection = true" class="immovables__button--card flex items-center justify-between p-3 xxl:p-2 xl:p-1.5 rounded-[4px] w-[60%]">
@@ -112,9 +112,11 @@ export default {
       deleteItemId: null,
       language: {},
       selectLanguage: 0,
+      imageServiceUrl: ''
     }
   },
   created() {
+    this.imageServiceUrl = this.$service
     if(this.user.lang === 0) {
       this.language = this.$ru;
     } else if (this.user.lang === 1) {

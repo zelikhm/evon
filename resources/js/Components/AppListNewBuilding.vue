@@ -390,10 +390,10 @@
               v-else>{{ language.ob[47] + ': ' + isSearch }}</h2>
             <span
               class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center"
-              v-if="!preloader">{{ language.izbr_1[3] + ': ' + count_house}}</span>
+              v-if="!preloaderObject">{{ language.izbr_1[3] + ': ' + count_house}}</span>
             <span
               class="flex text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] md:text-[12px] whitespace-nowrap text-center"
-              v-else>  <div class="minLoader"></div>  {{ language.izbr_1[3] + ': ' }}</span>
+              v-else>{{ language.izbr_1[3] + ': ' + count_house }} <div class="minLoader"></div></span>
           </div>
           <div class="flex items-center md:flex-col gap-8 xxl:gap-6 xl:gap-5 md:gap-3">
             <div v-if="!map" :tabindex="tabindex" @blur="openDate = false" class="relative">
@@ -689,6 +689,7 @@
     },
     data() {
       return {
+        preloaderObject: false,
         imageServiceUrl: '',
         markers: [],
         preloader: true,
@@ -1242,23 +1243,21 @@
         this.map_array = this.houses;
         this.preloader = false;
 
-      //   if (this.type === 0) {
-      //
-      //     let link = '/api/house/getHousesJk?dop=true';
-      //
-      //     if(this.user.subscription === true && this.user.subscription_info.free == 1) {
-      //       link = '/api/house/getHousesJk?dop=true&limit=true&limit_count=30';
-      //     }
-      //
-      //     axios.get(link).then(res => {
-      //       this.readyHouses = res.data;
-      //       this.count_house = this.readyHouses.length;
-      //       this.map_array = this.readyHouses;
-      //       this.updateHouses();
-      //       this.updatedMap();
-      //       this.preloader = false;
-      //     })
-      //   } else {
+        if (this.type === 0) {
+          this.preloaderObject = true;
+
+          let link = '/api/house/getHousesJk?dop=true';
+
+          axios.get(link).then(res => {
+            this.readyHouses = res.data;
+            this.count_house = this.readyHouses.length;
+            this.map_array = this.readyHouses;
+            this.updateHouses();
+            this.updatedMap();
+            this.preloaderObject = false;
+          })
+        }
+        // else {
       //
       //     let link = '/api/house/getHousesVillages?dop=true';
       //

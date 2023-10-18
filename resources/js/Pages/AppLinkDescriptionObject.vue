@@ -38,7 +38,7 @@
       </div>
     </div>
   </header>
-  <app-modal-album :image="house.images" v-if="album" @close-album="album = false" :language="language" />
+  <app-modal-album :image="house.images" :house="house" v-if="album" @close-album="album = false" :language="language" />
   <main>
     <div class="_container flex flex-col">
       <div class="decription__head rounded-[12px] p-5 xxl:p-4 xl:p-3 my-7 xxl:my-5 xl:my-4">
@@ -80,7 +80,7 @@
         <div class="flex flex-col">
           <swiper :modules="modules" :navigation="true" :loop="true" class="mySwiper w-full">
             <swiper-slide v-if="house.images.length > 0" class="h-full flex justify-center" v-for="image in house.images">
-              <img @click="album = true" class="h-full w-full object-cover cursor-pointer" :src="image.name" alt="">
+              <img @click="album = true" class="h-full w-full object-cover cursor-pointer" :src="image.isResize === 1 ? imageServiceUrl + image.name : image.name" alt="">
             </swiper-slide>
             <swiper-slide v-else class="h-full flex justify-center">
               <img class="h-full w-full object-cover" src="../../assets/no-img-house.jpg" alt="">
@@ -544,7 +544,8 @@ export default {
       frame: [],
       selectLanguage: 0,
       language: {},
-      selectLang: 0
+      selectLang: 0,
+      imageServiceUrl: ''
     }
   },
   methods: {
@@ -718,6 +719,7 @@ export default {
     }
   },
   created() {
+    this.imageServiceUrl = this.$service
     if (this.user.length !== 0) {
       if (this.user.lang === 0) {
         this.language = this.$ru;

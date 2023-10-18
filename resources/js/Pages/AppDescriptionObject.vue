@@ -8,6 +8,7 @@
   <app-modal-album
     v-if="album"
     :image="house.images"
+    :house="house"
     @close-album="album = false"
     :language="language"
   />
@@ -301,7 +302,7 @@
               <img
                 @click="album = true"
                 class="h-full w-full"
-                :src="item.name"
+                :src="item.isResize === 1 ? imageServiceUrl + item.name : item.name"
                 alt=""
               />
             </swiper-slide>
@@ -672,6 +673,7 @@ export default {
       selectLanguage: 0,
       city_name: {},
       area_name: {},
+      imageServiceUrl: '',
     };
   },
   provide() {
@@ -680,6 +682,7 @@ export default {
     };
   },
   created() {
+    this.imageServiceUrl = this.$service;
     if (this.user.lang === 0) {
       this.language = this.$ru;
       this.selectLanguage = 0;

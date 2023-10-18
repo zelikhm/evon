@@ -21,6 +21,8 @@ class FlatModel extends Model
       'price',
       'imageUp',
       'imageDown',
+      'isResizeImageUp',
+      'isResizeImageDown'
     ];
 
     protected $casts = [

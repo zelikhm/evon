@@ -14,7 +14,7 @@
           <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[20px] leading-none">{{
             language.rielt_2[0] }} <span>Создайте персональную лэндинг-презентацию для клиента</span></h2>
           <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{
-            language.izbr_1[2] }} {{ compilation.length }} шт.</span> 
+            language.izbr_1[2] }} {{ compilation.length }} шт.</span>
         </div>
         <button
           class="login__btn&#45;&#45;bg text-white text-base xxl:text-sm xl:text-xs lg:text-[15px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2 xl:py-1.5 rounded-[3px] leading-none">
@@ -35,10 +35,10 @@
                 <span @click="openSelectionWithProps(item)"
                   class="cursor-pointer text-lg xxl:text-[15px] xl:text-[13px] lg:text-[17px] text-[#1E1D2D] font-medium leading-none">{{
                     item.title }}
-                  
-                </span> 
+
+                </span>
                 <a class="Preview" target="_blank" :href="previewLink(item)">
-                  <button>Предварительный просмотр</button>  
+                  <button>Предварительный просмотр</button>
                 </a>
               </div>
               <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{
@@ -52,7 +52,7 @@
                   class="text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{ item.isEdit ?
                     language.dob_ob_1[24] : language.menu_zastr_1[9] }}</button>
               </div>
-              
+
             </div>
             <div
               class="tools relative border__left sm:border-0 flex flex-col sm:flex-row h-full sm:h-fit sm:w-full justify-evenly sm:py-1">
@@ -72,7 +72,7 @@
               <button @click="item.deleteConfirm = true" class="relative px-5 xxl:px-4 xl:px-3 h-full sm:h-fit sm:flex-shrink-0">
                 <img src="../../assets/svg/bucket_icon_red.svg"
                   class="w-6 xxl:w-5.5 xl:w-5 lg:w-6 h-6 xxl:h-5.5 xl:h-5 lg:h-6" alt="">
-                  
+
               </button>
               <div v-if="item.deleteConfirm"
                 class="cursor-auto z-20 text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] absolute top-[110%] bg-white right-0 flex flex-col border border-solid border-[#CEC3DD] rounded-[5px]">
@@ -199,7 +199,7 @@ export default {
     },
 
 
-    previewLink(item) { 
+    previewLink(item) {
       return `${window.location.protocol}//${window.location.host}/compilation/${10000 + item.id}`;
     },
   },
@@ -222,7 +222,7 @@ export default {
     })
 
     this.compilationReady = this.compilationReady.sort((a, b) => b.createdAtParse - a.createdAtParse)
-  }, 
+  },
   components: {
     AppHeader,
     AppFooter,
@@ -242,7 +242,7 @@ h2 {
 h2 span{
   font-weight: 400;
   font-size: 13px;
-  display:block; 
+  display:block;
   background: rgb(246 243 250);
     padding: 7px 8px;
     border-radius: 6px;
@@ -255,7 +255,7 @@ h2 span{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
 }
 
 .row-preview .Preview{
@@ -298,12 +298,12 @@ h2 span{
 }
 
 .creat{
-  
+
 }
 
 
 
-@media (max-width: 992px) { 
+@media (max-width: 992px) {
 
   .wraper-block{
     display: flex;

@@ -21,7 +21,7 @@ class CacheService implements CacheInterface
 
     Cache::forget('houses_full');
 
-    $houses = $housesService->getHouses('Новостройка', false, true, null);
+    $houses = $housesService->getHouses('Новостройка', true, true, 300);
 
     Cache::put('houses_full', $houses, 21600);
 

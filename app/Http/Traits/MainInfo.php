@@ -40,23 +40,11 @@ trait MainInfo
   protected function getSlider($house)
   {
 
-//    $requestCity = HouseModel::where('city', $house->city)->whereNot('id', $house->id)->with(['flats'])->get();
-
     $requestArea = HouseModel::where('area', $house->area)
       ->whereNot('id', $house->id)
       ->where('active', 2)
       ->where('visible', 1)
-      ->with(['flats'])->get();
-
-
-
-//    if (count($requestCity) < 5) {
-//      $requestCity->merge($requestArea);
-//    }
-
-//    if (count($requestCity) === 0) {
-//      $requestCity = HouseModel::limit(5)->whereNot('id', $house->id)->with(['flats'])->get();
-//    }
+      ->with(['flats', 'mainImage'])->get();
 
     $requestArea->splice(5);
 
@@ -209,13 +197,17 @@ trait MainInfo
   protected function getPhoto($house)
   {
 
+    if($house->mainImage !== null) {
+      return $house->mainImage->isResize === 1 ? (env('SERVICE_URL') . '/' . $house->mainImage->image) : $house->mainImage->image;
+    }
+
     $image = HouseImagesModel::where('house_id', $house->id)
       ->orderBy('category', 'ASC')
       ->orderBy('created_at', 'ASC')
       ->first();
 
     if ($image !== null) {
-      return $image->name;
+      return $image->isResize === 1 ? ((env('SERVICE_URL') . $image->name)) : $image->name;
     }
   }
 

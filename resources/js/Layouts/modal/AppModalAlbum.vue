@@ -13,6 +13,7 @@
             class="mySwiper2 mb-4 xxl:mb-3 xl:mb-2"
           >
             <swiper-slide v-for="item in showImage">
+              {{ item }}
               <img class="w-full h-full" :src="item.isResize === 1 ? (imageServiceUrl + item.name) : item.name" />
             </swiper-slide>
           </swiper>
@@ -45,7 +46,7 @@ import { ref } from 'vue'
 import { FreeMode, Navigation, Pagination} from "swiper";
 
 export default {
-  props: ['image', 'language'],
+  props: ['image', 'language', 'house'],
   components: {
     Swiper,
     SwiperSlide,
@@ -73,7 +74,7 @@ export default {
       this.category = item.id
       this.showImage = []
       this.showImage.push(...this.image.filter(item => item.category === this.category))
-      this.mainImage = this.house.mainImage !== null ? this.house.mainImage.image : this.showImage[0].name
+      this.mainImage = this.house.mainImage !== undefined ? this.house.mainImage.image : this.showImage[0].name
     }
   },
   setup() {
@@ -88,7 +89,7 @@ export default {
   created() {
     this.imageServiceUrl = this.$service;
     this.showImage.push(...this.image.filter(item => item.category === this.category))
-    this.mainImage = this.house.mainImage !== null ? this.house.mainImage.image : this.showImage[0].name
+    this.mainImage = this.house.mainImage !== undefined ? this.house.mainImage.image : this.showImage[0].name
     this.categories.forEach((item, idx) => {
       item.count = this.image.filter(i => i.category === idx).length
     })

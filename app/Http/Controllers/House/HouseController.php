@@ -87,7 +87,11 @@ class HouseController extends Controller
 
   public function index(Request $request, HousesService $housesService, CacheService $cacheService)
   {
-    $houses = $housesService->getHouses('Новостройка', false, true, null);
+    $houses = Cache::get('houses_full');
+
+    if(!$houses) {
+      $houses = $cacheService->updateCacheHouses($housesService);
+    }
 
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
@@ -601,7 +605,7 @@ class HouseController extends Controller
     if ($this->checkToken($request->token)) {
 
       if ($request->image_up) {
-        $imageUp = time() . '.flat.'. $request->file('image')->getClientOriginalExtension();
+        $imageUp = time() . '.flat.'. $request->file('image_up')->getClientOriginalExtension();
         $request->image_up->move(public_path('/storage/buffer'), $imageUp);
         $this->waterMark($imageUp, 'storage/flat/', false);
         $imageUp = '/storage/flat/' . $imageUp;
@@ -611,7 +615,7 @@ class HouseController extends Controller
       }
 
       if ($request->image_down) {
-        $imageDown = time() . '.flat.'. $request->file('image')->getClientOriginalExtension();
+        $imageDown = time() . '.flat.'. $request->file('image_down')->getClientOriginalExtension();
         $request->image_down->move(public_path('/storage/buffer'), $imageDown);
         $this->waterMark($imageDown, 'storage/flat/', false);
         $imageDown = '/storage/flat/' . $imageDown;
@@ -671,7 +675,7 @@ class HouseController extends Controller
       if ($request->image_up === 'null' ) {
         $imageUp = null;
       } else if ($request->image_up) {
-        $imageUp = time() . '.flat.'. $request->file('image')->getClientOriginalExtension();
+        $imageUp = time() . '.flat.'. $request->file('image_up')->getClientOriginalExtension();
         $request->image_up->move(public_path('/storage/buffer'), $imageUp);
         $this->waterMark($imageUp, 'storage/flat/', false);
         $imageUp = '/storage/flat/' . $imageUp;
@@ -685,7 +689,7 @@ class HouseController extends Controller
       if ($request->image_down === 'null') {
         $imageDown = null;
       } else if ($request->image_down) {
-        $imageDown = time() . '.flat.'. $request->file('image')->getClientOriginalExtension();
+        $imageDown = (time() + 100) . '.flat.'. $request->file('image_down')->getClientOriginalExtension();
         $request->image_down->move(public_path('/storage/buffer'), $imageDown);
         $this->waterMark($imageDown, 'storage/flat/', false);
         $imageDown = '/storage/flat/' . $imageDown;
@@ -694,7 +698,6 @@ class HouseController extends Controller
         if ($flat->imageDown !== null) {
           $imageDown = $flat->imageDown;
         }
-
       }
 
       FlatModel::where('id', $request->flat_id)
@@ -1052,7 +1055,7 @@ class HouseController extends Controller
 
   public function waterMark($image_buffer, $path, $blur)
   {
-    $image = Image::make('storage/' . $image_buffer);
+    $image = Image::make('storage/buffer/' . $image_buffer);
     $image->insert('images/watermark.png');
 //    $image->resize(600, 420);
     $image->heighten(420);

@@ -286,18 +286,15 @@ export default {
       formData.append('price', this.flat.price)
       formData.append('token', this.token)
 
-
-      console.log(this.selectFlat)
-      console.log(this.flat.image_up)
       if (!this.selectFlat.imageDown) {
         formData.append('image_down', this.flat.image_down)
 
       }
       if (!this.selectFlat.imageUp) {
-        console.log(this.flat.image_up)
         formData.append('image_up', this.flat.image_up)
       }
 
+      console.log(this.selectFlat.image_down);
 
       axios({
         method: 'post',
@@ -305,7 +302,6 @@ export default {
         headers: { "Content-type": "multipart/form-data" },
         data: formData,
       }).then(response => {
-        console.log(response.data)
         this.$emit('close-add-apartments', response.data)
       }).catch(e => this.$emit('call-notification', 'Не все поля заполнены!'))
     },

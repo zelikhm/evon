@@ -55,10 +55,11 @@ class ImageService implements ImageInterface
    * @param $type
    * @param $image
    * @param $id
+   * @param null $type_flat_image
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function edit($type, $image, $id)
+  public function edit($type, $image, $id, $type_flat_image = null)
   {
 
     if ($type === 0) {
