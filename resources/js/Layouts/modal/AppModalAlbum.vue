@@ -13,7 +13,6 @@
             class="mySwiper2 mb-4 xxl:mb-3 xl:mb-2"
           >
             <swiper-slide v-for="item in showImage">
-              {{ item }}
               <img class="w-full h-full" :src="item.isResize === 1 ? (imageServiceUrl + item.name) : item.name" />
             </swiper-slide>
           </swiper>
