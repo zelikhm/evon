@@ -14,6 +14,7 @@ use App\Models\TraceModel;
 use App\Models\User\ClientModel;
 use App\Models\User\CompanyModel;
 use App\Models\User\SubscriptionModel;
+use App\Models\User\VerificationModel;
 use SleepingOwl\Admin\Providers\AdminSectionsServiceProvider as ServiceProvider;
 use AdminNavigation;
 
@@ -48,6 +49,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
     \App\Models\Log\PaymentLogModel::class => 'App\Http\Admin\Log\PaymentLogModel',
     //
     ClientModel::class => 'App\Http\Admin\Client',
+    VerificationModel::class => 'App\Http\Admin\Verification',
     //
     ImageLogModel::class => 'App\Http\Admin\Log\ImageLog'
   ];

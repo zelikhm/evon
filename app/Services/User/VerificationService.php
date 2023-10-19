@@ -33,7 +33,7 @@ class VerificationService extends UserService implements VerificationInterface
       VerificationModel::create([
         'user_id' => $user_id,
         'link' => $form->link,
-        'file' => $fileName,
+        'file' => '/storage/verification/' . $fileName,
         'text' => $form->text,
         'isVerification' => 1,
       ]);
