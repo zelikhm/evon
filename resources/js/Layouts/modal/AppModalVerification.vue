@@ -41,13 +41,18 @@
                      type="text">
             </div>
             <div
-              class="flex w-full flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-              <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px]" for="company">Загрузить
-                файл</label>
+              class="flex w-full flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5"
+            >
+              <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px]" for="company">Загрузить файл</label>
               <label class="input-file">
                 <input type="file" name="file" ref="image" @change="addPhotos">
                 <span>Выберите файл</span>
               </label>
+              <div class="select-file" v-if="selectedFileName">
+                <img src="../../../../public/images/file-icon.png">
+                <p>{{ selectedFileName }}</p>
+                <span @click="removeFile">✖</span>
+              </div>
             </div>
           </div>
           <div
@@ -106,6 +111,7 @@
           comment: "",
         },
         send: false,
+        selectedFileName: null,
       }
     },
     computed: {
@@ -121,6 +127,17 @@
     methods: {
       addPhotos(e) {
         this.file = e.target.files[0];
+        const fileInput = this.$refs.image;
+        if (fileInput.files.length > 0) {
+          this.selectedFileName = fileInput.files[0].name;
+        } else {
+          this.selectedFileName = null;
+        }
+      },
+      removeFile() {
+        this.selectedFileName = null;
+        const fileInput = this.$refs.image;
+        fileInput.value = '';
       },
       sendData() {
         if (this.formData.link || this.formData.comment) {
@@ -141,6 +158,23 @@
 
 <style scoped>
 
+.select-file{
+  margin-top: 15px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.select-file img{
+  width: 30px;
+}
+.select-file p{
+  font-size: 14px;
+}
+.select-file span{
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+}
   .modal-content {
     display: flex;
     flex-direction: column;
