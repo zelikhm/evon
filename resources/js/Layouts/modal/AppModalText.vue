@@ -2,7 +2,7 @@
 
 <template>
   <!--  Вход в приложение как риэлтор -->
-  <div class="fixed z-[100] w-full h-full flex items-center justify-center">
+  <div v-if="openModalText" class="fixed z-[100] w-full h-full flex items-center justify-center">
     <div
       class=" modal text relative bg-white rounded-[12px] p-10 xxl:p-9 xl:p-8 lg:p-5 z-50 w-[30%] lg:w-[48%] md:w-[60%] sm:w-[90%] h-fit">
        <div  class="relative mb-9 xxl:mb-6 xl:mb-5">
@@ -18,7 +18,10 @@
 <script>
   export default {
     props: {
-
+      openModalText:{
+        type:Boolean,
+        default:false
+      }
     },
     data() {
       return {
