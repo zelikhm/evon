@@ -17,7 +17,7 @@ Route::get('/test', function () {
 
   foreach ($users as $user) {
     User\VerificationModel::create([
-      'image_id' => $user->id,
+      'user_id' => $user->id,
       'link' => 'initialisation',
       'file' => 'initialisation',
       'isVerification' => 2,
