@@ -42,13 +42,17 @@ class VerificationService extends UserService implements VerificationInterface
         'isVerification' => 1,
       ]);
 
+      $url = env('APP_URL') . '/admin/verification_models/"$verification->id"/edit';
+
+      dd($url);
+
       $message = "<html><head></head><body><p>
                 Подана заявка на верификацию<br>
                 Имя: . $user->first_name<br>
                 Фамилия: . $user->last_name<br>
                 Телефон: . $user->phone<br>
                 Email: . $user->email<br>
-                Ссылка на админку: . https://evon-tr-test.info/admin/verification_models/$verification->id/edit<br>
+                Ссылка на админку: $url<br>
                 </p></body></html>";
 
       $registerMailService->sendMail("evon.information@gmail.com", $message);
