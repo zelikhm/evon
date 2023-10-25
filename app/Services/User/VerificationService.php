@@ -34,7 +34,7 @@ class VerificationService extends UserService implements VerificationInterface
         $fileName = '';
       }
 
-      VerificationModel::create([
+      $verification = VerificationModel::create([
         'user_id' => $user_id,
         'link' => $form->link,
         'file' => '/storage/verification/' . $fileName,
@@ -48,7 +48,7 @@ class VerificationService extends UserService implements VerificationInterface
                 Фамилия: . $user->last_name<br>
                 Телефон: . $user->phone<br>
                 Email: . $user->email<br>
-                Ссылка на админку: . <br>
+                Ссылка на админку: . https://evon-tr-test.info/admin/verification_models/$verification->id/edit<br>
                 </p></body></html>";
 
       $registerMailService->sendMail("evon.information@gmail.com", $message);
