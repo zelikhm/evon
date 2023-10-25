@@ -1,5 +1,4 @@
 <script setup>
-
 import '../../../public/styles/styles.css'
 import '../../../public/styles/fonts.css'
 import '../../../public/styles/adapt.css'
@@ -10,8 +9,6 @@ import '../../../public/styles/watchvideo.css'
 import '../../../public/styles/welcom.css'
 import '../../../public/styles/help.css'
 import '../../../public/styles/ForRealtors.css'
-
-
 </script>
 
 <template>
@@ -27,6 +24,7 @@ import '../../../public/styles/ForRealtors.css'
     @open-modal-choise="mobileModal = !mobileModal" @selectLanguage="choseLanguage" :user_info="userInfo"
     :language="language"></new-header>
 
+  <app-modal-text :openModalText="openModalText"/>
 
   <div v-if="mobileModal" class="fixed z-[100] w-full h-full flex items-center justify-center">
     <div
@@ -372,6 +370,7 @@ import { usePage } from "@inertiajs/inertia-vue3";
 import AppModalRegister from "@/Layouts/modal/AppModalRegister.vue";
 import NewHeader from "@/Components/NewsComponent/NewHeader.vue";
 import NewFooter from "@/Components/NewsComponent/NewFooter.vue";
+import AppModalText from "@/Layouts/modal/AppModalText.vue";
 import { ref, onMounted } from 'vue';
 
 export default {
@@ -401,6 +400,7 @@ export default {
       openLoginRealtor: false,
       openLoginDeveloper: false,
       openRegister: false,
+      openModalText: false,
       language: this.$ru,
       selectLanguage: 0,
       user: [],
@@ -664,7 +664,8 @@ export default {
     AppFooter,
     AppModalAuth,
     NewHeader,
-    NewFooter
+    NewFooter,
+    AppModalText
   }
 }
 </script>

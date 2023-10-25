@@ -4,6 +4,13 @@ import { Link } from '@inertiajs/inertia-vue3'
 
 <template>
   <app-header :user="user" :language="language" @selectLanguage="choseLanguage" />
+  <app-submit
+    v-if="dataSubmit.display"
+    :title="dataSubmit.title"
+    :link="dataSubmit.link"
+    :type="1"
+    @closeSubmitSelection="dataSubmit.display=!dataSubmit.display"
+  />
   <main>
     <div class="_container">
       <div class="my-14 xxl:my-10 xl:my-8">
@@ -156,6 +163,7 @@ import { Link } from '@inertiajs/inertia-vue3'
 <script>
 import AppHeader from '../Layouts/AppHeader.vue'
 import AppFooter from "../Layouts/AppFooter.vue"
+import AppSubmit from "../Layouts/modal/AppSubmitSelection.vue"
 
 export default {
   props: {
@@ -192,22 +200,28 @@ export default {
       linkModal: {
         link: '',
         open: false,
+      },
+
+      dataSubmit:{
+        display:false,
+        title:"",
+        link:""
       }
     }
   },
   methods: {
     sendLink(type, house) {
       const link = house.slug + '-client';
-
       axios.post('/compilation/builder/getLink', {
         type: type,
         slug: house.slug
       }).then(res => {
         this.linkModal.link = res.data;
         this.linkModal.open = true;
+        this.dataSubmit.display=true
+        this.dataSubmit.title=type==0?"Отправить клиенту":"Отправить партнеру"
+        this.dataSubmit.link=this.linkModal.link
       })
-
-
     },
     choseLanguage(language) {
       this.selectLanguage = language;
@@ -312,6 +326,7 @@ export default {
   components: {
     AppHeader,
     AppFooter,
+    AppSubmit
   },
   mounted() {
     this.page = new URL(location.href).searchParams.get('page');

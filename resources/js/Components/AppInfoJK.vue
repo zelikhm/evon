@@ -20,7 +20,18 @@
              type="text" id="name_object">
     </div>
 
-    <input type="file" @change="addImage">
+    <div class="select-file-content">
+      <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px]" for="company">Загрузить файл</label>
+      <label class="input-file">
+        <input type="file" name="file" ref="image"  @change="addImage">
+        <span>Выберите файл</span>
+      </label>
+      <div class="select-file" v-if="selectedFileName">
+        <img src="../../../public/images/file-icon.png">
+        <p>{{ selectedFileName }}</p>
+        <span @click="removeFile">✖</span>
+      </div>
+    </div>
 
     <label
       :class="{ validationText: validation.description }"
@@ -550,12 +561,25 @@
           image: false
         },
         isEdit: false,
-        isBorder: 0
+        isBorder: 0,
+
+        selectedFileName: null,
       }
     },
     methods: {
       addImage(e) {
         this.mainImage = e.target.files[0];
+        const fileInput = this.$refs.image;
+        if (fileInput.files.length > 0) {
+          this.selectedFileName = fileInput.files[0].name;
+        } else {
+          this.selectedFileName = null;
+        }
+      },
+      removeFile() {
+        this.selectedFileName = null;
+        const fileInput = this.$refs.image;
+        fileInput.value = '';
       },
       changeBorder(id) {
         this.isBorder = id
@@ -1056,8 +1080,94 @@
     border: 1px solid red;
   }
 
+
+  .select-file-content{
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    max-width: 250px;
+  }
+  .select-file{
+    margin-top: 15px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+  }
+  .select-file img{
+    width: 25px;
+  }
+  .select-file p{
+    font-size: 12px;
+  }
+  .select-file span{
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+  }
   .validationText {
     color: red;
+  }
+  .input-file {
+    position: relative;
+    display: inline-block;
+  }
+
+  .input-file span {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    display: block;
+    text-decoration: none;
+    font-size: .83vw;
+    vertical-align: middle;
+    border: 2px solid rgb(232 70 128);
+    color: rgb(232 70 128);
+    text-align: center;
+    border-radius: 4px;
+    background-color: transparent;
+    line-height: .83vw;
+    padding: 8px 20px;
+    box-sizing: border-box;
+    margin: 0;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+  }
+
+  .input-file input[type=file] {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    display: block;
+    width: 0;
+    height: 0;
+  }
+
+  label {
+    font-size: .83vw;
+  }
+
+  .row {
+    display: flex;
+    gap: 15px;
+  }
+
+  /* Hover/active */
+  .input-file:hover span {
+    background-color: rgb(232 70 128);;
+    border: 2px solid transparent;
+    color: white;
+  }
+
+  .input-file:active span {
+    background-color: rgb(232 70 128);;
+    border: 2px solid transparent;
+    color: white;
+  }
+
+  /* Disabled */
+  .input-file input[type=file]:disabled + span {
+    background-color: #eee;
   }
 </style>
 <style src="@vueform/multiselect/themes/default.css"></style>
