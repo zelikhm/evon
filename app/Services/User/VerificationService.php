@@ -27,8 +27,12 @@ class VerificationService extends UserService implements VerificationInterface
 
     if ($user->verification === null) {
 
-      $fileName = time() . '.' . $form->file('file')->getClientOriginalName();
-      $form->file('file')->move(public_path('/storage/verification'), $fileName);
+      if($form->file('file')) {
+        $fileName = time() . '.' . $form->file('file')->getClientOriginalName();
+        $form->file('file')->move(public_path('/storage/verification'), $fileName);
+      } else {
+        $fileName = '';
+      }
 
       VerificationModel::create([
         'user_id' => $user_id,

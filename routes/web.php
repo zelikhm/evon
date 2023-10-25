@@ -12,6 +12,23 @@ use App\Http\Traits\MainInfo;
 
 Route::get('/', ['App\Http\Controllers\Controller', 'main']);
 
+Route::get('/test', function () {
+  $users = User::all();
+
+  foreach ($users as $user) {
+    User\VerificationModel::create([
+      'image_id' => $user->id,
+      'link' => 'initialisation',
+      'file' => 'initialisation',
+      'isVerification' => 2,
+      'text' => 'initialisation',
+    ]);
+  }
+
+  dd(1);
+
+});
+
 Route::prefix('/compilation')->group(function () {
   Route::get('/{id}', ['App\Http\Controllers\User\CompilationController', 'show']);
   Route::get('/user/{id}/{house}', ['App\Http\Controllers\User\CompilationController', 'soloHouse']);
