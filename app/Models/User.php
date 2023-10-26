@@ -97,6 +97,19 @@ class User extends Authenticatable
   } //end
 
   /**
+   * check verification
+   * @return bool
+   */
+
+  public function isVerification()
+  {
+    $verification = VerificationModel::where('user_id', $this->id)
+      ->first();
+
+    return $verification !== null ? $verification->isVerification === 2 : false;
+  } //end
+
+  /**
    * belong method for verification
    * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
    */
