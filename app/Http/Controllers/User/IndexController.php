@@ -59,9 +59,13 @@ class IndexController extends Controller
   {
     if ($this->checkToken($request->token)) {
 
-      return response()->json(User::where('token', $request->token)
-        ->with(['company', 'subscriptionInfo', 'isVerification'])
-        ->first(), 200);
+      $user = User::where('token', $request->token)
+        ->with(['company', 'subscriptionInfo'])
+        ->first();
+
+      $user->verification = $user->isVerification();
+
+      return response()->json($user, 200);
 
     } else {
 
