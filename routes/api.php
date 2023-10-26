@@ -18,6 +18,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::prefix('/verification')->group(function () {
+  Route::post('/send', ['App\Http\Controllers\User\VerificationController', 'send']);
+  Route::post('/get', ['App\Http\Controllers\User\VerificationController', 'get']);
+});
+
 Route::prefix('/image')->group(function () {
   Route::post('/edit', ['App\Http\Controllers\House\HouseController', 'editImage']);
 });

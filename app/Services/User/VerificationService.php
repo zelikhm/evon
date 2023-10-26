@@ -56,7 +56,6 @@ class VerificationService extends UserService implements VerificationInterface
       $registerMailService->sendMail("evon.information@gmail.com", $message);
 
       return true;
-
     } else {
       return false;
     }
