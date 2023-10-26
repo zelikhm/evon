@@ -146,8 +146,6 @@ class AuthenticatedSessionController extends Controller
     $user = User::where('email', $request->email)
       ->first();
 
-    dd($user);
-
     if($user !== null && Hash::check($request->password, $user->password) && $user->deleted !== 1) {
 
       $token = $this->checkSession($user->id);
