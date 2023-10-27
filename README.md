@@ -64,6 +64,7 @@ path send \ [post] / :
 - link - ссылка
 - text - комментарий
 - user_id - айди пользователя
+- isApi (for mobile app only true)
 
 ### House 
 
@@ -476,6 +477,12 @@ path getChatApi \ [post] / поля:
 - token - токен
 
 ### User 
+
+Бесплатная подписка на 20 дней \
+path trial \ [post] / поля:
+
+- user_id - айди юзера
+- isApi - true for api
 
 Получения пользователя \
 path get \ [post] / поля:

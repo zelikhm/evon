@@ -26,8 +26,8 @@ class IndexController extends Controller
    * @return \Symfony\Component\HttpFoundation\Response
    */
 
-  public function trial() {
-    $user = User::where('id', Auth::id())
+  public function trial(Request $request) {
+    $user = User::where('id', $request->user_id ? $request->user_id : Auth::id())
       ->with(['subscription'])
       ->first();
 
@@ -43,9 +43,9 @@ class IndexController extends Controller
       $user->free_subscription = 0;
       $user->save();
 
-      return Inertia::location('/profile?setTrial=1');
+      return $request->isApi ? response()->json(true, 200) : Inertia::location('/profile?setTrial=1');
     } else {
-      return Inertia::location('/profile?setTrial=0');
+      return $request->isApi ? response()->json(false, 401) : Inertia::location('/profile?setTrial=0');
     }
   } //end
 

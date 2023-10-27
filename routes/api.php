@@ -121,6 +121,8 @@ Route::prefix('user')->group(function () {
   Route::post('/register', ['App\Http\Controllers\User\IndexController', 'sendRegister']);
   //
   Route::post('/deleteAccount', ['App\Http\Controllers\User\ProfileController', 'deleteAccount']);
+  //
+  Route::post('/trial', ['App\Http\Controllers\User\IndexController', 'trial']);
 });
 
 Route::prefix('chat')->group(function () {
