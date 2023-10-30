@@ -8,8 +8,8 @@
     @close-notification="openNotification = !openNotification"
     :text="text"
   />
-  <app-modal-verification v-if="openModalVer || verification !== null" @close-modal-verification="openModalVer = false, verification = null" :verification="verification"></app-modal-verification>
-  <AppModalSubscription v-if="subscription !== null" @close-modal-verification="subscription = null" :subscription="subscription"></AppModalSubscription>
+  <app-modal-verification v-if="openModalVer || verification !== null" @close-modal-verification="openModalVer = false, verification = null" :language="language" :verification="verification"></app-modal-verification>
+  <AppModalSubscription v-if="subscription !== null" @close-modal-verification="subscription = null" :language="language" :subscription="subscription"></AppModalSubscription>
 
   <main class="relative">
     <div class="_container">
@@ -46,8 +46,8 @@
                 <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
 
                 <!--Текст про подписки-->
-                <div class="text-hint red" v-if="!user.subscription">Подписка закончена</div>
-                <div class="text-hint"  v-if="!user.subscription">Оформить подписку и получить доступ к базе недвижимости и функциям сервиса </div>
+                <div class="text-hint red" v-if="!user.subscription">{{ language.subscription[0] }}</div>
+                <div class="text-hint"  v-if="!user.subscription">{{ language.subscription[1] }}</div>
                 <button @click="openPayProfile = true" class="hover__button--purple transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">{{ language.prof_rielt[15] + ' TR' }}</button>
                 <button @click="openPayRusProfile = true" class="hover__button--purple transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">{{ language.prof_rielt[15] + ' RUB' }}</button>
               </div>
@@ -55,7 +55,7 @@
             <div>
               <h3 class="title text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">
                 {{ language.prof_rielt[3] }}
-                <span>Эта информация указывается в презентации для клиента</span>
+                <span>{{ language.subscription[1] }}</span>
               </h3>
               <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3 mt-7 xxl:mt-5 xl:mt-4">
                 <div class="grid grid-cols-2 sm:grid-cols-1 gap-5 xxl:gap-4 xl:gap-3">
@@ -95,22 +95,22 @@
 
               <div  class="row-status flex w-full flex-col border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
                 <div class="info">
-                  <label  class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px]" for="company">Статус</label>
-                  <h3 v-if="user.verification === null" class="red text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">Не верифицирован</h3>
-                  <h3 v-else-if="user.verification.isVerification === 0" class="red text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">Не верифицирован</h3>
-                  <h3 v-else-if="user.verification.isVerification === 1" class="orange text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">На верификации</h3>
-                  <h3 v-else-if="user.verification.isVerification === 2" class="green text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">Верифицирован</h3>
+                  <label  class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px]" for="company">{{ language.subscription[2] }}</label>
+                  <h3 v-if="user.verification === null" class="red text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">{{ language.subscription[4] }}</h3>
+                  <h3 v-else-if="user.verification.isVerification === 0" class="red text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">{{ language.subscription[4] }}</h3>
+                  <h3 v-else-if="user.verification.isVerification === 1" class="orange text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">{{ language.subscription[5] }}</h3>
+                  <h3 v-else-if="user.verification.isVerification === 2" class="green text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">{{ language.subscription[35] }}</h3>
                 </div>
                 <div v-if="user.verification === null">
                   <button @click="openModalVer = true"
                           class="hover__button--purple max-w-[170px] ml-[0px] transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">
-                    Верификация
+                    {{ language.subscription[5] }}
                   </button>
                 </div>
                 <div v-else-if="user.verification.isVerification !== 2">
                   <button @click="openModalVer = true"
                           class="hover__button--purple max-w-[170px] ml-[0px] transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">
-                    Верификация
+                    {{ language.subscription[5] }}
                   </button>
                 </div>
               </div>

@@ -3,8 +3,8 @@
     <div :class="{short:true}"
          class=" modal-content relative   flex flex-col   bg-white rounded-[12px] px-12 xxl:px-10 xl:px-8 py-8 xxl:py-6 xl:py-5 z-50 w-[32%] lg:w-[50%] md:w-[64%] sm:w-[90%] h-fit">
       <div class="relative title flex justify-between items-center">
-        <h3 v-if="subscription == 1">Пробная версия</h3>
-        <h3 v-else>Требуется подписка</h3>
+        <h3 v-if="subscription == 1">{{ language.subscription[71] }}</h3>
+        <h3 v-else>{{ language.subscription[18] }}</h3>
         <button @click="$emit('close-modal-verification')" class="hover__close transition-all relative w-4 h-4 z-50">
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] rotate-45"></span>
           <span class="absolute h-[1px] top-1/2 left-0 w-4 bg-[#8A8996] -rotate-45"></span>
@@ -13,24 +13,24 @@
       <div>
         <div class="form" v-if="subscription == 1">
           <p >
-            Попробовать премиум версию бесплатно на 20 дней
+            {{ language.subscription[72] }}
           </p>
 
           <button
             @click="sendTrial"
             class="hover__button--purple transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">
-            Опробовать
+            {{ language.subscription[73] }}
           </button>
         </div>
         <div class="form" v-else>
           <p>
-            доступно в премиум версии. Подключить премиум версию можно в профиле
+            {{ language.subscription[19] }}
           </p>
 
           <button
             @click="$emit('close-modal-verification')"
             class="hover__button--purple transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">
-            Закрыть
+            {{ language.subscription[20] }}
           </button>
         </div>
       </div>
@@ -44,7 +44,8 @@
 
   export default {
     props: [
-      'subscription'
+      'subscription',
+      'language'
     ],
     mounted() {
       console.log(this.subscription);

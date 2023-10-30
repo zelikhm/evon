@@ -15,30 +15,30 @@ import { Link } from '@inertiajs/inertia-vue3'
         <div class="flex lg:flex-col items-center justify-between">
           <div class="flex flex-col p-4 xxl:p-3 xl:p-2">
             <div class="flex items-center lg:justify-center gap-5 xxl:gap-4 xl:gap-3"><span
-                class="font-semibold text-xl xxl:text-lg xl:text-sm lg:text-[19px]">Мои клиенты </span>
+                class="font-semibold text-xl xxl:text-lg xl:text-sm lg:text-[19px]">{{ language.subscription[21] }}</span>
             </div>
-            <span class="text-[#8A8996]  text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">Найдено {{ clients.length }}
+            <span class="text-[#8A8996]  text-sm xxl:text-xs xl:text-[10px] lg:text-[14px]">{{ language.subscription[34] }} {{ clients.length }}
               шт.</span>
           </div>
           <div class="flex lg:flex-col lg:items-center h-20 xxl:h-16 xl:h-12 lg:h-fit">
             <div class="flex items-center p-4 xxl:p-3 xl:p-2">
               <button @click="openSelection(null), tool = 1"
                 class="login__btn--bg bg-[#E84680] px-4 xxl:px-4 xl:px-2.5 rounded-[3px] h-10 xxl:h-8 xl:h-6 font-semibold text-white text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px] leading-none">
-                Добавить клиента
+                {{ language.subscription[4] }}
               </button>
             </div>
           </div>
         </div>
       </div>
       <div class="purple-hints flex flex-col pb-7 xxl:pb-5 xl:pb-4">
-        <p class="text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2 strong">- Ваши клиенты хотят приобрести недвижимость в Турции?</p>
-        <p class="text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2 strong" >- Хотите продавать дистанционно?</p>
-        <p class="text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2 strong">- Нужна квалифицированная помощь в работе с клиентом в Турции?</p>
+        <p class="text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2 strong">{{ language.subscription[22] }}</p>
+        <p class="text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2 strong">{{ language.subscription[23] }}</p>
+        <p class="text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2 strong">{{ language.subscription[24] }}</p>
 
-        <p class=" text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2">Теперь это возможно, получать комиссионной вознаграждение, даже если вы не бывали в Турции и не планируете!</p>
-        <p class=" text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2">Наш сервис предлагает вам партнерское сотрудничество. В котором вы можете передать своего клиента, за часть комиссионного вознаграждения, после проведения сделки с вашим клиентом.</p>
-        <p class=" text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2">Вы можете быть уверены, что партнеры с нашей стороны, с 15 летнем стажем, проведут высококвалифицированную работу с вашим клиентом. Подберут объект под запрос клиента, встретят клиента в аэропорту, организуют прокат по всем выбранным объектам, услуги переводчика, юридическое сопровождение сделки, послепродажный сервис.</p>
-        <p class=" text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2">Все условия сотрудничества фиксированы документально и гарантируют выплату вашего комиссионного вознаграждения</p>
+        <p class=" text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2">{{ language.subscription[25] }}</p>
+        <p class=" text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2">{{ language.subscription[26] }}</p>
+        <p class=" text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2">{{ language.subscription[27] }}</p>
+        <p class=" text-base xxl:text-sm xl:text-xs pb-4 xxl:pb-3 xl:pb-2">{{ language.subscription[28] }}</p>
 
       </div>
       <div class="columns-clients">
@@ -74,10 +74,10 @@ import { Link } from '@inertiajs/inertia-vue3'
                   {{ cli.client_text }}
                 </span>
               </div>
-              <div class="text-xs font-bold decided">{{ cli.isJk === 1 ? "Определился с объектом" : "Не определился с объектом" }}
+              <div class="text-xs font-bold decided">{{ cli.isJk === 1 ? language.subscription[51] : language.subscription[52]}}
               </div>
               <div class="client-status">
-                <div class="text-xs font-bold mb-2">Статус клиента:
+                <div class="text-xs font-bold mb-2">{{ language.subscription[50] }}:
                   <!-- <span class="font-normal">
                     {{ cli.jk === "1" ? "Определился с объектом" : "Не определился с объектом" }}
                   </span> -->
@@ -96,7 +96,7 @@ import { Link } from '@inertiajs/inertia-vue3'
                 </div>
               </div>
               <div class="text-xs font-bold mb-2">
-                Комментарий:
+                {{ language.subscription[11] }}:
                 <span class="coment-user font-normal" :class="{hidden:cli.comment.length>=50 && !cli.showFullComment}" >
                   {{ cli.comment }}
                 </span>
@@ -107,8 +107,8 @@ import { Link } from '@inertiajs/inertia-vue3'
 
               <div v-if="cli.manager_name">
                 <div class="text-s font-bold mb-2">Менеджер:</div>
-                <div class="text-xs font-bold mb-2">ФИО: {{ cli.manager_name }}</div>
-                <div class="text-xs font-bold mb-2">Телефон: {{ cli.manager_phone }}</div>
+                <div class="text-xs font-bold mb-2">{{ language.subscription[53] }}: {{ cli.manager_name }}</div>
+                <div class="text-xs font-bold mb-2">{{ language.subscription[54] }}: {{ cli.manager_phone }}</div>
               </div>
               <div v-else>
                 <div class="text-s font-bold mb-2">Менеджер: не назначен</div>
@@ -134,8 +134,8 @@ import { Link } from '@inertiajs/inertia-vue3'
           </div>
         </div>
         <div class="clients-menager">
-          <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold">Связаться с менеджером</h2>
-          <p>Evon в Турции</p>
+          <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold">{{ language.subscription[29] }}</h2>
+          <p>{{ language.subscription[30] }}</p>
           <ul class="clients-menager-refs">
             <li><em>WhatsApp</em> <a href="https://wa.me/+905442258559">905442258559</a></li>
             <li><em>Telegram</em> <a href="https://t.me/evon_turkey">@evon_turkey</a></li>
@@ -144,11 +144,10 @@ import { Link } from '@inertiajs/inertia-vue3'
           </ul>
 
           <ul class="clients-menager-refs low">
-            <li>После добавления клиента, свяжитесь с менеджером EVON для подбора партнёра в
-              сопровождении сделки</li>
+            <li>{{ language.subscription[31] }}</li>
           </ul>
 
-          <button @click="cooperation_modal=!cooperation_modal" class="login__btn--bg bg-[#E84680] px-4 xxl:px-4 xl:px-2.5 rounded-[5px] h-10 xxl:h-8 xl:h-6 font-semibold text-white text-base xxl:text-[11px] xl:text-[9px] lg:text-[12px] leading-none">Соглашение о сотрудничестве</button>
+          <button @click="cooperation_modal=!cooperation_modal" class="login__btn--bg bg-[#E84680] px-4 xxl:px-4 xl:px-2.5 rounded-[5px] h-10 xxl:h-8 xl:h-6 font-semibold text-white text-base xxl:text-[11px] xl:text-[9px] lg:text-[12px] leading-none">{{ language.subscription[32] }}</button>
 
         </div>
       </div>

@@ -3,11 +3,10 @@
     <div :class="{ 'translate__x__0': openSideBar }"
       class="transition-all ease-linear duration-500 flex flex-col relative z-50 w-[50%] lg:w-[64%] sm:w-full translate-x-full h-[100vh] bg-white px-28 xxl:px-24 xl:px-20 lg:px-10 sm:px-5 py-14 xxl:py-10 xl:py-8 lg:py-5">
       <div class="relative mb-10 xxl:mb-8 xl:mb-6">
+
         <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold">
           {{ tool == 1 ? 'Добавление' : 'Редактировать' }} клиента
         </h2>
-
-
 
         <button @click="closeModal" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
           <div class="absolute h-[1px] w-4 rotate-45"></div>
@@ -19,28 +18,28 @@
 
         <div class="hint-clients bg-litepink text-[#E84680] text-lg xxl:text-[15px] xl:text-[13px] leading-none py-5 xxl:py-4 xl:py-3 rounded-[6px]">
           <p class="text-base xxl:text-sm xl:text-xs pb-3 xxl:pb-2 xl:pb-1">
-            Внимание! Для эффективного сотрудничества вам необходимо провести работу с вашим клиентом по нескольким этапам:
+            {{ language.subscription[42] }}
           </p>
           <p class="text-base xxl:text-sm xl:text-xs pb-3 xxl:pb-2 xl:pb-1">
-            - Выявить лицо принимающее решение
+            {{ language.subscription[43] }}
           </p>
           <p class="text-base xxl:text-sm xl:text-xs pb-3 xxl:pb-2 xl:pb-1">
-            - Подробное описание рассматриваемой недвижимости
+            {{ language.subscription[44] }}
           </p>
           <p class="text-base xxl:text-sm xl:text-xs pb-3 xxl:pb-2 xl:pb-1">
-            - Установить цель покупки
+            {{ language.subscription[45] }}
           </p>
           <p class="text-base xxl:text-sm xl:text-xs pb-3 xxl:pb-2 xl:pb-1">
-            - Сделать подбор недвижимости с использованием подборок с сайта EVON
+            {{ language.subscription[46] }}
           </p>
           <p class="text-base xxl:text-sm xl:text-xs pb-3 xxl:pb-2 xl:pb-1">
-            - Планируемая дата сделки или приезда в Турцию
+            {{ language.subscription[47] }}
           </p>
           <p class="text-base xxl:text-sm xl:text-xs pb-3 xxl:pb-2 xl:pb-1">
-            - Форма оплаты
+            {{ language.subscription[48] }}
           </p>
           <p class="text-base xxl:text-sm xl:text-xs pb-3 xxl:pb-2 xl:pb-1">
-            - Рекомендация работать в Турции только с нашим партнером
+            {{ language.subscription[49] }}
           </p>
         </div>
         <h3 class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none">{{ language.rielt_3[1]
@@ -52,13 +51,12 @@
             <div class="mb-4 xxl:mb-3 xl:mb-3">
               <input class="custom__checkbox" type="checkbox" id="checkbox1" v-model="compilation.checkbox1Active"
                      @click="toggleCheckbox(1)">
-              <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="checkbox1">Определился с объектом</label>
+              <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="checkbox1">{{ language.subscription[51] }}</label>
             </div>
             <div class="mb-4 xxl:mb-3 xl:mb-3">
               <input class="custom__checkbox" type="checkbox" id="checkbox2" v-model="compilation.checkbox2Active"
                      @click="toggleCheckbox(2)">
-              <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="checkbox2">Не определился с
-                объектом</label>
+              <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="checkbox2">{{ language.subscription[52] }}</label>
             </div>
           </div>
         </div>
@@ -66,38 +64,38 @@
              class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
           <div v-if="compilation.checkbox1Active">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">
-              Определился с объектом
+              {{ language.subscription[51] }}
             </label>
             <p class="text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0">
-              Ваше вознаграждение составляет 75% от общей комиссии, за вычетом расходов по сделке. Требуется юридическое сопровождение сделки (составление всех необходимых документов для сделки и оплаты), встреча Клиента с сопровождение его до Продавца, помощь в переговорах с Продавцом, консультация по оплате и переводе средств, услуги переводчика
+              {{ language.subscription[66] }}
             </p>
           </div>
           <div v-else-if="compilation.checkbox2Active">
             <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">
-              Не определился с объектом
+              {{ language.subscription[52] }}
             </label>
             <p class="text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0">
-              Ваше вознаграждение составляет 40% от общей комиссии, за вычетом расходов по сделке. Требуется осуществить поиск объекта, подбор недвижимости, исчерпывающая информация о рынке недвижимости Турции, юридическое сопровождение сделки, услуги переводчика, полное сопровождение и консультация на всех этапах работы с продавцом, включая: встреча на территории Турции, показ объектов, составление всех необходимых документов для сделки и оплаты, консультирование по вопросам оплаты, международных переводов, рассрочке, а так же послепродажный сервис (консультации по миграционным вопросам, ремонту, покупки мебели и пр.)
+              {{ language.subscription[67] }}
             </p>
           </div>
         </div>
         <div :class="{ validation: validation.name == false }"
           class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">Ф.И.О</label>
+          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">{{ language.subscription[53] }}</label>
           <input v-model="compilation.name"
             class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
             type="text" id="post_contact">
         </div>
         <div :class="{ validation: validation.phone == false }"
           class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">Телефон</label>
+          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">{{ language.subscription[54] }}</label>
           <input v-model="compilation.phone"
             class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
             type="tel" @input="validatePhoneInput()">
         </div>
         <div :class="{ validation: validation.WatTelg == false }"
           class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">WatsApp / Телеграмм</label>
+          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">{{ language.subscription[55] }}</label>
           <input v-model="compilation.WatTelg"
             class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
             type="tel">
@@ -111,7 +109,7 @@
         </div> -->
         <div :class="{ validation: validation.interested == false }"
           class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">Рассматриваемые объекты с платформы EVON</label>
+          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">{{ language.subscription[56] }}</label>
           <input v-model="compilation.interested"
             class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
             type="text">
@@ -120,21 +118,21 @@
         <!--Новые поля-->
         <div :class="{ validation: validation.purchasePurpose == false }"
              class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact"> Цель покупки</label>
+          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">{{ language.subscription[57] }}</label>
           <input v-model="compilation.purchasePurpose"
                  class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                  type="text">
         </div>
         <div :class="{ validation: validation.plannedDate == false }"
              class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact"> Планируемая дата сделки или приезда в Турцию</label>
+          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">{{ language.subscription[58] }}</label>
           <input @input="compilation.plannedDate"
                  class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0"
                  type="date">
         </div>
         <div :class="{ validation: validation.paymentMethod == false }"
              class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact"> Форма оплаты</label>
+          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">{{ language.subscription[60] }}</label>
           <div class="relative">
             <div @click="toggleDropdown" class="dropdown-toggle text-base xxl:text-sm xl:text-xs pb-3 xxl:pb-2 xl:pb-1">
               {{ getPaymentMethodName }}
@@ -157,7 +155,7 @@
 
         <div :class="{ validation: validation.comment == false }"
           class="flex flex-col w-full border border-solid border-[#E5DFEE] gap-0.5 rounded-[6px] px-5 xxl:px-4 xl:px-3 py-4 xxl:py-3 xl:py-2.5">
-          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">Комментарий о клиенте и рассматриваемой недвижимости</label>
+          <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px]" for="post_contact">{{ language.subscription[65] }}</label>
           <textarea v-model="compilation.comment"
             class="text-[#1E1D2D] resize-none text-lg xxl:text-[15px] xl:text-[13px] p-0 leading-none border-transparent focus:border-transparent focus:ring-0 min-h-[50px]"
             type="text"></textarea>
@@ -195,14 +193,24 @@
 
 export default {
   props: ['openChangeClient', 'openSideBar', 'user', 'itemCompilation', 'language', "tool", "clientInfo"],
+  watch: {
+    language(item) {
+      this.paymentMethods = [
+        item.subscription[61],
+        item.subscription[62],
+        item.subscription[63],
+        item.subscription[64],
+      ]
+    }
+  },
   data() {
     return {
       select: false,
       paymentMethods: [
-        'Выберите форму оплаты',
-        'Наличные',
-        'Безналичные',
-        'Рассрочка',
+        this.language.subscription[61],
+        this.language.subscription[62],
+        this.language.subscription[63],
+        this.language.subscription[64],
       ],
       compilation: {
         id: null,
