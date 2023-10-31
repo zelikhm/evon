@@ -29,7 +29,7 @@
           <input :value="getLink()" readonly ref="text" disabled
             class="copy-link w-full text-[#1E1D2D] text-[16px] focus:ring-[#6435A5] focus:border-[#6435A5] xxl:text-[14px] xl:text-[12px] pl-5 xxl:pl-4 xl:pl-3 py-3 xxl:py-2.5 xl:py-2 leading-none rounded-[5px] border border-solid border-[#E5DFEE] pr-12 xxl:pr-10 xl:pr-8"
             type="text">
-                   <span class="copy-link-text">Ссылка скопирована</span>
+                   <span v-if="copy_link_hint" class="copy-link-text">Ссылка скопирована</span>
           <img @click="copy"
             class="absolute cursor-pointer top-1/2 -translate-y-1/2 w-6 xxl:w-5 xl:w-4 right-5 xxl:right-4 xl:right-3"
             src="../../../assets/svg/copy_icon_purple.svg" alt="">
@@ -52,6 +52,7 @@ export default {
     return {
       isVisible: false,
       selectLanguage: 0,
+      copy_link_hint:false
     }
   },
   mounted() {
@@ -76,9 +77,13 @@ export default {
     },
     copy() {
       try {
-        navigator.clipboard.writeText(this.getLink())
+        navigator.clipboard.writeText(this.valueLink)
+        this.copy_link_hint=true
+        setTimeout(() => {
+          this.copy_link_hint=false
+        }, 3000);
       } catch (error) {
-        var textToCopy = this.getLink();
+        var textToCopy = this.valueLink;
         var input = document.createElement("textarea");
         input.value = textToCopy;
         document.body.appendChild(input);
@@ -86,6 +91,10 @@ export default {
         input.setSelectionRange(0, 99999);
         document.execCommand("copy");
         document.body.removeChild(input);
+        this.copy_link_hint=true
+        setTimeout(() => {
+          this.copy_link_hint=false
+        }, 3000);
       }
     }
   }
