@@ -240,7 +240,7 @@
 
           <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]"
                :class="{ 'border__bottom--0': openSelectDev}"
-               v-if="user.subscription_info.free === 0"
+               v-if="user.subscription_info !== null && user.subscription_info.free === 0"
           >
             <span
               class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">{{ language.rielt_1[23] }}</span>
