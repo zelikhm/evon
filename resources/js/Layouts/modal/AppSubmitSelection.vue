@@ -82,9 +82,9 @@ export default {
 
 <style scoped>
 .copy-link-text {
-  position: absolute;
+       position: absolute;
     top: 40px;
-    right: 99px;
+    right: calc(50% - 84px);
     box-shadow: 0px 0px 0px 1px;
     background: white;
     color: rgb(101 54 165 );
