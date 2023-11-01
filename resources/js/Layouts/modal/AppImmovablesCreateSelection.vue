@@ -38,7 +38,7 @@
           >
             <div class="flex justify-between items-center mb-3 xxl:mb-2.5 xl:mb-2">
               <div class="flex gap-5 xxl:gap-4 xl:gap-3 items-center">
-                <img v-if="house !== undefined && house.images.length > 0" :src="house.image" class="w-[70px] xxl:w-[60px] xl:w-[50px] h-[70px] xl:h-[60px] xl:h-[50px] rounded-[3px]" alt="">
+                <img v-if="house !== undefined && house.image !== null" :src="imageServiceUrl + house.image.name" class="w-[70px] xxl:w-[60px] xl:w-[50px] h-[70px] xl:h-[60px] xl:h-[50px] rounded-[3px]" alt="">
                 <img v-else src="../../../assets/no-img-houses.jpg" class="w-[70px] xxl:w-[60px] xl:w-[50px] h-[70px] xl:h-[60px] xl:h-[50px] rounded-[3px]" alt="">
                 <div class="flex flex-col gap-3 xxl:gap-2.5 xl:gap-2">
                   <span class="text-[#1E1D2D] font-medium text-[18px] xxl:text-[15px] xl:text-[13px] leading-none">{{ house.title }}</span>
@@ -76,7 +76,8 @@ export default {
       openInput: false,
       commentJK: '',
       commentCompilation: '',
-      isShow: false
+      isShow: false,
+      imageServiceUrl: '',
     }
   },
   emits: ['close-add-selection', 'close-i-create-selection', 'update-compilation'],
@@ -105,6 +106,7 @@ export default {
     }
   },
   created() {
+    this.imageServiceUrl = this.$service;
     this.titleCompilation = this.title
   }
 }

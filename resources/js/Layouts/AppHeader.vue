@@ -68,7 +68,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
             <Link href="/profile/favorites" :class="{ 'opacity-60': $page.url !== '/profile/favorites' }"
               class="whitespace-nowrap">
             {{ language.rielt_1[3] }}</Link>
-            <Link v-if="openClient" href="/profile/help" :class="{ 'opacity-60': $page.url !== '/profile/help' }"
+            <Link href="/profile/help" :class="{ 'opacity-60': $page.url !== '/profile/help' }"
                   class="whitespace-nowrap">
               {{ language.subscription[39] }}</Link>
           </div>

@@ -115,7 +115,7 @@
                 <img src="../../../public/images/new/question.png" alt="" srcset="">
               </div>
               <div class="hitn-text">
-                 Окончание строительства год/квартал
+                 {{ language.subscription[79] }}
               </div>
             </div>
             <span

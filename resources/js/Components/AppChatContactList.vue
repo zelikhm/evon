@@ -8,7 +8,7 @@
   <div class="chat__userlist lg:absolute lg:-left-full transition-all duration-500 lg:z-40 h-[85vh] lg:w-[50vw] md:w-[87.5vw] overflow-y-auto border border-solid border-[#E5DFEE] bg-white">
     <div class="p-4 xxl:p-3 xl:p-2.5">
       <div class="relative">
-        <input v-model="searchName" class="bg-[#F7F7F9] focus:ring-[#6435A5] w-full pl-8 xxl:pl-7 xl:pl-6 py-2.5 xl:py-2 text-sm xxl:text-xs xl:text-[10px] rounded-[6px]" placeholder="Поиск..." type="text">
+        <input v-model="searchName" class="bg-[#F7F7F9] focus:ring-[#6435A5] w-full pl-8 xxl:pl-7 xl:pl-6 py-2.5 xl:py-2 text-sm xxl:text-xs xl:text-[10px] rounded-[6px]" :placeholder="language.ob[47] + '...'" type="text">
         <img src="../../assets/svg/search_icon_grey.svg" class="absolute top-1/2 left-0 translate-x-1/2 -translate-y-1/2 w-4.5 xxl:w-4 xl:w-3.5" alt="">
       </div>
     </div>

@@ -29,7 +29,7 @@
           <input :value="getLink()" readonly ref="text" disabled
             class="copy-link w-full text-[#1E1D2D] text-[16px] focus:ring-[#6435A5] focus:border-[#6435A5] xxl:text-[14px] xl:text-[12px] pl-5 xxl:pl-4 xl:pl-3 py-3 xxl:py-2.5 xl:py-2 leading-none rounded-[5px] border border-solid border-[#E5DFEE] pr-12 xxl:pr-10 xl:pr-8"
             type="text">
-                   <span class="copy-link-text">Ссылка скопирована</span>
+                   <span class="copy-link-text">{{ language.subscription[76] }}</span>
           <img @click="copy"
             class="absolute cursor-pointer top-1/2 -translate-y-1/2 w-6 xxl:w-5 xl:w-4 right-5 xxl:right-4 xl:right-3"
             src="../../../assets/svg/copy_icon_purple.svg" alt="">
@@ -60,16 +60,7 @@ export default {
   emits: ['close-addClient'],
   methods: {
     getLink() {
-
-      if (this.user.subscription_info.free_link == 1) {
-        axios.post('/api/user/setLink', {
-          'token': this.user.token,
-          'id': this.user.subscription_info.id,
-        })
-      }
-
       return window.location.origin + '/compilation/user/' + this.user.id + '/' + this.house.slug;
-
     },
     closeAddClient() {
       this.$emit('close-addClient')

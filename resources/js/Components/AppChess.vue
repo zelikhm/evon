@@ -35,7 +35,7 @@
 
             <!--Всплывашка-->
             <div class="hitn-text">
-                 Дата обновления прайса
+              {{ language.subscription[80] }}
               </div>
           </div>
           <div class="chess__buttons h-9 xxl:h-8 xl:h-7 flex items-center p-1 xl:p-0.5 rounded-[3px] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px]">
@@ -99,7 +99,7 @@
               }">{{ selectFlat.status == 0 ? language.dob_kv_1[10] : selectFlat.status == 1 ? language.dob_kv_1[11] : selectFlat.status == 2 ? language.dob_kv_1[12] : selectFlat.status == 3 ? language.dob_kv_1[13] : language.dob_kv_1[9] }}</span>
               </span>
               <span class="text-[22px] xxl:text-[18px] xl:text-[15px] lg:text-[21px] font-semibold leading-none pb-4 xxl:pb-3 xl:pb-2.5">{{ selectFlat.price }} €</span>
-              <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none pb-5 xxl:pb-4 xl:pb-3">{{ Math.round(selectFlat.price / selectFlat.square) }} € за м²</span>
+              <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none pb-5 xxl:pb-4 xl:pb-3">{{ Math.round(selectFlat.price / selectFlat.square) }} € {{ language.subscription[81] }}</span>
               <div class="gray-backg flex items-center gap-1 w-fit px-2 xl:px-1.5 py-1.5 xl:py-1">
                 <img class="w-4 xxl:w-3.5 xl:w-3" src="../../assets/svg/ruller_icon.svg" alt="">
                 <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{ selectFlat.square }} м²</span>

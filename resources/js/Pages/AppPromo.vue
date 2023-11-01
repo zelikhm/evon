@@ -16,8 +16,10 @@ import '../../../public/styles/ForRealtors.css'
     @open-modal-realtor="openModalRealtor" @open-modal-developer="openModalDeveloper" :language="language"
     :selectLanguage="selectLanguage" />
 
-  <app-modal-register :message="message" :oLoginRegister="openRegister" @close-modal="closeModalRegister" :language="language"
+  <app-modal-register :oLoginRegister="openRegister" @close-modal="closeModalRegister" :language="language"
     :selectLanguage="selectLanguage" />
+
+  <AppModalAfterRegister v-if="registration !== null" :message="message" @close-modal="closeModalRegister" :language="language" />
 
   <new-header @login-realtor="openLoginRealtor = !openLoginRealtor"
     @login-developer="openLoginDeveloper = !openLoginDeveloper" @open-register="openRegister = !openRegister"
@@ -372,6 +374,7 @@ import NewHeader from "@/Components/NewsComponent/NewHeader.vue";
 import NewFooter from "@/Components/NewsComponent/NewFooter.vue";
 import AppModalText from "@/Layouts/modal/AppModalText.vue";
 import { ref, onMounted } from 'vue';
+import AppModalAfterRegister from "@/Layouts/modal/AppModalAfterRegister.vue";
 
 export default {
   name: "AppPromo",
@@ -453,7 +456,6 @@ export default {
     this.type()
   },
   mounted() {
-    this.openRegister = this.registration !== null;
     const showToolAnimation = ref(false);
     const slideInfoElement = this.$refs.slideInfoRef;
 
@@ -665,7 +667,8 @@ export default {
     AppModalAuth,
     NewHeader,
     NewFooter,
-    AppModalText
+    AppModalText,
+    AppModalAfterRegister
   }
 }
 </script>

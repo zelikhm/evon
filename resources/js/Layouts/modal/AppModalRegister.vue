@@ -41,7 +41,7 @@ const submit = () => {
         <p v-if="form.success" class="mt-10 text-center" style="color: #FFFFFF;">
           {{ language.reg[10] }}
         </p>
-        <p style="text-align: center" :style="message == 1 ? failed : success">
+        <p v-if="message !== null" style="text-align: center" :style="parseInt(message) == 1 ? failed : success">
           {{ parseInt(message) === 1 ? '*Проверьте данные' : 'Регистрация успешна' }}
         </p>
         <!-- <button @click="closeModal" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
@@ -90,7 +90,7 @@ const submit = () => {
             class="select xxl:max-h-[120px] xl:max-h-[110px] lg:max-h-[80px] overflow-y-auto custom__scroll absolute w-full z-40 bg-[#F6F3FA] flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[15px]">
             <span v-for="(type, idx) in types" :key="idx" @click="changeSelectTypes(type), form.type = selectType, form.type_id = type.id"
               class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none">
-              {{ type.type + ' ' + type.id + ' ' +  form.type_id}}
+              {{ type.type }}
             </span>
           </div>
         </div>
@@ -159,6 +159,9 @@ export default {
     'open-modal-realtor',
     'open-modal-developer',
   ],
+  mounted() {
+    console.log(this.message);
+  },
   setup() {
     this.form.language = this.selectLanguage;
 

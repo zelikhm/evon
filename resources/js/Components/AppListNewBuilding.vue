@@ -508,7 +508,7 @@
                 {{ item.title }}
               </a>
               <Link :href="'/profile/edit/' + item.slug" v-if="user.role > 1">edit</Link>
-              <span class="text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">от {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} € до {{ Number.isInteger(item.maxPrice) ? item.maxPrice.toLocaleString('ru') : "-" }}</span>
+              <span class="text-lg xxl:text-[15px] xl:text-[13px] md:text-[17px]">{{ language.subscription[74] }} {{ Number.isInteger(item.minPrice) ? item.minPrice.toLocaleString('ru') : "-" }} € {{ language.subscription[75] }} {{ Number.isInteger(item.maxPrice) ? item.maxPrice.toLocaleString('ru') : "-" }} €</span>
             </div>
           </div>
 
