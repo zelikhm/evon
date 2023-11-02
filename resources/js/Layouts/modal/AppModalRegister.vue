@@ -41,9 +41,6 @@ const submit = () => {
         <p v-if="form.success" class="mt-10 text-center" style="color: #FFFFFF;">
           {{ language.reg[10] }}
         </p>
-        <p v-if="message !== null" style="text-align: center" :style="parseInt(message) == 1 ? failed : success">
-          {{ parseInt(message) === 1 ? '*Проверьте данные' : 'Регистрация успешна' }}
-        </p>
         <!-- <button @click="closeModal" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
           <div class="absolute h-[1px] w-4 bg-[#8A8996] rotate-45"></div>
           <div class="absolute h-[1px] w-4 bg-[#8A8996] -rotate-45"></div>

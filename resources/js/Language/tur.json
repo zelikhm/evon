@@ -81,7 +81,8 @@
     "78": "Müşteri için özel sunum oluştur",
     "79": "İnşaatın tamamlanması (yıl/çeyrek)",
     "80": "Fiyat güncelleme tarihi",
-    "81": "m2 fiyatı"
+    "81": "m2 fiyatı",
+    "82": "Başarıyla kaydoldunuz. Giriş bilgilerinizi (e-posta) kullanarak EVON sitesine giriş yapabilirsiniz"
   },
   "main": {
     "0": "Evon - emlak ajansları, gayrimenkul danışmanları ve inşaat şirketleri için universal bir platform",
@@ -105,7 +106,6 @@
     "18": "Giriş",
     "19": "Kayıt",
     "20": "Ücretsiz sürümü deneme",
-
     "21":"Giriş Yap",
     "22":"Kaydol",
     "23":"Türkiye",
@@ -114,7 +114,7 @@
     "26":" emlak şirketleri",
     "27":" inşaat şirketleri",
     "28":"Emlakçılar ve inşaat şirketleri için profesyonel bir satış aracı sunuyoruz. Kolay konut arama, müteahhitlerle iletişim ve müşterilere tek tıklamayla sunum ile yeni konutların en büyük ve en güncel veritabanı",
-    "29":"Kaydol",
+    "29":"Ücretsiz denemeye başla",
     "30":"Uygulamayı indir",
     "31":"Aşağı kaydır",
     "32": "Şirketi tanıtan videoyu izle",

@@ -19,7 +19,12 @@ import '../../../public/styles/ForRealtors.css'
   <app-modal-register :oLoginRegister="openRegister" @close-modal="closeModalRegister" :language="language"
     :selectLanguage="selectLanguage" />
 
-  <AppModalAfterRegister v-if="registration !== null" :message="message" @close-modal="closeModalRegister" :language="language" />
+  <AppModalAfterRegister
+    v-if="openAfterRegister"
+    :message="message"
+    @close-modal="closeModalAfterRegister"
+    :language="language"
+  />
 
   <new-header @login-realtor="openLoginRealtor = !openLoginRealtor"
     @login-developer="openLoginDeveloper = !openLoginDeveloper" @open-register="openRegister = !openRegister"
@@ -324,7 +329,7 @@ import '../../../public/styles/ForRealtors.css'
       </div>
 
       <h2 v-html="language.main[67]"></h2>
-      <button class="reg-btn" v-on:click="openRegister = !openRegister">{{ language.main[22] }}</button>
+      <button class="reg-btn" v-on:click="openRegister = !openRegister">{{ language.main[29] }}</button>
       <!--  <button v-on:click="openLoginDeveloper = !openLoginDeveloper"><span>{{ language.main[61] }}</span> <img
           src="images/img/lowSection/arrow.png" alt="" srcset=""></button> -->
       <h3>{{ language.main[62] }}</h3>
@@ -422,8 +427,8 @@ export default {
       welcomText: {},
       touchStartX: 0,
       touchMoveX: 0,
-      openClient: computed(() => usePage().props.value.check)
-
+      openClient: computed(() => usePage().props.value.check),
+      openAfterRegister: null,
     }
   },
   created() {
@@ -456,6 +461,7 @@ export default {
     this.type()
   },
   mounted() {
+    this.openAfterRegister = this.message !== null
     const showToolAnimation = ref(false);
     const slideInfoElement = this.$refs.slideInfoRef;
 
@@ -468,7 +474,9 @@ export default {
     window.addEventListener('scroll', handleScroll);
   },
   methods: {
-
+    closeModalAfterRegister() {
+      this.openAfterRegister = false;
+    },
     handleMouseDown(e) {
       this.isMouseDown = true;
       this.startX = e.pageX - this.$refs.cont.offsetLeft;
