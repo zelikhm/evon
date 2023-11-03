@@ -95,7 +95,9 @@ export default {
   border: 7px;
   pointer-events: none;
 }
+.Modal .Modal_body{
 
+}
 .copy-link:hover + .copy-link-text {
   opacity: 1;
 }

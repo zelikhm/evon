@@ -144,8 +144,6 @@ export default {
   transform: translate(-50%, -50%);
   max-width: 90%;
   max-height: 90%;
-  overflow-y: auto;
-  overflow-x: hidden;
 }
 
 @media only screen and (max-width: 1000px) {
