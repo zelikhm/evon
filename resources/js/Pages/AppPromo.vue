@@ -391,7 +391,8 @@ export default {
     'userInfo',
     'registration',
     'message',
-    'builder'
+    'builder',
+    'language_select'
   ],
   watch: {
     language(item) {
@@ -432,6 +433,11 @@ export default {
     }
   },
   created() {
+
+    if(this.language_select !== null) {
+      this.selectLanguage = parseInt(this.language_select);
+    }
+
     if (this.userInfo.length === 0) {
       this.user = null;
     } else {

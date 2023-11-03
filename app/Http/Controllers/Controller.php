@@ -32,6 +32,7 @@ class Controller extends BaseController
 
       return Inertia::render('AppPromo', [
         'userInfo' => $this->getUser(),
+        'language_select' => $request->language,
         'registration' => $request->registration,
         'message' => $request->message,
         'builder' => $request->builder,
