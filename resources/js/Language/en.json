@@ -82,7 +82,14 @@
     "79": "Completion of construction year/quarter",
     "80": "Price update time",
     "81": "per m2",
-    "82": "You have successfully registered. You can log in to the EVON platform using your login (email)"
+    "82": "You have successfully registered. You can log in to the EVON platform using your login (email)",
+    "83": "Preview",
+    "84": "Edit",
+    "85": "Send the project to the client",
+    "86": "The project",
+    "87": "has been successfully added to the selected",
+    "88": "has already been added to the Selected ",
+    "89": "Select the Selected you want to add!"
   },
   "main": {
     "0": "Evon is a one-stop platform for real estate agencies, private realtors and construction companies.",

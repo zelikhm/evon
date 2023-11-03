@@ -16,7 +16,7 @@
             <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] font-medium leading-none m">{{ house.title }}</span>
             <span
               class="border uppercase border-solid border-[#30CB49] text-[#30CB49] text-[14px] xxl:text-[12px] xl:text-[10px] px-2 xl:px-1.5 py-1.5 xl:py-1 rounded-[3px] leading-none"
-              v-if="house.created && !Number.isInteger(+house.created[0])">{{ house.created }}</span>
+              v-if="house.created && !Number.isInteger(+house.created[0])">{{ getLabel(house.created) }}</span>
             <span
               class="border uppercase border-solid border-[#E84680] text-[#E84680] text-[14px] xxl:text-[12px] xl:text-[10px] px-2 xl:px-1.5 py-1.5 xl:py-1 rounded-[3px] leading-none"
               v-else-if="house.created">{{ house.created }}</span>
@@ -25,9 +25,9 @@
         </div>
       </div>
       <div class="p-8 xxl:p-6 xl:p-5">
-        <span v-if="idCompilation === true" style="color: red;">Выберите подборку, в которую желаете добавить!</span>
-        <span v-if="success" style="color: green;">Жилищный комплекс {{ house.title }} успешно добавлен в подборку {{ activeNameCompilation }}!</span>
-        <span v-if="failed" style="color: red;">Жилищный комплекс {{ house.title }} уже добавлен в подборку {{ activeNameCompilation }}!</span>
+        <span v-if="idCompilation === true" style="color: red;">{{ language.subscription[89] }}</span>
+        <span v-if="success" style="color: green;">{{ language.subscription[86] }} {{ house.title }} {{ language.subscription[87] }} {{ activeNameCompilation }}!</span>
+        <span v-if="failed" style="color: red;">{{ language.subscription[86] }} {{ house.title }} {{ language.subscription[88] }} {{ activeNameCompilation }}!</span>
         <div
           class="mt-2 main__title-block border border-solid border-[#E5DFEE] rounded-[5px] pl-5 xxl:pl-4 xl:pl-3 py-5 xxl:py-4 xl:py-3 pr-1 text-[16px] xxl:text-[14px] xl:text-[12px]">
           <div
@@ -99,6 +99,11 @@
     },
     emits: ['close-add-selection', 'open-create-sel'],
     methods: {
+      getLabel(title) {
+        if(title == 'Сдан') {
+          return this.language.rielt_1[10]
+        }
+      },
       getCity(city) {
         let name = this.city_array.find(item => item.title === city);
 

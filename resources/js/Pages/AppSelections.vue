@@ -38,7 +38,7 @@
 
                 </span>
                 <a class="Preview" target="_blank" :href="previewLink(item)">
-                  <button>Предварительный просмотр</button>
+                  <button>{{ language.subscription[83] }}</button>
                 </a>
               </div>
               <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[14px] leading-none">{{
@@ -60,13 +60,13 @@
                 class="relative px-5 xxl:px-4 xl:px-3 h-full sm:h-fit sm:flex-shrink-0">
                 <img src="../../assets/svg/pen_icon_grey.svg"
                   class="w-6 xxl:w-5.5 xl:w-5 lg:w-6 h-6 xxl:h-5.5 xl:h-5 lg:h-6" alt="">
-                  <span>Редактировать</span>
+                  <span>{{ language.subscription[84] }}</span>
               </button>
               <div class="w-full sm:w-[1px] h-[1px] sm:h-full bg-[#E5DFEE] flex-shrink-0"></div>
               <button @click="onModalWithLink(item)" class="relative px-5 xxl:px-4 xl:px-3 h-full sm:h-fit sm:flex-shrink-0">
                 <img src="../../assets/svg/arrow_tray_top.svg"
                   class="w-6 xxl:w-5.5 xl:w-5 lg:w-6 h-6 xxl:h-5.5 xl:h-5 lg:h-6" alt="">
-                  <span>Отправить клиенту</span>
+                  <span>{{ language.subscription[85] }}</span>
               </button>
               <div class="w-full sm:w-[1px] h-[1px] sm:h-full bg-[#E5DFEE]"></div>
               <button @click="item.deleteConfirm = true" class="relative px-5 xxl:px-4 xl:px-3 h-full sm:h-fit sm:flex-shrink-0">
