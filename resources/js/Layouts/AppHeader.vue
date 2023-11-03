@@ -275,7 +275,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
                   class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
                   <span class="leading-none whitespace-nowrap cursor-default">{{ language.ob[42] }}</span>
                   <span class="leading-none whitespace-nowrap cursor-default"
-                        v-if="user_info !== null && user_info.subscription_info !== null">{{ getDate(user_info.subscription_info.finished_at) }}</span>
+                        v-if="user_info !== null && user_info.subscription_info !== undefined">{{ getDate(user_info.subscription_info.finished_at) }}</span>
                 </div>
                 <div v-if="user_info.role === 0"
                      class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">
