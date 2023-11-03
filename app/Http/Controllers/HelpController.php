@@ -16,16 +16,6 @@ class HelpController extends Controller
 
   public function getHelp(Request $request)
   {
-
-    $ip = $request->ip();
-    $currentUserInfo = Location::get($ip);
-
-    if ($ip !== '127.0.0.1') {
-      if ($currentUserInfo->countryCode === 'TR' && Auth::user()->openClient !== 1) {
-        return Inertia::location('/');
-      }
-    }
-
     return Inertia::render('AppClients', [
       'user' => $this->getUser(),
       'client' => ClientModel::where('user_id', $this->getUser()->id)->get(),
