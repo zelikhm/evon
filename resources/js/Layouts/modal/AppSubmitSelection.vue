@@ -35,8 +35,8 @@ export default {
     user: Object,
     language: {},
     title:{
-       type:String,
-       default:""
+      type:String,
+      default:""
     },
     type:{
       type:Number,
@@ -82,20 +82,22 @@ export default {
 
 <style scoped>
 .copy-link-text {
-       position: absolute;
-    top: 40px;
-    right: calc(50% - 84px);
-    box-shadow: 0px 0px 0px 1px;
-    background: white;
-    color: rgb(101 54 165 );
-    border-radius: 10px;
-    font-size: 12px;
-    padding: 2px 22px;
-    transition: .7s;
-    border: 7px;
-    pointer-events: none;
+  position: absolute;
+  top: 40px;
+  right: calc(50% - 84px);
+  box-shadow: 0px 0px 0px 1px;
+  background: white;
+  color: rgb(101 54 165 );
+  border-radius: 10px;
+  font-size: 12px;
+  padding: 2px 22px;
+  transition: .7s;
+  border: 7px;
+  pointer-events: none;
 }
+.Modal .Modal_body{
 
+}
 .copy-link:hover + .copy-link-text {
   opacity: 1;
 }
