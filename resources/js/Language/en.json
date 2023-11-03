@@ -98,7 +98,9 @@
     "95": "Reward: ",
     "96": "Manager: not appointed",
     "97": "Manager",
-    "98": "Interested in:"
+    "98": "Interested in:",
+    "99": "select file",
+    "100": "Add file"
   },
   "main": {
     "0": "Evon is a one-stop platform for real estate agencies, private realtors and construction companies.",

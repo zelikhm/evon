@@ -21,10 +21,10 @@
     </div>
 
     <div class="select-file-content">
-      <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px]" for="company">Загрузить файл</label>
+      <label class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[13px]" for="company">{{ language.subscription[100] }}</label>
       <label class="input-file">
         <input type="file" name="file" ref="image"  @change="addImage">
-        <span>Выберите файл</span>
+        <span>{{ language.subscription[99] }}</span>
       </label>
       <div class="select-file" v-if="selectedFileName">
         <img src="../../../public/images/file-icon.png">

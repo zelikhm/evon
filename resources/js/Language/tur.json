@@ -74,8 +74,8 @@
     "71": "Ücretsiz deneme",
     "72": "20 günlük ücretsiz denemeye geç",
     "73": "Dene",
-    "74": "dan",
-    "75": "ya",
+    "74": "",
+    "75": "",
     "76": "Bağlantı kopyalandı",
     "77": "Koleksiyon ekle",
     "78": "Müşteri için özel sunum oluştur",
@@ -98,7 +98,9 @@
     "95": "Kazanç: ",
     "96": "Menajer: atanmadı",
     "97": "Menajer",
-    "98": "İlgilenenler:"
+    "98": "İlgilenenler:",
+    "99": "Dosya seç",
+    "100": "Dosya ekle"
   },
   "main": {
     "0": "Evon - emlak ajansları, gayrimenkul danışmanları ve inşaat şirketleri için universal bir platform",
