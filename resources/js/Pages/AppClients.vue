@@ -24,7 +24,7 @@ import { Link } from '@inertiajs/inertia-vue3'
             <div class="flex items-center p-4 xxl:p-3 xl:p-2">
               <button @click="openSelection(null), tool = 1"
                 class="login__btn--bg bg-[#E84680] px-4 xxl:px-4 xl:px-2.5 rounded-[3px] h-10 xxl:h-8 xl:h-6 font-semibold text-white text-base xxl:text-[13px] xl:text-[11px] lg:text-[15px] leading-none">
-                {{ language.subscription[4] }}
+                {{ language.subscription[41] }}
               </button>
             </div>
           </div>
@@ -69,7 +69,7 @@ import { Link } from '@inertiajs/inertia-vue3'
               </div>
 
               <!-- <div class="text-xs font-bold mb-2">Запрос клиента: <span class="font-normal">Запрос</span></div> -->
-              <div class="text-xs font-bold mb-2">Заинтересован в:
+              <div class="text-xs font-bold mb-2">{{ language.subscription[98] }}
                 <span class="font-normal">
                   {{ cli.client_text }}
                 </span>
@@ -106,14 +106,14 @@ import { Link } from '@inertiajs/inertia-vue3'
               </button>
 
               <div v-if="cli.manager_name">
-                <div class="text-s font-bold mb-2">Менеджер:</div>
+                <div class="text-s font-bold mb-2">{{ language.subscription[97] }}:</div>
                 <div class="text-xs font-bold mb-2">{{ language.subscription[53] }}: {{ cli.manager_name }}</div>
                 <div class="text-xs font-bold mb-2">{{ language.subscription[54] }}: {{ cli.manager_phone }}</div>
               </div>
               <div v-else>
-                <div class="text-s font-bold mb-2">Менеджер: не назначен</div>
+                <div class="text-s font-bold mb-2">{{ language.subscription[96] }}</div>
               </div>
-              <div class="text-s font-bold mb-2" v-if="cli.commission">Вознаграждение: {{ cli.commission/*  + '%' */ }}</div>
+              <div class="text-s font-bold mb-2" v-if="cli.commission">{{ language.subscription[95] }}: {{ cli.commission/*  + '%' */ }}</div>
               <div v-if="cli.deleteConfirm"
                 class="cursor-auto z-20 w-full text-sm lg:text-base absolute top-1/4 bg-white right-0 flex flex-col border border-solid border-purple-400 rounded-lg ">
                 <span class="whitespace-nowrap text-center border__bottom p-2.5 xxl:p-2 xl:p-1.5 leading-none">Вы
@@ -232,6 +232,32 @@ export default {
     user: [],
     client: []
   },
+  watch: {
+    language(item) {
+      this.clientsStatus = [
+        {
+          id: 0,
+          name: item.subscription[90]
+        },
+        {
+          id: 1,
+          name: item.subscription[91]
+        },
+        {
+          id: 2,
+          name: item.subscription[92]
+        },
+        {
+          id: 3,
+          name: item.subscription[93]
+        },
+        {
+          id: 4,
+          name: item.subscription[94]
+        }
+      ]
+    }
+  },
   data() {
     return {
       language: {},
@@ -249,26 +275,7 @@ export default {
 
       clientsSelect: 1,
       clientsStatus: [
-        {
-          id: 0,
-          name: "Новая заявка"
-        },
-        {
-          id: 1,
-          name: "В работе с партнером"
-        },
-        {
-          id: 2,
-          name: "Бронь"
-        },
-        {
-          id: 3,
-          name: "Оформление"
-        },
-        {
-          id: 4,
-          name: "Сделка завершена"
-        }
+
       ],
       dropdownVisible: false,
     }
@@ -290,11 +297,11 @@ export default {
     },
     visStatusClient(status) {
       switch (status) {
-        case 0: return "Новая заявка";
-        case 1: return "В работе с партнером";
-        case 2: return "Бронь";
-        case 3: return "Оформление";
-        case 4: return "Сделка завершена";
+        case 0: return this.language.subscription[90];
+        case 1: return this.language.subscription[91];
+        case 2: return this.language.subscription[92];
+        case 3: return this.language.subscription[93];
+        case 4: return this.language.subscription[94];
         default: return "-";
       }
     },

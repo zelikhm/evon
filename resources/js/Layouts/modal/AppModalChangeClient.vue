@@ -5,7 +5,7 @@
       <div class="relative mb-10 xxl:mb-8 xl:mb-6">
 
         <h2 class="text-[22px] xxl:text-lg xl:text-base font-semibold">
-          {{ tool == 1 ? 'Добавление' : 'Редактировать' }} клиента
+          {{ tool == 1 ? language.subscription[41] : language.subscription[84] + 'клиента' }}
         </h2>
 
         <button @click="closeModal" class="hover__close transition-all w-4 h-4 absolute top-[20%] right-0 z-50">
@@ -46,7 +46,7 @@
           }}</h3>
         <div class="status"
              :class="{ validation: validation.checkbox1Active == false && validation.checkbox2Active == false }">
-          <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="checkbox1">Статус:</label>
+          <label class="text-base xxl:text-[13px] xl:text-[11px] leading-none" for="checkbox1">{{ language.subscription[3] }}:</label>
           <div class="row-status flex flex-row w-full gap-5 rounded-[6px] px-5 xxl:px-4 py-4 xl:py-2.5">
             <div class="mb-4 xxl:mb-3 xl:mb-3">
               <input class="custom__checkbox" type="checkbox" id="checkbox1" v-model="compilation.checkbox1Active"

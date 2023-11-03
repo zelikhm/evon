@@ -166,9 +166,9 @@ class IndexController extends Controller
     $status = $registerService->startRegister($request->all());
 
     if($status['status'] === false) {
-      return Inertia::location('/?registration=false&message=1&builder=' . $status['builder']);
+      return Inertia::location('/?registration=false&message=1&builder=' . $status['builder'] . '&language='.$request->language);
     } else {
-      return Inertia::location('/?registration=true&message=0&builder=' . $status['builder']);
+      return Inertia::location('/?registration=true&message=0&builder=' . $status['builder'] . '&language='.$request->language);
     }
 
   }
