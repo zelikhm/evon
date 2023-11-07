@@ -1022,7 +1022,7 @@ class HouseController extends Controller
 
     if ($this->checkToken($request->token)) {
 
-      $imageName = time() . '.house.' . $request->file('image')->getClientOriginalExtension();
+      $imageName = time() + rand(1, 100000) . '.house.' . $request->file('image')->getClientOriginalExtension();
       $request->file('image')->move(public_path('/storage/buffer'), $imageName);
 
       $image = HouseImagesModel::create([
