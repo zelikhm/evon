@@ -523,6 +523,7 @@
                 <div class="relative object__block h-full">
                   <div
                     class="seek opacity-0 transition-all immovables__overlay h-full w-full absolute z-10 rounded-[6px]"></div>
+                  {{item.image.name}}
                   <img v-if="item.image !== null" :src="item.image.isResize === 1 ? (imageServiceUrl + item.image.name) : item.image.name"
                        class="object-cover w-full h-[180px] exl:h-fit exl:h-[9.3vw] x:h-[10vw] lg:h-[14vw] md:h-[32vw] sm:h-[42vw]"
                        alt="">

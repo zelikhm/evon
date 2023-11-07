@@ -73,12 +73,10 @@ Route::prefix('house')->group(function () {
 });
 
 Route::prefix('info')->group(function () {
-
   Route::get('getInfo', ['App\Http\Controllers\House\HouseController', 'getInfos']);
   Route::get('getDop', ['App\Http\Controllers\House\HouseController', 'getDops']);
   Route::get('getCity', ['App\Http\Controllers\House\HouseController', 'getCityes']);
   Route::get('getCountHouse', ['App\Http\Controllers\House\HouseController', 'getCountHouse']);
-
 });
 
 Route::prefix('compilation')->group(function () {

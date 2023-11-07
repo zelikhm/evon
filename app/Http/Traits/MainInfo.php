@@ -179,10 +179,15 @@ trait MainInfo
 
   protected function getHouseOnId($house_id)
   {
-    $house = HouseModel::where('id', $house_id)->with(['info', 'supports', 'files', 'frames', 'images', 'news', 'flats'])->first();
+    $house = HouseModel::where('id', $house_id)->with(['flats', 'user', 'mainImage'])->first();
+
 
     if ($house !== null) {
-      $house->image = $this->getPhoto($house);
+      if($house->mainImage === null) {
+        $house->image = HouseImagesModel::where('house_id', $house->id)->first();
+      } else {
+        $house->image = $house->mainImage;
+      }
 
       return $house;
     }

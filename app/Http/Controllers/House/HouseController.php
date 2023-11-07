@@ -71,9 +71,7 @@ class HouseController extends Controller
       ->get();
 
     foreach ($houses as $house) {
-
       $search->push($this->getHouseOnId($house->id));
-
     }
 
     return response()->json($search, 200);

@@ -11,6 +11,7 @@ use AdminDisplayFilter;
 use AdminColumnFilter;
 use AdminColumnEditable;
 use App\Models\User;
+use App\Models\User\CompanyModel;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -89,8 +90,18 @@ class Verification extends Section implements Initializable
     $display = AdminDisplay::datatables()
       ->paginate(40)
       ->setColumns($columns)
-      ->setDisplaySearch(true, 'поиск')
+      ->setDisplaySearch(false, 'поиск')
       ->setHtmlAttribute('class', 'table-primary table-hover');
+
+    $display->setColumnFilters([
+      null, // Не ищем по первому столбцу
+      // Поиск текста
+      AdminColumnFilter::select(new User, 'user_id')->setDisplay('email')->setPlaceholder('Пользователь')->setColumnName('user.id'),
+      null,
+      null,
+      null,
+      null,
+    ]);
 
     $display->setApply(function (Builder $query) {
       $query->OrderBy('id', 'asc');
