@@ -16,7 +16,7 @@ class CacheService implements CacheInterface
    * @param HousesService $housesService
    */
 
-  public function updateCacheHouses(HousesService $housesService): Collection
+  public function updateCacheHouses(HousesService $housesService)
   {
 
     Cache::forget('houses_full');
@@ -33,7 +33,7 @@ class CacheService implements CacheInterface
    * @param HousesService $housesService
    */
 
-  public function updateCacheVillages(HousesService $housesService): Collection
+  public function updateCacheVillages(HousesService $housesService)
   {
     Cache::forget('houses_villages_full');
 

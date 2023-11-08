@@ -92,8 +92,6 @@
 
         this.myPhotos.push({url: URL.createObjectURL(file), name: file.name, size: formatBytes, file: file})
 
-        console.log(formData)
-
         axios.post('/api/house/addedImages',
           formData,
           {
