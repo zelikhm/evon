@@ -1247,7 +1247,7 @@
         if (this.type === 0) {
           this.preloaderObject = true;
 
-          let link = '/api/house/getHousesJk?dop=true';
+          let link = '/api/house/getHousesJk?dop=true&isCache=0';
 
           axios.get(link).then(res => {
             this.readyHouses = res.data;
