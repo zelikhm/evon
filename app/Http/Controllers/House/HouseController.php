@@ -275,9 +275,9 @@ class HouseController extends Controller
   {
     if ($this->checkToken($request->token)) {
       if($request->isCache == true) {
-        return count(Cache::get('houses_full'));
+        return Cache::get('houses_full');
       } else {
-        return count($housesService->getHouses('Новостройка', false, $request->dop, null));
+        return $housesService->getHouses('Новостройка', false, $request->dop, null);
       }
     } else {
       return response()->json('not auth', 401);
