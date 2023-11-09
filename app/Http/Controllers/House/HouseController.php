@@ -273,13 +273,15 @@ class HouseController extends Controller
 
   public function getHousesJk(Request $request, HousesService $housesService)
   {
-
     if ($this->checkToken($request->token)) {
-      return $housesService->getHouses('Новостройка', $request->limit, $request->dop, $request->limit_count);
+      if($request->isCache == true) {
+        return count(Cache::get('houses_full'));
+      } else {
+        return count($housesService->getHouses('Новостройка', false, $request->dop, null));
+      }
     } else {
       return response()->json('not auth', 401);
     }
-
   }
 
   /**
@@ -291,11 +293,14 @@ class HouseController extends Controller
   public function getHousesVillages(Request $request, HousesService $housesService)
   {
     if ($this->checkToken($request->token)) {
-      return $housesService->getHouses('Вилла', $request->limit, $request->dop, $request->limit_count);
+      if($request->isCache) {
+        return Cache::get('houses_villages_full');
+      } else {
+        return $housesService->getHouses('Вилла', false, $request->dop, null);
+      }
     } else {
       return response()->json('not auth', 401);
     }
-
   }
 
   /**

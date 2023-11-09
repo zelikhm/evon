@@ -71,13 +71,13 @@ path send \ [post] / :
 Получить все ЖК \ 
 path getHousesJk (новостройки) \ [get] / :
 
-- limit (true\false) - для получения 30 обьектов
+- isCache 1 - обьекты с кеша \ 0 - обьекты все
 - token
 
 Получить все Виллы \
 path getHousesVillages (виллы) \ [get] / :
 
-- limit (true\false) - для получения 30 обьектов
+- isCache 1 - обьекты с кеша \ 0 - обьекты все
 - token
 
 Поиск по обьектам \

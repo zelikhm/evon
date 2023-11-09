@@ -57,7 +57,6 @@ class HousesService implements HousesInterface
   public function getHouses($type, $limit, $dop, $count = null)
   {
     if ($limit) {
-
       $houses = HouseModel::where('visible', 1)
         ->orderBy('updated_at', 'DESC')
         ->where('active', 2)
