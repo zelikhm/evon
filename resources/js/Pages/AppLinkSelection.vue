@@ -61,8 +61,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
                 <div class="flex flex-col" v-for="item in i">
                   <Link :href="href + '/' + item.slug">
                   <div class="relative rounded-[5px]">
-                    <img class="h-[295px] exl:h-[15vw] md:h-[28vw] sm:h-[43vw] w-full object-cover" :src="item.image"
-                      v-if="item.image" alt="">
+                    <img v-if="item.image" class="h-[295px] exl:h-[15vw] md:h-[28vw] sm:h-[43vw] w-full object-cover" :src="imageServiceUrl + item.image.name" alt="">
                     <img class="exl:h-[15vw] md:h-[28vw] sm:h-[43vw w-full object-cover" v-else
                       src="../../assets/no-img-houses-zastroy.jpg" alt="">
                     <div
@@ -192,7 +191,8 @@ export default {
       count: 0,
       selectLanguage: 0,
       language: {},
-      selectLang: 0
+      selectLang: 0,
+      imageServiceUrl: ''
     }
   },
   methods: {
@@ -243,6 +243,7 @@ export default {
     },
   },
   created() {
+    this.imageServiceUrl = this.$service
     this.href = window.location.href
 
     if (this.user.length !== 0) {
