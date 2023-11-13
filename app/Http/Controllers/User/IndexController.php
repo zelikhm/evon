@@ -33,7 +33,7 @@ class IndexController extends Controller
 
     if($user->subscription === null && $user->free_subscription === 1) {
       User\SubscriptionModel::create([
-        'user_id' => Auth::id(),
+        'user_id' => $request->user_id ? $request->user_id : Auth::id(),
         'active' => 1,
         'finished_at' => Carbon::now()->addDays(20),
         'free' => 0,
