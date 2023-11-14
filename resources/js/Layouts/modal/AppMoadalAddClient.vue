@@ -69,7 +69,9 @@ export default {
         })
       }
 
-      return window.location.origin + '/compilation/user/' + this.user.id + '/' + this.house.slug;
+      this.valueLink = window.location.origin + '/compilation/user/' + this.user.id + '/' + this.house.slug;
+
+      return this.valueLink;
 
     },
     closeAddClient() {
