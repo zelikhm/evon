@@ -237,7 +237,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
               {{ language.rielt_1[2] }}</Link>
             <Link href="/profile/help" :class="{ 'opacity-60': $page.url !== '/profile/help' }"
                   class="whitespace-nowrap">
-              {{ language.rielt_1[58] }}</Link>
+              {{ language.subscription[39] }}</Link>
           </div>
         </div>
         <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 text-[16px] xxl:text-[13px] xl:text-[11px] lg:text-[15px]">
