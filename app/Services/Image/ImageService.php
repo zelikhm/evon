@@ -21,18 +21,17 @@ class ImageService implements ImageInterface
    * 2 - main
    * @param $image_id
    * @param $type
-   * @param $file
    * @return bool
    */
 
-  public function add($image_id, $type, $file, $image_name): bool
+  public function add($image_id, $type, $image_name): bool
   {
 
     $photo = fopen('storage/buffer/'.$image_name, 'r');
 
     $response = Http::attach(
       'image', $photo, $image_name
-    )->post(env('SERVICE_URL') . '/api/add', [
+    )->post(env('SERVICE_URL') . 'api/add', [
       'type' => $type,
       'imageName' => $image_name,
       'image_id' => $image_id,
@@ -40,11 +39,11 @@ class ImageService implements ImageInterface
     ]);
 
     try {
-      self::saveLog('(Удачно) Добавлено изображение', $file, false);
+      self::saveLog('(Удачно) Добавлено изображение', $photo, false);
 
       return true;
     } catch (\Exception $e) {
-      self::saveLog('(Не удачно) Добавлено изображение', $file, false);
+      self::saveLog('(Не удачно) Добавлено изображение', $photo, false);
 
       return false;
     }
@@ -113,7 +112,7 @@ class ImageService implements ImageInterface
   public function delete($image, $type)
   {
 
-    Http::post(env('SERVICE_URL') . '/api/delete', [
+    Http::post(env('SERVICE_URL') . 'api/delete', [
       'type' => $type,
       'image' => $image,
       'token' => env('SERVICE_TOKEN')

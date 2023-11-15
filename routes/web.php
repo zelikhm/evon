@@ -2,6 +2,7 @@
 
 use App\Models\Builder\HouseModel;
 use App\Models\User;
+use App\Services\Image\ImageService;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
@@ -11,13 +12,6 @@ use Inertia\Inertia;
 use App\Http\Traits\MainInfo;
 
 Route::get('/', ['App\Http\Controllers\Controller', 'main']);
-
-Route::get('/test', function () {
-  \App\Models\Builder\HouseImagesModel::where('isResize', 0)
-    ->update([
-      'isResize' => 1
-    ]);
-});
 
 Route::prefix('/compilation')->group(function () {
   Route::get('/{id}', ['App\Http\Controllers\User\CompilationController', 'show']);

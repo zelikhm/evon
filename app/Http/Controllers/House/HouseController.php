@@ -1038,7 +1038,7 @@ class HouseController extends Controller
         'updated_at' => Carbon::now()->addHour(3),
       ]);
 
-      $imageService->add($image->id, 0, $request->file('image'), $imageName);
+      $status = $imageService->add($image->id, 0, $imageName);
 
       HouseModel::where('id', $request->house_id)->update([
         'active' => 0,
@@ -1084,7 +1084,7 @@ class HouseController extends Controller
    * @return \Illuminate\Http\JsonResponse
    */
 
-  public function deletedImage(Request $request)
+  public function deletedImage(Request $request, ImageService $imageService)
   {
 
     if ($this->checkToken($request->token)) {
@@ -1096,6 +1096,8 @@ class HouseController extends Controller
       HouseModel::where('id', $request->house_id)->update([
         'active' => 0,
       ]);
+
+      $imageService->delete($request->image_name, 0);
 
       return response()->json(HouseImagesModel::where('house_id', $request->house_id)->get(), 200);
     } else {
