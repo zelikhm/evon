@@ -12,6 +12,13 @@ use App\Http\Traits\MainInfo;
 
 Route::get('/', ['App\Http\Controllers\Controller', 'main']);
 
+Route::get('/test', function () {
+  \App\Models\Builder\HouseImagesModel::where('isResize', 0)
+    ->update([
+      'isResize' => 1
+    ]);
+});
+
 Route::prefix('/compilation')->group(function () {
   Route::get('/{id}', ['App\Http\Controllers\User\CompilationController', 'show']);
   Route::get('/user/{id}/{house}', ['App\Http\Controllers\User\CompilationController', 'soloHouse']);
