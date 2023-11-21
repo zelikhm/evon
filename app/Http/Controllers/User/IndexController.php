@@ -32,6 +32,8 @@ class IndexController extends Controller
       ->with(['subscription'])
       ->first();
 
+    dd($user);
+
     if($user->subscription === null && $user->free_subscription === 1) {
       User\SubscriptionModel::create([
         'user_id' => $request->user_id ? $request->user_id : Auth::id(),
