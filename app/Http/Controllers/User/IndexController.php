@@ -8,6 +8,7 @@ use App\Http\Traits\MainInfo;
 use App\Models\Builder\HouseSupportModel;
 use App\Models\User;
 use App\Rules\Password;
+use App\Services\Mail\RegisterMailService;
 use App\Services\User\RegisterService;
 use App\Services\User\UserService;
 use Carbon\Carbon;
@@ -153,7 +154,7 @@ class IndexController extends Controller
    * @param Request $request
    */
 
-  public function sendRegister(Request $request, RegisterService $registerService) {
+  public function sendRegister(Request $request, RegisterService $registerService, RegisterMailService $registerMailService) {
 
     $request->validate([
       'first_name' => 'required',
@@ -164,6 +165,13 @@ class IndexController extends Controller
     ]);
 
     $status = $registerService->startRegister($request->all());
+
+    if($request->type_id < 3)
+    {
+      $registerMailService->sendMailUser($request);
+    }
+
+    $registerMailService->sendMailAdmin($request);
 
     if($status['status'] === false) {
       return Inertia::location('/?registration=false&message=1&builder=' . $status['builder'] . '&language='.$request->language_id);

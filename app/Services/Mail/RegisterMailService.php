@@ -25,7 +25,7 @@ class RegisterMailService implements RegisterMailInterface
    * @param $form
    */
 
-  public function SendMailAdmin($form)
+  public function sendMailAdmin($form)
   {
 
     $message = "<html><head></head><body><p>
@@ -51,59 +51,54 @@ class RegisterMailService implements RegisterMailInterface
   public function sendMailUser($form)
   {
 
-    if($form->language_id == 0) {
-      $message = "<html><head></head><body><p>
-                <i>Это информационное письмо, не отвечайте на него.</i><br>
-                <br>
-                Здравствуйте,<br>
-                Мы получили заявку на регистрацию на сайте <b>evon-tr.com</b> от вашего имени.
-                <br>Обращаем ваше внимание, что информация на сайте предназначена только для агентов по недвижимости и строительных компаний.
-                <br>
-                <br>Для получения доступа необходимо пройти процедуру подтверждения вашей деятельности, предоставив один из следующих вариантов на почту <b>evon.information@gmail.com</b>:
-                <br>
-                - Ссылку на ваши профили в социальных сетях/на сайтах с указанием вашей деятельности.<br>
-                - Контакты двух риелторов и или контакт руководителя, которые могут подтвердить вашу деятельность.<br>
-                - Лицензию на работу в данной сфере.<br>
-                <br>
-                Пожалуйста, отправьте нам выбранный вариант информации на почту <b>evon.information@gmail.com</b>.<br>
-                После проверки мы предоставим вам доступ к нашей платформе и информируем вас по электронной почте.<br>
-                Мы благодарим вас за проявленный интерес и надеемся на долгосрочное сотрудничество.
-                </p></body></html>";
+    if ($form->language_id == 0) {
+      $message = "<html><head></head><body>
+                  Здравствуйте,<br>
+                  Мы получили заявку на регистрацию на сайте evon-tr.com от вашего имени.<br>
+                  <br>
+                  <br>Вам был создан личный кабинет.
+                  <br>Вы можете зайти на сайт Evon-tr.com
+                  <br>по своей почте нажав «Войти». Одноразовый пароль придет на вашу почту.
+                  <br>
+                  <br>В профиле вы можете пройти верификацию для получения доступа к самой большой базе недвижимости и функциям платформы EVON.
+                  <br>
+                  <br>Добро пожаловать на платформу недвижимости EVON.
+                  <br>
+                  <br>WhatsApp +90 544 225 85 59
+                  <br>evon.information@gmail.com
+                  </body></html>";
     } else if ($form->language_id == 1) {
-      $message = "<html><head></head><body><p>
-                  <i>This is an informational letter, do not reply to it.</i><br>
+      $message = "<html><head></head><body>
+                  Hello, <br>
+                  We have received an application for registration on the website evon-tr.com on your behalf.<br>
                   <br>
-                  Hello,<br>
-                  We have received an application to register on <b>evon-tr.com</b> on your behalf.
-                  <br>Please note that the information on the site is intended only for real estate agents and construction companies.
+                  <br>A personal account has been created for you. You can go to Evon-tr.com
+                  <br>Via your email by clicking “Login”.
+                  <br>A one-time password will be sent to your email.
                   <br>
-                  <br>To gain access, you must go through the procedure for confirming your activity by providing one of the following options to <b>evon.information@gmail.com</b>:
+                  <br>In your profile, you can pass verification to gain access to the largest real estate database and functions of the EVON platform.
                   <br>
-                  - A link to your social media profiles/websites indicating your activities.<br>
-                  - Contacts of two realtors and or contact of the head who can confirm your activities.<br>
-                  - License to work in this field.<br>
+                  <br>Welcome to the EVON real estate platform.
                   <br>
-                  Please send us your chosen information option to <b>evon.information@gmail.com</b>.<br>
-                  After verification, we will grant you access to our platform and inform you by email.<br>
-                  We thank you for your interest and look forward to long-term cooperation.
-                </p></body></html>";
+                  <br>WhatsApp +90 544 225 85 59
+                  <br>evon.information@gmail.com
+                  </body></html>";
     } else if ($form->language_id == 2) {
-      $message = "<html><head></head><body><p>
-                  <i>Bu bir bilgilendirme mesajıdır, cevap vermeyiniz.</i><br>
-                   <br>
+      $message = "<html><head></head><body>
                   Merhaba,<br>
-                  Adınıza <b>evon-tr.com</b>'a kayıt başvurusu tarafımıza ulaşmıştır.
-                  <br>Web sitesindeki verilerin sadece emlakçılar ve inşaat şirketleri için olduğunu lütfen unutmayın.
-                  <br>Erişim sağlamak için, aşağıdakilerden birini evon.information@gmail.com adresine göndererek işinizi onaylama prosedüründen geçmelisiniz:
+                  evon-tr.com internet sitesinden sizin adınıza kayıt başvurusu aldık.<br>
                   <br>
-                  - Faaliyetlerinizi gösteren sosyal medya/web sitesi profillerinize bir bağlantı gönderiniz.<br>
-                  - Faaliyetlerinizi teyit edebilecek iki Emlak Danışmanının ve / veya yöneticinizin iletişim bilgilerini paylaşınız.<br>
-                  - Sahada faaliyet gösterebilmek için bir lisans gönderiniz.<br>
+                  <br>Sizin için kişisel bir hesap oluşturuldu. Evon-tr.com'a gidebilirsiniz.
+                  <br>“Giriş” düğmesine tıklayarak e-postanız aracılığıyla.
+                  <br>E-posta adresinize tek kullanımlık şifre gönderilecektir.
                   <br>
-                  Lütfen bilgilerinizi <b>evon.information@gmail.com</b> adresine gönderin.<br>
-                  Doğrulama aşamasından sonra platformumuza erişiminizi sağlayacağız ve e-posta ile sizi bilgilendireceğiz.<br>
-                  İlginiz için teşekkür ediyor ve uzun vadeli bir işbirliği yürütmeyi umuyoruz.
-                </p></body></html>";
+                  <br>Profilinizde, EVON platformunun en büyük emlak veritabanına ve işlevlerine erişim sağlamak için doğrulamayı geçebilirsiniz.
+                  <br>
+                  <br>EVON emlak platformuna hoş geldiniz.
+                  <br>
+                  <br>WhatsApp +90 544 225 85 59
+                  <br>evon.information@gmail.com
+                  </body></html>";
     }
 
     return $this->sendMail($form->email, $message);
@@ -116,7 +111,8 @@ class RegisterMailService implements RegisterMailInterface
    * @return bool
    */
 
-  public function sendMail($email, $message) {
+  public function sendMail($email, $message)
+  {
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
