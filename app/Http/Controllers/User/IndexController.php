@@ -174,9 +174,9 @@ class IndexController extends Controller
     $registerMailService->sendMailAdmin($request);
 
     if($status['status'] === false) {
-      return Inertia::location('/?registration=false&message=1&builder=' . $status['builder'] . '&language='.$request->language_id);
+      return $request->isApi === true ? response()-json(true, 200) : Inertia::location('/?registration=false&message=1&builder=' . $status['builder'] . '&language='.$request->language_id);
     } else {
-      return Inertia::location('/?registration=true&message=0&builder=' . $status['builder'] . '&language='.$request->language_id);
+      return $request->isApi === true ? response()-json(false, 400) : Inertia::location('/?registration=true&message=0&builder=' . $status['builder'] . '&language='.$request->language_id);
     }
 
   }
