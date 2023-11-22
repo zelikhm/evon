@@ -42,7 +42,7 @@ class VerificationService extends UserService implements VerificationInterface
         'isVerification' => 1,
       ]);
 
-      $url = env('APP_URL') . '/admin/verification_models/' . $verification->id . '/edit';
+      $url = env('APP_URL') . 'admin/verification_models/' . $verification->id . '/edit';
 
       $message = "<html><head></head><body><p>
                 Подана заявка на верификацию<br>
