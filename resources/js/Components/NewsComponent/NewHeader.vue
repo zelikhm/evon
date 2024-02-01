@@ -23,8 +23,8 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
 <!--            <a href="https://m.facebook.com/people/EVON/100092335686616/" target="_blank"><img src="images/img/header/s2.png" alt=""-->
 <!--                srcset=""></a>-->
             <a href="https://t.me/evon_turkey" target="_blank"><img src="images/img/header/s3.png" alt="" srcset=""></a>
-<!--            <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA==" target="_blank"><img src="images/img/header/s4.png"-->
-<!--                alt="" srcset=""></a>-->
+            <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA==" target="_blank"><img src="images/img/header/s4.png"
+                alt="" srcset=""></a>
           </li>
           <li class="lang">
             <change-language @selectLanguage="selectLanguage" :selectLang="selectLang" :user_info="user_info"/>

@@ -80,8 +80,8 @@ import '../../../public/styles/ForRealtors.css'
 <!--                src="images/img/header/s2.png" alt="" srcset=""></a>-->
             <a href="https://t.me/evon_turkey" target="_blank"><img src="images/img/header/s3.png" alt=""
                 srcset=""></a>
-<!--            <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA==" target="_blank"><img-->
-<!--                src="images/img/header/s4.png" alt="" srcset=""></a>-->
+            <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA==" target="_blank"><img
+                src="images/img/header/s4.png" alt="" srcset=""></a>
           </div>
 
           <h4 class="scroll">
