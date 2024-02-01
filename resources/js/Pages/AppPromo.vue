@@ -66,7 +66,7 @@ import '../../../public/styles/ForRealtors.css'
                 class="flex gap-[1vw]">
                 <img src="images/img/welcom/apl.png" alt="" srcset="">
               </a>
-              <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew&pli=1" target="_blank"
+              <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew" target="_blank"
                 class="flex gap-[1vw]">
                 <img src="images/img/welcom/andr.png" alt="" srcset="">
               </a>
@@ -340,7 +340,7 @@ import '../../../public/styles/ForRealtors.css'
                 class="flex gap-[1vw]">
                 <img src="images/img/welcom/apl.png" alt="" srcset="">
               </a>
-              <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew&pli=1" target="_blank"
+              <a href="https://play.google.com/store/apps/details?id=ru.alfa.evonnew" target="_blank"
                 class="flex gap-[1vw]">
                 <img src="images/img/welcom/andr.png" alt="" srcset="">
               </a>
