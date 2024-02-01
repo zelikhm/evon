@@ -81,15 +81,15 @@
     width: 2.3438vw;
 }
 
-#lowSection .foot { 
+#lowSection .foot {
     background-image: url(../images/img/lowSection/t.png);
     background-position: 0;
     background-repeat: no-repeat;
-    background-size: 100% 100%; 
+    background-size: 100% 100%;
     position: relative;
-    z-index: 2; 
-    height: 14.7917vw; 
-    padding-top: 7.2917vw;  
+    z-index: 2;
+    height: 14.7917vw;
+    padding-top: 7.2917vw;
 }
 
 #lowSection .foot p {
@@ -249,7 +249,7 @@ footer .mobile-contant {
         margin-top: 25vw;
         max-width: none;
     }
-    
+
     #lowSection h3 {
         font-weight: 400;
         font-size: 6.25vw;
@@ -264,21 +264,21 @@ footer .mobile-contant {
     #lowSection {
         min-height: auto;
     }
-    #lowSection .row-soc { 
-        gap: 7.6042vw; 
+    #lowSection .row-soc {
+        gap: 7.6042vw;
     }
     #lowSection .bg-houses img:nth-child(2) {
         display: none;
     }
-    
+
     #lowSection .upp-row {
         display: none;
     }
-    
+
     #lowSection button {
         margin: 23.4375vw auto 43.75vw;
     }
-    
+
     #lowSection .bg-houses img:nth-child(1) {
         width: 130vw;
         margin: 0 auto;
@@ -288,16 +288,16 @@ footer .mobile-contant {
         top: auto;
         left: 0;
     }
-    
+
     #lowSection .row-soc img {
         width: 9.6875vw;
     }
-    
+
     #lowSection button span {
         font-size: 6.875vw;
         line-height: 10.3125vw;
     }
-    
+
     footer .mobile-contant {
         display: block;
         padding-top: 7.8125vw;
@@ -317,7 +317,7 @@ footer .mobile-contant {
         opacity: 1;
         margin-bottom: 15.625vw;
     }
-    
+
     footer .mobile-contant .logo {
         max-width: 32.8125vw;
         width: 100%;
@@ -325,29 +325,30 @@ footer .mobile-contant {
         margin: 0 auto;
         margin-bottom: 9.375vw;
     }
-    
+
     #lowSection .foot .container {
         display: none;
     }
-    
+
     footer .row-ref {
         display: block;
     }
-    
+
     #lowSection .foot {
         height: 31.25vw;
         padding-top: 0;
         margin-top: 20vw;
     }
-    
+
     footer .row-soc {
-        width: 52.4975vw;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 9.375vw;
+      width: 52.4975vw;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 9.375vw;
+      gap: 8vw;
     }
-    
+
     footer p {
         display: block;
         text-align: center;
@@ -355,20 +356,20 @@ footer .mobile-contant {
         font-size: 3.75vw;
         line-height: 120%;
     }
-    
+
     footer nav ul li {
         display: none;
     }
-    
+
     footer nav ul li:first-child span {
         display: none;
     }
-    
+
     footer nav ul li:first-child {
         display: block;
         width: 100%;
     }
-    
+
     footer nav ul li:first-child a {
         color: #D6BFFF;
         font-size: 4.375vw;
@@ -388,7 +389,7 @@ footer .mobile-contant {
         margin: 6.25vw 0vw;
         color: #FFFFFF;
     }
-    
+
     footer .row-ref a:last-child {
         font-weight: 400;
         font-size: 3.75vw;
@@ -400,4 +401,3 @@ footer .mobile-contant {
 
 }
 
- 

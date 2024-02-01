@@ -13,15 +13,15 @@
           <a href="https://wa.me/+905442258559" target="_blank">
             <img src="images/img/footer/s1.png" alt="" srcset="">
           </a>
-          <a href="https://m.facebook.com/people/EVON/100092335686616/" target="_blank">
-            <img src="images/img/footer/s2.png" alt="" srcset="">
-          </a>
-          <a href="https://t.me/evon_real_estate" target="_blank">
+<!--          <a href="https://m.facebook.com/people/EVON/100092335686616/" target="_blank">-->
+<!--            <img src="images/img/footer/s2.png" alt="" srcset="">-->
+<!--          </a>-->
+          <a href="https://t.me/evon_turkey" target="_blank">
             <img src="images/img/footer/s3.png" alt="" srcset="">
           </a>
-          <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA==" target="_blank">
-            <img src="images/img/footer/s4.png" alt="" srcset="">
-          </a>
+<!--          <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA==" target="_blank">-->
+<!--            <img src="images/img/footer/s4.png" alt="" srcset="">-->
+<!--          </a>-->
         </div>
       </div>
 
@@ -37,16 +37,16 @@
           </li>
           <li>
             <span>Telegram</span>
-            <a href="https://t.me/evon_real_estate" target="_blank">evon_real_estate</a>
+            <a href="https://t.me/evon_turkey" target="_blank">evon_turkey</a>
           </li>
-          <li>
-            <span>Instagram</span>
-            <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA==" target="_blank">evon_platform_tr</a>
-          </li>
-          <li>
-            <span>Facebook</span>
-            <a href="https://m.facebook.com/people/EVON/100092335686616/" target="_blank">ServisEvon</a>
-          </li>
+<!--          <li>-->
+<!--            <span>Instagram</span>-->
+<!--            <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA==" target="_blank">evon_platform_tr</a>-->
+<!--          </li>-->
+<!--          <li>-->
+<!--            <span>Facebook</span>-->
+<!--            <a href="https://m.facebook.com/people/EVON/100092335686616/" target="_blank">ServisEvon</a>-->
+<!--          </li>-->
         </ul>
       </nav>
       <p>

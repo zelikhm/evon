@@ -76,12 +76,12 @@ import '../../../public/styles/ForRealtors.css'
           <div class="ref-soc">
             <a href="https://wa.me/+905442258559" target="_blank"><img src="images/img/header/s1.png" alt=""
                 srcset=""></a>
-            <a href="https://m.facebook.com/people/EVON/100092335686616/" target="_blank"><img
-                src="images/img/header/s2.png" alt="" srcset=""></a>
-            <a href="https://t.me/evon_real_estate" target="_blank"><img src="images/img/header/s3.png" alt=""
+<!--            <a href="https://m.facebook.com/people/EVON/100092335686616/" target="_blank"><img-->
+<!--                src="images/img/header/s2.png" alt="" srcset=""></a>-->
+            <a href="https://t.me/evon_turkey" target="_blank"><img src="images/img/header/s3.png" alt=""
                 srcset=""></a>
-            <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA==" target="_blank"><img
-                src="images/img/header/s4.png" alt="" srcset=""></a>
+<!--            <a href="https://instagram.com/evon_platform_tr?igshid=OGQ5ZDc2ODk2ZA==" target="_blank"><img-->
+<!--                src="images/img/header/s4.png" alt="" srcset=""></a>-->
           </div>
 
           <h4 class="scroll">

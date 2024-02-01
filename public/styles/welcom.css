@@ -574,6 +574,8 @@ header {
         margin: 0 auto;
         margin: 21.875vw auto 11.5625vw auto; /* (значение px / 320) * 100 */
         max-width: 51.25vw; /* (значение px / 320) * 100 */
+      justify-content: center;
+      gap: 8vw;
     }
 
     #welcom .ref-soc img {
