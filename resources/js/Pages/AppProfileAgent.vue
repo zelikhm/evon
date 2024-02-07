@@ -34,7 +34,7 @@
                   </div>
                 </div>
               </div>
-              <div v-if="verification !== null" class="bg-[#F6F3FA] w-full flex flex-col rounded-[10px]">
+              <div v-if="user.verification !== null" class="bg-[#F6F3FA] w-full flex flex-col rounded-[10px]">
 
                <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5 p-5 xxl:p-4 xl:p-3">
                  <span class="text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] leading-none">{{ language.prof_rielt[10] }}</span>
