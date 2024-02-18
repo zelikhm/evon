@@ -34,23 +34,23 @@
                   </div>
                 </div>
               </div>
-              <div v-if="user.verification !== null" class="bg-[#F6F3FA] w-full flex flex-col rounded-[10px]">
+<!--              <div v-if="user.verification !== null" class="bg-[#F6F3FA] w-full flex flex-col rounded-[10px]">-->
 
-               <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5 p-5 xxl:p-4 xl:p-3">
-                 <span class="text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] leading-none">{{ language.prof_rielt[10] }}</span>
-                 <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none" v-if="user.subscription">
-                   {{ language.prof_rielt[11] }}: <span class="text-[#E84680]">{{ new Date(Date.parse(user.subscription_info.finished_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span>
-                 </span>
-               </div>
+<!--               <div class="flex flex-col gap-2.5 xxl:gap-2 xl:gap-1.5 p-5 xxl:p-4 xl:p-3">-->
+<!--                 <span class="text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] leading-none">{{ language.prof_rielt[10] }}</span>-->
+<!--                 <span class="text-[#8A8996] text-[14px] xxl:text-[12px] xl:text-[10px] lg:text-[13px] leading-none" v-if="user.subscription">-->
+<!--                   {{ language.prof_rielt[11] }}: <span class="text-[#E84680]">{{ new Date(Date.parse(user.subscription_info.finished_at)).toISOString().replace(/^([^T]+)T(.+)$/,'$1').replace(/^(\d+)-(\d+)-(\d+)$/,'$3.$2.$1') }}</span>-->
+<!--                 </span>-->
+<!--               </div>-->
 
-                <div class="w-full h-[1px] bg-[#E5DFEE]"></div>
+<!--                <div class="w-full h-[1px] bg-[#E5DFEE]"></div>-->
 
-                <!--Текст про подписки-->
-                <div class="text-hint red" v-if="!user.subscription">{{ language.subscription[0] }}</div>
-                <div class="text-hint"  v-if="!user.subscription">{{ language.subscription[1] }}</div>
-                <button @click="openPayProfile = true" class="hover__button--purple transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">{{ language.prof_rielt[15] + ' TR' }}</button>
-                <button @click="openPayRusProfile = true" class="hover__button--purple transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">{{ language.prof_rielt[15] + ' RUB' }}</button>
-              </div>
+<!--                &lt;!&ndash;Текст про подписки&ndash;&gt;-->
+<!--                <div class="text-hint red" v-if="!user.subscription">{{ language.subscription[0] }}</div>-->
+<!--                <div class="text-hint"  v-if="!user.subscription">{{ language.subscription[1] }}</div>-->
+<!--                <button @click="openPayProfile = true" class="hover__button&#45;&#45;purple transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">{{ language.prof_rielt[15] + ' TR' }}</button>-->
+<!--                <button @click="openPayRusProfile = true" class="hover__button&#45;&#45;purple transition-all bg-[#6435A5] text-[15px] xxl:text-[13px] xl:text-[11px] lg:text-[14px] py-4 xxl:py-3 xl:py-2.5  leading-none text-white m-5 xxl:m-4 xl:m-3 rounded-[5px]">{{ language.prof_rielt[15] + ' RUB' }}</button>-->
+<!--              </div>-->
             </div>
             <div>
               <h3 class="title text-[18px] xxl:text-[15px] xl:text-[13px] lg:text-[16px] text-[#1E1D2D]">
