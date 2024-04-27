@@ -5,7 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\AuthCheck;
 use App\Http\Traits\MainInfo;
-use App\Models\Builder\HouseSupportModel;
+use App\Models\Builder\HouseSupport;
+use App\Models\Log\UtmStat;
 use App\Models\User;
 use App\Rules\Password;
 use App\Services\Mail\RegisterMailService;
@@ -33,7 +34,7 @@ class IndexController extends Controller
       ->first();
 
     if($user->subscription === null && $user->free_subscription === 1) {
-      User\SubscriptionModel::create([
+      User\Subscription::create([
         'user_id' => $request->user_id ? $request->user_id : Auth::id(),
         'active' => 1,
         'finished_at' => Carbon::now()->addDays(20),
@@ -84,7 +85,7 @@ class IndexController extends Controller
 
     if($this->checkToken($request->token)) {
 
-      User\SubscriptionModel::where('id', $request->id)->update(['free_link' => 0]);
+      User\Subscription::where('id', $request->id)->update(['free_link' => 0]);
 
       return response()->json(true, 200);
     } else {
@@ -179,6 +180,26 @@ class IndexController extends Controller
       return $request->isApi === true ? response()-json(false, 400) : Inertia::location('/?registration=true&message=0&builder=' . $status['builder'] . '&language='.$request->language_id);
     }
 
+  }
+
+  /**
+   * edit utm for reg
+   * @param $ip
+   * @return bool
+   */
+
+  public function utm($ip)
+  {
+    try {
+      UtmStat::where('ip', $ip)
+        ->update([
+          'is_reg' => 1,
+        ]);
+
+      return true;
+    }catch (\Exception $exception) {
+      return false;
+    }
   }
 
   /**

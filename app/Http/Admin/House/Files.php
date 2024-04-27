@@ -8,7 +8,7 @@ use AdminForm;
 use AdminFormElement;
 use AdminNavigation;
 use AdminDisplayFilter;
-use App\Models\Builder\HouseModel;
+use App\Models\Builder\House;
 use App\Models\LandingModel;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -104,7 +104,7 @@ class Files extends Section implements Initializable
 
     $form = AdminForm::elements([
 
-      AdminFormElement::select('house_id', 'ЖК')->setModelForOptions(HouseModel::class),
+      AdminFormElement::select('house_id', 'ЖК')->setModelForOptions(House::class),
 
       AdminFormElement::file('name', 'Файл')->setUploadPath(function(\Illuminate\Http\UploadedFile $file) {
         return '/storage/files';

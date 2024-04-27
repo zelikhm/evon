@@ -2,68 +2,68 @@
 
 namespace App\Observers;
 
-use App\Models\Builder\HouseImagesModel;
-use App\Models\Builder\HouseModel;
+use App\Models\Builder\HouseImage;
+use App\Models\Builder\House;
 use Carbon\Carbon;
 
 class ImageObserver
 {
     /**
-     * Handle the HouseImagesModel "created" event.
+     * Handle the HouseImage "created" event.
      *
-     * @param  \App\Models\HouseImagesModel  $houseImagesModel
+     * @param  \App\Models\HouseImage  $houseImagesModel
      * @return void
      */
-    public function created(HouseImagesModel $houseImagesModel)
+    public function created(HouseImage $houseImagesModel)
     {
-      HouseModel::where('id', $houseImagesModel->house_id)->update([
+      House::where('id', $houseImagesModel->house_id)->update([
         'active' => 0,
       ]);
     }
 
     /**
-     * Handle the HouseImagesModel "updated" event.
+     * Handle the HouseImage "updated" event.
      *
-     * @param  \App\Models\HouseImagesModel  $houseImagesModel
+     * @param  \App\Models\HouseImage  $houseImagesModel
      * @return void
      */
-    public function updated(HouseImagesModel $houseImagesModel)
+    public function updated(HouseImage $houseImagesModel)
     {
-      HouseModel::where('id', $houseImagesModel->house_id)->update([
+      House::where('id', $houseImagesModel->house_id)->update([
         'active' => 0,
         'updated_at' => Carbon::now(),
       ]);
     }
 
     /**
-     * Handle the HouseImagesModel "deleted" event.
+     * Handle the HouseImage "deleted" event.
      *
-     * @param  \App\Models\HouseImagesModel  $houseImagesModel
+     * @param  \App\Models\HouseImage  $houseImagesModel
      * @return void
      */
-    public function deleted(HouseImagesModel $houseImagesModel)
+    public function deleted(HouseImage $houseImagesModel)
     {
         //
     }
 
     /**
-     * Handle the HouseImagesModel "restored" event.
+     * Handle the HouseImage "restored" event.
      *
-     * @param  \App\Models\HouseImagesModel  $houseImagesModel
+     * @param  \App\Models\HouseImage  $houseImagesModel
      * @return void
      */
-    public function restored(HouseImagesModel $houseImagesModel)
+    public function restored(HouseImage $houseImagesModel)
     {
         //
     }
 
     /**
-     * Handle the HouseImagesModel "force deleted" event.
+     * Handle the HouseImage "force deleted" event.
      *
-     * @param  \App\Models\HouseImagesModel  $houseImagesModel
+     * @param  \App\Models\HouseImage  $houseImagesModel
      * @return void
      */
-    public function forceDeleted(HouseImagesModel $houseImagesModel)
+    public function forceDeleted(HouseImage $houseImagesModel)
     {
         //
     }

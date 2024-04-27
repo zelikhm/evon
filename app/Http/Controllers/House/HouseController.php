@@ -6,19 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Http\Traits\AuthCheck;
 use App\Http\Traits\MainInfo;
 use App\Models\Builder\Flat\FlatImagesModel;
-use App\Models\Builder\Flat\FlatModel;
-use App\Models\Builder\Flat\FrameModel;
-use App\Models\Builder\HouseCharacteristicsModel;
-use App\Models\Builder\HouseFilesModel;
-use App\Models\Builder\HouseImagesModel;
-use App\Models\Builder\HouseMainImageModel;
-use App\Models\Builder\HouseModel;
-use App\Models\Builder\HouseNewsModel;
-use App\Models\Builder\HouseSupportModel;
-use App\Models\Builder\HouseViewsModel;
-use App\Models\Builder\Info\CityModel;
-use App\Models\Builder\Info\StructureModel;
-use App\Models\Builder\Info\TypesModel;
+use App\Models\Builder\Flat\Flat;
+use App\Models\Builder\Flat\Frame;
+use App\Models\Builder\HouseCharacteristic;
+use App\Models\Builder\HouseFile;
+use App\Models\Builder\HouseImage;
+use App\Models\Builder\HouseMainImage;
+use App\Models\Builder\House;
+use App\Models\Builder\HouseNew;
+use App\Models\Builder\HouseSupport;
+use App\Models\Builder\HouseView;
+use App\Models\Builder\Info\City;
+use App\Models\Builder\Info\Structure;
+use App\Models\Builder\Info\Type;
 use App\Models\User;
 use App\Services\Cache\CacheService;
 use App\Services\Houses\HousesService;
@@ -61,7 +61,7 @@ class HouseController extends Controller
 
     $search = collect();
 
-    $houses = HouseModel::where('title', 'LIKE', '%' . $request->title . '%')
+    $houses = House::where('title', 'LIKE', '%' . $request->title . '%')
       ->where('active', 2)
       ->where('visible', 1)
       ->orWhere('description', 'LIKE', $request->title . '%')
@@ -93,9 +93,9 @@ class HouseController extends Controller
 
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
-      'dops' => TypesModel::all(),
-      'infos' => StructureModel::all(),
-      'city' => CityModel::with(['regions'])->get(),
+      'dops' => Type::all(),
+      'infos' => Structure::all(),
+      'city' => City::with(['regions'])->get(),
       'areas' => $this->getRegions(),
       'builders' => User::where('role', 1)->get(),
 //      'notification' => $this->getNotification(),
@@ -103,7 +103,7 @@ class HouseController extends Controller
       'news' => $this->getNewsForPage(),
       'adminNews' => $this->getAdminNews(),
       'user' => $this->getUser(),
-      'count_houses' => HouseModel::count(),
+      'count_houses' => House::count(),
       'free_count' => 30,
       'type' => 0,
     ]);
@@ -133,9 +133,9 @@ class HouseController extends Controller
 
     return Inertia::render('AppListImmovables', [
       'houses' => $houses,
-      'dops' => TypesModel::all(),
-      'infos' => StructureModel::all(),
-      'city' => CityModel::with(['regions'])->get(),
+      'dops' => Type::all(),
+      'infos' => Structure::all(),
+      'city' => City::with(['regions'])->get(),
       'areas' => $this->getRegions(),
       'builders' => User::where('role', 1)->get(),
 //      'notification' => $this->getNotification(),
@@ -143,7 +143,7 @@ class HouseController extends Controller
       'news' => $this->getNewsForPage(),
       'adminNews' => $this->getAdminNews(),
       'user' => $this->getUser(),
-      'count_houses' => HouseModel::count(),
+      'count_houses' => House::count(),
       'free_count' => 30,
       'type' => 1,
     ]);
@@ -162,7 +162,7 @@ class HouseController extends Controller
       'infos' => $this->getInfo(),
       'city' => $this->getCity(),
       'notification' => $this->getNotification(),
-      'count' => HouseModel::count(),
+      'count' => House::count(),
       'user' => $this->getUser(),
       'admin' => null,
       'token' => $token = Auth::user()->token,
@@ -245,7 +245,7 @@ class HouseController extends Controller
 
   public function getCountHouse() {
 
-    return response()->json(HouseModel::count(), 200);
+    return response()->json(House::count(), 200);
 
   }
 
@@ -312,18 +312,18 @@ class HouseController extends Controller
   public function house($slug)
   {
 
-    $house = HouseModel::where('slug', $slug)
+    $house = House::where('slug', $slug)
       ->where('user_id', Auth::id())
       ->first();
 
     if ($house === null) {
-      $house = HouseModel::where('slug', $slug)
+      $house = House::where('slug', $slug)
         ->where('active', 2)
         ->where('visible', 1)
         ->firstOrFail();
     }
 
-    HouseViewsModel::create([
+    HouseView::create([
       'house_id' => $house->id,
       'created_at' => Carbon::now()->addHour(3),
       'updated_at' => Carbon::now()->addHour(3),
@@ -357,7 +357,7 @@ class HouseController extends Controller
 
   public function edit($slug)
   {
-    HouseModel::where('slug', $slug)->firstOrFail();
+    House::where('slug', $slug)->firstOrFail();
 
     if(Auth::user()->role === 1) {
 
@@ -393,14 +393,14 @@ class HouseController extends Controller
   public function delete(Request $request)
   {
     if ($this->checkToken($request->token)) {
-      HouseModel::where('id', $request->house_id)->delete();
-      HouseViewsModel::where('house_id', $request->house_id)->delete();
-      HouseImagesModel::where('house_id', $request->house_id)->delete();
-      HouseNewsModel::where('house_id', $request->house_id)->delete();
-      HouseCharacteristicsModel::where('house_id', $request->house_id)->delete();
-      HouseSupportModel::where('house_id', $request->house_id)->delete();
-      HouseFilesModel::where('house_id', $request->house_id)->delete();
-      FrameModel::where('house_id', $request->house_id)->delete();
+      House::where('id', $request->house_id)->delete();
+      HouseView::where('house_id', $request->house_id)->delete();
+      HouseImage::where('house_id', $request->house_id)->delete();
+      HouseNew::where('house_id', $request->house_id)->delete();
+      HouseCharacteristic::where('house_id', $request->house_id)->delete();
+      HouseSupport::where('house_id', $request->house_id)->delete();
+      HouseFile::where('house_id', $request->house_id)->delete();
+      Frame::where('house_id', $request->house_id)->delete();
 
       return response()->json(true, 205);
     } else {
@@ -419,7 +419,7 @@ class HouseController extends Controller
   {
     if ($this->checkToken($request->token)) {
       if ($request->floors && $request->count_flat) {
-        $house = HouseModel::create([
+        $house = House::create([
           'user_id' => $request->user_id,
           'title' => $request->title,
           'slug' => Str::slug(mb_substr(Str::random(40), 0, 50), '-'),
@@ -478,7 +478,7 @@ class HouseController extends Controller
           $str1 = null;
         }
 
-        HouseCharacteristicsModel::create([
+        HouseCharacteristic::create([
           'house_id' => $house->id,
           'exclusive' => $request->exclusive,
           'floors' => $request->floors,
@@ -515,7 +515,7 @@ class HouseController extends Controller
 
     if ($this->checkToken($request->token)) {
 
-      $house = HouseModel::where('id', $request->house_id)
+      $house = House::where('id', $request->house_id)
         ->update([
           'title' => $request->title,
           'description' => $request->description,
@@ -572,7 +572,7 @@ class HouseController extends Controller
         $str1 = null;
       }
 
-      HouseCharacteristicsModel::where('house_id', $request->house_id)
+      HouseCharacteristic::where('house_id', $request->house_id)
         ->update([
           'exclusive' => $request->exclusive,
           'floors' => $request->floors,
@@ -613,7 +613,7 @@ class HouseController extends Controller
         $this->waterMark($imageUp, 'storage/flat/', false);
         $imageUp = '/storage/flat/' . $imageUp;
       } else {
-        $flat = FlatModel::where('id', $request->flat_id)->first();
+        $flat = Flat::where('id', $request->flat_id)->first();
         $imageUp = $flat !== null ? $flat->imageUp : null;
       }
 
@@ -623,11 +623,11 @@ class HouseController extends Controller
         $this->waterMark($imageDown, 'storage/flat/', false);
         $imageDown = '/storage/flat/' . $imageDown;
       } else {
-        $flat = FlatModel::where('id', $request->flat_id)->first();
+        $flat = Flat::where('id', $request->flat_id)->first();
         $imageDown = $flat !== null ? $flat->imageDown : null;
       }
 
-      $flat = FlatModel::create([
+      $flat = Flat::create([
         'frame_id' => $request->frame_id,
         'number' => $request->number,
         'square' => $request->square,
@@ -640,7 +640,7 @@ class HouseController extends Controller
         'imageDown' => $imageDown,
       ]);
 
-      $frame = FrameModel::where('id', $request->frame_id)->first();
+      $frame = Frame::where('id', $request->frame_id)->first();
 
       return response()->json($this->getHouse($frame->house_id), 200);
     } else {
@@ -658,7 +658,7 @@ class HouseController extends Controller
   {
     if ($this->checkToken($request->token)) {
 
-      FlatModel::where('id', $request->flat_id)->delete();
+      Flat::where('id', $request->flat_id)->delete();
 
       return response()->json('deleted', 205);
     } else {
@@ -683,7 +683,7 @@ class HouseController extends Controller
         $this->waterMark($imageUp, 'storage/flat/', false);
         $imageUp = '/storage/flat/' . $imageUp;
       } else {
-        $flat = FlatModel::where('id', $request->flat_id)->first();
+        $flat = Flat::where('id', $request->flat_id)->first();
         if ($flat->imageUp !== null) {
           $imageUp = $flat->imageUp;
         }
@@ -697,13 +697,13 @@ class HouseController extends Controller
         $this->waterMark($imageDown, 'storage/flat/', false);
         $imageDown = '/storage/flat/' . $imageDown;
       } else {
-        $flat = FlatModel::where('id', $request->flat_id)->first();
+        $flat = Flat::where('id', $request->flat_id)->first();
         if ($flat->imageDown !== null) {
           $imageDown = $flat->imageDown;
         }
       }
 
-      FlatModel::where('id', $request->flat_id)
+      Flat::where('id', $request->flat_id)
         ->update([
           'number' => $request->number,
           'square' => $request->square,
@@ -716,7 +716,7 @@ class HouseController extends Controller
           'imageDown' => $imageDown,
         ]);
 
-      HouseModel::where('id', $request->house_id)->update([
+      House::where('id', $request->house_id)->update([
         'active' => 0,
       ]);
 
@@ -737,11 +737,11 @@ class HouseController extends Controller
 
     if ($this->checkToken($request->token)) {
 
-      FlatModel::where('id', $request->flat_id)->update([
+      Flat::where('id', $request->flat_id)->update([
         'status' => $request->status,
       ]);
 
-      HouseModel::where('id', $request->house_id)->update([
+      House::where('id', $request->house_id)->update([
         'active' => 0,
       ]);
 
@@ -761,14 +761,14 @@ class HouseController extends Controller
   public function createFrame(Request $request)
   {
     if ($this->checkToken($request->token)) {
-      FrameModel::create([
+      Frame::create([
         'house_id' => $request->house_id,
         'name' => $request->name,
         'created_at' => Carbon::now()->addHour(3),
         'updated_at' => Carbon::now()->addHour(3),
       ]);
 
-      return response()->json(FrameModel::where('house_id', $request->house_id)->with(['flats'])->get(), 200);
+      return response()->json(Frame::where('house_id', $request->house_id)->with(['flats'])->get(), 200);
     } else {
       return response()->json('not auth', 401);
     }
@@ -784,17 +784,17 @@ class HouseController extends Controller
   {
     if ($this->checkToken($request->token)) {
 
-      FrameModel::where('id', $request->frame_id)
+      Frame::where('id', $request->frame_id)
         ->update([
           'name' => $request->name,
           'updated_at' => Carbon::now()->addHour(3),
         ]);
 
-      HouseModel::where('id', $request->house_id)->update([
+      House::where('id', $request->house_id)->update([
         'active' => 0,
       ]);
 
-      return response()->json(FrameModel::where('house_id', $request->house_id)->with(['flats'])->get(), 200);
+      return response()->json(Frame::where('house_id', $request->house_id)->with(['flats'])->get(), 200);
     } else {
       return response()->json('not auth', 401);
     }
@@ -810,7 +810,7 @@ class HouseController extends Controller
   {
     if ($this->checkToken($request->token)) {
 
-      FrameModel::where('id', $request->frame_id)->delete();
+      Frame::where('id', $request->frame_id)->delete();
 
       return response()->json('deleted', 205);
     } else {
@@ -835,7 +835,7 @@ class HouseController extends Controller
         $imageName = null;
       }
 
-      HouseSupportModel::create([
+      HouseSupport::create([
         'house_id' => $request->house_id,
         'avatar' => '/storage/support/' . $imageName,
         'name' => $request->name,
@@ -847,7 +847,7 @@ class HouseController extends Controller
         'updated_at' => Carbon::now()->addHour(3),
       ]);
 
-      return response()->json(HouseSupportModel::where('house_id', $request->house_id)->get(), 200);
+      return response()->json(HouseSupport::where('house_id', $request->house_id)->get(), 200);
     } else {
       return response()->json('not auth', 401);
     }
@@ -868,11 +868,11 @@ class HouseController extends Controller
         $request->avatar->move(public_path('/storage/support'), $imageName);
         $imageName = '/storage/support/' . $imageName;
       } else {
-        $sup = HouseSupportModel::where('id', $request->id)->first();
+        $sup = HouseSupport::where('id', $request->id)->first();
         $imageName = $sup->avatar;
       }
 
-      HouseSupportModel::where('id', $request->id)
+      HouseSupport::where('id', $request->id)
         ->update([
           'avatar' => $imageName,
           'name' => $request->name,
@@ -884,7 +884,7 @@ class HouseController extends Controller
           'updated_at' => Carbon::now()->addHour(3),
         ]);
 
-      return response()->json(HouseSupportModel::where('house_id', $request->house_id)->get(), 200);
+      return response()->json(HouseSupport::where('house_id', $request->house_id)->get(), 200);
     } else {
       return response()->json('not auth', 401);
     }
@@ -900,7 +900,7 @@ class HouseController extends Controller
   {
     if ($this->checkToken($request->token)) {
 
-      HouseSupportModel::where('id', $request->id)->delete();
+      HouseSupport::where('id', $request->id)->delete();
       return response()->json(true, 205);
 
     } else {
@@ -920,7 +920,7 @@ class HouseController extends Controller
   {
     if ($this->checkToken($request->token)) {
 
-      HouseSupportModel::where('house_id', $request->house_id)->delete();
+      HouseSupport::where('house_id', $request->house_id)->delete();
       return response()->json(true, 205);
 
     } else {
@@ -958,7 +958,7 @@ class HouseController extends Controller
   {
     if ($this->checkToken($request->token)) {
 
-      HouseModel::where('id', $request->house_id)
+      House::where('id', $request->house_id)
         ->update([
           'visible' => $request->visible,
         ]);
@@ -983,7 +983,7 @@ class HouseController extends Controller
       $fileName = time() . '.files.' . $request->file('file')->getClientOriginalExtension();
       $request->file('file')->move(public_path('/storage/files'), $fileName);
 
-      $file = HouseFilesModel::create([
+      $file = HouseFile::create([
         'house_id' => $request->house_id,
         'name' => '/storage/files/' . $fileName,
         'created_at' => Carbon::now()->addHour(3),
@@ -1006,9 +1006,9 @@ class HouseController extends Controller
   public function deletedFile(Request $request)
   {
     if ($this->checkToken($request->token)) {
-      HouseFilesModel::where('name', $request->fileName)->delete();
+      HouseFile::where('name', $request->fileName)->delete();
 
-      return response()->json(HouseFilesModel::where('house_id', $request->house_id)->get(), 200);
+      return response()->json(HouseFile::where('house_id', $request->house_id)->get(), 200);
 
     } else {
       return response()->json('not auth', 401);
@@ -1030,7 +1030,7 @@ class HouseController extends Controller
       $imageName = time() + rand(1, 100000) . '.house.' . $request->file('image')->getClientOriginalExtension();
       $request->file('image')->move(public_path('/storage/buffer'), $imageName);
 
-      $image = HouseImagesModel::create([
+      $image = HouseImage::create([
         'house_id' => $request->house_id,
         'name' => "/storage/buffer/" . $imageName,
         'category' => $request->category_id,
@@ -1040,7 +1040,7 @@ class HouseController extends Controller
 
       $status = $imageService->add($image->id, 0, $imageName);
 
-      HouseModel::where('id', $request->house_id)->update([
+      House::where('id', $request->house_id)->update([
         'active' => 0,
       ]);
 
@@ -1089,17 +1089,17 @@ class HouseController extends Controller
 
     if ($this->checkToken($request->token)) {
 
-      HouseImagesModel::where('name', $request->image_name)
+      HouseImage::where('name', $request->image_name)
         ->where('house_id', $request->house_id)
         ->delete();
 
-      HouseModel::where('id', $request->house_id)->update([
+      House::where('id', $request->house_id)->update([
         'active' => 0,
       ]);
 
       $imageService->delete($request->image_name, 0);
 
-      return response()->json(HouseImagesModel::where('house_id', $request->house_id)->get(), 200);
+      return response()->json(HouseImage::where('house_id', $request->house_id)->get(), 200);
     } else {
       return response()->json('not auth', 401);
     }
@@ -1109,14 +1109,14 @@ class HouseController extends Controller
   public function getInfos()
   {
 
-    return TypesModel::all();
+    return Type::all();
 
   }
 
   public function getDops()
   {
 
-    return StructureModel::all();
+    return Structure::all();
 
   }
 

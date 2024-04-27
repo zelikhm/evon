@@ -5,8 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\AuthCheck;
 use App\Http\Traits\MainInfo;
-use App\Models\Messages\ChatModel;
-use App\Models\Messages\MessageModel;
+use App\Models\Messages\Chat;
+use App\Models\Messages\Message;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -26,18 +26,18 @@ class ChatController extends Controller
   public function getOrCreateChat(Request $request) {
 
     if ($request->from && $request->to) {
-      $chat = ChatModel::where('from_id', $request->from)
+      $chat = Chat::where('from_id', $request->from)
         ->where('to_id', $request->to)
         ->first();
 
       if ($chat === null) {
-        $chat = ChatModel::where('from_id', $request->to)
+        $chat = Chat::where('from_id', $request->to)
           ->where('to_id', $request->from)
           ->first();
 
         if ($chat === null) {
 
-          $chat = ChatModel::create([
+          $chat = Chat::create([
             'from_id' => $request->from,
             'to_id' => $request->to,
           ]);
@@ -59,18 +59,18 @@ class ChatController extends Controller
   {
 
     if ($request->from && $request->to) {
-      $chat = ChatModel::where('from_id', $request->from)
+      $chat = Chat::where('from_id', $request->from)
         ->where('to_id', $request->to)
         ->first();
 
       if ($chat === null) {
-        $chat = ChatModel::where('from_id', $request->to)
+        $chat = Chat::where('from_id', $request->to)
           ->where('to_id', $request->from)
           ->first();
 
         if ($chat === null) {
 
-          $chat = ChatModel::create([
+          $chat = Chat::create([
             'from_id' => $request->from,
             'to_id' => $request->to,
           ]);
@@ -91,7 +91,7 @@ class ChatController extends Controller
   public function checkChatApi(Request $request)
   {
 
-    $chats = ChatModel::where('visible_id', $request->user_id)
+    $chats = Chat::where('visible_id', $request->user_id)
       ->count();
 
     return response()->json($chats, 200);
@@ -110,7 +110,7 @@ class ChatController extends Controller
 
     foreach ($chats as $item) {
 
-      $item->message = MessageModel::where('chat_id', $item->id)
+      $item->message = Message::where('chat_id', $item->id)
         ->orderBy('created_at', 'DESC')->first();
 
     }
@@ -137,7 +137,7 @@ class ChatController extends Controller
 
       foreach ($chats as $item) {
 
-        $item->message = MessageModel::where('chat_id', $item->id)
+        $item->message = Message::where('chat_id', $item->id)
           ->orderBy('created_at', 'DESC')->first();
 
       }
@@ -159,7 +159,7 @@ class ChatController extends Controller
   public function getChat($id)
   {
 
-    $chat = ChatModel::where('id', $id)
+    $chat = Chat::where('id', $id)
       ->with(['from', 'to'])
       ->firstOrFail();
 
@@ -173,7 +173,7 @@ class ChatController extends Controller
 
     foreach ($chats as $item) {
 
-      $item->message = MessageModel::where('chat_id', $item->id)
+      $item->message = Message::where('chat_id', $item->id)
         ->orderBy('created_at', 'DESC')->first();
 
     }
@@ -196,7 +196,7 @@ class ChatController extends Controller
   public function getChatApi(Request $request) {
 
     if($this->checkToken($request->token)) {
-      $chat = ChatModel::where('id', $request->chat_id)
+      $chat = Chat::where('id', $request->chat_id)
         ->with(['from', 'to'])
         ->firstOrFail();
 
@@ -206,7 +206,7 @@ class ChatController extends Controller
 //
 //    foreach ($chats as $item) {
 //
-//      $item->message = MessageModel::where('chat_id', $item->id)
+//      $item->message = Message::where('chat_id', $item->id)
 //        ->orderBy('created_at', 'DESC')->first();
 //
 //    }
@@ -228,19 +228,19 @@ class ChatController extends Controller
   {
     $moderation = User::where('role', 2)->first();
 
-    $status = ChatModel::where('from_id', $moderation->id)
+    $status = Chat::where('from_id', $moderation->id)
       ->where('to_id', $id)
       ->first();
 
     if ($status === null) {
-      $status = ChatModel::where('to_id', $moderation->id)
+      $status = Chat::where('to_id', $moderation->id)
         ->where('from_id', $id)
         ->first();
 
       if ($status === null) {
 
         if($moderation->id !== $id) {
-          ChatModel::create([
+          Chat::create([
             'from_id' => $moderation->id,
             'to_id' => $id,
             'type' => 1,
@@ -250,7 +250,7 @@ class ChatController extends Controller
       }
     }
 
-    $chats = ChatModel::orWhere('from_id', $id)
+    $chats = Chat::orWhere('from_id', $id)
       ->orWhere('to_id', $id)
       ->orderBy('type', 'DESC')
       ->orderBy('updated_at', 'DESC')
@@ -269,7 +269,7 @@ class ChatController extends Controller
   public function loadMessages($chat)
   {
 
-    $messages = MessageModel::where('chat_id', $chat->id)
+    $messages = Message::where('chat_id', $chat->id)
       ->orderBy('created_at', 'ASC')
       ->get();
 

@@ -2,62 +2,62 @@
 
 namespace App\Observers;
 
-use App\Models\Builder\Info\CityModel;
-use App\Models\Builder\Info\RegionModel;
+use App\Models\Builder\Info\City;
+use App\Models\Builder\Info\Region;
 
 class CityObserver
 {
     /**
-     * Handle the CityModel "created" event.
+     * Handle the City "created" event.
      *
-     * @param  \App\Models\CityModel  $cityModel
+     * @param  \App\Models\City  $cityModel
      * @return void
      */
-    public function created(CityModel $cityModel)
+    public function created(City $cityModel)
     {
         //
     }
 
     /**
-     * Handle the CityModel "updated" event.
+     * Handle the City "updated" event.
      *
-     * @param  \App\Models\CityModel  $cityModel
+     * @param  \App\Models\City  $cityModel
      * @return void
      */
-    public function updated(CityModel $cityModel)
+    public function updated(City $cityModel)
     {
         //
     }
 
     /**
-     * Handle the CityModel "deleted" event.
+     * Handle the City "deleted" event.
      *
-     * @param  \App\Models\CityModel  $cityModel
+     * @param  \App\Models\City  $cityModel
      * @return void
      */
-    public function deleted(CityModel $cityModel)
+    public function deleted(City $cityModel)
     {
-       RegionModel::where('city_id', $cityModel->id)->delete();
+       Region::where('city_id', $cityModel->id)->delete();
     }
 
     /**
-     * Handle the CityModel "restored" event.
+     * Handle the City "restored" event.
      *
-     * @param  \App\Models\CityModel  $cityModel
+     * @param  \App\Models\City  $cityModel
      * @return void
      */
-    public function restored(CityModel $cityModel)
+    public function restored(City $cityModel)
     {
         //
     }
 
     /**
-     * Handle the CityModel "force deleted" event.
+     * Handle the City "force deleted" event.
      *
-     * @param  \App\Models\CityModel  $cityModel
+     * @param  \App\Models\City  $cityModel
      * @return void
      */
-    public function forceDeleted(CityModel $cityModel)
+    public function forceDeleted(City $cityModel)
     {
         //
     }

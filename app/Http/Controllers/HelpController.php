@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Traits\AuthCheck;
-use App\Models\User\ClientModel;
+use App\Models\User\Client;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +18,7 @@ class HelpController extends Controller
   {
     return Inertia::render('AppClients', [
       'user' => $this->getUser(),
-      'client' => ClientModel::where('user_id', $this->getUser()->id)->get(),
+      'client' => Client::where('user_id', $this->getUser()->id)->get(),
     ]);
   }
 
@@ -26,7 +26,7 @@ class HelpController extends Controller
 
     if($this->checkToken($request->token)) {
 
-      $client = ClientModel::where('id', $request->id)
+      $client = Client::where('id', $request->id)
         ->update([
           'status_client' => $request->status,
         ]);
@@ -50,11 +50,11 @@ class HelpController extends Controller
 
     if ($this->checkToken($request->token)) {
 
-      ClientModel::where('id', $request->client_id)
+      Client::where('id', $request->client_id)
         ->where('user_id', $request->user_id)
         ->delete();
 
-      $clients = ClientModel::where('user_id', $request->user_id)->get();
+      $clients = Client::where('user_id', $request->user_id)->get();
 
       return response()->json($clients, 200);
     } else {
@@ -73,7 +73,7 @@ class HelpController extends Controller
 
     if ($this->checkToken($request->token)) {
 
-      ClientModel::create([
+      Client::create([
         'user_id' => $request->user_id,
         'name' => $request->name,
         'phone' => $request->phone,
@@ -91,7 +91,7 @@ class HelpController extends Controller
 
 
       return response()->json(
-        ClientModel::where('user_id', $request->user_id)
+        Client::where('user_id', $request->user_id)
           ->get(), 200);
     } else {
 
@@ -110,7 +110,7 @@ class HelpController extends Controller
 
     if ($this->checkToken($request->token)) {
 
-      $client = ClientModel::where('id', $request->client_id)
+      $client = Client::where('id', $request->client_id)
         ->where('user_id', $request->user_id)
         ->update([
           'name' => $request->name,
@@ -126,7 +126,7 @@ class HelpController extends Controller
         ]);
 
       return response()->json(
-        ClientModel::where('user_id', $request->user_id)
+        Client::where('user_id', $request->user_id)
           ->get(), 200);
     } else {
 
@@ -144,7 +144,7 @@ class HelpController extends Controller
   {
 
     return response()->json(
-      ClientModel::where(
+      Client::where(
         'user_id',
         $request->user_id
       )->get(),

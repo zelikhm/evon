@@ -7,7 +7,7 @@ use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
 use AdminNavigation;
-use App\Models\Builder\HouseModel;
+use App\Models\Builder\House;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -98,7 +98,7 @@ class Frame extends Section implements Initializable
     $form = AdminForm::elements([
 
       AdminFormElement::select('house_id', 'ЖК')
-        ->setModelForOptions(HouseModel::class, 'title')
+        ->setModelForOptions(House::class, 'title')
         ->setUsageKey('id'),
 
       AdminFormElement::text('name', 'Название'),

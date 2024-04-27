@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Builder\HouseModel;
+use App\Models\Builder\House;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
     function success(Request $request) {
 
-      HouseModel::where('id', $request->house_id)->update([
+      House::where('id', $request->house_id)->update([
         'active' => 2
       ]);
 
@@ -17,7 +17,7 @@ class AdminController extends Controller
     }
 
     function failed(Request $request) {
-      HouseModel::where('id', $request->house_id)->update([
+      House::where('id', $request->house_id)->update([
         'active' => 0
       ]);
 

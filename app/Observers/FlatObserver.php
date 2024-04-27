@@ -3,72 +3,72 @@
 namespace App\Observers;
 
 use App\Models\Builder\Flat\FlatImagesModel;
-use App\Models\Builder\Flat\FlatModel;
-use App\Models\Builder\Flat\FrameModel;
-use App\Models\Builder\HouseModel;
+use App\Models\Builder\Flat\Flat;
+use App\Models\Builder\Flat\Frame;
+use App\Models\Builder\House;
 use Carbon\Carbon;
 
 class FlatObserver
 {
     /**
-     * Handle the FlatModel "created" event.
+     * Handle the FlatAdmin "created" event.
      *
-     * @param  \App\Models\FlatModel  $flatModel
+     * @param  \App\Models\FlatAdmin  $flatModel
      * @return void
      */
-    public function created(FlatModel $flatModel)
+    public function created(Flat $flatModel)
     {
-        $frame = FrameModel::where('id', $flatModel->frame_id)->first();
+        $frame = Frame::where('id', $flatModel->frame_id)->first();
 
-        HouseModel::where('id', $frame->house_id)->update([
+        House::where('id', $frame->house_id)->update([
           'updated_at' => Carbon::now()->addHours(3),
         ]);
     }
 
     /**
-     * Handle the FlatModel "updated" event.
+     * Handle the FlatAdmin "updated" event.
      *
-     * @param  \App\Models\FlatModel  $flatModel
+     * @param  \App\Models\FlatAdmin  $flatModel
      * @return void
      */
-    public function updated(FlatModel $flatModel)
+    public function updated(Flat $flatModel)
     {
-      $frame = FrameModel::where('id', $flatModel->frame_id)->first();
+      $frame = Frame::where('id', $flatModel->frame_id)->first();
 
-      HouseModel::where('id', $frame->house_id)->update([
+      House::where('id', $frame->house_id)->update([
         'updated_at' => Carbon::now()->addHours(3),
       ]);
     }
 
     /**
-     * Handle the FlatModel "deleted" event.
+     * Handle the FlatAdmin "deleted" event.
      *
-     * @param  \App\Models\FlatModel  $flatModel
+     * @param  \App\Models\FlatAdmin  $flatModel
      * @return void
      */
-    public function deleted(FlatModel $flatModel)
+    public function deleted(Flat $flatModel)
     {
         FlatImagesModel::where('flat_id', $flatModel->id)->delete();
     }
 
     /**
-     * Handle the FlatModel "restored" event.
+     * Handle the FlatAdmin "restored" event.
      *
-     * @param  \App\Models\FlatModel  $flatModel
+     * @param  \App\Models\FlatAdmin  $flatModel
      * @return void
      */
-    public function restored(FlatModel $flatModel)
+    public function restored(Flat $flatModel)
     {
         //
     }
 
     /**
-     * Handle the FlatModel "force deleted" event.
+     * Handle the FlatAdmin "force deleted" event.
      *
-     * @param  \App\Models\FlatModel  $flatModel
+     * @param  \App\Models\FlatAdmin  $flatModel
      * @return void
      */
-    public function forceDeleted(FlatModel $flatModel)
+    public function forceDeleted(Flat $flatModel)
     {
         //
     }

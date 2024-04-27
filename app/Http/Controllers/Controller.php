@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Traits\MainInfo;
-use App\Models\Builder\Flat\FlatModel;
-use App\Models\Builder\HouseImagesModel;
-use App\Models\Builder\HouseModel;
+use App\Models\Builder\Flat\Flat;
+use App\Models\Builder\HouseImage;
+use App\Models\Builder\House;
 use App\Models\User;
 
 use GuzzleHttp\Client;
@@ -36,8 +36,8 @@ class Controller extends BaseController
         'registration' => $request->registration,
         'message' => $request->message,
         'builder' => $request->builder,
-        'count_flats' => FlatModel::count(),
-        'count_house' => HouseModel::count(),
+        'count_flats' => Flat::count(),
+        'count_house' => House::count(),
         'count_people' => User::where('role', 0)->count() < 150 ? 150 : User::where('role', 0)->count(),
       ]);
     }
@@ -59,8 +59,8 @@ class Controller extends BaseController
 
       return Inertia::render('AppPromo', [
         'userInfo' => $this->getUser(),
-        'count_flats' => FlatModel::count(),
-        'count_house' => HouseModel::count(),
+        'count_flats' => Flat::count(),
+        'count_house' => House::count(),
         'count_people' => User::where('role', 0)->count() < 150 ? 150 : User::where('role', 0)->count(),
         'block_show' => true,
       ]);

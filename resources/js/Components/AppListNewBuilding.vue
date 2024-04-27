@@ -1224,6 +1224,7 @@
       this.selectDate = this.dates[0].date;
       this.count_house = this.count_houses;
       let href = window.location.href
+
       if (href.split('#').at(-1) === 'search') {
 
         this.isSearch = `${localStorage.getItem('searchData')}`
@@ -1240,6 +1241,7 @@
           })
           .catch(e => console.log(e))
       } else {
+        console.log(this.houses);
         this.readyHouses = this.houses
         this.map_array = this.houses;
         this.preloader = false;
@@ -1258,23 +1260,6 @@
             this.preloaderObject = false;
           })
         }
-        // else {
-      //
-      //     let link = '/api/house/getHousesVillages?dop=true';
-      //
-      //     if(this.user.subscription === true && this.user.subscription_info.free == 1) {
-      //       link = '/api/house/getHousesVillages?dop=true&limit=true&limit_count=10';
-      //     }
-      //
-      //     axios.get(link).then(res => {
-      //       this.readyHouses = res.data;
-      //       this.count_house = this.readyHouses.length;
-      //       this.map_array = this.readyHouses;
-      //       this.updateHouses();
-      //       this.updatedMap();
-      //       this.preloader = false;
-      //     })
-      //   }
       }
 
       this.infos.forEach(item => {
@@ -1309,6 +1294,8 @@
         // this.regions = this.city[0].regions
 
       }
+
+      console.log(this.readyHouses)
 
       this.updateHouses()
 

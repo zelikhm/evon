@@ -7,12 +7,12 @@ use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
 use AdminNavigation;
-use App\Http\Admin\House\Info\Structure;
-use App\Http\Admin\House\Info\Type;
-use App\Models\Builder\HouseCharacteristicsModel;
-use App\Models\Builder\HouseModel;
-use App\Models\Builder\Info\StructureModel;
-use App\Models\Builder\Info\TypesModel;
+use App\Http\Admin\House\Info\StructureAdmin;
+use App\Http\Admin\House\Info\TypeAdmin;
+use App\Models\Builder\HouseCharacteristic;
+use App\Models\Builder\House;
+use App\Models\Builder\Info\Structure;
+use App\Models\Builder\Info\Type;
 use App\Models\LandingModel;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -30,7 +30,7 @@ use SleepingOwl\Admin\Section;
 /**
  * Class Administrators
  *
- * @property \App\Models\Builder\HouseCharacteristicsModel $model
+ * @property \App\Models\Builder\HouseCharacteristic $model
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */
@@ -104,7 +104,7 @@ class HouseCharacteristics extends Section implements Initializable
     if($id === null) {
       $form = AdminForm::elements([
         AdminFormElement::select('house_id', 'ЖК')
-          ->setModelForOptions(HouseModel::class, 'title')
+          ->setModelForOptions(House::class, 'title')
           ->setUsageKey('id'),
         AdminFormElement::columns()
           ->addColumn([
@@ -133,7 +133,7 @@ class HouseCharacteristics extends Section implements Initializable
     } else {
       $form = AdminForm::elements([
         AdminFormElement::select('house_id', 'ЖК')
-          ->setModelForOptions(HouseModel::class, 'title')
+          ->setModelForOptions(House::class, 'title')
           ->setUsageKey('id'),
         AdminFormElement::columns()
           ->addColumn([
@@ -233,7 +233,7 @@ class HouseCharacteristics extends Section implements Initializable
 
   public function types() {
 
-    $types = TypesModel::all();
+    $types = Type::all();
 
     return $types->map(static function ($item, $types) {
       return [
@@ -251,7 +251,7 @@ class HouseCharacteristics extends Section implements Initializable
 
   public function infos() {
 
-    $structure = StructureModel::all();
+    $structure = Structure::all();
 
     return $structure->map(static function ($item, $structure) {
       return [

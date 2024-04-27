@@ -7,7 +7,7 @@ use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
 use AdminNavigation;
-use App\Models\User\CompanyModel;
+use App\Models\User\Company;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +23,7 @@ use SleepingOwl\Admin\Section;
 /**
  * Class Administrators
  *
-// * @property \App\Models\Log\PaymentLogModel $model
+// * @property \App\Models\Log\PaymentLog $model
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */

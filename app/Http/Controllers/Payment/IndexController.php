@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\User\SubscriptionController;
-use App\Models\PaymentModel;
-use App\Models\TarifModel;
-use App\Models\TarifRussionModel;
-use App\Models\TraceModel;
+use App\Models\Payment;
+use App\Models\Tarif;
+use App\Models\TarifRussion;
+use App\Models\Trace;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -18,7 +18,7 @@ class IndexController extends Controller
 {
 
   public function plan() {
-    return response()->json(TarifModel::all(), 200);
+    return response()->json(Tarif::all(), 200);
   }
 
   /**
@@ -30,16 +30,16 @@ class IndexController extends Controller
 
   public function cloud(Request $request) {
 
-     TraceModel::create([
+     Trace::create([
       'user_id' => $request->options['data']['CloudPayments']['user_id'],
       'order_id' => $request->options['data']['CloudPayments']['random'],
       'price' => $request->options['data']['CloudPayments']['Amounts'],
       'title' => 'Оплата русской подписки',
       'status' => 'Оплачено',
-      'type' => $request->options['data']['CloudPayments']['Type'],
+      'type' => $request->options['data']['CloudPayments']['TypeAdmin'],
     ]);
 
-    $tarif = TarifRussionModel::where('id', $request->options['data']['CloudPayments']['Type'])->first();
+    $tarif = TarifRussion::where('id', $request->options['data']['CloudPayments']['TypeAdmin'])->first();
     $user = User::where('id', $request->options['data']['CloudPayments']['user_id'])->first();
 
     $subscription = new SubscriptionController();
@@ -57,13 +57,13 @@ class IndexController extends Controller
 
   public function setFailed(Request $request) {
 
-    TraceModel::create([
+    Trace::create([
       'user_id' => $request->options['data']['CloudPayments']['user_id'],
       'order_id' => $request->options['data']['CloudPayments']['random'],
       'price' => $request->options['data']['CloudPayments']['Amounts'],
       'title' => 'Оплата русской подписки',
       'status' => 'Оплачено',
-      'type' => $request->options['data']['CloudPayments']['Type'],
+      'type' => $request->options['data']['CloudPayments']['TypeAdmin'],
     ]);
 
     return Inertia::location('/profile');
@@ -80,12 +80,12 @@ class IndexController extends Controller
     $merchant_key   = '5B9J78CdGoFtpxJ6';
     $merchant_salt  = '9qHpXbz7gSRo8m6F';
 
-    PaymentModel::create([
+    Payment::create([
       'email' => $request->email,
       'type' => $request->type,
     ]);
 
-    $count = PaymentModel::orderBy('id', 'DESC')->first();
+    $count = Payment::orderBy('id', 'DESC')->first();
 
     $name            = "подписка: для пользователя " . $request->email;
     $price           = $request->price;

@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
-use App\Models\Builder\Flat\FlatModel;
-use App\Models\Builder\Flat\FrameModel;
-use App\Models\Builder\HouseModel;
-use App\Models\Builder\Info\CityModel;
+use App\Models\Builder\Flat\Flat;
+use App\Models\Builder\Flat\Frame;
+use App\Models\Builder\House;
+use App\Models\Builder\Info\City;
 use App\Observers\CityObserver;
 use App\Observers\FlatObserver;
 use App\Observers\FrameObserver;
@@ -35,10 +35,10 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        CityModel::observe(CityObserver::class);
-        HouseModel::observe(HouseObserver::class);
-        FlatModel::observe(FlatObserver::class);
-        FrameModel::observe(FrameObserver::class);
+        City::observe(CityObserver::class);
+        House::observe(HouseObserver::class);
+        Flat::observe(FlatObserver::class);
+        Frame::observe(FrameObserver::class);
     }
 
     /**

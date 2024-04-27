@@ -8,7 +8,7 @@ use AdminForm;
 use AdminFormElement;
 use AdminNavigation;
 use App\Models\LandingModel;
-use App\Models\User\CompanyModel;
+use App\Models\User\Company;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +24,7 @@ use SleepingOwl\Admin\Section;
 /**
  * Class Administrators
  *
-// * @property \App\Models\TraceModel $model
+// * @property \App\Models\Trace $model
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */

@@ -2,69 +2,69 @@
 
 namespace App\Observers;
 
-use App\Models\Builder\Flat\FlatModel;
-use App\Models\Builder\Flat\FrameModel;
-use App\Models\Builder\HouseModel;
+use App\Models\Builder\Flat\Flat;
+use App\Models\Builder\Flat\Frame;
+use App\Models\Builder\House;
 use Carbon\Carbon;
 
 class FrameObserver
 {
     /**
-     * Handle the FrameModel "created" event.
+     * Handle the Frame "created" event.
      *
-     * @param  \App\Models\FrameModel  $frameModel
+     * @param  \App\Models\Frame  $frameModel
      * @return void
      */
-    public function created(FrameModel $frameModel)
+    public function created(Frame $frameModel)
     {
-        HouseModel::where('id', $frameModel->house_id)->update([
+        House::where('id', $frameModel->house_id)->update([
           'active' => 0,
         ]);
     }
 
     /**
-     * Handle the FrameModel "updated" event.
+     * Handle the Frame "updated" event.
      *
-     * @param  \App\Models\FrameModel  $frameModel
+     * @param  \App\Models\Frame  $frameModel
      * @return void
      */
-    public function updated(FrameModel $frameModel)
+    public function updated(Frame $frameModel)
     {
-      HouseModel::where('id', $frameModel->house_id)->update([
+      House::where('id', $frameModel->house_id)->update([
         'active' => 0,
         'updated_at' => Carbon::now(),
       ]);
     }
 
     /**
-     * Handle the FrameModel "deleted" event.
+     * Handle the Frame "deleted" event.
      *
-     * @param  \App\Models\FrameModel  $frameModel
+     * @param  \App\Models\Frame  $frameModel
      * @return void
      */
-    public function deleted(FrameModel $frameModel)
+    public function deleted(Frame $frameModel)
     {
-        FlatModel::where('frame_id', $frameModel->id)->delete();
+        Flat::where('frame_id', $frameModel->id)->delete();
     }
 
     /**
-     * Handle the FrameModel "restored" event.
+     * Handle the Frame "restored" event.
      *
-     * @param  \App\Models\FrameModel  $frameModel
+     * @param  \App\Models\Frame  $frameModel
      * @return void
      */
-    public function restored(FrameModel $frameModel)
+    public function restored(Frame $frameModel)
     {
         //
     }
 
     /**
-     * Handle the FrameModel "force deleted" event.
+     * Handle the Frame "force deleted" event.
      *
-     * @param  \App\Models\FrameModel  $frameModel
+     * @param  \App\Models\Frame  $frameModel
      * @return void
      */
-    public function forceDeleted(FrameModel $frameModel)
+    public function forceDeleted(Frame $frameModel)
     {
         //
     }

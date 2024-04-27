@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Log\PaymentLogModel;
-use App\Models\PaymentModel;
-use App\Models\TarifModel;
+use App\Models\Log\PaymentLog;
+use App\Models\Payment;
+use App\Models\Tarif;
 use App\Models\User;
-use App\Models\User\SubscriptionModel;
+use App\Models\User\Subscription;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -25,16 +25,16 @@ class SubscriptionController extends Controller
 
     info($request->callback_id);
 
-    $payment = PaymentModel::where('id', $request->callback_id)
+    $payment = Payment::where('id', $request->callback_id)
       ->where('status', 0)
       ->first();
 
-    PaymentModel::where('id', $request->callback_id)
+    Payment::where('id', $request->callback_id)
       ->update(['status' => 1]);
 
     if ($request->status === 'success' && $payment !== null) {
 
-      $type = TarifModel::where('id', $payment->type)->first();
+      $type = Tarif::where('id', $payment->type)->first();
 
       info($type->days);
 
@@ -55,7 +55,7 @@ class SubscriptionController extends Controller
 
   private function setLog($user_id, $text) {
 
-    PaymentLogModel::create([
+    PaymentLog::create([
       'user_id' => $user_id,
       'text' => $text
     ]);
@@ -75,14 +75,14 @@ class SubscriptionController extends Controller
 
     self::setLog($user->id, 'Инициализация подписки');
 
-    $sub = SubscriptionModel::where('user_id', $user->id)->first();
+    $sub = Subscription::where('user_id', $user->id)->first();
 
     if ($sub !== null) {
       if ($sub->finished_at < Carbon::now()->addHour(3)) {
 
         self::setLog($user->id, 'Продление закончившейся подписки (1)');
 
-        $sub = SubscriptionModel::where('user_id', $user->id)->update([
+        $sub = Subscription::where('user_id', $user->id)->update([
           'finished_at' => Carbon::now()->addHour(3)->addDay($type->days),
           'free' => 0,
         ]);
@@ -99,7 +99,7 @@ class SubscriptionController extends Controller
 
           self::setLog($user->id, 'Продление бесплатной подписки (2)');
 
-          $sub = SubscriptionModel::where('user_id', $user->id)->update([
+          $sub = Subscription::where('user_id', $user->id)->update([
             'finished_at' => Carbon::now()->addHour(3)->addDay($type->days),
             'free' => 0,
           ]);
@@ -115,7 +115,7 @@ class SubscriptionController extends Controller
 
           self::setLog($user->id, 'Продление подписки (3)');
 
-          $sub = SubscriptionModel::where('user_id', $user->id)->update([
+          $sub = Subscription::where('user_id', $user->id)->update([
             'finished_at' => $date->addDay($type->days),
             'free' => 0,
           ]);
@@ -133,7 +133,7 @@ class SubscriptionController extends Controller
 
       self::setLog($user->id, 'Оформление новой подписки (4)');
 
-      $sub = SubscriptionModel::create([
+      $sub = Subscription::create([
         'user_id' => $user->id,
         'active' => true,
         'free' => 0,

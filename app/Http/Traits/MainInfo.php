@@ -2,26 +2,26 @@
 
 namespace App\Http\Traits;
 
-use App\Http\Admin\News\AdminNewsModel;
-use App\Models\Builder\Flat\FlatModel;
-use App\Models\Builder\Flat\FrameModel;
-use App\Models\Builder\HouseCharacteristicsModel;
-use App\Models\Builder\HouseImagesModel;
-use App\Models\Builder\HouseModel;
-use App\Models\Builder\HouseNewsModel;
-use App\Models\Builder\HouseViewsModel;
-use App\Models\Builder\Info\CityModel;
-use App\Models\Builder\Info\RegionModel;
-use App\Models\Builder\Info\StructureModel;
-use App\Models\Builder\Info\TypesModel;
-use App\Models\Messages\ChatModel;
-use App\Models\Messages\MessageModel;
-use App\Models\NotificationModel;
+use App\Http\Admin\News\AdminNews;
+use App\Models\Builder\Flat\Flat;
+use App\Models\Builder\Flat\Frame;
+use App\Models\Builder\HouseCharacteristic;
+use App\Models\Builder\HouseImage;
+use App\Models\Builder\House;
+use App\Models\Builder\HouseNew;
+use App\Models\Builder\HouseView;
+use App\Models\Builder\Info\City;
+use App\Models\Builder\Info\Region;
+use App\Models\Builder\Info\Structure;
+use App\Models\Builder\Info\Type;
+use App\Models\Messages\Chat;
+use App\Models\Messages\Message;
+use App\Models\Notification;
 use App\Models\User;
-use App\Models\User\CompilationInfoModel;
-use App\Models\User\CompilationModel;
-use App\Models\User\FavoritesModel;
-use App\Models\User\SubscriptionModel;
+use App\Models\User\CompilationInfo;
+use App\Models\User\Compilation;
+use App\Models\User\Favorite;
+use App\Models\User\Subscription;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use function Symfony\Component\Routing\Loader\Configurator\collection;
@@ -40,7 +40,7 @@ trait MainInfo
   protected function getSlider($house)
   {
 
-    $requestArea = HouseModel::where('area', $house->area)
+    $requestArea = House::where('area', $house->area)
       ->whereNot('id', $house->id)
       ->where('active', 2)
       ->where('visible', 1)
@@ -85,7 +85,7 @@ trait MainInfo
 
   protected function getNewsForPage()
   {
-    $news = HouseNewsModel::orderByDesc('created_at')
+    $news = HouseNew::orderByDesc('created_at')
       ->with(['house'])->get();
 
     foreach ($news as $key => $item) {
@@ -106,7 +106,7 @@ trait MainInfo
 
   protected function getAdminNews()
   {
-    return \App\Models\News\AdminNewsModel::orderByDesc('created_at')->limit(30)->get();
+    return \App\Models\News\AdminNew::orderByDesc('created_at')->limit(30)->get();
   }
 
   /**
@@ -117,11 +117,11 @@ trait MainInfo
 
   protected function getCompilation($id)
   {
-    $compilation = CompilationModel::where('user_id', $id)->get();
+    $compilation = Compilation::where('user_id', $id)->get();
 
     foreach ($compilation as $item) {
       $houses = collect();
-      $comp = CompilationInfoModel::where('compilation_id', $item->id)->with(['house'])->get();
+      $comp = CompilationInfo::where('compilation_id', $item->id)->with(['house'])->get();
       foreach ($comp as $value) {
         $houses->push($value);
       }
@@ -139,12 +139,12 @@ trait MainInfo
 
   protected function checkChat($id)
   {
-    $chat = ChatModel::where('from_id', $id)
+    $chat = Chat::where('from_id', $id)
       ->orWhere('to_id', Auth::id())
       ->first();
 
     if ($chat === null) {
-      $chat = ChatModel::where('to_id', $id)
+      $chat = Chat::where('to_id', $id)
         ->orWhere('from_id', Auth::id())
         ->first();
     }
@@ -164,7 +164,7 @@ trait MainInfo
 
   protected function createChat($id)
   {
-    return ChatModel::create([
+    return Chat::create([
       'from_id' => Auth::id(),
       'to_id' => $id,
       'visible_id' => $id,
@@ -179,12 +179,12 @@ trait MainInfo
 
   protected function getHouseOnId($house_id)
   {
-    $house = HouseModel::where('id', $house_id)->with(['flats', 'user', 'mainImage'])->first();
+    $house = House::where('id', $house_id)->with(['flats', 'user', 'mainImage'])->first();
 
 
     if ($house !== null) {
       if($house->mainImage === null) {
-        $house->image = HouseImagesModel::where('house_id', $house->id)->first();
+        $house->image = HouseImage::where('house_id', $house->id)->first();
       } else {
         $house->image = $house->mainImage;
       }
@@ -206,7 +206,7 @@ trait MainInfo
       return $house->mainImage->isResize === 1 ? (env('SERVICE_URL') . '/' . $house->mainImage->image) : $house->mainImage->image;
     }
 
-    $image = HouseImagesModel::where('house_id', $house->id)
+    $image = HouseImage::where('house_id', $house->id)
       ->orderBy('category', 'ASC')
       ->orderBy('created_at', 'ASC')
       ->first();
@@ -223,7 +223,7 @@ trait MainInfo
 
     for ($i = 0; $i < 4; $i++) {
 
-      $images = HouseImagesModel::where('house_id', $house->id)->where('category', $i)->limit(5)->get();
+      $images = HouseImage::where('house_id', $house->id)->where('category', $i)->limit(5)->get();
 
       foreach ($images as $image) {
         $array->push($image);
@@ -242,16 +242,16 @@ trait MainInfo
 
   protected function getHouseForUser($user_id)
   {
-    $houses = HouseModel::where('user_id', $user_id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->get();
+    $houses = House::where('user_id', $user_id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->get();
 
     foreach ($houses as $house) {
       $house->image = $this->getPhoto($house);
       $house->view = [
-        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addHour(-24))->count(),
-        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-5))->count(),
-        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-7))->count(),
-        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addWeek(-1))->count(),
-        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addYear(-1))->count(),
+        HouseView::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addHour(-24))->count(),
+        HouseView::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-5))->count(),
+        HouseView::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-7))->count(),
+        HouseView::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addWeek(-1))->count(),
+        HouseView::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addYear(-1))->count(),
       ];
     }
 
@@ -266,17 +266,17 @@ trait MainInfo
 
   protected function getHouseForUserPagination($id)
   {
-    $houses = HouseModel::where('user_id', $id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->get();
+    $houses = House::where('user_id', $id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->get();
 
     foreach ($houses as $house) {
       $house->image = $this->getPhoto($house);
 
       $house->view = [
-        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addHour(-24))->count(),
-        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-5))->count(),
-        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-7))->count(),
-        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addWeek(-1))->count(),
-        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addYear(-1))->count(),
+        HouseView::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addHour(-24))->count(),
+        HouseView::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-5))->count(),
+        HouseView::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-7))->count(),
+        HouseView::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addWeek(-1))->count(),
+        HouseView::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addYear(-1))->count(),
       ];
     }
 
@@ -289,17 +289,17 @@ trait MainInfo
    */
 
   protected function getHouseForAdminPagination($limit) {
-    $houses = HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'news'])->limit($limit)->get();
+    $houses = House::with(['info', 'supports', 'files', 'frames', 'images', 'news'])->limit($limit)->get();
 
     foreach ($houses as $house) {
       $house->image = $this->getPhoto($house);
 
       $house->view = [
-        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addHour(-24))->count(),
-        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-5))->count(),
-        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-7))->count(),
-        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addWeek(-1))->count(),
-        HouseViewsModel::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addYear(-1))->count(),
+        HouseView::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addHour(-24))->count(),
+        HouseView::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-5))->count(),
+        HouseView::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addDay(-7))->count(),
+        HouseView::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addWeek(-1))->count(),
+        HouseView::where('house_id', $house->id)->where('created_at', '>', Carbon::now()->addYear(-1))->count(),
       ];
     }
 
@@ -319,7 +319,7 @@ trait MainInfo
     $news = collect();
 
     foreach ($houses as $house) {
-      $news_array = HouseNewsModel::where('house_id', $house->id)->with(['house'])->get();
+      $news_array = HouseNew::where('house_id', $house->id)->with(['house'])->get();
 
       foreach ($news_array as $new) {
         $news->push($new);
@@ -336,9 +336,9 @@ trait MainInfo
 
   protected function getNotification()
   {
-    $notifications = NotificationModel::where('user_id', Auth::id())->get();
+    $notifications = Notification::where('user_id', Auth::id())->get();
 
-    NotificationModel::where('user_id', Auth::id())->delete();
+    Notification::where('user_id', Auth::id())->delete();
 
     return $notifications;
   }
@@ -350,13 +350,13 @@ trait MainInfo
 
   protected function getChats()
   {
-    $chats = ChatModel::where('from_id', Auth::id())
+    $chats = Chat::where('from_id', Auth::id())
       ->orWhere('to_id', Auth::id())
       ->with(['from', 'to'])
       ->get();
 
     foreach ($chats as $chat) {
-      $chat->last_message = MessageModel::where('chat_id', $chat->id)->orderBy('DESC')->first();
+      $chat->last_message = Message::where('chat_id', $chat->id)->orderBy('DESC')->first();
     }
 
     return $chats;
@@ -370,17 +370,17 @@ trait MainInfo
 
   protected function getHouse($id)
   {
-    $house = HouseModel::with(['info', 'supports', 'files', 'frames', 'user', 'news', 'images', 'flats'])
+    $house = House::with(['info', 'supports', 'files', 'frames', 'user', 'news', 'images', 'flats'])
       ->where('id', $id)
       ->first();
 
     foreach ($house->frames as $frame) {
-      $frame->flats = FlatModel::where('frame_id', $frame->id)->with(['images'])->get();
+      $frame->flats = Flat::where('frame_id', $frame->id)->with(['images'])->get();
     }
 
     $house->image = $this->getPhoto($house);
 
-    $favorite = FavoritesModel::where('user_id', Auth::id())
+    $favorite = Favorite::where('user_id', Auth::id())
       ->where('house_id', $id)
       ->first();
 
@@ -402,7 +402,7 @@ trait MainInfo
 
   protected function getHouseSlug($slug)
   {
-    $house = HouseModel::with(['info', 'supports', 'files', 'frames', 'images', 'user', 'news', 'flats', 'city_object', 'mainImage'])
+    $house = House::with(['info', 'supports', 'files', 'frames', 'images', 'user', 'news', 'flats', 'city_object', 'mainImage'])
       ->where('slug', $slug)
       ->first();
 
@@ -421,7 +421,7 @@ trait MainInfo
       $house->flat_updated = null;
     }
 
-    $frame_updated = FrameModel::where('house_id', $house->id)->orderBy('updated_at', 'DESC')->first();
+    $frame_updated = Frame::where('house_id', $house->id)->orderBy('updated_at', 'DESC')->first();
 
     if ($frame_updated !== null) {
       $house->frame_updated = $frame_updated->updated_at->format('d-m-Y');
@@ -430,7 +430,7 @@ trait MainInfo
     }
 
     foreach ($house->frames as $frame) {
-      $frame->flats = FlatModel::where('frame_id', $frame->id)->with(['images'])->get();
+      $frame->flats = Flat::where('frame_id', $frame->id)->with(['images'])->get();
     }
 
     $house->image = $this->getPhoto($house);
@@ -441,7 +441,7 @@ trait MainInfo
     $house->maxSquare = $house->flats->max('square');
     $house->minSquare = $house->flats->min('square');
 
-    $favorite = FavoritesModel::where('user_id', Auth::id())
+    $favorite = Favorite::where('user_id', Auth::id())
       ->where('house_id', $house->id)
       ->first();
 
@@ -462,7 +462,7 @@ trait MainInfo
 
   protected function getCompilations($id)
   {
-    $compilations = CompilationModel::where('user_id', $id)->with(['values'])->get();
+    $compilations = Compilation::where('user_id', $id)->with(['values'])->get();
 
     foreach ($compilations as $compilation) {
       foreach ($compilation->values as $value) {
@@ -481,7 +481,7 @@ trait MainInfo
    */
 
 //  protected function getCompilation($id) {
-//    return CompilationModel::where('id', $id)->with(['values'])->get();
+//    return Compilation::where('id', $id)->with(['values'])->get();
 //  }
 
 
@@ -492,7 +492,7 @@ trait MainInfo
 
   protected function getDop()
   {
-    return TypesModel::all();
+    return Type::all();
   }
 
   /**
@@ -502,7 +502,7 @@ trait MainInfo
 
   protected function getCity()
   {
-    return CityModel::with(['regions'])->get();
+    return City::with(['regions'])->get();
   }
 
   /**
@@ -511,7 +511,7 @@ trait MainInfo
    */
 
   protected function getRegions() {
-    return RegionModel::all();
+    return Region::all();
   }
 
   /**
@@ -521,6 +521,6 @@ trait MainInfo
 
   protected function getInfo()
   {
-    return StructureModel::all();
+    return Structure::all();
   }
 }

@@ -5,11 +5,11 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\AuthCheck;
 use App\Http\Traits\MainInfo;
-use App\Models\Builder\HouseModel;
-use App\Models\Builder\Info\CityModel;
+use App\Models\Builder\House;
+use App\Models\Builder\Info\City;
 use App\Models\User;
-use App\Models\User\CompilationInfoModel;
-use App\Models\User\CompilationModel;
+use App\Models\User\CompilationInfo;
+use App\Models\User\Compilation;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,7 +56,7 @@ class CompilationController extends Controller
 
   public function soloHouse($id, $house) {
 
-    HouseModel::where('slug', $house)->firstOrFail();
+    House::where('slug', $house)->firstOrFail();
 
     $house = $this->getHouseSlug($house);
 
@@ -69,7 +69,7 @@ class CompilationController extends Controller
     $user_info = User::where('id', $id)->firstOrFail();
 
     $compilation = [
-      'company' => User\CompanyModel::where('id', $user_info->company_id)->first(),
+      'company' => User\Company::where('id', $user_info->company_id)->first(),
       'user' => $user_info,
       'isVisible' => 0,
     ];
@@ -111,7 +111,7 @@ class CompilationController extends Controller
   public function show($id)
   {
     if((int)($id) !== 0) {
-      $compilation = CompilationModel::where('id', $id - 10000)->with(['values', 'user', 'company'])->firstOrFail();
+      $compilation = Compilation::where('id', $id - 10000)->with(['values', 'user', 'company'])->firstOrFail();
     } else {
       return redirect('404');
     }
@@ -123,7 +123,7 @@ class CompilationController extends Controller
       $houses->push($this->getHouseOnId($value->house_id));
     }
 
-    $cities = CityModel::all();
+    $cities = City::all();
 
     $houses_cities = array();
 
@@ -163,11 +163,11 @@ class CompilationController extends Controller
 
   public function house($id, $house) {
 
-    HouseModel::where('slug', $house)->firstOrFail();
+    House::where('slug', $house)->firstOrFail();
 
     $house = $this->getHouseSlug($house);
 
-    $compilation = CompilationInfoModel::where('compilation_id', $id - 10000)
+    $compilation = CompilationInfo::where('compilation_id', $id - 10000)
       ->where('house_id', $house->id)
       ->firstOrFail();
 
@@ -177,7 +177,7 @@ class CompilationController extends Controller
       $user = [];
     }
 
-    $compilation = CompilationModel::where('id', $id - 10000)->with(['values', 'user', 'company'])->firstOrFail();
+    $compilation = Compilation::where('id', $id - 10000)->with(['values', 'user', 'company'])->firstOrFail();
 
     return Inertia::render('AppLinkDescriptionObject', [
       'house' => $house,
@@ -202,7 +202,7 @@ class CompilationController extends Controller
 
     if ($this->checkToken($request->token)) {
 
-       CompilationModel::where('id', $request->id)->update([
+       Compilation::where('id', $request->id)->update([
         'title' => $request->title,
         'description' => $request->description,
         'isVisible' => $request->isVisible,
@@ -239,7 +239,7 @@ class CompilationController extends Controller
   public function create(Request $request)
   {
     if ($this->checkToken($request->token)) {
-      $compl = CompilationModel::create([
+      $compl = Compilation::create([
         'user_id' => $request->user_id,
         'title' => $request->title,
         'description' => $request->description,
@@ -265,10 +265,10 @@ class CompilationController extends Controller
   {
     if ($this->checkToken($request->token)) {
 
-      $status = CompilationInfoModel::where('compilation_id', $request->compilation_id)->where('house_id', $request->house_id)->first();
+      $status = CompilationInfo::where('compilation_id', $request->compilation_id)->where('house_id', $request->house_id)->first();
 
       if($status === null) {
-        CompilationInfoModel::create([
+        CompilationInfo::create([
           'compilation_id' => $request->compilation_id,
           'house_id' => $request->house_id,
           'description' => $request->description,
@@ -276,7 +276,7 @@ class CompilationController extends Controller
           'updated_at' => Carbon::now()->addHour(3),
         ]);
 
-        $compilation = CompilationModel::where('id', $request->compilation_id)->with(['values', 'user', 'company'])->first();
+        $compilation = Compilation::where('id', $request->compilation_id)->with(['values', 'user', 'company'])->first();
 
         $houses = collect();
 
@@ -288,7 +288,7 @@ class CompilationController extends Controller
 
         return response()->json($compilation, 200);
       } else {
-        $compilation = CompilationModel::where('id', $request->compilation_id)->with(['values', 'user', 'company'])->first();
+        $compilation = Compilation::where('id', $request->compilation_id)->with(['values', 'user', 'company'])->first();
 
         return response()->json($compilation, 201);
 
@@ -310,11 +310,11 @@ class CompilationController extends Controller
 
     if ($this->checkToken($request->token)) {
 
-      CompilationInfoModel::where('compilation_id', $request->compilation_id)
+      CompilationInfo::where('compilation_id', $request->compilation_id)
         ->where('house_id', $request->house_id)
         ->delete();
 
-      $compilation = CompilationModel::where('id', $request->compilation_id)->with(['values', 'user', 'company'])->firstOrFail();
+      $compilation = Compilation::where('id', $request->compilation_id)->with(['values', 'user', 'company'])->firstOrFail();
 
       return response()->json($compilation, 200);
     } else {
@@ -332,9 +332,9 @@ class CompilationController extends Controller
   public function delete(Request $request)
   {
     if ($this->checkToken($request->token)) {
-      CompilationInfoModel::where('compilation_id', $request->id)
+      CompilationInfo::where('compilation_id', $request->id)
         ->delete();
-      CompilationModel::where('id', $request->id)
+      Compilation::where('id', $request->id)
         ->delete();
 
       return response()->json(true, 200);

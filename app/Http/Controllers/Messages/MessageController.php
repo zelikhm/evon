@@ -8,8 +8,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\ChatController;
 use App\Http\Traits\AuthCheck;
 use App\Http\Traits\MainInfo;
-use App\Models\Messages\ChatModel;
-use App\Models\Messages\MessageModel;
+use App\Models\Messages\Chat;
+use App\Models\Messages\Message;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +46,7 @@ class MessageController extends Controller
 
     $chat = $this->checkChat($id);
 
-    $messages = MessageModel::where('chat_id', $chat->id)->get();
+    $messages = Message::where('chat_id', $chat->id)->get();
 
     return Inertia::render('', [
       'chat' => $chat,
@@ -71,7 +71,7 @@ class MessageController extends Controller
 
       foreach ($chats as $item) {
 
-        $item->message = MessageModel::where('chat_id', $item->id)
+        $item->message = Message::where('chat_id', $item->id)
           ->orderBy('created_at', 'DESC')->first();
 
       }
@@ -91,7 +91,7 @@ class MessageController extends Controller
   public function reloadChat(Request $request)
   {
     if ($this->checkToken($request->token)) {
-      $chat = ChatModel::where('id', $request->id)
+      $chat = Chat::where('id', $request->id)
         ->with(['messages', 'from', 'to'])
         ->first();
 
@@ -111,7 +111,7 @@ class MessageController extends Controller
 
   public function chatOpen(Request $request) {
 
-    ChatModel::where('id', $request->id)->update(['visible_id' => 0]);
+    Chat::where('id', $request->id)->update(['visible_id' => 0]);
 
     return response()->json(true, 200);
 
@@ -125,7 +125,7 @@ class MessageController extends Controller
   public function message(Request $request)
   {
     if ($this->checkToken($request->token)) {
-      MessageModel::create([
+      Message::create([
         'chat_id' => $request->chat_id,
         'message' => $request->message,
         'user_id' => $request->user_id,
@@ -133,7 +133,7 @@ class MessageController extends Controller
         'updated_at' => Carbon::now()->addHours(6),
       ]);
 
-      ChatModel::where('id', $request->chat_id)->update([
+      Chat::where('id', $request->chat_id)->update([
         'visible_id' => $request->visible_id,
         'updated_at' => Carbon::now()->addHours(6),
       ]);
@@ -141,7 +141,7 @@ class MessageController extends Controller
       $notif = new NotificationController();
       $notif->setNotification($request->user_id, 'Вам пришло новое сообщение');
 
-      $chat = ChatModel::where('id', $request->chat_id)
+      $chat = Chat::where('id', $request->chat_id)
         ->with(['messages', 'from', 'to'])
         ->first();
 

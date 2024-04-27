@@ -5,7 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\AuthCheck;
 use App\Http\Traits\MainInfo;
-use App\Models\User\FavoritesModel;
+use App\Models\User\Favorite;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +24,7 @@ class FavoriteController extends Controller
 
   public function index() {
 
-    $favorite = FavoritesModel::where('user_id', Auth::id())->get();
+    $favorite = Favorite::where('user_id', Auth::id())->get();
 
     foreach ($favorite as $item) {
       $house = $this->getHouseOnId($item->house_id);
@@ -46,7 +46,7 @@ class FavoriteController extends Controller
     public function add(Request $request) {
       if($this->checkToken($request->token)) {
 
-        $favorites = FavoritesModel::create([
+        $favorites = Favorite::create([
           'user_id' => $request->user_id,
           'house_id' => $request->house_id,
           'created_at' => Carbon::now()->addHour(3),
@@ -69,7 +69,7 @@ class FavoriteController extends Controller
     public function deleted(Request $request) {
       if($this->checkToken($request->token)) {
 
-        FavoritesModel::where('user_id', $request->user_id)
+        Favorite::where('user_id', $request->user_id)
           ->where('house_id', $request->house_id)
           ->delete();
 
@@ -86,7 +86,7 @@ class FavoriteController extends Controller
 
     public function getAll(Request $request) {
 
-      $favorites = FavoritesModel::where('user_id', $request->user_id)->get();
+      $favorites = Favorite::where('user_id', $request->user_id)->get();
 
       foreach ($favorites as $item) {
         $house = $this->getHouseOnId($item->house_id);

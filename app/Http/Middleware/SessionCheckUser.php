@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\User\SessionModel;
+use App\Models\User\Session;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +20,7 @@ class SessionCheckUser
    */
   public function handle(Request $request, Closure $next, $guard = null)
   {
-    $hasSession = SessionModel::where('user_id', Auth::id())
+    $hasSession = Session::where('user_id', Auth::id())
       ->where('session', $request->cookie('session_key'))
       ->first();
 

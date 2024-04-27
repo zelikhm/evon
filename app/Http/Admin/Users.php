@@ -11,7 +11,7 @@ use AdminDisplayFilter;
 use AdminColumnFilter;
 use App\Models\LandingModel;
 use App\Models\User;
-use App\Models\User\CompanyModel;
+use App\Models\User\Company;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -97,7 +97,7 @@ class Users extends Section implements Initializable
 
       AdminColumn::custom('Тариф / подписка', function (\Illuminate\Database\Eloquent\Model $model) {
 
-        $subscription = User\SubscriptionModel::where('user_id', $model->id)->first();
+        $subscription = User\Subscription::where('user_id', $model->id)->first();
 
         if ($subscription !== null) {
           $link = '/admin/subscription_models/' . $subscription->id . '/edit';
@@ -110,7 +110,7 @@ class Users extends Section implements Initializable
 
       AdminColumn::custom('Дата окончания', function (\Illuminate\Database\Eloquent\Model $model) {
 
-        $subscription = User\SubscriptionModel::where('user_id', $model->id)->first();
+        $subscription = User\Subscription::where('user_id', $model->id)->first();
 
         if ($subscription !== null) {
           return $subscription->finished_at > Carbon::now() ? $subscription->finished_at : '<b style="color: red">Закончена</b>';
@@ -143,7 +143,7 @@ class Users extends Section implements Initializable
 
       AdminColumnFilter::text()->setPlaceholder('first_name'),
 
-      AdminColumnFilter::select(new CompanyModel, 'company_id')->setDisplay('title')->setPlaceholder('Выберите компанию')->setColumnName('company_id'),
+      AdminColumnFilter::select(new Company, 'company_id')->setDisplay('title')->setPlaceholder('Выберите компанию')->setColumnName('company_id'),
 
       null,
 
@@ -191,7 +191,7 @@ class Users extends Section implements Initializable
           AdminFormElement::text('link', 'Языки'),
         ]),
 
-      AdminFormElement::select('company_id', 'Компания')->setModelForOptions(CompanyModel::class),
+      AdminFormElement::select('company_id', 'Компания')->setModelForOptions(Company::class),
 
       AdminFormElement::image('image', 'Изображение')->setUploadPath(function (\Illuminate\Http\UploadedFile $file) {
         return '/storage/user';

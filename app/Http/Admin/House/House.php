@@ -8,10 +8,10 @@ use AdminForm;
 use AdminFormElement;
 use AdminNavigation;
 use AdminColumnEditable;
-use App\Models\Builder\HouseCharacteristicsModel;
-use App\Models\Builder\HouseModel;
-use App\Models\Builder\Info\CityModel;
-use App\Models\Builder\Info\RegionModel;
+use App\Models\Builder\HouseCharacteristic;
+use App\Models\Builder\House;
+use App\Models\Builder\Info\City;
+use App\Models\Builder\Info\Region;
 use App\Models\LandingModel;
 use App\Models\User;
 use Carbon\Carbon;
@@ -34,7 +34,7 @@ use SleepingOwl\Admin\Section;
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */
-class House extends Section implements Initializable
+class HouseAdmin extends Section implements Initializable
 {
   /**
    * @var bool
@@ -85,7 +85,7 @@ class House extends Section implements Initializable
 
       AdminColumn::custom('ХАРАКТЕРИСТИКИ', function(\Illuminate\Database\Eloquent\Model $model) {
 
-        $chara = HouseCharacteristicsModel::where('house_id', $model->id)->first();
+        $chara = HouseCharacteristic::where('house_id', $model->id)->first();
 
         if($chara !== null) {
           return 'Заполнена ' . "<a href=/admin/house_characteristics_models/$chara->id/edit>клик</a>";
@@ -119,7 +119,7 @@ class House extends Section implements Initializable
     $control->addButton($button);
 
     $button->setCondition(function(\Illuminate\Database\Eloquent\Model $model) {
-      $house = HouseModel::where('id', $model->getKey())->first();
+      $house = House::where('id', $model->getKey())->first();
 
       if($house->active === 2) {
         return false;
@@ -139,7 +139,7 @@ class House extends Section implements Initializable
     $control->addButton($button1);
 
     $button1->setCondition(function(\Illuminate\Database\Eloquent\Model $model) {
-      $house = HouseModel::where('id', $model->getKey())->first();
+      $house = House::where('id', $model->getKey())->first();
 
       if($house->active !== 2) {
         return false;
@@ -164,12 +164,12 @@ class House extends Section implements Initializable
   {
     $card = AdminForm::card();
 
-    $model = HouseModel::where('id', $id)->first();
+    $model = House::where('id', $id)->first();
 
     if($model !== null) {
       if($model->city) {
-        $city = CityModel::where('title', $model->city)->first();
-        $regions = RegionModel::where('city_id', $city->id)->get();
+        $city = City::where('title', $model->city)->first();
+        $regions = Region::where('city_id', $city->id)->get();
 
         $options = $regions->map(static function ($item, $regions) {
           return [
@@ -179,7 +179,7 @@ class House extends Section implements Initializable
       }
 
       if($model->area) {
-        $area = RegionModel::where('title', $model->area)->first();
+        $area = Region::where('title', $model->area)->first();
       }
     }
 
@@ -193,12 +193,12 @@ class House extends Section implements Initializable
         AdminFormElement::columns()
           ->addColumn([
             AdminFormElement::text('title', 'Заголовок'),
-            AdminFormElement::select('city', 'Город')->setModelForOptions(CityModel::class)->SetUsageKey('title'),
+            AdminFormElement::select('city', 'Город')->setModelForOptions(City::class)->SetUsageKey('title'),
             AdminFormElement::text('longitude', 'Долгота'),
             AdminFormElement::number('percent', 'Процент')->setMin(0),
             AdminFormElement::text('slug', 'Слаг (для ссылки, название на английском)')->required(),
           ], 6)->addColumn([
-//            AdminFormElement::select('area', 'Район')->setModelForOptions(RegionModel::where('city_id', $city->id)->get()),
+//            AdminFormElement::select('area', 'Район')->setModelForOptions(Region::where('city_id', $city->id)->get()),
             AdminFormElement::text('latitude', 'Широта'),
             AdminFormElement::text('comment', 'Комментарий'),
             AdminFormElement::select('active', 'Прошел модерацию?', [
@@ -223,7 +223,7 @@ class House extends Section implements Initializable
         AdminFormElement::columns()
           ->addColumn([
             AdminFormElement::text('title', 'Заголовок'),
-            AdminFormElement::select('city', 'Город')->setModelForOptions(CityModel::class)->setUsageKey('title'),
+            AdminFormElement::select('city', 'Город')->setModelForOptions(City::class)->setUsageKey('title'),
             AdminFormElement::text('longitude', 'Долгота'),
             AdminFormElement::number('percent', 'Процент')->setMin(0),
             AdminFormElement::text('slug', 'Слаг (для ссылки, название на английском)')->required(),

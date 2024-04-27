@@ -6,9 +6,9 @@ use App\Http\Admin\House\HouseNews;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\AuthCheck;
 use App\Http\Traits\MainInfo;
-use App\Models\Builder\HouseModel;
-use App\Models\Builder\HouseNewsModel;
-use App\Models\News\AdminNewsModel;
+use App\Models\Builder\House;
+use App\Models\Builder\HouseNew;
+use App\Models\News\AdminNew;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -41,7 +41,7 @@ class NewsController extends Controller
 
   public function getAllNews() {
 
-    $news = HouseNewsModel::where('visible', 1)
+    $news = HouseNews::where('visible', 1)
       ->with(['house'])
       ->orderBy('created_at', 'ASC')
       ->get();
@@ -69,7 +69,7 @@ class NewsController extends Controller
 
   public function getAllNewsAdmin() {
 
-    return AdminNewsModel::all();
+    return AdminNew::all();
 
   }
 
@@ -85,7 +85,7 @@ class NewsController extends Controller
     $houses = $this->getHouseForUser($request->user_id);
 
     foreach ($houses as $house) {
-      $news = HouseNewsModel::where('house_id', $house->id)->get();
+      $news = HouseNews::where('house_id', $house->id)->get();
       if(count($news) > 0) {
         $collections->push($news);
       }
@@ -102,7 +102,7 @@ class NewsController extends Controller
 
   public function getNew(Request $request) {
 
-    return HouseNewsModel::where('id', $request->new_id)->first();
+    return HouseNews::where('id', $request->new_id)->first();
 
   }
 
@@ -114,7 +114,7 @@ class NewsController extends Controller
 
   public function editNews($id) {
 
-    $new = HouseNewsModel::where('id', $id)->with(['house'])->first();
+    $new = HouseNews::where('id', $id)->with(['house'])->first();
 
     if($new === null) {
       redirect('/news');
@@ -158,7 +158,7 @@ class NewsController extends Controller
 
   public function add(Request $request) {
     if($this->checkToken($request->token)) {
-      $news = HouseNewsModel::create([
+      $news = HouseNews::create([
         'house_id' => $request->house_id,
         'title' => $request->title,
         'description' => $request->description,
@@ -178,7 +178,7 @@ class NewsController extends Controller
 
   public function edit(Request $request) {
     if($this->checkToken($request->token)) {
-      $new = HouseNewsModel::where('id', $request->new_id)
+      $new = HouseNews::where('id', $request->new_id)
         ->update([
           'house_id' => $request->house_id,
           'title' => $request->title,
@@ -199,7 +199,7 @@ class NewsController extends Controller
 
   public function delete(Request $request) {
     if($this->checkToken($request->token)) {
-      HouseNewsModel::where('id', $request->new_id)
+      HouseNews::where('id', $request->new_id)
         ->delete();
 
       return response()->json(true, 200);
@@ -216,7 +216,7 @@ class NewsController extends Controller
 
   public function visible(Request $request) {
     if($this->checkToken($request->token)) {
-      $new = HouseNewsModel::where('id', $request->new_id)
+      $new = HouseNews::where('id', $request->new_id)
         ->update([
           'visible' => $request->visible
         ]);

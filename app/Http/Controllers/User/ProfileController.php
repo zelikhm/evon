@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Traits\AuthCheck;
 use App\Http\Traits\MainInfo;
 use App\Mail\RegisterEmail;
-use App\Models\TarifModel;
-use App\Models\TarifRussionModel;
+use App\Models\Tarif;
+use App\Models\TarifRussion;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,15 +31,15 @@ class ProfileController extends Controller
     if (Auth::user()->role !== 0) {
       return Inertia::render('AppProfileDev', [
         'user' => $this->getUser(),
-        'tarifs' => TarifModel::all(),
-        'tarifs_rus' => TarifRussionModel::all(),
+        'tarifs' => Tarif::all(),
+        'tarifs_rus' => TarifRussion::all(),
         'notification' => $this->getNotification(),
       ]);
     } else {
       return Inertia::render('AppProfileAgent', [
         'user' => $this->getUser(),
-        'tarifs' => TarifModel::all(),
-        'tarifs_rus' => TarifRussionModel::all(),
+        'tarifs' => Tarif::all(),
+        'tarifs_rus' => TarifRussion::all(),
         'notification' => $this->getNotification(),
         'verification' => $request->verification,
         'subscription' => $request->subscription,

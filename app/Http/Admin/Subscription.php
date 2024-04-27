@@ -11,7 +11,7 @@ use AdminColumnEditable;
 use AdminColumnFilter;
 use App\Models\LandingModel;
 use App\Models\User;
-use App\Models\User\CompanyModel;
+use App\Models\User\Company;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -93,7 +93,7 @@ class Subscription extends Section implements Initializable
       // Поиск текста
       AdminColumnFilter::text()->setPlaceholder('email'),
 
-      AdminColumnFilter::select(new CompanyModel, 'company_id')->setDisplay('title')->setPlaceholder('Выберите компанию')->setColumnName('company.id'),
+      AdminColumnFilter::select(new Company, 'company_id')->setDisplay('title')->setPlaceholder('Выберите компанию')->setColumnName('company.id'),
 
       AdminColumnFilter::range()->setColumnName('finished_at')->setFrom(
         AdminColumnFilter::date()->setColumnName('finished_at')->setPlaceholder('From Date')->setFormat('Y-m-d')

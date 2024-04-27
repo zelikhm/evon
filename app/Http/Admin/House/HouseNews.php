@@ -7,7 +7,7 @@ use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
 use AdminNavigation;
-use App\Models\Builder\HouseModel;
+use App\Models\Builder\House;
 use App\Models\LandingModel;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -100,7 +100,7 @@ class HouseNews extends Section implements Initializable
     $form = AdminForm::elements([
 
       AdminFormElement::select('house_id', 'ЖК')
-        ->setModelForOptions(HouseModel::class, 'title')
+        ->setModelForOptions(House::class, 'title')
         ->setUsageKey('id'),
 
       AdminFormElement::checkbox('visible', 'Отображать?'),

@@ -6,7 +6,7 @@ namespace App\Services\User;
 
 use App\Http\Traits\AuthCheck;
 use App\Http\Traits\MainInfo;
-use App\Models\Builder\HouseModel;
+use App\Models\Builder\House;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,7 +24,7 @@ class CompilationService implements CompilationInterface
 
     public function get($slug)
     {
-      HouseModel::where('slug', $slug)->firstOrFail();
+      House::where('slug', $slug)->firstOrFail();
 
       $house = $this->getHouseSlug($slug);
 

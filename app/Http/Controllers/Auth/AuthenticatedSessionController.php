@@ -204,10 +204,10 @@ class AuthenticatedSessionController extends Controller
    */
 
   protected function checkSession($id) {
-    $session = User\SessionModel::where('user_id', $id)->get();
+    $session = User\Session::where('user_id', $id)->get();
 
     if(count($session) !== 0) {
-      User\SessionModel::where('user_id', $id)->delete();
+      User\Session::where('user_id', $id)->delete();
     }
 
     return $this->setSession($id);
@@ -224,7 +224,7 @@ class AuthenticatedSessionController extends Controller
 
     Cookie::queue('session_key', $session, 262800);
 
-    User\SessionModel::create([
+    User\Session::create([
       'session' => $session,
       'user_id' => $id,
       'active' => 1,

@@ -27,7 +27,7 @@ use SleepingOwl\Admin\Section;
 /**
  * Class Administrators
  *
- * // * @property \App\Models\User\ClientModel $model
+ * // * @property \App\Models\User\Client $model
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */

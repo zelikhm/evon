@@ -11,7 +11,7 @@ use AdminDisplayFilter;
 use AdminColumnFilter;
 use AdminColumnEditable;
 use App\Models\User;
-use App\Models\User\CompanyModel;
+use App\Models\User\Company;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -28,7 +28,7 @@ use SleepingOwl\Admin\Section;
 /**
  * Class Administrators
  *
- * // * @property \App\Models\User\VerificationModel $model
+ * // * @property \App\Models\User\Verification $model
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */

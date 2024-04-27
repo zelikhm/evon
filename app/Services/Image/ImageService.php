@@ -5,9 +5,9 @@ namespace App\Services\Image;
 
 
 use App\Models\Builder\Flat\FlatImagesModel;
-use App\Models\Builder\HouseImagesModel;
-use App\Models\Builder\HouseMainImageModel;
-use App\Models\Log\ImageLogModel;
+use App\Models\Builder\HouseImage;
+use App\Models\Builder\HouseMainImage;
+use App\Models\Log\ImageLog;
 use Illuminate\Support\Facades\Http;
 
 class ImageService implements ImageInterface
@@ -63,7 +63,7 @@ class ImageService implements ImageInterface
 
     if ($type === 0) {
 
-      HouseMainImageModel::where(self::NAME, $id)
+      HouseMainImage::where(self::NAME, $id)
         ->update([
           'image' => $image,
           'isResize' => true
@@ -73,7 +73,7 @@ class ImageService implements ImageInterface
 
     } else if ($type === 1) {
 
-      HouseImagesModel::where(self::NAME, $id)
+      HouseImage::where(self::NAME, $id)
         ->update([
           'name' => $image,
           'isResize' => true,
@@ -140,7 +140,7 @@ class ImageService implements ImageInterface
   private static function saveLog($title, $image, $error):void
   {
 
-    ImageLogModel::create([
+    ImageLog::create([
       'title' => $title,
       'image' => $image,
       'error' => $error

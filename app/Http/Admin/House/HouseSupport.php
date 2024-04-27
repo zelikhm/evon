@@ -7,7 +7,7 @@ use AdminDisplay;
 use AdminForm;
 use AdminFormElement;
 use AdminNavigation;
-use App\Models\Builder\HouseModel;
+use App\Models\Builder\House;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -104,7 +104,7 @@ class HouseSupport extends Section implements Initializable
       AdminFormElement::columns()
         ->addColumn([
           AdminFormElement::select('house_id', 'ЖК')
-            ->setModelForOptions(HouseModel::class, 'title')
+            ->setModelForOptions(House::class, 'title')
             ->setUsageKey('id'),
           AdminFormElement::text('name', 'Имя')->required(),
           AdminFormElement::text('phone', 'Телефон')->required(),

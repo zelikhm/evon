@@ -8,7 +8,7 @@ use AdminForm;
 use AdminFormElement;
 use AdminNavigation;
 use App\Models\LandingModel;
-use App\Models\User\CompanyModel;
+use App\Models\User\Company;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -28,7 +28,7 @@ use SleepingOwl\Admin\Section;
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */
-class Company extends Section implements Initializable
+class CompanyAdmin extends Section implements Initializable
 {
   /**
    * @var bool

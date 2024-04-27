@@ -5,7 +5,7 @@ namespace App\Services\User;
 
 
 use App\Models\User;
-use App\Models\User\VerificationModel;
+use App\Models\User\Verification;
 use App\Services\Mail\RegisterMailService;
 use Illuminate\Support\Facades\Auth;
 use phpDocumentor\Reflection\Types\Boolean;
@@ -34,7 +34,7 @@ class VerificationService extends UserService implements VerificationInterface
         $fileName = '';
       }
 
-      $verification = VerificationModel::create([
+      $verification = Verification::create([
         'user_id' => $user_id,
         'link' => $form->link,
         'file' => '/storage/verification/' . $fileName,
@@ -70,7 +70,7 @@ class VerificationService extends UserService implements VerificationInterface
 
   public function editStatus($verification_id, $status): void
   {
-    $verification = VerificationModel::where('id', $verification_id)->first();
+    $verification = Verification::where('id', $verification_id)->first();
 
     $verification->status = $status;
     $verification->save();

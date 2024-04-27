@@ -4,13 +4,13 @@
 namespace App\Services\Houses;
 
 
-use App\Models\Builder\HouseImagesModel;
-use App\Models\Builder\HouseMainImageModel;
-use App\Models\Builder\HouseModel;
-use App\Models\Builder\HouseViewsModel;
-use App\Models\Builder\Info\StructureModel;
-use App\Models\Builder\Info\TypesModel;
-use App\Models\User\FavoritesModel;
+use App\Models\Builder\HouseImage;
+use App\Models\Builder\HouseMainImage;
+use App\Models\Builder\House;
+use App\Models\Builder\HouseView;
+use App\Models\Builder\Info\Structure;
+use App\Models\Builder\Info\Type;
+use App\Models\User\Favorite;
 use App\Services\Image\ImageService;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,8 +30,8 @@ class HousesService implements HousesInterface
   public function __construct(ImageService $imageService)
   {
     $this->imageService = $imageService;
-    $this->dops_array = TypesModel::all();
-    $this->infos_array = StructureModel::all();
+    $this->dops_array = Type::all();
+    $this->infos_array = Structure::all();
 
   } //end
 
@@ -57,23 +57,23 @@ class HousesService implements HousesInterface
   public function getHouses($type, $limit, $dop, $count = null)
   {
     if ($limit) {
-      $houses = HouseModel::where('visible', 1)
+      $houses = House::where('visible', 1)
         ->orderBy('updated_at', 'DESC')
         ->where('active', 2)
-        ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
-        ->select('house_models.*')
-        ->where('house_characteristics_models.type', $type)
+        ->join('house_characteristics', 'house_characteristics.house_id', 'houses.id')
+        ->select('houses.*')
+        ->where('house_characteristics.type', $type)
         ->distinct()
         ->with(['flats', 'user', 'mainImage'])
         ->limit($count !== null ? $count : 30)
         ->get();
     } else {
-      $houses = HouseModel::where('visible', 1)
+      $houses = House::where('visible', 1)
         ->orderBy('updated_at', 'DESC')
         ->where('active', 2)
-        ->join('house_characteristics_models', 'house_characteristics_models.house_id', 'house_models.id')
-        ->select('house_models.*')
-        ->where('house_characteristics_models.type', $type)
+        ->join('house_characteristics', 'house_characteristics.house_id', 'houses.id')
+        ->select('houses.*')
+        ->where('house_characteristics.type', $type)
         ->distinct()
         ->with(['flats', 'user', 'mainImage'])
         ->get();
@@ -86,7 +86,7 @@ class HousesService implements HousesInterface
       $house->description_tr = [];
 
       if($house->mainImage === null) {
-        $house->image = HouseImagesModel::where('house_id', $house->id)->first();
+        $house->image = HouseImage::where('house_id', $house->id)->first();
       } else {
         $house->image = $house->mainImage;
       }
@@ -96,7 +96,7 @@ class HousesService implements HousesInterface
         $house->info_array = $this->getInfoForHouse($house->info->info);
       }
 
-      $house->popular = HouseViewsModel::where('house_id', $house->id)->count() > 30;
+      $house->popular = HouseView::where('house_id', $house->id)->count() > 30;
 
       $house->maxPrice = (int)($house->flats->max('price'));
       $house->minPrice = (int)($house->flats->min('price'));
@@ -106,7 +106,7 @@ class HousesService implements HousesInterface
 
       $house->builder = $house->user->first_name;
 
-      $favorite = FavoritesModel::where('user_id', Auth::id())
+      $favorite = Favorite::where('user_id', Auth::id())
         ->where('house_id', $house->id)
         ->first();
 
@@ -175,20 +175,20 @@ class HousesService implements HousesInterface
     }
 
     if($type === 0) {
-      HouseMainImageModel::create([
+      HouseMainImage::create([
         'house_id' => $id,
         'image' => $image_name,
       ]);
     } else {
-      $image = HouseMainImageModel::where('house_id', $id)->first();
+      $image = HouseMainImage::where('house_id', $id)->first();
 
       if($image !== null) {
-        HouseMainImageModel::where('house_id', $id)
+        HouseMainImage::where('house_id', $id)
           ->update([
             'image' => $image_name
           ]);
       } else {
-        HouseMainImageModel::create([
+        HouseMainImage::create([
             'house_id' => $id,
             'image' => $image_name
           ]);

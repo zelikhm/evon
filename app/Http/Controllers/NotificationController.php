@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\NotificationModel;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,7 +16,7 @@ class NotificationController extends Controller
 
   public function setNotification($user_id, $message)
   {
-    NotificationModel::create([
+    Notification::create([
       'user_id' => $user_id,
       'message' => $message,
       'active' => 1,
@@ -29,7 +29,7 @@ class NotificationController extends Controller
    */
 
   public function get() {
-    return NotificationModel::where('user_id', Auth::id())
+    return Notification::where('user_id', Auth::id())
       ->get();
   }
 
@@ -40,7 +40,7 @@ class NotificationController extends Controller
 
   public function delete(Request $request)
   {
-    NotificationModel::where('id', $request->id)
+    Notification::where('id', $request->id)
       ->delete();
   }
 }

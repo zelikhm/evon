@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Models\User\CompanyModel;
-use App\Models\User\SubscriptionModel;
-use App\Models\User\VerificationModel;
+use App\Models\User\Company;
+use App\Models\User\Subscription;
+use App\Models\User\Verification;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -75,7 +75,7 @@ class User extends Authenticatable
    */
 
   public function hasSubscription() {
-    $subscription = SubscriptionModel::where('user_id', $this->id)
+    $subscription = Subscription::where('user_id', $this->id)
       ->first();
 
     if($subscription) {
@@ -93,7 +93,7 @@ class User extends Authenticatable
    */
 
   public function subscription() {
-    return $this->belongsTo(SubscriptionModel::class, 'id', 'user_id');
+    return $this->belongsTo(Subscription::class, 'id', 'user_id');
   } //end
 
   /**
@@ -103,7 +103,7 @@ class User extends Authenticatable
 
   public function isVerification()
   {
-    $verification = VerificationModel::where('user_id', $this->id)
+    $verification = Verification::where('user_id', $this->id)
       ->first();
 
     return $verification !== null ? $verification->isVerification === 2 : false;
@@ -116,14 +116,14 @@ class User extends Authenticatable
 
   public function verification()
   {
-    return $this->belongsTo(VerificationModel::class, 'id', 'user_id');
+    return $this->belongsTo(Verification::class, 'id', 'user_id');
   } //end
 
   public function subscriptionInfo() {
-    return $this->belongsTo(SubscriptionModel::class, 'id', 'user_id');
+    return $this->belongsTo(Subscription::class, 'id', 'user_id');
   }
 
   public function company() {
-    return $this->belongsTo(CompanyModel::class, 'company_id', 'id');
+    return $this->belongsTo(Company::class, 'company_id', 'id');
   }
 }
