@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 Abstract class UserService implements UserInterface
 {
 
-
   /**
    * get user
    * @param $user_id
@@ -88,6 +87,6 @@ Abstract class UserService implements UserInterface
       'first_name' => $form['first_name'],
       'last_name' => $form['last_name'],
     ]);
-
   } //end
+
 }

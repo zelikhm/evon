@@ -105,12 +105,12 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
               <div v-if="openProfileMenu"
                 class="overflow-hidden border border-solid border-[#E5DFEE] absolute z-50 top-[90%] right-0 flex flex-col bg-white rounded-[5px]">
 
-                <Link href="/profile"
-                  class="cursor-pointer hover__select border__bottom--not whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">
-                  <span class="cursor-pointer pr-1 leading-none whitespace-nowrap cursor-default">{{ language.ob[42] }}</span>
-                  <span class="cursor-pointer leading-none whitespace-nowrap cursor-default"
-                    v-if="user !== null && user.subscription_info !== null"> {{ getDate(user.subscription_info.finished_at) }}</span>
-                </Link>
+<!--                <Link href="/profile"-->
+<!--                  class="cursor-pointer hover__select border__bottom&#45;&#45;not whitespace-nowrap cursor-pointer p-4 xxl:p-3 xl:p-2.5">-->
+<!--                  <span class="cursor-pointer pr-1 leading-none whitespace-nowrap cursor-default">{{ language.ob[42] }}</span>-->
+<!--                  <span class="cursor-pointer leading-none whitespace-nowrap cursor-default"-->
+<!--                    v-if="user !== null && user.subscription_info !== null"> {{ getDate(user.subscription_info.finished_at) }}</span>-->
+<!--                </Link>-->
 
                 <div v-if="user.role === 0"
                   class="hover__select border__bottom--not flex justify-between gap-3.5 xxl:gap-3 xl:gap-2.5 items-center p-4 xxl:p-3 xl:p-2.5">

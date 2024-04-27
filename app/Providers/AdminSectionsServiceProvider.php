@@ -3,18 +3,18 @@
 namespace App\Providers;
 
 use App\Http\Admin\Log\PaymentLogModel;
-use App\Models\Builder\HouseFilesModel;
-use App\Models\Builder\HouseImagesModel;
-use App\Models\Builder\Info\RegionModel;
-use App\Models\Log\ImageLogModel;
-use App\Models\News\AdminNewsModel;
-use App\Models\TarifModel;
-use App\Models\TarifRussionModel;
-use App\Models\TraceModel;
-use App\Models\User\ClientModel;
-use App\Models\User\CompanyModel;
-use App\Models\User\SubscriptionModel;
-use App\Models\User\VerificationModel;
+use App\Models\Builder\HouseFile;
+use App\Models\Builder\HouseImage;
+use App\Models\Builder\Info\Region;
+use App\Models\Log\ImageLog;
+use App\Models\News\AdminNew;
+use App\Models\Tarif;
+use App\Models\TarifRussion;
+use App\Models\Trace;
+use App\Models\User\Client;
+use App\Models\User\Company;
+use App\Models\User\Subscription;
+use App\Models\User\Verification;
 use SleepingOwl\Admin\Providers\AdminSectionsServiceProvider as ServiceProvider;
 use AdminNavigation;
 
@@ -27,31 +27,33 @@ class AdminSectionsServiceProvider extends ServiceProvider
   protected $sections = [
     \App\Models\User::class => 'App\Http\Admin\Users',
     //houses
-    \App\Models\Builder\HouseModel::class => 'App\Http\Admin\House\House',
-    \App\Models\Builder\Info\TypesModel::class => 'App\Http\Admin\House\Info\Type',
-    \App\Models\Builder\Info\StructureModel::class => 'App\Http\Admin\House\Info\Structure',
-    \App\Models\Builder\Info\CityModel::class => 'App\Http\Admin\House\Info\City',
-    \App\Models\Builder\HouseCharacteristicsModel::class => 'App\Http\Admin\House\HouseCharacteristics',
-    \App\Models\Builder\HouseNewsModel::class => 'App\Http\Admin\House\HouseNews',
-    \App\Models\Builder\HouseSupportModel::class => 'App\Http\Admin\House\HouseSupport',
-    \App\Models\Builder\Flat\FrameModel::class => 'App\Http\Admin\House\Flat\Frame',
-    \App\Models\Builder\Flat\FlatModel::class => 'App\Http\Admin\House\Flat\Flat',
-    HouseImagesModel::class => 'App\Http\Admin\House\Images',
-    HouseFilesModel::class => 'App\Http\Admin\House\Files',
+    \App\Models\Builder\House::class => 'App\Http\Admin\House\House',
+    \App\Models\Builder\Info\Type::class => 'App\Http\Admin\House\Info\TypeAdmin',
+    \App\Models\Builder\Info\Structure::class => 'App\Http\Admin\House\Info\StructureAdmin',
+    \App\Models\Builder\Info\City::class => 'App\Http\Admin\House\Info\City',
+    \App\Models\Builder\HouseCharacteristic::class => 'App\Http\Admin\House\HouseCharacteristics',
+    \App\Models\Builder\HouseNew::class => 'App\Http\Admin\House\HouseNews',
+    \App\Models\Builder\HouseSupport::class => 'App\Http\Admin\House\HouseSupport',
+    \App\Models\Builder\Flat\Frame::class => 'App\Http\Admin\House\Flat\Frame',
+    \App\Models\Builder\Flat\Flat::class => 'App\Http\Admin\House\Flat\FlatAdmin',
+    HouseImage::class => 'App\Http\Admin\House\Images',
+    HouseFile::class => 'App\Http\Admin\House\Files',
     //
-    AdminNewsModel::class => 'App\Http\Admin\News\AdminNewsModel',
-    CompanyModel::class => 'App\Http\Admin\Company',
+    AdminNew::class => 'App\Http\Admin\News\AdminNews',
+    Company::class => 'App\Http\Admin\Company',
     //
-    TarifModel::class => 'App\Http\Admin\Tarif',
-    TarifRussionModel::class => 'App\Http\Admin\TarifRussion',
-    SubscriptionModel::class => 'App\Http\Admin\Subscription',
-    TraceModel::class => 'App\Http\Admin\Trace',
-    \App\Models\Log\PaymentLogModel::class => 'App\Http\Admin\Log\PaymentLogModel',
+    Tarif::class => 'App\Http\Admin\Tarif',
+    TarifRussion::class => 'App\Http\Admin\TarifRussion',
+    Subscription::class => 'App\Http\Admin\Subscription',
+    Trace::class => 'App\Http\Admin\Trace',
+    \App\Models\Log\PaymentLog::class => 'App\Http\Admin\Log\PaymentLogModel',
+    \App\Models\Log\Utm::class => 'App\Http\Admin\Log\Utm',
+    \App\Models\Log\UtmStat::class => 'App\Http\Admin\Log\UtmLog',
     //
-    ClientModel::class => 'App\Http\Admin\Client',
-    VerificationModel::class => 'App\Http\Admin\Verification',
+    Client::class => 'App\Http\Admin\Client',
+    Verification::class => 'App\Http\Admin\Verification',
     //
-    ImageLogModel::class => 'App\Http\Admin\Log\ImageLog'
+    ImageLog::class => 'App\Http\Admin\Log\ImageLog'
   ];
 
   /**

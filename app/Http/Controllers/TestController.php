@@ -9,17 +9,24 @@ use Illuminate\Support\Facades\Http;
 
 class TestController extends Controller
 {
-    public function index() {
-      return Inertia::render('TestApp');
-    }
+  public function index()
+  {
+    return Inertia::render('TestApp');
+  }
 
-    public function save(Request $request, ImageService $imageService) {
+  public function save(Request $request, ImageService $imageService)
+  {
 
-      $image = time() . '.' . $request->image->getClientOriginalName();
-      $request->image->move(public_path('/storage/buffer'), $image);
+    $image = time() . '.' . $request->image->getClientOriginalName();
+    $request->image->move(public_path('/storage/buffer'), $image);
 
-      $status = $imageService->add(0, 0, $request->image, $image);
+    $status = $imageService->add(0, 0, $request->image, $image);
 
-      dd($status);
-    }
+    dd($status);
+  }
+
+  public function test()
+  {
+
+  }
 }

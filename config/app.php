@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Facade;
 
 return [
 
+    'amo_token' => env('AMO_LONG_TOKEN'),
+    'amo_subdomain' => env('AMO_SUBDOMAIN'),
     /*
     |--------------------------------------------------------------------------
     | Application Name

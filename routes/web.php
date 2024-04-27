@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Builder\HouseModel;
+use App\Models\Builder\House;
 use App\Models\User;
 use App\Services\Image\ImageService;
 use Illuminate\Foundation\Application;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Traits\MainInfo;
 
-Route::get('/', ['App\Http\Controllers\Controller', 'main']);
+Route::get('/', ['App\Http\Controllers\Controller', 'main'])->middleware('utm');
 
 Route::prefix('/compilation')->group(function () {
   Route::get('/{id}', ['App\Http\Controllers\User\CompilationController', 'show']);
@@ -41,4 +41,5 @@ require __DIR__ . '/form.php';
 require __DIR__ . '/admin.php';
 require __DIR__ . '/agentRoutes.php';
 require __DIR__ . '/profile.php';
+require __DIR__ . '/report.php';
 

@@ -9,6 +9,7 @@ use App\Http\Middleware\CheckRole;
 use App\Http\Middleware\CheckSubscription;
 use App\Http\Middleware\CheckVerification;
 use App\Http\Middleware\SessionCheckUser;
+use App\Http\Middleware\Utm;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -79,5 +80,6 @@ class Kernel extends HttpKernel
     'CheckBuilder' => CheckBuilder::class,
     'CheckSubscription' => CheckSubscription::class,
     'CheckVerification' => CheckVerification::class,
+    'utm' => Utm::class,
   ];
 }

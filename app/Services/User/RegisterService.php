@@ -9,6 +9,13 @@ use function Symfony\Component\String\splice;
 class RegisterService extends UserService implements RegisterInterface
 {
 
+  private $amoService;
+
+  public function __construct(AmoService $amoService)
+  {
+    $this->amoService = $amoService;
+  }
+
   /**
    * generation password
    * @return string
@@ -16,9 +23,7 @@ class RegisterService extends UserService implements RegisterInterface
 
   private function generationPass()
   {
-
     return substr(hash("sha256", rand(12, 12)), 0, 12);
-
   } //end
 
   /**
@@ -29,6 +34,7 @@ class RegisterService extends UserService implements RegisterInterface
 
   public function startRegister($form)
   {
+    $this->amoService->save($form['last_name'] . ' ' . $form['first_name'], $form['email'], $form['phone']);
 
     if ($form['type_id'] < 3) {
       return ['status' => $this->registerRielter($form), 'builder' => false];
@@ -46,7 +52,6 @@ class RegisterService extends UserService implements RegisterInterface
 
   public function registerRielter($form)
   {
-
     if ($this->checkUser($form['email'], null, $form['phone'])) {
       return false;
     }
