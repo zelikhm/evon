@@ -35,7 +35,7 @@ Route::prefix('client')->group(function () {
   Route::post('/delete', ['App\Http\Controllers\HelpController', 'delete']);
 });
 
-Route::prefix('house')->group(function () {
+Route::prefix('house')->middleware('checkToken')->group(function () {
   //admin
   Route::post('/getHousesForAdmin', ['App\Http\Controllers\House\HouseController', 'getHousesForAdmin']);
   //
@@ -66,8 +66,7 @@ Route::prefix('house')->group(function () {
   Route::post('delete', ['App\Http\Controllers\House\HouseController', 'delete']);
   //
   Route::post('getHouseApi', ['App\Http\Controllers\House\HouseController', 'getHouseApi']);
-  Route::get('getHousesJk', ['App\Http\Controllers\House\HouseController', 'getHousesJk']);
-  Route::get('getHousesVillages', ['App\Http\Controllers\House\HouseController', 'getHousesVillages']);
+  Route::post('getHousesJk', ['App\Http\Controllers\House\HouseController', 'getHousesJk']);
   //
   Route::post('search', ['App\Http\Controllers\House\HouseController', 'search']);
 });

@@ -7,6 +7,7 @@ use App\Http\Middleware\CheckBuilder;
 use App\Http\Middleware\CheckRealtor;
 use App\Http\Middleware\CheckRole;
 use App\Http\Middleware\CheckSubscription;
+use App\Http\Middleware\CheckToken;
 use App\Http\Middleware\CheckVerification;
 use App\Http\Middleware\SessionCheckUser;
 use App\Http\Middleware\Utm;
@@ -81,5 +82,6 @@ class Kernel extends HttpKernel
     'CheckSubscription' => CheckSubscription::class,
     'CheckVerification' => CheckVerification::class,
     'utm' => Utm::class,
+    'checkToken' => CheckToken::class
   ];
 }

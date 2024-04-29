@@ -523,7 +523,6 @@
                 <div class="relative object__block h-full">
                   <div
                     class="seek opacity-0 transition-all immovables__overlay h-full w-full absolute z-10 rounded-[6px]"></div>
-                  {{item.image.name}}
                   <img v-if="item.image !== null" :src="item.image.isResize === 1 ? (imageServiceUrl + item.image.name) : item.image.name"
                        class="object-cover w-full h-[180px] exl:h-fit exl:h-[9.3vw] x:h-[10vw] lg:h-[14vw] md:h-[32vw] sm:h-[42vw]"
                        alt="">
@@ -603,7 +602,7 @@
           </div>
         </div>
         <div class="w-full flex justify-center mb-14 xxl:mb-10 xl:mb-8" @click="nextShow()"
-             v-if="count_house > count && !map"
+             v-if="count_houses > count && !map"
         >
           <button
             class="more__button mt-10 transition-all text-[#E84680] border border-solid border-[#E84680] text-base xxl:text-sm xl:text-xs lg:text-[15px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2.5 xl:py-1.5 rounded-[3px]">
@@ -1065,21 +1064,16 @@
         }
       },
       checkCity(id) {
-
         let arr = this.filters.cities.find(item => id === item.id);
 
         return arr !== undefined ? true : false;
-
       },
       checkRegion(id) {
-
         let arr = this.filters.areas.find(item => id === item.id);
 
         return arr !== undefined ? true : false;
-
       },
       changeSelectCity(city) {
-
         let arr = this.filters.cities.findIndex(item => city.id === item.id);
 
         if (arr !== -1) {
@@ -1109,24 +1103,16 @@
           } else {
             this.city_map = null;
           }
-
         }
-
       },
       changeSelectRegion(region) {
-
         let arr = this.filters.areas.findIndex(item => region.id === item.id);
 
         if (arr !== -1) {
-
           this.filters.areas.splice(arr, 1);
-
         } else {
-
           this.filters.areas.push(region);
-
         }
-
       },
       changeSelectPlan(item) {
         item.active = !item.active
@@ -1182,16 +1168,12 @@
           house.minSquare = Math.min(...squareFlats)
           house.maxSquare = Math.max(...squareFlats)
         })
-
-        // this.splitHouses();
       },
-      // splitHouses() {
-      //   this.houses_array = JSON.parse(JSON.stringify(this.readyHouses.sort((a, b) => b.created_at - a.created_at))).splice(0, this.count);
-      // },
       nextShow() {
         this.count += 30;
 
-        // this.houses_array = JSON.parse(JSON.stringify(this.readyHouses.sort((a, b) => b.created_at - a.created_at))).splice(0, this.count);
+        this.preloaderObject = true;
+        this.reloadHouses()
       },
       updatedMap() {
         let id = 0;
@@ -1218,6 +1200,22 @@
           })
         }
       },
+      reloadHouses() {
+        console.log(this.count)
+        axios.post('/api/house/getHousesJk?dop=true', {
+          token: this.user.token,
+          limit: this.count,
+          offset: 0,
+          type: 0
+        }).then(res => {
+          this.readyHouses = res.data;
+          this.count_house = this.readyHouses.length;
+          this.map_array = this.readyHouses;
+          this.updateHouses();
+          this.updatedMap();
+          this.preloaderObject = false;
+        })
+      }
     },
     created() {
       this.imageServiceUrl = this.$service;
@@ -1241,25 +1239,12 @@
           })
           .catch(e => console.log(e))
       } else {
-        console.log(this.houses);
         this.readyHouses = this.houses
         this.map_array = this.houses;
         this.preloader = false;
 
-        if (this.type === 0) {
-          this.preloaderObject = true;
-
-          let link = '/api/house/getHousesJk?dop=true&isCache=0';
-
-          axios.get(link).then(res => {
-            this.readyHouses = res.data;
-            this.count_house = this.readyHouses.length;
-            this.map_array = this.readyHouses;
-            this.updateHouses();
-            this.updatedMap();
-            this.preloaderObject = false;
-          })
-        }
+        this.preloaderObject = true;
+        this.reloadHouses()
       }
 
       this.infos.forEach(item => {

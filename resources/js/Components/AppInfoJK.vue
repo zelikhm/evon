@@ -869,7 +869,6 @@
         this.images = []
       },
       generationDop() {
-
         this.optionsSelectInfrastructure = [];
         this.optionsSelectServices = [];
 
@@ -893,10 +892,7 @@
           }
         }
 
-
-
         if (this.house !== undefined) {
-
           if (this.house.info.info !== null) {
             let info = this.house.info.info.replace(/[^\d]/g, ' '),
               arrayInfo = info.split(' ')
@@ -905,13 +901,12 @@
               if (key !== '') {
                 this.object.info.push(this.infos.find(item => item.id === +key))
                 if (this.selectLanguage === 0) {
-                  this.valueSelectInfrastructure.push(this.infos.find(item => item.id === +key).name)
+                  this.valueSelectInfrastructure.push(this.infos.find(item => item.id === +key)?.name)
                 } else if (this.selectLanguage === 1) {
-                  this.valueSelectInfrastructure.push(this.infos.find(item => item.id === +key).name_en)
+                  this.valueSelectInfrastructure.push(this.infos.find(item => item.id === +key)?.name_en)
                 } else if (this.selectLanguage === 2) {
-                  this.valueSelectInfrastructure.push(this.infos.find(item => item.id === +key).name_tr)
+                  this.valueSelectInfrastructure.push(this.infos.find(item => item.id === +key)?.name_tr)
                 }
-
               }
             }
           }
@@ -924,11 +919,11 @@
               if (key !== '') {
                 this.object.dop.push(this.dops.find(item => item.id === +key))
                 if (this.selectLanguage === 0) {
-                  this.valueSelectServices.push(this.dops.find(item => item.id === +key).name)
+                  this.valueSelectServices.push(this.dops.find(item => item.id === +key)?.name)
                 } else if (this.selectLanguage === 1) {
-                  this.valueSelectServices.push(this.dops.find(item => item.id === +key).name_en)
+                  this.valueSelectServices.push(this.dops.find(item => item.id === +key)?.name_en)
                 } else if (this.selectLanguage === 2) {
-                  this.valueSelectServices.push(this.dops.find(item => item.id === +key).name_tr)
+                  this.valueSelectServices.push(this.dops.find(item => item.id === +key)?.name_tr)
                 }
               }
             }

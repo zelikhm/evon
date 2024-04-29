@@ -181,7 +181,6 @@ trait MainInfo
   {
     $house = House::where('id', $house_id)->with(['flats', 'user', 'mainImage'])->first();
 
-
     if ($house !== null) {
       if($house->mainImage === null) {
         $house->image = HouseImage::where('house_id', $house->id)->first();
@@ -201,7 +200,6 @@ trait MainInfo
 
   protected function getPhoto($house)
   {
-
     if($house->mainImage !== null) {
       return $house->mainImage->isResize === 1 ? (env('SERVICE_URL') . '/' . $house->mainImage->image) : $house->mainImage->image;
     }
@@ -218,7 +216,6 @@ trait MainInfo
 
   protected function getPhotos($house)
   {
-
     $array = collect();
 
     for ($i = 0; $i < 4; $i++) {
@@ -231,7 +228,6 @@ trait MainInfo
     }
 
     return $array;
-
   }
 
   /**
@@ -242,7 +238,9 @@ trait MainInfo
 
   protected function getHouseForUser($user_id)
   {
-    $houses = House::where('user_id', $user_id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->get();
+    $houses = House::where('user_id', $user_id)
+      ->with(['info', 'supports', 'files', 'frames', 'images', 'news'])
+      ->get();
 
     foreach ($houses as $house) {
       $house->image = $this->getPhoto($house);
@@ -266,7 +264,9 @@ trait MainInfo
 
   protected function getHouseForUserPagination($id)
   {
-    $houses = House::where('user_id', $id)->with(['info', 'supports', 'files', 'frames', 'images', 'news'])->get();
+    $houses = House::where('user_id', $id)
+      ->with(['info', 'supports', 'files', 'frames', 'images', 'news'])
+      ->get();
 
     foreach ($houses as $house) {
       $house->image = $this->getPhoto($house);

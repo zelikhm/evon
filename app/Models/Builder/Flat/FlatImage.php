@@ -5,7 +5,7 @@ namespace App\Models\Builder\Flat;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FlatImagesModel extends Model
+class FlatImage extends Model
 {
   use HasFactory;
 

@@ -45,42 +45,42 @@ class HousesService implements HousesInterface
     // TODO: Implement getHouseSlug() method.
   }
 
+  public function getCountHouses($type)
+  {
+    return House::where('visible', 1)
+      ->orderBy('updated_at', 'DESC')
+      ->where('active', 2)
+      ->join('house_characteristics', 'house_characteristics.house_id', 'houses.id')
+      ->select('houses.*')
+      ->where('house_characteristics.type', $type)
+      ->distinct()
+      ->count();
+  }
+
   /**
    * get houses
    * @param $type
    * @param $limit
    * @param $dop
-   * @param null $count
+   * @param $offset
    * @return mixed
    */
 
-  public function getHouses($type, $limit, $dop, $count = null)
+  public function getHouses($type, $limit, $dop, $offset)
   {
-    if ($limit) {
-      $houses = House::where('visible', 1)
-        ->orderBy('updated_at', 'DESC')
-        ->where('active', 2)
-        ->join('house_characteristics', 'house_characteristics.house_id', 'houses.id')
-        ->select('houses.*')
-        ->where('house_characteristics.type', $type)
-        ->distinct()
-        ->with(['flats', 'user', 'mainImage'])
-        ->limit($count !== null ? $count : 30)
-        ->get();
-    } else {
-      $houses = House::where('visible', 1)
-        ->orderBy('updated_at', 'DESC')
-        ->where('active', 2)
-        ->join('house_characteristics', 'house_characteristics.house_id', 'houses.id')
-        ->select('houses.*')
-        ->where('house_characteristics.type', $type)
-        ->distinct()
-        ->with(['flats', 'user', 'mainImage'])
-        ->get();
-    }
+    $houses = House::where('visible', 1)
+      ->orderBy('updated_at', 'DESC')
+      ->where('active', 2)
+      ->join('house_characteristics', 'house_characteristics.house_id', 'houses.id')
+      ->select('houses.*')
+      ->where('house_characteristics.type', $type)
+      ->distinct()
+      ->with(['flats', 'user', 'mainImage'])
+      ->limit($limit)
+      ->offset($offset)
+      ->get();
 
     foreach ($houses as $house) {
-
       $house->description = [];
       $house->description_en = [];
       $house->description_tr = [];
