@@ -27,7 +27,7 @@
             class="relative w-[345px] xxl:w-[280px] xl:w-[240px] decription__head top-0 right-0 bg-white rounded-[10px]" v-if="house !== undefined">
             <div class="p-6 xxl:p-5 xl:p-4 border__bottom">
               <div class="flex items-center gap-5 xxl:gap-4 xl:gap-3 mb-7 xxl:mb-5 xl:mb-4">
-                <img v-if="house.isImage !== false" :src="house.image"
+                <img v-if="house.image !== null" :src="house.image.isResize === 1 ? (imageServiceUrl + house.image.name) : house.image.name"
                      class="w-14 xxl:w-12 xl:w-8 h-14 xxl:h-12 xl:h-8 rounded-full" alt="">
                 <img v-else src="../../assets/no-img-houses.jpg"
                      class="w-14 xxl:w-12 xl:w-8 h-14 xxl:h-12 xl:h-8 rounded-full" alt="">
@@ -217,6 +217,7 @@
 
     },
     created() {
+      this.imageServiceUrl = this.$service;
       // this.houses = this.houses_array;
       if(this.city !== null) {
         this.center = {
