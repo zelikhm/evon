@@ -289,7 +289,8 @@ trait MainInfo
    */
 
   protected function getHouseForAdminPagination($limit) {
-    $houses = House::with(['info', 'supports', 'files', 'frames', 'images', 'news'])->limit($limit)->get();
+    $houses = House::with(['info', 'supports', 'files', 'frames', 'images', 'news'])
+      ->limit($limit)->get();
 
     foreach ($houses as $house) {
       $house->image = $this->getPhoto($house);

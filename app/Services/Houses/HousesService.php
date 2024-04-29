@@ -57,6 +57,11 @@ class HousesService implements HousesInterface
       ->count();
   }
 
+  public function filtration($options, $plan, $city, $area, $price, $date_build, $squad, $name_builder, $locations, $infostructures, $dops)
+  {
+
+  }
+
   /**
    * get houses
    * @param $type
