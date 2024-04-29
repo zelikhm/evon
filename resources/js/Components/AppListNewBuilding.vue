@@ -34,13 +34,6 @@
         <div class="loader"></div>
       </div>
       <div class="custom__scroll h-[84vh] relative overflow-y-auto p-7 xxl:p-5 xl:p-4" v-if="preloader === false">
-        <div class="w-full flex justify-center mb-14 xxl:mb-10 xl:mb-8" @click="fullShow()">
-          <button
-            class="more__button mt-10 transition-all text-[#E84680] border border-solid border-[#E84680] text-base xxl:text-sm xl:text-xs lg:text-[15px] px-6 xxl:px-5 xl:px-4 py-2.5 xxl:py-2.5 xl:py-1.5 rounded-[3px]">
-            {{ language.rielt_1[59] }}
-          </button>
-        </div>
-
         <div class="mb-5 xxl:mb-4 xl:mb-3">
           <div class="flex flex-col gap-4 xxl:gap-3 xl:gap-2.5">
             <div class="flex items-center text-[#1E1D2D]">
@@ -1179,15 +1172,6 @@
       },
       nextShow() {
         this.count += 30;
-
-        this.preloaderObject = true;
-        this.reloadHouses(this.count)
-      },
-      fullShow() {
-        this.preloaderObject = true;
-        this.full_reload = true;
-
-        this.reloadHouses(this.count_houses)
       },
       updatedMap() {
         let id = 0;
@@ -1215,7 +1199,6 @@
         }
       },
       reloadHouses(count) {
-        console.log(this.count)
         axios.post('/api/house/getHousesJk?dop=true', {
           token: this.user.token,
           limit: count,
@@ -1228,6 +1211,7 @@
           this.updateHouses();
           this.updatedMap();
           this.preloaderObject = false;
+          this.reloadHouses(this.count_houses)
         })
       }
     },
@@ -1686,11 +1670,7 @@
         this.count_house = this.houses_array.length;
         this.updatedMap();
 
-        if(this.full_reload) {
-          return this.houses_array;
-        } else {
-          return this.houses_array.splice(0, this.count);
-        }
+        return this.houses_array.splice(0, this.count);
       }
     },
     components: {
