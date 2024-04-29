@@ -1198,7 +1198,7 @@
           })
         }
       },
-      reloadHouses(count) {
+      reloadHouses(count, last = false) {
         axios.post('/api/house/getHousesJk?dop=true', {
           token: this.user.token,
           limit: count,
@@ -1210,8 +1210,11 @@
           this.map_array = this.readyHouses;
           this.updateHouses();
           this.updatedMap();
-          this.preloaderObject = false;
-          this.reloadHouses(this.count_houses)
+          if(!last) {
+            this.reloadHouses(this.count_houses, true)
+          } else {
+            this.preloaderObject = false;
+          }
         })
       }
     },
