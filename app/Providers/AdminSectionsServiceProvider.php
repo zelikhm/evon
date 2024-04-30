@@ -27,7 +27,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
   protected $sections = [
     \App\Models\User::class => 'App\Http\Admin\Users',
     //houses
-    \App\Models\Builder\House::class => 'App\Http\Admin\House\House',
+    \App\Models\Builder\House::class => 'App\Http\Admin\House\HouseAdmin',
     \App\Models\Builder\Info\Type::class => 'App\Http\Admin\House\Info\TypeAdmin',
     \App\Models\Builder\Info\Structure::class => 'App\Http\Admin\House\Info\StructureAdmin',
     \App\Models\Builder\Info\City::class => 'App\Http\Admin\House\Info\City',
