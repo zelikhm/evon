@@ -40,7 +40,7 @@ class AdminSectionsServiceProvider extends ServiceProvider
     HouseFile::class => 'App\Http\Admin\House\Files',
     //
     AdminNew::class => 'App\Http\Admin\News\AdminNews',
-    Company::class => 'App\Http\Admin\Company',
+    Company::class => 'App\Http\Admin\CompanyAdmin',
     //
     Tarif::class => 'App\Http\Admin\Tarif',
     TarifRussion::class => 'App\Http\Admin\TarifRussion',

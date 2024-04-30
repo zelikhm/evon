@@ -17,8 +17,8 @@ class Utm
      */
     public function handle(Request $request, Closure $next)
     {
-        if($request->utm) {
-          $utm = \App\Models\Log\Utm::where('utm_code', $request->utm)->first();
+        if($request->custom_utm_code) {
+          $utm = \App\Models\Log\Utm::where('utm_code', $request->custom_utm_code)->first();
 
           if($utm) {
             try {
