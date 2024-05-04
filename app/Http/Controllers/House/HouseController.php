@@ -226,7 +226,7 @@ class HouseController extends Controller
    * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
    */
 
-  public function getHousesJk(Request $request, HousesService $housesService)
+  public function getHouses(Request $request, HousesService $housesService)
   {
     $type = $request->type === 0 ? "Новостройка" : "Вилла";
 

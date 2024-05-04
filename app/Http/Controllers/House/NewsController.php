@@ -41,7 +41,7 @@ class NewsController extends Controller
 
   public function getAllNews() {
 
-    $news = HouseNews::where('visible', 1)
+    $news = HouseNew::where('visible', 1)
       ->with(['house'])
       ->orderBy('created_at', 'ASC')
       ->get();
@@ -49,14 +49,12 @@ class NewsController extends Controller
     $collections = collect();
 
     foreach ($news as $item) {
-
       if($item->house !== []) {
         if($item->house->active === 2 && $item->house->visible === 1) {
           $item->house->image = $this->getPhoto($item->house);
           $collections->push($item);
         }
       }
-
     }
 
     return $collections;

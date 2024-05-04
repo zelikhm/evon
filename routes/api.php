@@ -66,7 +66,7 @@ Route::prefix('house')->middleware('checkToken')->group(function () {
   Route::post('delete', ['App\Http\Controllers\House\HouseController', 'delete']);
   //
   Route::post('getHouseApi', ['App\Http\Controllers\House\HouseController', 'getHouseApi']);
-  Route::post('getHousesJk', ['App\Http\Controllers\House\HouseController', 'getHousesJk']);
+  Route::post('getHousesJk', ['App\Http\Controllers\House\HouseController', 'getHouses']);
   //
   Route::post('search', ['App\Http\Controllers\House\HouseController', 'search']);
 });
