@@ -27,6 +27,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Intervention\Image\Facades\Image;
@@ -223,11 +224,23 @@ class HouseController extends Controller
   /**
    * get jk houses in api
    * @param Request $request
-   * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+   * @return \Illuminate\Http\JsonResponse
    */
 
   public function getHouses(Request $request, HousesService $housesService)
   {
+
+    $validator = Validator::make($request->all(), [
+      'type' => 'int|required|min:0|max:1',
+      'limit' => 'int|required|min:0',
+      'dop' => 'required',
+      'offset' => 'required|int|min:0'
+    ]);
+
+    if($validator->fails()) {
+      return response()->json($validator->messages(), 400);
+    }
+
     $type = $request->type === 0 ? "Новостройка" : "Вилла";
 
     return $housesService->getHouses($type, $request->limit, $request->dop, $request->offset);
