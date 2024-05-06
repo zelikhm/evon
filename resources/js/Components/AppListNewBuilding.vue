@@ -1199,11 +1199,12 @@
         }
       },
       reloadHouses(count, last = false) {
-        axios.post('/api/house/getHousesJk?dop=true', {
+        axios.post('/api/house/getHouses', {
           token: this.user.token,
           limit: count,
           offset: 0,
-          type: 0
+          type: 0,
+          dop: true
         }).then(res => {
           this.readyHouses = res.data;
           this.count_house = this.readyHouses.length;
