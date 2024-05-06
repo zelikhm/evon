@@ -23,7 +23,7 @@ class CheckToken
     ]);
 
     if($validator->fails()) {
-      return response()->json($request->token, 400);
+      return response()->json('token is required', 401);
     }
 
     $user = User::where('token', $request->token)->first();
@@ -31,7 +31,7 @@ class CheckToken
     if($user) {
       $request->user = $user;
     } else {
-      return response()->json('user is not defined', 400);
+      return response()->json('user is not defined', 401);
     }
 
     return $next($request);
