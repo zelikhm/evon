@@ -73,24 +73,31 @@ class HousesService implements HousesInterface
 
   public function getHouses($type, $limit, $dop, $offset)
   {
-    $houses = House::where('visible', 1)
+    $houses = House::where('house_characteristics.type', $type)
+      ->join('house_characteristics', 'house_characteristics.house_id', 'houses.id')
       ->orderBy('updated_at', 'DESC')
       ->where('active', 2)
-      ->join('house_characteristics', 'house_characteristics.house_id', 'houses.id')
+      ->where('visible', 1)
       ->select('houses.*')
-      ->where('house_characteristics.type', $type)
       ->distinct()
-      ->with(['flats', 'user', 'mainImage'])
-      ->limit($limit)
-      ->offset($offset)
-      ->get();
+      ->with(['flats', 'user', 'mainImage']);
+
+    if ($limit) {
+      $houses->limit($limit);
+    }
+
+    if($offset) {
+      $houses->offset($offset);
+    }
+
+    $houses = $houses->get();
 
     foreach ($houses as $house) {
       $house->description = [];
       $house->description_en = [];
       $house->description_tr = [];
 
-      if($house->mainImage === null) {
+      if ($house->mainImage === null) {
         $house->image = HouseImage::where('house_id', $house->id)->first();
       } else {
         $house->image = $house->mainImage;
@@ -169,9 +176,9 @@ class HousesService implements HousesInterface
    * @param $type
    */
 
-  public function mainImage($id, $image, $type):void
+  public function mainImage($id, $image, $type): void
   {
-    if($image) {
+    if ($image) {
       $image_name = time() . '.' . $image->getClientOriginalName();
       $image->move(public_path('/storage/buffer'), $image_name);
       $this->imageService->add($id, 2, $image, $image_name);
@@ -179,7 +186,7 @@ class HousesService implements HousesInterface
       $image_name = '';
     }
 
-    if($type === 0) {
+    if ($type === 0) {
       HouseMainImage::create([
         'house_id' => $id,
         'image' => $image_name,
@@ -187,16 +194,16 @@ class HousesService implements HousesInterface
     } else {
       $image = HouseMainImage::where('house_id', $id)->first();
 
-      if($image !== null) {
+      if ($image !== null) {
         HouseMainImage::where('house_id', $id)
           ->update([
             'image' => $image_name
           ]);
       } else {
         HouseMainImage::create([
-            'house_id' => $id,
-            'image' => $image_name
-          ]);
+          'house_id' => $id,
+          'image' => $image_name
+        ]);
       }
     }
 

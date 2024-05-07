@@ -89,6 +89,7 @@
         formData.append('image', file);
         formData.append('house_id', this.house.id);
         formData.append('category_id', this.category);
+        formData.append('token', this.token);
 
         this.myPhotos.push({url: URL.createObjectURL(file), name: file.name, size: formatBytes, file: file})
 

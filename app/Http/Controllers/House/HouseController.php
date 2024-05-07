@@ -229,19 +229,18 @@ class HouseController extends Controller
 
   public function getHouses(Request $request, HousesService $housesService)
   {
-
     $validator = Validator::make($request->all(), [
       'type' => 'int|required|min:0|max:1',
-      'limit' => 'int|required|min:0',
+      'limit' => 'int|min:0',
       'dop' => 'required',
-      'offset' => 'required|int|min:0'
+      'offset' => 'int|min:0'
     ]);
 
     if($validator->fails()) {
       return response()->json($validator->messages(), 400);
     }
 
-    $type = $request->type === 0 ? "Новостройка" : "Вилла";
+    $type = $request->type == 0 ? "Новостройка" : "Вилла";
 
     return $housesService->getHouses($type, $request->limit, $request->dop, $request->offset);
   }
