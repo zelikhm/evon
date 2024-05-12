@@ -58,7 +58,7 @@
       <div class="row-ref">
         <a href="https://evon-tr.com/privacy" target="_blank">{{ language.main[65] }}</a>
         <a href="https://evon-tr.com/agree" target="_blank">{{ language.main[66] }}</a>
-        <a href="#" >VERGI NO <span>3830916930</span></a>
+        <a href="#" ><span>ООО "ЕВОН"</span></a>
 
       </div>
     </div>

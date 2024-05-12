@@ -24,7 +24,7 @@ import { Link } from '@inertiajs/inertia-vue3'
         <div class="grid grid-cols-3 lg:flex lg:flex-col items-center lg:gap-2">
           <div>{{ language.footer[2] }}</div>
           <div class="flex justify-center lg:flex-col gap-12 xxl:gap-10 xl:gap-8 lg:gap-2 text-sm xxl:text-xs xl:text-[10px] lg:text-[12px]">
-            <span class="whitespace-nowrap">VERGİ NO 3830916930</span>
+            <span class="whitespace-nowrap">ООО "ЕВОН"</span>
           </div>
         </div>
       </div>
