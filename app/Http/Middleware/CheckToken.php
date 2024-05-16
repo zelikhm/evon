@@ -12,8 +12,8 @@ class CheckToken
   /**
    * Handle an incoming request.
    *
-   * @param \Illuminate\Http\Request $request
-   * @param \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse) $next
+   * @param  \Illuminate\Http\Request  $request
+   * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
    * @return \Illuminate\Http\JsonResponse
    */
   public function handle(Request $request, Closure $next)
@@ -29,11 +29,11 @@ class CheckToken
     $user = User::where('token', $request->token)->first();
 
     if($user) {
-      $request->user = $user;
-    } else {
-      return response()->json('user is not defined', 401);
+//      $request->user = $user;
+
+      return $next($request);
     }
 
-    return $next($request);
+    return response()->json('user is not defined', 401);
   }
 }
