@@ -19,7 +19,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
             <a href="#"><img class="logo" src="images/img/header/logo.png" alt="" srcset=""></a>
           </li>
           <li class="ref-soc">
-            <a href="wa.me/+905442258559" target="_blank"><img src="images/img/header/s1.png" alt="" srcset=""></a>
+            <a href="https://api.whatsapp.com/send?phone=905442258559" target="_blank"><img src="images/img/header/s1.png" alt="" srcset=""></a>
 <!--            <a href="https://m.facebook.com/people/EVON/100092335686616/" target="_blank"><img src="images/img/header/s2.png" alt=""-->
 <!--                srcset=""></a>-->
             <a href="https://t.me/evon_turkey" target="_blank"><img src="images/img/header/s3.png" alt="" srcset=""></a>
