@@ -86,11 +86,9 @@ class HousesService implements HousesInterface
       $houses->limit($limit);
     }
 
-    if($offset) {
+    if ($offset) {
       $houses->offset($offset);
     }
-
-    $houses = $houses->get();
 
     foreach ($houses as $house) {
       $house->description = [];
@@ -122,11 +120,7 @@ class HousesService implements HousesInterface
         ->where('house_id', $house->id)
         ->first();
 
-      if ($favorite !== null) {
-        $house->favorite = true;
-      } else {
-        $house->favorite = false;
-      }
+      $house->favorite = $favorite !== null;
 
     }
 
