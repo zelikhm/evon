@@ -1203,7 +1203,7 @@
           token: this.user.token,
           limit: count,
           offset: 0,
-          type: 0,
+          type: this.type,
           dop: true
         }).then(res => {
           this.readyHouses = res.data;
