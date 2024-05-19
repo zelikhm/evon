@@ -54,13 +54,13 @@ Route::prefix('house')->middleware('checkToken')->group(function () {
   Route::post('addedFiles', ['App\Http\Controllers\House\HouseController', 'addedFiles']);
   Route::post('deletedFile', ['App\Http\Controllers\House\HouseController', 'deletedFile']);
   //
-  Route::post('createFrame', ['App\Http\Controllers\House\HouseController', 'createFrame']);
-  Route::post('deleteFrame', ['App\Http\Controllers\House\HouseController', 'deleteFrame']);
-  Route::post('editFrame', ['App\Http\Controllers\House\HouseController', 'editFrame']);
-  Route::post('createFlat', ['App\Http\Controllers\House\HouseController', 'createFlat']);
-  Route::post('deletedFlat', ['App\Http\Controllers\House\HouseController', 'deletedFlat']);
-  Route::post('editFlat', ['App\Http\Controllers\House\HouseController', 'editFlat']);
-  Route::post('editStatusFlat', ['App\Http\Controllers\House\HouseController', 'editStatusFlat']);
+  Route::post('createFrame', ['App\Http\Controllers\House\FrameController', 'create']);
+  Route::post('deleteFrame', ['App\Http\Controllers\House\FrameController', 'delete']);
+  Route::post('editFrame', ['App\Http\Controllers\House\FrameController', 'edit']);
+  Route::post('createFlat', ['App\Http\Controllers\House\FlatController', 'create']);
+  Route::post('deletedFlat', ['App\Http\Controllers\House\FlatController', 'delete']);
+  Route::post('editFlat', ['App\Http\Controllers\House\FlatController', 'edit']);
+  Route::post('editStatusFlat', ['App\Http\Controllers\House\FlatController', 'editStatus']);
   //
   Route::post('setVisible', ['App\Http\Controllers\House\HouseController', 'setVisible']);
   Route::post('delete', ['App\Http\Controllers\House\HouseController', 'delete']);

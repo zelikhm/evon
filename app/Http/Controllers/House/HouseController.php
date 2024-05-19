@@ -5,6 +5,7 @@ namespace App\Http\Controllers\House;
 use App\Http\Controllers\Controller;
 use App\Http\Traits\AuthCheck;
 use App\Http\Traits\MainInfo;
+use App\Jobs\FlatImage;
 use App\Models\Builder\Flat\FlatImagesModel;
 use App\Models\Builder\Flat\Flat;
 use App\Models\Builder\Flat\Frame;
@@ -536,192 +537,6 @@ class HouseController extends Controller
     return response()->json($house, 200);
   }
 
-  /**
-   * create flat for frame
-   * @param Request $request
-   * @return \Illuminate\Http\JsonResponse
-   */
-
-  public function createFlat(Request $request)
-  {
-    if ($request->image_up) {
-      $imageUp = time() . '.flat.' . $request->file('image_up')->getClientOriginalExtension();
-      $request->image_up->move(public_path('/storage/buffer'), $imageUp);
-      $this->waterMark($imageUp, 'storage/flat/', false);
-      $imageUp = '/storage/flat/' . $imageUp;
-    } else {
-      $flat = Flat::where('id', $request->flat_id)->first();
-      $imageUp = $flat !== null ? $flat->imageUp : null;
-    }
-
-    if ($request->image_down) {
-      $imageDown = time() . '.flat.' . $request->file('image_down')->getClientOriginalExtension();
-      $request->image_down->move(public_path('/storage/buffer'), $imageDown);
-      $this->waterMark($imageDown, 'storage/flat/', false);
-      $imageDown = '/storage/flat/' . $imageDown;
-    } else {
-      $flat = Flat::where('id', $request->flat_id)->first();
-      $imageDown = $flat !== null ? $flat->imageDown : null;
-    }
-
-    $flat = Flat::create([
-      'frame_id' => $request->frame_id,
-      'number' => $request->number,
-      'square' => $request->square,
-      'count' => $request->count,
-      'floor' => $request->floor,
-      'status' => $request->status,
-      'number_from_stairs' => $request->stairs,
-      'price' => $request->price,
-      'imageUp' => $imageUp,
-      'imageDown' => $imageDown,
-    ]);
-
-    $frame = Frame::where('id', $request->frame_id)->first();
-
-    return response()->json($this->getHouse($frame->house_id), 200);
-  }
-
-  /**
-   * deleted flat
-   * @param Request $request
-   * @return \Illuminate\Http\JsonResponse
-   */
-
-  public function deletedFlat(Request $request)
-  {
-    Flat::where('id', $request->flat_id)->delete();
-
-    return response()->json('deleted', 205);
-  }
-
-  /**
-   * edit flat
-   * @param Request $request
-   * @return \Illuminate\Http\JsonResponse
-   */
-
-  public function editFlat(Request $request)
-  {
-    if ($request->image_up === 'null') {
-      $imageUp = null;
-    } else if ($request->image_up) {
-      $imageUp = time() . '.flat.' . $request->file('image_up')->getClientOriginalExtension();
-      $request->image_up->move(public_path('/storage/buffer'), $imageUp);
-      $this->waterMark($imageUp, 'storage/flat/', false);
-      $imageUp = '/storage/flat/' . $imageUp;
-    } else {
-      $flat = Flat::where('id', $request->flat_id)->first();
-      if ($flat->imageUp !== null) {
-        $imageUp = $flat->imageUp;
-      }
-    }
-
-    if ($request->image_down === 'null') {
-      $imageDown = null;
-    } else if ($request->image_down) {
-      $imageDown = (time() + 100) . '.flat.' . $request->file('image_down')->getClientOriginalExtension();
-      $request->image_down->move(public_path('/storage/buffer'), $imageDown);
-      $this->waterMark($imageDown, 'storage/flat/', false);
-      $imageDown = '/storage/flat/' . $imageDown;
-    } else {
-      $flat = Flat::where('id', $request->flat_id)->first();
-      if ($flat->imageDown !== null) {
-        $imageDown = $flat->imageDown;
-      }
-    }
-
-    Flat::where('id', $request->flat_id)
-      ->update([
-        'number' => $request->number,
-        'square' => $request->square,
-        'count' => $request->count,
-        'floor' => $request->floor,
-        'status' => $request->status,
-        'number_from_stairs' => $request->stairs,
-        'price' => $request->price,
-        'imageUp' => $imageUp,
-        'imageDown' => $imageDown,
-      ]);
-
-    House::where('id', $request->house_id)->update([
-      'active' => 0,
-    ]);
-
-    return response()->json($this->getHouse($request->house_id), 200);
-  }
-
-  /**
-   * edit status for flat
-   * @param Request $request
-   * @return \Illuminate\Http\JsonResponse
-   */
-
-  public function editStatusFlat(Request $request)
-  {
-    Flat::where('id', $request->flat_id)->update([
-      'status' => $request->status,
-    ]);
-
-    House::where('id', $request->house_id)->update([
-      'active' => 0,
-    ]);
-
-    return response()->json($this->getHouse($request->house_id), 200);
-  }
-
-  /**
-   * create frame for house
-   * @param Request $request
-   * @return \Illuminate\Http\JsonResponse
-   */
-
-  public function createFrame(Request $request)
-  {
-    Frame::create([
-      'house_id' => $request->house_id,
-      'name' => $request->name,
-      'created_at' => Carbon::now()->addHour(3),
-      'updated_at' => Carbon::now()->addHour(3),
-    ]);
-
-    return response()->json(Frame::where('house_id', $request->house_id)->with(['flats'])->get(), 200);
-  }
-
-  /**
-   * edit frame
-   * @param Request $request
-   * @return \Illuminate\Http\JsonResponse
-   */
-
-  public function editFrame(Request $request)
-  {
-    Frame::where('id', $request->frame_id)
-      ->update([
-        'name' => $request->name,
-        'updated_at' => Carbon::now()->addHour(3),
-      ]);
-
-    House::where('id', $request->house_id)->update([
-      'active' => 0,
-    ]);
-
-    return response()->json(Frame::where('house_id', $request->house_id)->with(['flats'])->get(), 200);
-  }
-
-  /**
-   * deleted frame
-   * @param Request $request
-   * @return \Illuminate\Http\JsonResponse
-   */
-
-  public function deleteFrame(Request $request)
-  {
-    Frame::where('id', $request->frame_id)->delete();
-
-    return response()->json('deleted', 205);
-  }
-
 
   /**
    * added support for house
@@ -878,19 +693,21 @@ class HouseController extends Controller
 
       $image = HouseImage::create([
         'house_id' => $request->house_id,
-        'name' => "/storage/buffer/" . $imageName,
+        'name' => '/storage/buffer/' . $imageName,
         'category' => $request->category_id,
-        'created_at' => Carbon::now()->addHour(3),
-        'updated_at' => Carbon::now()->addHour(3),
       ]);
 
-      $status = $imageService->add($image->id, 0, $imageName);
+      \App\Jobs\Image::dispatch(
+        $image->id,
+        $imageName,
+        true
+      )->delay(2);
 
       House::where('id', $request->house_id)->update([
         'active' => 0,
       ]);
 
-      return response()->json("/storage/buffer/" . $imageName, 200);
+      return response()->json($image->name, 200);
   }
 
   /**
@@ -936,8 +753,6 @@ class HouseController extends Controller
       House::where('id', $request->house_id)->update([
         'active' => 0,
       ]);
-
-      $imageService->delete($request->image_name, 0);
 
       return response()->json(HouseImage::where('house_id', $request->house_id)->get(), 200);
   }

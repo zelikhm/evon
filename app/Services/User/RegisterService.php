@@ -34,7 +34,7 @@ class RegisterService extends UserService implements RegisterInterface
 
   public function startRegister($form)
   {
-    $this->amoService->save($form['last_name'] . ' ' . $form['first_name'], $form['email'], $form['phone']);
+//    $this->amoService->save($form['last_name'] . ' ' . $form['first_name'], $form['email'], $form['phone']);
 
     if ($form['type_id'] < 3) {
       return ['status' => $this->registerRielter($form), 'builder' => false];

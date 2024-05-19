@@ -294,7 +294,6 @@ export default {
         formData.append('image_up', this.flat.image_up)
       }
 
-      console.log(this.selectFlat.image_down);
 
       axios({
         method: 'post',

@@ -63,6 +63,8 @@ class AmoService
       ]
     ]);
 
+    dd(json_decode($response->body()));
+
     return json_decode($response->body())->_embedded->contacts[0]->id;
   }
 

@@ -40,7 +40,6 @@ class AuthenticatedSessionController extends Controller
    */
   public function store(Request $request)
   {
-
       $request->validate([
         'password' => ['required', new Password()],
         'email' => ['required', 'max:50', 'exists:App\Models\User,email'],

@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('house_characteristics_models', function (Blueprint $table) {
-          $table->dropColumn('status');
-          $table->longText('exclusive')->nullable();
+//          $table->dropColumn('status');
+//          $table->longText('exclusive')->nullable();
         });
     }
 

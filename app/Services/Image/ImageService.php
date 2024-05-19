@@ -9,6 +9,7 @@ use App\Models\Builder\HouseImage;
 use App\Models\Builder\HouseMainImage;
 use App\Models\Log\ImageLog;
 use Illuminate\Support\Facades\Http;
+use Intervention\Image\Facades\Image;
 
 class ImageService implements ImageInterface
 {
@@ -24,29 +25,29 @@ class ImageService implements ImageInterface
    * @return bool
    */
 
-  public function add($image_id, $type, $image_name): bool
+  public function add($image_name, $path, $blur)
   {
+    \App\Jobs\Image::dispatch($image_name, $path, $blur)->delay(2);
 
-    $photo = fopen('storage/buffer/'.$image_name, 'r');
 
-    $response = Http::attach(
-      'image', $photo, $image_name
-    )->post(env('SERVICE_URL') . 'api/add', [
-      'type' => $type,
-      'imageName' => $image_name,
-      'image_id' => $image_id,
-      'token' => env('SERVICE_TOKEN')
-    ]);
-
-    try {
-      self::saveLog('(Удачно) Добавлено изображение', $photo, false);
-
-      return true;
-    } catch (\Exception $e) {
-      self::saveLog('(Не удачно) Добавлено изображение', $photo, false);
-
-      return false;
-    }
+//    $response = Http::attach(
+//      'image', $photo, $image_name
+//    )->post(env('SERVICE_URL') . 'api/add', [
+//      'type' => $type,
+//      'imageName' => $image_name,
+//      'image_id' => $image_id,
+//      'token' => env('SERVICE_TOKEN')
+//    ]);
+//
+//    try {
+//      self::saveLog('(Удачно) Добавлено изображение', $photo, false);
+//
+//      return true;
+//    } catch (\Exception $e) {
+//      self::saveLog('(Не удачно) Добавлено изображение', $photo, false);
+//
+//      return false;
+//    }
   } //end
 
   /**

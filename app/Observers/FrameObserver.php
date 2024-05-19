@@ -10,9 +10,9 @@ use Carbon\Carbon;
 class FrameObserver
 {
     /**
-     * Handle the Frame "created" event.
+     * Handle the FrameService "created" event.
      *
-     * @param  \App\Models\Frame  $frameModel
+     * @param  \App\Models\FrameService  $frameModel
      * @return void
      */
     public function created(Frame $frameModel)
@@ -23,9 +23,9 @@ class FrameObserver
     }
 
     /**
-     * Handle the Frame "updated" event.
+     * Handle the FrameService "updated" event.
      *
-     * @param  \App\Models\Frame  $frameModel
+     * @param  \App\Models\FrameService  $frameModel
      * @return void
      */
     public function updated(Frame $frameModel)
@@ -37,9 +37,9 @@ class FrameObserver
     }
 
     /**
-     * Handle the Frame "deleted" event.
+     * Handle the FrameService "deleted" event.
      *
-     * @param  \App\Models\Frame  $frameModel
+     * @param  \App\Models\FrameService  $frameModel
      * @return void
      */
     public function deleted(Frame $frameModel)
@@ -48,9 +48,9 @@ class FrameObserver
     }
 
     /**
-     * Handle the Frame "restored" event.
+     * Handle the FrameService "restored" event.
      *
-     * @param  \App\Models\Frame  $frameModel
+     * @param  \App\Models\FrameService  $frameModel
      * @return void
      */
     public function restored(Frame $frameModel)
@@ -59,9 +59,9 @@ class FrameObserver
     }
 
     /**
-     * Handle the Frame "force deleted" event.
+     * Handle the FrameService "force deleted" event.
      *
-     * @param  \App\Models\Frame  $frameModel
+     * @param  \App\Models\FrameService  $frameModel
      * @return void
      */
     public function forceDeleted(Frame $frameModel)
