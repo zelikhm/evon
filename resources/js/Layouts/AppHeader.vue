@@ -17,8 +17,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
           <div class="flex gap-3 xxl:gap-2 font-medium">
             <div class="relative text-[#3B3A45] z-50">
               <button @click="loginOpens"
-                class="login login__btn--bg text-white px-5 xxl:px-4 xl:px-3 py-2.5 xxl:py-2 xl:py-1 rounded-[3px]">{{
-                  language.main[18] }}</button>
+                class="login login__btn--bg text-white px-5 xxl:px-4 xl:px-3 py-2.5 xxl:py-2 xl:py-1 rounded-[3px]">{{  language?.main[18] }}</button>
               <div v-if="loginOpen"
                 class="login__dropdown absolute overflow-hidden top-[120%] flex flex-col items-start bg-white rounded-[6px]">
                 <button @click="loginDeveloper"
@@ -31,7 +30,7 @@ import ChangeLanguage from "@/Components/ChangeLanguage.vue";
             </div>
             <button @click="$emit('open-register')"
               class="register__button--bg text-white px-5 xxl:px-4 xl:px-3 py-2.5 xxl:py-2 xl:py-1 rounded-[3px]">{{
-                language.main[19] }}</button>
+                language?.main[19] }}</button>
           </div>
         </div>
       </div>

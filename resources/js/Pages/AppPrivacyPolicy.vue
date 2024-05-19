@@ -8,7 +8,7 @@
         <div>
           <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">
             Настоящая Политика конфиденциальности (далее по тексту – НПК) распространяется на всю информацию, которую
-            компания «EVON BİLİŞİM SANAYİ VE TİCARET LİMİTED ŞIRKETİ» может получить о Пользователе во время пользования
+            компания ООО "ЕВОН" может получить о Пользователе во время пользования
             им сайтом Компании с доменным именем https://evon-tr.com/ (далее по тексту – сайт).
           </p>
           <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px] my-3">1. ОСНОВНЫЕ ПОНЯТИЯ</p>
@@ -16,7 +16,7 @@
             терминология:</p>
           <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">1.1.1. «Администрация сайта
             «https://evon-tr.com/» (далее – Администрация сайта)» – персонал, имеющий полномочия управлять сайтом,
-            действующий от имени «EVON BİLİŞİM SANAYİ VE TİCARET LİMİTED ŞIRKETİ», организующий и (или) осуществляющий
+            действующий от имени ООО "ЕВОН", организующий и (или) осуществляющий
             обработку данных, а также определяющий цели обработки и состав этих данных, все допустимые действия,
             выполняемые с этой информацией. </p>
           <p class="text-[#8A8996] text-base xxl:text-sm xl:text-xs lg:text-[14px]">1.1.2. «Данные пользователя сайта» –
@@ -155,11 +155,11 @@
       }
     },
     created() {
-      if(this.user.lang === 0) {
+      if(this.user?.lang === 0) {
         this.language = this.$ru;
-      } else if (this.user.lang === 1) {
+      } else if (this.user?.lang === 1) {
         this.language = this.$en;
-      } else if (this.user.lang === 2) {
+      } else if (this.user?.lang === 2) {
         this.language = this.$tur;
       }
     },
