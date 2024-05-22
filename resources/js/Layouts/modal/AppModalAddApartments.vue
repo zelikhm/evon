@@ -294,7 +294,6 @@ export default {
         formData.append('image_up', this.flat.image_up)
       }
 
-
       axios({
         method: 'post',
         url: '/api/house/editFlat',
