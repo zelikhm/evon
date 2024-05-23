@@ -138,14 +138,22 @@ class NewsController extends Controller
    * @return \Inertia\Response
    */
 
-  public function createNews() {
+  public function createNews(Request $request) {
+    if(Auth::user()->role > 1) {
+      $house = House::where('id', $request->house_id)
+        ->first();
+
+      $user_id = $house->user_id;
+    } else {
+      $user_id = Auth::id();
+    }
 
     return Inertia::render('AppAddNews', [
-      'houses' => $this->getHouseForUser(Auth::id()),
+      'houses' => $this->getHouseForUser($user_id),
+      'house' => $this->getHouseOnId($request->house_id),
       'user' => $this->getUser(),
       'notification' => $this->getNotification(),
     ]);
-
   }
 
   /**

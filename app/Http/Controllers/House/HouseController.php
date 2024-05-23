@@ -265,10 +265,14 @@ class HouseController extends Controller
       ->first();
 
     if ($house === null) {
-      $house = House::where('slug', $slug)
-        ->where('active', 2)
-        ->where('visible', 1)
-        ->firstOrFail();
+      $house = House::where('slug', $slug);
+
+      if(Auth::check() && Auth::user()->role === 0) {
+        $house->where('active', 2);
+        $house->where('visible', 1);
+      }
+
+      $house = $house->firstOrFail();
     }
 
     HouseView::create([

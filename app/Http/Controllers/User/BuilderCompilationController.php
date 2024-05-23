@@ -15,10 +15,9 @@ class BuilderCompilationController extends Controller
 {
     public function compilation($slug, CompilationService $compilationService)
     {
+      $link = base64_decode($slug);
 
-      $link = explode('-', base64_decode($slug));
-
-      $house = $compilationService->get($link[0]);
+      $house = $compilationService->get($link);
 
       if(Auth::check()) {
         $user = $this->getUser();
@@ -53,7 +52,7 @@ class BuilderCompilationController extends Controller
 
   public function getLink(Request $request) {
 
-      $link = $request->slug . '-' . ($request->type === 0 ? 'client' : 'partner');
+      $link = $request->slug;
 
       return response()->json(env('APP_URL') . '/compilation/builder/compilation/' .  base64_encode($link), 200);
   } //end

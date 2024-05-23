@@ -15,16 +15,16 @@
         <div class="my-14 xxl:my-10 xl:my-8">
           <h2 class="text-[22px] xxl:text-lg xl:text-[15px] lg:text-[18px] font-semibold pb-7 xxl:pb-5 xl:pb-4">{{ itemEdit === undefined ? language.lk_zastr_news[6] : language.lk_zastr_news[5] }}</h2>
           <div class="flex flex-col gap-5 xxl:gap-4 xl:gap-3">
-            <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" :class="{ 'border__bottom--0': openSelectJK, 'validate': !validate.JK}">
+            <div class="flex flex-col h-fit border border-solid border-[#E5DFEE] rounded-[6px]" @click="openSelectJK = !openSelectJK" :class="{ 'border__bottom--0': openSelectJK, 'validate': !validate.JK}">
               <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[12px] px-5 xxl:px-4 xl:px-3 pt-4 xxl:pt-3 xl:pt-2.5">{{ language.lk_zastr_news[0] }}</span>
-              <div class="relative" :tabindex="tabindex" @blur="openSelectJK = false">
-                <div @click="openSelectJK = !openSelectJK" class="flex items-center justify-between cursor-pointer text-[#1E1D2D]  text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
+              <div class="relative" :tabindex="tabindex">
+                <div  class="flex items-center justify-between cursor-pointer text-[#1E1D2D]  text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] px-5 xxl:px-4 xl:px-3 pb-3 xxl:pb-2.5 xl:pb-2">
                   <span>{{ selectJK }}</span>
                   <img src="../../assets/svg/arrow_down_black.svg" class="w-3 xxl:w-2.5 xl:w-2 transition-all" :class="{ 'rotate-180': openSelectJK }" alt="">
                 </div>
                 <div v-if="openSelectJK" class="absolute w-full z-40 bg-white flex flex-col top-full left-0 w-full border border-solid border-[#E5DFEE] rounded-b-[6px] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px]">
                   <span
-                    v-for="(JK, idx) in selectHouse" :key="idx"
+                    v-for="(JK, idx) in houses" :key="idx"
                     @click="changeSelectJK(JK)"
                     class="hover__select cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 leading-none"
                   >
@@ -74,6 +74,7 @@
         required: false,
         default: 0,
       },
+      house: []
     },
     data() {
       return {
@@ -137,28 +138,15 @@
       },
     },
     created() {
-      if(this.user.lang === 0) {
-        this.language = this.$ru;
-      } else if (this.user.lang === 1) {
-        this.language = this.$en;
-      } else if (this.user.lang === 2) {
-        this.language = this.$tur;
-      }
+      this.choseLanguage(this.user.lang)
 
-      this.selectJK = this.language.ob[40];
-
-      let link = window.location.href.split('#')
-      let link2 = window.location.href.split('/')
-      if (link[1] !== undefined) {
-        this.dataNews.house_id = this.houses.find(item => item.id === +link[1]).id
-        this.selectJK = this.houses.find(item => item.id === +link[1]).title
-      }
-      if (Number.isInteger(+link2.at(-1))) {
-        this.dataNews.house_id = this.houses.find(item => item.id === this.new.house_id).id
-        this.selectJK = this.houses.find(item => item.id === this.new.house_id).title
+      if(this.house !== undefined) {
+        this.dataNews.house_id = this.house.id;
+        this.selectJK = this.house.title;
       } else {
-        this.isCreate = true
+        this.selectJK = this.language.ob[40];
       }
+
       this.itemEdit = this.new
 
       if (this.itemEdit !== undefined) {
@@ -167,12 +155,6 @@
         this.dataNews.description = this.itemEdit.description
         this.idNews = this.itemEdit.id
       }
-
-      this.houses.forEach(item => {
-        // if (item.active === 2) {
-        this.selectHouse.push(item)
-        // }
-      })
 
     },
     components: {
