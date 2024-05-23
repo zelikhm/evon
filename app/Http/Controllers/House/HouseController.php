@@ -173,21 +173,12 @@ class HouseController extends Controller
 
   public function showHouse()
   {
-    $admin = Auth::user()->role > 1 ? true : false;
-
-    if (Auth::user()->role === 1) {
-      return Inertia::render('AppPrivateOfficeDev', [
-        'houses' => $this->getHouseForUserPagination(Auth::id()),
-        'user' => $this->getUser(),
-        'admin' => $admin
-      ]);
-    } else {
-      return Inertia::render('AppPrivateOfficeDev', [
-        'houses' => $this->getHouseForAdminPagination(30),
-        'user' => $this->getUser(),
-        'admin' => $admin
-      ]);
-    }
+    return Inertia::render('AppPrivateOfficeDev', [
+      'houses' => $this->getHouseForUserPagination(Auth::user()->role === 1 ? Auth::id() : 30),
+      'user' => $this->getUser(),
+      'admin' => Auth::user()->role > 1 ? true : false,
+      'token' => Auth::user()->token
+    ]);
   }
 
   /**

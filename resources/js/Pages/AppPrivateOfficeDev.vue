@@ -169,7 +169,8 @@ export default {
   props: {
     houses: [],
     user: [],
-    admin: false
+    admin: false,
+    token: ''
   },
   data() {
     return {
