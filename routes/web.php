@@ -14,16 +14,6 @@ use Intervention\Image\Facades\Image;
 
 Route::get('/', ['App\Http\Controllers\Controller', 'main'])->middleware('utm');
 
-Route::get('/test', function () {
-  House::updated([
-    'active' => 1,
-  ]);
-
-  House::updated([
-    'active' => 2
-  ]);
-});
-
 Route::prefix('/compilation')->group(function () {
   Route::get('/{id}', ['App\Http\Controllers\User\CompilationController', 'show']);
   Route::get('/user/{id}/{house}', ['App\Http\Controllers\User\CompilationController', 'soloHouse']);
