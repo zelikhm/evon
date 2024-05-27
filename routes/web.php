@@ -15,12 +15,13 @@ use Intervention\Image\Facades\Image;
 Route::get('/', ['App\Http\Controllers\Controller', 'main'])->middleware('utm');
 
 Route::get('/test', function () {
-  $image_name = 'storage/buffer/1716181031.house.webp';
-  $image = \Intervention\Image\Facades\Image::make($image_name);
-  $image->insert('images/watermark.png');
-  $image->heighten(420);
+  House::update([
+    'status' => 1,
+  ]);
 
-  dd($image);
+  House::update([
+    'status' => 2
+  ]);
 });
 
 Route::prefix('/compilation')->group(function () {
