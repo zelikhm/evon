@@ -15,12 +15,12 @@ use Intervention\Image\Facades\Image;
 Route::get('/', ['App\Http\Controllers\Controller', 'main'])->middleware('utm');
 
 Route::get('/test', function () {
-  House::all()->update([
-    'status' => 1,
+  House::updated([
+    'active' => 1,
   ]);
 
-  House::all()->update([
-    'status' => 2
+  House::updated([
+    'active' => 2
   ]);
 });
 
