@@ -54,6 +54,6 @@ class BuilderCompilationController extends Controller
 
       $link = $request->slug;
 
-      return response()->json(env('APP_URL') . '/compilation/builder/compilation/' .  base64_encode($link), 200);
+      return response()->json(env('APP_URL') . 'compilation/builder/compilation/' .  base64_encode($link), 200);
   } //end
 }
