@@ -50,36 +50,25 @@ class AuthenticatedSessionController extends Controller
 
       if($user !== null && Hash::check($request->password, $user->password) && $user->deleted !== 1) {
 
-        Auth::logoutOtherDevices(Hash::make($request->password));
-
         $this->checkSession($user->id);
 
         Auth::login($user, $remember = true);
 
         if(Auth::user()->role === 3) {
-
           return redirect()->intended(RouteServiceProvider::ADMIN);
-
         } elseif (Auth::user()->role === 0) {
+          Auth::logoutOtherDevices(Hash::make($request->password));
 
           if(Auth::user()->checked === 1) {
-
             User::where('id', Auth::id())->update([
               'checked' => 0,
             ]);
-
             return redirect()->intended(RouteServiceProvider::HOME);
-
           } else {
-
             return redirect()->intended(RouteServiceProvider::HOUSES);
-
           }
-
         } else {
-
           return redirect()->intended(RouteServiceProvider::HOME);
-
         }
 
       }
