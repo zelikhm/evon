@@ -55,7 +55,7 @@ class AuthenticatedSessionController extends Controller
         Auth::login($user, $remember = true);
 
         if(Auth::user()->role === 3) {
-          return redirect()->intended(RouteServiceProvider::ADMIN);
+          return Inertia::location('/profile');
         } elseif (Auth::user()->role === 0) {
           Auth::logoutOtherDevices(Hash::make($request->password));
 
@@ -63,12 +63,12 @@ class AuthenticatedSessionController extends Controller
             User::where('id', Auth::id())->update([
               'checked' => 0,
             ]);
-            return redirect()->intended(RouteServiceProvider::HOME);
+            return Inertia::location('/profile');
           } else {
-            return redirect()->intended(RouteServiceProvider::HOUSES);
+            return Inertia::location('/profile');
           }
         } else {
-          return redirect()->intended(RouteServiceProvider::HOME);
+          return Inertia::location('/profile');
         }
 
       }
