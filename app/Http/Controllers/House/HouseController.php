@@ -154,7 +154,19 @@ class HouseController extends Controller
       'token' => $token = Auth::user()->token,
     ]);
   }
-
+  public function createHouseTest()
+  {
+    return Inertia::render('AddObject', [
+      'dops' => $this->getDop(),
+      'infos' => $this->getInfo(),
+      'city' => $this->getCity(),
+      'notification' => $this->getNotification(),
+      'count' => House::count(),
+      'user' => $this->getUser(),
+      'admin' => null,
+      'token' => $token = Auth::user()->token,
+    ]);
+  }
   /**
    * get house with help token
    * @param Request $request

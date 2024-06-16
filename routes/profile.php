@@ -7,6 +7,7 @@ Route::prefix('profile')->middleware(['auth', 'session'])->group(function () {
 
   Route::middleware('CheckRealtor')->group(function () {
     Route::get('/addedHouse', ['App\Http\Controllers\House\HouseController', 'createHouse']);
+    Route::get('/addedHouseTest', ['App\Http\Controllers\House\HouseController', 'createHouseTest']);
     Route::get('/edit/{house}', ['App\Http\Controllers\House\HouseController', 'edit']);
     Route::get('/houses', ['App\Http\Controllers\House\HouseController', 'showHouse']);
     Route::get('/news', ['App\Http\Controllers\House\NewsController', 'index']);
