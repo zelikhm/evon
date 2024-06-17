@@ -3,98 +3,108 @@ import { Link } from '@inertiajs/inertia-vue3'
 </script>
 
 <template>
-  <h2 class="font-semibold text-[22px] xxl:text-[18px] xl:text-[15px] mb-5 xxl:mb-4 xl:mb-3">{{ language.dob_kv_1[0] }}</h2>
-  <div class="flex flex-col">
-    <div class="grid grid-cols-6 lg:grid-cols-4 sm:grid-cols-3 gap-3 xxl:gap-2.5 xl:gap-2">
-      <div @click="targetFrame(frame, idx)" v-for="(frame, idx) in house.frames" :class="{ 'border-white': frame.active !== 1 }" class="corpus__banner flex justify-between cursor-pointer rounded-[5px] border border-solid border-[#6435A5] px-5 xxl:px-4 xl:px-3 py-5 xxl:py-4 xl:py-3">
-        <div class="flex flex-col justify-center gap-3.5 xxl:gap-3 xl:gap-2.5">
-          <span class="text-[#1E1D2D] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px] leading-none whitespace-nowrap">{{ frame.name }}</span>
-          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap" v-if="frame.flats">{{ frame.flats.length }} {{ frame.flats.length === 1 ? language.dob_kv_1[15] : frame.flats.length === 2 || frame.flats.length === 3 || frame.flats.length === 4 ? language.dob_kv_1[16] : language.dob_kv_1[17] }}</span>
-          <span class="text-[#8A8996] text-sm xxl:text-xs xl:text-[10px] lg:text-[14px] leading-none whitespace-nowrap" v-else>0 {{language.dob_kv_1[17]}}</span>
+  <div class="main-container">
+    <div class="frames-grid">
+      <div
+        @click="targetFrame(frame, idx)"
+        v-for="(frame, idx) in house?.frames"
+        :class="{ 'border-white': frame.active !== 1 }"
+        class="frame-item"
+      >
+        <div class="frame-details">
+          <span class="frame-name">{{ frame.name }}</span>
+          <span class="frame-flats" v-if="frame.flats">{{ frame.flats.length }} {{ frame.flats.length === 1 ? language.dob_kv_1[15] : frame.flats.length === 2 || frame.flats.length === 3 || frame.flats.length === 4 ? language.dob_kv_1[16] : language.dob_kv_1[17] }}</span>
+          <span class="frame-flats" v-else>0 {{language.dob_kv_1[17]}}</span>
         </div>
-        <div class="relative flex flex-col items-center justify-between gap-3.5 xxl:gap-3 xl:gap-2.5">
+        <div class="frame-actions">
           <button @click="$emit('open-add-frame', frame)">
-            <img class="w-5 xxl:w-4 xl:w-3" src="../../assets/svg/pen_icon_grey.svg" alt="">
+            <img class="action-icon" src="../../assets/svg/pen_icon_grey.svg" alt="">
           </button>
           <button @click="deleteConfirmOn(frame)" class="relative">
-            <img class="w-5 xxl:w-4 xl:w-3" src="../../assets/svg/bucket_icon_red.svg" alt="">
+            <img class="action-icon" src="../../assets/svg/bucket_icon_red.svg" alt="">
           </button>
-          <div v-if="frame.deleteConfirm" class="cursor-auto z-20 text-[16px] xxl:text-[14px] xl:text-[12px] lg:text-[15px] absolute top-[120%] bg-white left-[] flex flex-col border border-solid border-[#CEC3DD] rounded-[5px]">
-            <span class="whitespace-nowrap text-center border__bottom p-2.5 xxl:p-2 xl:p-1.5 leading-none">Вы уверены что хотите удалить?</span>
-            <div class="cursor-pointer flex">
-              <div class="hover__select w-full text-center border__right p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[red]" @click="deleteFrame(frame)">Да</div>
-              <div @click="frame.deleteConfirm = false" class="hover__select w-full text-center p-2.5 xxl:p-2 xl:p-1.5 leading-none text-[green]">Нет</div>
+          <div v-if="frame.deleteConfirm" class="delete-confirm">
+            <span class="confirm-text">Вы уверены что хотите удалить?</span>
+            <div class="confirm-actions">
+              <div class="confirm-yes" @click="deleteFrame(frame)">Да</div>
+              <div class="confirm-no" @click="frame.deleteConfirm = false">Нет</div>
             </div>
           </div>
         </div>
       </div>
-      <div class="flex items-center">
-        <img @click="$emit('open-add-frame', isEdit ? 0 : 1)" src="../../assets/svg/plus_icon_purple.svg" class="cursor-pointer ml-3 xxl:ml-2.5 xl:ml-2 w-8 xxl:w-6 xl:w-5" alt="">
-      </div>
     </div>
-    <div class="grid lg:w-[87.5vw] pb-2 custom__scroll--chess gap-4 xxl:gap-3.5 xl:gap-3 my-16 xxl:my-12 xl:my-10 text-[#1E1D2D] text-base xxl:text-sm xl:text-xs lg:text-[15px]">
-      <div class="text-[#8A8996] grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
-        <div
-          class="leading-none bg-white flex items-center gap-2 xl:gap-1.5"
-          v-for="item in titleTable"
-        >
-          <span class="leading-none">{{ item.title }}</span>
-          <div v-if="item.filter" @click="changeFilter(item)" class="flex flex-col gap-[1px] xl:gap-[0.5px]">
-            <svg class="cursor-pointer rotate-180 w-[9px] h-[7px] w-[9px] xxl:w-[8px] xl:w-[7px]" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="flats-grid">
+      <div class="flats-header">
+        <div class="flats-header-item" v-for="item in titleTable">
+          <span>{{ item.title }}</span>
+          <div v-if="item.filter" @click="changeFilter(item)" class="filter-icons">
+            <svg class="filter-icon" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path :class="{ 'fill-[#6435A5]': item.active === 1 }" d="M4.5 7L8.39711 0.25H0.602886L4.5 7Z" fill="#E5DFEE"/>
             </svg>
-            <svg class="cursor-pointer w-[9px] xxl:w-[8px] xl:w-[7px] h-[7px]" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg class="filter-icon" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path :class="{ 'fill-[#6435A5]': item.active === 2 }" d="M4.5 7L8.39711 0.25H0.602886L4.5 7Z" fill="#E5DFEE"/>
             </svg>
           </div>
         </div>
       </div>
-      <div v-for="item in house.frames[frameId].flats" v-if="house.frames.length > 0" class="flex items-center h-[56px] xxl:h-[48px] xl:h-[40px] rounded-[5px] border border-solid border-[#E5DFEE] justify-between">
-        <div class="grid__apartments-line items-center px-5 xxl:px-4 xl:px-3">
-          <div class="leading-none bg-white">{{ item.number }}</div>
-          <div class="leading-none">{{ item.square }}</div>
-          <div class="leading-none">{{ item.price }}</div>
-          <div class="leading-none">{{ item.count }}</div>
-          <div class="leading-none">{{ item.floor }}</div>
-          <div class="relative" :tabindex="tabindex" @blur="item.statusActive = false">
-            <div @click="item.statusActive = !item.statusActive" class="flex items-center cursor-pointer gap-5 xxl:gap-4 xl:gap-3">
-              <span class="whitespace-nowrap">{{ item.status == 0 ? language.dob_kv_1[10] : item.status == 1 ? language.dob_kv_1[11] : item.status == 2 ? language.dob_kv_1[12] : item.status == 3 ? language.dob_kv_1[13] : language.dob_kv_1[9] }}
-              </span>
-              <svg class="w-2.5 xl:w-2" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div v-for="item in 6"   class="flat-item">
+        <div class="flat-details">
+          <div>вфывфывфывфыв</div>
+          <div>вфывфывфывфыв</div>
+          <div>вфывфывфывфыв</div>
+          <div>вфывфывфывфыв</div>
+          <div>вфывфывфывфыв</div>
+          <div class="status-container" :tabindex="tabindex" @blur="item.statusActive = false">
+            <div @click="item.statusActive = !item.statusActive" class="status-toggle">
+              <span> asdasdasdasdasd</span>
+              <svg class="status-icon" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M5.00005 3.879L8.71255 0.166504L9.77305 1.227L5.00005 6L0.227051 1.227L1.28755 0.166504L5.00005 3.879Z" fill="#8A8996"/>
               </svg>
             </div>
-            <div v-if="item.statusActive" class="absolute flex flex-col z-20 top-[130%] left-0 bg-white border border-solid border-[#E5DFEE] rounded-[5px]">
-              <span @click="changeSelectStatus(status, item)" v-for="status in statuses" class="border__bottom--not cursor-pointer px-5 xxl:px-4 xl:px-3 py-3 xxl:py-2.5 xl:py-2 whitespace-nowrap">
-                {{ status.status }}
-              </span>
+            <div v-if="item.statusActive" class="status-options">
+              <span @click="changeSelectStatus(status, item)" v-for="status in statuses" class="status-option">{{ status.status }}</span>
             </div>
           </div>
         </div>
-        <div class="flex items-center justify-end flex-shrink-0">
-          <button class="border__right h-[56px] xxl:h-[48px] xl:h-[40px] w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img @click="editFlat(item)" src="../../assets/svg/pen_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+        <div class="flat-actions">
+          <button class="edit-button">
+            <img @click="editFlat(item)" src="../../assets/svg/pen_icon_grey.svg" class="action-icon" alt="">
           </button>
-          <button @click="deleteFlat(item)" class="w-[60px] xxl:w-[48px] xl:w-[36px] flex items-center justify-center">
-            <img src="../../assets/svg/bucket_icon_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">
+          <button @click="deleteFlat(item)" class="delete-button">
+            <img src="../../assets/svg/bucket_icon_grey.svg" class="action-icon" alt="">
           </button>
         </div>
       </div>
+<!--      <div v-for="item in house?.frames[frameId]?.flats" v-if="house?.frames?.length > 0" class="flat-item">-->
+<!--        <div class="flat-details">-->
+<!--          <div>{{ item.number }}</div>-->
+<!--          <div>{{ item.square }}</div>-->
+<!--          <div>{{ item.price }}</div>-->
+<!--          <div>{{ item.count }}</div>-->
+<!--          <div>{{ item.floor }}</div>-->
+<!--          <div class="status-container" :tabindex="tabindex" @blur="item.statusActive = false">-->
+<!--            <div @click="item.statusActive = !item.statusActive" class="status-toggle">-->
+<!--              <span>{{ item.status == 0 ? language.dob_kv_1[10] : item.status == 1 ? language.dob_kv_1[11] : item.status == 2 ? language.dob_kv_1[12] : item.status == 3 ? language.dob_kv_1[13] : language.dob_kv_1[9] }}</span>-->
+<!--              <svg class="status-icon" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--                <path d="M5.00005 3.879L8.71255 0.166504L9.77305 1.227L5.00005 6L0.227051 1.227L1.28755 0.166504L5.00005 3.879Z" fill="#8A8996"/>-->
+<!--              </svg>-->
+<!--            </div>-->
+<!--            <div v-if="item.statusActive" class="status-options">-->
+<!--              <span @click="changeSelectStatus(status, item)" v-for="status in statuses" class="status-option">{{ status.status }}</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="flat-actions">-->
+<!--          <button class="edit-button">-->
+<!--            <img @click="editFlat(item)" src="../../assets/svg/pen_icon_grey.svg" class="action-icon" alt="">-->
+<!--          </button>-->
+<!--          <button @click="deleteFlat(item)" class="delete-button">-->
+<!--            <img src="../../assets/svg/bucket_icon_grey.svg" class="action-icon" alt="">-->
+<!--          </button>-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
   </div>
-<!--  <div class= "w-full flex justify-center mt-5 xxl:mt-4 xl:mt-3 gap-3 xxl:gap-2.5 xl:gap-2 items-center text-[#8A8996] text-lg xxl:text-[15px] xl:text-[13px] lg:text-[16px]">-->
-<!--    <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5  rounded-[3px] flex items-center justify-center cursor-pointer">-->
-<!--      <img src="../../assets/svg/arrow_right_grey.svg" class="rotate-180 w-5 xxl:w-4 xl:w-3" alt="">-->
-<!--    </div>-->
-<!--    <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">1</div>-->
-<!--    <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">2</div>-->
-<!--    <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">3</div>-->
-<!--    <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">...</div>-->
-<!--    <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">24</div>-->
-<!--    <div class="hover__select h-7 xxl:h-6 xl:h-5 w-7 xxl:w-6 xl:w-5 rounded-[3px] flex items-center justify-center cursor-pointer">-->
-<!--      <img src="../../assets/svg/arrow_right_grey.svg" class="w-5 xxl:w-4 xl:w-3" alt="">-->
-<!--    </div>-->
-<!--  </div>-->
 </template>
 
 <script>
@@ -201,7 +211,7 @@ export default {
     }
 
 
-    if (this.house.frames.length > 0) {
+    if (this.house?.frames?.length > 0) {
       let startFrame = this.house.frames[0].id
 
       this.house.frames.forEach((item, idx) => {
@@ -240,3 +250,206 @@ export default {
 }
 
 </script>
+
+
+<style scoped>
+.main-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.frames-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 1024px) {
+  .frames-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .frames-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.frame-item {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  border: 1px solid #6435A5;
+  border-radius: 5px;
+  padding: 20px 20px;
+}
+
+.frame-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+}
+
+.frame-name {
+  color: #1E1D2D;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.frame-flats {
+  color: #8A8996;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.frame-actions {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.action-icon {
+  width: 20px;
+}
+
+.delete-confirm {
+  position: absolute;
+  top: 140%;
+  background: white;
+  border: 1px solid #CEC3DD;
+  border-radius: 5px;
+  z-index: 20;
+  text-align: center;
+  font-size: 16px;
+}
+
+.confirm-text {
+  padding: 10px;
+  border-bottom: 1px solid #CEC3DD;
+}
+
+.confirm-actions {
+  display: flex;
+}
+
+.confirm-yes, .confirm-no {
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.confirm-yes {
+  color: red;
+  border-right: 1px solid #CEC3DD;
+}
+
+.confirm-no {
+  color: green;
+}
+
+.flats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 0px;
+  color: #1E1D2D;
+  font-size: 16px;
+}
+
+.flats-header {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  background: white;
+  padding: 20px;
+}
+
+.flats-header-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.filter-icons .filter-icon:first-child{
+  transform: rotate(180deg);
+}
+.filter-icon {
+  width: 9px;
+  height: 7px;
+  cursor: pointer;
+}
+
+.flat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 56px;
+  border: 1px solid #E5DFEE;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.flat-details {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.status-container {
+  position: relative;
+}
+
+.status-toggle {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+}
+
+.status-icon {
+  width: 10px;
+}
+
+.status-options {
+  position: absolute;
+  top: 130%;
+  left: 0;
+  background: white;
+  border: 1px solid #E5DFEE;
+  border-radius: 5px;
+  z-index: 20;
+}
+
+.status-option {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.flat-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.edit-button, .delete-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 56px;
+  border-right: 1px solid #E5DFEE;
+}
+
+.delete-button {
+  border-right: none;
+}
+</style>

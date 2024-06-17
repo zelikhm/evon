@@ -48,7 +48,7 @@
              })
             .catch(e => console.error(e))
       } else {
-        axios.post('/api/house/createFrame', { house_id: this.house.id, name: this.frameName, token: this.token })
+        axios.post('/api/house/createFrame', { house_id: this.house?.id, name: this.frameName, token: this.token })
             .then(response => {
               response.data.forEach((item, idx) => {
                 item.active = 0
